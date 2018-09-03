@@ -11,7 +11,7 @@ npm install --save https://github.com/pedaling/class101-ui.git
 ```jsx
 import React, { Component } from 'react'
 
-import { Button } from '@pedaling/class101-ui'
+import { Button } from 'class101-ui'
 
 class Example extends Component {
   render () {
