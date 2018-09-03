@@ -6,6 +6,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var React = require('react');
 var React__default = _interopDefault(React);
+var styled = _interopDefault(require('styled-components'));
 
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -55,6 +56,18 @@ var possibleConstructorReturn = function (self, call) {
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
 
+var taggedTemplateLiteral = function (strings, raw) {
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
+    }
+  }));
+};
+
+var _templateObject = taggedTemplateLiteral(['\n  background-color: red;\n  padding: 100px;\n'], ['\n  background-color: red;\n  padding: 100px;\n']);
+
+var Container = styled.div(_templateObject);
+
 var Button = function (_Component) {
   inherits(Button, _Component);
 
@@ -67,9 +80,13 @@ var Button = function (_Component) {
     key: 'render',
     value: function render() {
       return React__default.createElement(
-        'button',
+        Container,
         null,
-        'Test'
+        React__default.createElement(
+          'button',
+          null,
+          'Test'
+        )
       );
     }
   }]);
