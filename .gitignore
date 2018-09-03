@@ -1,20 +1,18 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-
-# testing
-/coverage
-
-# production
-/build
-
-# misc
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+/node_modules
+.gobble*
+dist
+_actual
+_actual.js
+coverage
+.commithash
+.idea
+bin/rollup
+test/_tmp
+test/hooks/tmp
+test/tmp
+test/typescript/typings
+perf/
 
 npm-debug.log*
 yarn-debug.log*
