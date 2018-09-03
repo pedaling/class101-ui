@@ -1,2 +1,22 @@
-export { default as Button } from './Button';
-export { default as ReadMore } from './ReadMore';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+import styles from './styles.css'
+
+export default class ExampleComponent extends Component {
+  static propTypes = {
+    text: PropTypes.string
+  }
+
+  render() {
+    const {
+      text
+    } = this.props
+
+    return (
+      <div className={styles.test}>
+        Example Component: {text}
+      </div>
+    )
+  }
+}
