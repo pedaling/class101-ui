@@ -1,41 +1,11 @@
 'use strict';
 
+Object.defineProperty(exports, '__esModule', { value: true });
+
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var React = require('react');
 var React__default = _interopDefault(React);
-var PropTypes = _interopDefault(require('prop-types'));
-
-function styleInject(css, ref) {
-  if ( ref === void 0 ) ref = {};
-  var insertAt = ref.insertAt;
-
-  if (!css || typeof document === 'undefined') { return; }
-
-  var head = document.head || document.getElementsByTagName('head')[0];
-  var style = document.createElement('style');
-  style.type = 'text/css';
-
-  if (insertAt === 'top') {
-    if (head.firstChild) {
-      head.insertBefore(style, head.firstChild);
-    } else {
-      head.appendChild(style);
-    }
-  } else {
-    head.appendChild(style);
-  }
-
-  if (style.styleSheet) {
-    style.styleSheet.cssText = css;
-  } else {
-    style.appendChild(document.createTextNode(css));
-  }
-}
-
-var css = "/* add css styles here (optional) */\n\n.styles_test__32Qsm {\n  display: inline-block;\n  margin: 2em auto;\n  border: 2px solid #000;\n  font-size: 2em;\n}\n";
-var styles = { "test": "styles_test__32Qsm" };
-styleInject(css);
 
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -85,34 +55,48 @@ var possibleConstructorReturn = function (self, call) {
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
 
-var ExampleComponent = function (_Component) {
-  inherits(ExampleComponent, _Component);
+var Button = function (_Component) {
+  inherits(Button, _Component);
 
-  function ExampleComponent() {
-    classCallCheck(this, ExampleComponent);
-    return possibleConstructorReturn(this, (ExampleComponent.__proto__ || Object.getPrototypeOf(ExampleComponent)).apply(this, arguments));
+  function Button() {
+    classCallCheck(this, Button);
+    return possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).apply(this, arguments));
   }
 
-  createClass(ExampleComponent, [{
+  createClass(Button, [{
     key: 'render',
     value: function render() {
-      var text = this.props.text;
-
-
       return React__default.createElement(
-        'div',
-        { className: styles.test },
-        'Example Component: ',
-        text
+        'button',
+        null,
+        'Test'
       );
     }
   }]);
-  return ExampleComponent;
+  return Button;
 }(React.Component);
 
-ExampleComponent.propTypes = {
-  text: PropTypes.string
-};
+var ReadMore = function (_Component) {
+  inherits(ReadMore, _Component);
 
-module.exports = ExampleComponent;
+  function ReadMore() {
+    classCallCheck(this, ReadMore);
+    return possibleConstructorReturn(this, (ReadMore.__proto__ || Object.getPrototypeOf(ReadMore)).apply(this, arguments));
+  }
+
+  createClass(ReadMore, [{
+    key: 'render',
+    value: function render() {
+      return React__default.createElement(
+        'button',
+        null,
+        'Test'
+      );
+    }
+  }]);
+  return ReadMore;
+}(React.Component);
+
+exports.Button = Button;
+exports.ReadMore = ReadMore;
 //# sourceMappingURL=index.js.map
