@@ -21,7 +21,6 @@ export default {
       sourcemap: true
     }
   ],
-  external: ['styled-components'],
   plugins: [
     external(),
     postcss({
@@ -35,5 +34,4 @@ export default {
     resolve(),
     commonjs()
   ],
-  globals: { 'styled-components': 'styled' }
 };
