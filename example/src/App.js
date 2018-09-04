@@ -1,13 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import ExampleComponent from 'class101-ui'
+import { Grid } from 'class101-ui';
 
 export default class App extends Component {
-  render () {
+  render() {
+    console.log('Cla', Grid);
     return (
       <div>
-        <ExampleComponent text='Modern React component module' />
+        Test
       </div>
-    )
+    );
   }
 }
