@@ -1,6 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
-import { media } from '../styles';
+import { media } from '../BreakPoints';
 
 const Grid = styled.div`
   position: relative;
@@ -13,12 +12,4 @@ const Grid = styled.div`
   `};
 `;
 
-type Props = {
-  children: any,
-};
-
-export default ({ children, ...restProps }: Props) => (
-  <Grid { ...restProps }>
-    { children }
-  </Grid>
-);
+export default Grid;

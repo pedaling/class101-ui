@@ -1,44 +1,11 @@
 import { css } from 'styled-components';
-
-export const white = '#FFF';
-export const black = '#000';
-
-export const gray900 = '#292a2b';
-export const gray800 = '#353a3c';
-export const gray700 = '#4c5256';
-export const gray600 = '#868c91';
-export const gray500 = '#a8aeb3';
-export const gray400 = '#cdd1d6';
-export const gray300 = '#e0e2e6';
-export const gray200 = '#e9ecef';
-export const gray100 = '#eff1f3';
-export const gray50 = '#f9f9fb';
-
-export const red50 = '#fff0f0';
-export const red200 = '#ffc9c9';
-export const red100 = '#ffd9d9';
-export const red300 = '#f7abb0';
-export const red400 = '#f28896';
-export const red600 = '#e52c60';
-export const red500 = '#ed6b85';
-export const red700 = '#e0004d';
-export const red800 = '#c20042';
-export const red900 = '#a40038';
-
-export const orange50 = '#fff9f2';
-export const orange200 = '#ffd8a8';
-export const orange400 = '#ffa94d';
-export const orange100 = '#ffe8cc';
-export const orange300 = '#ffc078';
-export const orange500 = '#ff922b';
-export const orange600 = '#fd7e14';
-export const orange700 = '#f76707';
-export const orange800 = '#e8590c';
-export const orange900 = '#d9480f';
-
-export const green500 = '#00b79d';
-
-export const redError = '#ff5252';
+import {
+  gray800,
+  gray700,
+  gray600,
+  gray500,
+  white,
+} from '../Colors';
 
 export const heading1BlackBold = css`
   font-family: 'NanumSquare';
@@ -315,45 +282,3 @@ export const subheadingBlack = css`
   color: ${gray700};
   line-height: 32px;
 `;
-
-export function buildMediaQuery({ minWidth, maxWidth }, not) {
-  let query = '';
-
-  if (minWidth) {
-    query += `(min-width: ${minWidth}px)`;
-  }
-
-  if (minWidth && maxWidth) {
-    query += ' and ';
-  }
-
-  if (maxWidth) {
-    query += `(max-width: ${maxWidth}px)`;
-  }
-
-  if (not) {
-    query = `not all and ${query}`;
-  }
-
-  return query;
-}
-
-export default buildMediaQuery;
-
-export const SIZES = {
-  sm: { minWidth: null, maxWidth: 1023 },
-  md: { minWidth: null, maxWidth: null }, // TODO: 태블릿 사이즈가 추가되면 수정합니다.
-  lg: { minWidth: 1024, maxWidth: null },
-};
-
-export const media = Object.keys(SIZES).reduce((acc, label) => {
-  acc[label] = (...args) => {
-    const mediaQuery = buildMediaQuery(SIZES[label]);
-    return css`
-      @media ${mediaQuery} {
-        ${css(...args)}
-      }
-    `;
-  };
-  return acc;
-}, {});

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { media } from '../styles';
+import { media } from '../BreakPoints';
 
 const sizeToPercent = (size: number) => (((size || 12) / 12) * 100);
 

@@ -4,11 +4,11 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "class101-ui": "https://github.com/pedaling/class101-ui.git#master",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-scripts": "^1.1.4",
-    "class101-ui": "link:.."
+    "react-scripts": "^1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
