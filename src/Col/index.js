@@ -9,6 +9,7 @@ const Col = styled.div`
   padding-right: 12px;
   padding-left: 12px;
   float: left;
+  box-sizing: border-box;
 
   ${props => props.sm && media.sm`
     width: ${props => sizeToPercent(props.sm)}%;

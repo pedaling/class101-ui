@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 
-import { styles } from 'class101-ui';
+import { Grid, Row, Col } from 'class101-ui';
 
 export default class App extends Component {
   render() {
-    console.log('Cla', styles);
     return (
-      <div>
-        Test
-      </div>
+      <Grid>
+        <Row>
+          <Col lg={ 4 } sm={ 12 }>
+            Col1
+          </Col>
+          <Col lg={ 4 } sm={ 12 }>
+            Col2
+          </Col>
+          <Col lg={ 4 } sm={ 12 }>
+            Col3
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }

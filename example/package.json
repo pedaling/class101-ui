@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "class101-ui": "https://github.com/pedaling/class101-ui.git#master",
+    "class101-ui": "https://github.com/pedaling/class101-ui.git",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
