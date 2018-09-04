@@ -8,7 +8,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "^1.1.4",
-    "class101-ui": "https://github.com/pedaling/class101-ui.git"
+    "class101-ui": "link:.."
   },
   "scripts": {
     "start": "react-scripts start",

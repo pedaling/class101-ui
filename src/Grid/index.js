@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { media } from '../styles';
 
@@ -12,4 +13,12 @@ const Grid = styled.div`
   `};
 `;
 
-export default Grid;
+type Props = {
+  children: any,
+};
+
+export default ({ children, ...restProps }: Props) => (
+  <Grid { ...restProps }>
+    { children }
+  </Grid>
+);
