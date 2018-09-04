@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { media } from '../BreakPoints';
 
-const Row = styled.div.attrs({ className: `clearfix ${props => props.className || ''}` })`
+const Row = styled.div.attrs({ className: 'clearfix' })`
   margin-right: -12px;
   margin-left: -12px;
   ${media.sm`
