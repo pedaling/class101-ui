@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { gray200, gray600 } from '../Spinner';
+import { gray200, gray600 } from '../Colors';
 
 type Props = {
   size?: number,
