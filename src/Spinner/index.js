@@ -19,11 +19,13 @@ const strokeOffset = PATH_LENGTH - (PATH_LENGTH * 0.25);
 const SpinnerHead = styled.path`
   transform-origin: center;
   transition: stroke-dashoffset 2s cubic-bezier(.4, 1, 0.75, 0.9);
-  stroke: black;
+  stroke: ${props => props.backgroundColor || gray600};
   stroke-linecap: round;
 `;
 
-const SpinnerTrack = styled.path``;
+const SpinnerTrack = styled.path`
+  stroke: ${props => props.color || gray200};
+`;
 
 const Container = styled.div`
   display: flex;
@@ -39,17 +41,6 @@ const Container = styled.div`
 
   path {
     fill-opacity: 0;
-  }
-
-  ${SpinnerHead} {
-    transform-origin: center;
-    transition: stroke-dashoffset 2s cubic-bezier(.4, 1, 0.75, 0.9);
-    stroke: ${props => props.backgroundColor || gray600};
-    stroke-linecap: round;
-  }
-
-  ${SpinnerTrack} {
-    stroke: ${props => props.color || gray200};
   }
 `;
 
