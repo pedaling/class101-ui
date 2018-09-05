@@ -8,8 +8,8 @@ type Props = {
   color?: string,
 };
 
-const Spinner = ({ ...props }: Props) => (
-  <Spinner { ...props } />
+const Component = ({ size = 50, ...props }: Props) => (
+  <Spinner size={ size } { ...props } />
 );
 
-export default Spinner;
+export default Component;
