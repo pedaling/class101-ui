@@ -5,7 +5,7 @@ route: /cores
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Spinner } from 'class101-ui';
+import Spinner from './Spinner';
 
 # Spinner
 
@@ -19,4 +19,14 @@ import { Spinner } from 'class101-ui';
 
 <Playground>
   <Spinner />
+</Playground>
+
+## Custom example
+
+<Playground>
+  <Spinner
+    size={ 100 }
+    backgroundColor="red"
+    color="pink"
+  />
 </Playground>

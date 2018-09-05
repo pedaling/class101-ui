@@ -1,5 +1,5 @@
 {
-  "name": "class101-ui",
+  "name": "class101",
   "version": "0.11.0",
   "license": "MIT",
   "scripts": {
@@ -7,15 +7,12 @@
     "build": "docz build"
   },
   "dependencies": {
-    "emotion": "^9.2.8",
+    "class101-ui": "https://github.com/pedaling/class101-ui.git",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-emotion": "^9.2.8",
-    "class101-ui": "https://github.com/pedaling/class101-ui.git"
+    "react-dom": "^16.4.2"
   },
   "devDependencies": {
-    "babel-plugin-emotion": "^9.2.8",
     "docz": "^0.11.0"
   }
 }
