@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { gray200, gray600 } from '../Colors';
 
 type Props = {
@@ -44,12 +44,10 @@ const Container = styled.div`
   ${SpinnerHead} {
     transform-origin: center;
     transition: stroke-dashoffset 2s cubic-bezier(.4, 1, 0.75, 0.9);
-    stroke: ${props => props.backgroundColor || gray600};
     stroke-linecap: round;
   }
 
   ${SpinnerTrack} {
-    stroke: ${props => props.color || gray200};
   }
 `;
 
@@ -65,9 +63,12 @@ export default ({ size = 50, backgroundColor, color }: Props) => (
   <Container>
     <SpinnerAnimation>
       <svg height={ size } width={ size } viewBox="0 0 100 100" strokeWidth={ strokeWidth }>
-        <SpinnerTrack color={ color } d={ SPINNER_TRACK } />
+        <SpinnerTrack className={ css`color:  ${color || gray200}` } color={ color } d={ SPINNER_TRACK } />
         <SpinnerHead
           backgroundColor={ backgroundColor }
+          className={ css`
+            stroke: ${backgroundColor || gray600};
+          ` }
           d={ SPINNER_TRACK }
           pathLength={ PATH_LENGTH }
           strokeDasharray={ `${PATH_LENGTH} ${PATH_LENGTH}` }
