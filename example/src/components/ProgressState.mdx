@@ -1,30 +1,30 @@
 ---
 menu: Components
-name: Progress Bar
-route: /components/progress-bar
+name: Progress State
+route: /components/progress-state
 ---
 
 import { Playground, PropsTable } from 'docz';
-import ProgressBar from './ProgressBar';
+import ProgressState from './ProgressState';
 
-# Progress Bar
+# Progress State
 
 진행 상황의 정도를 보여주기 유용한 컴포넌트입니다.
 
 ## Props
 
-<PropsTable of={ProgressBar} />
+<PropsTable of={ProgressState} />
 
 ## Basic usage
 
 <Playground>
-  <ProgressBar percent={ 30 } />
+  <ProgressState percent={ 30 } />
 </Playground>
 
 ## Custom example
 
 <Playground>
-  <ProgressBar
+  <ProgressState
     percent={ 80 }
     backgroundColor="pink"
     barColor="red"

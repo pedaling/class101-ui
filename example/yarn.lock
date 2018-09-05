@@ -1791,9 +1791,9 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-class101-ui@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/class101-ui/-/class101-ui-0.1.1.tgz#210b83479e5e93c29fcaeb76656a8b846888a576"
+"class101-ui@link:..":
+  version "0.0.0"
+  uid ""
 
 clean-css@4.2.x:
   version "4.2.1"
