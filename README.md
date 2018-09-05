@@ -3,7 +3,7 @@
 ## Install
 
 ```console
-npm install --save https://github.com/pedaling/class101-ui.git
+npm install --save class101-ui
 ```
 
 ## Usage

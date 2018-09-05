@@ -1791,9 +1791,9 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-"class101-ui@https://github.com/pedaling/class101-ui.git":
+class101-ui@^0.1.0:
   version "0.1.0"
-  resolved "https://github.com/pedaling/class101-ui.git#c23e26adb2412e0b4a397971bead87dba5f815a4"
+  resolved "https://registry.yarnpkg.com/class101-ui/-/class101-ui-0.1.0.tgz#434a53262ada388fb08887c166d862bea6734bdd"
 
 clean-css@4.2.x:
   version "4.2.1"
