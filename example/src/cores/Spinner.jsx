@@ -8,8 +8,8 @@ type Props = {
   color?: string, // 돌아가는 선의 색상
 };
 
-const Component = ({ size = 50, ...props }: Props) => (
-  <Spinner size={ size } { ...props } />
+const Component = ({ size = 50, backgroundColor, color }: Props) => (
+  <Spinner size={ size } backgroundColor={ backgroundColor } color={ color } />
 );
 
 export default Component;

@@ -12,7 +12,8 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-emotion": "^9.2.8"
+    "react-emotion": "^9.2.8",
+    "styled-components": "^3.4.5"
   },
   "devDependencies": {
     "babel-plugin-emotion": "^9.2.8",
