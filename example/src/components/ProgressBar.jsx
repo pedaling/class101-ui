@@ -18,7 +18,7 @@ type Props = {
 
 const Component = ({
   percent,
-  backgroundColor = Colors.gray700,
+  backgroundColor = Colors.gray200,
   barColor = Colors.orange600,
   height = 4,
 }: Props) => (

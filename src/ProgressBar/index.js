@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { orange600, gray700 } from '../Colors';
+import { orange600, gray200 } from '../Colors';
 
 type Props = {
   percent: number,
@@ -18,7 +18,7 @@ const Bar = styled.div`
 
 const Container = styled.div`
   border-radius: 2px;
-  background-color: ${props => props.backgroundColor || gray700};
+  background-color: ${props => props.backgroundColor || gray200};
   flex-grow: 1;
 
   ${props => props.height && css`
