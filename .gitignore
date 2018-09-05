@@ -1,19 +1,13 @@
 .DS_Store
 /node_modules
 .gobble*
-dist
-_actual
-_actual.js
+/dist
 coverage
 .commithash
 .idea
-bin/rollup
-test/_tmp
-test/hooks/tmp
-test/tmp
-test/typescript/typings
 perf/
-example/node_modules/
+/example/node_modules
+/example/.docz
 
 npm-debug.log*
 yarn-debug.log*
