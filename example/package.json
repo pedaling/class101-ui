@@ -1,13 +1,13 @@
 {
   "name": "class101",
-  "version": "0.11.0",
+  "version": "0.1.0",
   "license": "MIT",
   "scripts": {
     "dev": "docz dev",
     "build": "docz build"
   },
   "dependencies": {
-    "class101-ui": "/Users/iseongho/Development/class101-ui",
+    "class101-ui": "^0.1.1",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2"

@@ -158,9 +158,9 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
-"@pedaling/eslint-config-pedaling@https://github.com/pedaling/eslint-config-pedaling.git":
+"@pedaling/eslint-config-pedaling@^1.0.6":
   version "1.0.6"
-  resolved "https://github.com/pedaling/eslint-config-pedaling.git#635d2c6f06b948ad1b2287d6ebb932351af8ee26"
+  resolved "https://registry.yarnpkg.com/@pedaling/eslint-config-pedaling/-/eslint-config-pedaling-1.0.6.tgz#ed039c36cc3e80915a453c49220c7c36557c21b4"
   dependencies:
     eslint-config-airbnb "^16.1.0"
     eslint-plugin-flowtype "^2.46.0"

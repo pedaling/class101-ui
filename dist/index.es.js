@@ -78,6 +78,32 @@ var index = /*#__PURE__*/Object.freeze({
   redError: redError
 });
 
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
+var objectWithoutProperties = function (obj, keys) {
+  var target = {};
+
+  for (var i in obj) {
+    if (keys.indexOf(i) >= 0) continue;
+    if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
+    target[i] = obj[i];
+  }
+
+  return target;
+};
+
 var taggedTemplateLiteral = function (strings, raw) {
   return Object.freeze(Object.defineProperties(strings, {
     raw: {
@@ -345,10 +371,11 @@ var index$3 = (function (_ref) {
   var _ref$size = _ref.size,
       size = _ref$size === undefined ? 50 : _ref$size,
       backgroundColor = _ref.backgroundColor,
-      color = _ref.color;
+      color = _ref.color,
+      restProps = objectWithoutProperties(_ref, ['size', 'backgroundColor', 'color']);
   return React.createElement(
     Container,
-    null,
+    restProps,
     React.createElement(
       SpinnerAnimation,
       null,
@@ -368,5 +395,36 @@ var index$3 = (function (_ref) {
   );
 });
 
-export { index as Colors, index$1 as BreakPoints, index$2 as TextStyles, Grid, Col, Row, index$3 as Spinner };
+var _templateObject$6 = taggedTemplateLiteral(['\n  border-radius: 2px;\n  background-color: ', ';\n  width: ', '%;\n'], ['\n  border-radius: 2px;\n  background-color: ', ';\n  width: ', '%;\n']),
+    _templateObject2$5 = taggedTemplateLiteral(['\n  border-radius: 2px;\n  background-color: ', ';\n  flex-grow: 1;\n\n  ', ';\n'], ['\n  border-radius: 2px;\n  background-color: ', ';\n  flex-grow: 1;\n\n  ', ';\n']),
+    _templateObject3$4 = taggedTemplateLiteral(['\n    height: ', 'px;\n\n    ', ' {\n      height: ', 'px;\n    }\n  '], ['\n    height: ', 'px;\n\n    ', ' {\n      height: ', 'px;\n    }\n  ']);
+
+var Bar = styled.div(_templateObject$6, function (props) {
+  return props.barColor || orange600;
+}, function (props) {
+  return props.percent || 0;
+});
+
+var Container$1 = styled.div(_templateObject2$5, function (props) {
+  return props.backgroundColor || gray700;
+}, function (props) {
+  return props.height && css(_templateObject3$4, props.height, Bar, props.height);
+});
+
+var index$4 = (function (_ref) {
+  var _ref$percent = _ref.percent,
+      percent = _ref$percent === undefined ? 0 : _ref$percent,
+      _ref$height = _ref.height,
+      height = _ref$height === undefined ? 4 : _ref$height,
+      backgroundColor = _ref.backgroundColor,
+      barColor = _ref.barColor,
+      restProps = objectWithoutProperties(_ref, ['percent', 'height', 'backgroundColor', 'barColor']);
+  return React.createElement(
+    Container$1,
+    _extends({ backgroundColor: backgroundColor, height: height }, restProps),
+    React.createElement(Bar, { barColor: barColor, percent: Number(percent) > 100 ? 100 : percent })
+  );
+});
+
+export { index as Colors, index$1 as BreakPoints, index$2 as TextStyles, Grid, Col, Row, index$3 as Spinner, index$4 as ProgressBar };
 //# sourceMappingURL=index.es.js.map

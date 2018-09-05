@@ -11,14 +11,23 @@ type Props = {
 
   /** 바의 색상 */
   barColor?: string,
+
+  /** 세로 높이 */
+  height?: number,
 };
 
 const Component = ({
-  percent = 0,
+  percent,
   backgroundColor = Colors.gray700,
   barColor = Colors.orange600,
+  height = 4,
 }: Props) => (
-  <ProgressBar percent={ percent } backgroundColor={ backgroundColor } barColor={ barColor } />
+  <ProgressBar
+    percent={ percent }
+    backgroundColor={ backgroundColor }
+    barColor={ barColor }
+    height={ height }
+  />
 );
 
 export default Component;

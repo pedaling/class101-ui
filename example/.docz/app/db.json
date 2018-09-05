@@ -4,7 +4,7 @@
     "description": "My awesome app using docz",
     "themeConfig": {},
     "ordering": "descending",
-    "version": "0.11.0",
+    "version": "0.1.0",
     "repository": null
   },
   "entries": {
@@ -41,9 +41,9 @@
       ]
     },
     "src/cores/ProgressBar.mdx": {
-      "menu": "Core",
+      "menu": "Components",
       "name": "Progress bar",
-      "route": "/cores",
+      "route": "/components/progress-bar",
       "id": "f2a95769529f849d413344fe2d58d37d",
       "filepath": "src/cores/ProgressBar.mdx",
       "link": null,
@@ -52,8 +52,8 @@
       "headings": [
         {
           "depth": 1,
-          "slug": "spinner",
-          "value": "Spinner"
+          "slug": "progress-bar",
+          "value": "Progress bar"
         },
         {
           "depth": 2,
@@ -73,9 +73,9 @@
       ]
     },
     "src/cores/Spinner.mdx": {
-      "menu": "Core",
+      "menu": "Components",
       "name": "Spinner",
-      "route": "/cores",
+      "route": "/components/spinner",
       "id": "2ce1a5a4a37a3b063387663edb4d3028",
       "filepath": "src/cores/Spinner.mdx",
       "link": null,
