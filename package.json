@@ -4,7 +4,10 @@
   "description": "A React-based UI Component Library, powered by Class101.",
   "author": "iseongho",
   "license": "MIT",
-  "repository": "https://github.com/pedaling/class101-ui.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedaling/class101-ui.git"
+  },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
@@ -27,7 +30,7 @@
     "styled-components": "^3.4.5"
   },
   "devDependencies": {
-    "@pedaling/eslint-config-pedaling": "https://github.com/pedaling/eslint-config-pedaling.git",
+    "@pedaling/eslint-config-pedaling": "^1.0.6",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
     "babel-plugin-external-helpers": "^6.22.0",
@@ -60,5 +63,20 @@
   "files": [
     "dist"
   ],
-  "dependencies": {}
+  "dependencies": {},
+  "bugs": {
+    "url": "https://github.com/pedaling/class101-ui/issues"
+  },
+  "homepage": "https://github.com/pedaling/class101-ui#readme",
+  "directories": {
+    "example": "example"
+  },
+  "keywords": [
+    "ui-library",
+    "ui-framework",
+    "ui-components",
+    "ui-kit",
+    "class101",
+    "design"
+  ]
 }
