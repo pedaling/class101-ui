@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'react-emotion';
 import { gray200, gray600 } from '../Colors';
 
 type Props = {
@@ -16,16 +16,16 @@ const MIN_STROKE_WIDTH = 16;
 const strokeWidth = Math.min((MIN_STROKE_WIDTH, STROKE_WIDTH * 100) / 50);
 const strokeOffset = PATH_LENGTH - (PATH_LENGTH * 0.25);
 
-const SpinnerHead = styled.path`
+const SpinnerHead = styled('path')`
   transform-origin: center;
   transition: stroke-dashoffset 2s cubic-bezier(.4, 1, 0.75, 0.9);
   stroke: black;
   stroke-linecap: round;
 `;
 
-const SpinnerTrack = styled.path``;
+const SpinnerTrack = styled('path')``;
 
-const Container = styled.div`
+const Container = styled('div')`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,14 +44,16 @@ const Container = styled.div`
   ${SpinnerHead} {
     transform-origin: center;
     transition: stroke-dashoffset 2s cubic-bezier(.4, 1, 0.75, 0.9);
+    stroke: ${props => props.backgroundColor || gray600};
     stroke-linecap: round;
   }
 
   ${SpinnerTrack} {
+    stroke: ${props => props.color || gray200};
   }
 `;
 
-const SpinnerAnimation = styled.span`
+const SpinnerAnimation = styled('span')`
   @keyframes pt-spinner-animation {
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }
@@ -63,12 +65,9 @@ export default ({ size = 50, backgroundColor, color }: Props) => (
   <Container>
     <SpinnerAnimation>
       <svg height={ size } width={ size } viewBox="0 0 100 100" strokeWidth={ strokeWidth }>
-        <SpinnerTrack className={ css`color:  ${color || gray200}` } color={ color } d={ SPINNER_TRACK } />
+        <SpinnerTrack color={ color } d={ SPINNER_TRACK } />
         <SpinnerHead
           backgroundColor={ backgroundColor }
-          className={ css`
-            stroke: ${backgroundColor || gray600};
-          ` }
           d={ SPINNER_TRACK }
           pathLength={ PATH_LENGTH }
           strokeDasharray={ `${PATH_LENGTH} ${PATH_LENGTH}` }

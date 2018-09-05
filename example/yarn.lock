@@ -1800,7 +1800,7 @@ class-utils@^0.3.5:
 
 "class101-ui@https://github.com/pedaling/class101-ui.git":
   version "0.1.0"
-  resolved "https://github.com/pedaling/class101-ui.git#9b374971015bfa2ada33a45f4bf0ade64ddfe903"
+  resolved "https://github.com/pedaling/class101-ui.git#283bd1f5e6cd5d72bddd37c8f37f2a16a37eef56"
 
 clean-css@4.2.x:
   version "4.2.1"
