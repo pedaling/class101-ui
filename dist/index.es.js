@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import React from 'react';
+import styled$1 from 'react-emotion';
 
 var white = '#FFF';
 var black = '#000';
@@ -329,17 +330,17 @@ var STROKE_WIDTH = 4;
 var strokeWidth = Math.min((STROKE_WIDTH * 100) / 50);
 var strokeOffset = PATH_LENGTH - PATH_LENGTH * 0.25;
 
-var SpinnerHead = styled.path(_templateObject$5);
+var SpinnerHead = styled$1.path(_templateObject$5);
 
-var SpinnerTrack = styled.path(_templateObject2$4);
+var SpinnerTrack = styled$1.path(_templateObject2$4);
 
-var Container = styled.div(_templateObject3$3, SpinnerHead, function (props) {
+var Container = styled$1.div(_templateObject3$3, SpinnerHead, function (props) {
   return props.backgroundColor || gray600;
 }, SpinnerTrack, function (props) {
   return props.color || gray200;
 });
 
-var SpinnerAnimation = styled.span(_templateObject4$1);
+var SpinnerAnimation = styled$1.span(_templateObject4$1);
 
 var index$3 = (function (_ref) {
   var _ref$size = _ref.size,

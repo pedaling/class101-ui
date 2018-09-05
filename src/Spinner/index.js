@@ -16,16 +16,16 @@ const MIN_STROKE_WIDTH = 16;
 const strokeWidth = Math.min((MIN_STROKE_WIDTH, STROKE_WIDTH * 100) / 50);
 const strokeOffset = PATH_LENGTH - (PATH_LENGTH * 0.25);
 
-const SpinnerHead = styled('path')`
+const SpinnerHead = styled.path`
   transform-origin: center;
   transition: stroke-dashoffset 2s cubic-bezier(.4, 1, 0.75, 0.9);
   stroke: black;
   stroke-linecap: round;
 `;
 
-const SpinnerTrack = styled('path')``;
+const SpinnerTrack = styled.path``;
 
-const Container = styled('div')`
+const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,7 +53,7 @@ const Container = styled('div')`
   }
 `;
 
-const SpinnerAnimation = styled('span')`
+const SpinnerAnimation = styled.span`
   @keyframes pt-spinner-animation {
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }
