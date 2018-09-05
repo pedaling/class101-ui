@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { gray200, gray600 } from '../Colors';
+import { gray200, gray600 } from '../Colors';
 
 type Props = {
   size?: number,
@@ -44,10 +44,12 @@ const Container = styled.div`
   ${SpinnerHead} {
     transform-origin: center;
     transition: stroke-dashoffset 2s cubic-bezier(.4, 1, 0.75, 0.9);
+    stroke: ${props => props.backgroundColor || gray600};
     stroke-linecap: round;
   }
 
   ${SpinnerTrack} {
+    stroke: ${props => props.color || gray200};
   }
 `;
 
@@ -59,14 +61,13 @@ const SpinnerAnimation = styled.span`
   animation: pt-spinner-animation 0.6s linear infinite;
 `;
 
-const Component = ({ size = 50, backgroundColor, color }: Props) => (
+export default ({ size = 50, backgroundColor, color }: Props) => (
   <Container>
     <SpinnerAnimation>
       <svg height={ size } width={ size } viewBox="0 0 100 100" strokeWidth={ strokeWidth }>
-        <SpinnerTrack style={{ stroke: 'red' }} color={ color } d={ SPINNER_TRACK } />
+        <SpinnerTrack color={ color } d={ SPINNER_TRACK } />
         <SpinnerHead
           backgroundColor={ backgroundColor }
-          style={{ stroke: 'red' }}
           d={ SPINNER_TRACK }
           pathLength={ PATH_LENGTH }
           strokeDasharray={ `${PATH_LENGTH} ${PATH_LENGTH}` }
@@ -76,5 +77,3 @@ const Component = ({ size = 50, backgroundColor, color }: Props) => (
     </SpinnerAnimation>
   </Container>
 );
-
-export default Component;
