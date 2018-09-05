@@ -1,0 +1,32 @@
+---
+menu: Core
+name: Progress bar
+route: /cores
+---
+
+import { Playground, PropsTable } from 'docz';
+import ProgressBar from './ProgressBar';
+
+# Spinner
+
+진행 중인 사항이 있음을 알리기에 유용한 컴포넌트입니다.
+
+## Props
+
+<PropsTable of={ProgressBar} />
+
+## Basic usage
+
+<Playground>
+  <ProgressBar percent={ 30 } />
+</Playground>
+
+## Custom example
+
+<Playground>
+  <ProgressBar
+    percent={ 80 }
+    backgroundColor="red"
+    barColor="pink"
+  />
+</Playground>

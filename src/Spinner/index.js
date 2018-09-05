@@ -52,8 +52,8 @@ const SpinnerAnimation = styled.span`
   animation: pt-spinner-animation 0.6s linear infinite;
 `;
 
-export default ({ size = 50, backgroundColor, color }: Props) => (
-  <Container>
+export default ({ size = 50, backgroundColor, color, ...restProps }: Props) => (
+  <Container { ...restProps }>
     <SpinnerAnimation>
       <svg height={ size } width={ size } viewBox="0 0 100 100" strokeWidth={ strokeWidth }>
         <SpinnerTrack color={ color } d={ SPINNER_TRACK } />

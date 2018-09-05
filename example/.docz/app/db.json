@@ -1,6 +1,6 @@
 {
   "config": {
-    "title": "Class101 Ui",
+    "title": "Class101",
     "description": "My awesome app using docz",
     "themeConfig": {},
     "ordering": "descending",
@@ -40,6 +40,38 @@
         }
       ]
     },
+    "src/cores/ProgressBar.mdx": {
+      "menu": "Core",
+      "name": "Progress bar",
+      "route": "/cores",
+      "id": "f2a95769529f849d413344fe2d58d37d",
+      "filepath": "src/cores/ProgressBar.mdx",
+      "link": null,
+      "slug": "src-cores-progress-bar",
+      "order": 0,
+      "headings": [
+        {
+          "depth": 1,
+          "slug": "spinner",
+          "value": "Spinner"
+        },
+        {
+          "depth": 2,
+          "slug": "props",
+          "value": "Props"
+        },
+        {
+          "depth": 2,
+          "slug": "basic-usage",
+          "value": "Basic usage"
+        },
+        {
+          "depth": 2,
+          "slug": "custom-example",
+          "value": "Custom example"
+        }
+      ]
+    },
     "src/cores/Spinner.mdx": {
       "menu": "Core",
       "name": "Spinner",
@@ -64,6 +96,11 @@
           "depth": 2,
           "slug": "basic-usage",
           "value": "Basic usage"
+        },
+        {
+          "depth": 2,
+          "slug": "custom-example",
+          "value": "Custom example"
         }
       ]
     }
