@@ -7,6 +7,7 @@
     "build": "docz build"
   },
   "dependencies": {
+    "class101-ui": "/Users/iseongho/Development/class101-ui",
     "emotion": "^9.2.8",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
