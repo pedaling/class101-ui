@@ -317,14 +317,56 @@ var _templateObject$4 = taggedTemplateLiteral(['\n  margin-right: -12px;\n  marg
 
 var Row = styled.div.attrs({ className: 'clearfix' })(_templateObject$4, media.sm(_templateObject2$3));
 
-var index$3 = (function () {
+var _templateObject$5 = taggedTemplateLiteral(['\n  transform-origin: center;\n  transition: stroke-dashoffset 2s cubic-bezier(.4, 1, 0.75, 0.9);\n  stroke: ', ';\n  stroke-linecap: round;\n'], ['\n  transform-origin: center;\n  transition: stroke-dashoffset 2s cubic-bezier(.4, 1, 0.75, 0.9);\n  stroke: ', ';\n  stroke-linecap: round;\n']),
+    _templateObject2$4 = taggedTemplateLiteral(['\n  stroke: ', ';\n'], ['\n  stroke: ', ';\n']),
+    _templateObject3$3 = taggedTemplateLiteral(['\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  overflow: visible;\n  vertical-align: middle;\n\n  svg {\n    display: block;\n  }\n\n  path {\n    fill-opacity: 0;\n  }\n'], ['\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  overflow: visible;\n  vertical-align: middle;\n\n  svg {\n    display: block;\n  }\n\n  path {\n    fill-opacity: 0;\n  }\n']),
+    _templateObject4$1 = taggedTemplateLiteral(['\n  @keyframes pt-spinner-animation {\n    from { transform: rotate(0deg); }\n    to   { transform: rotate(360deg); }\n  }\n  animation: pt-spinner-animation 0.6s linear infinite;\n'], ['\n  @keyframes pt-spinner-animation {\n    from { transform: rotate(0deg); }\n    to   { transform: rotate(360deg); }\n  }\n  animation: pt-spinner-animation 0.6s linear infinite;\n']);
+
+var SPINNER_TRACK = 'M 50,50 m 0,-44.5 a 44.5,44.5 0 1 1 0,89 a 44.5,44.5 0 1 1 0,-89';
+var PATH_LENGTH = 280;
+var STROKE_WIDTH = 4;
+
+var strokeWidth = Math.min((STROKE_WIDTH * 100) / 50);
+var strokeOffset = PATH_LENGTH - PATH_LENGTH * 0.25;
+
+var SpinnerHead = styled.path(_templateObject$5, function (props) {
+  return props.backgroundColor || gray600;
+});
+
+var SpinnerTrack = styled.path(_templateObject2$4, function (props) {
+  return props.color || gray200;
+});
+
+var Container = styled.div(_templateObject3$3);
+
+var SpinnerAnimation = styled.span(_templateObject4$1);
+
+var index$3 = (function (_ref) {
+  var _ref$size = _ref.size,
+      size = _ref$size === undefined ? 50 : _ref$size,
+      backgroundColor = _ref.backgroundColor,
+      color = _ref.color;
   return React.createElement(
-    'div',
+    Container,
     null,
-    'zz'
+    React.createElement(
+      SpinnerAnimation,
+      null,
+      React.createElement(
+        'svg',
+        { height: size, width: size, viewBox: '0 0 100 100', strokeWidth: strokeWidth },
+        React.createElement(SpinnerTrack, { color: color, d: SPINNER_TRACK }),
+        React.createElement(SpinnerHead, {
+          backgroundColor: backgroundColor,
+          d: SPINNER_TRACK,
+          pathLength: PATH_LENGTH,
+          strokeDasharray: PATH_LENGTH + ' ' + PATH_LENGTH,
+          strokeDashoffset: strokeOffset
+        })
+      )
+    )
   );
 });
 
-export default index$3;
-export { index as Colors, index$1 as BreakPoints, index$2 as TextStyles, Grid, Col, Row };
+export { index as Colors, index$1 as BreakPoints, index$2 as TextStyles, Grid, Col, Row, index$3 as Spinner };
 //# sourceMappingURL=index.es.js.map
