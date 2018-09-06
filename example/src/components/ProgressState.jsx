@@ -3,30 +3,38 @@ import React from 'react';
 import { ProgressState, Colors } from 'class101-ui';
 
 type Props = {
-  /** 바의 길이 */
-  percent: number,
+  /** { label: string, active?: boolean } */
+  values: Array<{
+    label: string,
+    active?: boolean,
+  }>,
 
-  /** 백그라운드 색상 */
+  /** 기본 글의 색상 */
+  color?: string,
+
+  /** 기본 배경 색상 */
   backgroundColor?: string,
 
-  /** 바의 색상 */
-  barColor?: string,
+  /** 활성된 글의 색상 */
+  activeColor?: string,
 
-  /** 세로 높이 */
-  height?: number,
+  /** 활성된 배경 색상 */
+  activeBackgroundColor?: string,
 };
 
 const Component = ({
-  percent,
-  backgroundColor = Colors.gray200,
-  barColor = Colors.orange600,
-  height = 4,
+  values,
+  color = Colors.gray500,
+  backgroundColor = Colors.gray700,
+  activeColor = Colors.white,
+  activeBackgroundColor = Colors.orange600,
 }: Props) => (
   <ProgressState
-    percent={ percent }
+    values={ values }
+    color={ color }
     backgroundColor={ backgroundColor }
-    barColor={ barColor }
-    height={ height }
+    activeColor={ activeColor }
+    activeBackgroundColor={ activeBackgroundColor }
   />
 );
 

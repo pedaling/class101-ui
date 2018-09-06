@@ -6,7 +6,7 @@ type Props = {
   /** 바의 길이 */
   percent: number,
 
-  /** 백그라운드 색상 */
+  /** 배경 색상 */
   backgroundColor?: string,
 
   /** 바의 색상 */

@@ -18,16 +18,39 @@ import ProgressState from './ProgressState';
 ## Basic usage
 
 <Playground>
-  <ProgressState percent={ 30 } />
+  <ProgressState values={ [
+    {
+      label: '1',
+    },
+    {
+      label: '2',
+      active: true,
+    },
+    {
+      label: '3',
+    },
+  ] } />
 </Playground>
 
 ## Custom example
 
 <Playground>
   <ProgressState
-    percent={ 80 }
+    values={ [
+      {
+        label: '준비',
+        active: true,
+      },
+      {
+        label: '배송',
+      },
+      {
+        label: '완료',
+      },
+    ] }
+    color="gray"
     backgroundColor="pink"
-    barColor="red"
-    height={ 8 }
+    activeColor="yellow"
+    activeBackgroundColor="red"
   />
 </Playground>

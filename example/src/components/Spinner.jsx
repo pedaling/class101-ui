@@ -6,7 +6,7 @@ type Props = {
   /** 크기 */
   size?: number,
 
-  /** 원의 기본 색상 */
+  /** 원의 배경 색상 */
   backgroundColor?: string,
 
   /** 돌아가는 선의 색상 */

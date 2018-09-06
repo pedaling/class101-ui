@@ -49,7 +49,7 @@ const SpinnerAnimation = styled.span`
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }
   }
-  animation: pt-spinner-animation 0.6s linear infinite;
+  animation: pt-spinner-animation 0.62s ease-in-out infinite;
 `;
 
 export default ({ size = 50, backgroundColor, color, ...restProps }: Props) => (
