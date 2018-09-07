@@ -8,4 +8,5 @@ export { default as Row } from './Row';
 export { default as Spinner } from './Spinner';
 export { default as ProgressBar } from './ProgressBar';
 export { default as ProgressState } from './ProgressState';
+export { default as Button } from './Button';
 export { Colors, BreakPoints, TextStyles };

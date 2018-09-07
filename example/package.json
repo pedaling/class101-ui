@@ -13,6 +13,7 @@
     "react-dom": "^16.4.2"
   },
   "devDependencies": {
-    "docz": "^0.11.0"
+    "docz": "^0.11.1",
+    "docz-theme-default": "^0.11.1"
   }
 }

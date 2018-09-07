@@ -3,7 +3,7 @@ import React from 'react';
 import { ProgressState, Colors } from 'class101-ui';
 
 type Props = {
-  /** { label: string, active?: boolean } */
+  /** { label: 상태, active?: 활성화 여부 } */
   values: Array<{
     label: string,
     active?: boolean,

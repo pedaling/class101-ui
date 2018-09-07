@@ -14,6 +14,7 @@ const Bar = styled.div`
   border-radius: 2px;
   background-color: ${props => props.barColor || orange600};
   width: ${props => props.percent || 0}%;
+  transition: width 0.3s ease-in-out;
 `;
 
 const Container = styled.div`

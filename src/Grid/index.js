@@ -8,7 +8,7 @@ const Grid = styled.div`
     margin: 0 24px;
   `};
   ${media.lg`
-    max-width: ${props => (props.maxWidthAuto ? 'auto' : '960px')};
+    max-width: ${props => (props.maxWidthNone ? 'none' : '960px')};
   `};
 `;
 

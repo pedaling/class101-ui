@@ -1,0 +1,54 @@
+---
+menu: Components
+name: Button
+route: /components/button
+---
+
+import { Playground, PropsTable } from 'docz';
+import Button from './Button';
+
+# Button
+
+눌러서 제어하는 기능을 담당하는 컴포넌트입니다.
+
+## Props
+
+<PropsTable of={Button} />
+
+## Basic usage
+
+<Playground>
+  <Button>
+    Click me
+  </Button>
+</Playground>
+
+## With different sizes
+
+<Playground>
+  <Button size="lg">Click me</Button>
+  <Button size="md">Click me</Button>
+  <Button size="sm">Click me</Button>
+</Playground>
+
+## With different colors
+
+<Playground>
+  <Button color="black" backgroundColor="pink">BLACKPINK</Button>
+  <Button color="pink" backgroundColor="black">BLACKPINK</Button>
+</Playground>
+
+## With different icons
+
+<Playground>
+  <Button leftIconSrc="https://via.placeholder.com/18x18">Click me</Button>
+  <Button rightIconSrc="https://via.placeholder.com/18x18">Click me</Button>
+</Playground>
+
+## With different aligns(Only block)
+
+<Playground>
+  <Button textAlign="left" block>Click me</Button>
+  <Button textAlign="center" block>Click me</Button>
+  <Button textAlign="right" block>Click me</Button>
+</Playground>
