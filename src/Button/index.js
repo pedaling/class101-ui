@@ -144,7 +144,7 @@ export default ({
   }
 
   return (
-    <Button size={ size } { ...restProps }>
+    <Button size={ size } disabled={ disabled } { ...restProps }>
       {
         Boolean(leftIconSrc) &&
         <LeftIcon src={ leftIconSrc } />
