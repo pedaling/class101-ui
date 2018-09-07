@@ -27,7 +27,7 @@ const SpinnerTrack = styled.path`
   stroke: ${props => props.color || gray200};
 `;
 
-const Container = styled.div`
+const SpinnerContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,19 +52,25 @@ const SpinnerAnimation = styled.span`
   animation: pt-spinner-animation 0.62s ease-in-out infinite;
 `;
 
+const Container = styled.div`
+  display: inline-block;
+`;
+
 export default ({ size = 50, backgroundColor, color, ...restProps }: Props) => (
-  <Container { ...restProps }>
-    <SpinnerAnimation>
-      <svg height={ size } width={ size } viewBox="0 0 100 100" strokeWidth={ strokeWidth }>
-        <SpinnerTrack color={ color } d={ SPINNER_TRACK } />
-        <SpinnerHead
-          backgroundColor={ backgroundColor }
-          d={ SPINNER_TRACK }
-          pathLength={ PATH_LENGTH }
-          strokeDasharray={ `${PATH_LENGTH} ${PATH_LENGTH}` }
-          strokeDashoffset={ strokeOffset }
-        />
-      </svg>
-    </SpinnerAnimation>
+  <Container  { ...restProps }>
+    <SpinnerContainer>
+      <SpinnerAnimation>
+        <svg height={ size } width={ size } viewBox="0 0 100 100" strokeWidth={ strokeWidth }>
+          <SpinnerTrack color={ color } d={ SPINNER_TRACK } />
+          <SpinnerHead
+            backgroundColor={ backgroundColor }
+            d={ SPINNER_TRACK }
+            pathLength={ PATH_LENGTH }
+            strokeDasharray={ `${PATH_LENGTH} ${PATH_LENGTH}` }
+            strokeDashoffset={ strokeOffset }
+          />
+        </svg>
+      </SpinnerAnimation>
+    </SpinnerContainer>
   </Container>
 );
