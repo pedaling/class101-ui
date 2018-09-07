@@ -24,6 +24,9 @@ type Props = {
   /** 글의 정렬 */
   textAlign?: 'left' | 'center' | 'right',
 
+  /** 진행 여부 */
+  loading?: boolean,
+
   children: Node,
 };
 
@@ -33,6 +36,7 @@ const Component = ({
   color = Colors.gray800,
   backgroundColor = Colors.orange600,
   textAlign = 'center',
+  loading = false,
   children,
   ...restProps
 }: Props) => (
@@ -43,6 +47,7 @@ const Component = ({
     color={ color }
     backgroundColor={ backgroundColor }
     textAlign={ textAlign }
+    loading={ loading }
     { ...restProps }
   >
     { children }

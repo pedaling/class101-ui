@@ -57,7 +57,7 @@ const Container = styled.div`
 `;
 
 export default ({ size = 50, backgroundColor, color, ...restProps }: Props) => (
-  <Container  { ...restProps }>
+  <Container { ...restProps }>
     <SpinnerContainer>
       <SpinnerAnimation>
         <svg height={ size } width={ size } viewBox="0 0 100 100" strokeWidth={ strokeWidth }>

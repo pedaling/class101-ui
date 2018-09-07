@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { orange600, gray800 } from '../Colors';
 import { body2BlackBold } from '../TextStyles';
+import Spinner from '../Spinner';
 
 type Props = {
   block?: boolean,
@@ -11,7 +12,32 @@ type Props = {
   leftIconSrc?: string,
   rightIconSrc?: string,
   textAlign?: 'left' | 'center' | 'right',
+  loading?: boolean,
 };
+
+// TODO: 스타일 아키텍쳐 작업 후 className으로 변경하자.
+const StyledSpinner = styled(Spinner)`
+  ${props => props.buttonSize === 'lg' && css`
+    span, span > svg {
+      width: 24px;
+      height: 24px;
+    }
+  `};
+
+  ${props => props.buttonSize === 'md' && css`
+    span, span > svg {
+      width: 18px;
+      height: 18px;
+    }
+  `};
+
+  ${props => props.buttonSize === 'sm' && css`
+    span, span > svg {
+      width: 16px;
+      height: 16px;
+    }
+  `};
+`;
 
 const LeftIcon = styled.img.attrs({ alt: '' })``;
 
@@ -105,17 +131,29 @@ export default ({
   leftIconSrc,
   rightIconSrc,
   children,
+  disabled,
+  loading,
   ...restProps
-}: Props) => (
-  <Button size={ size } { ...restProps }>
-    {
-      Boolean(leftIconSrc) &&
-      <LeftIcon src={ leftIconSrc } />
-    }
-    <span>{ children }</span>
-    {
-      Boolean(rightIconSrc) &&
-      <RightIcon src={ rightIconSrc } />
-    }
-  </Button>
-);
+}: Props) => {
+  if (loading) {
+    return (
+      <Button size={ size } { ...restProps } disabled>
+        <StyledSpinner buttonSize={ size } />
+      </Button>
+    );
+  }
+
+  return (
+    <Button size={ size } { ...restProps }>
+      {
+        Boolean(leftIconSrc) &&
+        <LeftIcon src={ leftIconSrc } />
+      }
+      <span>{ children }</span>
+      {
+        Boolean(rightIconSrc) &&
+        <RightIcon src={ rightIconSrc } />
+      }
+    </Button>
+  );
+};
