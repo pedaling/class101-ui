@@ -51,6 +51,7 @@ const Button = styled.button`
   border: none;
   width: ${props => (props.block ? '100%' : 'auto')};
   text-align: ${props => props.textAlign || 'center'};
+  cursor: pointer;
 
   ${props => props.size === 'lg' && css`
     font-size: 16px;
@@ -120,7 +121,6 @@ const Button = styled.button`
   }
 
   &:disabled {
-    pointer-events: none;
     cursor: not-allowed;
     opacity: 0.8;
   }
