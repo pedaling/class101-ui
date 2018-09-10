@@ -13,6 +13,7 @@ type Props = {
   rightIconSrc?: string,
   textAlign?: 'left' | 'center' | 'right',
   loading?: boolean,
+  borderRadius?: number;
 };
 
 // TODO: 스타일 아키텍쳐 작업 후 className으로 변경하자.
@@ -49,6 +50,7 @@ const Button = styled.button`
   background-color: ${props => props.backgroundColor || orange600};
   outline: none;
   border: none;
+  border-radius: ${props => props.borderRadius || 1}px;
   width: ${props => (props.block ? '100%' : 'auto')};
   text-align: ${props => props.textAlign || 'center'};
   cursor: pointer;

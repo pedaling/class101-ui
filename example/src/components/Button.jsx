@@ -24,6 +24,9 @@ type Props = {
   /** 글의 정렬 */
   textAlign?: 'left' | 'center' | 'right',
 
+  /** 버튼의 둥근 정도 */
+  borderRadius?: number,
+
   /** 진행 여부 */
   loading?: boolean,
 
@@ -36,6 +39,7 @@ const Component = ({
   color = Colors.gray800,
   backgroundColor = Colors.orange600,
   textAlign = 'center',
+  borderRadius = 1,
   loading = false,
   children,
   ...restProps
@@ -47,6 +51,7 @@ const Component = ({
     color={ color }
     backgroundColor={ backgroundColor }
     textAlign={ textAlign }
+    borderRadius={ borderRadius }
     loading={ loading }
     { ...restProps }
   >
