@@ -42,7 +42,7 @@ const Content = styled.div`
   `};
 `;
 
-const Chevron = styled.img.attrs({ src: 'https://class101.net/images/ic-chevron-gray.png', alt: '>' })`
+const Chevron = styled.img.attrs({ src: 'https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/ic-chevron-gray.png', alt: '>' })`
   width: 24px;
   height: 24px;
   margin: 0 12px;

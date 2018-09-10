@@ -9,4 +9,5 @@ export { default as Spinner } from './Spinner';
 export { default as ProgressBar } from './ProgressBar';
 export { default as ProgressState } from './ProgressState';
 export { default as Button } from './Button';
+export { default as Input } from './Input';
 export { Colors, BreakPoints, TextStyles };

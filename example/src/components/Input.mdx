@@ -1,0 +1,59 @@
+---
+menu: Components
+name: Input
+route: /components/input
+---
+
+import { Playground, PropsTable } from 'docz';
+import Input from './Input';
+
+# Input
+
+문자열을 입력받는 컴포넌트입니다.
+
+## Props
+
+<PropsTable of={Input} />
+
+## Basic usage
+
+<Playground>
+  <Input placeholder="입력해주세요." />
+</Playground>
+
+## Inline inputs
+
+<Playground>
+  <Input
+    inline
+    placeholder="입력해주세요."
+  />
+  <Input
+    inline
+    placeholder="입력해주세요."
+  />
+</Playground>
+
+## With allow message
+
+<Playground>
+  <Input allowMessage="올바른 값입니다." />
+</Playground>
+
+## With error message
+
+<Playground>
+  <Input errorMessage="특수문자를 제외하고 입력해주세요." />
+</Playground>
+
+## With warn message
+
+<Playground>
+  <Input warnMessage="보안에 취약한 값입니다." />
+</Playground>
+
+## Disabled Input
+
+<Playground>
+  <Input placeholder="잠금 상태입니다." disabled />
+</Playground>
