@@ -11,17 +11,17 @@ const Col = styled.div`
   float: left;
   box-sizing: border-box;
 
-  ${props => props.sm && media.sm`
+  ${media.sm`
     width: ${props => sizeToPercent(props.sm)}%;
     padding-right: 4px;
     padding-left: 4px;
   `};
 
-  ${props => props.md && media.md`
+  ${media.md`
     width: ${props => sizeToPercent(props.md || props.sm)}%;
   `};
 
-  ${props => props.lg && media.lg`
+  ${media.lg`
     width: ${props => sizeToPercent(props.lg || props.md || props.sm)}%;
   `};
 `;
