@@ -1,6 +1,6 @@
-<p align="center"><a href="https://class101.net" target="_blank" rel="noopener noreferrer"><img width="128" src="resources/images/logo-class101.png" alt="C"></a></p>
+<p><a href="https://class101.net" target="_blank" rel="noopener noreferrer"><img width="128" src="resources/images/logo-class101.png" alt="C"></a></p>
 
-<h2 align="center">Class101 UI</h2>
+# Class101 UI
 
 A React-based UI Component Library, powered by [Class101](https://class101.net).
 
