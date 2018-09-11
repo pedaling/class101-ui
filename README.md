@@ -2,7 +2,7 @@
 
 # Class101 UI
 
-A React-based UI Component Library, powered by [Class101](https://class101.net).
+A React-based UI Component Library, powered by Class101.
 
 ## Install
 
@@ -26,7 +26,7 @@ class Example extends Component {
 }
 ```
 
-# Worked
+## Worked
 
 - Responsive Grid System
 - Button
@@ -35,9 +35,9 @@ class Example extends Component {
 - Progress State
 - Spinner
 
-These are at example folder
+These are at [example folder](https://github.com/pedaling/class101-ui/tree/master/example).
 
-# Roadmap
+## Roadmap
 
 - Textarea
 - Card
@@ -48,3 +48,9 @@ These are at example folder
 - Responsive V2
 - Font
 - Styled component css to inline style
+
+## License
+
+Licensed under the MIT License, Copyright (c) 2018 pedaling.
+
+See [LICENSE](https://github.com/pedaling/class101-ui/blob/master/LICENSE) for more information.
