@@ -1,4 +1,4 @@
-<p><a href="https://class101.net" target="_blank" rel="noopener noreferrer"><img width="128" src="resources/images/logo-class101.png" alt="C"></a></p>
+<p align="center"><a href="https://class101.net" target="_blank" rel="noopener noreferrer"><img width="128" src="https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/logo-class101.png" alt="C"></a></p>
 
 # Class101 UI
 
