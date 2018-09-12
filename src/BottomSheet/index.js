@@ -29,6 +29,9 @@ const Container = styled.div`
   background-color: ${white};
   box-shadow: 0 -1px 3px -1px rgba(41, 42, 43, 0.16), 0 0 1px 1px rgba(0, 0, 0, 0.04);
   box-sizing: border-box;
+  opacity: 1;
+  display: inline;
+  zoom: 1;
   ${props => (props.isOpened ? css`
     transform: translateY(${BORDER_SIZE}px);
   ` : css`
