@@ -16,9 +16,11 @@ const BORDER_SIZE = 1;
 
 const Container = styled.div`
   z-index: ${props => props.zIndex || 2001};
-  position: relative;
-  width: 100%;
-  height: 100%;
+  position: ${props => (props.fullScreen ? 'fixed' : 'relative')};
+  width: ${props => (props.fullScreen ? '100vw' : '100%')};
+  height: ${props => (props.fullScreen ? '100vh' : '100%')};
+  top: 0;
+  left: 0;
   overflow: hidden;
   -ms-transition: top 0.8s;
   transition: transform 0.8s;
@@ -96,24 +98,6 @@ const BadgeCounterContainer = styled.div`
   margin-left: 4px;
 `;
 
-const FullScreenConverter = styled.div`
-  z-index: ${props => props.zIndex || 2001};
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-`;
-
-const BackgroundWindow = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-`;
-
 export default class BottomSheet extends Component<Props> {
   state = {
     isOpened: false,
@@ -140,11 +124,11 @@ export default class BottomSheet extends Component<Props> {
 
     const isOpened = this.props.isOpened || this.state.isOpened;
 
-    const Element = (
-      <Container isOpened={ isOpened } zIndex={ zIndex } { ...restProps }>
+    return (
+      <Container isOpened={ isOpened } fullScreen={ fullScreen } zIndex={ zIndex } { ...restProps }>
         {
           this.headerElement && renderContent &&
-          <Content marginTop={ this.headerElement.clientHeight }>
+          <Content fullScreen={ fullScreen } marginTop={ this.headerElement.clientHeight }>
             { renderContent() }
           </Content>
         }
@@ -168,19 +152,5 @@ export default class BottomSheet extends Component<Props> {
         </Header>
       </Container>
     );
-
-    if (fullScreen) {
-      return (
-        <FullScreenConverter zIndex={ zIndex }>
-          {
-            isOpened &&
-            <BackgroundWindow />
-          }
-          { Element }
-        </FullScreenConverter>
-      );
-    }
-
-    return Element;
   }
 }
