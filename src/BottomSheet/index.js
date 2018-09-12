@@ -8,12 +8,14 @@ type Props = {
   badgeCount?: number,
   renderContent: () => HTMLElement,
   renderFixedContent: () => HTMLElement,
+  fullScreen?: boolean,
+  zIndex?: number,
 };
 
-const BORDER_SIZE = 2;
+const BORDER_SIZE = 1;
 
 const Container = styled.div`
-  z-index: 2001;
+  z-index: ${props => props.zIndex || 2001};
   position: relative;
   width: 100%;
   height: 100%;
@@ -94,6 +96,24 @@ const BadgeCounterContainer = styled.div`
   margin-left: 4px;
 `;
 
+const FullScreenConverter = styled.div`
+  z-index: ${props => props.zIndex || 2001};
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+`;
+
+const BackgroundWindow = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+`;
+
 export default class BottomSheet extends Component<Props> {
   state = {
     isOpened: false,
@@ -113,13 +133,15 @@ export default class BottomSheet extends Component<Props> {
       renderFixedContent,
       badgeCount,
       renderContent,
+      fullScreen = true,
+      zIndex,
       ...restProps
     } = this.props;
 
     const isOpened = this.props.isOpened || this.state.isOpened;
 
-    return (
-      <Container isOpened={ isOpened } { ...restProps }>
+    const Element = (
+      <Container isOpened={ isOpened } zIndex={ zIndex } { ...restProps }>
         {
           this.headerElement && renderContent &&
           <Content marginTop={ this.headerElement.clientHeight }>
@@ -146,5 +168,19 @@ export default class BottomSheet extends Component<Props> {
         </Header>
       </Container>
     );
+
+    if (fullScreen) {
+      return (
+        <FullScreenConverter zIndex={ zIndex }>
+          {
+            isOpened &&
+            <BackgroundWindow />
+          }
+          { Element }
+        </FullScreenConverter>
+      );
+    }
+
+    return Element;
   }
 }
