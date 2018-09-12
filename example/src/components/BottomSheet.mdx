@@ -1,0 +1,40 @@
+---
+menu: Components
+name: Bottom Sheet
+route: /components/bottom-sheet
+---
+
+import { Playground, PropsTable } from 'docz';
+import BottomSheet from './BottomSheet';
+
+# Bottom Sheet
+
+하단에 고정되어 있지만 누르면 Slide Up되는 컴포넌트입니다.
+
+## Props
+
+<PropsTable of={BottomSheet} />
+
+## Basic usage
+
+<Playground>
+  <BottomSheet
+    title="Bottom Sheet"
+    badgeCount={ 101 }
+    renderFixedContent={ () => (<div>List</div>) }
+    renderContent={ () => (
+      <ul style={{ margin:0 }}>
+        <li>Item</li>
+        <li>Item</li>
+        <li>Item</li>
+        <li>Item</li>
+        <li>Item</li>
+        <li>Item</li>
+        <li>Item</li>
+        <li>Item</li>
+        <li>Item</li>
+        <li>Item</li>
+      </ul>
+    ) }
+  />
+</Playground>

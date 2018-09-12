@@ -34,6 +34,7 @@ class Example extends Component {
 - Progress Bar
 - Progress State
 - Spinner
+- Bottom Sheet
 
 These are at [example folder](https://github.com/pedaling/class101-ui/tree/master/example).
 

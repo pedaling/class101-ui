@@ -19,3 +19,7 @@ yarn install
 ```console
 yarn docz dev
 ```
+
+## Progress
+
+- Make a generate page
