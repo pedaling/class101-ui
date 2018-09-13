@@ -20,6 +20,9 @@ type Props = {
 
   /** CSS z-index 속성의 값 */
   zIndex?: number,
+
+  /** 열렸을 때 CSS z-index 속성의 값 */
+  openedZIndex?: number,
 };
 
 const style = {

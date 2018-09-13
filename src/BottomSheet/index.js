@@ -10,12 +10,13 @@ type Props = {
   renderFixedContent: () => HTMLElement,
   fullScreen?: boolean,
   zIndex?: number,
+  openedZIndex?: number,
 };
 
 const BORDER_SIZE = 1;
 
 const Container = styled.div`
-  z-index: ${props => props.zIndex || 2001};
+  z-index: ${props => (props.isOpened ? props.openedZIndex : props.zIndex) || 2001};
   position: ${props => (props.fullScreen ? 'fixed' : 'relative')};
   width: ${props => (props.fullScreen ? '100vw' : '100%')};
   height: ${props => (props.fullScreen ? '90vh' : '100%')};
@@ -131,13 +132,14 @@ export default class BottomSheet extends Component<Props> {
       renderContent,
       fullScreen = true,
       zIndex,
+      openedZIndex,
       ...restProps
     } = this.props;
 
     const isOpened = this.props.isOpened || this.state.isOpened;
 
     const element = (
-      <Container isOpened={ isOpened } fullScreen={ fullScreen } zIndex={ zIndex } { ...restProps }>
+      <Container isOpened={ isOpened } fullScreen={ fullScreen } zIndex={ zIndex } openedZIndex={ openedZIndex } { ...restProps }>
         {
           this.headerElement && renderContent &&
           <Content fullScreen={ fullScreen } marginTop={ this.headerElement.clientHeight }>
@@ -170,7 +172,7 @@ export default class BottomSheet extends Component<Props> {
         <div>
           {
             isOpened &&
-            <BackgroundWindow zIndex={ zIndex } onClick={ this.onChangeToggle } />
+            <BackgroundWindow zIndex={ openedZIndex || zIndex } onClick={ this.onChangeToggle } />
           }
           { element }
         </div>
