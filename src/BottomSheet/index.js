@@ -18,12 +18,12 @@ const Container = styled.div`
   z-index: ${props => props.zIndex || 2001};
   position: ${props => (props.fullScreen ? 'fixed' : 'relative')};
   width: ${props => (props.fullScreen ? '100vw' : '100%')};
-  height: ${props => (props.fullScreen ? '100vh' : '100%')};
-  bottom: 0;
+  height: ${props => (props.fullScreen ? '90vh' : '100%')};
+  bottom: calc(48px - 100%);
   left: 0;
-  overflow: hidden;
-  -ms-transition: bottom 0.8s;
-  transition: bottom 0.8s;
+  overflow: ${props => (props.fullScreen ? 'visible' : 'hidden')};
+  -ms-transition: transform 0.8s;
+  transition: transform 0.8s;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   background-color: ${white};
@@ -31,9 +31,9 @@ const Container = styled.div`
   box-sizing: border-box;
   zoom: 1;
   ${props => (props.isOpened ? css`
-    bottom: -${BORDER_SIZE}px;
+    transform: translateY(calc(48px - 100% + ${BORDER_SIZE}px));
   ` : css`
-    bottom: calc(48px - 100%);
+    transform: translateY(${props => (props.fullScreen ? `calc(-10% - ${BORDER_SIZE + 1}px)` : 0)});
   `)}
 `;
 
@@ -76,7 +76,7 @@ const BadgeCounter = styled.div`
 const Content = styled.div`
   margin-top: ${props => props.marginTop || 0}px;
   width: 100%;
-  height: calc(100% - ${props => props.marginTop || 0}px);
+  height: calc(${props => (props.fullScreen ? 90 : 100)}% - ${props => props.marginTop || 0}px - ${BORDER_SIZE + 3}px);
   overflow: auto;
   padding: 0 24px;
 `;
@@ -97,6 +97,17 @@ const InnerHeader = styled.div`
 const BadgeCounterContainer = styled.div`
   display: inline-block;
   margin-left: 4px;
+`;
+
+const BackgroundWindow = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow: visible;
+  z-index: ${props => (props.zIndex - 1) || 2000};
 `;
 
 export default class BottomSheet extends Component<Props> {
@@ -125,7 +136,7 @@ export default class BottomSheet extends Component<Props> {
 
     const isOpened = this.props.isOpened || this.state.isOpened;
 
-    return (
+    const element = (
       <Container isOpened={ isOpened } fullScreen={ fullScreen } zIndex={ zIndex } { ...restProps }>
         {
           this.headerElement && renderContent &&
@@ -153,5 +164,19 @@ export default class BottomSheet extends Component<Props> {
         </Header>
       </Container>
     );
+
+    if (fullScreen) {
+      return (
+        <div>
+          {
+            isOpened &&
+            <BackgroundWindow zIndex={ zIndex } onClick={ this.onChangeToggle } />
+          }
+          { element }
+        </div>
+      );
+    }
+
+    return element;
   }
 }
