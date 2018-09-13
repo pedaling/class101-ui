@@ -1,0 +1,38 @@
+---
+menu: Components
+name: Badge
+route: /components/badge
+---
+
+import { Playground, PropsTable } from 'docz';
+import Badge from './Badge';
+
+# Badge
+
+알림 개수를 알리기 유용한 컴포넌트입니다.
+
+## Props
+
+<PropsTable of={ Badge } />
+
+## Basic usage
+
+<Playground>
+  <Badge count={ 2 } />
+  <Badge count={ 101 } />
+</Playground>
+
+## With diffrent colors
+
+<Playground>
+  <Badge
+    count={ 2 }
+    color="black"
+    backgroundColor="pink"
+  />
+  <Badge
+    count={ 2 }
+    color="pink"
+    backgroundColor="black"
+  />
+</Playground>

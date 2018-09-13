@@ -5,6 +5,7 @@ import { body2BlackBold } from '../TextStyles';
 import Spinner from '../Spinner';
 
 type Props = {
+  type?: string,
   block?: boolean,
   size?: 'lg' | 'md' | 'sm',
   color?: string,
@@ -54,6 +55,7 @@ const Button = styled.button`
   width: ${props => (props.block ? '100%' : 'auto')};
   text-align: ${props => props.textAlign || 'center'};
   cursor: pointer;
+  line-height: 0 !important;
 
   ${props => props.size === 'lg' && css`
     font-size: 16px;
@@ -130,6 +132,7 @@ const Button = styled.button`
 
 export default ({
   size = 'md',
+  type = 'button',
   leftIconSrc,
   rightIconSrc,
   children,
@@ -139,7 +142,7 @@ export default ({
 }: Props) => {
   if (loading) {
     return (
-      <Button size={ size } { ...restProps } disabled>
+      <Button type={ type } size={ size } { ...restProps } disabled>
         <StyledSpinner buttonSize={ size } />
       </Button>
     );

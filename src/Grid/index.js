@@ -3,10 +3,7 @@ import { media } from '../BreakPoints';
 
 const Grid = styled.div`
   position: relative;
-  margin: 0 32px;
-  ${media.sm`
-    margin: 0 24px;
-  `};
+  margin: 0 auto;
   ${media.lg`
     max-width: ${props => (props.maxWidthNone ? 'none' : '960px')};
   `};

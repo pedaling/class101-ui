@@ -55,12 +55,12 @@ sm: < 2013px
 
 ## With grid container
 
-이 Grid Container는 Class101의 디자이너가 지정한 알맞은 간격(Margin)을 가졌으며, 최대 가로 크기(max-width)를 가집니다.
+이 Grid Container는 중앙 정렬되며, 최대 가로 크기(max-width)를 가집니다.
 
 <Playground>
   <Grid>
     <Row>
-      <Col lg={ 12 }>You can see diffrent margin and max width</Col>
+      <Col lg={ 12 }>With grid container</Col>
     </Row>
   </Grid>
 </Playground>
@@ -87,8 +87,8 @@ sm: < 2013px
       <Col lg={ 12 } sm={ 12 }>Header</Col>
     </Row>
     <Row>
-      <Col lg={ 4 } sm={ 12 }>Side Menu</Col>
-      <Col lg={ 8 } sm={ 12 }>Content</Col>
+      <Col style={{ height: 100 }} lg={ 4 } sm={ 12 }>Side Menu</Col>
+      <Col style={{ height: 300 }} lg={ 8 } sm={ 12 }>Content</Col>
     </Row>
     <Row>
       <Col lg={ 12 } sm={ 12 }>Footer</Col>

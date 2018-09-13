@@ -46,9 +46,7 @@ These are at [example folder](https://github.com/pedaling/class101-ui/tree/maste
 - Breadcrumb
 - Sync Image
 - Darkness Skin
-- Responsive V2
 - Font
-- Styled component css to inline style
 
 ## License
 
