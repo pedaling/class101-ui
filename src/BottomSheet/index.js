@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import { white } from '../Colors';
-import { body1BlackBold, tiny1WhiteBold } from '../TextStyles';
+import { body1BlackBold, tiny1WhiteBold, subheadingBlackBold } from '../TextStyles';
 
 type Props = {
   title: string,
@@ -14,6 +14,23 @@ type Props = {
 };
 
 const BORDER_SIZE = 1;
+
+const Title = styled.span`
+  ${body1BlackBold};
+  -ms-transition: font-size 0.8s;
+  transition: font-size 0.8s;
+`;
+
+const InnerHeader = styled.div`
+  padding: 10px 24px;
+  cursor: pointer;
+  -ms-transition: padding 0.8s;
+  transition: padding 0.8s;
+
+  div, span {
+    vertical-align: middle;
+  }
+`;
 
 const Container = styled.div`
   z-index: ${props => (props.isOpened ? props.openedZIndex : props.zIndex) || 2001};
@@ -33,6 +50,14 @@ const Container = styled.div`
   zoom: 1;
   ${props => (props.isOpened ? css`
     transform: translateY(calc(48px - 100% + ${BORDER_SIZE}px));
+
+    ${Title} {
+      ${subheadingBlackBold};
+    }
+
+    ${InnerHeader} {
+      padding-top: 24px;
+    }
   ` : css`
     transform: translateY(${props => (props.fullScreen ? `calc(-10% - ${BORDER_SIZE + 1}px)` : 0)});
   `)}
@@ -43,23 +68,20 @@ const Header = styled.div`
   top: 0;
   left: 0;
   width: 100%;
+  background-color: ${white};
 `;
 
 const Chevron = styled.img.attrs({ src: 'https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/ic-chevron-gray.png', alt: '>' })`
   width: 24px;
   height: 24px;
   position: absolute;
-  top: 12px;
+  top: ${12 - BORDER_SIZE}px;
   right: 24px;
   -ms-transition: transform 0.8s;
   transition: transform 0.8s;
   -ms-transform: rotate(${props => props.rotate || 270}deg);
   -webkit-transform: rotate(${props => props.rotate || 270}deg);
   transform: rotate(${props => props.rotate || 270}deg);
-`;
-
-const Title = styled.span`
-  ${body1BlackBold};
 `;
 
 const BadgeCounter = styled.div`
@@ -83,16 +105,7 @@ const Content = styled.div`
 `;
 
 const FixedContent = styled.div`
-  padding: ${BORDER_SIZE}px 24px 10px;
-`;
-
-const InnerHeader = styled.div`
-  padding: 10px 24px;
-  cursor: pointer;
-
-  div, span {
-    vertical-align: middle;
-  }
+  padding: 0 24px 10px;
 `;
 
 const BadgeCounterContainer = styled.div`
@@ -145,7 +158,7 @@ export default class BottomSheet extends Component<Props> {
     const element = (
       <Container isOpened={ isOpened } fullScreen={ fullScreen } zIndex={ zIndex } openedZIndex={ openedZIndex } { ...restProps }>
         {
-          this.headerElement && renderContent &&
+          this.headerElement && this.headerElement.clientHeight && renderContent &&
           <Content fullScreen={ fullScreen } marginTop={ this.headerElement.clientHeight }>
             { renderContent() }
           </Content>
@@ -180,7 +193,12 @@ export default class BottomSheet extends Component<Props> {
         <div>
           {
             isOpened &&
-            <BackgroundWindow zIndex={ openedZIndex || zIndex } onClick={ this.onChangeToggle } />
+            <BackgroundWindow
+              zIndex={ openedZIndex || zIndex }
+              onMouseDown={ this.onChangeToggle }
+              onTouchStart={ this.onChangeToggle }
+              onTouchEnd={ this.preventDefault }
+            />
           }
           { element }
         </div>
