@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import { white } from '../Colors';
-import { body1BlackBold, tiny1WhiteBold, subheadingBlackBold } from '../TextStyles';
+import { body1BlackBold, subheadingBlackBold } from '../TextStyles';
 import Badge from '../Badge';
 
 type Props = {
