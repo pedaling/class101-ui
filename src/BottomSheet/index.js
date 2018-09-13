@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import { white } from '../Colors';
 import { body1BlackBold, tiny1WhiteBold, subheadingBlackBold } from '../TextStyles';
+import Badge from '../Badge';
 
 type Props = {
   title: string,
@@ -97,16 +98,8 @@ const Header = styled.div`
   background-color: ${white};
 `;
 
-const BadgeCounter = styled.div`
-  ${tiny1WhiteBold};
-  height: 20px;
-  width: 20px;
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-  border-radius: 50%;
-  background-color: #e62c60;
-  padding: 0 6px;
+const BadgeCounter = styled(Badge)`
+  margin-left: 4px;
 `;
 
 const Content = styled.div`
@@ -119,11 +112,6 @@ const Content = styled.div`
 
 const FixedContent = styled.div`
   padding: 0 24px 10px;
-`;
-
-const BadgeCounterContainer = styled.div`
-  display: inline-block;
-  margin-left: 4px;
 `;
 
 const BackgroundWindow = styled.div`
@@ -186,9 +174,7 @@ export default class BottomSheet extends Component<Props, State> {
             <Title>{ title || '' }</Title>
             {
               badgeCount &&
-              <BadgeCounterContainer>
-                <BadgeCounter>{ badgeCount }</BadgeCounter>
-              </BadgeCounterContainer>
+              <BadgeCounter count={ badgeCount } />
             }
             <Chevron rotate={ isOpened ? 90 : 270 } />
           </InnerHeader>
