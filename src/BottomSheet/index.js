@@ -19,23 +19,21 @@ const Container = styled.div`
   position: ${props => (props.fullScreen ? 'fixed' : 'relative')};
   width: ${props => (props.fullScreen ? '100vw' : '100%')};
   height: ${props => (props.fullScreen ? '100vh' : '100%')};
-  top: 0;
+  bottom: 0;
   left: 0;
   overflow: hidden;
-  -ms-transition: top 0.8s;
-  transition: transform 0.8s;
+  -ms-transition: bottom 0.8s;
+  transition: bottom 0.8s;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   background-color: ${white};
   box-shadow: 0 -1px 3px -1px rgba(41, 42, 43, 0.16), 0 0 1px 1px rgba(0, 0, 0, 0.04);
   box-sizing: border-box;
-  opacity: 1;
-  display: inline;
   zoom: 1;
   ${props => (props.isOpened ? css`
-    transform: translateY(${BORDER_SIZE}px);
+    bottom: -${BORDER_SIZE}px;
   ` : css`
-    transform: translateY(calc(100% - 48px));
+    bottom: calc(48px - 100%);
   `)}
 `;
 
