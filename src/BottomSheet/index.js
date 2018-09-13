@@ -13,6 +13,10 @@ type Props = {
   openedZIndex?: number,
 };
 
+type State = {
+  isOpened: boolean,
+};
+
 const BORDER_SIZE = 1;
 
 const Title = styled.span`
@@ -30,6 +34,18 @@ const InnerHeader = styled.div`
   div, span {
     vertical-align: middle;
   }
+`;
+
+const Chevron = styled.img.attrs({ src: 'https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/ic-chevron-gray.png', alt: '>' })`
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 24px;
+  -ms-transition: transform 0.8s, top 0.8s;
+  transition: transform 0.8s, top 0.8s;
+  -ms-transform: rotate(${props => props.rotate || 270}deg);
+  -webkit-transform: rotate(${props => props.rotate || 270}deg);
+  transform: rotate(${props => props.rotate || 270}deg);
 `;
 
 const Container = styled.div`
@@ -58,8 +74,16 @@ const Container = styled.div`
     ${InnerHeader} {
       padding-top: 24px;
     }
+
+    ${Chevron} {
+      top: ${24 - BORDER_SIZE}px;
+    }
   ` : css`
     transform: translateY(${props => (props.fullScreen ? `calc(-10% - ${BORDER_SIZE + 1}px)` : 0)});
+
+    ${Chevron} {
+      top: ${12 - BORDER_SIZE}px;
+    }
   `)}
 `;
 
@@ -68,20 +92,9 @@ const Header = styled.div`
   top: 0;
   left: 0;
   width: 100%;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
   background-color: ${white};
-`;
-
-const Chevron = styled.img.attrs({ src: 'https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/ic-chevron-gray.png', alt: '>' })`
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  top: ${12 - BORDER_SIZE}px;
-  right: 24px;
-  -ms-transition: transform 0.8s;
-  transition: transform 0.8s;
-  -ms-transform: rotate(${props => props.rotate || 270}deg);
-  -webkit-transform: rotate(${props => props.rotate || 270}deg);
-  transform: rotate(${props => props.rotate || 270}deg);
 `;
 
 const BadgeCounter = styled.div`
@@ -124,7 +137,7 @@ const BackgroundWindow = styled.div`
   z-index: ${props => (props.zIndex - 1) || 2000};
 `;
 
-export default class BottomSheet extends Component<Props> {
+export default class BottomSheet extends Component<Props, State> {
   state = {
     isOpened: false,
   };
@@ -159,12 +172,13 @@ export default class BottomSheet extends Component<Props> {
       <Container isOpened={ isOpened } fullScreen={ fullScreen } zIndex={ zIndex } openedZIndex={ openedZIndex } { ...restProps }>
         {
           this.headerElement && this.headerElement.clientHeight && renderContent &&
-          <Content fullScreen={ fullScreen } marginTop={ this.headerElement.clientHeight }>
+          <Content fullScreen={ fullScreen } marginTop={ this.headerElement.clientHeight + 17 }>
             { renderContent() }
           </Content>
         }
-        <Header innerRef={ (ref) => { this.headerElement = ref; } }>
+        <Header innerRef={ (ref) => { if (!this.headerElement) this.headerElement = ref; } }>
           <InnerHeader
+            onChange={ () => console.log('asdasdasda') }
             onMouseDown={ this.onChangeToggle }
             onTouchStart={ this.onChangeToggle }
             onTouchEnd={ this.preventDefault }
