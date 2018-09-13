@@ -124,6 +124,10 @@ export default class BottomSheet extends Component<Props> {
     this.setState({ isOpened: !isOpened });
   }
 
+  preventDefault = (e) => {
+    e.preventDefault();
+  }
+
   render() {
     const {
       title,
@@ -147,7 +151,11 @@ export default class BottomSheet extends Component<Props> {
           </Content>
         }
         <Header innerRef={ (ref) => { this.headerElement = ref; } }>
-          <InnerHeader onClick={ this.onChangeToggle }>
+          <InnerHeader
+            onMouseDown={ this.onChangeToggle }
+            onTouchStart={ this.onChangeToggle }
+            onTouchEnd={ this.preventDefault }
+          >
             <Title>{ title || '' }</Title>
             {
               badgeCount &&
