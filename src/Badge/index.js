@@ -13,7 +13,7 @@ const Container = styled.div`
   display: inline-block;
 `;
 
-const BadgeCounter = styled.div`
+const BadgeCounter = styled.label`
   ${tiny1WhiteBold};
   height: 20px;
   width: 20px;
