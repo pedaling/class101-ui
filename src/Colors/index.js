@@ -9,7 +9,7 @@ export const gray400 = '#bdc2c6';
 export const gray500 = '#a8aeb3';
 export const gray600 = '#858a8d';
 export const gray700 = '#616568';
-export const gray800 = '#353a3c';
+export const gray800 = '#3e4042';
 export const gray900 = '#1b1c1d';
 
 export const red50 = '#fff0f0';

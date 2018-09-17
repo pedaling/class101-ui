@@ -22,15 +22,15 @@ const BORDER_SIZE = 1;
 
 const Title = styled.span`
   ${body1BlackBold};
-  -ms-transition: font-size 0.8s;
-  transition: font-size 0.8s;
+  -ms-transition: font-size  0.4s ease-in-out;
+  transition: font-size  0.4s ease-in-out;
 `;
 
 const InnerHeader = styled.div`
   padding: 10px 24px;
   cursor: pointer;
-  -ms-transition: padding 0.8s;
-  transition: padding 0.8s;
+  -ms-transition: padding  0.4s ease-in-out;
+  transition: padding  0.4s ease-in-out;
 
   div, span {
     vertical-align: middle;
@@ -42,8 +42,8 @@ const Chevron = styled.img.attrs({ src: 'https://s3.ap-northeast-2.amazonaws.com
   height: 24px;
   position: absolute;
   right: 24px;
-  -ms-transition: transform 0.8s, top 0.8s;
-  transition: transform 0.8s, top 0.8s;
+  -ms-transition: transform  0.4s ease-in-out, top  0.4s ease-in-out;
+  transition: transform  0.4s ease-in-out, top  0.4s ease-in-out;
   -ms-transform: rotate(${props => props.rotate || 270}deg);
   -webkit-transform: rotate(${props => props.rotate || 270}deg);
   transform: rotate(${props => props.rotate || 270}deg);
@@ -57,8 +57,8 @@ const Container = styled.div`
   bottom: calc(48px - 100%);
   left: 0;
   overflow: ${props => (props.fullScreen ? 'visible' : 'hidden')};
-  -ms-transition: transform 0.8s;
-  transition: transform 0.8s;
+  -ms-transition: transform  0.4s ease-in-out;
+  transition: transform  0.4s ease-in-out;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   background-color: ${white};

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { tiny1WhiteBold } from '../TextStyles';
-import { white } from '../Colors';
+import { white, red600 } from '../Colors';
 
 type Props = {
   count: number,
@@ -21,7 +21,7 @@ const BadgeCounter = styled.label`
   text-align: center;
   vertical-align: middle;
   border-radius: 10px;
-  background-color: ${props => props.backgroundColor || '#e62c60'};
+  background-color: ${props => props.backgroundColor || red600};
   color: ${props => props.color || white};
   padding: 0 6px;
 `;
