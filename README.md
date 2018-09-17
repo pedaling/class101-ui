@@ -31,12 +31,14 @@ class Example extends Component {
 ## Worked
 
 - Responsive Grid System
+- Colors
 - Button
 - Input
 - Progress Bar
 - Progress State
 - Spinner
 - Bottom Sheet
+- Badge
 
 These are at [example folder](https://github.com/pedaling/class101-ui/tree/master/example).
 
