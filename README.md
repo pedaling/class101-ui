@@ -6,7 +6,9 @@ A React-based UI Component Library, powered by Class101.
 
 ## Install
 
+```console
 npm install --save class101-ui
+```
 
 ## Usage
 
