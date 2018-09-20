@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { orange600, gray800 } from '../Colors';
 import { body2BlackBold } from '../TextStyles';
@@ -15,6 +16,8 @@ type Props = {
   textAlign?: 'left' | 'center' | 'right',
   loading?: boolean,
   borderRadius?: number;
+  to?: string,
+  href?: string,
 };
 
 // TODO: 스타일 아키텍쳐 작업 후 className으로 변경하자.
@@ -45,7 +48,7 @@ const LeftIcon = styled.img.attrs({ alt: '' })``;
 
 const RightIcon = styled.img.attrs({ alt: '' })``;
 
-const Button = styled.button`
+const buttonStyle = css`
   ${body2BlackBold};
   color: ${props => props.color || gray800};
   background-color: ${props => props.backgroundColor || orange600};
@@ -53,17 +56,19 @@ const Button = styled.button`
   border: none;
   border-radius: ${props => props.borderRadius || 1}px;
   width: ${props => (props.block ? '100%' : 'auto')};
+  display: ${props => (props.block ? 'block' : 'inline-block')};
   text-align: ${props => props.textAlign || 'center'};
   cursor: pointer;
-  line-height: 0 !important;
+  line-height: 1 !important;
+  box-sizing: border-box;
 
   ${props => props.size === 'lg' && css`
     font-size: 16px;
-    line-height: 28px;
     padding: 0 20px;
     height: 48px;
 
     ${LeftIcon}, ${RightIcon} {
+      font-size: 0;
       width: 24px;
       height: 24px;
     }
@@ -97,7 +102,6 @@ const Button = styled.button`
 
   ${props => props.size === 'sm' && css`
     font-size: 11px;
-    line-height: 16px;
     padding: 0 10px;
     height: 28px;
 
@@ -130,6 +134,29 @@ const Button = styled.button`
   }
 `;
 
+const Button = styled.button`
+  ${buttonStyle};
+`;
+
+const AnchorButtonInner = styled.div`
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+`;
+
+const anchorButtonStyle = css`
+  ${buttonStyle};
+  text-decoration: none;
+`;
+
+const LinkButton = styled(Link)`
+  ${anchorButtonStyle};
+`;
+
+const AnchorButton = styled.a`
+  ${anchorButtonStyle};
+`;
+
 export default ({
   size = 'md',
   type = 'button',
@@ -138,6 +165,8 @@ export default ({
   children,
   disabled,
   loading,
+  to,
+  href,
   ...restProps
 }: Props) => {
   if (loading) {
@@ -148,17 +177,35 @@ export default ({
     );
   }
 
+  const innerElements = [
+    Boolean(leftIconSrc) && <LeftIcon src={ leftIconSrc } />,
+    <span>{ children }</span>,
+    Boolean(rightIconSrc) && <RightIcon src={ rightIconSrc } />
+  ].filter(Boolean);
+
+  const anchorButtonElements = (
+    <AnchorButtonInner>
+      { innerElements }
+    </AnchorButtonInner>
+  );
+
+  if (to) {
+    return (
+      <LinkButton to={ to } size={ size } disabled={ disabled } { ...restProps }>
+        { anchorButtonElements }
+      </LinkButton>
+    );
+  } else if (href) {
+    return (
+      <AnchorButton href={ href } size={ size } disabled={ disabled } { ...restProps }>
+        { anchorButtonElements }
+      </AnchorButton>
+    );
+  }
+
   return (
     <Button size={ size } disabled={ disabled } { ...restProps }>
-      {
-        Boolean(leftIconSrc) &&
-        <LeftIcon src={ leftIconSrc } />
-      }
-      <span>{ children }</span>
-      {
-        Boolean(rightIconSrc) &&
-        <RightIcon src={ rightIconSrc } />
-      }
+      { innerElements }
     </Button>
   );
 };

@@ -30,6 +30,12 @@ type Props = {
   /** 진행 여부 */
   loading?: boolean,
 
+  /** Link(React Router Dom)에 쓸 URL */
+  to?: string,
+
+  /** A Tag에 쓸 URL */
+  href?: string,
+
   children: Node,
 };
 

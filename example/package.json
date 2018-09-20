@@ -10,7 +10,8 @@
     "class101-ui": "link:..",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react-dom": "^16.4.2",
+    "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
     "docz": "^0.11.2",
