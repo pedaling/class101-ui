@@ -1,0 +1,45 @@
+---
+menu: Form Controls
+name: Control Group
+route: /form-controls/control-group
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Button } from 'class101-ui';
+import ControlGroup from './ControlGroup';
+import Input from '../formInputs/Input';
+
+# Control Group
+
+Input을 Label로 묶어줍니다.
+
+## Props
+
+<PropsTable of={ControlGroup} />
+
+## Basic usage
+
+<Playground>
+  <ControlGroup>
+    <Input placeholder="Placeholder text" />
+    <Button size="lg">Click me</Button>
+  </ControlGroup>
+</Playground>
+
+## Block control group
+
+<Playground>
+  <ControlGroup block>
+    <Input placeholder="Placeholder text" />
+    <Button size="lg">Click me</Button>
+  </ControlGroup>
+</Playground>
+
+## Vertical control group
+
+<Playground>
+  <ControlGroup vertical>
+    <Input placeholder="Placeholder text" />
+    <Button size="lg">Click me</Button>
+  </ControlGroup>
+</Playground>

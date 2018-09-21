@@ -13,4 +13,5 @@ export { default as Input } from './Input';
 export { default as BottomSheet } from './BottomSheet';
 export { default as Badge } from './Badge';
 export { default as FormGroup } from './FormGroup';
+export { default as ControlGroup } from './ControlGroup';
 export { Colors, BreakPoints, TextStyles };

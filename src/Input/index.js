@@ -17,7 +17,7 @@ type Props = {
 
 const StyledInput = styled.input`
   ${body2Black}
-  border-radius: 2px;
+  border-radius: 1px;
   background-color: white;
   border: solid 1px ${gray300};
   width: 100%;
