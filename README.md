@@ -34,18 +34,19 @@ class Example extends Component {
 - Colors
 - Button
 - Input
+- Textarea
 - Progress Bar
 - Progress State
 - Spinner
 - Bottom Sheet
 - Badge
 - Form Group
+- Control Group
 
 These are at [example folder](https://github.com/pedaling/class101-ui/tree/master/example).
 
 ## Roadmap
 
-- Textarea
 - Card
 - Tabs
 - Breadcrumb
