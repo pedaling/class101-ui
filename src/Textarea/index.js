@@ -5,7 +5,6 @@ import { orange500, gray800, gray500, gray400, gray300, gray50, redError, gray60
 import { body2Black } from '../TextStyles';
 
 type Props = {
-  type: string,
   className?: string,
   style?: {},
   inputStyle?: {},
@@ -15,14 +14,16 @@ type Props = {
   errorMessage?: string,
 };
 
-const StyledInput = styled.input`
+const StyledTextarea = styled.textarea`
   ${body2Black}
   border-radius: 1px;
   background-color: white;
   border: solid 1px ${gray300};
   width: 100%;
-  height: 48px;
-  padding: 0 16px;
+  height: 104px;
+  padding: 12px 16px;
+  box-sizing: border-box;
+
   &:hover {
     border: solid 1px ${gray400};
   }
@@ -95,15 +96,9 @@ const DescriptionIcon = styled.img.attrs({ alt: '!' })`
   margin-right: 2px;
 `;
 
-export default class Input extends Component<Props> {
-  static defaultProps = {
-    size: 'md',
-    type: 'text'
-  };
-
+export default class Textarea extends Component<Props> {
   render() {
     const {
-      type,
       className,
       style,
       inputStyle,
@@ -116,9 +111,8 @@ export default class Input extends Component<Props> {
 
     return (
       <Container style={ style } inline={ inline }>
-        <StyledInput
+        <StyledTextarea
           className={ `${className || ''} ${errorMessage ? ' error' : ''} ${warnMessage ? ' warn' : ''}` }
-          type={ type }
           inputStyle={ inputStyle }
           { ...restProps }
         />
