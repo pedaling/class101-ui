@@ -39,6 +39,7 @@ class Example extends Component {
 - Spinner
 - Bottom Sheet
 - Badge
+- Form Group
 
 These are at [example folder](https://github.com/pedaling/class101-ui/tree/master/example).
 
@@ -50,7 +51,7 @@ These are at [example folder](https://github.com/pedaling/class101-ui/tree/maste
 - Breadcrumb
 - Sync Image
 - Darkness Skin
-- Font
+- Typography
 
 ## License
 
