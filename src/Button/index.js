@@ -62,6 +62,7 @@ const buttonStyle = css`
   line-height: 1 !important;
   box-sizing: border-box;
   font-weight: normal;
+  vertical-align: middle;
 
   ${props => props.size === 'lg' && css`
     font-weight: bold;
