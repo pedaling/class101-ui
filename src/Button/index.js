@@ -54,15 +54,17 @@ const buttonStyle = css`
   background-color: ${props => props.backgroundColor || orange600};
   outline: none;
   border: none;
-  border-radius: ${props => props.borderRadius || 1}px;
+  border-radius: ${props => props.borderRadius || 2}px;
   width: ${props => (props.block ? '100%' : 'auto')};
   display: ${props => (props.block ? 'block' : 'inline-block')};
   text-align: ${props => props.textAlign || 'center'};
   cursor: pointer;
   line-height: 1 !important;
   box-sizing: border-box;
+  font-weight: normal;
 
   ${props => props.size === 'lg' && css`
+    font-weight: bold;
     font-size: 16px;
     padding: 0 20px;
     height: 48px;
@@ -83,6 +85,7 @@ const buttonStyle = css`
   `};
 
   ${props => props.size === 'md' && css`
+    font-size: 14px;
     padding: 0 16px;
     height: 40px;
 
@@ -101,6 +104,25 @@ const buttonStyle = css`
   `};
 
   ${props => props.size === 'sm' && css`
+    font-size: 14px;
+    padding: 0 12px;
+    height: 32px;
+
+    ${LeftIcon}, ${RightIcon} {
+      width: 18px;
+      height: 18px;
+    }
+
+    ${LeftIcon} {
+      margin-right: 4px;
+    }
+
+    ${RightIcon} {
+      margin-left: 4px;
+    }
+  `};
+
+  ${props => props.size === 'xs' && css`
     font-size: 11px;
     padding: 0 10px;
     height: 28px;
