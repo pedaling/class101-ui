@@ -17,6 +17,14 @@ export { default as BottomSheet } from './BottomSheet';
 export { default as Badge } from './Badge';
 export { default as FormGroup } from './FormGroup';
 export { default as ControlGroup } from './ControlGroup';
+export { default as Headline1 } from './Typography/Headline1';
+export { default as Headline2 } from './Typography/Headline2';
+export { default as Headline3 } from './Typography/Headline3';
+export { default as Subtitle1 } from './Typography/Subtitle1';
+export { default as Body1 } from './Typography/Body1';
+export { default as Body2 } from './Typography/Body2';
+export { default as Caption1 } from './Typography/Caption1';
+export { default as Caption2 } from './Typography/Caption2';
 export { Colors, BreakPoints, TextStyles };
 
 injectGlobal`
@@ -46,6 +54,8 @@ injectGlobal`
     url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/01ff0283/Subset/SpoqaHanSans/SpoqaHanSansLight.woff') format('woff'),
     url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/01ff0283/Subset/SpoqaHanSans/SpoqaHanSansLight.ttf') format('truetype');
   }
+
+  @import url(https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css);
 
   body {
     font-family: 'SpoqaHanSans', 'Sans-serif';

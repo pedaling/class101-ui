@@ -30,7 +30,8 @@ class Example extends Component {
 
 ## Worked
 
-- Responsive Grid System
+- Grid System(Responsive)
+- Typography(Responsive tag and styles)
 - Colors
 - Button(Support Anchor Button)
 - Input
@@ -52,7 +53,6 @@ These are at [example folder](https://github.com/pedaling/class101-ui/tree/maste
 - Breadcrumb
 - Sync Image
 - Darkness Skin
-- Typography(Support Responsive)
 
 ## License
 
