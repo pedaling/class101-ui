@@ -9,13 +9,14 @@
   "dependencies": {
     "class101-ui": "link:..",
     "prop-types": "^15.6.2",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-router-dom": "^4.3.1"
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2"
   },
   "devDependencies": {
-    "docz": "^0.11.2",
-    "docz-theme-default": "^0.11.2",
+    "@babel/preset-flow": "^7.0.0",
+    "docz": "^0.12.5",
+    "flow-bin": "^0.81.0",
+    "flow-typed": "^2.5.1",
     "styled-components": "^3.4.6"
   }
 }
