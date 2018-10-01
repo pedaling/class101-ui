@@ -286,7 +286,7 @@ export const subheadingBlack = css`
 export const display2 = css`
   font-family: 'NanumSquare';
   font-size: 96px;
-  font-weight: normal;
+  font-weight: ${props => props.fontWeight || 'normal'};
   line-height: 108px;
   letter-spacing: -2px;
   margin: 0;
@@ -295,7 +295,7 @@ export const display2 = css`
 export const display3 = css`
   font-family: 'NanumSquare';
   font-size: 72px;
-  font-weight: normal;
+  font-weight: ${props => props.fontWeight || 'normal'};
   line-height: 86px;
   letter-spacing: -1.5px;
   margin: 0;
@@ -304,7 +304,7 @@ export const display3 = css`
 export const headline1 = css`
   font-family: 'NanumSquare';
   font-size: 48px;
-  font-weight: normal;
+  font-weight: ${props => props.fontWeight || 'bold'};
   line-height: 56px;
   letter-spacing: -1px;
   margin: 0;
@@ -313,7 +313,7 @@ export const headline1 = css`
 export const headline2 = css`
   font-family: 'NanumSquare';
   font-size: 32px;
-  font-weight: normal;
+  font-weight: ${props => props.fontWeight || 'bold'};
   line-height: 40px;
   letter-spacing: -0.6px;
   margin: 0;
@@ -322,7 +322,7 @@ export const headline2 = css`
 export const headline3 = css`
   font-family: 'NanumSquare';
   font-size: 24px;
-  font-weight: normal;
+  font-weight: ${props => props.fontWeight || 'bold'};
   line-height: 32px;
   letter-spacing: -0.4px;
   margin: 0;
@@ -331,7 +331,7 @@ export const headline3 = css`
 export const subtitle1 = css`
   font-family: 'SpoqaHanSans';
   font-size: 20px;
-  font-weight: bold;
+  font-weight: ${props => props.fontWeight || 'bold'};
   line-height: 28px;
   letter-spacing: -0.2px;
   margin: 0;
@@ -340,7 +340,7 @@ export const subtitle1 = css`
 export const body1 = css`
   font-family: 'SpoqaHanSans';
   font-size: 16px;
-  font-weight: normal;
+  font-weight: ${props => props.fontWeight || 'normal'};
   line-height: 24px;
   letter-spacing: -0.1px;
   margin: 0;
@@ -349,7 +349,7 @@ export const body1 = css`
 export const body2 = css`
   font-family: 'SpoqaHanSans';
   font-size: 14px;
-  font-weight: normal;
+  font-weight: ${props => props.fontWeight || 'normal'};
   line-height: 20px;
   letter-spacing: normal;
   margin: 0;
@@ -358,7 +358,7 @@ export const body2 = css`
 export const caption1 = css`
   font-family: 'SpoqaHanSans';
   font-size: 11px;
-  font-weight: normal;
+  font-weight: ${props => props.fontWeight || 'normal'};
   line-height: 16px;
   letter-spacing: normal;
   margin: 0;
@@ -367,7 +367,7 @@ export const caption1 = css`
 export const caption2 = css`
   font-family: 'SpoqaHanSans';
   font-size: 9px;
-  font-weight: normal;
+  font-weight: ${props => props.fontWeight || 'normal'};
   line-height: 12px;
   letter-spacing: normal;
   margin: 0;

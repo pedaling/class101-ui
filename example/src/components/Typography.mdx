@@ -1,11 +1,10 @@
 ---
 menu: Components
 name: Typography
-order: 1
 route: /components/typography
 ---
 
-import { Playground } from 'docz';
+import { Playground, PropsTable } from 'docz';
 import Headline1 from './Typography/Headline1';
 import Headline2 from './Typography/Headline2';
 import Headline3 from './Typography/Headline3';
@@ -21,19 +20,76 @@ Class101 UI의 Typography는 기기나 뷰포트 크기가 증가함에 따라 �
 
 ## Basic usage
 
-데스크탑(lg)에선 쌓이다가 모바일(sm)에선 수평으로 변하는 코드입니다. 브라우저 창의 가로를 늘렸다 줄였다 해보세요!
-
 <Playground>
   <Headline1>H1 heading</Headline1>
   <Headline2>H2 heading</Headline2>
   <Headline3>H3 heading</Headline3>
-  <Subtitle1>H4 Subtitle</Subtitle1>
+  <Subtitle1>H4 subtitle</Subtitle1>
   <Body1>P and div body1</Body1>
   <Body2>P and div body2</Body2>
   <Caption1>Div caption2</Caption1>
   <Caption2>Div caption2</Caption2>
 </Playground>
 
+## Responsive examples
+
+lg: >= 1024px <br />
+sm: < 2013px
+
+데스크탑(lg)과 모바일(sm)에서 태그와 스타일이 바뀝니다! 브라우저 창의 가로를 늘렸다 줄였다 해보세요!
+
+<Playground>
+  <Headline1 sm="headline2">H1 heading or H2 heading</Headline1>
+  <Subtitle1 sm="Body1Paragraph">H4 subtitle or P body1 paragraph</Subtitle1>
+  <Body1 sm="Body2">DIV body1 or DIV body2</Body1>
+  <Caption1 sm="Caption2">DIV caption1 or DIV caption2</Caption1>
+</Playground>
+
 ## Headings
 
-이 Grid Container는 중앙 정렬되며, 최대 가로 크기(max-width)를 가집니다.
+<PropsTable of={Headline1} />
+
+<Playground>
+  <Headline1 display={ 2 }>H1 display2</Headline1>
+  <Headline1 display={ 3 }>H1 display3</Headline1>
+  <Headline1>H1 heading</Headline1>
+  <Headline2>H2 heading</Headline2>
+  <Headline3>H3 heading</Headline3>
+</Playground>
+
+## Subtitle
+
+<PropsTable of={Subtitle1} />
+
+<Playground>
+  <Subtitle1>H4 subtitle</Subtitle1>
+</Playground>
+
+## bodies
+
+<PropsTable of={Body1} />
+
+<Playground>
+  <Body1>Body1은 한 줄에 적합합니다.</Body1>
+  <Body1 paragraph>Body1Paragraph는 여러 줄에 적합합니다. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Body1>
+  <Body2>Body2는 한 줄에 적합합니다.</Body2>
+  <Body2 paragraph>Body2Paragraph는 여러 줄에 적합니다. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Body2>
+</Playground>
+
+## captions
+
+<PropsTable of={Caption1} />
+
+<Playground>
+  <Caption1>Div caption2</Caption1>
+  <Caption2>Div caption2</Caption2>
+</Playground>
+
+## With diffrent colors and margins
+
+<Playground>
+  <Headline1 color="orange" marginLeft={ 20 }>Lorem ipsum dolor sit amet</Headline1>
+  <Subtitle1 color="red" marginLeft={ 200 } marginTop={ 10 }>1914 translation by H. Rackham</Subtitle1>
+  <Body1 color="green" marginBottom={ 10 }>Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC</Body1>
+  <Caption1 color="pink" marginLeft={ 50 }>Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC</Caption1>
+</Playground>

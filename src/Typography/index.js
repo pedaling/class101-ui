@@ -29,7 +29,6 @@ type State = {
 
 const customStyle = css`
   color: ${props => props.color || gray800};
-  font-weight: ${props => props.fontWeight || 'normal'};
   margin-top: ${props => props.marginTop || 0}px;
   margin-bottom: ${props => props.marginBottom || 0}px;
   margin-left: ${props => props.marginLeft || 0}px;
@@ -50,7 +49,6 @@ const Headline1 = styled.h1`
 const Headline2 = styled.h2`
   ${headline2};
   color: ${props => props.color || gray800};
-  font-weight: ${props => props.fontWeight || 'normal'};
   ${props => [2, '2'].includes(props.display) && css`
     ${display2};
   `};
@@ -63,7 +61,6 @@ const Headline2 = styled.h2`
 const Headline3 = styled.h3`
   ${headline3};
   color: ${props => props.color || gray800};
-  font-weight: ${props => props.fontWeight || 'normal'};
   ${props => [2, '2'].includes(props.display) && css`
     ${display2};
   `};
