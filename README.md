@@ -1,8 +1,25 @@
-<p><a href="https://class101.net" target="_blank" rel="noopener noreferrer"><img width="128" src="https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/logo-class101.png" alt="C"></a></p>
+<p><a href="https://class101-ui.netlify.com" target="_blank" rel="noopener noreferrer"><img width="128" src="https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/logo-class101.png" alt="C"></a></p>
 
-# Class101 UI
+<p>
+  <a href="https://www.npmjs.com/package/class101-ui">
+    <img
+      src="https://img.shields.io/npm/v/class101-ui.svg"
+      alt="npm"
+    >
+  </a>
+  <a href="https://github.com/pedaling/class101-ui/blob/master/LICENSE">
+    <img
+      src="https://img.shields.io/github/license/mashape/apistatus.svg"
+      alt="MIT"
+    >
+  </a>
+</p>
+
+# [Class101 UI](https://class101-ui.netlify.com)
 
 A React-based UI Component Library, powered by Class101.
+
+[**View the full documentation ▸**](https://class101-ui.netlify.com)
 
 ## Install
 
@@ -28,7 +45,7 @@ class Example extends Component {
 }
 ```
 
-## Worked
+## 🎉 Worked
 
 - Grid System(Responsive)
 - Typography(Responsive tag and styles)
@@ -44,9 +61,9 @@ class Example extends Component {
 - Form Group
 - Control Group
 
-These are at [example folder](https://github.com/pedaling/class101-ui/tree/master/example).
+These are at [Class101 UI Documents Site](https://class101-ui.netlify.com).
 
-## Roadmap
+## 🚀 Roadmap
 
 - Card
 - Tabs
@@ -54,7 +71,7 @@ These are at [example folder](https://github.com/pedaling/class101-ui/tree/maste
 - Sync Image
 - Darkness Skin
 
-## License
+## 📝 License
 
 Licensed under the MIT License, Copyright (c) 2018 pedaling.
 
