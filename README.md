@@ -15,7 +15,7 @@
   </a>
 </p>
 
-# [Class101 UI](https://class101-ui.netlify.com)
+# Class101 UI
 
 A React-based UI Component Library, powered by Class101.
 
