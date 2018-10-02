@@ -13,6 +13,12 @@
       alt="MIT"
     >
   </a>
+  <a href="https://class101-ui.netlify.com">
+    <img
+      src="https://img.shields.io/readthedocs/pip.svg"
+      alt="docs"
+    >
+  </a>
 </p>
 
 # Class101 UI
