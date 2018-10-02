@@ -1,0 +1,33 @@
+---
+menu: Components
+name: Progress Bar
+route: /components/progress-bar
+---
+
+import { Playground, PropsTable } from 'docz';
+import ProgressBar from './ProgressBar';
+
+# Progress Bar
+
+진행 상황의 정도를 보여주기 유용한 컴포넌트입니다.
+
+## Props
+
+<PropsTable of={ProgressBar} />
+
+## Basic usage
+
+<Playground>
+  <ProgressBar value={ 30 } />
+</Playground>
+
+## Custom example
+
+<Playground>
+  <ProgressBar
+    value={ 80 }
+    backgroundColor="pink"
+    barColor="red"
+    height={ 8 }
+  />
+</Playground>

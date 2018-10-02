@@ -1,0 +1,96 @@
+---
+menu: Components
+name: Layout
+route: /components/layout
+---
+
+import { Playground } from 'docz';
+import Grid from './Grid';
+import Row from './Row';
+import Col from './Col';
+
+# Layout
+
+Class101 UI는 기기나 뷰포트 크기가 증가함에 따라 12열이 적절하게 확대되는 반응형, 모바일 우선 유동 그리드 시스템을 지원합니다.
+
+## Grid options
+
+lg: >= 1024px <br />
+sm: < 1013px
+
+## Basic usage
+
+데스크탑(lg)에선 쌓이다가 모바일(sm)에선 수평으로 변하는 코드입니다. 브라우저 창의 가로를 늘렸다 줄였다 해보세요!
+
+<Playground>
+  <Row>
+    <Col lg={ 1 }>lg-1</Col>
+    <Col lg={ 1 }>lg-1</Col>
+    <Col lg={ 1 }>lg-1</Col>
+    <Col lg={ 1 }>lg-1</Col>
+    <Col lg={ 1 }>lg-1</Col>
+    <Col lg={ 1 }>lg-1</Col>
+    <Col lg={ 1 }>lg-1</Col>
+    <Col lg={ 1 }>lg-1</Col>
+    <Col lg={ 1 }>lg-1</Col>
+    <Col lg={ 1 }>lg-1</Col>
+    <Col lg={ 1 }>lg-1</Col>
+    <Col lg={ 1 }>lg-1</Col>
+  </Row>
+  <Row>
+    <Col lg={ 8 }>lg-8</Col>
+    <Col lg={ 4 }>lg-4</Col>
+  </Row>
+  <Row>
+    <Col lg={ 4 }>lg-4</Col>
+    <Col lg={ 4 }>lg-4</Col>
+    <Col lg={ 4 }>lg-4</Col>
+  </Row>
+  <Row>
+    <Col lg={ 6 }>lg-6</Col>
+    <Col lg={ 6 }>lg-6</Col>
+  </Row>
+</Playground>
+
+## With grid container
+
+이 Grid Container는 중앙 정렬되며, 최대 가로 크기(max-width)를 가집니다.
+
+<Playground>
+  <Grid>
+    <Row>
+      <Col lg={ 12 }>With grid container</Col>
+    </Row>
+  </Grid>
+</Playground>
+
+## Responsive mobile and desktop example
+
+<Playground>
+  <Row>
+    <Col lg={ 8 } sm={ 12 }>lg-4</Col>
+    <Col lg={ 4 } sm={ 6 }>lg-4</Col>
+  </Row>
+  <Row>
+    <Col lg={ 4 } sm={ 6 }>lg-4</Col>
+    <Col lg={ 4 } sm={ 6 }>lg-4</Col>
+    <Col lg={ 4 } sm={ 6 }>lg-4</Col>
+  </Row>
+</Playground>
+
+## Responsive blog example
+
+<Playground>
+  <Grid>
+    <Row>
+      <Col lg={ 12 } sm={ 12 }>Header</Col>
+    </Row>
+    <Row>
+      <Col style={{ height: 100 }} lg={ 4 } sm={ 12 }>Side Menu</Col>
+      <Col style={{ height: 300 }} lg={ 8 } sm={ 12 }>Content</Col>
+    </Row>
+    <Row>
+      <Col lg={ 12 } sm={ 12 }>Footer</Col>
+    </Row>
+  </Grid>
+</Playground>

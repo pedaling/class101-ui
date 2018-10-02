@@ -1,0 +1,6 @@
+node_modules/*
+build/*
+config
+scripts
+app/registerServiceWorker.js
+flow-typed

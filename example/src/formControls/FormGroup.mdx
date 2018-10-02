@@ -1,0 +1,44 @@
+---
+menu: Form Controls
+name: Form Group
+route: /form-controls/form-group
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Input } from 'class101-ui';
+import FormGroup from './FormGroup';
+
+# Form Group
+
+각종 컨트롤러들을 한 폼으로 묶어줍니다.
+
+## Props
+
+<PropsTable of={FormGroup} />
+
+## Basic usage
+
+<Playground>
+  <FormGroup label="Label">
+    <Input placeholder="Placeholder text" />
+  </FormGroup>
+</Playground>
+
+## With different label colors
+
+<Playground>
+  <FormGroup label="Label" labelColor="gray">
+    <Input placeholder="Placeholder text" />
+  </FormGroup>
+  <FormGroup label="Label" labelColor="pink">
+    <Input placeholder="Placeholder text" />
+  </FormGroup>
+</Playground>
+
+## Inline form group
+
+<Playground>
+  <FormGroup label="Label" inline>
+    <Input placeholder="Placeholder text" />
+  </FormGroup>
+</Playground>

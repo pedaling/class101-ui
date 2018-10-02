@@ -1,0 +1,16 @@
+[ignore]
+.*/node_modules/.*
+*/node_modules/*
+
+[include]
+node_modules/fbjs/lib/
+node_modules/react/lib/
+
+[libs]
+flow-typed/
+
+[lints]
+
+[options]
+
+[strict]

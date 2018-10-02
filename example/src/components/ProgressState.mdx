@@ -1,0 +1,68 @@
+---
+menu: Components
+name: Progress State
+route: /components/progress-state
+---
+
+import { Playground, PropsTable } from 'docz';
+import ProgressState from './ProgressState';
+
+# Progress State
+
+진행 과정과 현재 상태를 보여주기 유용한 컴포넌트입니다.
+
+## Props
+
+<PropsTable of={ProgressState} />
+
+## Basic usage
+
+<Playground>
+  <ProgressState
+    value="2"
+    items={ [
+      {
+        label: 'Lorem',
+        value: '1',
+      },
+      {
+        label: 'Ipsum',
+        value: '2',
+      },
+      {
+        label: 'dolor',
+        value: '3',
+      },
+      {
+        label: 'sit',
+        value: '4',
+      },
+    ] }
+  />
+</Playground>
+
+## Custom example
+
+<Playground>
+  <ProgressState
+    value="inProgress"
+    items={ [
+      {
+        label: '준비',
+        value: 'ready',
+      },
+      {
+        label: '진행',
+        value: 'inProgress',
+      },
+      {
+        label: '완료',
+        value: 'success',
+      },
+    ] }
+    color="gray"
+    backgroundColor="pink"
+    activeColor="yellow"
+    activeBackgroundColor="red"
+  />
+</Playground>
