@@ -4,9 +4,9 @@ import { tiny1WhiteBold } from '../TextStyles';
 import { white, red600 } from '../Colors';
 
 type Props = {
-  count: number,
   color?: string,
   backgroundColor?: string,
+  children: Node,
 };
 
 const Container = styled.div`
@@ -27,7 +27,7 @@ const BadgeCounter = styled.label`
 `;
 
 export default ({
-  count = 0,
+  children,
   color,
   backgroundColor,
   ...restProps
@@ -37,7 +37,7 @@ export default ({
       color={ color }
       backgroundColor={ backgroundColor }
     >
-      { count }
+      { children || 0 }
     </BadgeCounter>
   </Container>
 );

@@ -169,7 +169,7 @@ export default class BottomSheet extends Component<Props, State> {
             <Title>{ title || '' }</Title>
             {
               badgeCount &&
-              <BadgeCounter count={ badgeCount } />
+              <BadgeCounter>{ badgeCount }</BadgeCounter>
             }
             <Chevron rotate={ isOpened ? 90 : 270 } />
           </InnerHeader>

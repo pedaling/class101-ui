@@ -18,21 +18,24 @@ import Badge from './Badge';
 ## Basic usage
 
 <Playground>
-  <Badge count={ 2 } />
-  <Badge count={ 101 } />
+  <Badge>1</Badge>
+  <Badge>0</Badge>
+  <Badge>1</Badge>
 </Playground>
 
 ## With diffrent colors
 
 <Playground>
   <Badge
-    count={ 2 }
     color="black"
     backgroundColor="pink"
-  />
+  >
+    101
+  </Badge>
   <Badge
-    count={ 2 }
     color="pink"
     backgroundColor="black"
-  />
+  >
+    101
+  </Badge>
 </Playground>

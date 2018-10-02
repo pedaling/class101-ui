@@ -3,9 +3,9 @@ import React from 'react';
 import { Badge, Colors } from 'class101-ui';
 
 type Props = {
-  backgroundColor?: string,
   color?: string,
-  count: number,
+  backgroundColor?: string,
+  children: Node,
 };
 
 const hiddenStyle = {
@@ -16,12 +16,10 @@ const hiddenStyle = {
 const Component = ({
   backgroundColor = '#e62c60',
   color = Colors.whte,
-  count,
   ...restProps
 }: Props) => (
   <Badge
     style={ hiddenStyle }
-    count={ count }
     color={ color }
     backgroundColor={ backgroundColor }
     { ...restProps }
