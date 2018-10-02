@@ -18,37 +18,46 @@ import ProgressState from './ProgressState';
 ## Basic usage
 
 <Playground>
-  <ProgressState values={ [
-    {
-      label: '1',
-    },
-    {
-      label: '2',
-      active: true,
-    },
-    {
-      label: '3',
-    },
-    {
-      label: '4',
-    },
-  ] } />
+  <ProgressState
+    value="2"
+    items={ [
+      {
+        label: 'Lorem',
+        value: '1',
+      },
+      {
+        label: 'Ipsum',
+        value: '2',
+      },
+      {
+        label: 'dolor',
+        value: '3',
+      },
+      {
+        label: 'sit',
+        value: '4',
+      },
+    ] }
+  />
 </Playground>
 
 ## Custom example
 
 <Playground>
   <ProgressState
-    values={ [
+    value="inProgress"
+    items={ [
       {
         label: '준비',
-        active: true,
+        value: 'ready',
       },
       {
-        label: '배송',
+        label: '진행',
+        value: 'inProgress',
       },
       {
         label: '완료',
+        value: 'success',
       },
     ] }
     color="gray"

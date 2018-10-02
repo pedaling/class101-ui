@@ -5,9 +5,10 @@ import { white, orange600, gray700, gray500 } from '../Colors';
 import { body2Gray } from '../TextStyles';
 
 type Props = {
-  values: Array<{
-    label: string,
-    active?: boolean,
+  value?: string,
+  items: Array<{
+    label?: string,
+    value: string,
   }>,
   color?: string,
   backgroundColor?: string,
@@ -49,7 +50,8 @@ const Chevron = styled.img.attrs({ src: 'https://s3.ap-northeast-2.amazonaws.com
 `;
 
 export default ({
-  values,
+  value,
+  items,
   color,
   backgroundColor,
   activeBackgroundColor,
@@ -58,15 +60,15 @@ export default ({
 }: Props) => (
   <Container backgroundColor={ backgroundColor } { ...restProps }>
     {
-      values.map((p, index) => (
+      items.map((item, index) => (
         <Content
           key={ String(index) }
-          active={ p.active || false }
+          active={ Boolean(value && String(value) === String(item.value)) }
           color={ color }
           activeBackgroundColor={ activeBackgroundColor }
           activeColor={ activeColor }
         >
-          { p.label }
+          { item.label || item.value }
         </Content>
       )).reduce((prev, curr) => [prev, <Chevron />, curr])
     }

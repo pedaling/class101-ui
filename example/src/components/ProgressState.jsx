@@ -3,10 +3,13 @@ import React from 'react';
 import { ProgressState, Colors } from 'class101-ui';
 
 type Props = {
-  /** { label: 상태, active?: 활성화 여부 } */
-  values: Array<{
-    label: string,
-    active?: boolean,
+  /** 현재 값 */
+  value?: string,
+
+  /** { label?: 보여줄 값, value: 내부 값 } */
+  items: Array<{
+    label?: string,
+    value: string,
   }>,
 
   /** 기본 글의 색상 */
@@ -23,14 +26,16 @@ type Props = {
 };
 
 const Component = ({
-  values,
+  value,
+  items,
   color = Colors.gray500,
   backgroundColor = Colors.gray700,
   activeColor = Colors.white,
   activeBackgroundColor = Colors.orange600,
 }: Props) => (
   <ProgressState
-    values={ values }
+    value={ value }
+    items={ items }
     color={ color }
     backgroundColor={ backgroundColor }
     activeColor={ activeColor }
