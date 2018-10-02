@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { orange600, gray200 } from '../Colors';
 
 type Props = {
-  percent: number,
+  value: number,
   backgroundColor?: string,
   barColor?: string,
   height?: number,
@@ -13,7 +13,7 @@ type Props = {
 const Bar = styled.div`
   border-radius: 2px;
   background-color: ${props => props.barColor || orange600};
-  width: ${props => props.percent || 0}%;
+  width: ${props => props.value || 0}%;
   transition: width 0.3s ease-in-out;
 `;
 
@@ -31,8 +31,8 @@ const Container = styled.div`
   `};
 `;
 
-export default ({ percent = 0, height = 4, backgroundColor, barColor, ...restProps }: Props) => (
+export default ({ value = 0, height = 4, backgroundColor, barColor, ...restProps }: Props) => (
   <Container backgroundColor={ backgroundColor } height={ height } { ...restProps }>
-    <Bar barColor={ barColor } percent={ Number(percent) > 100 ? 100 : percent } />
+    <Bar barColor={ barColor } value={ Number(value) > 100 ? 100 : value } />
   </Container>
 );
