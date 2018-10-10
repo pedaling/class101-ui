@@ -15,6 +15,7 @@ const Container = styled.div`
 
 const BadgeCounter = styled.label`
   ${tiny1WhiteBold};
+  line-height: 1;
   min-width: 20px;
   height: 20px;
   display: table-cell;
