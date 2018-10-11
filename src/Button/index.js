@@ -230,7 +230,7 @@ export default ({
   }
 
   return (
-    <Button size={ size } disabled={ disabled } { ...restProps }>
+    <Button type={ type } size={ size } disabled={ disabled } { ...restProps }>
       { innerElements }
     </Button>
   );
