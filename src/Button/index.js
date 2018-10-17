@@ -193,6 +193,7 @@ export default ({
   loading,
   to,
   href,
+  target,
   ...restProps
 }: Props) => {
   if (loading) {
@@ -201,6 +202,12 @@ export default ({
         <StyledSpinner buttonSize={ size } />
       </Button>
     );
+  }
+
+  const options = {};
+
+  if (target === '_blank') {
+    options.rel = 'noopener noreferrer';
   }
 
   const innerElements = [
@@ -217,13 +224,27 @@ export default ({
 
   if (to) {
     return (
-      <LinkButton to={ to } size={ size } disabled={ disabled } { ...restProps }>
+      <LinkButton
+        to={ to }
+        target={ target }
+        size={ size }
+        disabled={ disabled }
+        { ...options }
+        { ...restProps }
+      >
         { anchorButtonElements }
       </LinkButton>
     );
   } else if (href) {
     return (
-      <AnchorButton href={ href } size={ size } disabled={ disabled } { ...restProps }>
+      <AnchorButton
+        href={ href }
+        target={ target }
+        size={ size }
+        disabled={ disabled }
+        { ...options }
+        { ...restProps }
+      >
         { anchorButtonElements }
       </AnchorButton>
     );

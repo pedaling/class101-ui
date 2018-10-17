@@ -15,14 +15,14 @@ export const imports = {
     import(/* webpackPrefetch: true, webpackChunkName: "src-components-spinner" */ 'src/components/Spinner.mdx'),
   'src/components/Typography.mdx': () =>
     import(/* webpackPrefetch: true, webpackChunkName: "src-components-typography" */ 'src/components/Typography.mdx'),
-  'src/formControls/ControlGroup.mdx': () =>
-    import(/* webpackPrefetch: true, webpackChunkName: "src-form-controls-control-group" */ 'src/formControls/ControlGroup.mdx'),
-  'src/formControls/FormGroup.mdx': () =>
-    import(/* webpackPrefetch: true, webpackChunkName: "src-form-controls-form-group" */ 'src/formControls/FormGroup.mdx'),
   'src/formInputs/Input.mdx': () =>
     import(/* webpackPrefetch: true, webpackChunkName: "src-form-inputs-input" */ 'src/formInputs/Input.mdx'),
   'src/formInputs/Textarea.mdx': () =>
     import(/* webpackPrefetch: true, webpackChunkName: "src-form-inputs-textarea" */ 'src/formInputs/Textarea.mdx'),
+  'src/formControls/ControlGroup.mdx': () =>
+    import(/* webpackPrefetch: true, webpackChunkName: "src-form-controls-control-group" */ 'src/formControls/ControlGroup.mdx'),
+  'src/formControls/FormGroup.mdx': () =>
+    import(/* webpackPrefetch: true, webpackChunkName: "src-form-controls-form-group" */ 'src/formControls/FormGroup.mdx'),
   'src/overlays/BottomSheet.mdx': () =>
     import(/* webpackPrefetch: true, webpackChunkName: "src-overlays-bottom-sheet" */ 'src/overlays/BottomSheet.mdx'),
   'src/styles/Colors.mdx': () =>
