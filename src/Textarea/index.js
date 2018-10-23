@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
-import { orange500, gray800, gray500, gray400, gray300, gray50, redError, gray600 } from '../Colors';
+import { orange500, gray800, gray500, gray400, gray300, gray000, redError, gray600 } from '../Colors';
 import { body2Black } from '../TextStyles';
 
 type Props = {
@@ -28,7 +28,7 @@ const StyledTextarea = styled.textarea`
     border: solid 1px ${gray400};
   }
   &:disabled {
-    background-color: ${gray50};
+    background-color: ${gray000};
     &:hover {
       cursor: not-allowed;
     }

@@ -572,6 +572,11 @@
         },
         {
           "depth": 2,
+          "slug": "blue-scale",
+          "value": "Blue scale"
+        },
+        {
+          "depth": 2,
           "slug": "green-scale",
           "value": "Green scale"
         }
