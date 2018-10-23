@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import { orange600, gray800 } from '../Colors';
+import { orange600, gray800, white } from '../Colors';
 import { body2BlackBold } from '../TextStyles';
 import Spinner from '../Spinner';
 
@@ -38,6 +38,13 @@ const StyledSpinner = styled(Spinner)`
 
   ${props => props.buttonSize === 'sm' && css`
     span, span > svg {
+      width: 18px;
+      height: 18px;
+    }
+  `};
+
+  ${props => props.buttonSize === 'xs' && css`
+    span, span > svg {
       width: 16px;
       height: 16px;
     }
@@ -50,7 +57,7 @@ const RightIcon = styled.img.attrs({ alt: '' })``;
 
 const buttonStyle = css`
   ${body2BlackBold};
-  color: ${props => props.color || gray800};
+  color: ${props => props.color || white};
   background-color: ${props => props.backgroundColor || orange600};
   outline: none;
   border: none;

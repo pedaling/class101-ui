@@ -330,6 +330,80 @@
         }
       ]
     },
+    "src/formControls/ControlGroup.mdx": {
+      "menu": "Form Controls",
+      "name": "Control Group",
+      "route": "/form-controls/control-group",
+      "id": "819e7ed7e3d2fd4b083e3036c1a14844",
+      "filepath": "src/formControls/ControlGroup.mdx",
+      "link": null,
+      "slug": "src-form-controls-control-group",
+      "order": 0,
+      "headings": [
+        {
+          "depth": 1,
+          "slug": "control-group",
+          "value": "Control Group"
+        },
+        {
+          "depth": 2,
+          "slug": "props",
+          "value": "Props"
+        },
+        {
+          "depth": 2,
+          "slug": "basic-usage",
+          "value": "Basic usage"
+        },
+        {
+          "depth": 2,
+          "slug": "block-control-group",
+          "value": "Block control group"
+        },
+        {
+          "depth": 2,
+          "slug": "vertical-control-group",
+          "value": "Vertical control group"
+        }
+      ]
+    },
+    "src/formControls/FormGroup.mdx": {
+      "menu": "Form Controls",
+      "name": "Form Group",
+      "route": "/form-controls/form-group",
+      "id": "0b362a7de5caeb7aa82bcc828529ee64",
+      "filepath": "src/formControls/FormGroup.mdx",
+      "link": null,
+      "slug": "src-form-controls-form-group",
+      "order": 0,
+      "headings": [
+        {
+          "depth": 1,
+          "slug": "form-group",
+          "value": "Form Group"
+        },
+        {
+          "depth": 2,
+          "slug": "props",
+          "value": "Props"
+        },
+        {
+          "depth": 2,
+          "slug": "basic-usage",
+          "value": "Basic usage"
+        },
+        {
+          "depth": 2,
+          "slug": "with-different-label-colors",
+          "value": "With different label colors"
+        },
+        {
+          "depth": 2,
+          "slug": "inline-form-group",
+          "value": "Inline form group"
+        }
+      ]
+    },
     "src/formInputs/Input.mdx": {
       "menu": "Form Inputs",
       "name": "Input",
@@ -431,80 +505,6 @@
           "depth": 2,
           "slug": "disabled-textarea",
           "value": "Disabled textarea"
-        }
-      ]
-    },
-    "src/formControls/ControlGroup.mdx": {
-      "menu": "Form Controls",
-      "name": "Control Group",
-      "route": "/form-controls/control-group",
-      "id": "819e7ed7e3d2fd4b083e3036c1a14844",
-      "filepath": "src/formControls/ControlGroup.mdx",
-      "link": null,
-      "slug": "src-form-controls-control-group",
-      "order": 0,
-      "headings": [
-        {
-          "depth": 1,
-          "slug": "control-group",
-          "value": "Control Group"
-        },
-        {
-          "depth": 2,
-          "slug": "props",
-          "value": "Props"
-        },
-        {
-          "depth": 2,
-          "slug": "basic-usage",
-          "value": "Basic usage"
-        },
-        {
-          "depth": 2,
-          "slug": "block-control-group",
-          "value": "Block control group"
-        },
-        {
-          "depth": 2,
-          "slug": "vertical-control-group",
-          "value": "Vertical control group"
-        }
-      ]
-    },
-    "src/formControls/FormGroup.mdx": {
-      "menu": "Form Controls",
-      "name": "Form Group",
-      "route": "/form-controls/form-group",
-      "id": "0b362a7de5caeb7aa82bcc828529ee64",
-      "filepath": "src/formControls/FormGroup.mdx",
-      "link": null,
-      "slug": "src-form-controls-form-group",
-      "order": 0,
-      "headings": [
-        {
-          "depth": 1,
-          "slug": "form-group",
-          "value": "Form Group"
-        },
-        {
-          "depth": 2,
-          "slug": "props",
-          "value": "Props"
-        },
-        {
-          "depth": 2,
-          "slug": "basic-usage",
-          "value": "Basic usage"
-        },
-        {
-          "depth": 2,
-          "slug": "with-different-label-colors",
-          "value": "With different label colors"
-        },
-        {
-          "depth": 2,
-          "slug": "inline-form-group",
-          "value": "Inline form group"
         }
       ]
     },

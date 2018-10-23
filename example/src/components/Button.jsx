@@ -42,10 +42,10 @@ type Props = {
 const Component = ({
   block = false,
   size = 'md',
-  color = Colors.gray800,
+  color = Colors.white,
   backgroundColor = Colors.orange600,
   textAlign = 'center',
-  borderRadius = 1,
+  borderRadius = 3,
   loading = false,
   children,
   ...restProps
