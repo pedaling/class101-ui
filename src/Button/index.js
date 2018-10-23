@@ -54,7 +54,7 @@ const buttonStyle = css`
   background-color: ${props => props.backgroundColor || orange600};
   outline: none;
   border: none;
-  border-radius: ${props => props.borderRadius || 2}px;
+  border-radius: ${props => props.borderRadius || 3}px;
   width: ${props => (props.block ? '100%' : 'auto')};
   display: ${props => (props.block ? 'block' : 'inline-block')};
   text-align: ${props => props.textAlign || 'center'};
