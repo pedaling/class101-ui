@@ -5,9 +5,7 @@ import { orange500, gray800, gray500, gray400, gray300, gray000, redError, gray6
 import { body2Black } from '../TextStyles';
 
 type Props = {
-  className?: string,
-  style?: {},
-  inputStyle?: {},
+  className?: string,style?: {},inputStyle?: {},
   inline?: boolean,
   allowMessage?: string,
   warnMessage?: string,

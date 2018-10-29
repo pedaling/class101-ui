@@ -3,11 +3,7 @@ import styled from 'styled-components';
 import { tiny1WhiteBold } from '../TextStyles';
 import { white, red600 } from '../Colors';
 
-type Props = {
-  color?: string,
-  backgroundColor?: string,
-  children: Node,
-};
+type Props = { color?: string, backgroundColor?: string, children: Node };
 
 const Container = styled.div`
   display: inline-block;
@@ -27,18 +23,10 @@ const BadgeCounter = styled.label`
   padding: 0 6px;
 `;
 
-export default ({
-  children,
-  color,
-  backgroundColor,
-  ...restProps
-}: Props) => (
-  <Container { ...restProps }>
-    <BadgeCounter
-      color={ color }
-      backgroundColor={ backgroundColor }
-    >
-      { children || 0 }
+export default ({ children, color, backgroundColor, ...restProps }: Props) => (
+  <Container {...restProps}>
+    <BadgeCounter color={color} backgroundColor={backgroundColor}>
+      {children || 0}
     </BadgeCounter>
   </Container>
 );

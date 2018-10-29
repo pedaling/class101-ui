@@ -1,9 +1,16 @@
 {
   "presets": [
-    ["env", {
-      "modules": false
-    }],
-    "stage-0",
-    "react"
-  ]
+    ["@babel/preset-env", { "modules": false }],
+    "@babel/preset-flow",
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    ["@babel/proposal-class-properties"],
+    ["@babel/plugin-proposal-object-rest-spread"]
+  ],
+  "env": {
+    "test": {
+      "plugins": ["@babel/transform-modules-commonjs"]
+    }
+  }
 }

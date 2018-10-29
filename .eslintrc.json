@@ -1,4 +1,0 @@
-{
-  "parser": "babel-eslint",
-  "extends": "@pedaling/eslint-config-pedaling"
-}
