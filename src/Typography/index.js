@@ -33,7 +33,7 @@ const customStyle = css`
   margin-bottom: ${props => props.marginBottom || 0}px;
   margin-left: ${props => props.marginLeft || 0}px;
   margin-right: ${props => props.marginRight || 0}px;
-  text-align: ${props => props.textAlign || 'left'};
+  ${props => props.textAlign && `text-align: ${props.textAlign}`};
 `;
 
 const Headline1 = styled.h1`
