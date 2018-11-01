@@ -1,15 +1,33 @@
+import React from 'react';
 import styled from 'styled-components';
 import { media } from '../BreakPoints';
 
+type Props = {
+  marginTop?: number | string, 
+  marginBottom?: number | string,  
+};
+
 const Grid = styled.div`
   position: relative;
-  margin: 0 auto;
+  ${props => props.marginTop && `margin-top: ${typeof props.marginTop === 'number' ? `${props.marginTop}px` : props.marginTop}`};
+  ${props => props.marginBottom && `margin-bottom: ${typeof props.marginBottom === 'number' ? `${props.marginBottom}px` : props.marginBottom}`};
+  margin-left: auto;
+  margin-right: auto;
   ${media.sm`
-    margin: 0 24px;
+    margin-left: 24px;
+    margin-right: 24px;
   `};
   ${media.lg`
     max-width: ${props => (props.maxWidthNone ? 'none' : '960px')};
   `};
 `;
 
-export default Grid;
+export default ({
+  marginTop,
+  marginBottom,
+  ...restProps,
+}: Props) => (<Grid 
+  marginTop={ marginTop }
+  marginBottom={  marginBottom }
+  { ...restProps }
+/>);

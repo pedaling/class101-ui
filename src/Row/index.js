@@ -1,8 +1,16 @@
+import React from 'react';
 import styled from 'styled-components';
 import { media } from '../BreakPoints';
 
+type Props = {
+  marginTop?: number | string, 
+  marginBottom?: number | string,  
+};
+
 const Row = styled.div`
   zoom: 1;
+  ${props => props.marginTop && `margin-top: ${typeof props.marginTop === 'number' ? `${props.marginTop}px` : props.marginTop}`};
+  ${props => props.marginBottom && `margin-bottom: ${typeof props.marginBottom === 'number' ? `${props.marginBottom}px` : props.marginBottom}`};
   margin-right: -12px;
   margin-left: -12px;
   ${media.sm`
@@ -20,4 +28,12 @@ const Row = styled.div`
   }
 `;
 
-export default Row;
+export default ({
+  marginTop,
+  marginBottom,
+  ...restProps,
+}: Props) => (<Row 
+  marginTop={ marginTop }
+  marginBottom={  marginBottom }
+  { ...restProps }
+/>);
