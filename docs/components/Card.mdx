@@ -1,0 +1,161 @@
+---
+menu: Components
+name: Card
+route: /components/card
+---
+
+import { Playground, PropsTable } from "docz";
+import Grid from "./Grid";
+import Row from "./Row";
+import Button from "./Button";
+import Tiny1 from "./Typography/Tiny1";
+import { Colors } from 'class101-ui';
+import { NoHiddenStyleCol } from "./Col";
+
+import Card from "./Card";
+import { imageSrc } from "./interface";
+
+# Card
+
+## Props
+
+<PropsTable of={Card} />
+
+## Basic usage
+
+<Playground>
+  <Grid>
+    <Row>
+      <NoHiddenStyleCol lg={8}>
+        <Card 
+          title="카드 타이틀 두 줄 까지만 허용합니다 두 줄 넘어가면 말 줄임표가 생깁니다 카드 타이틀 두 줄 까지만 허용합니다 두 줄 넘어가면 말 줄임표가 생깁니다"
+          image={ imageSrc }
+        />
+      </NoHiddenStyleCol>
+      <NoHiddenStyleCol lg={4}>
+        <Card 
+          size={ "sm" }
+          title="카드 타이틀 두 줄 까지만 허용합니다 두 줄 넘어가면 말 줄임표가 생깁니다 카드 타이틀 두 줄 까지만 허용합니다 두 줄 넘어가면 말 줄임표가 생깁니다"
+          image={ imageSrc }
+        >
+        </Card>
+      </NoHiddenStyleCol>
+    </Row>
+  </Grid>
+</Playground>
+
+## With Image Ratio
+
+<Playground>
+  <Grid>
+    <Row>
+      <NoHiddenStyleCol lg={8}>
+        <Card 
+          title="아이패드 드로잉"
+          imageRatio="4*3"
+          image={ imageSrc }
+        />
+      </NoHiddenStyleCol>
+    </Row>
+  </Grid>
+</Playground>
+
+## With Image Component
+
+<Playground>
+  <Grid>
+    <Row>
+      <NoHiddenStyleCol lg={8}>
+        <Card 
+          title="아이패드 드로잉"
+          image={ 
+            <div>
+              <img src={ imageSrc }/>
+            </div> 
+          }
+        />
+      </NoHiddenStyleCol>
+    </Row>
+  </Grid>
+</Playground>
+
+## With tag
+
+<Playground>
+  <Grid>
+    <Row>
+      <NoHiddenStyleCol lg={8}>
+        <Card 
+          title="아이패드 드로잉"
+          image={ imageSrc }
+          tag={["커피부르잉", "초급", "커피", "드로잉", "아이패드"]}
+        />
+      </NoHiddenStyleCol>
+      <NoHiddenStyleCol lg={4}>
+        <Card 
+          size={ "sm" }
+          title="아이패드 드로잉"
+          image={ imageSrc }
+          tag={["커피부르잉", "초급", "커피", "드로잉", "아이패드"]}
+        />
+      </NoHiddenStyleCol>
+    </Row>
+  </Grid>
+</Playground>
+
+## Anchor Card
+
+<Playground>
+  <Grid>
+    <Row>
+      <NoHiddenStyleCol lg={6}>
+        <Card 
+          title="아이패드 드로잉"
+          image={ imageSrc }
+          tag={["커피부르잉", "초급"]}
+          to={"/"}
+          target={"_blank"}
+        >
+        <Button style={{ marginTop: '24px'}}>Native Anchor</Button>
+        </Card>
+      </NoHiddenStyleCol>
+      <NoHiddenStyleCol lg={6}>
+        <Card 
+          title="아이패드 드로잉"
+          image={ imageSrc }
+          tag={["커피부르잉", "초급"]}
+          href={"/"}
+          target={"_blank"}
+        >
+        <Button style={{ marginTop: '24px'}}>Link of React Router DOM</Button>
+        </Card>
+      </NoHiddenStyleCol>
+    </Row>
+  </Grid>
+</Playground>
+
+## Extra Component
+
+<Playground>
+  <Grid>
+    <Row>
+      <NoHiddenStyleCol lg={6}>
+        <Card 
+          title="아이패드 드로잉"
+          image={ imageSrc }
+          tag={["커피부르잉", "초급"]}
+          to={"/"}
+          target={"_blank"}
+          extraTop={
+            <div style={{lineHeight: 1}}>
+              <Tiny1 style={{display: 'inline-block'}} fontWeight={'Bold'}>바로 수강 가능</Tiny1>
+              <Tiny1 style={{display: 'inline-block'}} fontWeight={'Bold'} marginLeft={11} color={ Colors.orange700}>40% 할인</Tiny1>
+            </div>
+          }
+          extraBottom={<Tiny1>10월 12일 ~ 10월 24일</Tiny1>}
+        >
+        </Card>
+      </NoHiddenStyleCol>
+    </Row>
+  </Grid>
+</Playground>

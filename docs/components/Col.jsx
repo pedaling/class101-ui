@@ -43,3 +43,23 @@ const Component = ({
 );
 
 export default Component;
+
+export const NoHiddenStyleCol = ({
+  lg,
+  sm,
+  smOffset,
+  mdOffset,
+  lgOffset,
+  style,
+  ...restProps
+}: Props) => (
+  <Col
+    lg={ lg }
+    sm={ sm }
+    smOffset={ smOffset }
+    mdOffset={ mdOffset }
+    lgOffset={ lgOffset }
+    style={{ ...styleMedia }} 
+    { ...restProps } 
+  />
+);

@@ -7,6 +7,7 @@ import * as TextStyles from './TextStyles';
 export { default as Grid } from './Grid';
 export { default as Col } from './Col';
 export { default as Row } from './Row';
+export { default as Card } from './Card';
 export { default as Spinner } from './Spinner';
 export { default as ProgressBar } from './ProgressBar';
 export { default as ProgressState } from './ProgressState';
@@ -25,6 +26,7 @@ export { default as Body1 } from './Typography/Body1';
 export { default as Body2 } from './Typography/Body2';
 export { default as Caption1 } from './Typography/Caption1';
 export { default as Caption2 } from './Typography/Caption2';
+export { default as Tiny1 } from './Typography/Tiny1';
 export { Colors, BreakPoints, TextStyles };
 
 injectGlobal`

@@ -12,6 +12,7 @@ import {
   body2,
   caption1,
   caption2,
+  tiny1,
 } from '../TextStyles';
 import { gray800 } from '../Colors';
 import { SIZES } from '../BreakPoints';
@@ -110,6 +111,11 @@ const Caption2 = styled.div`
   ${customStyle};
 `;
 
+const Tiny1 = styled.div`
+  ${tiny1};
+  ${customStyle};
+`;
+
 const getCurrentSize = (currentWidth: number) => {
   let windowSize = 'md';
 
@@ -163,6 +169,7 @@ const TypographyList = {
   Body2Paragraph,
   Caption1,
   Caption2,
+  Tiny1,
 };
 
 export default class Typography extends Component<Props, State> {

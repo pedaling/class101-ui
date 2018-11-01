@@ -372,3 +372,12 @@ export const caption2 = css`
   letter-spacing: normal;
   margin: 0;
 `;
+
+export const tiny1 = css`
+  font-family: 'SpoqaHanSans';
+  font-size: 11px;
+  font-weight: ${props => props.fontWeight || 'normal'};
+  line-height: 16px;
+  letter-spacing: normal;
+  margin: 0;
+`;
