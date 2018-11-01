@@ -15,6 +15,9 @@ declare type Typography = {
   /** 글자의 굵기 */
   fontWeight?: number | string,
 
+  /** 글 정렬 */
+  textAlign?: 'left' | 'right' | 'center' | 'justify',
+
   /** CSS의 margin-top 속성의 값 */
   marginTop?: number,
 

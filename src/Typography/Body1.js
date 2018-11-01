@@ -7,6 +7,7 @@ type Props = {
   paragraph?: boolean,
   color?: string,
   fontWeight?: number | string,
+  textAlign?: 'left' | 'right' | 'center' | 'justify',
   marginTop?: number,
   marginBottom?: number,
   marginLeft?: number,

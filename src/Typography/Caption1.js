@@ -6,6 +6,7 @@ type Props = {
   sm?: string,
   color?: string,
   fontWeight?: number | string,
+  textAlign?: 'left' | 'right' | 'center' | 'justify',
   marginTop?: number,
   marginBottom?: number,
   marginLeft?: number,
