@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import { orange600, gray800, white } from '../Colors';
+import { orange600, white } from '../Colors';
 import { body2BlackBold } from '../TextStyles';
 import Spinner from '../Spinner';
 
@@ -178,7 +178,7 @@ const anchorButtonStyle = css`
   ${buttonStyle};
   text-decoration: none;
   &:link, &:visited, &:hover, &:active {
-    color: ${props => props.color || gray800};
+    color: ${props => props.color || white};
   }
 `;
 
