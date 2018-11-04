@@ -24,8 +24,8 @@ const BadgeCounter = styled.label`
 `;
 
 export default ({ children, color, backgroundColor, ...restProps }: Props) => (
-  <Container {...restProps}>
-    <BadgeCounter color={color} backgroundColor={backgroundColor}>
+  <Container { ...restProps }>
+    <BadgeCounter color={ color } backgroundColor={ backgroundColor }>
       {children || 0}
     </BadgeCounter>
   </Container>

@@ -27,17 +27,17 @@ const ImageBox = styled.div`
   ${props => {
     const ratios = props.imageRatio.split('*');
     return (
-      `
-      position: relative;
-      padding-bottom: ${ratios[1] / ratios[0] * 100}%;
-      img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }`
+      css`
+        position: relative;
+        padding-bottom: ${ratios[1] / ratios[0] * 100}%;
+        img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }`
       )
     }}
 `;

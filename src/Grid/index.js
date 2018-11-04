@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { media } from '../BreakPoints';
 
 type Props = {
@@ -9,8 +9,20 @@ type Props = {
 
 const Grid = styled.div`
   position: relative;
-  ${props => props.marginTop && `margin-top: ${typeof props.marginTop === 'number' ? `${props.marginTop}px` : props.marginTop}`};
-  ${props => props.marginBottom && `margin-bottom: ${typeof props.marginBottom === 'number' ? `${props.marginBottom}px` : props.marginBottom}`};
+  ${props => 
+    props.marginTop && 
+    css`margin-top: ${typeof props.marginTop === 'number' ? 
+        `${props.marginTop}px` : 
+        props.marginTop
+      };
+    `}
+  ${props => 
+    props.marginBottom && 
+    css`margin-bottom: ${typeof props.marginBottom === 'number' ? 
+        `${props.marginBottom}px` : 
+        props.marginBottom
+      };
+    `}
   margin-left: auto;
   margin-right: auto;
   ${media.sm`
