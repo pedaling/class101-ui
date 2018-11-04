@@ -5,6 +5,7 @@ export default {
   description: 'A React-based UI Component Library, powered by Class101.',
   src: './docs/',
   themeConfig: {
+    showPlaygroundEditor: true,
     colors: {
       primary: '#fd7e14',
     },
