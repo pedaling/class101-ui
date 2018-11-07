@@ -5,9 +5,12 @@ import * as BreakPoints from './BreakPoints';
 import * as TextStyles from './TextStyles';
 
 export { default as Grid } from './Grid';
+export { default as GridList } from './GridList';
+export { default as BasicList } from './BasicList';
 export { default as Col } from './Col';
 export { default as Row } from './Row';
 export { default as Card } from './Card';
+export { default as KlassCard } from './KlassCard';
 export { default as Spinner } from './Spinner';
 export { default as ProgressBar } from './ProgressBar';
 export { default as ProgressState } from './ProgressState';
@@ -61,5 +64,14 @@ injectGlobal`
 
   body {
     font-family: 'SpoqaHanSans', 'Sans-serif';
+  }
+  a {
+    text-decoration: none;
+    &:link, &:visited {
+      color: inherit;
+    }
+  }
+  p, ul {
+    padding: 0, margin: 0
   }
 `;

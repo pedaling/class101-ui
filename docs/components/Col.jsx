@@ -16,7 +16,6 @@ type Props = {
 
 const hiddenStyle = {
   border: `1px solid ${Colors.orange500}`,
-  padding: '15px 10px',
   textAlign: 'center',
   backgroundColor: `${Colors.orange200}`,
   backgroundClip: 'content-box',
@@ -26,7 +25,6 @@ const Component = ({
   lg,
   sm,
   smOffset,
-  mdOffset,
   lgOffset,
   style,
   ...restProps
@@ -35,7 +33,6 @@ const Component = ({
     lg={ lg }
     sm={ sm }
     smOffset={ smOffset }
-    mdOffset={ mdOffset }
     lgOffset={ lgOffset }
     style={{ ...style, ...hiddenStyle }} 
     { ...restProps } 
@@ -48,7 +45,6 @@ export const NoHiddenStyleCol = ({
   lg,
   sm,
   smOffset,
-  mdOffset,
   lgOffset,
   style,
   ...restProps
@@ -56,9 +52,6 @@ export const NoHiddenStyleCol = ({
   <Col
     lg={ lg }
     sm={ sm }
-    smOffset={ smOffset }
-    mdOffset={ mdOffset }
-    lgOffset={ lgOffset }
     style={{ ...styleMedia }} 
     { ...restProps } 
   />

@@ -1,0 +1,205 @@
+---
+menu: List
+name: BasicList
+route: /list/basic-list
+---
+
+import { Playground, PropsTable } from 'docz';
+import GridList from './GridList';
+import BasicList from './BasicList';
+import Card from './Card';
+
+import { imageSrc } from "./interface";
+
+# List
+
+titleStyle은 Typography, buttonStyle은 Button 컴포넌트의 속성을 참고해주세요.
+
+## Props
+
+<PropsTable of={BasicList} />
+
+## Basic usage
+
+BasicList를 사용할 경우 리스트의 헤더 타이틀이나 푸터의 버튼이 필요한 경우만 사용해주세요.  
+리스트만 필요한 경우는 GridList를 사용할 수 있습니다.
+
+<Playground>
+  <BasicList
+    title="가장 완강률이 높은 클래스"
+    buttonTitle="클래스 전체보기"
+  >
+    <GridList
+      items={[
+        {
+          id: 1,
+          title: '리스트 아이템 1',
+          image: imageSrc,
+          to: '/',
+        },
+        {
+          id: 2,
+          title: '리스트 아이템 2',
+          image: imageSrc,
+          to: '/',
+        },
+      ]}
+      smColumn={ 2 }
+      renderItem={(item => 
+        <Card 
+          title={item.title}
+          coverImage={ item.image }
+          to={ item.to }
+        />
+      )}
+    />
+  </BasicList>
+</Playground>
+
+## Anchor or Action to Button
+
+`to`, `href`, `onClick`을 지정할 경우 리스트 푸터의 버튼이 액션 가능한 요소가 됩니다.
+
+<Playground>
+  <BasicList
+    title="가장 완강률이 높은 클래스"
+    buttonTitle="클래스 전체보기"
+    to="/"
+  >
+    <GridList
+      items={[
+        {
+          id: 1,
+          title: '리스트 아이템 1',
+          image: imageSrc,
+          to: '/',
+        },
+        {
+          id: 2,
+          title: '리스트 아이템 2',
+          image: imageSrc,
+          to: '/',
+        },
+      ]}
+      smColumn={ 2 }
+      renderItem={(item => 
+        <Card 
+          title={item.title}
+          coverImage={ item.image }
+          to={ item.to }
+        />
+      )}
+    />
+  </BasicList>
+</Playground>
+
+## Anchor or Action to Title
+
+ButtonTitle이 없고, `to`, `href`, `onClick`을 지정할 경우 리스트 헤더는 액션이 가능한 요소가 됩니다.
+
+<Playground>
+  <BasicList
+    title="가장 완강률이 높은 클래스"
+    to="/"
+  >
+    <GridList
+      items={[
+        {
+          id: 1,
+          title: '리스트 아이템 1',
+          image: imageSrc,
+          to: '/',
+        },
+        {
+          id: 2,
+          title: '리스트 아이템 2',
+          image: imageSrc,
+          to: '/',
+        },
+      ]}
+      smColumn={ 2 }
+      renderItem={(item => 
+        <Card 
+          title={item.title}
+          coverImage={ item.image }
+          to={ item.to }
+        />
+      )}
+    />
+  </BasicList>
+</Playground>
+
+## Custom Style
+
+기본 typography의 변경은 `titleStyle={{ typography: "Body2" }}`처럼 넣어주세요.
+
+<Playground>
+  <BasicList
+    title="가장 완강률이 높은 클래스"
+    titleStyle={{
+      typography: "Body2",
+      color: "orange",
+      sm: "Caption1",
+    }}
+    buttonTitle="클래스 전체보기"
+    buttonStyle={{
+      color: "white",
+      backgroundColor: "black",
+    }}
+  >
+    <GridList
+      items={[
+        {
+          id: 1,
+          title: '리스트 아이템 1',
+          image: imageSrc,
+        },
+        {
+          id: 2,
+          title: '리스트 아이템 2',
+          image: imageSrc,
+        },
+      ]}
+      smColumn={ 2 }
+      renderItem={(item => 
+        <Card 
+          title={item.title}
+          coverImage={ item.image }
+        />
+      )}
+    />
+  </BasicList>
+</Playground>
+
+
+## with subtitle
+
+<Playground>
+  <BasicList
+    title="가장 완강률이 높은 클래스"
+    subTitle="알림신청 하신 분들에게는 할인 및 이벤트 소식과 제작 과정을 전해드려요."
+    buttonTitle="클래스 전체보기"
+  >
+    <GridList
+      items={[
+        {
+          id: 1,
+          title: '리스트 아이템 1',
+          image: imageSrc,
+        },
+        {
+          id: 2,
+          title: '리스트 아이템 2',
+          image: imageSrc,
+        },
+      ]}
+      smColumn={ 2 }
+      renderItem={(item => 
+        <Card 
+          title={item.title}
+          coverImage={ item.image }
+        />
+      )}
+    />
+  </BasicList>
+</Playground>
