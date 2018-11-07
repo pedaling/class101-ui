@@ -7,22 +7,16 @@ type Props = {
   title: string,
 
   /** 카드 이미지 */
-  image: Node | string,
+  coverImage: Node | string,
 
   /** 카드 srcSet */
-  imageSrcSet?: string,
+  coverImageSrcSet?: string,
 
   /** 대체 텍스트 */
-  imageAlt?: string,
+  coverImageAlt?: string,
 
   /** 카드 이미지 비율 */
-  imageRatio?: '16*9' | '4*3' | '1*1',
-
-  /** 카드 크기 */
-  size?: "lg" | "sm",
-
-  /** 태그 */
-  tag?: Array<string>,
+  coverImageRatio?: '16*9' | '4*3' | '1*1',
 
   /** 타이틀 위에 들어갈 추가 노드 */
   extraTop?: Node,
@@ -33,18 +27,16 @@ type Props = {
   /** Link(React Router Dom)에 쓸 URL */
   to?: string,
 
-  /**	A Tag에 쓸 URL */
+  /**	Native Anchor에 쓸 URL */
   href?: string,
 };
 
 const Component = ({
   title,
-  image,
-  imageSrcSet,
-  imageAlt,
-  imageRatio = "16*9",
-  size = "lg",
-  tag,
+  coverImage,
+  coverImageSrcSet,
+  coverImageAlt,
+  coverImageRatio = "16*9",
   extraTop,
   extraBottom,
   children,
@@ -55,12 +47,10 @@ const Component = ({
 }: Props) => (
   <Card 
     title={ title }
-    image={ image }
-    imageSrcSet={ imageSrcSet }
-    imageAlt={ imageAlt }
-    imageRatio={ imageRatio }
-    size={ size }
-    tag={ tag }
+    coverImage={ coverImage }
+    coverImageSrcSet={ coverImageSrcSet }
+    coverImageAlt={ coverImageAlt }
+    coverImageRatio={ coverImageRatio }
     extraTop={ extraTop }
     extraBottom={ extraBottom }
     to={ to }

@@ -1,18 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import { body2Black, tiny1Gray } from '../TextStyles';
+import { body2Black } from '../TextStyles';
 
 type Props = {
   title: string,
-  image: string | Node,
-  imageSrcSet?: string,
-  imageAlt?: string,
-  imageRatio?: '1*1' | '4*3' | '16*9',
-  tag?: Array<string>,
+  coverImage: string | Node,
+  coverImageSrcSet?: string,
+  coverImageAlt?: string,
+  coverImageRatio?: '1*1' | '4*3' | '16*9',
   extraTop?: Node,
   extraBottom?: Node,
-  size?: "lg" | "sm",
   to?: string,
   href?: string,
 };
@@ -21,11 +19,11 @@ const Card = styled.div`
   width: 100%;
 `;
 
-const ImageBox = styled.div`
+const CoverImage = styled.div`
   overflow: hidden;
-  border-radius: ${props => props.size === 'sm' ? 2 : 4}px;
+  border-radius: 2px;
   ${props => {
-    const ratios = props.imageRatio.split('*');
+    const ratios = props.coverImageRatio.split('*');
     return (
       css`
         position: relative;
@@ -42,42 +40,26 @@ const ImageBox = styled.div`
     }}
 `;
 
-const TextBox = styled.div`
-  margin-top: ${props => props.size === 'sm' ? 4 : 8}px;
+const Body = styled.div`
+  margin-top: 4px;
+  > div {
+    margin-top: 2px;
+  }
 `;
 
 const Title = styled.div`
   ${body2Black};
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 `;
 
-const TinyBox = styled.div`
-  margin-left: -4px;
-  &:after {
-    content: '';
-    display: block;
-    clear: left;
-  }
-`;
-
-const Tiny = styled.div`
-  float: left;
-  margin-left: 4px; 
-  ${tiny1Gray}
-`;
-
 const anchorCardStyle = css`
-  text-decoration: none;
   img {
     transition: transform 0.5s, opacity 0.5s;
     opacity: 1;
     transform: scale(1);
-  }
-  &:link, &:visited {
-    color: inherit;
   }
   &:hover,
   &:focus {
@@ -86,9 +68,6 @@ const anchorCardStyle = css`
       transform: scale(1.1);
     }
   }
-`;
-
-const CardInner = styled.div`
 `;
 
 const LinkCardInner = styled(Link)`
@@ -101,12 +80,10 @@ const AnchorCardInner = styled.a`
 
 export default ({
   title,
-  image,
-  imageSrcSet,
-  imageAlt,
-  imageRatio = "4*3",
-  size = "lg",
-  tag = [],
+  coverImage,
+  coverImageSrcSet,
+  coverImageAlt,
+  coverImageRatio = "4*3",
   extraTop,
   extraBottom,
   children,
@@ -123,38 +100,25 @@ export default ({
   }
 
   const imgElements = () => {
-    if(typeof image === 'string') {
+    if(typeof coverImage === 'string') {
       return (
-        imageSrcSet ? 
-          <img src={ image } alt={ imageAlt || "" } srcSet={ imageSrcSet } /> : 
-          <img src={ image } alt={ imageAlt || "" } />
+        coverImageSrcSet ? 
+          <img src={ coverImage } alt={ coverImageAlt || "" } srcSet={ coverImageSrcSet } /> : 
+          <img src={ coverImage } alt={ coverImageAlt || "" } />
       )} 
-      return image;
+      return coverImage;
   };
 
-  const tagElements = (
-    <TinyBox>
-      {
-        tag.map((t, i) => 
-          <Tiny key={ i.toString() }>{t}</Tiny>
-        )
-      }
-    </TinyBox> 
-  );
-
-  const innerElements = (
-    <CardInner>
-      <ImageBox size={ size } imageRatio={ imageRatio } >
-        { imgElements() }
-      </ImageBox>
-      <TextBox size={ size }>
-        { extraTop }
-        <Title>{title}</Title>
-        { tag.length > 0 && tagElements }
-        { extraBottom }
-      </TextBox>
-    </CardInner>
-  )
+  const innerElements = [
+    <CoverImage coverImageRatio={ coverImageRatio } >
+      { imgElements() }
+    </CoverImage>,
+    <Body>
+      { extraTop }
+      <Title>{title}</Title>
+      { extraBottom }
+    </Body>
+  ];
 
   if(to) {
     return (

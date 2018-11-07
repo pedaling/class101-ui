@@ -28,15 +28,15 @@ import { imageSrc } from "./interface";
     <Row>
       <NoHiddenStyleCol lg={8}>
         <Card 
-          title="카드 타이틀 두 줄 까지만 허용합니다 두 줄 넘어가면 말 줄임표가 생깁니다 카드 타이틀 두 줄 까지만 허용합니다 두 줄 넘어가면 말 줄임표가 생깁니다"
-          image={ imageSrc }
+          title="카드 타이틀 세 줄 까지만 허용합니다 세 줄 넘어가면 말 줄임표가 생깁니다 카드 타이틀 세 줄 까지만 허용합니다 세 줄 넘어가면 말 줄임표가 생깁니다"
+          coverImage={ imageSrc }
         />
       </NoHiddenStyleCol>
       <NoHiddenStyleCol lg={4}>
         <Card 
           size={ "sm" }
-          title="카드 타이틀 두 줄 까지만 허용합니다 두 줄 넘어가면 말 줄임표가 생깁니다 카드 타이틀 두 줄 까지만 허용합니다 두 줄 넘어가면 말 줄임표가 생깁니다"
-          image={ imageSrc }
+          title="나만의 그림으로 내 삶을 채우다, 강한의 색연필 일러스트"
+          coverImage={ imageSrc }
         >
         </Card>
       </NoHiddenStyleCol>
@@ -52,8 +52,8 @@ import { imageSrc } from "./interface";
       <NoHiddenStyleCol lg={8}>
         <Card 
           title="아이패드 드로잉"
-          imageRatio="4*3"
-          image={ imageSrc }
+          coverImageRatio="4*3"
+          coverImage={ imageSrc }
         />
       </NoHiddenStyleCol>
     </Row>
@@ -68,35 +68,11 @@ import { imageSrc } from "./interface";
       <NoHiddenStyleCol lg={8}>
         <Card 
           title="아이패드 드로잉"
-          image={ 
+          coverImage={ 
             <div>
               <img src={ imageSrc }/>
             </div> 
           }
-        />
-      </NoHiddenStyleCol>
-    </Row>
-  </Grid>
-</Playground>
-
-## With tag
-
-<Playground>
-  <Grid>
-    <Row>
-      <NoHiddenStyleCol lg={8}>
-        <Card 
-          title="아이패드 드로잉"
-          image={ imageSrc }
-          tag={["커피부르잉", "초급", "커피", "드로잉", "아이패드"]}
-        />
-      </NoHiddenStyleCol>
-      <NoHiddenStyleCol lg={4}>
-        <Card 
-          size={ "sm" }
-          title="아이패드 드로잉"
-          image={ imageSrc }
-          tag={["커피부르잉", "초급", "커피", "드로잉", "아이패드"]}
         />
       </NoHiddenStyleCol>
     </Row>
@@ -111,8 +87,7 @@ import { imageSrc } from "./interface";
       <NoHiddenStyleCol lg={6}>
         <Card 
           title="아이패드 드로잉"
-          image={ imageSrc }
-          tag={["커피부르잉", "초급"]}
+          coverImage={ imageSrc }
           to={"/"}
           target={"_blank"}
         >
@@ -122,8 +97,7 @@ import { imageSrc } from "./interface";
       <NoHiddenStyleCol lg={6}>
         <Card 
           title="아이패드 드로잉"
-          image={ imageSrc }
-          tag={["커피부르잉", "초급"]}
+          coverImage={ imageSrc }
           href={"/"}
           target={"_blank"}
         >
@@ -142,17 +116,25 @@ import { imageSrc } from "./interface";
       <NoHiddenStyleCol lg={6}>
         <Card 
           title="아이패드 드로잉"
-          image={ imageSrc }
-          tag={["커피부르잉", "초급"]}
+          coverImage={ imageSrc }
           to={"/"}
           target={"_blank"}
           extraTop={
-            <div style={{lineHeight: 1}}>
+            <div style={{lineHeight: '16px' }}>
               <Tiny1 style={{display: 'inline-block'}} fontWeight={'Bold'}>바로 수강 가능</Tiny1>
               <Tiny1 style={{display: 'inline-block'}} fontWeight={'Bold'} marginLeft={11} color={ Colors.orange700}>40% 할인</Tiny1>
             </div>
           }
-          extraBottom={<Tiny1>10월 12일 ~ 10월 24일</Tiny1>}
+        >
+        </Card>
+      </NoHiddenStyleCol>
+      <NoHiddenStyleCol lg={6}>
+        <Card 
+          title="아이패드 드로잉"
+          coverImage={ imageSrc }
+          to={"/"}
+          target={"_blank"}
+          extraBottom={<Tiny1 color={ Colors.gray400 }>10월 12일 ~ 10월 24일</Tiny1>}
         >
         </Card>
       </NoHiddenStyleCol>
