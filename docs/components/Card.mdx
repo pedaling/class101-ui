@@ -13,6 +13,7 @@ import { Colors } from 'class101-ui';
 import { NoHiddenStyleCol } from "./Col";
 
 import Card from "./Card";
+import KlassCard from "./KlassCard";
 import { imageSrc } from "./interface";
 
 # Card
@@ -137,6 +138,104 @@ import { imageSrc } from "./interface";
           extraBottom={<Tiny1 color={ Colors.gray400 }>10월 12일 ~ 10월 24일</Tiny1>}
         >
         </Card>
+      </NoHiddenStyleCol>
+    </Row>
+  </Grid>
+</Playground>
+
+## KlassCard
+
+<PropsTable of={KlassCard} />
+
+## preview KlassCard
+
+알림신청 카드
+
+<Playground>
+  <Grid>
+    <Row>
+      <NoHiddenStyleCol lg={4}>
+        <KlassCard 
+          state="preview"
+          title="아이패드 드로잉"
+          coverImage={ imageSrc }
+          creatorName="Kang Han"
+          to={"/"}
+          target={"_blank"}
+          reservationed={false}
+          reservationCount={ 11 }
+          onReservationClick={() => {}}
+        >
+        </KlassCard >
+      </NoHiddenStyleCol>
+      <NoHiddenStyleCol lg={4}>
+        <KlassCard 
+          state="preview"
+          title="아이패드 드로잉"
+          coverImage={ imageSrc }
+          creatorName="Kang Han"
+          to={"/"}
+          target={"_blank"}
+          loading={ true }
+          reservationed={false}
+          reservationCount={ 11 }
+          onReservationClick={() => {}}
+        >
+        </KlassCard >
+      </NoHiddenStyleCol>
+      <NoHiddenStyleCol lg={4}>
+        <KlassCard 
+          state="preview"
+          title="아이패드 드로잉"
+          coverImage={ imageSrc }
+          creatorName="Kang Han"
+          to={"/"}
+          target={"_blank"}
+          reservationed={true}
+          reservationCount={ 11 }
+          onReservationClick={() => {}}
+        >
+        </KlassCard >
+      </NoHiddenStyleCol>
+    </Row>
+  </Grid>
+</Playground>
+
+## selling KlassCard
+
+바로 수강 가능 / 수강 모집 중 카드
+
+<Playground>
+  <Grid>
+    <Row>
+      <NoHiddenStyleCol lg={4}>
+        <KlassCard 
+          state="sale"
+          title="아이패드 드로잉"
+          coverImage={ imageSrc }
+          creatorName="Kang Han"
+          sale={ 40 }
+          wishlisted={ false }
+          onWishlistClick={() => {}}
+          to={"/"}
+          target={"_blank"}
+        >
+        </KlassCard >
+      </NoHiddenStyleCol>
+      <NoHiddenStyleCol lg={4}>
+        <KlassCard 
+          state="funding"
+          title="아이패드 드로잉"
+          coverImage={ imageSrc }
+          creatorName="Kang Han"
+          openDate="9월 18일"
+          sale={ 40 }
+          wishlisted={ true }
+          onWishlistClick={() => {}}
+          to={"/"}
+          target={"_blank"}
+        >
+        </KlassCard >
       </NoHiddenStyleCol>
     </Row>
   </Grid>

@@ -15,7 +15,7 @@ type Props = {
   onClick?: () => void;
 };
 
-const BasicList = styled.div`
+const List = styled.div`
 `;
 
 export default ({
@@ -31,7 +31,7 @@ export default ({
   children,
   ...restProps,
 }: Props) => (
-  <BasicList { ...restProps }>
+  <List { ...restProps }>
     { title && 
       !buttonTitle ? 
         <ListHeader 
@@ -60,5 +60,5 @@ export default ({
         { ...buttonStyle }
       />
     }
-  </BasicList>
+  </List>
 );

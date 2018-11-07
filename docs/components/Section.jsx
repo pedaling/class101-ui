@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { BasicList } from 'class101-ui';
+import { Section } from 'class101-ui';
 
 type Props = {
   title?: string,
@@ -27,7 +27,7 @@ const Component = ({
   children,
   ...restProps,
 }: Props) => (
-  <BasicList
+  <Section
     title={ title }
     titleStyle={ titleStyle }
     subTitle={ subTitle }
@@ -40,7 +40,7 @@ const Component = ({
     { ...restProps }
   >
     { children }
-  </BasicList>
+  </Section>
 );
 
 export default Component;

@@ -65,6 +65,14 @@ const GridListItem = styled.li`
         clear: left;
       }`
     }
+    ${props => props.smColumn === 1 && css`
+      .sale-wish-icon {
+        > svg {
+          width: 32px;
+          height: 32px;
+        }
+      }
+    `}
   `}
 
   ${media.lg`

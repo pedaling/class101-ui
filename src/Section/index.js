@@ -1,0 +1,64 @@
+import React from 'react';
+import styled from 'styled-components';
+import Header from './Header';
+import Footer from './Footer';
+
+type Props = {
+  title?: string,
+  titleStyle?: any,
+  subTitle?: string,
+  buttonTitle?: string,
+  buttonStyle?: any,
+  to?: string,
+  href?: string,
+  target?: string,
+  onClick?: () => void;
+};
+
+const Section = styled.section`
+`;
+
+export default ({
+  title,
+  titleStyle,
+  subTitle,
+  buttonTitle,
+  buttonStyle,
+  to,
+  href,
+  target,
+  onClick,
+  children,
+  ...restProps,
+}: Props) => (
+  <Section { ...restProps }>
+    { title && 
+      !buttonTitle ? 
+        <Header 
+          title={ title } 
+          to={ to }
+          href={ href }
+          target={ target }
+          onClick={ onClick }
+          subTitle={ subTitle }
+          { ...titleStyle }
+        /> :
+        <Header 
+          title={ title } 
+          subTitle={ subTitle }
+          { ...titleStyle }
+        />
+    }
+    { children }
+    { buttonTitle && 
+      <Footer 
+        buttonTitle={ buttonTitle } 
+        to={ to }
+        href={ href }
+        target={ target }
+        onClick={ onClick }
+        { ...buttonStyle }
+      />
+    }
+  </Section>
+);

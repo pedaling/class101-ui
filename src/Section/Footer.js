@@ -7,7 +7,7 @@ type Props = {
   buttonTitle: '',
 };
 
-const ListFooter = styled.div`
+const Footer = styled.div`
   margin-top: 24px;
 `;
 
@@ -21,7 +21,7 @@ export default ({
   },
   ...restProps,
 }: Props) => (
-  <ListFooter>
+  <Footer>
     <Button 
       color={ color }
       backgroundColor={ backgroundColor }
@@ -31,5 +31,5 @@ export default ({
     >
       { buttonTitle }
     </Button>
-  </ListFooter>
+  </Footer>
 )
