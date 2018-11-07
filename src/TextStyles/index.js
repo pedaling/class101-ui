@@ -117,7 +117,7 @@ export const heading3BlackBold = css`
 
 export const tiny1Gray = css`
   font-size: 11px;
-  color: ${gray500};
+  color: ${gray600};
   line-height: 16px;
 `;
 
@@ -171,7 +171,7 @@ export const subheadingGray = css`
 
 export const tiny2Gray = css`
   font-size: 9px;
-  color: ${gray500};
+  color: ${gray600};
   line-height: 12px;
 `;
 

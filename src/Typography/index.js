@@ -193,7 +193,6 @@ export default class Typography extends Component<Props, State> {
   }
 
   updateWindowDimensions = throttle(() => {
-    console.log(window.innerWidth);
     this.setState({ width: window.innerWidth });
   }, 60)
 
