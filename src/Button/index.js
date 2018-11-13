@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { orange600, white } from '../Colors';
-import { body2BlackBold } from '../TextStyles';
+import { body2WhiteBold } from '../TextStyles';
 import Spinner from '../Spinner';
 
 type Props = {
@@ -56,7 +56,7 @@ const LeftIcon = styled.img.attrs({ alt: '' })``;
 const RightIcon = styled.img.attrs({ alt: '' })``;
 
 const buttonStyle = css`
-  ${body2BlackBold};
+  ${body2WhiteBold};
   color: ${props => props.color || white};
   background-color: ${props => props.backgroundColor || orange600};
   outline: none;
@@ -177,9 +177,6 @@ const AnchorButtonInner = styled.div`
 const anchorButtonStyle = css`
   ${buttonStyle};
   text-decoration: none;
-  &:link, &:visited, &:hover, &:active {
-    color: ${props => props.color || white};
-  }
 `;
 
 const LinkButton = styled(Link)`

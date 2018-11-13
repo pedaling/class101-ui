@@ -67,9 +67,7 @@ injectGlobal`
   }
   a {
     text-decoration: none;
-    &:link, &:visited {
-      color: inherit;
-    }
+    color: inherit;
   }
   p, ul {
     padding: 0, margin: 0
