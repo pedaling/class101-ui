@@ -177,6 +177,9 @@ const AnchorButtonInner = styled.div`
 const anchorButtonStyle = css`
   ${buttonStyle};
   text-decoration: none;
+  &:hover {
+    color: ${props => props.color || white};
+  }
 `;
 
 const LinkButton = styled(Link)`
