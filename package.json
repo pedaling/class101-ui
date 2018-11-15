@@ -52,7 +52,7 @@
     "react": "^15.0.0 || ^16.0.0",
     "react-dom": "^15.0.0 || ^16.0.0",
     "react-router-dom": "^4.3.1",
-    "styled-components": "^3.4.5"
+    "styled-components": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -96,7 +96,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-postcss": "^1.6.2",
     "rollup-plugin-url": "^1.4.0",
-    "styled-components": "^3.4.5"
+    "styled-components": "^4.1.1"
   },
   "files": [
     "dist"

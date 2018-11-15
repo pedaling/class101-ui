@@ -159,7 +159,7 @@ export default class BottomSheet extends Component<Props, State> {
             { renderContent() }
           </Content>
         }
-        <Header innerRef={ (ref) => { if (!this.headerElement) this.headerElement = ref; } }>
+        <Header ref={ (ref) => { if (!this.headerElement) this.headerElement = ref; } }>
           <InnerHeader
             onMouseDown={ this.onChangeToggle }
             onTouchStart={ this.onChangeToggle }
