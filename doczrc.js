@@ -10,6 +10,7 @@ export default {
       primary: '#fd7e14',
     },
   },
+  wrapper: 'docs/Wrapper',
   modifyBundlerConfig: (config) => ({
       ...config,
       resolve: {
