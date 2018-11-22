@@ -1,6 +1,6 @@
 {
   "name": "class101-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React-based UI Component Library, powered by Class101.",
   "author": "iseongho",
   "license": "MIT",
@@ -11,6 +11,7 @@
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
+  "sideEffects": false,
   "engines": {
     "node": ">=8",
     "npm": ">=5"
