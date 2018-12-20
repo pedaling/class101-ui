@@ -1,45 +1,9 @@
-version: 2
-jobs:
-  install-dependencies:
-    working_directory: ~/class101-ui
-    docker:
-      - image: circleci/node:8
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/class101-ui
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}-v2
-            - yarn-packages-{{ .Branch }}-v2
-            - yarn-packages-master-v2
-            - yarn-packages-v2-
-      - run:
-          name: Install Dependencies
-          command: yarn install
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}-v2
-          paths:
-            - node_modules/
-            - ~/.cache/yarn
-      - persist_to_workspace:
-          root: .
-          paths: .
-  build:
-    docker:
-      - image: circleci/node:8
-    working_directory: ~/class101-ui
-    steps:
-      - attach_workspace:
-          at: ~/class101-ui
-      - run:
-          name: Test
-          command: yarn test
-      - run:
-          name: Build
-          command: yarn build
-      - persist_to_workspace:
-          root: .
-          paths: .
+version: 2.1
+
+orbs:
+    hello: circleci/hello-build@0.0.7 # uses the circleci/buildpack-deps Docker image
+
+workflows:
+    "Hello Workflow":
+        jobs:
+          - hello/hello-build
