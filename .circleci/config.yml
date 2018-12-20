@@ -43,3 +43,15 @@ jobs:
       - persist_to_workspace:
           root: .
           paths: .
+
+workflows:
+  version: 2
+  build-test:
+    jobs:
+      - install-dependencies:
+          filters:
+            branches:
+              only: master
+      - build:
+          requires:
+            - install-dependencies
