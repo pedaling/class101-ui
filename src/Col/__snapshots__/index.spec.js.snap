@@ -76,6 +76,7 @@ Object {
     ],
   },
   "displayName": "styled.div",
+  "foldedComponentIds": Array [],
   "render": [Function],
   "styledComponentId": "sc-bdVaJa",
   "target": "div",
