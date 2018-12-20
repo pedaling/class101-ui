@@ -1,8 +1,45 @@
 version: 2
 jobs:
-  build:
-    docker: # use the docker executor type; machine and macos executors are also supported
-      - image: circleci/node:8 # the primary container, where your job's commands are run
+  install-dependencies:
+    working_directory: ~/class101-ui
+    docker:
+      - image: circleci/node:8
     steps:
-      - checkout # check out the code in the project directory
-      - run: echo "hello world" # run the `echo` command
+      - checkout
+      - attach_workspace:
+          at: ~/class101-ui
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}-v2
+            - yarn-packages-{{ .Branch }}-v2
+            - yarn-packages-master-v2
+            - yarn-packages-v2-
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}-v2
+          paths:
+            - node_modules/
+            - ~/.cache/yarn
+      - persist_to_workspace:
+          root: .
+          paths: .
+  build:
+    docker:
+      - image: circleci/node:8
+    working_directory: ~/class101-ui
+    steps:
+      - attach_workspace:
+          at: ~/class101-ui
+      - run:
+          name: Test
+          command: yarn test
+      - run:
+          name: Build
+          command: yarn build
+      - persist_to_workspace:
+          root: .
+          paths: .
