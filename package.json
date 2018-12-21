@@ -1,12 +1,12 @@
 {
   "name": "class101-ui",
-  "version": "1.0.1",
+  "version": "0.0.0-development",
   "description": "A React-based UI Component Library, powered by Class101.",
   "author": "iseongho",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pedaling/class101-ui.git"
+    "url": "https://github.com/pedaling/class101-ui.git"
   },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -25,7 +25,8 @@
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build",
     "docz:dev": "docz dev",
-    "docz:build": "docz build"
+    "docz:build": "docz build",
+    "semantic-release": "semantic-release"
   },
   "husky": {
     "hooks": {
@@ -97,6 +98,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-postcss": "^1.6.2",
     "rollup-plugin-url": "^1.4.0",
+    "semantic-release": "^15.13.1",
     "styled-components": "^4.1.1"
   },
   "files": [

@@ -43,6 +43,14 @@ jobs:
       - persist_to_workspace:
           root: .
           paths: .
+  release:
+    docker:
+      - image: circleci/node:8
+    working_directory: ~/class101-ui
+    steps:
+      - attach_workspace:
+          at: ~/class101-ui
+      - run: yarn semantic-release
 
 workflows:
   version: 2
@@ -55,3 +63,6 @@ workflows:
       - build:
           requires:
             - install-dependencies
+      - release:
+          requires:
+            - build
