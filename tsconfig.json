@@ -1,21 +1,21 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "declaration": true,
+    "declarationDir": "dist",
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "noEmit": true,
     "jsx": "react",
-    "baseUrl": ".",
-    "typeRoots": ["./src/types", "./node_modules/@types"],
-    "paths": {}
+    "baseUrl": "src",
+    "outDir": "dist"
   },
-  "include": ["src"]
+  "include": ["src/**/*"],
+  "exclude": ["docz", "example"]
 }
