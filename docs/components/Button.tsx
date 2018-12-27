@@ -2,44 +2,44 @@
 import React from 'react';
 import { Button, Colors } from 'class101-ui';
 
-type Props = {
+interface Props {
   /** 가로를 모두 채울지 여부 */
-  block?: boolean,
+  block?: boolean;
 
   /** 크기 */
-  size?: 'lg' | 'md' | 'sm',
+  size?: 'lg' | 'md' | 'sm';
 
   /** 글의 색상 */
-  color?: string,
+  color?: string;
 
   /** 배경의 색상 */
-  backgroundColor?: string,
+  backgroundColor?: string;
 
   /** 왼쪽 아이콘 */
-  leftIconSrc?: string,
+  leftIconSrc?: string;
 
   /** 오른쪽 아이콘 */
-  rightIconSrc?: string,
+  rightIconSrc?: string;
 
   /** 글의 정렬 */
-  textAlign?: 'left' | 'center' | 'right',
+  textAlign?: 'left' | 'center' | 'right';
 
   /** 버튼의 둥근 정도 */
-  borderRadius?: number,
+  borderRadius?: number;
 
   /** 진행 여부 */
-  loading?: boolean,
+  loading?: boolean;
 
   /** Link(React Router Dom)에 쓸 URL */
-  to?: string,
+  to?: string;
 
   /** A Tag에 쓸 URL */
-  href?: string,
+  href?: string;
 
-  children: Node,
-};
+  children: Node;
+}
 
-const Component = ({
+export const Component = ({
   block = false,
   size = 'md',
   color = Colors.white,
@@ -52,17 +52,15 @@ const Component = ({
 }: Props) => (
   <Button
     style={{ marginRight: block ? 0 : 12, marginBottom: block ? 12 : 0 }}
-    block={ block }
-    size={ size }
-    color={ color }
-    backgroundColor={ backgroundColor }
-    textAlign={ textAlign }
-    borderRadius={ borderRadius }
-    loading={ loading }
-    { ...restProps }
+    block={block}
+    size={size}
+    color={color}
+    backgroundColor={backgroundColor}
+    textAlign={textAlign}
+    borderRadius={borderRadius}
+    loading={loading}
+    {...restProps}
   >
-    { children }
+    {children}
   </Button>
 );
-
-export default Component;

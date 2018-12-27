@@ -5,7 +5,7 @@ route: /components/button
 ---
 
 import { Playground, PropsTable } from 'docz';
-import Button from './Button';
+import { Component as Button } from './Button';
 
 # Button
 
@@ -18,9 +18,7 @@ import Button from './Button';
 ## Basic usage
 
 <Playground>
-  <Button>
-    Click me
-  </Button>
+  <Button>Click me</Button>
 </Playground>
 
 ## With different sizes
@@ -35,8 +33,12 @@ import Button from './Button';
 ## With different colors
 
 <Playground>
-  <Button color="black" backgroundColor="pink">BLACKPINK</Button>
-  <Button color="pink" backgroundColor="black">BLACKPINK</Button>
+  <Button color="black" backgroundColor="pink">
+    BLACKPINK
+  </Button>
+  <Button color="pink" backgroundColor="black">
+    BLACKPINK
+  </Button>
 </Playground>
 
 ## With different icons
@@ -49,9 +51,15 @@ import Button from './Button';
 ## With different aligns(Only block)
 
 <Playground>
-  <Button textAlign="left" block>Click me</Button>
-  <Button textAlign="center" block>Click me</Button>
-  <Button textAlign="right" block>Click me</Button>
+  <Button textAlign="left" block>
+    Click me
+  </Button>
+  <Button textAlign="center" block>
+    Click me
+  </Button>
+  <Button textAlign="right" block>
+    Click me
+  </Button>
 </Playground>
 
 ## Disabled button

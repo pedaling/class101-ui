@@ -5,7 +5,7 @@ route: /form-inputs/textarea
 ---
 
 import { Playground, PropsTable } from 'docz';
-import Textarea from './Textarea';
+import { Component as Textarea } from './Textarea';
 
 # Textarea
 
@@ -24,14 +24,8 @@ import Textarea from './Textarea';
 ## Inline textareas
 
 <Playground>
-  <Textarea
-    inline
-    placeholder="입력해주세요."
-  />
-  <Textarea
-    inline
-    placeholder="입력해주세요."
-  />
+  <Textarea inline placeholder="입력해주세요." />
+  <Textarea inline placeholder="입력해주세요." />
 </Playground>
 
 ## With allow message

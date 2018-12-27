@@ -248,9 +248,9 @@ export default ({
 
   const innerElements = (
     <>
-      Boolean(leftIconSrc) && <LeftIcon src={leftIconSrc} />
+      {Boolean(leftIconSrc) && <LeftIcon src={leftIconSrc} />}
       <span>{children}</span>
-      Boolean(rightIconSrc) && <RightIcon src={rightIconSrc} />
+      {Boolean(rightIconSrc) && <RightIcon src={rightIconSrc} />}
     </>
   );
 

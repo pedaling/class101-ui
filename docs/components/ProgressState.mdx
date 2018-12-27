@@ -5,7 +5,7 @@ route: /components/progress-state
 ---
 
 import { Playground, PropsTable } from 'docz';
-import ProgressState from './ProgressState';
+import { Component as ProgressState } from './ProgressState';
 
 # Progress State
 
@@ -20,7 +20,7 @@ import ProgressState from './ProgressState';
 <Playground>
   <ProgressState
     value="2"
-    items={ [
+    items={[
       {
         label: 'Lorem',
         value: '1',
@@ -37,7 +37,7 @@ import ProgressState from './ProgressState';
         label: 'sit',
         value: '4',
       },
-    ] }
+    ]}
   />
 </Playground>
 
@@ -46,7 +46,7 @@ import ProgressState from './ProgressState';
 <Playground>
   <ProgressState
     value="inProgress"
-    items={ [
+    items={[
       {
         label: '준비',
         value: 'ready',
@@ -59,7 +59,7 @@ import ProgressState from './ProgressState';
         label: '완료',
         value: 'success',
       },
-    ] }
+    ]}
     color="gray"
     backgroundColor="pink"
     activeColor="yellow"

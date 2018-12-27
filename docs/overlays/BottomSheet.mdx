@@ -5,7 +5,7 @@ route: /overlays/bottom-sheet
 ---
 
 import { Playground, PropsTable } from 'docz';
-import BottomSheet from './BottomSheet';
+import { Component as BottomSheet } from './BottomSheet';
 
 # Bottom Sheet
 
@@ -13,16 +13,16 @@ import BottomSheet from './BottomSheet';
 
 ## Props
 
-<PropsTable of={ BottomSheet } />
+<PropsTable of={BottomSheet} />
 
 ## Basic usage
 
 <Playground>
   <BottomSheet
     title="Bottom Sheet"
-    badgeCount={ 101 }
-    renderFixedContent={ () => (<div>List</div>) }
-    renderContent={ () => (
+    badgeCount={101}
+    renderFixedContent={() => <div>List</div>}
+    renderContent={() => (
       <ul style={{ margin: 0 }}>
         <li>Item</li>
         <li>Item</li>
@@ -35,6 +35,6 @@ import BottomSheet from './BottomSheet';
         <li>Item</li>
         <li>Item</li>
       </ul>
-    ) }
+    )}
   />
 </Playground>

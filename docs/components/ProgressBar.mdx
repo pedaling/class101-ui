@@ -5,7 +5,7 @@ route: /components/progress-bar
 ---
 
 import { Playground, PropsTable } from 'docz';
-import ProgressBar from './ProgressBar';
+import { Component as ProgressBar } from './ProgressBar';
 
 # Progress Bar
 
@@ -18,16 +18,11 @@ import ProgressBar from './ProgressBar';
 ## Basic usage
 
 <Playground>
-  <ProgressBar value={ 30 } />
+  <ProgressBar value={30} />
 </Playground>
 
 ## Custom example
 
 <Playground>
-  <ProgressBar
-    value={ 80 }
-    backgroundColor="pink"
-    barColor="red"
-    height={ 8 }
-  />
+  <ProgressBar value={80} backgroundColor="pink" barColor="red" height={8} />
 </Playground>

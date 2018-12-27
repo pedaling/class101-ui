@@ -5,9 +5,9 @@ route: /components/layout
 ---
 
 import { Playground, PropsTable } from 'docz';
-import Grid from './Grid';
-import Row from './Row';
-import Col from './Col';
+import { Component as Grid } from './Grid';
+import { Component as Row } from './Row';
+import { Component as Col } from './Col';
 
 # Layout
 
@@ -38,45 +38,45 @@ sm: < 1013px
 
 <Playground>
   <Row>
-    <Col lg={ 1 }>lg-1</Col>
-    <Col lg={ 1 }>lg-1</Col>
-    <Col lg={ 1 }>lg-1</Col>
-    <Col lg={ 1 }>lg-1</Col>
-    <Col lg={ 1 }>lg-1</Col>
-    <Col lg={ 1 }>lg-1</Col>
-    <Col lg={ 1 }>lg-1</Col>
-    <Col lg={ 1 }>lg-1</Col>
-    <Col lg={ 1 }>lg-1</Col>
-    <Col lg={ 1 }>lg-1</Col>
-    <Col lg={ 1 }>lg-1</Col>
-    <Col lg={ 1 }>lg-1</Col>
+    <Col lg={1}>lg-1</Col>
+    <Col lg={1}>lg-1</Col>
+    <Col lg={1}>lg-1</Col>
+    <Col lg={1}>lg-1</Col>
+    <Col lg={1}>lg-1</Col>
+    <Col lg={1}>lg-1</Col>
+    <Col lg={1}>lg-1</Col>
+    <Col lg={1}>lg-1</Col>
+    <Col lg={1}>lg-1</Col>
+    <Col lg={1}>lg-1</Col>
+    <Col lg={1}>lg-1</Col>
+    <Col lg={1}>lg-1</Col>
   </Row>
   <Row>
-    <Col lg={ 8 }>lg-8</Col>
-    <Col lg={ 4 }>lg-4</Col>
+    <Col lg={8}>lg-8</Col>
+    <Col lg={4}>lg-4</Col>
   </Row>
   <Row>
-    <Col lg={ 4 }>lg-4</Col>
-    <Col lg={ 4 }>lg-4</Col>
-    <Col lg={ 4 }>lg-4</Col>
+    <Col lg={4}>lg-4</Col>
+    <Col lg={4}>lg-4</Col>
+    <Col lg={4}>lg-4</Col>
   </Row>
   <Row>
-    <Col lg={ 6 }>lg-6</Col>
-    <Col lg={ 6 }>lg-6</Col>
+    <Col lg={6}>lg-6</Col>
+    <Col lg={6}>lg-6</Col>
   </Row>
 </Playground>
 
 ## Mobile first
 
-mobile first로 설계되어 sm만 설정 되어 있을 경우 sm에서의 설정이 데스크탑(lg)에서도 적용됩니다.  
+mobile first로 설계되어 sm만 설정 되어 있을 경우 sm에서의 설정이 데스크탑(lg)에서도 적용됩니다.
 반대로 lg만 설정할 경우 모바일(sm)에서는 한 셀이 12열을 모두 차지하게 됩니다.
 
 <Playground>
   <Row>
-    <Col sm={ 4 }>sm-4</Col>
+    <Col sm={4}>sm-4</Col>
   </Row>
   <Row>
-    <Col lg={ 4 }>lg-4</Col>
+    <Col lg={4}>lg-4</Col>
   </Row>
 </Playground>
 
@@ -87,7 +87,7 @@ mobile first로 설계되어 sm만 설정 되어 있을 경우 sm에서의 설�
 <Playground>
   <Grid>
     <Row>
-      <Col lg={ 12 }>With grid container</Col>
+      <Col lg={12}>With grid container</Col>
     </Row>
   </Grid>
 </Playground>
@@ -96,13 +96,23 @@ mobile first로 설계되어 sm만 설정 되어 있을 경우 sm에서의 설�
 
 <Playground>
   <Row>
-    <Col lg={ 8 } sm={ 12 }>lg-4</Col>
-    <Col lg={ 4 } sm={ 6 }>lg-4</Col>
+    <Col lg={8} sm={12}>
+      lg-4
+    </Col>
+    <Col lg={4} sm={6}>
+      lg-4
+    </Col>
   </Row>
   <Row>
-    <Col lg={ 4 } sm={ 6 }>lg-4</Col>
-    <Col lg={ 4 } sm={ 6 }>lg-4</Col>
-    <Col lg={ 4 } sm={ 6 }>lg-4</Col>
+    <Col lg={4} sm={6}>
+      lg-4
+    </Col>
+    <Col lg={4} sm={6}>
+      lg-4
+    </Col>
+    <Col lg={4} sm={6}>
+      lg-4
+    </Col>
   </Row>
 </Playground>
 
@@ -111,14 +121,22 @@ mobile first로 설계되어 sm만 설정 되어 있을 경우 sm에서의 설�
 <Playground>
   <Grid>
     <Row>
-      <Col lg={ 12 } sm={ 12 }>Header</Col>
+      <Col lg={12} sm={12}>
+        Header
+      </Col>
     </Row>
     <Row>
-      <Col style={{ height: 100 }} lg={ 4 } sm={ 12 }>Side Menu</Col>
-      <Col style={{ height: 300 }} lg={ 8 } sm={ 12 }>Content</Col>
+      <Col style={{ height: 100 }} lg={4} sm={12}>
+        Side Menu
+      </Col>
+      <Col style={{ height: 300 }} lg={8} sm={12}>
+        Content
+      </Col>
     </Row>
     <Row>
-      <Col lg={ 12 } sm={ 12 }>Footer</Col>
+      <Col lg={12} sm={12}>
+        Footer
+      </Col>
     </Row>
   </Grid>
 </Playground>
@@ -128,36 +146,42 @@ mobile first로 설계되어 sm만 설정 되어 있을 경우 sm에서의 설�
 <Playground>
   <Grid>
     <Row>
-      <Col sm={ 8 } smOffset={ 2 }>
+      <Col sm={8} smOffset={2}>
         sm-8, sm-offset-2
       </Col>
     </Row>
     <Row>
-      <Col lg={ 4 } lgOffset={ 8 }>
+      <Col lg={4} lgOffset={8}>
         lg-4, lg-offset-8
       </Col>
     </Row>
     <Row>
-      <Col lg={ 4 } sm={ 8 } lgOffset={ 4 } smOffset={ 2 }>
-        lg-4, lg-offset-4<br/>
+      <Col lg={4} sm={8} lgOffset={4} smOffset={2}>
+        lg-4, lg-offset-4
+        <br />
         sm-8, sm-offset-2
       </Col>
     </Row>
     <Row>
-      <Col lg={ 2 }>
-        lg-2<br/>
+      <Col lg={2}>
+        lg-2
+        <br />
       </Col>
-      <Col lg={ 2 } lgOffset={ 2 }>
-        lg-2<br/>
+      <Col lg={2} lgOffset={2}>
+        lg-2
+        <br />
         lg-offset-2
       </Col>
-      <Col lg={ 2 } lgOffset={ 2 }>
-        lg-2<br/>
+      <Col lg={2} lgOffset={2}>
+        lg-2
+        <br />
         lg-offset-2
       </Col>
     </Row>
     <Row>
-      <Col lg={ 10 } lgOffset={ 2 }>lg-10, lg-offset-2</Col>
+      <Col lg={10} lgOffset={2}>
+        lg-10, lg-offset-2
+      </Col>
     </Row>
   </Grid>
 </Playground>
@@ -169,37 +193,37 @@ mobile first로 설계되어 sm만 설정 되어 있을 경우 sm에서의 설�
 <Playground>
   <Grid>
     <Row>
-      <Col lg={ 12 }>With grid container</Col>
+      <Col lg={12}>With grid container</Col>
     </Row>
   </Grid>
-  <Grid marginTop={ 24 }>
+  <Grid marginTop={24}>
     <Row>
-      <Col lg={ 12 }>With grid container - marginTop 24(px)</Col>
+      <Col lg={12}>With grid container - marginTop 24(px)</Col>
     </Row>
   </Grid>
-  <Grid marginTop={ '2em' } marginBottom={ '2em' }>
+  <Grid marginTop={'2em'} marginBottom={'2em'}>
     <Row>
-      <Col lg={ 12 }>With grid container - marginTop 2em, marginBottom 2em</Col>
+      <Col lg={12}>With grid container - marginTop 2em, marginBottom 2em</Col>
     </Row>
   </Grid>
   <Grid>
     <Row>
-      <Col lg={ 12 }>With grid container</Col>
+      <Col lg={12}>With grid container</Col>
     </Row>
   </Grid>
 </Playground>
 
 <Playground>
   <Row>
-    <Col lg={ 12 }>row</Col>
+    <Col lg={12}>row</Col>
   </Row>
-  <Row marginTop={ 24 }>
-    <Col lg={ 12 }>row - marginTop 24(px)</Col>
+  <Row marginTop={24}>
+    <Col lg={12}>row - marginTop 24(px)</Col>
   </Row>
-  <Row marginTop={ '2em' } marginBottom={ '2em' }>
-    <Col lg={ 12 }>row - marginTop 2em, marginBottom 2em</Col>
+  <Row marginTop={'2em'} marginBottom={'2em'}>
+    <Col lg={12}>row - marginTop 2em, marginBottom 2em</Col>
   </Row>
   <Row>
-    <Col lg={ 12 }>row</Col>
+    <Col lg={12}>row</Col>
   </Row>
 </Playground>

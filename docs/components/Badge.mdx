@@ -5,7 +5,7 @@ route: /components/badge
 ---
 
 import { Playground, PropsTable } from 'docz';
-import Badge from './Badge';
+import { Component as Badge } from './Badge';
 
 # Badge
 
@@ -13,7 +13,7 @@ import Badge from './Badge';
 
 ## Props
 
-<PropsTable of={ Badge } />
+<PropsTable of={Badge} />
 
 ## Basic usage
 
@@ -26,16 +26,10 @@ import Badge from './Badge';
 ## With diffrent colors
 
 <Playground>
-  <Badge
-    color="black"
-    backgroundColor="pink"
-  >
+  <Badge color="black" backgroundColor="pink">
     101
   </Badge>
-  <Badge
-    color="pink"
-    backgroundColor="black"
-  >
+  <Badge color="pink" backgroundColor="black">
     101
   </Badge>
 </Playground>
