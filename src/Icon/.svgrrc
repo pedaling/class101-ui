@@ -1,0 +1,11 @@
+{
+  "expandProps": false,
+  "dimensions": false,
+  "replaceAttrValues": {
+    "#3E4042": "{this.props.tintColor}"
+  },
+  "svgProps": {
+    "width": "{this.props.iconSize}",
+    "height": "{this.props.iconSize}"
+  }
+}

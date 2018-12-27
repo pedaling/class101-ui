@@ -19,29 +19,20 @@
   "scripts": {
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
-    "build": "rollup -c",
+    "build": "tsc -p . && rollup -c",
     "start": "rollup -c -w",
     "prepare": "yarn run build",
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build",
     "docz:dev": "docz dev",
     "docz:build": "docz build",
+    "prettier": "prettier --write src/**/*",
     "semantic-release": "semantic-release"
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  },
-  "prettier": {
-    "trailingComma": "es5",
-    "tabWidth": 2,
-    "semi": true,
-    "singleQuote": true,
-    "bracketSpacing": true,
-    "jsxBracketSameLine": true,
-    "requirePragma": true,
-    "insertPragma": true
   },
   "lint-staged": {
     "*.js": [
@@ -69,6 +60,10 @@
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@pedaling/eslint-config-pedaling": "^1.0.6",
+    "@pedaling/tslint-config-class101": "^1.0.3",
+    "@types/react": "^16.7.18",
+    "@types/react-router-dom": "^4.3.1",
+    "@types/styled-components": "^4.1.4",
     "babel-eslint": "^9.0.0",
     "cross-env": "^5.1.4",
     "docz": "^0.12.9",
@@ -86,7 +81,7 @@
     "gh-pages": "^1.2.0",
     "husky": "^1.1.2",
     "lint-staged": "^8.0.0",
-    "prettier": "^1.14.3",
+    "prettier": "^1.15.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",
@@ -97,14 +92,19 @@
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-postcss": "^1.6.2",
+    "rollup-plugin-typescript": "^1.0.0",
     "rollup-plugin-url": "^1.4.0",
     "semantic-release": "^15.13.1",
-    "styled-components": "^4.1.1"
+    "styled-components": "^4.1.1",
+    "tslib": "^1.9.3",
+    "tslint": "^5.12.0"
   },
   "files": [
     "dist"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "typescript": "3.1.6"
+  },
   "bugs": {
     "url": "https://github.com/pedaling/class101-ui/issues"
   },
