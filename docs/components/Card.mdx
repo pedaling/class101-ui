@@ -4,17 +4,17 @@ name: Card
 route: /components/card
 ---
 
-import { Playground, PropsTable } from "docz";
-import Grid from "./Grid";
-import Row from "./Row";
-import Button from "./Button";
-import Tiny1 from "./Typography/Tiny1";
+import { Playground, PropsTable } from 'docz';
+import { Component as Grid } from './Grid';
+import { Component as Row } from './Row';
+import { Component as Button } from './Button';
+import { Component as Tiny1 } from './Typography/Tiny1';
 import { Colors } from 'class101-ui';
-import { NoHiddenStyleCol } from "./Col";
+import { NoHiddenStyleCol } from './Col';
 
-import Card from "./Card";
-import KlassCard from "./KlassCard";
-import { imageSrc } from "./interface";
+import { Component as Card } from './Card';
+import { Component as KlassCard } from './KlassCard';
+import { imageSrc } from './interface';
 
 # Card
 
@@ -28,18 +28,13 @@ import { imageSrc } from "./interface";
   <Grid>
     <Row>
       <NoHiddenStyleCol lg={8}>
-        <Card 
+        <Card
           title="카드 타이틀 세 줄 까지만 허용합니다 세 줄 넘어가면 말 줄임표가 생깁니다 카드 타이틀 세 줄 까지만 허용합니다 세 줄 넘어가면 말 줄임표가 생깁니다"
-          coverImage={ imageSrc }
+          coverImage={imageSrc}
         />
       </NoHiddenStyleCol>
       <NoHiddenStyleCol lg={4}>
-        <Card 
-          size={ "sm" }
-          title="나만의 그림으로 내 삶을 채우다, 강한의 색연필 일러스트"
-          coverImage={ imageSrc }
-        >
-        </Card>
+        <Card size={'sm'} title="나만의 그림으로 내 삶을 채우다, 강한의 색연필 일러스트" coverImage={imageSrc} />
       </NoHiddenStyleCol>
     </Row>
   </Grid>
@@ -51,11 +46,7 @@ import { imageSrc } from "./interface";
   <Grid>
     <Row>
       <NoHiddenStyleCol lg={8}>
-        <Card 
-          title="아이패드 드로잉"
-          coverImageRatio="4*3"
-          coverImage={ imageSrc }
-        />
+        <Card title="아이패드 드로잉" coverImageRatio="4*3" coverImage={imageSrc} />
       </NoHiddenStyleCol>
     </Row>
   </Grid>
@@ -67,12 +58,12 @@ import { imageSrc } from "./interface";
   <Grid>
     <Row>
       <NoHiddenStyleCol lg={8}>
-        <Card 
+        <Card
           title="아이패드 드로잉"
-          coverImage={ 
+          coverImage={
             <div>
-              <img src={ imageSrc }/>
-            </div> 
+              <img src={imageSrc} />
+            </div>
           }
         />
       </NoHiddenStyleCol>
@@ -86,23 +77,13 @@ import { imageSrc } from "./interface";
   <Grid>
     <Row>
       <NoHiddenStyleCol lg={6}>
-        <Card 
-          title="아이패드 드로잉"
-          coverImage={ imageSrc }
-          to={"/"}
-          target={"_blank"}
-        >
-        <Button style={{ marginTop: '24px'}}>Native Anchor</Button>
+        <Card title="아이패드 드로잉" coverImage={imageSrc} to={'/'} target={'_blank'}>
+          <Button style={{ marginTop: '24px' }}>Native Anchor</Button>
         </Card>
       </NoHiddenStyleCol>
       <NoHiddenStyleCol lg={6}>
-        <Card 
-          title="아이패드 드로잉"
-          coverImage={ imageSrc }
-          href={"/"}
-          target={"_blank"}
-        >
-        <Button style={{ marginTop: '24px'}}>Link of React Router DOM</Button>
+        <Card title="아이패드 드로잉" coverImage={imageSrc} href={'/'} target={'_blank'}>
+          <Button style={{ marginTop: '24px' }}>Link of React Router DOM</Button>
         </Card>
       </NoHiddenStyleCol>
     </Row>
@@ -115,29 +96,31 @@ import { imageSrc } from "./interface";
   <Grid>
     <Row>
       <NoHiddenStyleCol lg={6}>
-        <Card 
+        <Card
           title="아이패드 드로잉"
-          coverImage={ imageSrc }
-          to={"/"}
-          target={"_blank"}
+          coverImage={imageSrc}
+          to={'/'}
+          target={'_blank'}
           extraTop={
-            <div style={{lineHeight: '16px' }}>
-              <Tiny1 style={{display: 'inline-block'}} fontWeight={'Bold'}>바로 수강 가능</Tiny1>
-              <Tiny1 style={{display: 'inline-block'}} fontWeight={'Bold'} marginLeft={11} color={ Colors.orange700}>40% 할인</Tiny1>
+            <div style={{ lineHeight: '16px' }}>
+              <Tiny1 style={{ display: 'inline-block' }} fontWeight={'Bold'}>
+                바로 수강 가능
+              </Tiny1>
+              <Tiny1 style={{ display: 'inline-block' }} fontWeight={'Bold'} marginLeft={11} color={Colors.orange700}>
+                40% 할인
+              </Tiny1>
             </div>
           }
-        >
-        </Card>
+        />
       </NoHiddenStyleCol>
       <NoHiddenStyleCol lg={6}>
-        <Card 
+        <Card
           title="아이패드 드로잉"
-          coverImage={ imageSrc }
-          to={"/"}
-          target={"_blank"}
-          extraBottom={<Tiny1 color={ Colors.gray400 }>10월 12일 ~ 10월 24일</Tiny1>}
-        >
-        </Card>
+          coverImage={imageSrc}
+          to={'/'}
+          target={'_blank'}
+          extraBottom={<Tiny1 color={Colors.gray400}>10월 12일 ~ 10월 24일</Tiny1>}
+        />
       </NoHiddenStyleCol>
     </Row>
   </Grid>
@@ -155,47 +138,44 @@ import { imageSrc } from "./interface";
   <Grid>
     <Row>
       <NoHiddenStyleCol lg={4}>
-        <KlassCard 
+        <KlassCard
           state="preview"
           title="아이패드 드로잉"
-          coverImage={ imageSrc }
+          coverImage={imageSrc}
           creatorName="Kang Han"
-          to={"/"}
-          target={"_blank"}
+          to={'/'}
+          target={'_blank'}
           reservationed={false}
-          reservationCount={ 11 }
+          reservationCount={11}
           onReservationClick={() => {}}
-        >
-        </KlassCard >
+        />
       </NoHiddenStyleCol>
       <NoHiddenStyleCol lg={4}>
-        <KlassCard 
+        <KlassCard
           state="preview"
           title="아이패드 드로잉"
-          coverImage={ imageSrc }
+          coverImage={imageSrc}
           creatorName="Kang Han"
-          to={"/"}
-          target={"_blank"}
-          loading={ true }
+          to={'/'}
+          target={'_blank'}
+          loading={true}
           reservationed={false}
-          reservationCount={ 11 }
+          reservationCount={11}
           onReservationClick={() => {}}
-        >
-        </KlassCard >
+        />
       </NoHiddenStyleCol>
       <NoHiddenStyleCol lg={4}>
-        <KlassCard 
+        <KlassCard
           state="preview"
           title="아이패드 드로잉"
-          coverImage={ imageSrc }
+          coverImage={imageSrc}
           creatorName="Kang Han"
-          to={"/"}
-          target={"_blank"}
+          to={'/'}
+          target={'_blank'}
           reservationed={true}
-          reservationCount={ 11 }
+          reservationCount={11}
           onReservationClick={() => {}}
-        >
-        </KlassCard >
+        />
       </NoHiddenStyleCol>
     </Row>
   </Grid>
@@ -209,33 +189,31 @@ import { imageSrc } from "./interface";
   <Grid>
     <Row>
       <NoHiddenStyleCol lg={4}>
-        <KlassCard 
+        <KlassCard
           state="sale"
           title="아이패드 드로잉"
-          coverImage={ imageSrc }
+          coverImage={imageSrc}
           creatorName="Kang Han"
-          sale={ 40 }
-          wishlisted={ false }
+          sale={40}
+          wishlisted={false}
           onWishlistClick={() => {}}
-          to={"/"}
-          target={"_blank"}
-        >
-        </KlassCard >
+          to={'/'}
+          target={'_blank'}
+        />
       </NoHiddenStyleCol>
       <NoHiddenStyleCol lg={4}>
-        <KlassCard 
+        <KlassCard
           state="funding"
           title="아이패드 드로잉"
-          coverImage={ imageSrc }
+          coverImage={imageSrc}
           creatorName="Kang Han"
           openDate="9월 18일"
-          sale={ 40 }
-          wishlisted={ true }
+          sale={40}
+          wishlisted={true}
           onWishlistClick={() => {}}
-          to={"/"}
-          target={"_blank"}
-        >
-        </KlassCard >
+          to={'/'}
+          target={'_blank'}
+        />
       </NoHiddenStyleCol>
     </Row>
   </Grid>

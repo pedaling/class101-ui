@@ -5,11 +5,11 @@ route: /components/section
 ---
 
 import { Playground, PropsTable } from 'docz';
-import GridList from './GridList';
-import Section from './Section';
-import Card from './Card';
+import { Component as GridList } from './GridList';
+import { Component as Section } from './Section';
+import { Component as Card } from './Card';
 
-import { imageSrc } from "./interface";
+import { imageSrc } from './interface';
 
 # Section
 
@@ -24,10 +24,7 @@ titleStyle은 Typography, buttonStyle은 Button 컴포넌트의 속성을 참고
 섹션의 헤더 타이틀과 푸터 버튼을 지정할 수 있습니다.
 
 <Playground>
-  <Section
-    title="가장 완강률이 높은 클래스"
-    buttonTitle="클래스 전체보기"
-  >
+  <Section title="가장 완강률이 높은 클래스" buttonTitle="클래스 전체보기">
     리스트나 캐러셀 등이 들어갈 수 있습니다.
   </Section>
 </Playground>
@@ -37,11 +34,7 @@ titleStyle은 Typography, buttonStyle은 Button 컴포넌트의 속성을 참고
 `to`, `href`, `onClick`을 지정할 경우 섹션 푸터의 버튼이 액션 가능한 요소가 됩니다.
 
 <Playground>
-  <Section
-    title="가장 완강률이 높은 클래스"
-    buttonTitle="클래스 전체보기"
-    to="/"
-  >
+  <Section title="가장 완강률이 높은 클래스" buttonTitle="클래스 전체보기" to="/">
     <GridList
       items={[
         {
@@ -57,14 +50,8 @@ titleStyle은 Typography, buttonStyle은 Button 컴포넌트의 속성을 참고
           to: '/',
         },
       ]}
-      smColumn={ 2 }
-      renderItem={(item => 
-        <Card 
-          title={item.title}
-          coverImage={ item.image }
-          to={ item.to }
-        />
-      )}
+      smColumn={2}
+      renderItem={item => <Card title={item.title} coverImage={item.image} to={item.to} />}
     />
   </Section>
 </Playground>
@@ -74,10 +61,7 @@ titleStyle은 Typography, buttonStyle은 Button 컴포넌트의 속성을 참고
 ButtonTitle이 없고, `to`, `href`, `onClick`을 지정할 경우 섹션 헤더는 액션이 가능한 요소가 됩니다.
 
 <Playground>
-  <Section
-    title="가장 완강률이 높은 클래스"
-    to="/"
-  >
+  <Section title="가장 완강률이 높은 클래스" to="/">
     <GridList
       items={[
         {
@@ -93,14 +77,8 @@ ButtonTitle이 없고, `to`, `href`, `onClick`을 지정할 경우 섹션 헤더
           to: '/',
         },
       ]}
-      smColumn={ 2 }
-      renderItem={(item => 
-        <Card 
-          title={item.title}
-          coverImage={ item.image }
-          to={ item.to }
-        />
-      )}
+      smColumn={2}
+      renderItem={item => <Card title={item.title} coverImage={item.image} to={item.to} />}
     />
   </Section>
 </Playground>
@@ -126,13 +104,8 @@ ButtonTitle이 없고, `to`, `href`, `onClick`을 지정할 경우 섹션 헤더
           image: imageSrc,
         },
       ]}
-      smColumn={ 2 }
-      renderItem={(item => 
-        <Card 
-          title={item.title}
-          coverImage={ item.image }
-        />
-      )}
+      smColumn={2}
+      renderItem={item => <Card title={item.title} coverImage={item.image} />}
     />
   </Section>
 </Playground>
@@ -145,14 +118,14 @@ ButtonTitle이 없고, `to`, `href`, `onClick`을 지정할 경우 섹션 헤더
   <Section
     title="가장 완강률이 높은 클래스"
     titleStyle={{
-      typography: "Body2",
-      color: "orange",
-      sm: "Caption1",
+      typography: 'Body2',
+      color: 'orange',
+      sm: 'Caption1',
     }}
     buttonTitle="클래스 전체보기"
     buttonStyle={{
-      color: "white",
-      backgroundColor: "black",
+      color: 'white',
+      backgroundColor: 'black',
     }}
   >
     <GridList
@@ -168,13 +141,8 @@ ButtonTitle이 없고, `to`, `href`, `onClick`을 지정할 경우 섹션 헤더
           image: imageSrc,
         },
       ]}
-      smColumn={ 2 }
-      renderItem={(item => 
-        <Card 
-          title={item.title}
-          coverImage={ item.image }
-        />
-      )}
+      smColumn={2}
+      renderItem={item => <Card title={item.title} coverImage={item.image} />}
     />
   </Section>
 </Playground>

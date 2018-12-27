@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Colors } from 'class101-ui';
 
-type Props = {
+interface Props {
   colorName: string,
   backgroundColor: string,
   color?: string,

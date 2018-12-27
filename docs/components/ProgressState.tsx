@@ -2,30 +2,30 @@
 import React from 'react';
 import { ProgressState, Colors } from 'class101-ui';
 
-type Props = {
+interface Props {
   /** 현재 값 */
-  value?: string,
+  value?: string;
 
   /** { label?: 보여줄 값, value: 내부 값 } */
   items: Array<{
-    label?: string,
-    value: string,
-  }>,
+    label?: string;
+    value: string;
+  }>;
 
   /** 기본 글의 색상 */
-  color?: string,
+  color?: string;
 
   /** 기본 배경 색상 */
-  backgroundColor?: string,
+  backgroundColor?: string;
 
   /** 활성된 글의 색상 */
-  activeColor?: string,
+  activeColor?: string;
 
   /** 활성된 배경 색상 */
-  activeBackgroundColor?: string,
-};
+  activeBackgroundColor?: string;
+}
 
-const Component = ({
+export const Component = ({
   value,
   items,
   color = Colors.gray500,
@@ -34,13 +34,11 @@ const Component = ({
   activeBackgroundColor = Colors.orange600,
 }: Props) => (
   <ProgressState
-    value={ value }
-    items={ items }
-    color={ color }
-    backgroundColor={ backgroundColor }
-    activeColor={ activeColor }
-    activeBackgroundColor={ activeBackgroundColor }
+    value={value}
+    items={items}
+    color={color}
+    backgroundColor={backgroundColor}
+    activeColor={activeColor}
+    activeBackgroundColor={activeBackgroundColor}
   />
 );
-
-export default Component;

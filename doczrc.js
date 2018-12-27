@@ -11,14 +11,15 @@ export default {
     },
   },
   wrapper: 'docs/Wrapper',
-  modifyBundlerConfig: (config) => ({
-      ...config,
-      resolve: {
-        ...config.resolve,
-        alias: {
-          ...config.resolve.alias,
-          'class101-ui': path.resolve('./src')
-        }
-      }
-    }),
+  typescript: true,
+  modifyBundlerConfig: config => ({
+    ...config,
+    resolve: {
+      ...config.resolve,
+      alias: {
+        ...config.resolve.alias,
+        'class101-ui': path.resolve('./src'),
+      },
+    },
+  }),
 };

@@ -2,28 +2,28 @@
 import React from 'react';
 import { BottomSheet } from 'class101-ui';
 
-type Props = {
+interface Props {
   /** 제목 */
-  title: string,
+  title: string;
 
   /** 알림 개수 */
-  badgeCount?: number,
+  badgeCount?: number;
 
   /**  안에 들어갈 내용  */
-  renderContent: () => HTMLElement,
+  renderContent: () => HTMLElement;
 
   /** 상단에 고정될 내용 */
-  renderFixedContent: () => HTMLElement,
+  renderFixedContent: () => HTMLElement;
 
   /** 창 전체에 Fixed 여부(Docs에선 사용 불가) */
-  fullScreen?: boolean,
+  fullScreen?: boolean;
 
   /** CSS z-index 속성의 값 */
-  zIndex?: number,
+  zIndex?: number;
 
   /** 열렸을 때 CSS z-index 속성의 값 */
-  openedZIndex?: number,
-};
+  openedZIndex?: number;
+}
 
 const style = {
   position: 'relative',
@@ -34,18 +34,8 @@ const style = {
   paddingRight: 2,
 };
 
-const Component = ({
-  fullScreen = true,
-  zIndex = 2001,
-  ...restProps
-}: Props) => (
-  <div style={ style }>
-    <BottomSheet
-      zIndex={ zIndex }
-      fullScreen={ (fullScreen && false) }
-      { ...restProps }
-    />
+export const Component = ({ fullScreen = true, zIndex = 2001, ...restProps }: Props) => (
+  <div style={style}>
+    <BottomSheet zIndex={zIndex} fullScreen={fullScreen && false} {...restProps} />
   </div>
 );
-
-export default Component;
