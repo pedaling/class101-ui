@@ -11,6 +11,7 @@
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
+  "types": "dist/index.d.ts",
   "sideEffects": false,
   "engines": {
     "node": ">=8",
@@ -79,6 +80,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-postcss": "^1.6.2",
     "rollup-plugin-typescript": "^1.0.0",
+    "rollup-plugin-typescript2": "^0.18.1",
     "rollup-plugin-url": "^1.4.0",
     "semantic-release": "^15.13.1",
     "styled-components": "^4.1.1",
