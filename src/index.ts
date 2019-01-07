@@ -1,5 +1,6 @@
 import * as BreakPoints from './BreakPoints';
 import * as Colors from './Colors';
+import * as Icon from './Icon';
 import * as TextStyles from './TextStyles';
 
 export { default as Grid } from './Grid';
@@ -28,5 +29,5 @@ export { default as Body2 } from './Typography/Body2';
 export { default as Caption1 } from './Typography/Caption1';
 export { default as Caption2 } from './Typography/Caption2';
 export { default as Tiny1 } from './Typography/Tiny1';
-export { Colors, BreakPoints, TextStyles };
+export { Colors, BreakPoints, TextStyles, Icon };
 export { default as GlobalStyle } from './GlobalStyle';
