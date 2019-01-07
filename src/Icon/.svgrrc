@@ -1,11 +1,13 @@
 {
   "expandProps": false,
-  "dimensions": false,
+  "prettier": false,
+  "dimensions": true,
   "replaceAttrValues": {
-    "#3E4042": "{this.props.tintColor}"
+    "#3E4042": "{this.props.fillColor}"
   },
   "svgProps": {
-    "width": "{this.props.iconSize}",
-    "height": "{this.props.iconSize}"
+    "width": "{this.props.size}",
+    "height": "{this.props.size}",
+    "viewBox": "0 0 24 24"
   }
 }
