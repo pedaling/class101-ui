@@ -24,7 +24,7 @@ interface Props {
   lg?: Typo;
   md: Typo;
   sm?: Typo;
-  children?: JSX.Element | string;
+  children?: React.ReactNode | string;
   display?: 1 | 2 | 3;
 }
 

@@ -8,7 +8,7 @@ interface Props {
   label: string;
   labelColor?: string;
   inline?: boolean;
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 const Label = styled.label<{ labelColor?: string }>`

@@ -5,15 +5,15 @@ import { body2Black } from '../TextStyles';
 
 interface Props {
   title: string;
-  coverImage: string | JSX.Element;
+  coverImage: string | React.ReactNode;
   coverImageSrcSet?: string;
   coverImageAlt?: string;
   coverImageRatio?: '1*1' | '4*3' | '16*9';
-  extraTop?: JSX.Element;
-  extraBottom?: JSX.Element;
+  extraTop?: React.ReactNode;
+  extraBottom?: React.ReactNode;
   to?: string;
   href?: string;
-  children?: JSX.Element;
+  children?: React.ReactNode;
   target?: string;
 }
 
