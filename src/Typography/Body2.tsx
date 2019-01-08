@@ -12,7 +12,7 @@ interface Props {
   marginBottom?: number;
   marginLeft?: number;
   marginRight?: number;
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 export default ({ paragraph, children, ...restProps }: Props) => (

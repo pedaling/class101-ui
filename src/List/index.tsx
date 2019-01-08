@@ -14,7 +14,7 @@ interface Props {
   href?: string;
   target?: string;
   onClick?: () => void;
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 const List = styled.div``;

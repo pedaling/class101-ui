@@ -9,7 +9,7 @@ import { tiny1BlackBold, tiny1Gray } from '../TextStyles';
 interface Props {
   state: 'preview' | 'funding' | 'sale';
   title: string;
-  coverImage: string | JSX.Element;
+  coverImage: string | React.ReactNode;
   creatorName?: string;
   openDate?: string;
   sale?: number;

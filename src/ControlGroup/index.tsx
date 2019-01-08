@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 interface Props {
   block?: boolean;
   vertical?: boolean;
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 const Container = styled.div<Props>`
