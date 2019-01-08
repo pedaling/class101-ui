@@ -48,7 +48,7 @@ export const media = {
     first: TemplateStringsArray | CSSObject | InterpolationFunction<ThemedStyledProps<T, {}>>,
     ...interpolations: Interpolation<ThemedStyledProps<T, {}>>[]
   ) {
-    const mediaQuery = buildMediaQuery(SIZES.sm);
+    const mediaQuery = buildMediaQuery(SIZES.md);
     return css<T>`
       @media ${mediaQuery} {
         ${css<T>(first, ...interpolations)};
@@ -59,7 +59,7 @@ export const media = {
     first: TemplateStringsArray | CSSObject | InterpolationFunction<ThemedStyledProps<T, {}>>,
     ...interpolations: Interpolation<ThemedStyledProps<T, {}>>[]
   ) {
-    const mediaQuery = buildMediaQuery(SIZES.sm);
+    const mediaQuery = buildMediaQuery(SIZES.lg);
     return css<T>`
       @media ${mediaQuery} {
         ${css<T>(first, ...interpolations)};
