@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Col 스냅샷과 일치한다.. 1`] = `
+exports[`Col 스냅샷과 일치한다. 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "attrs": Array [],
@@ -31,7 +31,7 @@ Object {
       [Function],
       "
   ",
-      "
+      ";
       }
     ",
       "
@@ -39,6 +39,7 @@ Object {
   ",
       "
       @media ",
+      "(max-width: 1023px)",
       " {
         ",
       "
@@ -49,7 +50,7 @@ Object {
       [Function],
       "
   ",
-      "
+      ";
       }
     ",
       "
@@ -57,7 +58,7 @@ Object {
   ",
       "
       @media ",
-      "(min-width: 1024px)",
+      "(max-width: 1023px)",
       " {
         ",
       "
@@ -68,7 +69,7 @@ Object {
       [Function],
       "
   ",
-      "
+      ";
       }
     ",
       ";

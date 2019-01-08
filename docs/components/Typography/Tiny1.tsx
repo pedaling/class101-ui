@@ -55,7 +55,7 @@ interface Typography {
   children: Node;
 }
 
-const Component = ({
+export const Component = ({
   color = Colors.gray800,
   marginTop = 0,
   marginBottom = 0,
