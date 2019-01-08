@@ -18,8 +18,8 @@
     "npm": ">=5"
   },
   "scripts": {
-    "test": "cross-env CI=1 react-scripts test --env=jsdom",
-    "test:watch": "react-scripts test --env=jsdom",
+    "test": "cross-env CI=1 react-scripts-ts test --env=jsdom",
+    "test:watch": "react-scripts-ts test --env=jsdom",
     "build": "tsc -p . && rollup -c",
     "start": "rollup -c -w",
     "prepare": "yarn run build",
@@ -59,6 +59,7 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@pedaling/tslint-config-class101": "^1.0.3",
+    "@types/jest": "^23.3.12",
     "@types/react": "^16.7.18",
     "@types/react-router-dom": "^4.3.1",
     "@types/styled-components": "^4.1.4",
@@ -72,7 +73,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^1.1.4",
+    "react-scripts-ts": "^3.1.0",
     "rollup": "^0.64.1",
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-commonjs": "^9.1.3",

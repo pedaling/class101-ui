@@ -1,11 +1,11 @@
-import Col from './';
+import Col from './index';
 
 describe('Col', () => {
   it('값이 존재한다.', () => {
     expect(Col).toBeTruthy();
   });
 
-  it('스냅샷과 일치한다..', () => {
+  it('스냅샷과 일치한다.', () => {
     expect(Col).toMatchSnapshot();
   });
 });
