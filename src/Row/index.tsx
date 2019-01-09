@@ -1,14 +1,15 @@
+import { HTMLDivProps } from 'interfaces/props';
 import React from 'react';
 import styled, { css } from 'styled-components';
+
 import { media } from '../BreakPoints';
 
-interface Props {
+interface Props extends HTMLDivProps {
   marginTop?: number | string;
   marginBottom?: number | string;
-  children?: React.ReactNode;
 }
 
-const Row = styled.div<Props>`
+const StyledDiv = styled.div<Props>`
   zoom: 1;
   ${props =>
     props.marginTop &&
@@ -38,4 +39,9 @@ const Row = styled.div<Props>`
   }
 `;
 
-export default ({ ...restProps }: Props) => <Row {...restProps} />;
+export default class Row extends React.PureComponent<Props> {
+  public render() {
+    const { children, ...restProps } = this.props;
+    return <StyledDiv {...restProps}>{children}</StyledDiv>;
+  }
+}

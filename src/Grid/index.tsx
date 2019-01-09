@@ -8,7 +8,7 @@ interface Props {
   maxWidthNone?: boolean;
 }
 
-const Grid = styled.div<Props>`
+const StyledDiv = styled.div<Props>`
   position: relative;
   ${props =>
     props.marginTop &&
@@ -31,4 +31,10 @@ const Grid = styled.div<Props>`
   `};
 `;
 
-export default ({ ...restProps }: Props) => <Grid {...restProps} />;
+export default class Grid extends React.PureComponent<Props> {
+  public render() {
+    const { children, ...restProps } = this.props;
+
+    return <StyledDiv {...restProps}>{children}</StyledDiv>;
+  }
+}
