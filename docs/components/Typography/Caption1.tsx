@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Caption1, Colors } from 'class101-ui';
+import { Caption1, Colors } from '@class101/ui';
 
 interface Typography {
   /** PC에서 해당 태그와 스타일로 변합니다. */

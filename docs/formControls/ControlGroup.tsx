@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { ControlGroup } from 'class101-ui';
+import { ControlGroup } from '@class101/ui';
 
 interface Props {
   /** 가로를 모두 채울지 여부 */

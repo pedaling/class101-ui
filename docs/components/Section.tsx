@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Section } from 'class101-ui';
+import { Section } from '@class101/ui';
 
 interface Props {
   title?: string;

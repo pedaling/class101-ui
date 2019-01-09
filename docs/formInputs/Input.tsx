@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Input } from 'class101-ui';
+import { Input } from '@class101/ui';
 
 interface Props {
   /** input의 type */

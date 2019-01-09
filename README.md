@@ -38,7 +38,7 @@ npm install --save class101-ui
 ```jsx
 import React, { Component } from 'react'
 
-import { Button } from 'class101-ui'
+import { Button } from '@class101/ui'
 
 class Example extends Component {
   render () {

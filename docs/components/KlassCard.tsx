@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { KlassCard } from 'class101-ui';
+import { KlassCard } from '@class101/ui';
 
 interface Props {
   /** 클래스 상태 */

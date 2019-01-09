@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { BottomSheet } from 'class101-ui';
+import { BottomSheet } from '@class101/ui';
 
 interface Props {
   /** 제목 */

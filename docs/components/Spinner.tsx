@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Spinner, Colors } from 'class101-ui';
+import { Spinner, Colors } from '@class101/ui';
 
 interface Props {
   /** 크기 */

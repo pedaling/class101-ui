@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { ProgressBar, Colors } from 'class101-ui';
+import { ProgressBar, Colors } from '@class101/ui';
 
 interface Props {
   /** 바의 길이 */

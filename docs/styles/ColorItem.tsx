@@ -1,7 +1,7 @@
 // @flow
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import { Colors } from 'class101-ui';
+import { Colors } from '@class101/ui';
 
 interface Props {
   colorName: string,

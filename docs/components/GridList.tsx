@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { GridList } from 'class101-ui';
+import { GridList } from '@class101/ui';
 
 interface Props {
   /** 기본 단위 - px */

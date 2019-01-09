@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Col, Colors } from 'class101-ui';
+import { Col, Colors } from '@class101/ui';
 
 interface Props {
   /** 모바일(sm)에서 차지할 열 */

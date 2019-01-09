@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Card } from 'class101-ui';
+import { Card } from '@class101/ui';
 
 interface Props {
   /** 카드 타이틀 */

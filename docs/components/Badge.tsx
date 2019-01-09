@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Badge, Colors } from 'class101-ui';
+import { Badge, Colors } from '@class101/ui';
 
 export interface Props {
   color?: string;

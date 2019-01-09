@@ -5,6 +5,7 @@ import { media } from '../BreakPoints';
 interface Props {
   marginTop?: number | string;
   marginBottom?: number | string;
+  children?: React.ReactNode;
 }
 
 const Row = styled.div<Props>`

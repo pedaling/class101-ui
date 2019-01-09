@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormGroup, Colors } from 'class101-ui';
+import { FormGroup, Colors } from '@class101/ui';
 
 interface Props {
   /** 그룹명 */

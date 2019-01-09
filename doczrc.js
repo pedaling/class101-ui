@@ -18,7 +18,7 @@ export default {
       ...config.resolve,
       alias: {
         ...config.resolve.alias,
-        'class101-ui': path.resolve('./src'),
+        '@class101/ui': path.resolve('./src'),
       },
     },
   }),
