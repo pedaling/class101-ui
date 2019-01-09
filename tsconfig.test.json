@@ -14,7 +14,10 @@
     "noEmit": true,
     "jsx": "react",
     "baseUrl": "src",
-    "outDir": "dist"
+    "outDir": "dist",
+    "paths": {
+      "interface/*": ["src/interface/*"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["docz", "example"]

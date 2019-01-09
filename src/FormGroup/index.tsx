@@ -1,14 +1,14 @@
+import { BaseProps } from '../interfaces/props';
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 
 import { gray800 } from '../Colors';
 import { body2Black } from '../TextStyles';
 
-interface Props {
+interface Props extends BaseProps {
   label: string;
   labelColor?: string;
   inline?: boolean;
-  children: React.ReactNode;
 }
 
 const Label = styled.label<{ labelColor?: string }>`

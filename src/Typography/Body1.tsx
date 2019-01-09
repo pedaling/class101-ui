@@ -1,7 +1,9 @@
+import { BaseProps } from '../interfaces/props';
 import React from 'react';
+
 import Typography, { Typo } from '.';
 
-interface Props {
+interface Props extends BaseProps {
   lg?: Typo;
   sm?: Typo;
   paragraph?: boolean;

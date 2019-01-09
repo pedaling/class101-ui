@@ -1,4 +1,4 @@
-import { HTMLDivProps } from 'interfaces/props';
+import { HTMLDivProps } from '../interfaces/props';
 import React from 'react';
 import styled, { css } from 'styled-components';
 

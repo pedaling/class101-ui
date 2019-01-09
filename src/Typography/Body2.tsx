@@ -1,7 +1,9 @@
+import { BaseProps } from '../interfaces/props';
 import React from 'react';
+
 import Typography, { Typo } from '.';
 
-interface Props {
+interface Props extends BaseProps {
   lg?: Typo;
   sm?: Typo;
   paragraph?: boolean;
@@ -12,7 +14,6 @@ interface Props {
   marginBottom?: number;
   marginLeft?: number;
   marginRight?: number;
-  children: React.ReactNode;
 }
 
 export default ({ paragraph, children, ...restProps }: Props) => (

@@ -7,4 +7,4 @@ export interface BaseProps {
 }
 
 // alias
-export type HTMLDivProps = React.HTMLAttributes<HTMLDivElement>;
+export interface HTMLDivProps extends React.HTMLAttributes<HTMLDivElement> {}
