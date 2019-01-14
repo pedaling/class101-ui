@@ -31,3 +31,4 @@ export { default as Caption2 } from './Typography/Caption2';
 export { default as Tiny1 } from './Typography/Tiny1';
 export { Colors, BreakPoints, TextStyles, Icon };
 export { default as GlobalStyle } from './GlobalStyle';
+export { default as Checkbox } from './Checkbox';
