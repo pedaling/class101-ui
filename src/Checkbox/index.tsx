@@ -1,17 +1,18 @@
-// @flow
 import React, { Children } from 'react';
 import styled, { css } from 'styled-components';
 import { CheckboxOn, CheckboxOff} from '../Icon';
-import { orange500, redError, gray600 } from '../Colors';
+import { orange400, orange500, redError, gray600, red000 } from '../Colors';
 import { HTMLInputProps } from 'interfaces/props';
+import { Icon } from 'index';
+import { Alert } from '@class101/ui/Icon';
 
-interface Props extends HTMLInputProps {
+export interface Props extends HTMLInputProps {
   className?: string;
   style?: React.CSSProperties;
   inputStyle?: React.CSSProperties;
   inline?: boolean;
-  allowMessage?: string;
-  warnMessage?: string;
+  allowingMessage?: string;
+  warnningMessage?: string;
   errorMessage?: string;
 }
 
@@ -34,20 +35,14 @@ const DescriptionStyle = css`
   }
 `;
 
-const ErrorText = styled.h6`
-  ${DescriptionStyle};
-  color: ${redError};
-`;
+interface TextProps {
+  readonly color: string;
+}
 
-const WarnText = styled.h6`
+const MessageText = styled.h6<TextProps>`
   ${DescriptionStyle};
-  color: ${orange500};
-`;
-
-const AllowText = styled.h6`
-  ${DescriptionStyle};
-  color: ${gray600};
-`;
+  color: ${props => props.color};
+`
 
 const ChildText = styled.span`
   font-size: 16px;
@@ -59,14 +54,14 @@ const Container = styled.label<Props>`
   align-items: center;
 `;
 
-const DescriptionIcon = styled.img.attrs({ alt: '!' })`
+const DescriptionIcon = styled(Alert)`
   width: 16px;
   height: 16px;
   margin-right: 2px;
 `;
 
 export default class Checkbox extends React.PureComponent<Props, State> {
-  public readonly state: State = {
+  public readonly state = {
     checked: false,
   }
 
@@ -80,7 +75,7 @@ export default class Checkbox extends React.PureComponent<Props, State> {
   }
 
   public render() {
-    const { className, style, inputStyle, inline, allowMessage, warnMessage, errorMessage, checked, type, children, ...restProps } = this.props;
+    const { style, inputStyle, inline, allowingMessage, warnningMessage, errorMessage, type, children, ...restProps } = this.props;
     return (
       <div style={style}>
         <Container inline={inline}>
@@ -93,18 +88,19 @@ export default class Checkbox extends React.PureComponent<Props, State> {
           />
           <ChildText>{children}</ChildText>
         </Container>
-        {allowMessage && !errorMessage && <AllowText>{allowMessage}</AllowText>}
+
+        {allowingMessage && !errorMessage && <MessageText color={gray600}>{allowingMessage}</MessageText>}
         {errorMessage && (
-          <ErrorText>
-            <DescriptionIcon src="https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/ic-danger-red.png" />
+          <MessageText color={redError}>
+            <DescriptionIcon fillColor={redError} />
             <span>{errorMessage}</span>
-          </ErrorText>
+          </MessageText>
         )}
-        {warnMessage && (
-          <WarnText>
-            <DescriptionIcon src="https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/ic-danger-yellow.png" />
-            <span>{warnMessage}</span>
-          </WarnText>
+        {warnningMessage && (
+          <MessageText color={orange500}>
+            <DescriptionIcon fillColor={orange500} />
+            <span>{warnningMessage}</span>
+          </MessageText>
         )}
       </div>
     );

@@ -1,6 +1,5 @@
-// @flow
 import React from 'react';
-import { Checkbox, Colors } from '@class101/ui';
+import { Checkbox } from '@class101/ui';
 
 export interface Props {
   className?: string;
