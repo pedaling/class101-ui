@@ -1,7 +1,8 @@
 import React from 'react';
+import { HTMLInputProps } from '../../src/interfaces/props';
 import { Checkbox } from '@class101/ui';
 
-export interface Props {
+export interface Props extends HTMLInputProps {
   className?: string;
   style?: React.CSSProperties;
   inputStyle?: React.CSSProperties;
@@ -10,7 +11,7 @@ export interface Props {
   warnMessage?: string;
   errorMessage?: string;
   checked?: boolean;
-  onChange?: React.ChangeEvent<HTMLInputElement>;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Component = ({

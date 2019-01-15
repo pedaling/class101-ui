@@ -1,9 +1,8 @@
 import React, { Children } from 'react';
 import styled, { css } from 'styled-components';
 import { CheckboxOn, CheckboxOff} from '../Icon';
-import { orange400, orange500, redError, gray600, red000 } from '../Colors';
+import { orange500, redError, gray600 } from '../Colors';
 import { HTMLInputProps } from 'interfaces/props';
-import { Icon } from 'index';
 import { Alert } from '@class101/ui/Icon';
 
 export interface Props extends HTMLInputProps {
