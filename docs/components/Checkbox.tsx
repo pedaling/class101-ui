@@ -14,8 +14,16 @@ export interface Props extends HTMLInputProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const Component = ({
-  ...restProps
-}: Props): React.ReactNode => (
-  <Checkbox {...restProps} />
-);
+export class MyCheckbox extends React.Component {
+  public readonly state = {
+    checked: false,
+  }
+
+  private handleChange = (event) => {
+    this.setState({checked: event.target.checked});
+  }
+
+  render() {
+    return <Checkbox checked={this.state.checked} onChange={this.handleChange} children={this.props.children} />;
+  }
+}

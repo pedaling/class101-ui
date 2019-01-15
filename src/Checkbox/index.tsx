@@ -15,10 +15,6 @@ export interface Props extends HTMLInputProps {
   errorMessage?: string;
 }
 
-interface State {
-  readonly checked: boolean
-}
-
 const StyledCheckbox = styled.input.attrs({ type: 'checkbox' })`
   display: none;
 `;
@@ -59,29 +55,16 @@ const DescriptionIcon = styled(Alert)`
   margin-right: 2px;
 `;
 
-export default class Checkbox extends React.PureComponent<Props, State> {
-  public readonly state = {
-    checked: false,
-  }
-
-  public static getDerivedStateFromProps(props: Props, state: State) {
-    if (props.onChange !== undefined && state.checked !== props.checked) {
-      return {
-        checked: props.checked,
-      }
-    }
-    return state;
-  }
-
+export default class Checkbox extends React.PureComponent<Props> {
   public render() {
-    const { style, inputStyle, inline, allowingMessage, warnningMessage, errorMessage, type, children, ...restProps } = this.props;
+    const { style, inputStyle, inline, allowingMessage, warnningMessage, errorMessage, type, children, checked, ...restProps } = this.props;
     return (
       <div style={style}>
         <Container inline={inline}>
-          {this.state.checked ? <CheckboxOn size={18}/> : <CheckboxOff size={18} />}
+          {checked ? <CheckboxOn size={18}/> : <CheckboxOff size={18} />}
           <StyledCheckbox
             onChange={this.handleChange}
-            checked={this.state.checked}
+            checked={checked}
             style={inputStyle}
             {...restProps}
           />
@@ -106,7 +89,6 @@ export default class Checkbox extends React.PureComponent<Props, State> {
   }
 
   private handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({checked: e.target.checked});
     if (this.props.onChange !== undefined) {
       this.props.onChange(e);
     }
