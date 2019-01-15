@@ -10,8 +10,8 @@ export interface Props extends HTMLInputProps {
   style?: React.CSSProperties;
   inputStyle?: React.CSSProperties;
   inline?: boolean;
-  allowingMessage?: string;
-  warnningMessage?: string;
+  allowMessage?: string;
+  warnMessage?: string;
   errorMessage?: string;
 }
 
@@ -57,7 +57,8 @@ const DescriptionIcon = styled(Alert)`
 
 export default class Checkbox extends React.PureComponent<Props> {
   public render() {
-    const { style, inputStyle, inline, allowingMessage, warnningMessage, errorMessage, type, children, checked, ...restProps } = this.props;
+    const { style, inputStyle, inline, allowMessage, warnMessage, errorMessage, type, children, checked, ...restProps } = this.props;
+    console.log(this.props);
     return (
       <div style={style}>
         <Container inline={inline}>
@@ -71,17 +72,17 @@ export default class Checkbox extends React.PureComponent<Props> {
           <ChildText>{children}</ChildText>
         </Container>
 
-        {allowingMessage && !errorMessage && <MessageText color={gray600}>{allowingMessage}</MessageText>}
+        {allowMessage && !errorMessage && <MessageText color={gray600}>{allowMessage}</MessageText>}
         {errorMessage && (
           <MessageText color={redError}>
             <DescriptionIcon fillColor={redError} />
             <span>{errorMessage}</span>
           </MessageText>
         )}
-        {warnningMessage && (
+        {warnMessage && (
           <MessageText color={orange500}>
             <DescriptionIcon fillColor={orange500} />
-            <span>{warnningMessage}</span>
+            <span>{warnMessage}</span>
           </MessageText>
         )}
       </div>

@@ -14,7 +14,7 @@ export interface Props extends HTMLInputProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export class MyCheckbox extends React.Component {
+export class MyCheckbox extends React.Component<Props> {
   public readonly state = {
     checked: false,
   }
@@ -23,7 +23,8 @@ export class MyCheckbox extends React.Component {
     this.setState({checked: event.target.checked});
   }
 
-  render() {
-    return <Checkbox checked={this.state.checked} onChange={this.handleChange} children={this.props.children} />;
+  public render() {
+    const { ...restProps } = this.props;
+    return <Checkbox checked={this.state.checked} onChange={this.handleChange} {...restProps} />;
   }
 }
