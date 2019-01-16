@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Alert } from '@class101/ui/Icon';
+import { Icon } from '@class101/ui';
 
 interface TextProps {
   color: string;
@@ -22,7 +22,7 @@ interface DescProps {
   isDisplayed: boolean;
 }
 
-const DescriptionIcon = styled(Alert)<DescProps>`
+const DescriptionIcon = styled(Icon.Alert)<DescProps>`
   display: ${props => props.isDisplayed ? `block` : `none`};
   width: 16px;
   height: 16px;
