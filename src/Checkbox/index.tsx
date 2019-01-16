@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { CheckboxOn, CheckboxOff} from '../Icon';
 import { orange500, redError, gray600 } from '../Colors';
 import { HTMLInputProps } from 'interfaces/props';

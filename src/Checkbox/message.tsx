@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Icon } from '@class101/ui';
+import { Alert } from '../Icon';
 
 interface TextProps {
   color: string;
@@ -18,12 +18,7 @@ const MessageText = styled.h6<TextProps>`
   color: ${props => props.color};
 `
 
-interface DescProps {
-  isDisplayed: boolean;
-}
-
-const DescriptionIcon = styled(Icon.Alert)<DescProps>`
-  display: ${props => props.isDisplayed ? `block` : `none`};
+const DescriptionIcon = styled(Alert)`
   width: 16px;
   height: 16px;
   margin-right: 2px;
