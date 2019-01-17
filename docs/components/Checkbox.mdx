@@ -1,0 +1,30 @@
+---
+menu: Components
+name: Checkbox
+route: /components/checkbox
+---
+
+import { Playground, PropsTable } from 'docz';
+import { MyCheckbox as Checkbox } from './Checkbox';
+
+# Checkbox
+
+This is Checkbox component.
+
+## Props
+
+<PropsTable of={Checkbox} />
+
+## Basic usage
+
+<Playground>
+  <Checkbox>Check1</Checkbox>
+  <Checkbox>Check2</Checkbox>
+  <Checkbox>Check3</Checkbox>
+</Playground>
+
+## With allow message
+
+<Playground>
+  <Checkbox allowMessage={'Hello'}>Check1</Checkbox>
+</Playground>
