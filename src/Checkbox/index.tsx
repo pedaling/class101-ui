@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react'
 import styled from 'styled-components';
 import { CheckboxOn, CheckboxOff} from '../Icon';
 import { orange500, redError, gray600 } from '../Colors';
