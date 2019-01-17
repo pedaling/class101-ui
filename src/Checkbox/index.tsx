@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components';
 import { CheckboxOn, CheckboxOff} from '../Icon';
 import { orange500, redError, gray600 } from '../Colors';
-import { HTMLInputProps } from 'interfaces/props';
+import { HTMLInputProps } from '../interfaces/props';
 import Message from './message'
 
 export interface Props extends HTMLInputProps {
