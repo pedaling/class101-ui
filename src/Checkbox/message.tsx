@@ -18,24 +18,22 @@ const MessageText = styled.h6<TextProps>`
   color: ${props => props.color};
 `
 
-const DescriptionIcon = styled(Alert)`
-  width: 16px;
-  height: 16px;
-  margin-right: 2px;
-`;
-
 interface Props {
   color: string;
   descriptionIconFillColor?: string;
   message: string;
 }
 
+const alertStyle = { marginLeft: `2px` };
+
+
 export default class Message extends React.PureComponent<Props> {
   public render() {
     const { color, message, descriptionIconFillColor } = this.props
     return (
       <MessageText color={color}>
-        {descriptionIconFillColor !== undefined ? <DescriptionIcon size={16} fillColor={descriptionIconFillColor} /> : null}
+        {descriptionIconFillColor !== undefined ? 
+        <span style={alertStyle}><Alert size={16} fillColor={descriptionIconFillColor} /></span> : null}
         <span>{message}</span>
       </MessageText>
     )
