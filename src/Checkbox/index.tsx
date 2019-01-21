@@ -33,7 +33,6 @@ const Container = styled.label<Props>`
 export default class Checkbox extends React.PureComponent<Props> {
   public render() {
     const { className, style, inputStyle, inline, allowMessage, warnMessage, errorMessage, type, children, checked, ...restProps } = this.props;
-
     return (
       <div style={style}>
         <Container inline={inline}>

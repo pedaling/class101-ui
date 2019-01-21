@@ -35,7 +35,7 @@ export default class Message extends React.PureComponent<Props> {
     const { color, message, descriptionIconFillColor } = this.props
     return (
       <MessageText color={color}>
-        {descriptionIconFillColor !== undefined ? <DescriptionIcon fillColor={descriptionIconFillColor} /> : null}
+        {descriptionIconFillColor !== undefined ? <DescriptionIcon size={16} fillColor={descriptionIconFillColor} /> : null}
         <span>{message}</span>
       </MessageText>
     )
