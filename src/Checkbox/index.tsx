@@ -13,7 +13,6 @@ export interface Props extends HTMLInputProps {
   allowMessage?: string;
   warnMessage?: string;
   errorMessage?: string;
-  touched?: boolean;
 }
 
 const HiddenCheckboxInput = styled.input.attrs({ type: 'checkbox' })`
@@ -33,7 +32,7 @@ const Container = styled.label<Props>`
 
 export default class Checkbox extends React.PureComponent<Props> {
   public render() {
-    const { className, style, inputStyle, inline, allowMessage, warnMessage, errorMessage, type, children, checked, touched, ...restProps } = this.props;
+    const { className, style, inputStyle, inline, allowMessage, warnMessage, errorMessage, type, children, checked, ...restProps } = this.props;
     return (
       <div style={style}>
         <Container inline={inline}>
@@ -48,9 +47,9 @@ export default class Checkbox extends React.PureComponent<Props> {
           <ChildText>{children}</ChildText>
         </Container>
 
-        {touched && allowMessage && !errorMessage && <Message color={gray600} message={allowMessage}/>}
-        {touched && errorMessage && <Message color={redError} descriptionIconFillColor={redError} message={errorMessage} />}
-        {touched && warnMessage && <Message color={orange500} descriptionIconFillColor={orange500} message={warnMessage} />}
+        {allowMessage && !errorMessage && <Message color={gray600} message={allowMessage}/>}
+        {errorMessage && <Message color={redError} descriptionIconFillColor={redError} message={errorMessage} />}
+        {warnMessage && <Message color={orange500} descriptionIconFillColor={orange500} message={warnMessage} />}
       </div>
     );
   }

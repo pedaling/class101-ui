@@ -12,7 +12,6 @@ export interface Props extends HTMLInputProps {
   errorMessage?: string;
   checked: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  touched: boolean;
 }
 
 export class MyCheckbox extends React.Component<Props> {
