@@ -24,7 +24,7 @@ interface Props {
   message: string;
 }
 
-const alertStyle = { marginLeft: `2px` };
+const alertStyle = { marginRight: `2px` };
 
 
 export default class Message extends React.PureComponent<Props> {
