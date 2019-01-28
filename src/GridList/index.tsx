@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
+
 import { media } from '../BreakPoints';
 
 const sizeToPercent = (column?: number) => 100 / (column || 1);
@@ -11,7 +12,7 @@ interface Props {
   lgColumn?: Column;
 }
 
-const GridList = styled.div``;
+const List = styled.div``;
 
 const GridListUl = styled.ul<{ smColumn?: Column }>`
   overflow: hidden;
@@ -98,14 +99,20 @@ const GridListItem = styled.li<{ lgColumn?: Column; smColumn?: Column }>`
   `}
 `;
 
-export default ({ items, renderItem, smColumn, lgColumn, ...restProps }: Props) => (
-  <GridList {...restProps}>
-    <GridListUl smColumn={smColumn}>
-      {items.map(item => (
-        <GridListItem key={item.id} smColumn={smColumn} lgColumn={lgColumn}>
-          {renderItem(item)}
-        </GridListItem>
-      ))}
-    </GridListUl>
-  </GridList>
-);
+export default class GridList extends React.PureComponent<Props & HTMLAttributes<HTMLDivElement>> {
+  public render() {
+    const { items, renderItem, smColumn, lgColumn, ...restProps } = this.props;
+
+    return (
+      <List {...restProps}>
+        <GridListUl smColumn={smColumn}>
+          {items.map((item, index, arr) => (
+            <GridListItem key={item.id} smColumn={smColumn} lgColumn={lgColumn}>
+              {renderItem(item, index, arr)}
+            </GridListItem>
+          ))}
+        </GridListUl>
+    </List>
+    );
+  }
+}
