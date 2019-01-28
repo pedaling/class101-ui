@@ -38,6 +38,7 @@ export default createGlobalStyle`
     color: inherit;
   }
   p, ul {
-    padding: 0, margin: 0
+    padding: 0;
+    margin: 0
   }
 `;
