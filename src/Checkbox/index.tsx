@@ -20,8 +20,10 @@ const HiddenCheckboxInput = styled.input.attrs({ type: 'checkbox' })`
 `;
 
 const ChildText = styled.span`
-  font-size: 16px;
-  margin-left: 4px;
+  font-size: 14px;
+  margin-left: 8px;
+  line-height: 20px;
+  letter-spacing: -0.2px;
 `
 
 const Container = styled.label<Props>`
