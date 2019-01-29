@@ -1,4 +1,5 @@
-import React, { HTMLAttributes } from 'react';
+import { HTMLDivProps } from 'interfaces/props';
+import React from 'react';
 import styled, { css } from 'styled-components';
 
 import { media } from '../BreakPoints';
@@ -99,7 +100,7 @@ const GridListItem = styled.li<{ lgColumn?: Column; smColumn?: Column }>`
   `}
 `;
 
-export default class GridList extends React.PureComponent<Props & HTMLAttributes<HTMLDivElement>> {
+export default class GridList extends React.PureComponent<Props & HTMLDivProps> {
   public render() {
     const { items, renderItem, smColumn, lgColumn, ...restProps } = this.props;
 
@@ -112,7 +113,7 @@ export default class GridList extends React.PureComponent<Props & HTMLAttributes
             </GridListItem>
           ))}
         </GridListUl>
-    </List>
+      </List>
     );
   }
 }

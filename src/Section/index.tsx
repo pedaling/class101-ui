@@ -1,11 +1,19 @@
-import React from 'react';
+import { HTMLDivProps } from 'interfaces/props';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 
 import Footer from './Footer';
 import Header from './Header';
 
-interface Props {
-  title?: string;
+interface SectionProps {
+  marginTop?: number | string;
+  marginBottom?: number | string;
+  marginLeft?: number | string;
+  marginRight?: number | string;
+}
+
+interface OwnProps {
+  title: string | ReactNode;
   titleStyle?: any;
   subTitle?: string;
   buttonTitle?: string;
@@ -17,7 +25,12 @@ interface Props {
   children?: React.ReactNode;
 }
 
-const Section = styled.section``;
+type Props = OwnProps & SectionProps & HTMLDivProps;
+
+const Section = styled.section<SectionProps>`
+  margin: ${props =>
+    `${props.marginTop || 0}px ${props.marginRight || 0}px ${props.marginBottom || 0}px ${props.marginLeft || 0}`}px;
+`;
 
 export default ({
   title,
@@ -33,7 +46,7 @@ export default ({
   ...restProps
 }: Props) => (
   <Section {...restProps}>
-    {title && !buttonTitle ? (
+    {!buttonTitle ? (
       <Header title={title} to={to} href={href} target={target} onClick={onClick} subTitle={subTitle} {...titleStyle} />
     ) : (
       <Header title={title} subTitle={subTitle} {...titleStyle} />

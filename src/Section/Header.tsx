@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { gray300 } from '../Colors';
+import { Chevron } from '../Icon';
 import { body2Paragraph } from '../TextStyles';
 import Typography, { Typo } from '../Typography';
 
@@ -24,8 +25,9 @@ const Header = styled.div`
   }
 `;
 
-const HeaderTitle = styled(Typography)`
-  display: inline-block;
+const HeaderTop = styled(Typography)`
+  display: flex;
+  align-items: center;
 `;
 
 const SubTitle = styled.p`
@@ -33,13 +35,8 @@ const SubTitle = styled.p`
   margin-top: 4px;
 `;
 
-const HeaderIcon = styled.span`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  svg {
-    display: block;
-  }
+const Title = styled.div`
+  margin-right: 4px;
 `;
 
 export default ({ title, subTitle, typography, to, href, target, ...restProps }: Props) => {
@@ -49,26 +46,14 @@ export default ({ title, subTitle, typography, to, href, target, ...restProps }:
     options.rel = 'noopener noreferrer';
   }
 
-  const sectionHeaderTitle = (
-    <HeaderTitle md={typography || ('Subtitle1' as Typo)} {...restProps}>
-      {title}
-    </HeaderTitle>
-  );
-
-  const sectionHeaderIcon = (
-    <HeaderIcon>
-      <svg width={24} height={24} viewBox="0 0 24px 24px">
-        <path fill={gray300} fillRule="evenodd" d="M8.5 18.5l6-6.5-6-6.5L10 4l7.5 8-7.5 8z" />
-      </svg>
-    </HeaderIcon>
-  );
-
   if (to) {
     return (
       <Header>
         <Link to={to} target={target} {...options}>
-          {sectionHeaderTitle}
-          {sectionHeaderIcon}
+          <HeaderTop md={typography || ('Subtitle1' as Typo)} {...restProps}>
+            <Title>{title}</Title>
+            <Chevron fillColor={gray300} />
+          </HeaderTop>
         </Link>
         {subTitle && <SubTitle>{subTitle}</SubTitle>}
       </Header>
@@ -78,8 +63,10 @@ export default ({ title, subTitle, typography, to, href, target, ...restProps }:
     return (
       <Header>
         <a href={href} target={target} {...options}>
-          {sectionHeaderTitle}
-          {sectionHeaderIcon}
+          <HeaderTop md={typography || ('Subtitle1' as Typo)} {...restProps}>
+            <Title>{title}</Title>
+            <Chevron fillColor={gray300} />
+          </HeaderTop>
         </a>
         {subTitle && <SubTitle>{subTitle}</SubTitle>}
       </Header>
@@ -87,7 +74,9 @@ export default ({ title, subTitle, typography, to, href, target, ...restProps }:
   }
   return (
     <Header>
-      {sectionHeaderTitle}
+      <HeaderTop md={typography || ('Subtitle1' as Typo)} {...restProps}>
+        {title}
+      </HeaderTop>
       {subTitle && <SubTitle>{subTitle}</SubTitle>}
     </Header>
   );
