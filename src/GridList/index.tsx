@@ -1,8 +1,8 @@
-import { HTMLDivProps } from 'interfaces/props';
 import React from 'react';
 import styled, { css } from 'styled-components';
 
 import { media } from '../BreakPoints';
+import { HTMLDivProps } from '../interfaces/props';
 
 const sizeToPercent = (column?: number) => 100 / (column || 1);
 type Column = 1 | 2 | 3 | 4 | 6 | 12;

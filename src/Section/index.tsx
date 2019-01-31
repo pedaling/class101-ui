@@ -1,7 +1,7 @@
-import { HTMLDivProps } from 'interfaces/props';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 
+import { HTMLDivProps } from '../interfaces/props';
 import Footer from './Footer';
 import Header from './Header';
 
