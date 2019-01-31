@@ -13,7 +13,7 @@ interface SectionProps {
 }
 
 interface OwnProps {
-  title: string | ReactNode;
+  title: ReactNode;
   titleStyle?: any;
   subTitle?: string;
   buttonTitle?: string;
@@ -22,7 +22,7 @@ interface OwnProps {
   href?: string;
   target?: string;
   onClick?: () => void;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 type Props = OwnProps & SectionProps & HTMLDivProps;
