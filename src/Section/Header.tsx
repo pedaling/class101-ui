@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -8,7 +8,7 @@ import { body2Paragraph } from '../TextStyles';
 import Typography, { Typo } from '../Typography';
 
 interface Props {
-  title?: string;
+  title?: ReactNode;
   subTitle?: string;
   typography?: Typo;
   to?: string;
