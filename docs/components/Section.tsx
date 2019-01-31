@@ -3,7 +3,7 @@ import { Section } from '@class101/ui';
 import React, { ReactNode } from 'react';
 
 interface Props {
-  title?: string;
+  title?: string | ReactNode;
   titleStyle?: any;
   subTitle?: string;
   buttonTitle?: string;
