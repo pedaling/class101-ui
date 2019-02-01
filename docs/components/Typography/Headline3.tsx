@@ -1,33 +1,12 @@
-// @flow
 import { Headline3 } from '@class101/ui';
 import React from 'react';
 
 interface Typography {
   /** PC에서 해당 태그와 스타일로 변합니다. */
-  lg?:
-    | 'Headline1'
-    | 'Headline2'
-    | 'Headline1'
-    | 'Subtitle1'
-    | 'Body1'
-    | 'Body1Paragraph'
-    | 'Body2'
-    | 'Body2Paragraph'
-    | 'Caption1'
-    | 'Caption2';
+  lg?: 'Headline1' | 'Headline2' | 'Headline1' | 'Subtitle1' | 'Body1' | 'Body2' | 'Caption1' | 'Caption2';
 
   /** Mobile에서 해당 태그와 스타일로 변합니다. */
-  sm?:
-    | 'Headline1'
-    | 'Headline2'
-    | 'Headline1'
-    | 'Subtitle1'
-    | 'Body1'
-    | 'Body1Paragraph'
-    | 'Body2'
-    | 'Body2Paragraph'
-    | 'Caption1'
-    | 'Caption2';
+  sm?: 'Headline1' | 'Headline2' | 'Headline1' | 'Subtitle1' | 'Body1' | 'Body2' | 'Caption1' | 'Caption2';
 
   /** 글자의 색상 */
   color?: string;
