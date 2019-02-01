@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
 import { Card } from '@class101/ui';
+import React, { ReactNode } from 'react';
 
 interface Props {
   /** 카드 타이틀 */
@@ -29,35 +29,8 @@ interface Props {
 
   /**	Native Anchor에 쓸 URL */
   href?: string;
+
+  children: ReactNode;
 }
 
-export const Component = ({
-  title,
-  coverImage,
-  coverImageSrcSet,
-  coverImageAlt,
-  coverImageRatio = '16*9',
-  extraTop,
-  extraBottom,
-  children,
-  to,
-  href,
-  target,
-  ...restProps
-}: Props) => (
-  <Card
-    title={title}
-    coverImage={coverImage}
-    coverImageSrcSet={coverImageSrcSet}
-    coverImageAlt={coverImageAlt}
-    coverImageRatio={coverImageRatio}
-    extraTop={extraTop}
-    extraBottom={extraBottom}
-    to={to}
-    href={href}
-    target
-    {...restProps}
-  >
-    {children}
-  </Card>
-);
+export const Component = ({ children, ...restProps }: Props) => <Card {...restProps}>{children}</Card>;

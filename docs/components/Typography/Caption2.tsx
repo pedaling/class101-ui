@@ -1,6 +1,6 @@
 // @flow
+import { Caption2 } from '@class101/ui';
 import React from 'react';
-import { Caption2, Colors } from '@class101/ui';
 
 interface Typography {
   /** PC에서 해당 태그와 스타일로 변합니다. */
@@ -14,8 +14,7 @@ interface Typography {
     | 'Body2'
     | 'Body2Paragraph'
     | 'Caption1'
-    | 'Caption2'
-    | 'Tiny1';
+    | 'Caption2';
 
   /** Mobile에서 해당 태그와 스타일로 변합니다. */
   sm?:
@@ -28,8 +27,7 @@ interface Typography {
     | 'Body2'
     | 'Body2Paragraph'
     | 'Caption1'
-    | 'Caption2'
-    | 'Tiny1';
+    | 'Caption2';
 
   /** 글자의 색상 */
   color?: string;
@@ -57,22 +55,4 @@ interface Typography {
 
 type Props = Typography;
 
-const Component = ({
-  color = Colors.gray800,
-  marginTop = 0,
-  marginBottom = 0,
-  marginLeft = 0,
-  marginRight = 0,
-  ...restProps
-}: Props) => (
-  <Caption2
-    color={color}
-    marginTop={marginTop || 0}
-    marginBottom={marginBottom || 10}
-    marginLeft={marginLeft || 0}
-    marginRight={marginRight || 0}
-    {...restProps}
-  />
-);
-
-export default Component;
+export const Component = (props: Props) => <Caption2 {...props} />;

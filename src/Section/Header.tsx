@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { gray300 } from '../Colors';
 import { Chevron } from '../Icon';
-import { body2Paragraph } from '../TextStyles';
+import { body2 } from '../TextStyles';
 import Typography, { Typo } from '../Typography';
 
 interface Props {
@@ -31,7 +31,7 @@ const HeaderTop = styled(Typography)`
 `;
 
 const SubTitle = styled.p`
-  ${body2Paragraph}
+  ${body2}
   margin-top: 4px;
 `;
 

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 
 import Badge from '../Badge';
-import { white } from '../Colors';
-import { body1BlackBold, subheadingBlackBold } from '../TextStyles';
+import { gray800, white } from '../Colors';
+import { body1, subtitle1 } from '../TextStyles';
 
 interface ContainerProps {
   fullScreen?: boolean;
@@ -26,7 +26,9 @@ interface State {
 const BORDER_SIZE = 1;
 
 const Title = styled.span`
-  ${body1BlackBold};
+  ${body1};
+  color: ${gray800};
+  font-weight: bold;
   transition: font-size 0.4s ease-in-out;
 `;
 
@@ -78,7 +80,9 @@ const Container = styled.div<ContainerProps & { isOpened?: boolean }>`
           transform: translateY(calc(48px - 100% + ${BORDER_SIZE}px));
 
           ${Title} {
-            ${subheadingBlackBold};
+            ${subtitle1};
+            color: ${gray800};
+            font-weight: bold;
           }
 
           ${InnerHeader} {
@@ -136,7 +140,7 @@ const BackgroundWindow = styled.div<{ zIndex?: number }>`
   z-index: ${props => (props.zIndex ? props.zIndex - 1 : 2000)};
 `;
 
-export default class BottomSheet extends React.PureComponent<Props, State> {
+export default class BottomSheet extends PureComponent<Props, State> {
   public readonly state = {
     isOpened: false,
   };

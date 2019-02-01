@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 
 import { orange600, white } from '../Colors';
 import Spinner from '../Spinner';
-import { body2WhiteBold } from '../TextStyles';
+import { body2 } from '../TextStyles';
 
 interface Props {
   type?: string;
@@ -77,7 +77,7 @@ const LeftIcon = styled.img.attrs({ alt: '' })``;
 const RightIcon = styled.img.attrs({ alt: '' })``;
 
 const buttonStyle = css<Props>`
-  ${body2WhiteBold};
+  ${body2};
   color: ${props => props.color || white};
   background-color: ${props => props.backgroundColor || orange600};
   outline: none;

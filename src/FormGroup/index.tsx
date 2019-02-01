@@ -1,9 +1,9 @@
-import { BaseProps } from '../interfaces/props';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 
 import { gray800 } from '../Colors';
-import { body2Black } from '../TextStyles';
+import { BaseProps } from '../interfaces/props';
+import { body2 } from '../TextStyles';
 
 interface Props extends BaseProps {
   label: string;
@@ -12,7 +12,7 @@ interface Props extends BaseProps {
 }
 
 const Label = styled.label<{ labelColor?: string }>`
-  ${body2Black};
+  ${body2};
   margin: 0 0 8px;
   color: ${props => props.labelColor || gray800};
 `;
@@ -42,7 +42,7 @@ const Container = styled.div<{ inline?: boolean }>`
     `};
 `;
 
-export default class FormGroup extends React.PureComponent<Props> {
+export default class FormGroup extends PureComponent<Props> {
   public render() {
     const { label, labelColor, inline, children, ...restProps } = this.props;
 

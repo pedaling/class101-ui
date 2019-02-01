@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import { body2Black } from '../TextStyles';
+
+import { gray800 } from '../Colors';
+import { body2 } from '../TextStyles';
 
 interface Props {
   title: string;
@@ -50,7 +52,8 @@ const Body = styled.div`
 `;
 
 const Title = styled.div`
-  ${body2Black};
+  ${body2};
+  color: ${gray800};
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
