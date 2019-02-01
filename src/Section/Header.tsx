@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { gray300 } from '../Colors';
 import { Chevron } from '../Icon';
 import { body2 } from '../TextStyles';
-import Typography, { Typo } from '../Typography';
+import Typography, { Typo, TypoProps } from '../Typography';
 
 interface Props {
   title?: ReactNode;
@@ -25,7 +25,7 @@ const Header = styled.div`
   }
 `;
 
-const HeaderTop = styled(Typography)`
+const HeaderTop: any = styled(Typography)`
   display: flex;
   align-items: center;
 `;

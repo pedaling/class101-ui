@@ -1,9 +1,9 @@
-// @flow
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
-
 import { SIZES } from '../BreakPoints';
 import { gray800 } from '../Colors';
+import { BaseProps } from '../interfaces/props';
+
 import {
   body1,
   body2,
@@ -24,7 +24,11 @@ interface Props {
   md: Typo;
   sm?: Typo;
   children?: React.ReactNode;
-  display?: 1 | 2 | 3;
+  element: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div';
+}
+
+interface HeadlineProps {
+  display?: 2 | 3;
 }
 
 interface State {
@@ -41,6 +45,9 @@ interface CommonTypoProps {
   display?: string | number;
 }
 
+export type TypoProps = Props & CommonTypoProps & BaseProps;
+export type HedalineTypoProps = Props & HeadlineProps & CommonTypoProps & BaseProps;
+
 const customStyle = css<CommonTypoProps>`
   color: ${props => props.color || gray800};
   margin-top: ${props => props.marginTop || 0}px;
@@ -50,94 +57,62 @@ const customStyle = css<CommonTypoProps>`
   ${props => props.textAlign && `text-align: ${props.textAlign}`};
 `;
 
-const Headline1 = styled.h1<CommonTypoProps>`
+const displayStyle = css<{ display?: string | number }>`
+  ${props =>
+    props.display &&
+    [2, '2'].includes(props.display) &&
+    css`
+      ${display2};
+    `};
+  ${props =>
+    props.display &&
+    [3, '3'].includes(props.display) &&
+    css`
+      ${display3};
+    `};
+`;
+
+const renderTypoElement = ({ element, ...restProps }: TypoProps) => React.createElement(element, restProps);
+
+const Headline1 = styled(renderTypoElement)<CommonTypoProps>`
   ${headline1};
-  ${props =>
-    props.display &&
-    [2, '2'].includes(props.display) &&
-    css`
-      ${display2};
-    `};
-  ${props =>
-    props.display &&
-    [3, '3'].includes(props.display) &&
-    css`
-      ${display3};
-    `};
+  ${displayStyle};
   ${customStyle};
 `;
 
-const Headline2 = styled.h2<CommonTypoProps>`
+const Headline2 = styled(renderTypoElement)<CommonTypoProps>`
   ${headline2};
-  color: ${props => props.color || gray800};
-  ${props =>
-    props.display &&
-    [2, '2'].includes(props.display) &&
-    css`
-      ${display2};
-    `};
-  ${props =>
-    props.display &&
-    [3, '3'].includes(props.display) &&
-    css`
-      ${display3};
-    `};
+  ${displayStyle};
   ${customStyle};
 `;
 
-const Headline3 = styled.h3<CommonTypoProps>`
+const Headline3 = styled(renderTypoElement)<CommonTypoProps>`
   ${headline3};
-  color: ${props => props.color || gray800};
-  ${props =>
-    props.display &&
-    [2, '2'].includes(props.display) &&
-    css`
-      ${display2};
-    `};
-  ${props =>
-    props.display &&
-    [3, '3'].includes(props.display) &&
-    css`
-      ${display3};
-    `};
+  ${displayStyle}
   ${customStyle};
 `;
 
-const Subtitle1 = styled.h4<CommonTypoProps>`
+const Subtitle1 = styled(renderTypoElement)<CommonTypoProps>`
   ${subtitle1};
   ${customStyle};
 `;
 
-const Body1 = styled.div<CommonTypoProps>`
+const Body1 = styled(renderTypoElement)<CommonTypoProps>`
   ${body1};
-  line-height: 24px;
   ${customStyle};
 `;
 
-const Body1Paragraph = styled.p<CommonTypoProps>`
-  ${body1};
-  line-height: 28px;
-  ${customStyle};
-`;
-
-const Body2 = styled.div<CommonTypoProps>`
+const Body2 = styled(renderTypoElement)<CommonTypoProps>`
   ${body2};
-  line-height: 20px;
   ${customStyle};
 `;
 
-const Body2Paragraph = styled.div<CommonTypoProps>`
-  ${body2};
-  line-height: 24px;
-  ${customStyle};
-`;
-
-const Caption1 = styled.div<CommonTypoProps>`
+const Caption1 = styled(renderTypoElement)<CommonTypoProps>`
   ${caption1};
   ${customStyle};
 `;
 
-const Caption2 = styled.div<CommonTypoProps>`
+const Caption2 = styled(renderTypoElement)<CommonTypoProps>`
   ${caption2};
   ${customStyle};
 `;
@@ -161,12 +136,11 @@ const getCurrentSize = (currentWidth: number) => {
       }
       return 'SKIP';
     });
-    if (!conditions.includes(false) && conditions.join() !== 'SKIP,SKIP') {
+    if (conditions.length !== 0 && !conditions.includes(false) && conditions.join() !== 'SKIP,SKIP') {
       windowSize = key;
     }
     return windowSize;
   });
-
   return windowSize;
 };
 
@@ -191,14 +165,16 @@ const TypographyList = {
   Headline3,
   Subtitle1,
   Body1,
-  Body1Paragraph,
   Body2,
-  Body2Paragraph,
   Caption1,
   Caption2,
 };
 
-export default class Typography extends React.PureComponent<Props, State> {
+export default class Typography extends PureComponent<Props, State> {
+  public static defaultProps = {
+    element: 'div',
+  };
+
   public readonly state = {
     width: 0,
   };

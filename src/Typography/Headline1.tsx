@@ -1,23 +1,8 @@
-import { BaseProps } from '../interfaces/props';
 import React from 'react';
+import Typography, { HedalineTypoProps } from '.';
 
-import Typography, { Typo } from '.';
-
-interface Props extends BaseProps {
-  lg?: Typo;
-  sm?: Typo;
-  display?: 1 | 2;
-  color?: string;
-  fontWeight?: number | string;
-  textAlign?: 'left' | 'right' | 'center' | 'justify';
-  marginTop?: number;
-  marginBottom?: number;
-  marginLeft?: number;
-  marginRight?: number;
-}
-
-export default ({ children, ...restProps }: Props) => (
-  <Typography md="Headline1" {...restProps}>
+export default ({ element = 'h1', children, ...restProps }: HedalineTypoProps) => (
+  <Typography md="Headline1" element={element} {...restProps}>
     {children}
   </Typography>
 );
