@@ -10,10 +10,10 @@ interface Props {
   className?: string;
 
   /** 부모 DOM의 style */
-  style?: Object;
+  style?: React.CSSProperties;
 
   /** input의 style */
-  inputStyle?: Object;
+  inputStyle?: React.CSSProperties;
 
   /** 옆으로 쌓이게 할 것인지 여부 */
   inline?: boolean;

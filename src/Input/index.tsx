@@ -1,15 +1,17 @@
-// @flow
-import React, { Component } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
-import { orange500, gray800, gray500, gray400, gray300, gray50, redError, gray600 } from '../Colors';
+
+import { gray300, gray400, gray50, gray500, gray600, gray800, orange500, redError } from '../Colors';
+import { Alert } from '../Icon';
+import { HTMLInputProps } from '../interfaces/props';
 import { body2Black } from '../TextStyles';
 
 interface Props {
   size: 'sm' | 'lg' | 'md';
   type: string;
   className?: string;
-  style?: {};
-  inputStyle?: {};
+  style?: React.CSSProperties;
+  inputStyle?: React.CSSProperties;
   inline?: boolean;
   allowMessage?: string;
   warnMessage?: string;
@@ -69,6 +71,10 @@ const DescriptionStyle = css`
   * {
     vertical-align: middle;
   }
+
+  span {
+    margin-left: 2px;
+  }
 `;
 
 const ErrorText = styled.h6`
@@ -90,13 +96,7 @@ const Container = styled.div<{ inline?: boolean }>`
   display: ${props => (props.inline ? 'inline-block' : 'block')};
 `;
 
-const DescriptionIcon = styled.img.attrs({ alt: '!' })`
-  width: 16px;
-  height: 16px;
-  margin-right: 2px;
-`;
-
-export default class Input extends React.PureComponent<Props> {
+export default class Input extends React.PureComponent<HTMLInputProps & Props> {
   public static defaultProps: Partial<Props> = {
     size: 'md',
     type: 'text',
@@ -127,13 +127,13 @@ export default class Input extends React.PureComponent<Props> {
         {allowMessage && !errorMessage && <AllowText>{allowMessage}</AllowText>}
         {errorMessage && (
           <ErrorText>
-            <DescriptionIcon src="https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/ic-danger-red.png" />
+            <Alert size={16} fillColor={redError} />
             <span>{errorMessage}</span>
           </ErrorText>
         )}
         {warnMessage && (
           <WarnText>
-            <DescriptionIcon src="https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/ic-danger-yellow.png" />
+            <Alert size={16} fillColor={orange500} />
             <span>{warnMessage}</span>
           </WarnText>
         )}
