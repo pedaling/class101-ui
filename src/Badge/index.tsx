@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { red600, white } from '../Colors';
-import { tiny1WhiteBold } from '../TextStyles';
+import { caption2 } from '../TextStyles';
 
 interface Props {
   color?: string;
@@ -15,7 +15,8 @@ const Container = styled.div`
 `;
 
 const BadgeCounter = styled.label<Props>`
-  ${tiny1WhiteBold};
+  ${caption2};
+  font-weight: bold;
   line-height: 1;
   min-width: 20px;
   height: 20px;

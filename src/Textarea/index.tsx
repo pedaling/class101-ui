@@ -1,8 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
-import { orange500, gray800, gray500, gray400, gray300, gray000, redError, gray600 } from '../Colors';
-import { body2Black } from '../TextStyles';
+
+import { gray000, gray300, gray400, gray500, gray600, gray800, orange500, redError } from '../Colors';
+import { body2 } from '../TextStyles';
 
 interface Props {
   className?: string;
@@ -15,7 +16,8 @@ interface Props {
 }
 
 const StyledTextarea = styled.textarea`
-  ${body2Black}
+  ${body2};
+  color: ${gray800};
   border-radius: 1px;
   background-color: white;
   border: solid 1px ${gray300};

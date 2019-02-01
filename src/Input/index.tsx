@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { gray300, gray400, gray50, gray500, gray600, gray800, orange500, redError } from '../Colors';
 import { Alert } from '../Icon';
 import { HTMLInputProps } from '../interfaces/props';
-import { body2Black } from '../TextStyles';
+import { body2 } from '../TextStyles';
 
 interface Props {
   size: 'sm' | 'lg' | 'md';
@@ -19,7 +19,8 @@ interface Props {
 }
 
 const StyledInput = styled.input`
-  ${body2Black}
+  ${body2};
+  color: ${gray800};
   border-radius: 1px;
   background-color: white;
   border: solid 1px ${gray300};

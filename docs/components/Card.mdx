@@ -8,7 +8,7 @@ import { Playground, PropsTable } from 'docz';
 import { Component as Grid } from './Grid';
 import { Component as Row } from './Row';
 import { Component as Button } from './Button';
-import { Component as Tiny1 } from './Typography/Tiny1';
+import { Component as Caption1 } from './Typography/Caption1';
 import { Colors } from '@class101/ui';
 import { NoHiddenStyleCol } from './Col';
 
@@ -103,12 +103,17 @@ import { imageSrc } from './interface';
           target={'_blank'}
           extraTop={
             <div style={{ lineHeight: '16px' }}>
-              <Tiny1 style={{ display: 'inline-block' }} fontWeight={'Bold'}>
+              <Caption1 style={{ display: 'inline-block' }} fontWeight={'Bold'}>
                 바로 수강 가능
-              </Tiny1>
-              <Tiny1 style={{ display: 'inline-block' }} fontWeight={'Bold'} marginLeft={11} color={Colors.orange700}>
+              </Caption1>
+              <Caption1
+                style={{ display: 'inline-block' }}
+                fontWeight={'Bold'}
+                marginLeft={11}
+                color={Colors.orange700}
+              >
                 40% 할인
-              </Tiny1>
+              </Caption1>
             </div>
           }
         />
@@ -119,7 +124,7 @@ import { imageSrc } from './interface';
           coverImage={imageSrc}
           to={'/'}
           target={'_blank'}
-          extraBottom={<Tiny1 color={Colors.gray400}>10월 12일 ~ 10월 24일</Tiny1>}
+          extraBottom={<Caption1 color={Colors.gray400}>10월 12일 ~ 10월 24일</Caption1>}
         />
       </NoHiddenStyleCol>
     </Row>

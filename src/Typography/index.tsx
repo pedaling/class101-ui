@@ -15,7 +15,6 @@ import {
   headline2,
   headline3,
   subtitle1,
-  tiny1,
 } from '../TextStyles';
 
 export type Typo = keyof typeof TypographyList;
@@ -143,11 +142,6 @@ const Caption2 = styled.div<CommonTypoProps>`
   ${customStyle};
 `;
 
-const Tiny1 = styled.div<CommonTypoProps>`
-  ${tiny1};
-  ${customStyle};
-`;
-
 const getCurrentSize = (currentWidth: number) => {
   let windowSize = 'md';
 
@@ -202,7 +196,6 @@ const TypographyList = {
   Body2Paragraph,
   Caption1,
   Caption2,
-  Tiny1,
 };
 
 export default class Typography extends React.PureComponent<Props, State> {

@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import Button from '../Button';
 import Card from '../Card';
-import { orange600, red000, red600 } from '../Colors';
-import { tiny1BlackBold, tiny1Gray } from '../TextStyles';
+import { gray600, gray800, orange600, red000, red600 } from '../Colors';
+import { caption1 } from '../TextStyles';
 
 interface Props {
   state: 'preview' | 'funding' | 'sale';
@@ -25,11 +25,14 @@ interface Props {
 const KlassCard = styled(Card)``;
 
 const CreatorName = styled.div`
-  ${tiny1BlackBold}
+  ${caption1};
+  color: ${gray800};
+  font-weight: bold;
 `;
 
 const SubInfo = styled.div`
-  ${tiny1Gray};
+  ${caption1};
+  color: ${gray600};
 `;
 
 const OpenState = styled.span`
@@ -43,7 +46,9 @@ const Dot = styled.span`
 `;
 
 const Sale = styled.span`
-  ${tiny1BlackBold}
+  ${caption1};
+  color: ${gray800};
+  font-weight: bold;
   display: inline-block;
   color: ${orange600};
 `;
@@ -64,7 +69,8 @@ const WishlistButton = styled.button`
 `;
 
 const ReservationButton = styled(Button).attrs({ size: 'sm' })<{ reservationed?: boolean }>`
-  ${tiny1Gray};
+  ${caption1};
+  color: ${gray600};
   width: 100%;
   margin-top: 8px;
   color: ${props => (props.reservationed ? 'white' : red600)};

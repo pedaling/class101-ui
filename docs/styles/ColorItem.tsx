@@ -1,15 +1,15 @@
 // @flow
+import { Colors } from '@class101/ui';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import { Colors } from '@class101/ui';
 
 interface Props {
-  colorName: string,
-  backgroundColor: string,
-  color?: string,
-};
+  colorName: string;
+  backgroundColor: string;
+  color?: string;
+}
 
-const Container = styled.div`
+const Container = styled.div<{ backgroundColor: string; content: string }>`
   border-radius: 4px;
   margin: 4px 0;
   padding: 6px 12px;
@@ -38,7 +38,7 @@ const HexCode = styled.span`
 `;
 
 class Component extends PureComponent<Props> {
-  handleClickItem = () => {
+  public handleClickItem = () => {
     const { backgroundColor } = this.props;
 
     const element = document.createElement('textarea');
@@ -52,25 +52,20 @@ class Component extends PureComponent<Props> {
     document.execCommand('copy');
     // eslint-disable-next-line
     document.body.removeChild(element);
-  }
+  };
 
-  render() {
-    const {
-      backgroundColor,
-      colorName,
-      color,
-      ...restProps
-    } = this.props;
+  public render() {
+    const { backgroundColor, colorName, color, ...restProps } = this.props;
 
     return (
       <Container
-        color={ color }
-        backgroundColor={ backgroundColor }
-        content={ colorName }
-        onClick={ this.handleClickItem }
-        { ...restProps }
+        color={color}
+        backgroundColor={backgroundColor}
+        content={colorName}
+        onClick={this.handleClickItem}
+        {...restProps}
       >
-        <HexCode>{ backgroundColor.toUpperCase() }</HexCode>
+        <HexCode>{backgroundColor.toUpperCase()}</HexCode>
       </Container>
     );
   }

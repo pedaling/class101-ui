@@ -1,8 +1,9 @@
 // @flow
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { white, orange600, gray700, gray500 } from '../Colors';
-import { body2Gray } from '../TextStyles';
+
+import { gray500, gray700, orange600, white } from '../Colors';
+import { body2 } from '../TextStyles';
 
 interface Props {
   value?: string;
@@ -26,7 +27,7 @@ const Container = styled.div<Props>`
 `;
 
 const Content = styled.div<Props & { active?: boolean }>`
-  ${body2Gray};
+  ${body2};
   display: flex;
   align-items: center;
   page-break-after: always;

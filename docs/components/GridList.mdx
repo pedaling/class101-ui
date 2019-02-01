@@ -9,8 +9,8 @@ import { Router } from 'react-router-dom';
 import { Component as GridList } from './GridList';
 import { Component as Card } from './Card';
 import { Component as KlassCard } from './KlassCard';
-import Body1 from './Typography/Body1';
-import Tiny1 from './Typography/Tiny1';
+import { Component as Body1 } from './Typography/Body1';
+import { Component as Caption1 } from './Typography/Caption1';
 
 import { imageSrc } from './interface';
 
@@ -81,10 +81,10 @@ Class101 UI의 Grid 시스템 기반의 리스트입니다.
             <img style={{ width: '100%' }} src={image} alt={title} />
           </div>
           <Body1>{title}</Body1>
-          <Tiny1>{productState}</Tiny1>
-          <Tiny1 fontWeight="Bold" color="orange">
+          <Caption1>{productState}</Caption1>
+          <Caption1 fontWeight="Bold" color="orange">
             {discount}% 할인
-          </Tiny1>
+          </Caption1>
         </div>
       );
     }}
