@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { gray300 } from '../Colors';
 import { Chevron } from '../Icon';
 import { body2 } from '../TextStyles';
-import Typography, { Typo, TypoProps } from '../Typography';
+import Typography, { Typo } from '../Typography';
 
 interface Props {
   title?: ReactNode;
@@ -25,18 +25,14 @@ const Header = styled.div`
   }
 `;
 
-const HeaderTop: any = styled(Typography)`
+const HeaderTop = styled.div`
   display: flex;
   align-items: center;
 `;
 
 const SubTitle = styled.p`
-  ${body2}
+  ${body2};
   margin-top: 4px;
-`;
-
-const Title = styled.div`
-  margin-right: 4px;
 `;
 
 export default ({ title, subTitle, typography, to, href, target, ...restProps }: Props) => {
@@ -50,8 +46,10 @@ export default ({ title, subTitle, typography, to, href, target, ...restProps }:
     return (
       <Header>
         <Link to={to} target={target} {...options}>
-          <HeaderTop md={typography || ('Subtitle1' as Typo)} {...restProps}>
-            <Title>{title}</Title>
+          <HeaderTop>
+            <Typography md={typography || ('Subtitle1' as Typo)} marginRight={4} {...restProps}>
+              {title}
+            </Typography>
             <Chevron fillColor={gray300} />
           </HeaderTop>
         </Link>
@@ -63,8 +61,10 @@ export default ({ title, subTitle, typography, to, href, target, ...restProps }:
     return (
       <Header>
         <a href={href} target={target} {...options}>
-          <HeaderTop md={typography || ('Subtitle1' as Typo)} {...restProps}>
-            <Title>{title}</Title>
+          <HeaderTop>
+            <Typography md={typography || ('Subtitle1' as Typo)} marginRight={4} {...restProps}>
+              {title}
+            </Typography>
             <Chevron fillColor={gray300} />
           </HeaderTop>
         </a>
@@ -74,8 +74,10 @@ export default ({ title, subTitle, typography, to, href, target, ...restProps }:
   }
   return (
     <Header>
-      <HeaderTop md={typography || ('Subtitle1' as Typo)} {...restProps}>
-        {title}
+      <HeaderTop>
+        <Typography md={typography || ('Subtitle1' as Typo)} {...restProps}>
+          {title}
+        </Typography>
       </HeaderTop>
       {subTitle && <SubTitle>{subTitle}</SubTitle>}
     </Header>

@@ -1,8 +1,8 @@
 import React from 'react';
-import Typography, { HedalineTypoProps } from '.';
+import Typography, { HeadlineTypoProps } from '.';
 
-export default ({ element = 'h2', children, ...restProps }: HedalineTypoProps) => (
-  <Typography md="Headline2" element={element} {...restProps}>
+export default ({ children, ...restProps }: HeadlineTypoProps) => (
+  <Typography md="Headline2" {...restProps}>
     {children}
   </Typography>
 );

@@ -18,16 +18,21 @@ import {
 } from '../TextStyles';
 
 export type Typo = keyof typeof TypographyList;
+export type TypoElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div';
 
-interface Props {
-  lg?: Typo;
+interface OwnProps {
   md: Typo;
-  sm?: Typo;
-  children?: React.ReactNode;
-  element: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div';
 }
 
-interface HeadlineProps {
+interface CommonTypoProps extends BaseProps {
+  lg?: Typo;
+  sm?: Typo;
+  display?: 2 | 3;
+  children?: React.ReactNode;
+  element?: TypoElement;
+}
+
+interface HeadlinProps {
   display?: 2 | 3;
 }
 
@@ -35,7 +40,7 @@ interface State {
   width: number;
 }
 
-interface CommonTypoProps {
+interface CommonTypoStyleProps {
   color?: string;
   marginTop?: number;
   marginBottom?: number;
@@ -45,10 +50,11 @@ interface CommonTypoProps {
   display?: string | number;
 }
 
-export type TypoProps = Props & CommonTypoProps & BaseProps;
-export type HedalineTypoProps = Props & HeadlineProps & CommonTypoProps & BaseProps;
+type Props = OwnProps & CommonTypoProps & CommonTypoStyleProps;
+export type TypoProps = CommonTypoProps & CommonTypoStyleProps & BaseProps;
+export type HeadlineTypoProps = TypoProps & HeadlinProps;
 
-const customStyle = css<CommonTypoProps>`
+const customStyle = css<CommonTypoStyleProps>`
   color: ${props => props.color || gray800};
   margin-top: ${props => props.marginTop || 0}px;
   margin-bottom: ${props => props.marginBottom || 0}px;
@@ -72,47 +78,45 @@ const displayStyle = css<{ display?: string | number }>`
     `};
 `;
 
-const renderTypoElement = ({ element, ...restProps }: TypoProps) => React.createElement(element, restProps);
-
-const Headline1 = styled(renderTypoElement)<CommonTypoProps>`
+const Headline1 = styled.h1<CommonTypoStyleProps>`
   ${headline1};
   ${displayStyle};
   ${customStyle};
 `;
 
-const Headline2 = styled(renderTypoElement)<CommonTypoProps>`
+const Headline2 = styled.h2<CommonTypoStyleProps>`
   ${headline2};
   ${displayStyle};
   ${customStyle};
 `;
 
-const Headline3 = styled(renderTypoElement)<CommonTypoProps>`
+const Headline3 = styled.h3<CommonTypoStyleProps>`
   ${headline3};
   ${displayStyle}
   ${customStyle};
 `;
 
-const Subtitle1 = styled(renderTypoElement)<CommonTypoProps>`
+const Subtitle1 = styled.h4<CommonTypoStyleProps>`
   ${subtitle1};
   ${customStyle};
 `;
 
-const Body1 = styled(renderTypoElement)<CommonTypoProps>`
+const Body1 = styled.div<CommonTypoStyleProps>`
   ${body1};
   ${customStyle};
 `;
 
-const Body2 = styled(renderTypoElement)<CommonTypoProps>`
+const Body2 = styled.div<CommonTypoStyleProps>`
   ${body2};
   ${customStyle};
 `;
 
-const Caption1 = styled(renderTypoElement)<CommonTypoProps>`
+const Caption1 = styled.div<CommonTypoStyleProps>`
   ${caption1};
   ${customStyle};
 `;
 
-const Caption2 = styled(renderTypoElement)<CommonTypoProps>`
+const Caption2 = styled.div<CommonTypoStyleProps>`
   ${caption2};
   ${customStyle};
 `;
@@ -171,10 +175,6 @@ const TypographyList = {
 };
 
 export default class Typography extends PureComponent<Props, State> {
-  public static defaultProps = {
-    element: 'div',
-  };
-
   public readonly state = {
     width: 0,
   };
@@ -200,7 +200,7 @@ export default class Typography extends PureComponent<Props, State> {
 
   public render() {
     const { width } = this.state;
-    const { children, ...restProps } = this.props;
+    const { element, children, ...restProps } = this.props;
 
     const lg = capitalize(this.props.lg);
     const md = capitalize(this.props.md);
@@ -209,7 +209,11 @@ export default class Typography extends PureComponent<Props, State> {
     let Element = null;
     if (!lg && md && !sm) {
       Element = TypographyList[md];
-      return <Element {...restProps}>{children}</Element>;
+      return (
+        <Element as={element} {...restProps}>
+          {children}
+        </Element>
+      );
     }
 
     const currentSize = getCurrentSize(width);
@@ -222,7 +226,10 @@ export default class Typography extends PureComponent<Props, State> {
     } else {
       Element = TypographyList[md || 'Body1'];
     }
-
-    return <Element {...restProps}>{children}</Element>;
+    return (
+      <Element as={element} {...restProps}>
+        {children}
+      </Element>
+    );
   }
 }
