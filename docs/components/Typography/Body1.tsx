@@ -1,5 +1,6 @@
 import { Body1 } from '@class101/ui';
-import React from 'react';
+import React, { ReactNode } from 'react';
+import { element } from 'prop-types';
 
 interface Typography {
   /** PC에서 해당 태그와 스타일로 변합니다. */
@@ -29,12 +30,12 @@ interface Typography {
   /** CSS의 margin-right 속성의 값 */
   marginRight?: number;
 
-  children: Node;
+  /** 엘리먼트 이름 */
+  element?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div';
+
+  children: ReactNode;
 }
 
-interface Props extends Typography {
-  /** 문단 스타일 사용 여부입니다. */
-  paragraph?: boolean;
-}
+type Props = Typography;
 
 export const Component = (props: Props) => <Body1 {...props} />;

@@ -1,5 +1,5 @@
 import { Caption1 } from '@class101/ui';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 interface Typography {
   /** PC에서 해당 태그와 스타일로 변합니다. */
@@ -29,7 +29,10 @@ interface Typography {
   /** CSS의 margin-right 속성의 값 */
   marginRight?: number;
 
-  children: Node;
+  /** 엘리먼트 이름 */
+  element?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div';
+
+  children: ReactNode;
 }
 
 type Props = Typography;
