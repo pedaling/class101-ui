@@ -28,8 +28,6 @@ export default createGlobalStyle`
     url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/01ff0283/Subset/SpoqaHanSans/SpoqaHanSansLight.ttf') format('truetype');
   }
 
-  @import url(https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css);
-
   body {
     font-family: 'SpoqaHanSans', 'Sans-serif';
   }
