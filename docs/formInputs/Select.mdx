@@ -1,0 +1,24 @@
+---
+menu: Form Inputs
+name: Select
+route: /form-inputs/select
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Component as Select } from './Select';
+
+# Select
+
+## Props
+
+<PropsTable of={Select} />
+
+## Basic usage
+
+<Playground>
+  <Select value="" placeholder="Select one" options={['Apple', 'Banana', 'Candy']} />
+</Playground>
+
+<Playground>
+  <Select value="Success" options={[{ label: 'Success', value: 'Success' }, { label: 'Fail', value: 'Fail' }]} />
+</Playground>
