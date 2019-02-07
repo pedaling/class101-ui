@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 import { SIZES } from '../BreakPoints';
-import { gray800 } from '../Colors';
 import { BaseProps } from '../interfaces/props';
 
 import {
@@ -54,7 +53,6 @@ export type TypoProps = CommonTypoProps & CommonTypoStyleProps & BaseProps;
 export type HeadlineTypoProps = TypoProps & HeadlinProps;
 
 const customStyle = css<CommonTypoStyleProps>`
-  color: ${props => props.color || gray800};
   margin-top: ${props => props.marginTop || 0}px;
   margin-bottom: ${props => props.marginBottom || 0}px;
   margin-left: ${props => props.marginLeft || 0}px;
