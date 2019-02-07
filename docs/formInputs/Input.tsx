@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { Input } from '@class101/ui';
 
