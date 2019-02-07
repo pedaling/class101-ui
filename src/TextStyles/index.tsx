@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 
 export interface TextStyleProperties {
-  fontWeight?: string;
+  fontWeight?: string | number;
 }
 
 export const display2 = css<TextStyleProperties>`

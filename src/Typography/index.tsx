@@ -46,7 +46,7 @@ interface CommonTypoStyleProps {
   marginRight?: number;
   marginLeft?: number;
   textAlign?: string;
-  fontWeight?: string;
+  fontWeight?: string | number;
 }
 
 type Props = OwnProps & CommonTypoProps & CommonTypoStyleProps;
