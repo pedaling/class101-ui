@@ -6,8 +6,9 @@ import { Alert } from '../Icon';
 import { HTMLInputProps } from '../interfaces/props';
 import { body2 } from '../TextStyles';
 
+type Size = 'sm' | 'md';
 interface Props {
-  size: 'sm' | 'lg' | 'md';
+  size: Size;
   type: string;
   className?: string;
   style?: React.CSSProperties;
@@ -18,14 +19,21 @@ interface Props {
   errorMessage?: string;
 }
 
-const StyledInput = styled.input`
+const defaultStyle = css`
+  height: 48px;
+`;
+const smallStyle = css`
+  height: 40px;
+`;
+
+const StyledInput = styled.input<{ size: Size }>`
   ${body2};
   color: ${gray800};
   border-radius: 1px;
   background-color: white;
   border: solid 1px ${gray300};
   width: 100%;
-  height: 48px;
+  ${props => (props.size === 'sm' ? smallStyle : defaultStyle)};
   padding: 0 16px;
   &:hover {
     border: solid 1px ${gray400};
@@ -122,6 +130,7 @@ export default class Input extends React.PureComponent<HTMLInputProps & Props> {
         <StyledInput
           className={`${className || ''} ${errorMessage ? ' error' : ''} ${warnMessage ? ' warn' : ''}`}
           type={type}
+          size={size}
           style={inputStyle}
           {...restProps}
         />
