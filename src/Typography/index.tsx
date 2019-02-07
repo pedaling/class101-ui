@@ -27,13 +27,12 @@ interface OwnProps {
 interface CommonTypoProps extends BaseProps {
   lg?: Typo;
   sm?: Typo;
-  display?: 2 | 3;
   children?: React.ReactNode;
   element?: TypoElement;
 }
 
 interface HeadlinProps {
-  display?: 2 | 3;
+  display?: 2 | 3 | '2' | '3';
 }
 
 interface State {
@@ -47,7 +46,7 @@ interface CommonTypoStyleProps {
   marginRight?: number;
   marginLeft?: number;
   textAlign?: string;
-  display?: string | number;
+  fontWeight?: string;
 }
 
 type Props = OwnProps & CommonTypoProps & CommonTypoStyleProps;
@@ -78,19 +77,19 @@ const displayStyle = css<{ display?: string | number }>`
     `};
 `;
 
-const Headline1 = styled.h1<CommonTypoStyleProps>`
+const Headline1 = styled.h1<CommonTypoStyleProps & HeadlinProps>`
   ${headline1};
   ${displayStyle};
   ${customStyle};
 `;
 
-const Headline2 = styled.h2<CommonTypoStyleProps>`
+const Headline2 = styled.h2<CommonTypoStyleProps & HeadlinProps>`
   ${headline2};
   ${displayStyle};
   ${customStyle};
 `;
 
-const Headline3 = styled.h3<CommonTypoStyleProps>`
+const Headline3 = styled.h3<CommonTypoStyleProps & HeadlinProps>`
   ${headline3};
   ${displayStyle}
   ${customStyle};
