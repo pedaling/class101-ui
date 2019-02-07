@@ -31,20 +31,38 @@ Class101 UI의 Typography는 기기나 뷰포트 크기가 증가함에 따라 �
   <Caption2>Div caption2</Caption2>
 </Playground>
 
+## element
+
+`element`를 사용해서 다음의 태그들을 적용할 수 있습니다.
+
+```
+element: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div';
+```
+
+<Playground>
+  <Headline1 element="h3">H1 heading or H2 heading</Headline1>
+  <Subtitle1 element="h1">H1 heading or H2 heading</Subtitle1>
+</Playground>
+
 ## Responsive examples
 
 lg: >= 1024px <br />
 sm: < 1013px
 
-데스크탑(lg)과 모바일(sm)에서 태그와 스타일이 바뀝니다! 브라우저 창의 가로를 늘렸다 줄였다 해보세요!
+데스크탑(lg)과 모바일(sm)에서 스타일이 바뀝니다! 브라우저 창의 가로를 늘렸다 줄였다 해보세요!<br/>
+**반응형 스타일을 사용할 때는 반드시 `element`를 지정해주세요.**
 
 <Playground>
-  <Headline1 sm="headline2">H1 heading or H2 heading</Headline1>
+  <Headline1 sm="headline2" element="h3">
+    H1 heading or H2 heading
+  </Headline1>
   <Body1 sm="Body2">DIV body1 or DIV body2</Body1>
   <Caption1 sm="Caption2">DIV caption1 or DIV caption2</Caption1>
 </Playground>
 
 ## Headings
+
+Headings는 더 큰 텍스트 스타일인 `display: 2 | 3`를 지원합니다.
 
 <PropsTable of={Headline1} />
 
@@ -65,6 +83,8 @@ sm: < 1013px
 </Playground>
 
 ## Bodies
+
+> v3부터 `paragaph` 속성은 사용하지 않습니다.
 
 <PropsTable of={Body1} />
 
