@@ -3,8 +3,11 @@ import React from 'react';
 import { Input } from '@class101/ui';
 
 interface Props {
+  /** 사이즈 */
+  size: 'sm' | 'md';
+
   /** input의 type */
-  type?: string;
+  type: string;
 
   /** input의 className */
   className?: string;
@@ -31,3 +34,8 @@ interface Props {
 export const Component = ({ type = 'text', inline = false, ...restProps }: Props) => (
   <Input style={{ marginRight: inline ? 12 : 0 }} type={type} inline={inline} {...restProps} />
 );
+
+Component.defaultProps = {
+  size: 'md',
+  type: 'text',
+};
