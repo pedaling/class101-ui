@@ -33,6 +33,7 @@ const StyledInput = styled.input<{ size: Size }>`
   background-color: white;
   border: solid 1px ${gray300};
   width: 100%;
+  box-sizing: border-box;
   ${props => (props.size === 'sm' ? smallStyle : defaultStyle)};
   padding: 0 16px;
   &:hover {
