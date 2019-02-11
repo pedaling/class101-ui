@@ -1,14 +1,15 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 
 import { gray000, gray300, gray400, gray500, gray600, gray800, orange500, redError } from '../Colors';
+import { HTMLTextareaProps } from '../interfaces/props';
 import { body2 } from '../TextStyles';
 
 interface Props {
   className?: string;
-  style?: {};
-  inputStyle?: {};
+  style?: React.CSSProperties;
+  inputStyle?: React.CSSProperties;
   inline?: boolean;
   allowMessage?: string;
   warnMessage?: string;
@@ -98,7 +99,7 @@ const DescriptionIcon = styled.img.attrs({ alt: '!' })`
   margin-right: 2px;
 `;
 
-export default class Textarea extends React.PureComponent<Props> {
+export default class Textarea extends React.PureComponent<HTMLTextareaProps & Props> {
   public render() {
     const { className, style, inputStyle, inline, allowMessage, warnMessage, errorMessage, ...restProps } = this.props;
 
