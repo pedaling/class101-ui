@@ -21,6 +21,7 @@ const Container = styled.div<Props>`
       ${TextStyles.caption1};
       display: flex;
       align-items: center;
+      justify-content: center;
       position: absolute;
       top: 0;
       left: 0;
