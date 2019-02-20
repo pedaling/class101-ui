@@ -50,12 +50,13 @@ lg: >= 1024px <br />
 sm: < 1013px
 
 데스크탑(lg)과 모바일(sm)에서 스타일이 바뀝니다! 브라우저 창의 가로를 늘렸다 줄였다 해보세요!<br/>
-**반응형 스타일을 사용할 때는 반드시 `element`를 지정해주세요.**
+
+```
+'Headline1' | 'Headline2' | 'Headline1' | 'Subtitle1' | 'Body1' | 'Body2' | 'Caption1' | 'Caption2'
+```
 
 <Playground>
-  <Headline1 sm="headline2" element="h3">
-    H1 heading or H2 heading
-  </Headline1>
+  <Headline1 sm="Headline2">H1 heading or H2 heading</Headline1>
   <Body1 sm="Body2">DIV body1 or DIV body2</Body1>
   <Caption1 sm="Caption2">DIV caption1 or DIV caption2</Caption1>
 </Playground>
