@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
-import { SIZES } from '../BreakPoints';
-import { BaseProps } from '../interfaces/props';
 
+import { media } from '../BreakPoints';
+import { BaseProps } from '../interfaces/props';
 import {
   body1,
   body2,
@@ -16,7 +16,7 @@ import {
   subtitle1,
 } from '../TextStyles';
 
-export type Typo = keyof typeof TypographyList;
+export type Typo = keyof typeof typographyList;
 export type TypoElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div';
 
 interface OwnProps {
@@ -32,10 +32,6 @@ interface CommonTypoProps extends BaseProps {
 
 interface HeadlinProps {
   display?: 2 | 3 | '2' | '3';
-}
-
-interface State {
-  width: number;
 }
 
 interface CommonTypoStyleProps {
@@ -75,158 +71,57 @@ const displayStyle = css<{ display?: string | number }>`
     `};
 `;
 
-const Headline1 = styled.h1<CommonTypoStyleProps & HeadlinProps>`
-  ${headline1};
-  ${displayStyle};
-  ${customStyle};
-`;
+const defaultElement = {
+  Headline1: 'h1',
+  Headline2: 'h2',
+  Headline3: 'h3',
+  Subtitle1: 'h4',
+  Body1: 'div',
+  Body2: 'div',
+  Caption1: 'div',
+  Caption2: 'div',
+};
 
-const Headline2 = styled.h2<CommonTypoStyleProps & HeadlinProps>`
-  ${headline2};
-  ${displayStyle};
-  ${customStyle};
-`;
+const typographyList = {
+  Headline1: headline1,
+  Headline2: headline2,
+  Headline3: headline3,
+  Subtitle1: subtitle1,
+  Body1: body1,
+  Body2: body2,
+  Caption1: caption1,
+  Caption2: caption2,
+};
 
-const Headline3 = styled.h3<CommonTypoStyleProps & HeadlinProps>`
-  ${headline3};
+const TextElement = styled.div<Props>`
+  ${props => typographyList[props.md]}
+  ${props =>
+    props.sm
+      ? `
+    ${media.sm`
+      ${typographyList[props.sm]}
+    `}
+  `
+      : ''}
+  ${props =>
+    props.lg
+      ? `
+    ${media.lg`
+      ${typographyList[props.lg]}
+    `}
+  `
+      : ''}
   ${displayStyle}
-  ${customStyle};
+  ${customStyle}
 `;
 
-const Subtitle1 = styled.h4<CommonTypoStyleProps>`
-  ${subtitle1};
-  ${customStyle};
-`;
-
-const Body1 = styled.div<CommonTypoStyleProps>`
-  ${body1};
-  ${customStyle};
-`;
-
-const Body2 = styled.div<CommonTypoStyleProps>`
-  ${body2};
-  ${customStyle};
-`;
-
-const Caption1 = styled.div<CommonTypoStyleProps>`
-  ${caption1};
-  ${customStyle};
-`;
-
-const Caption2 = styled.div<CommonTypoStyleProps>`
-  ${caption2};
-  ${customStyle};
-`;
-
-const getCurrentSize = (currentWidth: number) => {
-  let windowSize = 'md';
-
-  if (!currentWidth) {
-    return windowSize;
-  }
-
-  Object.keys(SIZES).forEach(key => {
-    const size = SIZES[key as keyof typeof SIZES];
-    const conditions = Object.keys(size).map(sizeOption => {
-      const BreakPoint = size[sizeOption as keyof typeof size];
-      if (BreakPoint && sizeOption === 'minWidth') {
-        return currentWidth >= BreakPoint;
-      }
-      if (BreakPoint && sizeOption === 'maxWidth') {
-        return currentWidth <= BreakPoint;
-      }
-      return 'SKIP';
-    });
-    if (conditions.length !== 0 && !conditions.includes(false) && conditions.join() !== 'SKIP,SKIP') {
-      windowSize = key;
-    }
-    return windowSize;
-  });
-  return windowSize;
-};
-
-const capitalize = (str?: string) => (str ? str[0].toUpperCase() + str.slice(1) : null) as keyof typeof TypographyList;
-
-const throttle = (callback: any, limit: number) => {
-  let wait = false;
-  return () => {
-    if (!wait) {
-      callback.call();
-      wait = true;
-      setTimeout(() => {
-        wait = false;
-      }, limit);
-    }
-  };
-};
-
-const TypographyList = {
-  Headline1,
-  Headline2,
-  Headline3,
-  Subtitle1,
-  Body1,
-  Body2,
-  Caption1,
-  Caption2,
-};
-
-export default class Typography extends PureComponent<Props, State> {
-  public readonly state = {
-    width: 0,
-  };
-
-  public updateWindowDimensions = throttle(() => {
-    this.setState({ width: window.innerWidth });
-  }, 60);
-
-  public componentDidMount() {
-    const { lg, md, sm } = this.props;
-    if ([lg, md, sm].filter(Boolean).length >= 2) {
-      this.updateWindowDimensions();
-      window.addEventListener('resize', this.updateWindowDimensions);
-    }
-  }
-
-  public componentWillUnmount() {
-    const { lg, md, sm } = this.props;
-    if ([lg, md, sm].filter(Boolean).length >= 2) {
-      window.removeEventListener('resize', this.updateWindowDimensions);
-    }
-  }
-
+export default class Typography extends PureComponent<Props> {
   public render() {
-    const { width } = this.state;
-    const { element, children, ...restProps } = this.props;
-
-    const lg = capitalize(this.props.lg);
-    const md = capitalize(this.props.md);
-    const sm = capitalize(this.props.sm);
-
-    let Element = null;
-    if (!lg && md && !sm) {
-      Element = TypographyList[md];
-      return (
-        <Element as={element} {...restProps}>
-          {children}
-        </Element>
-      );
-    }
-
-    const currentSize = getCurrentSize(width);
-    if (lg && currentSize === 'lg') {
-      Element = TypographyList[lg || md];
-    } else if (md && currentSize === 'md') {
-      Element = TypographyList[md];
-    } else if (sm && currentSize === 'sm') {
-      Element = TypographyList[sm || md];
-    } else {
-      Element = TypographyList[md || 'Body1'];
-    }
+    const { lg, sm, md, element = defaultElement[this.props.md] as TypoElement, children, ...restProps } = this.props;
     return (
-      <Element as={element} {...restProps}>
+      <TextElement as={element} lg={lg} sm={sm} md={md} {...restProps}>
         {children}
-      </Element>
+      </TextElement>
     );
   }
 }
