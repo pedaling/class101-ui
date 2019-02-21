@@ -1,4 +1,3 @@
-// @flow
 import { Button } from '@class101/ui';
 import React, { ReactNode } from 'react';
 

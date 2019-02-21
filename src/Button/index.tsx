@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, PureComponent, ReactNode } from 'react';
+import React, { PureComponent, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
