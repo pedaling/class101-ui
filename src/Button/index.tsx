@@ -82,14 +82,24 @@ const StyledSpinner = styled(Spinner)<StyledSpinnerProps>`
 `;
 
 const LeftIcon = styled.div`
-  img {
+  > img {
     width: 100%;
+    height: 100%;
+  }
+  > svg {
+    width: 100%;
+    height: 100%;
   }
 `;
 
 const RightIcon = styled.div`
-  img {
+  > img {
     width: 100%;
+    height: 100%;
+  }
+  > svg {
+    width: 100%;
+    height: 100%;
   }
 `;
 

@@ -47,15 +47,15 @@ import { Component as Button } from './Button';
 <Playground>
   <Button leftIconSrc="https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/ic-plus-black.png">Click me</Button>
   <Button rightIconSrc="https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/ic-plus-black.png">Click me</Button>
-  <Button leftIcon={<Icon.Add fillColor={Colors.white} size={16} />}>Click me</Button>
-  <Button rightIcon={<Icon.Add fillColor={Colors.white} size={16} />}>Click me</Button>
+  <Button leftIcon={<Icon.Add fillColor={Colors.white} />}>Click me</Button>
+  <Button rightIcon={<Icon.Add fillColor={Colors.white} />}>Click me</Button>
   <Button>
     <Icon.Add fillColor={Colors.white} size={16} />
-    Click me
+    <span style={{ marginLeft: '4px' }}>Click me</span>
   </Button>
   <Button>
+    <span style={{ marginRight: '4px' }}>Click me</span>
     <Icon.Add fillColor={Colors.white} size={16} />
-    Click me
   </Button>
 </Playground>
 
