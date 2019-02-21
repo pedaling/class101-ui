@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLAttributes, PureComponent, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
@@ -6,14 +6,15 @@ import { orange600, white } from '../Colors';
 import Spinner from '../Spinner';
 import { body2 } from '../TextStyles';
 
-interface Props {
+interface CommonProps {
   type?: string;
-  block?: boolean;
   size?: 'lg' | 'md' | 'sm' | 'xs';
   color?: string;
   backgroundColor?: string;
   leftIconSrc?: string;
   rightIconSrc?: string;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
   textAlign?: 'left' | 'center' | 'right';
   loading?: boolean;
   borderRadius?: number;
@@ -26,6 +27,14 @@ interface Props {
   style?: React.CSSProperties;
 }
 
+interface ContainerProps extends CommonProps {
+  fill?: boolean;
+}
+
+interface StyledContainerProps extends CommonProps {
+  fill?: string;
+}
+
 interface StyledSpinnerProps {
   buttonSize: 'lg' | 'md' | 'sm' | 'xs';
 }
@@ -33,7 +42,7 @@ interface StyledSpinnerProps {
 const StyledSpinner = styled(Spinner)<StyledSpinnerProps>`
   ${props =>
     props.buttonSize === 'lg' &&
-    css`
+    `
       span,
       span > svg {
         width: 24px;
@@ -43,7 +52,7 @@ const StyledSpinner = styled(Spinner)<StyledSpinnerProps>`
 
   ${props =>
     props.buttonSize === 'md' &&
-    css`
+    `
       span,
       span > svg {
         width: 18px;
@@ -53,7 +62,7 @@ const StyledSpinner = styled(Spinner)<StyledSpinnerProps>`
 
   ${props =>
     props.buttonSize === 'sm' &&
-    css`
+    `
       span,
       span > svg {
         width: 18px;
@@ -63,7 +72,7 @@ const StyledSpinner = styled(Spinner)<StyledSpinnerProps>`
 
   ${props =>
     props.buttonSize === 'xs' &&
-    css`
+    `
       span,
       span > svg {
         width: 16px;
@@ -72,29 +81,39 @@ const StyledSpinner = styled(Spinner)<StyledSpinnerProps>`
     `};
 `;
 
-const LeftIcon = styled.img.attrs({ alt: '' })``;
+const LeftIcon = styled.div`
+  img {
+    width: 100%;
+  }
+`;
 
-const RightIcon = styled.img.attrs({ alt: '' })``;
+const RightIcon = styled.div`
+  img {
+    width: 100%;
+  }
+`;
 
-const buttonStyle = css<Props>`
+const buttonStyle = css<StyledContainerProps>`
   ${body2};
   color: ${props => props.color || white};
   background-color: ${props => props.backgroundColor || orange600};
   outline: none;
   border: none;
   border-radius: ${props => props.borderRadius || 3}px;
-  width: ${props => (props.block ? '100%' : 'auto')};
-  display: ${props => (props.block ? 'block' : 'inline-block')};
-  text-align: ${props => props.textAlign || 'center'};
   cursor: pointer;
   line-height: 1 !important;
   box-sizing: border-box;
   font-weight: normal;
+  width: ${props => (props.fill === 'true' ? '100%' : 'auto')};
+  display: ${props => (props.fill === 'true' ? 'flex' : 'inline-flex')};
+  justify-content: ${props =>
+    props.textAlign === 'left' ? 'flex-start' : props.textAlign === 'right' ? 'flex-end' : 'center'};
+  align-items: center;
   vertical-align: middle;
 
   ${props =>
     props.size === 'lg' &&
-    css`
+    `
       font-weight: bold;
       font-size: 16px;
       padding: 0 20px;
@@ -117,7 +136,7 @@ const buttonStyle = css<Props>`
 
   ${props =>
     props.size === 'md' &&
-    css`
+    `
       font-size: 14px;
       padding: 0 16px;
       height: 40px;
@@ -138,7 +157,7 @@ const buttonStyle = css<Props>`
 
   ${props =>
     props.size === 'sm' &&
-    css`
+    `
       font-size: 14px;
       padding: 0 12px;
       height: 32px;
@@ -159,7 +178,7 @@ const buttonStyle = css<Props>`
 
   ${props =>
     props.size === 'xs' &&
-    css`
+    `
       font-size: 11px;
       padding: 0 10px;
       height: 28px;
@@ -193,14 +212,14 @@ const buttonStyle = css<Props>`
   }
 `;
 
-const Button = styled.button`
+const ButtonContainer = styled.button<StyledContainerProps>`
   ${buttonStyle};
 `;
 
-const AnchorButtonInner = styled.div`
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+const Text = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const anchorButtonStyle = css`
@@ -211,69 +230,107 @@ const anchorButtonStyle = css`
   }
 `;
 
-const LinkButton = styled(Link)`
+const AnchorButtonInner = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const LinkButton = styled(Link)<StyledContainerProps>`
   ${anchorButtonStyle};
 `;
 
-const AnchorButton = styled.a`
+const AnchorButton = styled.a<StyledContainerProps>`
   ${anchorButtonStyle};
 `;
 
-export default ({
-  size = 'md',
-  type = 'button',
-  leftIconSrc,
-  rightIconSrc,
-  children,
-  disabled,
-  loading,
-  to,
-  href,
-  target,
-  ...restProps
-}: Props) => {
-  if (loading) {
+export default class Button extends PureComponent<ContainerProps> {
+  public render() {
+    const {
+      size = 'md',
+      type = 'button',
+      fill = false,
+      leftIconSrc,
+      rightIconSrc,
+      leftIcon,
+      rightIcon,
+      children,
+      disabled,
+      loading,
+      to,
+      href,
+      target,
+      ...restProps
+    } = this.props;
+    if (loading) {
+      return (
+        <ButtonContainer type={type} size={size} fill={`${fill}`} {...restProps} disabled>
+          <StyledSpinner buttonSize={size} />
+        </ButtonContainer>
+      );
+    }
+
+    const options: { rel?: string } = {};
+
+    if (target === '_blank') {
+      options.rel = 'noopener noreferrer';
+    }
+
+    const innerElements = (
+      <>
+        {Boolean(leftIconSrc) && (
+          <LeftIcon>
+            <img src={leftIconSrc} alt="" />
+          </LeftIcon>
+        )}
+        {Boolean(leftIcon) && <LeftIcon>{leftIcon}</LeftIcon>}
+        <Text>{children}</Text>
+        {Boolean(rightIconSrc) && (
+          <RightIcon>
+            <img src={rightIconSrc} alt="" />
+          </RightIcon>
+        )}
+        {Boolean(rightIcon) && <RightIcon>{rightIcon}</RightIcon>}
+      </>
+    );
+
+    const anchorButtonElements = <AnchorButtonInner>{innerElements}</AnchorButtonInner>;
+
+    if (to) {
+      return (
+        <LinkButton
+          to={to}
+          target={target}
+          size={size}
+          disabled={disabled}
+          fill={`${fill}`}
+          {...restProps}
+          {...options}
+        >
+          {anchorButtonElements}
+        </LinkButton>
+      );
+    }
+    if (href) {
+      return (
+        <AnchorButton
+          href={href}
+          target={target}
+          size={size}
+          disabled={disabled}
+          fill={`${fill}`}
+          {...restProps}
+          {...options}
+        >
+          {anchorButtonElements}
+        </AnchorButton>
+      );
+    }
+
     return (
-      <Button type={type} size={size} {...restProps} disabled>
-        <StyledSpinner buttonSize={size} />
-      </Button>
+      <ButtonContainer type={type} size={size} disabled={disabled} fill={`${fill}`} {...restProps}>
+        {innerElements}
+      </ButtonContainer>
     );
   }
-
-  const options: { rel?: string } = {};
-
-  if (target === '_blank') {
-    options.rel = 'noopener noreferrer';
-  }
-
-  const innerElements = (
-    <>
-      {Boolean(leftIconSrc) && <LeftIcon src={leftIconSrc} />}
-      <span>{children}</span>
-      {Boolean(rightIconSrc) && <RightIcon src={rightIconSrc} />}
-    </>
-  );
-
-  const anchorButtonElements = <AnchorButtonInner>{innerElements}</AnchorButtonInner>;
-
-  if (to) {
-    return (
-      <LinkButton to={to} target={target} size={size} disabled={disabled} {...options} {...restProps}>
-        {anchorButtonElements}
-      </LinkButton>
-    );
-  }
-  if (href) {
-    return (
-      <AnchorButton href={href} target={target} size={size} disabled={disabled} {...options} {...restProps}>
-        {anchorButtonElements}
-      </AnchorButton>
-    );
-  }
-
-  return (
-    <Button type={type} size={size} disabled={disabled} {...restProps}>
-      {innerElements}
-    </Button>
-  );
-};
+}

@@ -5,6 +5,7 @@ route: /components/button
 ---
 
 import { Playground, PropsTable } from 'docz';
+import { Icon, Colors } from '@class101/ui';
 import { Component as Button } from './Button';
 
 # Button
@@ -46,18 +47,31 @@ import { Component as Button } from './Button';
 <Playground>
   <Button leftIconSrc="https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/ic-plus-black.png">Click me</Button>
   <Button rightIconSrc="https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/ic-plus-black.png">Click me</Button>
+  <Button leftIcon={<Icon.Add fillColor={Colors.white} size={16} />}>Click me</Button>
+  <Button rightIcon={<Icon.Add fillColor={Colors.white} size={16} />}>Click me</Button>
+  <Button>
+    <Icon.Add fillColor={Colors.white} size={16} />
+    Click me
+  </Button>
+  <Button>
+    <Icon.Add fillColor={Colors.white} size={16} />
+    Click me
+  </Button>
 </Playground>
 
-## With different aligns(Only block)
+## With different aligns(Only fill)
 
 <Playground>
-  <Button textAlign="left" block>
+  <Button textAlign="left" fill>
     Click me
   </Button>
-  <Button textAlign="center" block>
+  <Button textAlign="center" fill>
     Click me
   </Button>
-  <Button textAlign="right" block>
+  <Button textAlign="right" fill>
+    Click me
+  </Button>
+  <Button textAlign="right" fill>
     Click me
   </Button>
 </Playground>
