@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import Button from '../Button';
 import { gray200, gray600, white } from '../Colors';
 
@@ -25,7 +26,7 @@ export default ({
   ...restProps
 }: Props) => (
   <Footer>
-    <Button color={color} backgroundColor={backgroundColor} style={style} {...restProps} block>
+    <Button color={color} backgroundColor={backgroundColor} style={style} {...restProps} fill>
       {buttonTitle}
     </Button>
   </Footer>
