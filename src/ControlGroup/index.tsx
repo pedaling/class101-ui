@@ -1,19 +1,26 @@
-import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
+import React from 'react';
+import styled from 'styled-components';
 
-interface Props {
-  block?: boolean;
+interface CommonProps {
   vertical?: boolean;
   children: React.ReactNode;
 }
 
-const Container = styled.div<Props>`
+interface ContainerProps extends CommonProps {
+  fill?: boolean;
+}
+
+interface StyledContainerProps extends CommonProps {
+  fill?: string;
+}
+
+const Container = styled.div<StyledContainerProps>`
   display: flex;
   align-items: stretch;
 
   ${props =>
     props.vertical
-      ? css`
+      ? `
           flex-direction: column;
 
           & * {
@@ -31,7 +38,7 @@ const Container = styled.div<Props>`
             }
           }
         `
-      : css`
+      : `
           flex-direction: row;
 
           & * {
@@ -51,20 +58,20 @@ const Container = styled.div<Props>`
         `}
 
   ${props =>
-    props.block &&
-    css`
+    props.fill &&
+    `
       & * {
         flex: 1 1 auto;
       }
     `};
 `;
 
-export default class ControlGroup extends React.PureComponent<Props> {
+export default class ControlGroup extends React.PureComponent<ContainerProps> {
   public render() {
-    const { block, children, vertical, ...restProps } = this.props;
+    const { fill = false, children, vertical, ...restProps } = this.props;
 
     return (
-      <Container block={block} vertical={vertical} {...restProps}>
+      <Container fill={`${fill}`} vertical={vertical} {...restProps}>
         {children}
       </Container>
     );

@@ -1,10 +1,9 @@
-// @flow
-import React from 'react';
-import { Button, Colors } from '@class101/ui';
+import { Button } from '@class101/ui';
+import React, { ReactNode } from 'react';
 
 interface Props {
   /** 가로를 모두 채울지 여부 */
-  block?: boolean;
+  fill?: boolean;
 
   /** 크기 */
   size?: 'lg' | 'md' | 'sm';
@@ -15,11 +14,17 @@ interface Props {
   /** 배경의 색상 */
   backgroundColor?: string;
 
-  /** 왼쪽 아이콘 */
+  /** 왼쪽 아이콘 이미지 */
   leftIconSrc?: string;
 
-  /** 오른쪽 아이콘 */
+  /** 오른쪽 아이콘 이미지 */
   rightIconSrc?: string;
+
+  /** 왼쪽 아이콘 노드 */
+  leftIcon?: ReactNode;
+
+  /** 오른쪽 아이콘 노드 */
+  rightIcon?: ReactNode;
 
   /** 글의 정렬 */
   textAlign?: 'left' | 'center' | 'right';
@@ -36,31 +41,11 @@ interface Props {
   /** A Tag에 쓸 URL */
   href?: string;
 
-  children: Node;
+  children: ReactNode;
 }
 
-export const Component = ({
-  block = false,
-  size = 'md',
-  color = Colors.white,
-  backgroundColor = Colors.orange600,
-  textAlign = 'center',
-  borderRadius = 3,
-  loading = false,
-  children,
-  ...restProps
-}: Props) => (
-  <Button
-    style={{ marginRight: block ? 0 : 12, marginBottom: block ? 12 : 0 }}
-    block={block}
-    size={size}
-    color={color}
-    backgroundColor={backgroundColor}
-    textAlign={textAlign}
-    borderRadius={borderRadius}
-    loading={loading}
-    {...restProps}
-  >
+export const Component = ({ children, fill, ...restProps }: Props) => (
+  <Button style={{ marginRight: fill ? 0 : 12, marginBottom: fill ? 12 : 0 }} fill={fill} {...restProps}>
     {children}
   </Button>
 );
