@@ -1,8 +1,10 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { media } from '../BreakPoints';
+import styled from 'styled-components';
 
-interface Props {
+import { media } from '../BreakPoints';
+import { HTMLDivProps } from '../interfaces/props';
+
+interface Props extends HTMLDivProps {
   marginTop?: number | string;
   marginBottom?: number | string;
   maxWidthNone?: boolean;
@@ -12,12 +14,12 @@ const StyledDiv = styled.div<Props>`
   position: relative;
   ${props =>
     props.marginTop &&
-    css`
+    `
       margin-top: ${typeof props.marginTop === 'number' ? `${props.marginTop}px` : props.marginTop};
     `}
   ${props =>
     props.marginBottom &&
-    css`
+    `
       margin-bottom: ${typeof props.marginBottom === 'number' ? `${props.marginBottom}px` : props.marginBottom};
     `}
   margin-left: auto;
