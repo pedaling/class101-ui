@@ -1,8 +1,8 @@
-import { HTMLDivProps } from '../interfaces/props';
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { media } from '../BreakPoints';
+import { HTMLDivProps } from '../interfaces/props';
 
 interface Props extends HTMLDivProps {
   marginTop?: number | string;
@@ -10,15 +10,18 @@ interface Props extends HTMLDivProps {
 }
 
 const StyledDiv = styled.div<Props>`
-  zoom: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: stretch;
   ${props =>
     props.marginTop &&
-    css`
+    `
       margin-top: ${typeof props.marginTop === 'number' ? `${props.marginTop}px` : props.marginTop};
     `}
   ${props =>
     props.marginBottom &&
-    css`
+    `
       margin-bottom: ${typeof props.marginBottom === 'number' ? `${props.marginBottom}px` : props.marginBottom};
     `}
   margin-right: -12px;
@@ -27,16 +30,6 @@ const StyledDiv = styled.div<Props>`
     margin-right: -4px;
     margin-left: -4px;
   `};
-
-  &::before,
-  &::after {
-    content: '';
-    display: table;
-  }
-
-  &::after {
-    clear: both;
-  }
 `;
 
 export default class Row extends React.PureComponent<Props> {

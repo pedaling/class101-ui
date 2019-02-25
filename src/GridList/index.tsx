@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { media } from '../BreakPoints';
 import { HTMLDivProps } from '../interfaces/props';
@@ -17,64 +17,50 @@ const List = styled.div``;
 
 const GridListUl = styled.ul<{ smColumn?: Column }>`
   overflow: hidden;
-  display: block;
   list-style: none;
-  margin-block-start: 0;
-  margin-block-end: 0;
-  padding-inline-start: 0;
+  margin: 0;
+  padding: 0;
   margin-right: -12px;
   margin-left: -12px;
   margin-bottom: -24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: stretch;
 
   ${media.sm`
     margin-right: -4px;
     margin-left: -4px;
     ${props =>
       props.smColumn === 2 &&
-      css`
+      `
         margin-right: -8px;
         margin-left: -8px;
       `}%;
   `};
-
-  &::before,
-  &::after {
-    content: '';
-    display: table;
-  }
-
-  &::after {
-    clear: both;
-  }
 `;
+
 const GridListItem = styled.li<{ lgColumn?: Column; smColumn?: Column }>`
   position: relative;
   min-height: 1px;
   padding-right: 12px;
   padding-left: 12px;
   margin-bottom: 24px;
-  float: left;
   box-sizing: border-box;
-  width: ${props => sizeToPercent(props.smColumn)}%;
+  flex-basis: ${props => sizeToPercent(props.smColumn)}%;
 
   ${media.sm`
     padding-right: 4px;
     padding-left: 4px;
     ${props =>
       props.smColumn === 2 &&
-      css`
+      `
         padding-right: 8px;
         padding-left: 8px;
       `}%;
     ${props =>
-      css`
-        &:nth-child(${props.smColumn}n + 1) {
-          clear: left;
-        }
-      `}
-    ${props =>
       props.smColumn === 1 &&
-      css`
+      `
         .sale-wish-icon {
           > svg {
             width: 32px;
@@ -87,15 +73,8 @@ const GridListItem = styled.li<{ lgColumn?: Column; smColumn?: Column }>`
   ${media.lg`
     ${props =>
       props.lgColumn &&
-      css<{ lgColumn?: Column; smColumn?: Column }>`
-        width: ${props => sizeToPercent(props.lgColumn)}%;
-      `}
-    ${props =>
-      props.lgColumn &&
-      css`
-        &:nth-child(${props.lgColumn}n + 1) {
-          clear: left;
-        }
+      `
+        flex-basis: ${sizeToPercent(props.lgColumn)}%;
       `}
   `}
 `;
