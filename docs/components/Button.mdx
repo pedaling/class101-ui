@@ -12,6 +12,9 @@ import { Component as Button } from './Button';
 
 눌러서 제어하는 기능을 담당하는 컴포넌트입니다.
 
+> v4부터 Icon 컴포넌트와 함께 사용할 수 있도록 flex 기반의 스타일링을 지원하고 있습니다.  
+> textAlign 프로퍼티는 v4부터 지원하지 않습니다.
+
 ## Props
 
 <PropsTable of={Button} />
@@ -59,21 +62,11 @@ import { Component as Button } from './Button';
   </Button>
 </Playground>
 
-## With different aligns(Only fill)
+## With fill
 
 <Playground>
-  <Button textAlign="left" fill>
-    Click me
-  </Button>
-  <Button textAlign="center" fill>
-    Click me
-  </Button>
-  <Button textAlign="right" fill>
-    Click me
-  </Button>
-  <Button textAlign="right" fill>
-    Click me
-  </Button>
+  <Button>Click me</Button>
+  <Button fill>Click me</Button>
 </Playground>
 
 ## Disabled button

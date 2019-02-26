@@ -26,9 +26,6 @@ interface Props {
   /** 오른쪽 아이콘 노드 */
   rightIcon?: ReactNode;
 
-  /** 글의 정렬 */
-  textAlign?: 'left' | 'center' | 'right';
-
   /** 버튼의 둥근 정도 */
   borderRadius?: number;
 

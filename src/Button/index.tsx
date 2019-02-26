@@ -15,7 +15,6 @@ interface CommonProps {
   rightIconSrc?: string;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
-  textAlign?: 'left' | 'center' | 'right';
   loading?: boolean;
   borderRadius?: number;
   to?: string;
@@ -116,8 +115,7 @@ const buttonStyle = css<StyledContainerProps>`
   font-weight: normal;
   width: ${props => (props.fill === 'true' ? '100%' : 'auto')};
   display: ${props => (props.fill === 'true' ? 'flex' : 'inline-flex')};
-  justify-content: ${props =>
-    props.textAlign === 'left' ? 'flex-start' : props.textAlign === 'right' ? 'flex-end' : 'center'};
+  justify-content: center;
   align-items: center;
   vertical-align: middle;
 
