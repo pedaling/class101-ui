@@ -32,3 +32,4 @@ export { default as Select } from './Select';
 export { Colors, BreakPoints, TextStyles, Icon };
 export { default as GlobalStyle } from './GlobalStyle';
 export { default as Checkbox } from './Checkbox';
+export { default as Paper } from './Paper';
