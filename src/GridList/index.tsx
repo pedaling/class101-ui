@@ -47,7 +47,7 @@ const GridListItem = styled.li<{ lgColumn?: Column; smColumn?: Column }>`
   padding-left: 12px;
   margin-bottom: 24px;
   box-sizing: border-box;
-  flex-basis: ${props => sizeToPercent(props.smColumn)}%;
+  width: ${props => sizeToPercent(props.smColumn)}%;
 
   ${media.sm`
     padding-right: 4px;
@@ -74,7 +74,7 @@ const GridListItem = styled.li<{ lgColumn?: Column; smColumn?: Column }>`
     ${props =>
       props.lgColumn &&
       `
-        flex-basis: ${sizeToPercent(props.lgColumn)}%;
+        width: ${sizeToPercent(props.lgColumn)}%;
       `}
   `}
 `;
