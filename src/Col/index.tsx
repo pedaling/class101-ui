@@ -21,7 +21,7 @@ const Col = styled.div<ColProps>`
   padding-left: 12px;
   box-sizing: border-box;
   ${media.sm<ColProps>`
-    flex-basis: ${props => sizeToPercent(props.sm)}%;
+    width: ${props => sizeToPercent(props.sm)}%;
     padding-right: 4px;
     padding-left: 4px;
     ${props =>
@@ -32,7 +32,7 @@ const Col = styled.div<ColProps>`
   `}
 
   ${media.md`
-    flex-basis: ${props => sizeToPercent(props.md || props.sm)}%;
+    width: ${props => sizeToPercent(props.md || props.sm)}%;
     ${props =>
       (props.mdOffset || props.smOffset) &&
       `
@@ -41,7 +41,7 @@ const Col = styled.div<ColProps>`
   `}
 
   ${media.lg`
-    flex-basis: ${props => sizeToPercent(props.lg || props.md || props.sm)}%;
+    width: ${props => sizeToPercent(props.lg || props.md || props.sm)}%;
     ${props =>
       (props.lgOffset || props.mdOffset || props.smOffset) &&
       `

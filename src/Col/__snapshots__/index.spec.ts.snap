@@ -21,7 +21,7 @@ Object {
       " {
         ",
       "
-    flex-basis: ",
+    width: ",
       [Function],
       "%;
     padding-right: 4px;
@@ -41,7 +41,7 @@ Object {
       " {
         ",
       "
-    flex-basis: ",
+    width: ",
       [Function],
       "%;
     ",
@@ -60,7 +60,7 @@ Object {
       " {
         ",
       "
-    flex-basis: ",
+    width: ",
       [Function],
       "%;
     ",
