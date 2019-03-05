@@ -108,7 +108,7 @@ const buttonStyle = css<StyledContainerProps>`
   background-color: ${props => props.backgroundColor || orange600};
   outline: none;
   border: none;
-  border-radius: ${props => props.borderRadius || 3}px;
+  border-radius: ${props => (props.borderRadius != null ? props.borderRadius : 3)}px;
   cursor: pointer;
   line-height: 1 !important;
   box-sizing: border-box;
