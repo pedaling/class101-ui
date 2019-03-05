@@ -3,9 +3,9 @@ import React from 'react';
 
 interface Props {
   /** 가장자리 둥근 정도 */
-  borderRadius?: 1 | 2 | 3 | 4;
+  borderRadius?: number;
 
-  /** 모바일(sm)에서 차지할 열 */
+  /** 그림자 깊이 */
   elevation?: 1 | 2 | 3 | 4 | 5;
 }
 
