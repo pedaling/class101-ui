@@ -1,10 +1,11 @@
-import { css } from 'styled-components';
+import { css, FlattenSimpleInterpolation } from 'styled-components';
 
+export type ElevationValue = 1 | 2 | 3 | 4 | 5;
 export interface ElevationProps {
-  elevation?: 1 | 2 | 3 | 4 | 5;
+  elevation?: ElevationValue;
 }
 
-export const elevationStyles = {
+export const elevationStyleByElevation: { [key in ElevationValue]: FlattenSimpleInterpolation } = {
   1: css`
     box-shadow: 0 1px 3px -1px rgba(41, 42, 43, 0.16), 0 0 1px 1px rgba(0, 0, 0, 0.04);
   `,
@@ -21,5 +22,3 @@ export const elevationStyles = {
     box-shadow: 0 24px 32px -8px rgba(41, 42, 43, 0.24);
   `,
 };
-
-export default elevationStyles;
