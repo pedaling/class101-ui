@@ -5,26 +5,31 @@ import { ElevationProps, elevationStyleByElevation } from '../ElevationStyle';
 import { HTMLDivProps } from '../interfaces/props';
 import defaultTo from '../utils/defaultTo';
 
-interface PaperProps extends ElevationProps {
+interface StyleProps extends ElevationProps {
   borderRadius?: number;
 }
 
-const Container = styled.div<PaperProps>`
+interface Props extends StyleProps {
+  htmlDivAttributes: HTMLDivProps;
+}
+
+const Container = styled.div<StyleProps & HTMLDivProps>`
   border-radius: ${props => defaultTo(props.borderRadius, 1)}px;
   background-color: white;
-  ${props => elevationStyleByElevation[defaultTo(props.elevation, 4)]}
+  ${props => elevationStyleByElevation[defaultTo(props.elevation, 1)]}
 `;
 
-export default class Paper extends PureComponent<PaperProps & HTMLDivProps> {
+export default class Paper extends PureComponent<Props> {
   public defaultProps = {
     borderRadius: 1,
+    elevation: 1,
   };
 
   public render() {
-    const { elevation, children, ...restProps } = this.props;
+    const { children, htmlDivAttributes, ...restProps } = this.props;
 
     return (
-      <Container elevation={elevation} {...restProps}>
+      <Container {...htmlDivAttributes} {...restProps}>
         {children}
       </Container>
     );
