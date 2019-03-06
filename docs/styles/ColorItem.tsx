@@ -1,4 +1,3 @@
-// @flow
 import { Colors } from '@class101/ui';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
