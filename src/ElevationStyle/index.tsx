@@ -2,6 +2,7 @@ import { css, FlattenSimpleInterpolation } from 'styled-components';
 
 export type ElevationValue = 1 | 2 | 3 | 4 | 5;
 export interface ElevationProps {
+  /** 그림자 깊이 */
   elevation?: ElevationValue;
 }
 
