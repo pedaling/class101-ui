@@ -35,6 +35,7 @@ const StyledSelect = styled.select<{ inputSize: InputSize; fill?: boolean }>`
 export default class Select extends React.PureComponent<React.SelectHTMLAttributes<HTMLSelectElement> & SelectProps> {
   public static defaultProps = {
     size: InputSize.md,
+    fill: true,
   };
 
   public render() {
