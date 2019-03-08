@@ -7,7 +7,7 @@ export default class SvgReplay extends React.PureComponent<IconProps> {
   };
 
   public render() {
-    return <svg width={this.props.size} height={this.props.size} viewBox="0 0 24 24"><path fill={this.props.fillColor} fillRule="evenodd" d="M17.02 5L12 10V6c-3.84.021-6.979 3.16-7 7-.014 3.847 3.153 7.014 7 7 3.847-.014 7.006-3.153 7.02-7H21c-.021 4.943-4.057 8.979-9 9-4.929.021-9.028-4.064-9-9 .028-4.936 4.064-8.972 9-9V0l5.02 5z" /></svg>;
+    return <svg width={this.props.size} height={this.props.size} style={this.props.style} className={this.props.className} viewBox="0 0 24 24"><path fill={this.props.fillColor} fillRule="evenodd" d="M17.02 5L12 10V6c-3.84.021-6.979 3.16-7 7-.014 3.847 3.153 7.014 7 7 3.847-.014 7.006-3.153 7.02-7H21c-.021 4.943-4.057 8.979-9 9-4.929.021-9.028-4.064-9-9 .028-4.936 4.064-8.972 9-9V0l5.02 5z" /></svg>;
   }
 
 }
