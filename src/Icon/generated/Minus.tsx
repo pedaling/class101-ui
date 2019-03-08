@@ -7,7 +7,7 @@ export default class SvgMinus extends React.PureComponent<IconProps> {
   };
 
   public render() {
-    return <svg width={this.props.size} height={this.props.size} viewBox="0 0 24 24"><path fill={this.props.fillColor} fillRule="evenodd" d="M4 11h16v2H4z" /></svg>;
+    return <svg width={this.props.size} height={this.props.size} style={this.props.style} className={this.props.className} viewBox="0 0 24 24"><path fill={this.props.fillColor} fillRule="evenodd" d="M4 11h16v2H4z" /></svg>;
   }
 
 }
