@@ -5,6 +5,8 @@ interface Props {
   /** 사이즈 */
   size: 'sm' | 'md';
 
+  fill?: boolean;
+
   /** input의 type */
   type: string;
 
@@ -37,4 +39,5 @@ export const Component = ({ type = 'text', inline = false, ...restProps }: Props
 Component.defaultProps = {
   size: 'md',
   type: 'text',
+  fill: true,
 };

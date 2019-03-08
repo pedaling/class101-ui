@@ -1,54 +1,33 @@
+import { HTMLInputProps } from 'interfaces/props';
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-import { gray300, gray400, gray50, gray500, gray600, gray800, orange500, redError } from '../Colors';
-import { Alert } from '../Icon';
-import { HTMLInputProps } from '../interfaces/props';
-import { body2 } from '../TextStyles';
+import { gray500, gray600, gray800, orange500, redError } from '../../Colors';
+import { Alert } from '../../Icon';
+import { body2 } from '../../TextStyles';
+import { FormInputFillStyle, FormInputStyle, FormInputStyleBySize, InputSize } from '../common';
 
-type Size = 'sm' | 'md';
 interface Props {
-  size: Size;
+  size: InputSize;
   type: string;
   className?: string;
   style?: React.CSSProperties;
   inputStyle?: React.CSSProperties;
+  fill?: boolean;
   inline?: boolean;
   allowMessage?: string;
   warnMessage?: string;
   errorMessage?: string;
 }
 
-const defaultStyle = css`
-  height: 48px;
-`;
-const smallStyle = css`
-  height: 40px;
-`;
-
-const StyledInput = styled.input<{ size: Size }>`
+const StyledInput = styled.input<Props>`
   ${body2};
+  ${FormInputStyle};
+  ${props => FormInputStyleBySize[props.size]};
+  ${props => (props.fill ? FormInputFillStyle : null)};
   color: ${gray800};
-  border-radius: 1px;
-  background-color: white;
-  border: solid 1px ${gray300};
-  width: 100%;
   box-sizing: border-box;
-  ${props => (props.size === 'sm' ? smallStyle : defaultStyle)};
   padding: 0 16px;
-  &:hover {
-    border: solid 1px ${gray400};
-  }
-  &:disabled {
-    background-color: ${gray50};
-    &:hover {
-      cursor: not-allowed;
-    }
-  }
-  &:focus {
-    outline: none;
-    border-color: ${gray800};
-  }
   &::-webkit-input-placeholder {
     color: ${gray500};
   }
@@ -108,7 +87,8 @@ const Container = styled.div<{ inline?: boolean }>`
 
 export default class Input extends React.PureComponent<HTMLInputProps & Props> {
   public static defaultProps: Partial<Props> = {
-    size: 'md',
+    size: InputSize.md,
+    fill: true,
     type: 'text',
   };
 

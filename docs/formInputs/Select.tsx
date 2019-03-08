@@ -5,6 +5,7 @@ type OptionProps = string | { label?: string; disabled?: boolean; value?: string
 
 interface Props {
   options?: OptionProps[];
+  fill?: boolean;
   value: string | boolean | undefined;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => any;
 }
