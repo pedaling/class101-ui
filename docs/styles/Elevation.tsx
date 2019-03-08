@@ -1,8 +1,10 @@
 import { Colors, ElevationStyles } from '@class101/ui';
+import { ElevationProps } from '@class101/ui/ElevationStyles';
+import { defaultTo } from 'lodash-es';
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-const customStyle = css`
+export const Elevation = styled.div<ElevationProps>`
   flex: 1 1 20%;
   background-color: white;
   margin: 4px;
@@ -10,26 +12,7 @@ const customStyle = css`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-export const Elevation1 = styled.div`
-  ${customStyle}
-  ${ElevationStyles.elevation1};
-`;
-export const Elevation2 = styled.div`
-  ${customStyle}
-  ${ElevationStyles.elevation2};
-`;
-export const Elevation3 = styled.div`
-  ${customStyle}
-  ${ElevationStyles.elevation3};
-`;
-export const Elevation4 = styled.div`
-  ${customStyle}
-  ${ElevationStyles.elevation4};
-`;
-export const Elevation5 = styled.div`
-  ${customStyle}
-  ${ElevationStyles.elevation5};
+  ${props => ElevationStyles[`elevation${defaultTo(props.elevation, 1)}`]}
 `;
 
 export const Container = styled.div`
