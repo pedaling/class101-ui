@@ -1,4 +1,3 @@
-import { defaultTo } from 'lodash-es';
 import React, { PureComponent, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
@@ -109,7 +108,7 @@ const buttonStyle = css<StyledContainerProps>`
   background-color: ${props => props.backgroundColor || orange600};
   outline: none;
   border: none;
-  border-radius: ${props => defaultTo(props.borderRadius, 3)}px;
+  border-radius: ${props => (props.borderRadius != null ? props.borderRadius : 3)}px;
   cursor: pointer;
   line-height: 1 !important;
   box-sizing: border-box;
