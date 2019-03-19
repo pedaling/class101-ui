@@ -5,7 +5,7 @@ import React, { ReactNode } from 'react';
 interface Props {
   title?: string | ReactNode;
   titleStyle?: any;
-  subTitle?: string;
+  description?: string;
   buttonTitle?: string;
   buttonStyle?: any;
   to?: string;

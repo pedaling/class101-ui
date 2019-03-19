@@ -4,12 +4,12 @@ import styled from 'styled-components';
 
 import { gray300 } from '../Colors';
 import { Chevron } from '../Icon';
-import { body2 } from '../TextStyles';
+import { caption1 } from '../TextStyles';
 import Typography, { Typo } from '../Typography';
 
 interface Props {
   title?: ReactNode;
-  subTitle?: string;
+  description?: string;
   typography?: Typo;
   to?: string;
   href?: string;
@@ -30,12 +30,12 @@ const HeaderTop = styled.div`
   align-items: center;
 `;
 
-const SubTitle = styled.p`
-  ${body2};
+const Description = styled.p`
+  ${caption1};
   margin-top: 4px;
 `;
 
-export default ({ title, subTitle, typography, to, href, target, ...restProps }: Props) => {
+export default ({ title, description, typography, to, href, target, ...restProps }: Props) => {
   const options: { rel?: string } = {};
 
   if (target === '_blank') {
@@ -53,7 +53,7 @@ export default ({ title, subTitle, typography, to, href, target, ...restProps }:
             <Chevron fillColor={gray300} />
           </HeaderTop>
         </Link>
-        {subTitle && <SubTitle>{subTitle}</SubTitle>}
+        {description && <Description>{description}</Description>}
       </Header>
     );
   }
@@ -68,7 +68,7 @@ export default ({ title, subTitle, typography, to, href, target, ...restProps }:
             <Chevron fillColor={gray300} />
           </HeaderTop>
         </a>
-        {subTitle && <SubTitle>{subTitle}</SubTitle>}
+        {description && <Description>{description}</Description>}
       </Header>
     );
   }
@@ -79,7 +79,7 @@ export default ({ title, subTitle, typography, to, href, target, ...restProps }:
           {title}
         </Typography>
       </HeaderTop>
-      {subTitle && <SubTitle>{subTitle}</SubTitle>}
+      {description && <Description>{description}</Description>}
     </Header>
   );
 };
