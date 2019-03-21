@@ -1,0 +1,135 @@
+---
+menu: Components
+name: Tab
+route: /components/tab
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Tab } from '@class101/ui';
+
+# Tab
+
+## Props
+
+<PropsTable of={Tab} />
+
+## Basic badge
+
+<Playground>
+  <Tab
+    currentValue="PREVIEW"
+    tabs={[
+      {
+        value: 'PREVIEW',
+        title: '알림 신청',
+      },
+      {
+        value: 'KLASS',
+        title: '클래스 및 패키지',
+      },
+      {
+        value: 'CURRICULM',
+        title: '커리큘럼',
+      },
+    ]}
+  />
+</Playground>
+
+## onTabChange
+
+<Playground>
+  {() => {
+    const value = 'PREVIEW';
+    const tabs = [
+      {
+        value: 'PREVIEW',
+        title: '알림 신청',
+      },
+      {
+        value: 'KLASS',
+        title: '클래스 및 패키지',
+      },
+      {
+        value: 'CURRICULM',
+        title: '커리큘럼',
+      },
+    ];
+    class Example extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { currentValue: 'PREVIEW' };
+      }
+      render() {
+        let SectionElement;
+        switch (this.state.currentValue) {
+          case 'PREVIEW':
+            SectionElement = <div>알림 신청 알림 신청 알림 신청</div>
+            break;
+          case 'KLASS':
+            SectionElement = <div>클래스 및 패키지 클래스 및 패키지 클래스 및 패키지</div>
+            break;
+          default:
+            SectionElement = <div>커리큘럼 커리큘럼 커리큘럼</div>
+            break;
+        }
+        return <>
+          <Tab onTabChange={(value) => {this.setState({currentValue: value})}} tabs={tabs} currentValue={this.state.currentValue}/>
+          {SectionElement}
+        </>;
+      }
+    }
+    return <Example />
+}}
+
+</Playground>
+
+## Width badge
+
+<Playground>
+  <Tab
+    currentValue="PREVIEW"
+    tabs={[
+      {
+        value: 'PREVIEW',
+        title: '알림 신청',
+        badge: 0,
+      },
+      {
+        value: 'KLASS',
+        title: '클래스 및 패키지',
+        badge: 5,
+      },
+      {
+        value: 'CURRICULM',
+        title: '커리큘럼',
+        badge: 12,
+      },
+    ]}
+  />
+</Playground>
+
+## Not fluid
+
+<Playground>
+  <Tab
+    fluid={false}
+    currentValue="PREVIEW"
+    tabs={[
+      {
+        value: 'PREVIEW',
+        title: '알림 신청',
+        badge: 0,
+      },
+      {
+        value: 'KLASS',
+        title: '클래스 및 패키지',
+        badge: 5,
+      },
+      {
+        value: 'CURRICULM',
+        title: '커리큘럼',
+        badge: 12,
+      },
+    ]}
+  />
+</Playground>

@@ -32,6 +32,7 @@ export { default as Caption2 } from './Typography/Caption2';
 export { default as Portal } from './Portal';
 export { default as Toast, Props as ToastProps } from './Toast';
 export { default as Toaster } from './Toaster';
+export { default as Tab } from './Tab/TabContainer';
 
 export { Colors, BreakPoints, TextStyles, Icon, ElevationStyles, Input, Position, Select };
 export { default as GlobalStyle } from './GlobalStyle';
