@@ -19,10 +19,10 @@ interface Props {
   activeColor: string;
   borderColor: string;
   activeBorderColor: string;
+  fluid: boolean;
   className?: string;
-  fluid?: boolean;
   onTabChange?: (value: string | number) => void;
-  htmlDivAttributes?: HTMLAttributes<HTMLUListElement>;
+  ulAttributes?: HTMLAttributes<HTMLUListElement>;
 }
 
 export default class TabContainer extends PureComponent<Props> {
@@ -45,10 +45,10 @@ export default class TabContainer extends PureComponent<Props> {
       activeColor,
       activeBorderColor,
       fluid,
-      htmlDivAttributes,
+      ulAttributes,
     } = this.props;
     return (
-      <TabList borderColor={borderColor} className={className} {...htmlDivAttributes}>
+      <TabList borderColor={borderColor} className={className} {...ulAttributes}>
         {tabs.map(tab => (
           <TabItem
             key={tab.value}
@@ -58,7 +58,8 @@ export default class TabContainer extends PureComponent<Props> {
             color={color}
             activeColor={activeColor}
             activeBorderColor={activeBorderColor}
-            flexBasis={fluid ? 'auto' : `${100 / tabs.length}%`}
+            tabCount={tabs.length}
+            fluid={fluid}
           >
             {tab.title}
             {!isNil(tab.badge) && (

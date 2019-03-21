@@ -7,7 +7,8 @@ interface TabItemStyle {
   color: string;
   activeColor: string;
   activeBorderColor: string;
-  flexBasis: string;
+  tabCount: number;
+  fluid: boolean;
 }
 export interface TabItemProps extends TabItemStyle {
   value: string | number;
@@ -18,7 +19,7 @@ export interface TabItemProps extends TabItemStyle {
 
 export default class TabItem extends PureComponent<TabItemProps> {
   public render() {
-    const { className, flexBasis, children, color, activeColor, activeBorderColor } = this.props;
+    const { className, fluid, children, tabCount, color, activeColor, activeBorderColor } = this.props;
 
     return (
       <TabItemContainer
@@ -27,7 +28,8 @@ export default class TabItem extends PureComponent<TabItemProps> {
         color={color}
         activeColor={activeColor}
         activeBorderColor={activeBorderColor}
-        flexBasis={flexBasis}
+        tabCount={tabCount}
+        fluid={fluid}
       >
         {children}
       </TabItemContainer>
@@ -44,11 +46,11 @@ export default class TabItem extends PureComponent<TabItemProps> {
 const TabItemContainer = styled.li<TabItemStyle>`
   ${body2};
   display: flex;
-  flex-basis: ${props => props.flexBasis};
+  flex-basis: ${props => (props.fluid ? 'auto' : `${100 / props.tabCount}%`)};
   align-items: center;
   justify-content: center;
   padding: 0 4px 13px 4px;
-  margin-right: ${props => (props.flexBasis === 'auto' ? '26px' : 0)};
+  margin-right: ${props => (props.fluid ? '26px' : 0)};
   color: ${props => props.color};
 
   &:hover {
