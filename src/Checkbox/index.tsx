@@ -1,9 +1,13 @@
-import * as React from 'react'
+import * as React from 'react';
 import styled from 'styled-components';
-import { CheckboxOn, CheckboxOff} from '../Icon';
-import { orange500, redError, gray600 } from '../Colors';
+
+import { gray600, orange500, redError } from '../Colors';
+import { CheckboxOff, CheckboxOn } from '../Icon';
 import { HTMLInputProps } from '../interfaces/props';
-import Message from './message'
+import { body2 } from '../TextStyles';
+import Message from './message';
+
+const CHECKBOX_SIZE = 24;
 
 export interface Props extends HTMLInputProps {
   className?: string;
@@ -20,25 +24,34 @@ const HiddenCheckboxInput = styled.input.attrs({ type: 'checkbox' })`
 `;
 
 const ChildText = styled.span`
-  font-size: 14px;
+  ${body2};
   margin-left: 8px;
-  line-height: 20px;
-  letter-spacing: -0.2px;
-`
+`;
 
 const Container = styled.label<Props>`
   display: ${props => (props.inline ? 'inline-flex' : 'flex')};
   align-items: center;
 `;
 
-
 export default class Checkbox extends React.PureComponent<Props> {
   public render() {
-    const { className, style, inputStyle, inline, allowMessage, warnMessage, errorMessage, type, children, checked, ...restProps } = this.props;
+    const {
+      className,
+      style,
+      inputStyle,
+      inline,
+      allowMessage,
+      warnMessage,
+      errorMessage,
+      type,
+      children,
+      checked,
+      ...restProps
+    } = this.props;
     return (
       <div style={style}>
         <Container inline={inline}>
-          {checked ? <CheckboxOn size={18}/> : <CheckboxOff size={18} />}
+          {checked ? <CheckboxOn size={CHECKBOX_SIZE} /> : <CheckboxOff size={CHECKBOX_SIZE} />}
           <HiddenCheckboxInput
             className={className || ''}
             onChange={this.handleChange}
@@ -49,7 +62,7 @@ export default class Checkbox extends React.PureComponent<Props> {
           <ChildText>{children}</ChildText>
         </Container>
 
-        {allowMessage && !errorMessage && <Message color={gray600} message={allowMessage}/>}
+        {allowMessage && !errorMessage && <Message color={gray600} message={allowMessage} />}
         {errorMessage && <Message color={redError} descriptionIconFillColor={redError} message={errorMessage} />}
         {warnMessage && <Message color={orange500} descriptionIconFillColor={orange500} message={warnMessage} />}
       </div>
@@ -60,5 +73,5 @@ export default class Checkbox extends React.PureComponent<Props> {
     if (this.props.onChange !== undefined) {
       this.props.onChange(e);
     }
-  }
+  };
 }
