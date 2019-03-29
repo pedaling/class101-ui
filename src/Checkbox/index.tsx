@@ -7,10 +7,9 @@ import { HTMLInputProps } from '../interfaces/props';
 import { body2 } from '../TextStyles';
 import Message from './message';
 
-const CHECKBOX_SIZE = 24;
-
 export interface Props extends HTMLInputProps {
   className?: string;
+  size: number;
   style?: React.CSSProperties;
   inputStyle?: React.CSSProperties;
   inline?: boolean;
@@ -28,16 +27,20 @@ const ChildText = styled.span`
   margin-left: 8px;
 `;
 
-const Container = styled.label<Props>`
+const Container = styled.label<{ inline?: boolean }>`
   display: ${props => (props.inline ? 'inline-flex' : 'flex')};
   align-items: center;
 `;
 
 export default class Checkbox extends React.PureComponent<Props> {
+  public static defaultProps: Partial<Props> = {
+    size: 24,
+  };
   public render() {
     const {
       className,
       style,
+      size,
       inputStyle,
       inline,
       allowMessage,
@@ -51,7 +54,7 @@ export default class Checkbox extends React.PureComponent<Props> {
     return (
       <div style={style}>
         <Container inline={inline}>
-          {checked ? <CheckboxOn size={CHECKBOX_SIZE} /> : <CheckboxOff size={CHECKBOX_SIZE} />}
+          {checked ? <CheckboxOn size={size} /> : <CheckboxOff size={size} />}
           <HiddenCheckboxInput
             className={className || ''}
             onChange={this.handleChange}
