@@ -95,24 +95,26 @@ const typographyList = {
 
 const TextElement = styled.div<Props>`
   ${props => typographyList[props.md]}
-  ${props =>
-    props.sm
-      ? `
-    ${media.sm`
-      ${typographyList[props.sm]}
-    `}
-  `
-      : ''}
-  ${props =>
-    props.lg
-      ? `
-    ${media.lg`
-      ${typographyList[props.lg]}
-    `}
-  `
-      : ''}
   ${displayStyle}
   ${customStyle}
+  ${props =>
+    props.sm &&
+    css`
+      ${media.sm`
+        ${typographyList[props.sm]}
+        ${displayStyle}
+        ${customStyle}
+      `}
+    `}
+  ${props =>
+    props.lg &&
+    css`
+      ${media.lg`
+        ${typographyList[props.lg]}
+        ${displayStyle}
+        ${customStyle}
+      `}
+    `}
 `;
 
 export default class Typography extends PureComponent<Props> {
