@@ -13,7 +13,7 @@ interface Props extends BaseProps {
 
 const Label = styled.label<{ labelColor?: string }>`
   ${body2};
-  margin: 0 0 8px;
+  margin: 0 0 4px;
   color: ${props => props.labelColor || gray800};
 `;
 
