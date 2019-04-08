@@ -1,38 +1,85 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { PureComponent, ReactNode } from 'react';
+import styled, { css } from 'styled-components';
 
 import { red600, white } from '../Colors';
 import { caption2 } from '../TextStyles';
 
-interface Props {
-  color?: string;
-  backgroundColor?: string;
-  children?: any;
+type Size = 'sm' | 'md';
+interface BadgeTextProps {
+  backgroundColor: string;
+  round: boolean;
+  size: Size;
 }
 
-const Container = styled.div`
-  display: inline-block;
+interface Props extends BadgeTextProps {
+  color: string;
+  icon?: ReactNode;
+}
+
+export default class Badge extends PureComponent<Props> {
+  public static defaultProps: Partial<Props> = {
+    color: white,
+    backgroundColor: red600,
+    round: true,
+    size: 'md',
+  };
+  public render() {
+    const { color, backgroundColor, round, size, icon, children } = this.props;
+    return (
+      <Container backgroundColor={backgroundColor} round={round} size={size}>
+        {icon ? <Icon>{icon}</Icon> : ''}
+        <Text color={color}>{children}</Text>
+      </Container>
+    );
+  }
+}
+
+const ContainerStyle = (size: Size, round: boolean) => {
+  let minWidth;
+  switch (size) {
+    case 'sm':
+      minWidth = 16;
+      break;
+    default:
+      minWidth = 20;
+      break;
+  }
+  return css`
+    min-width: ${minWidth}px;
+    height: ${minWidth}px;
+    border-radius: ${round ? minWidth / 2 : 3}px;
+  `;
+};
+
+const Container = styled.div<BadgeTextProps>`
+  ${props => ContainerStyle(props.size, props.round)};
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 6px;
+  background-color: ${props => props.backgroundColor};
+  box-sizing: border-box;
 `;
 
-const BadgeCounter = styled.label<Props>`
+const Icon = styled.div`
+  margin-right: 2px;
+  > svg {
+    width: 12px;
+    height: 12px;
+  }
+`;
+
+const Text = styled.div<{ color: string }>`
   ${caption2};
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: bold;
   line-height: 1;
-  min-width: 20px;
-  height: 20px;
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-  border-radius: 10px;
-  background-color: ${props => props.backgroundColor || red600};
-  color: ${props => props.color || white};
-  padding: 0 6px;
+  color: ${props => props.color};
+  > svg {
+    width: 12px;
+    height: 12px;
+    margin: 0 -6px;
+  }
 `;
-
-export default ({ children, color, backgroundColor, ...restProps }: Props) => (
-  <Container {...restProps}>
-    <BadgeCounter color={color} backgroundColor={backgroundColor}>
-      {children}
-    </BadgeCounter>
-  </Container>
-);
