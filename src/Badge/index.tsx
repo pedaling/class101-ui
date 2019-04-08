@@ -7,8 +7,10 @@ import { caption2 } from '../TextStyles';
 type Size = 'sm' | 'md';
 interface BadgeTextProps {
   backgroundColor: string;
-  round: boolean;
+  pill: boolean;
   size: Size;
+  className: string;
+  children: ReactNode;
 }
 
 interface Props extends BadgeTextProps {
@@ -20,13 +22,13 @@ export default class Badge extends PureComponent<Props> {
   public static defaultProps: Partial<Props> = {
     color: white,
     backgroundColor: red600,
-    round: true,
+    pill: true,
     size: 'md',
   };
   public render() {
-    const { color, backgroundColor, round, size, icon, children } = this.props;
+    const { className, color, backgroundColor, pill, size, icon, children } = this.props;
     return (
-      <Container backgroundColor={backgroundColor} round={round} size={size}>
+      <Container className={className} backgroundColor={backgroundColor} pill={pill} size={size}>
         {icon ? <Icon>{icon}</Icon> : ''}
         <Text color={color}>{children}</Text>
       </Container>
@@ -34,7 +36,7 @@ export default class Badge extends PureComponent<Props> {
   }
 }
 
-const ContainerStyle = (size: Size, round: boolean) => {
+const ContainerStyle = (size: Size, pill: boolean) => {
   let minWidth;
   switch (size) {
     case 'sm':
@@ -47,12 +49,12 @@ const ContainerStyle = (size: Size, round: boolean) => {
   return css`
     min-width: ${minWidth}px;
     height: ${minWidth}px;
-    border-radius: ${round ? minWidth / 2 : 3}px;
+    border-radius: ${pill ? minWidth / 2 : 3}px;
   `;
 };
 
 const Container = styled.div<BadgeTextProps>`
-  ${props => ContainerStyle(props.size, props.round)};
+  ${props => ContainerStyle(props.size, props.pill)};
   display: inline-flex;
   justify-content: center;
   align-items: center;
