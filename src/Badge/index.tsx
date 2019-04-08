@@ -9,7 +9,7 @@ interface BadgeTextProps {
   backgroundColor: string;
   pill: boolean;
   size: Size;
-  className: string;
+  className?: string;
   children: ReactNode;
 }
 
@@ -25,27 +25,25 @@ export default class Badge extends PureComponent<Props> {
     pill: false,
     size: 'md',
   };
+
   public render() {
     const { className, color, backgroundColor, pill, size, icon, children } = this.props;
     return (
       <Container className={className} backgroundColor={backgroundColor} pill={pill} size={size}>
-        {icon ? <Icon>{icon}</Icon> : ''}
+        {icon ? <Icon>{icon}</Icon> : null}
         <Text color={color}>{children}</Text>
       </Container>
     );
   }
 }
 
+const minWidthBySize = {
+  sm: 16,
+  md: 20,
+};
+
 const ContainerStyle = (size: Size, pill: boolean) => {
-  let minWidth;
-  switch (size) {
-    case 'sm':
-      minWidth = 16;
-      break;
-    default:
-      minWidth = 20;
-      break;
-  }
+  const minWidth = minWidthBySize[size];
   return css`
     min-width: ${minWidth}px;
     height: ${minWidth}px;
