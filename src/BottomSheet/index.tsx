@@ -179,7 +179,7 @@ export default class BottomSheet extends PureComponent<Props, State> {
             onTouchEnd={this.preventDefault}
           >
             <Title>{title || ''}</Title>
-            {badgeCount && <BadgeCounter>{badgeCount}</BadgeCounter>}
+            {badgeCount && <BadgeCounter pill>{badgeCount}</BadgeCounter>}
             <Chevron rotate={isOpened ? 90 : 270} />
           </InnerHeader>
           {renderFixedContent && <FixedContent>{renderFixedContent()}</FixedContent>}

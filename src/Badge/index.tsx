@@ -22,7 +22,7 @@ export default class Badge extends PureComponent<Props> {
   public static defaultProps: Partial<Props> = {
     color: white,
     backgroundColor: red600,
-    pill: true,
+    pill: false,
     size: 'md',
   };
   public render() {
