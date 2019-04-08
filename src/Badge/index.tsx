@@ -37,7 +37,7 @@ export default class Badge extends PureComponent<Props> {
   }
 }
 
-const minWidthBySize = {
+const minWidthBySize: { [key in Size]: number } = {
   sm: 16,
   md: 20,
 };
