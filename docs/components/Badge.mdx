@@ -5,7 +5,7 @@ route: /components/badge
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Component as Badge } from './Badge';
+import { Badge, Colors, Icon } from '@class101/ui';
 
 # Badge
 
@@ -19,8 +19,16 @@ import { Component as Badge } from './Badge';
 
 <Playground>
   <Badge>1</Badge>
-  <Badge>0</Badge>
-  <Badge>1</Badge>
+  <br />
+  <Badge>10</Badge>
+</Playground>
+
+## Size
+
+<Playground>
+  <Badge size="sm">101</Badge>
+  <br />
+  <Badge size="md">101</Badge>
 </Playground>
 
 ## With diffrent colors
@@ -29,7 +37,28 @@ import { Component as Badge } from './Badge';
   <Badge color="black" backgroundColor="pink">
     101
   </Badge>
+  <br />
   <Badge color="pink" backgroundColor="black">
     101
+  </Badge>
+</Playground>
+
+## Shape
+
+<Playground>
+  <Badge round={false}>무료 배송</Badge>
+  <br />
+  <Badge round={false}>무료 배송</Badge>
+</Playground>
+
+## With Icon
+
+<Playground>
+  <Badge>
+    <Icon.StarFull fillColor={Colors.white} />
+  </Badge>
+  <br />
+  <Badge icon={<Icon.ShippingTruck fillColor={Colors.white} />} round={false} backgroundColor={Colors.green500}>
+    무료 배송
   </Badge>
 </Playground>
