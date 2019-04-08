@@ -43,12 +43,14 @@ import { Badge, Colors, Icon } from '@class101/ui';
   </Badge>
 </Playground>
 
-## Shape
+## Pill Badge
 
 <Playground>
-  <Badge pill>무료 배송</Badge>
+  <Badge pill>
+    <Icon.StarFull fillColor={Colors.white} />
+  </Badge>
   <br />
-  <Badge pill={false}>무료 배송</Badge>
+  <Badge pill>무료 배송</Badge>
 </Playground>
 
 ## With Icon
@@ -58,7 +60,7 @@ import { Badge, Colors, Icon } from '@class101/ui';
     <Icon.StarFull fillColor={Colors.white} />
   </Badge>
   <br />
-  <Badge icon={<Icon.ShippingTruck fillColor={Colors.white} />} round={false} backgroundColor={Colors.green500}>
+  <Badge icon={<Icon.ShippingTruck fillColor={Colors.white} />} pill={false} backgroundColor={Colors.green500}>
     무료 배송
   </Badge>
 </Playground>
