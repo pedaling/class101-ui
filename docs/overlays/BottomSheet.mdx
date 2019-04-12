@@ -5,7 +5,7 @@ route: /overlays/bottom-sheet
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Component as BottomSheet } from './BottomSheet';
+import { BottomSheet } from '@class101/ui';
 
 # Bottom Sheet
 
@@ -18,23 +18,38 @@ import { Component as BottomSheet } from './BottomSheet';
 ## Basic usage
 
 <Playground>
-  <BottomSheet
-    title="Bottom Sheet"
-    badgeCount={101}
-    renderFixedContent={() => <div>List</div>}
-    renderContent={() => (
-      <ul style={{ margin: 0 }}>
-        <li>Item</li>
-        <li>Item</li>
-        <li>Item</li>
-        <li>Item</li>
-        <li>Item</li>
-        <li>Item</li>
-        <li>Item</li>
-        <li>Item</li>
-        <li>Item</li>
-        <li>Item</li>
-      </ul>
-    )}
-  />
+  <div
+    style={{
+      position: 'relative',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: 200,
+      overflow: 'hidden',
+      paddingLeft: 2,
+      paddingRight: 2,
+    }}
+  >
+    <BottomSheet
+      fullScreen={false}
+      zIndex={2001}
+      title="Bottom Sheet"
+      badgeCount={101}
+      renderFixedContent={() => <div>List</div>}
+      renderContent={() => (
+        <ul style={{ margin: 0 }}>
+          <li>Item</li>
+          <li>Item</li>
+          <li>Item</li>
+          <li>Item</li>
+          <li>Item</li>
+          <li>Item</li>
+          <li>Item</li>
+          <li>Item</li>
+          <li>Item</li>
+          <li>Item</li>
+        </ul>
+      )}
+    />
+  </div>
 </Playground>
