@@ -1,26 +1,116 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 
 import Badge from '../Badge';
 import { gray800, white } from '../Colors';
+import { Chevron } from '../Icon';
+import { HTMLDivProps } from '../interfaces/props';
 import { body1, subtitle1 } from '../TextStyles';
 
 interface ContainerProps {
-  fullScreen?: boolean;
+  /** 창 전체에 Fixed 여부(Docs에선 사용 불가) */
+  fullScreen: boolean;
+
+  /** CSS z-index 속성의 값 */
   zIndex?: number;
+
+  /** 열렸을 때 CSS z-index 속성의 값 */
   openedZIndex?: number;
 }
 
 interface Props extends ContainerProps {
+  /** 열려 있는 지 여부 */
   isOpened?: boolean;
+
+  /** 제목 */
   title: string;
+
+  /** 알림 개수 */
   badgeCount?: number;
-  renderContent: () => HTMLElement;
-  renderFixedContent: () => HTMLElement;
+
+  /**  안에 들어갈 내용  */
+  renderContent: () => ReactNode;
+
+  /** 상단에 고정될 내용 */
+  renderFixedContent: () => ReactNode;
+
+  divAttributes: HTMLDivProps;
 }
 
 interface State {
-  isOpened: boolean;
+  readonly isOpened: boolean;
+}
+
+export default class BottomSheet extends PureComponent<Props, State> {
+  public static defaultProps = {
+    fullScreen: true,
+  };
+
+  public readonly state = {
+    isOpened: false,
+  };
+
+  private headerElement: HTMLDivElement | null = null;
+
+  public render() {
+    const { title, renderFixedContent, badgeCount, renderContent, fullScreen, zIndex, openedZIndex } = this.props;
+
+    const isOpened = this.props.isOpened || this.state.isOpened;
+
+    const element = (
+      <Container isOpened={isOpened} fullScreen={fullScreen} zIndex={zIndex} openedZIndex={openedZIndex}>
+        {this.headerElement && this.headerElement.clientHeight && renderContent && (
+          <Content fullScreen={fullScreen} marginTop={this.headerElement.clientHeight + 17}>
+            {renderContent()}
+          </Content>
+        )}
+        <Header
+          ref={ref => {
+            if (!this.headerElement) this.headerElement = ref;
+          }}
+        >
+          <InnerHeader
+            onMouseDown={this.onChangeToggle}
+            onTouchStart={this.onChangeToggle}
+            onTouchEnd={this.preventDefault}
+          >
+            <Title>{title || ''}</Title>
+            {badgeCount && <BadgeCounter pill>{badgeCount}</BadgeCounter>}
+            <ChevronBox rotate={isOpened ? 90 : 270}>
+              <Chevron />
+            </ChevronBox>
+          </InnerHeader>
+          {renderFixedContent && <FixedContent>{renderFixedContent()}</FixedContent>}
+        </Header>
+      </Container>
+    );
+
+    if (fullScreen) {
+      return (
+        <div>
+          {isOpened && (
+            <BackgroundWindow
+              zIndex={openedZIndex || zIndex}
+              onMouseDown={this.onChangeToggle}
+              onTouchStart={this.onChangeToggle}
+              onTouchEnd={this.preventDefault}
+            />
+          )}
+          {element}
+        </div>
+      );
+    }
+
+    return element;
+  }
+  private onChangeToggle = () => {
+    const { isOpened } = this.state;
+    this.setState({ isOpened: !isOpened });
+  };
+
+  private preventDefault = (e: React.TouchEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
 }
 
 const BORDER_SIZE = 1;
@@ -43,14 +133,11 @@ const InnerHeader = styled.div`
   }
 `;
 
-interface ChevronProps {
+interface ChevronBoxProps {
   rotate?: number;
 }
 
-const Chevron = styled.img.attrs({
-  src: 'https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/ic-chevron-gray.png',
-  alt: '>',
-})<ChevronProps>`
+const ChevronBox = styled.div<ChevronBoxProps>`
   width: 24px;
   height: 24px;
   position: absolute;
@@ -89,14 +176,14 @@ const Container = styled.div<ContainerProps & { isOpened?: boolean }>`
             padding-top: 24px;
           }
 
-          ${Chevron} {
+          ${ChevronBox} {
             top: ${24 - BORDER_SIZE}px;
           }
         `
       : css<{ fullScreen?: boolean }>`
           transform: translateY(${props => (props.fullScreen ? `calc(-10% - ${BORDER_SIZE + 1}px)` : 0)});
 
-          ${Chevron} {
+          ${ChevronBox} {
             top: ${12 - BORDER_SIZE}px;
           }
         `}
@@ -139,78 +226,3 @@ const BackgroundWindow = styled.div<{ zIndex?: number }>`
   overflow: visible;
   z-index: ${props => (props.zIndex ? props.zIndex - 1 : 2000)};
 `;
-
-export default class BottomSheet extends PureComponent<Props, State> {
-  public readonly state = {
-    isOpened: false,
-  };
-
-  private headerElement: HTMLDivElement | null = null;
-
-  public render() {
-    const {
-      title,
-      renderFixedContent,
-      badgeCount,
-      renderContent,
-      fullScreen = true,
-      zIndex,
-      openedZIndex,
-      ...restProps
-    } = this.props;
-
-    const isOpened = this.props.isOpened || this.state.isOpened;
-
-    const element = (
-      <Container isOpened={isOpened} fullScreen={fullScreen} zIndex={zIndex} openedZIndex={openedZIndex} {...restProps}>
-        {this.headerElement && this.headerElement.clientHeight && renderContent && (
-          <Content fullScreen={fullScreen} marginTop={this.headerElement.clientHeight + 17}>
-            {renderContent()}
-          </Content>
-        )}
-        <Header
-          ref={ref => {
-            if (!this.headerElement) this.headerElement = ref;
-          }}
-        >
-          <InnerHeader
-            onMouseDown={this.onChangeToggle}
-            onTouchStart={this.onChangeToggle}
-            onTouchEnd={this.preventDefault}
-          >
-            <Title>{title || ''}</Title>
-            {badgeCount && <BadgeCounter pill>{badgeCount}</BadgeCounter>}
-            <Chevron rotate={isOpened ? 90 : 270} />
-          </InnerHeader>
-          {renderFixedContent && <FixedContent>{renderFixedContent()}</FixedContent>}
-        </Header>
-      </Container>
-    );
-
-    if (fullScreen) {
-      return (
-        <div>
-          {isOpened && (
-            <BackgroundWindow
-              zIndex={openedZIndex || zIndex}
-              onMouseDown={this.onChangeToggle}
-              onTouchStart={this.onChangeToggle}
-              onTouchEnd={this.preventDefault}
-            />
-          )}
-          {element}
-        </div>
-      );
-    }
-
-    return element;
-  }
-  private onChangeToggle = () => {
-    const { isOpened } = this.state;
-    this.setState({ isOpened: !isOpened });
-  };
-
-  private preventDefault = (e: React.TouchEvent<HTMLDivElement>) => {
-    e.preventDefault();
-  };
-}
