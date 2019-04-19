@@ -1,3 +1,6 @@
 {
+  "rules": {
+    "member-access": false // context 이용 시 contextType에 member 접근자를 사용할 수 없음.
+  },
   "extends": "@pedaling/tslint-config-class101"
 }

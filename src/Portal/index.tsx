@@ -26,4 +26,10 @@ export default class Portal extends React.Component<Props> {
     const { children } = this.props;
     return ReactDom.createPortal(children, this.containerEl);
   }
+
+  public componentWillUnmount() {
+    if (!this.props.container) {
+      document.body.removeChild(this.containerEl);
+    }
+  }
 }
