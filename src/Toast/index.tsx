@@ -1,49 +1,67 @@
 import React, { ReactNode } from 'react';
-import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
 import { ElevationValue } from '../ElevationStyles';
-import { PortalContext } from '../UIContextProvider';
+import { Position } from '../Position';
+import { ToasterPosition } from '../Toaster';
 
-interface Props {
+// type TOP = {Position.TOP | typeof Position.TOP_LEFT | typeof Position.TOP_RIGHT;
+
+// type BOTTOM = typeof Position.BOTTOM | typeof Position.BOTTOM_LEFT | typeof Position.BOTTOM_RIGHT;
+
+export interface Props {
   backgroundColor: string;
   color: string;
   elevation?: ElevationValue;
   icon?: ReactNode;
   button?: ReactNode;
-  text: string;
+  message: string;
   timeout?: number;
-  hPosition?: 'left' | 'middle' | 'right';
-  vPosition?: 'top' | 'center' | 'bottom';
+  position?: ToasterPosition;
   onButtonClick?: (event: React.MouseEvent<HTMLElement>) => void;
   onclose?: () => void;
 }
 
 export default class Toast extends React.Component<Props> {
-  static contextType = PortalContext; // TODO: 룰 끄고 왜 껐는지 써두기
-  public context!: React.ContextType<typeof PortalContext>;
+  public static defaultProps = {
+    position: Position.TOP,
+    tiemout: 5000,
+  };
 
   constructor(props: Props) {
     super(props);
+    console.log(typeof props.position);
+  }
+
+  public componentDidMount() {
+    console.log(this.props, 'mounted!');
   }
 
   public render() {
-    console.log(this.context);
-    const { portalRoot } = this.context;
-    console.log(portalRoot);
-    console.log('render toast');
-
-    // if (!portalRef || !portalRef.current) {
-    //   throw Error('class101-ui: No Portal Root!');
-    // }
-    return ReactDOM.createPortal(<div>hello Portal</div>, portalRoot);
+    console.log(this.props);
+    const { message } = this.props;
+    return (
+      <Container {...this.props}>
+        <Message>{message}</Message>
+      </Container>
+    );
   }
 }
 
-const Container = styled.div<Props>`
+const Container = styled.div<Partial<Props>>`
   width: 312px;
-  height: 48px;
+  height: 20px;
   border-radius: 3px;
-  background-color: ${props => props.backgroundColor};
-  color: ${props => props.color};
+  padding: 14px 16px;
+  line-height: 20px;
+  background-color: ${props => props.backgroundColor || 'black'};
+  color: ${props => props.color || 'white'};
+  margin-top: ${props =>
+    props.position === Position.TOP || props.position === Position.TOP_LEFT || props.position === Position.TOP_RIGHT
+      ? '20px'
+      : 0};
+`;
+
+const Message = styled.span`
+  line-height: 20px;
 `;

@@ -5,7 +5,7 @@ route: /components/toast
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Component as Toast, ToastButton, UIContextProvider } from './Toast';
+import { Component as Toast, ToastButton } from './Toast';
 
 # Toast
 
@@ -28,3 +28,24 @@ export const AppToaster = Toaster.create({
 <Playground>
   <ToastButton />
 </Playground>
+
+### ToastButton
+
+```tsx
+export class ToastButton extends React.PureComponent {
+  private toaster: Toaster;
+
+  constructor(props) {
+    super(props);
+  }
+
+  public async componentDidMount() {
+    this.toaster = await Toaster.create();
+    console.log(this.toaster);
+  }
+
+  public render() {
+    return <Button onClick={() => this.toaster.show({ message: 'Hello Toast!' })}>show Toast!</Button>;
+  }
+}
+```
