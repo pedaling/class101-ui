@@ -38,8 +38,6 @@ interface Props {
   onclose?: () => void;
 }
 
-export { UIContextProvider };
-
 export const Component = ({
   backgroundColor = Colors.gray900,
   color = 'white',
@@ -73,14 +71,9 @@ export class ToastButton extends React.PureComponent {
 
   public async componentDidMount() {
     this.toaster = await Toaster.create();
-    console.log(this.toaster);
   }
 
   public render() {
     return <Button onClick={() => this.toaster.show({ message: 'Hello Toast!' })}>show Toast!</Button>;
-  }
-
-  public componentWillUnmount() {
-    Toaster.destroy(this.toaster);
   }
 }

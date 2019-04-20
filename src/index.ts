@@ -3,6 +3,7 @@ import * as Colors from './Colors';
 import * as ElevationStyles from './ElevationStyles';
 import { Input, Select } from './FormInput';
 import * as Icon from './Icon';
+import { Position } from './Position';
 import * as TextStyles from './TextStyles';
 
 export { default as Grid } from './Grid';
@@ -33,6 +34,6 @@ export { default as Portal } from './Portal';
 export { default as Toast } from './Toast';
 export { default as Toaster } from './Toaster';
 
-export { Colors, BreakPoints, TextStyles, Icon, ElevationStyles, Input, Select };
+export { Colors, BreakPoints, TextStyles, Icon, ElevationStyles, Input, Position, Select };
 export { default as GlobalStyle } from './GlobalStyle';
 export { default as Checkbox } from './Checkbox';

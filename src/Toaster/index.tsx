@@ -3,23 +3,8 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
 import Portal from '../Portal';
-
-export const Position = {
-  BOTTOM: 'bottom',
-  BOTTOM_LEFT: 'bottom-left',
-  BOTTOM_RIGHT: 'bottom-right',
-  LEFT: 'left',
-  LEFT_BOTTOM: 'left-bottom',
-  LEFT_TOP: 'left-top',
-  RIGHT: 'right',
-  RIGHT_BOTTOM: 'right-bottom',
-  RIGHT_TOP: 'right-top',
-  TOP: 'top',
-  TOP_LEFT: 'top-left',
-  TOP_RIGHT: 'top-right',
-};
-
-export type Position = typeof Position[keyof typeof Position];
+import { Position } from '../Position';
+import { default as Toast, Props as ToastProps } from '../Toast';
 
 export type ToasterPosition =
   | typeof Position.TOP
@@ -29,17 +14,17 @@ export type ToasterPosition =
   | typeof Position.BOTTOM_LEFT
   | typeof Position.BOTTOM_RIGHT;
 
+export const ToasterDefaultPosition = Position.TOP;
+
+type ToastData = ToastProps & { id: string };
+
 interface Props {
   container: HTMLDivElement;
   position?: ToasterPosition;
 }
 
 interface State {
-  toasts: string[];
-}
-
-interface ToastProps {
-  message: string;
+  toasts: ToastData[];
 }
 
 interface ToasterInterface {
@@ -62,27 +47,100 @@ export default class Toaster extends React.Component<Props, State> implements To
     return toasterRef.current;
   }
 
-  public static destroy(toaster: Toaster) {
-    ReactDOM.unmountComponentAtNode(toaster.props.container);
-  }
-
   constructor(props: Props) {
     super(props);
 
-    this.show = this.show.bind(this.show);
+    this.state = {
+      toasts: [],
+    };
+    this.show = this.show.bind(this);
   }
 
   public render() {
+    const { toasts } = this.state;
+
     return (
       <Portal>
-        <ToasterContainer>I am Toaster</ToasterContainer>
+        <ToasterContainer>
+          <TopToastsContainer>{this.drawToasts(toasts, Position.TOP)}</TopToastsContainer>
+          <TopLeftToastsContainer>{this.drawToasts(toasts, Position.TOP_LEFT)}</TopLeftToastsContainer>
+          <TopRightToastsContainer>{this.drawToasts(toasts, Position.TOP_RIGHT)}</TopRightToastsContainer>
+          <BottomToastsContainer>{this.drawToasts(toasts, Position.BOTTOM)}</BottomToastsContainer>
+          <BottomLeftToastsContainer>{this.drawToasts(toasts, Position.BOTTOM_LEFT)}</BottomLeftToastsContainer>
+          <BottomRightToastsContainer>{this.drawToasts(toasts, Position.BOTTOM_RIGHT)}</BottomRightToastsContainer>
+        </ToasterContainer>
       </Portal>
     );
   }
 
+  public componentWillUnmount() {
+    ReactDOM.unmountComponentAtNode(this.props.container);
+  }
+
   public show(props: ToastProps) {
-    alert(props.message);
+    this.setState(prevState => ({
+      toasts: [...prevState.toasts, { ...props, id: this.generateHash() }],
+    }));
+  }
+
+  private generateHash() {
+    return (
+      Math.random()
+        .toString(36)
+        .substring(2, 15) +
+      Math.random()
+        .toString(36)
+        .substring(2, 15)
+    );
+  }
+
+  private drawToasts(toasts: ToastData[], position: ToasterPosition) {
+    return toasts
+      .filter(toast => (toast.position ? toast.position === position : ToasterDefaultPosition === position))
+      .map(toast => <Toast key={toast.id} {...toast} />);
   }
 }
 
 const ToasterContainer = styled.div``;
+
+const TopToastsContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 312px;
+  z-index: 10000;
+`;
+
+const TopLeftToastsContainer = styled.div`
+  position: fixed;
+  top: 0;
+  margin-left: 20px;
+  z-index: 10000;
+`;
+
+const TopRightToastsContainer = styled.div`
+  position: fixed;
+  top: 0;
+  margin-right: 20px;
+  z-index: 10000;
+`;
+
+const BottomToastsContainer = styled.div`
+  position: fixed;
+  bottom: 0;
+  z-index: 10000;
+`;
+
+const BottomLeftToastsContainer = styled.div`
+  position: fixed;
+  bottom: 0;
+  z-index: 10000;
+`;
+
+const BottomRightToastsContainer = styled.div`
+  position: fixed;
+  bottom: 0;
+  z-index: 10000;
+`;
