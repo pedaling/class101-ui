@@ -64,8 +64,6 @@ export default class Toast extends React.Component<Props, State> {
     const { button, dismiss, icon, message, onButtonClicked } = this.props;
     const { unmount } = this.state;
 
-    console.log(typeof button);
-
     return (
       <UnmountAnimation unmount={unmount}>
         <Container {...this.props}>
