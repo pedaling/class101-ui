@@ -61,12 +61,12 @@ export default class Toaster extends React.Component<Props, State> implements To
     return (
       <Portal>
         <ToasterContainer>
-          <TopToastsContainer>{this.drawToasts(toasts, Position.TOP)}</TopToastsContainer>
-          <TopLeftToastsContainer>{this.drawToasts(toasts, Position.TOP_LEFT)}</TopLeftToastsContainer>
-          <TopRightToastsContainer>{this.drawToasts(toasts, Position.TOP_RIGHT)}</TopRightToastsContainer>
-          <BottomToastsContainer>{this.drawToasts(toasts, Position.BOTTOM)}</BottomToastsContainer>
-          <BottomLeftToastsContainer>{this.drawToasts(toasts, Position.BOTTOM_LEFT)}</BottomLeftToastsContainer>
-          <BottomRightToastsContainer>{this.drawToasts(toasts, Position.BOTTOM_RIGHT)}</BottomRightToastsContainer>
+          <TopToastsContainer>{this.renderToasts(toasts, Position.TOP)}</TopToastsContainer>
+          <TopLeftToastsContainer>{this.renderToasts(toasts, Position.TOP_LEFT)}</TopLeftToastsContainer>
+          <TopRightToastsContainer>{this.renderToasts(toasts, Position.TOP_RIGHT)}</TopRightToastsContainer>
+          <BottomToastsContainer>{this.renderToasts(toasts, Position.BOTTOM)}</BottomToastsContainer>
+          <BottomLeftToastsContainer>{this.renderToasts(toasts, Position.BOTTOM_LEFT)}</BottomLeftToastsContainer>
+          <BottomRightToastsContainer>{this.renderToasts(toasts, Position.BOTTOM_RIGHT)}</BottomRightToastsContainer>
         </ToasterContainer>
       </Portal>
     );
@@ -76,15 +76,13 @@ export default class Toaster extends React.Component<Props, State> implements To
     ReactDOM.unmountComponentAtNode(this.props.container);
   }
 
-  public show(props: ToastProps) {
+  public show(props: ToastProps): string {
     const key = this.generateHash();
     this.setState(prevState => ({
       toasts: [...prevState.toasts, { ...props, key }],
     }));
 
-    if (props.timeout === 0) {
-      return;
-    }
+    return key;
   }
 
   private generateHash() {
@@ -98,7 +96,7 @@ export default class Toaster extends React.Component<Props, State> implements To
     );
   }
 
-  private drawToasts(toasts: ToastData[], position: ToasterPosition) {
+  private renderToasts(toasts: ToastData[], position: ToasterPosition) {
     return toasts
       .filter(toast => (toast.position ? toast.position === position : ToasterDefaultPosition === position))
       .map(toast => {
@@ -110,7 +108,7 @@ export default class Toaster extends React.Component<Props, State> implements To
       .reverse();
   }
 
-  private dismiss(key: string) {
+  public dismiss(key: string) {
     this.setState(prevState => ({
       toasts: prevState.toasts.filter(toast => toast.key !== key),
     }));
