@@ -31,7 +31,7 @@ export { default as Body2 } from './Typography/Body2';
 export { default as Caption1 } from './Typography/Caption1';
 export { default as Caption2 } from './Typography/Caption2';
 export { default as Portal } from './Portal';
-export { default as Toast } from './Toast';
+export { default as Toast, Props as ToastProps } from './Toast';
 export { default as Toaster } from './Toaster';
 
 export { Colors, BreakPoints, TextStyles, Icon, ElevationStyles, Input, Position, Select };

@@ -16,11 +16,10 @@ export type ToasterPosition =
 
 export const ToasterDefaultPosition = Position.TOP;
 
-type ToastData = ToastProps & { id: string };
+type ToastData = ToastProps & { key: string };
 
 interface Props {
   container: HTMLDivElement;
-  position?: ToasterPosition;
 }
 
 interface State {
@@ -78,9 +77,14 @@ export default class Toaster extends React.Component<Props, State> implements To
   }
 
   public show(props: ToastProps) {
+    const key = this.generateHash();
     this.setState(prevState => ({
-      toasts: [...prevState.toasts, { ...props, id: this.generateHash() }],
+      toasts: [...prevState.toasts, { ...props, key }],
     }));
+
+    if (props.timeout === 0) {
+      return;
+    }
   }
 
   private generateHash() {
@@ -97,7 +101,19 @@ export default class Toaster extends React.Component<Props, State> implements To
   private drawToasts(toasts: ToastData[], position: ToasterPosition) {
     return toasts
       .filter(toast => (toast.position ? toast.position === position : ToasterDefaultPosition === position))
-      .map(toast => <Toast key={toast.id} {...toast} />);
+      .map(toast => {
+        const dismiss = () => {
+          this.dismiss(toast.key);
+        };
+        return <Toast key={toast.key} {...toast} dismiss={dismiss} />;
+      })
+      .reverse();
+  }
+
+  private dismiss(key: string) {
+    this.setState(prevState => ({
+      toasts: prevState.toasts.filter(toast => toast.key !== key),
+    }));
   }
 }
 
@@ -123,6 +139,7 @@ const TopLeftToastsContainer = styled.div`
 const TopRightToastsContainer = styled.div`
   position: fixed;
   top: 0;
+  right: 0;
   margin-right: 20px;
   z-index: 10000;
 `;
@@ -130,17 +147,30 @@ const TopRightToastsContainer = styled.div`
 const BottomToastsContainer = styled.div`
   position: fixed;
   bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 312px;
+  display: flex;
+  flex-direction: column-reverse;
   z-index: 10000;
 `;
 
 const BottomLeftToastsContainer = styled.div`
   position: fixed;
   bottom: 0;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column-reverse;
   z-index: 10000;
 `;
 
 const BottomRightToastsContainer = styled.div`
   position: fixed;
   bottom: 0;
+  right: 0;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column-reverse;
   z-index: 10000;
 `;

@@ -1,79 +1,50 @@
 // @flow
 import React, { ReactNode } from 'react';
-import { Button, Colors, Icon, Toast, Toaster, UIContextProvider } from '@class101/ui';
+import { Button, Colors, Icon, Toast, ToastProps, Toaster, Position } from '@class101/ui';
 import { ElevationValue } from '@class101/ui/ElevationStyles';
 
-interface Props {
-  /** 바탕색 */
+export interface Props {
+  /** @default Colors.gray900 */
+  /** 토스트의 바탕색 */
   backgroundColor?: string;
 
-  /** 글씨색 */
-  color: string;
-
-  /** Elevation 옵션 */
-  elevation?: ElevationValue;
-
-  /** 좌측 아이콘 */
-  icon?: ReactNode;
-
-  /** Toast 우측에 들어가는 액션 버튼 */
+  /** 토스트의 우측에 들어갈 버튼입니다 */
   button?: ReactNode;
 
-  /** 텍스트 */
-  text: string;
+  /** @default white */
+  /** 토스트의 글자색 */
+  color?: string;
 
-  /** 화면에 보이는 시간 */
-  timeout?: number;
+  /** 토스트 좌측에 들어갈 아이콘 */
+  icon?: React.DetailedReactHTMLElement<IconProps, HTMLElement>;
 
-  /** 수평 위치 */
-  hPosition?: 'left' | 'middle' | 'right';
+  /** 토스트 문구 */
+  message: string;
 
-  /** 수직 위치 */
-  vPosition?: 'top' | 'center' | 'bottom';
+  /** @default Position.TOP */
+  /** 토스트가 위치할 곳 */
+  position?: ToasterPosition;
 
-  /** 버튼이 클릭되었을때 실행되는 함수 */
-  onButtonClick?: (event: React.MouseEvent<HTMLElement>) => void;
+  /** @default 5000 */
+  /** 토스트가 화면에 보이는 시간 */
+  timeout: number;
 
-  /** 토스트가 닫혔을때 실행되는 함수 */
-  onclose?: () => void;
+  /** 버튼 클릭시 실행될 함수 */
+  onButtonClicked?: () => void;
+
+  /** 토스트가 없어지면 실행되는 함수 */
+  onClose?: () => void;
 }
 
-export const Component = ({
-  backgroundColor = Colors.gray900,
-  color = 'white',
-  elevation = 2,
-  button = Icon.Close,
-  text = '5초 뒤에 터집니다.',
-  hPosition = 'middle',
-  vPosition = 'bottom',
-}: Props) => (
-  <Toast
-    backgroundColor={backgroundColor}
-    color={color}
-    elevation={elevation}
-    button={button}
-    text={text}
-    hPosition={hPosition}
-    vPositio={vPosition}
-  />
-);
+export const Component = (props: Props) => <Toast />;
 
-// export const ToastContainer = ({}) => (
+let AppToaster: Toaster;
 
-// );
-
-export class ToastButton extends React.PureComponent {
-  private toaster: Toaster;
-
-  constructor(props) {
-    super(props);
+export async function showToast(props: ToastProps) {
+  if (!AppToaster) {
+    AppToaster = await Toaster.create();
   }
-
-  public async componentDidMount() {
-    this.toaster = await Toaster.create();
-  }
-
-  public render() {
-    return <Button onClick={() => this.toaster.show({ message: 'Hello Toast!' })}>show Toast!</Button>;
-  }
+  AppToaster.show(props);
 }
+
+export { Position };

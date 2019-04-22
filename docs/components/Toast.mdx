@@ -4,8 +4,10 @@ name: Toast
 route: /components/toast
 ---
 
+import { Colors, Icon } from '@class101/ui';
 import { Playground, PropsTable } from 'docz';
-import { Component as Toast, ToastButton } from './Toast';
+import { Component as Button } from './Button';
+import { Position, Component as Toast, showToast } from './Toast';
 
 # Toast
 
@@ -18,34 +20,81 @@ import { Component as Toast, ToastButton } from './Toast';
 ## Basic usage
 
 ```tsx
-import { Toaster } from '@class101-ui/core';
+let AppToaster;
 
-export const AppToaster = Toaster.create({
-  position:
-});
+export async function showToast(props: ToastProps) {
+  if (!AppToaster) {
+    AppToaster = await Toaster.create();
+  }
+  AppToaster.show(props);
+}
 ```
 
 <Playground>
-  <ToastButton />
+  <Button onClick={() => showToast({ message: 'hi' })}>Show Toast!</Button>
 </Playground>
 
-### ToastButton
+## Positions
 
-```tsx
-export class ToastButton extends React.PureComponent {
-  private toaster: Toaster;
+<Playground>
+  <Button onClick={() => showToast({ message: 'top hi', position: Position.TOP })}>Show Top Toast!</Button>
+  <Button onClick={() => showToast({ message: 'top left hi', position: Position.TOP_LEFT })}>
+    Show Top Left Toast!
+  </Button>
+  <Button onClick={() => showToast({ message: 'top right hi', position: Position.TOP_RIGHT })}>
+    Show Top Right Toast!
+  </Button>
+  <Button onClick={() => showToast({ message: 'bottom hi', position: Position.BOTTOM })}>Show Bottom Toast!</Button>
+  <Button onClick={() => showToast({ message: 'bottom left hi', position: Position.BOTTOM_LEFT })}>
+    Show Bottom Left Toast!
+  </Button>
+  <Button onClick={() => showToast({ message: 'bottom right hi', position: Position.BOTTOM_RIGHT })}>
+    Show Bottom Right Toast!
+  </Button>
+</Playground>
 
-  constructor(props) {
-    super(props);
-  }
+## Icons & Backgrounds
 
-  public async componentDidMount() {
-    this.toaster = await Toaster.create();
-    console.log(this.toaster);
-  }
+<Playground>
+  <Button
+    onClick={() =>
+      showToast({
+        backgroundColor: Colors.redError,
+        message: '오류입니다.',
+        icon: <Icon.Alert fillColor={Colors.white} />,
+      })
+    }
+  >
+    Show Warning Toast!
+  </Button>
+</Playground>
 
-  public render() {
-    return <Button onClick={() => this.toaster.show({ message: 'Hello Toast!' })}>show Toast!</Button>;
-  }
-}
-```
+## with Action
+
+<Playground>
+  <Button
+    onClick={() =>
+      showToast({
+        button: '실행취소',
+        message: '코멘트를 보냈습니다.',
+        icon: <Icon.CheckCircle fillColor={Colors.white} />,
+        timeout: 0,
+      })
+    }
+  >
+    Show Toast!
+  </Button>
+  <Button
+    onClick={() =>
+      showToast({
+        backgroundColor: Colors.redError,
+        button: <Icon.Close fillColor={Colors.white} />,
+        message: '오류입니다.',
+        icon: <Icon.Alert fillColor={Colors.white} />,
+        timeout: 0,
+      })
+    }
+  >
+    Show Toast!
+  </Button>
+</Playground>
