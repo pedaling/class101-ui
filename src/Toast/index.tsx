@@ -1,4 +1,3 @@
-import { defaultTo } from 'lodash-es';
 import React, { ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -17,13 +16,13 @@ export interface Props {
   backgroundColor?: string;
   button?: ReactNode;
   color?: string;
-  icon?: React.DetailedReactHTMLElement<IconProps, HTMLElement>;
+  icon?: ReactNode;
   message: string;
   position?: ToasterPosition;
   timeout: number;
   onButtonClicked?: () => void;
   onClose?: () => void;
-  dismiss: () => void;
+  dismiss?: () => void;
 }
 
 interface State {
@@ -51,7 +50,11 @@ export default class Toast extends React.Component<Props, State> {
         });
       }, timeout - UNMOUNT_ANIMATION_SECONDS * 1000);
 
-      setTimeout(dismiss, timeout);
+      if (dismiss) {
+        setTimeout(dismiss, timeout);
+      } else {
+        throw Error('No dismiss prop!');
+      }
     }
   }
 
@@ -62,7 +65,13 @@ export default class Toast extends React.Component<Props, State> {
     return (
       <UnmountAnimation unmount={unmount}>
         <Container {...this.props}>
-          {Boolean(icon) && <Icon>{React.cloneElement(icon!, { size: 18 })}</Icon>}
+          {Boolean(icon) && (
+            <Icon>
+              {typeof icon !== 'object'
+                ? icon
+                : React.cloneElement(icon as React.DetailedReactHTMLElement<IconProps, HTMLElement>, { size: 18 })}
+            </Icon>
+          )}
           <Message>{message}</Message>
           {Boolean(button) && (
             <Action onClick={onButtonClicked || dismiss}>
@@ -99,7 +108,6 @@ const UnmountAnimation = styled.div<{ unmount: boolean }>`
 
 const Container = styled.div<Partial<Props>>`
   width: 280px;
-  height: 20px;
   border-radius: 3px;
   padding: 14px 16px;
   line-height: 20px;
@@ -123,6 +131,7 @@ const Container = styled.div<Partial<Props>>`
         ? slideDownKeyFrames
         : slideUpKeyFrames}
     0.1s ease-out;
+  ${elevation1}
 `;
 
 const Icon = styled.span`
