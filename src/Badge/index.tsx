@@ -6,16 +6,16 @@ import { caption2 } from '../TextStyles';
 
 type Size = 'sm' | 'md';
 interface BadgeTextProps {
-  backgroundColor: string;
-  pill: boolean;
-  size: Size;
+  backgroundColor?: string;
+  pill?: boolean;
+  size?: Size;
   className?: string;
-  children: ReactNode;
 }
 
 interface Props extends BadgeTextProps {
-  color: string;
+  color?: string;
   icon?: ReactNode;
+  children?: ReactNode;
 }
 
 export default class Badge extends PureComponent<Props> {
@@ -42,7 +42,7 @@ const minWidthBySize: { [key in Size]: number } = {
   md: 20,
 };
 
-const ContainerStyle = (size: Size, pill: boolean) => {
+const containerStyle = (size: Size = 'md', pill: boolean = false) => {
   const minWidth = minWidthBySize[size];
   return css`
     min-width: ${minWidth}px;
@@ -52,7 +52,7 @@ const ContainerStyle = (size: Size, pill: boolean) => {
 };
 
 const Container = styled.div<BadgeTextProps>`
-  ${props => ContainerStyle(props.size, props.pill)};
+  ${props => containerStyle(props.size, props.pill)};
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -69,7 +69,7 @@ const Icon = styled.div`
   }
 `;
 
-const Text = styled.div<{ color: string }>`
+const Text = styled.div<{ color?: string }>`
   ${caption2};
   display: flex;
   justify-content: center;
