@@ -19,7 +19,7 @@ export interface Props {
   icon?: ReactElement<IconProps>;
   message: string;
   position?: ToasterPosition;
-  timeout: number;
+  timeout?: number;
   onButtonClicked?: () => void;
   onClose?: () => void;
   dismiss?: () => void;
@@ -42,6 +42,10 @@ export default class Toast extends React.Component<Props, State> {
 
   public componentDidMount() {
     const { dismiss, timeout } = this.props;
+
+    if (!timeout) {
+      throw Error('No timeout prop!');
+    }
 
     if (timeout > 0) {
       this.unmountAnimationTimeout = setTimeout(() => {
