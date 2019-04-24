@@ -100,8 +100,13 @@ const unmountAnimationCss = css`
   animation: ${fadeOutKeyFrames} ${UNMOUNT_ANIMATION_SECONDS}s;
 `;
 
+const unmountedCss = css`
+  opacity: 0;
+`;
+
 const UnmountAnimation = styled.div<{ unmount: boolean }>`
   ${props => props.unmount && unmountAnimationCss}
+  ${props => props.unmount && unmountedCss}
 `;
 
 const Container = styled.div<Partial<Props>>`
