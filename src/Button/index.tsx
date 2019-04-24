@@ -2,7 +2,7 @@ import React, { PureComponent, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-import { orange600, white } from '../Colors';
+import { gray000, gray200, orange600, white } from '../Colors';
 import Spinner from '../Spinner';
 import { body2 } from '../TextStyles';
 
@@ -216,7 +216,8 @@ const buttonStyle = css<StyledContainerProps>`
 
   &:disabled {
     cursor: not-allowed;
-    opacity: 0.8;
+    color: ${gray200};
+    background-color: ${gray000};
   }
 `;
 
