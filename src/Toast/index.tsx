@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 
 import * as Colors from '../Colors';
@@ -14,9 +14,9 @@ export const UNMOUNT_ANIMATION_SECONDS = 0.2;
 
 export interface Props {
   backgroundColor?: string;
-  button?: ReactNode;
+  button?: ReactElement<IconProps> | string;
   color?: string;
-  icon?: ReactNode;
+  icon?: ReactElement<IconProps>;
   message: string;
   position?: ToasterPosition;
   timeout: number;
@@ -67,9 +67,7 @@ export default class Toast extends React.Component<Props, State> {
         <Container {...this.props}>
           {Boolean(icon) && (
             <Icon>
-              {typeof icon !== 'object'
-                ? icon
-                : React.cloneElement(icon as React.DetailedReactHTMLElement<IconProps, HTMLElement>, { size: 18 })}
+              {React.cloneElement(icon as React.DetailedReactHTMLElement<IconProps, HTMLElement>, { size: 18 })}
             </Icon>
           )}
           <Message>{message}</Message>
