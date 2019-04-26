@@ -9,7 +9,7 @@ import { body1, subtitle1 } from '../TextStyles';
 
 interface ContainerProps {
   /** 창 전체에 Fixed 여부(Docs에선 사용 불가) */
-  fullScreen: boolean;
+  fullScreen?: boolean;
 
   /** CSS z-index 속성의 값 */
   zIndex?: number;
