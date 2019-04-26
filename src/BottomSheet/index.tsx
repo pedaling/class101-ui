@@ -34,7 +34,7 @@ interface Props extends ContainerProps {
   /** 상단에 고정될 내용 */
   renderFixedContent: () => ReactNode;
 
-  divAttributes: HTMLDivProps;
+  divAttributes?: HTMLDivProps;
 }
 
 interface State {
