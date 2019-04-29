@@ -18,20 +18,6 @@ export interface Props extends HTMLInputProps {
   errorMessage?: string;
 }
 
-const HiddenCheckboxInput = styled.input.attrs({ type: 'checkbox' })`
-  display: none;
-`;
-
-const ChildText = styled.span`
-  ${body2};
-  margin-left: 8px;
-`;
-
-const Container = styled.label<{ inline?: boolean }>`
-  display: ${props => (props.inline ? 'inline-flex' : 'flex')};
-  align-items: center;
-`;
-
 export default class Checkbox extends React.PureComponent<Props> {
   public static defaultProps: Partial<Props> = {
     size: 24,
@@ -52,16 +38,10 @@ export default class Checkbox extends React.PureComponent<Props> {
       ...restProps
     } = this.props;
     return (
-      <div style={style}>
+      <div style={style} className={className}>
         <Container inline={inline}>
           {checked ? <CheckboxOn size={size} /> : <CheckboxOff size={size} />}
-          <HiddenCheckboxInput
-            className={className || ''}
-            onChange={this.handleChange}
-            checked={checked}
-            style={inputStyle}
-            {...restProps}
-          />
+          <HiddenCheckboxInput onChange={this.handleChange} checked={checked} style={inputStyle} {...restProps} />
           <ChildText>{children}</ChildText>
         </Container>
 
@@ -78,3 +58,18 @@ export default class Checkbox extends React.PureComponent<Props> {
     }
   };
 }
+
+const Container = styled.label<{ inline?: boolean }>`
+  display: ${props => (props.inline ? 'inline-flex' : 'flex')};
+  align-items: center;
+  position: relative;
+`;
+
+const HiddenCheckboxInput = styled.input.attrs({ type: 'checkbox' })`
+  display: none;
+`;
+
+const ChildText = styled.span`
+  ${body2};
+  margin-left: 8px;
+`;
