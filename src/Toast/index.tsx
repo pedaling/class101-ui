@@ -43,7 +43,7 @@ export default class Toast extends React.Component<Props, State> {
   public componentDidMount() {
     const { dismiss, timeout } = this.props;
 
-    if (!timeout) {
+    if (timeout === undefined) {
       throw Error('No timeout prop!');
     }
 
@@ -114,7 +114,9 @@ const UnmountAnimation = styled.div<{ unmount: boolean }>`
 `;
 
 const Container = styled.div<Partial<Props>>`
-  width: 280px;
+  width: fit-content;
+  min-width: 280px;
+  max-width: 612px;
   border-radius: 3px;
   padding: 14px 16px;
   line-height: 20px;
@@ -133,6 +135,8 @@ const Container = styled.div<Partial<Props>>`
     props.position === Position.BOTTOM_RIGHT
       ? '20px'
       : 0};
+  margin-left: ${props => (props.position === Position.BOTTOM || props.position === Position.TOP ? 'auto' : '')};
+  margin-right: ${props => (props.position === Position.BOTTOM || props.position === Position.TOP ? 'auto' : '')};
   animation: ${props =>
       props.position === Position.TOP || props.position === Position.TOP_LEFT || props.position === Position.TOP_RIGHT
         ? slideDownKeyFrames
@@ -143,23 +147,28 @@ const Container = styled.div<Partial<Props>>`
 
 const Icon = styled.span`
   height: 20px;
+  line-height: 20px;
   margin-right: 8px;
   display: flex;
   align-items: center;
 `;
 
 const Message = styled.span`
-  line-height: 20px;
+  margin-right: 12px;
+  word-break: break-all;
 `;
 
 const Action = styled.button`
+  width: fit-content;
   border: 0;
   background-color: inherit;
   color: inherit;
   cursor: pointer;
   font-size: inherit;
+  line-height: 20px;
   margin-left: auto;
   padding: 0;
+  word-break: keep-all;
 
   &:active {
     outline: none;
