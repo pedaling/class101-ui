@@ -218,6 +218,9 @@ const buttonStyle = css<StyledContainerProps>`
     cursor: not-allowed;
     color: ${gray200};
     background-color: ${gray000};
+    path {
+      fill: ${gray200};
+    }
   }
 `;
 
