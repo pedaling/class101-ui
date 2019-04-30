@@ -85,6 +85,12 @@ export default class Toaster extends React.Component<Props, State> implements To
     return key;
   }
 
+  public dismiss(key: string) {
+    this.setState(prevState => ({
+      toasts: prevState.toasts.filter(toast => toast.key !== key),
+    }));
+  }
+
   private generateHash() {
     return (
       Math.random()
@@ -107,12 +113,6 @@ export default class Toaster extends React.Component<Props, State> implements To
       })
       .reverse();
   }
-
-  public dismiss(key: string) {
-    this.setState(prevState => ({
-      toasts: prevState.toasts.filter(toast => toast.key !== key),
-    }));
-  }
 }
 
 const ToasterContainer = styled.div``;
@@ -123,7 +123,7 @@ const TopToastsContainer = styled.div`
   left: 0;
   right: 0;
   margin: auto;
-  width: 312px;
+  width: 100%;
   z-index: 10000;
 `;
 
@@ -148,7 +148,7 @@ const BottomToastsContainer = styled.div`
   left: 0;
   right: 0;
   margin: auto;
-  width: 312px;
+  width: 100%;
   display: flex;
   flex-direction: column-reverse;
   z-index: 10000;
