@@ -38,7 +38,7 @@ export default class Toast extends React.Component<Props, State> {
   public state: State = {
     unmount: false,
   };
-  private unmountAnimationTimeout?: NodeJS.Timeout;
+  private unmountAnimationTimeout?: number;
 
   public componentDidMount() {
     const { dismiss, timeout } = this.props;
