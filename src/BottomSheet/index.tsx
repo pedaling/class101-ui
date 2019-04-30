@@ -16,6 +16,8 @@ interface ContainerProps {
 
   /** 열렸을 때 CSS z-index 속성의 값 */
   openedZIndex?: number;
+  className?: string;
+  divAttributes?: HTMLDivProps;
 }
 
 interface Props extends ContainerProps {
@@ -33,8 +35,6 @@ interface Props extends ContainerProps {
 
   /** 상단에 고정될 내용 */
   renderFixedContent: () => ReactNode;
-
-  divAttributes?: HTMLDivProps;
 }
 
 interface State {
@@ -53,12 +53,29 @@ export default class BottomSheet extends PureComponent<Props, State> {
   private headerElement: HTMLDivElement | null = null;
 
   public render() {
-    const { title, renderFixedContent, badgeCount, renderContent, fullScreen, zIndex, openedZIndex } = this.props;
+    const {
+      title,
+      renderFixedContent,
+      badgeCount,
+      renderContent,
+      fullScreen,
+      zIndex,
+      openedZIndex,
+      className,
+      divAttributes,
+    } = this.props;
 
     const isOpened = this.props.isOpened || this.state.isOpened;
 
     const element = (
-      <Container isOpened={isOpened} fullScreen={fullScreen} zIndex={zIndex} openedZIndex={openedZIndex}>
+      <Container
+        {...divAttributes}
+        isOpened={isOpened}
+        fullScreen={fullScreen}
+        zIndex={zIndex}
+        openedZIndex={openedZIndex}
+        className={className}
+      >
         {this.headerElement && this.headerElement.clientHeight && renderContent && (
           <Content fullScreen={fullScreen} marginTop={this.headerElement.clientHeight + 17}>
             {renderContent()}
