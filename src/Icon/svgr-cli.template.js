@@ -1,5 +1,7 @@
 function template({ template }, opts, { imports, componentName, jsx }) {
-  const typeScriptTpl = template.smart({ plugins: ['typescript', 'classProperties'] });
+  const typeScriptTpl = template.smart({
+    plugins: ['typescript', 'classProperties'],
+  });
 
   return typeScriptTpl.ast`
     ${imports}
