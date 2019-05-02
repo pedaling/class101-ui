@@ -1,8 +1,10 @@
+
 import React from 'react';
 
 export interface IconProps {
   size?: number;
   fillColor?: string;
+  accentColor?: string;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -78,6 +80,7 @@ export { default as PersonOutline } from './generated/PersonOutline';
 export { default as Phone } from './generated/Phone';
 export { default as Photo } from './generated/Photo';
 export { default as PhotoAdd } from './generated/PhotoAdd';
+export { default as PhotoOutline } from './generated/PhotoOutline';
 export { default as Play } from './generated/Play';
 export { default as PlayFast } from './generated/PlayFast';
 export { default as PlayForward } from './generated/PlayForward';
@@ -92,6 +95,7 @@ export { default as Report } from './generated/Report';
 export { default as RotateClockwise } from './generated/RotateClockwise';
 export { default as Search } from './generated/Search';
 export { default as Send } from './generated/Send';
+export { default as Send2 } from './generated/Send2';
 export { default as ShareApple } from './generated/ShareApple';
 export { default as ShippingTruck } from './generated/ShippingTruck';
 export { default as StarFull } from './generated/StarFull';

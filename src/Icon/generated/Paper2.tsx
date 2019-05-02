@@ -3,6 +3,7 @@ import { IconProps } from '../index';
 export default class SvgPaper2 extends React.PureComponent<IconProps> {
   public static defaultProps: Partial<IconProps> = {
     fillColor: '#3E4042',
+    accentColor: '#DDE0E2',
     size: 24
   };
 
