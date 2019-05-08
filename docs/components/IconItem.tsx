@@ -40,6 +40,7 @@ const Container = styled.div<Props>`
 const IconName = styled(Caption1)`
   text-align: center;
   word-break: break-all;
+  margin-top: 4px;
 `;
 
 class Component extends PureComponent<Props> {
@@ -65,7 +66,7 @@ class Component extends PureComponent<Props> {
     return (
       <Container onClick={this.handleClickItem} iconName={iconName} {...restProps}>
         <IconItem />
-        <IconName marginTop={4}>{iconName}</IconName>
+        <IconName>{iconName}</IconName>
       </Container>
     );
   }
