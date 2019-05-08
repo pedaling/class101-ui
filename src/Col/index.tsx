@@ -1,9 +1,30 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { media } from '../BreakPoints';
 import { HTMLDivProps } from '../interfaces/props';
 
-const sizeToPercent = (size?: number) => ((size || 12) / 12) * 100;
+const sizeToPercent = (size?: number) => ((size !== undefined ? size : 12) / 12) * 100;
+const getValidOffset = (offsets: (number | undefined)[]) => {
+  for (const offset of offsets) {
+    if (offset !== undefined) {
+      return offset;
+    }
+  }
+};
+
+const marginLeftStyle = (offsets: (number | undefined)[]) => {
+  const offset = getValidOffset(offsets);
+  if (offset === undefined) {
+    return '';
+  }
+  return css<{
+    smOffset?: number;
+    mdOffset?: number;
+    lgOffset?: number;
+  }>`
+    margin-left: ${sizeToPercent(offset)}%;
+  `;
+};
 
 interface ColProps extends HTMLDivProps {
   sm?: number;
@@ -24,29 +45,17 @@ const Col = styled.div<ColProps>`
     width: ${props => sizeToPercent(props.sm)}%;
     padding-right: 4px;
     padding-left: 4px;
-    ${props =>
-      props.smOffset &&
-      `
-        margin-left: ${sizeToPercent(props.smOffset)}%;
-      `}
+    ${props => marginLeftStyle([props.smOffset])}
   `}
 
   ${media.md`
     width: ${props => sizeToPercent(props.md || props.sm)}%;
-    ${props =>
-      (props.mdOffset || props.smOffset) &&
-      `
-        margin-left: ${sizeToPercent(props.mdOffset || props.smOffset)}%;
-      `}
+    ${props => marginLeftStyle([props.mdOffset, props.smOffset])};
   `}
 
   ${media.lg`
     width: ${props => sizeToPercent(props.lg || props.md || props.sm)}%;
-    ${props =>
-      (props.lgOffset || props.mdOffset || props.smOffset) &&
-      `
-        margin-left: ${sizeToPercent(props.lgOffset || props.mdOffset || props.smOffset)}%;
-      `}
+    ${props => marginLeftStyle([props.lgOffset, props.mdOffset, props.smOffset])};
   `};
 `;
 
