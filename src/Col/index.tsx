@@ -1,3 +1,4 @@
+import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 
 import { media } from '../BreakPoints';
@@ -26,7 +27,7 @@ const marginLeftStyle = (offsets: (number | undefined)[]) => {
   `;
 };
 
-interface ColProps extends HTMLDivProps {
+interface StyleProps {
   sm?: number;
   md?: number;
   lg?: number;
@@ -34,29 +35,38 @@ interface ColProps extends HTMLDivProps {
   mdOffset?: number;
   lgOffset?: number;
 }
+interface Props extends StyleProps {
+  className?: string;
+  divAttributes?: HTMLDivProps;
+}
 
-const Col = styled.div<ColProps>`
+export default class Col extends PureComponent<Props> {
+  public render() {
+    const { divAttributes, ...restProps } = this.props;
+    return <StyledDiv {...divAttributes} {...restProps} />;
+  }
+}
+
+const StyledDiv = styled.div<StyleProps>`
   position: relative;
   min-height: 1px;
   padding-right: 12px;
   padding-left: 12px;
   box-sizing: border-box;
-  ${media.sm<ColProps>`
+  ${media.sm<StyleProps>`
     width: ${props => sizeToPercent(props.sm)}%;
     padding-right: 4px;
     padding-left: 4px;
     ${props => marginLeftStyle([props.smOffset])}
   `}
 
-  ${media.md`
+  ${media.md<StyleProps>`
     width: ${props => sizeToPercent(props.md || props.sm)}%;
     ${props => marginLeftStyle([props.mdOffset, props.smOffset])};
   `}
 
-  ${media.lg`
+  ${media.lg<StyleProps>`
     width: ${props => sizeToPercent(props.lg || props.md || props.sm)}%;
     ${props => marginLeftStyle([props.lgOffset, props.mdOffset, props.smOffset])};
   `};
 `;
-
-export default Col;

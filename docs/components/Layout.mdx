@@ -4,16 +4,18 @@ name: Layout
 route: /components/layout
 ---
 
+import { Grid, Row, Col } from '@class101/ui';
 import { Playground, PropsTable } from 'docz';
-import { Component as Grid } from './Grid';
-import { Component as Row } from './Row';
-import { Component as Col } from './Col';
+import { Component as StyledCol } from './Col';
 
 # Layout
 
 Class101 UI는 기기나 뷰포트 크기가 증가함에 따라 12열이 적절하게 확대되는 반응형, 모바일 우선 유동 그리드 시스템을 지원합니다.
 
-> v4 부터는 flex 기반의 레이아웃을 제공합니다.
+> **NOTE**
+>
+> - v4부터는 flex 기반의 레이아웃을 제공합니다.
+> - v6부터는 margin 스타일을 제어하는 속성을 따로 지원하지 않습니다.
 
 ## Grid options
 
@@ -40,31 +42,31 @@ sm: < 1013px
 
 <Playground>
   <Row>
-    <Col lg={1}>lg-1</Col>
-    <Col lg={1}>lg-1</Col>
-    <Col lg={1}>lg-1</Col>
-    <Col lg={1}>lg-1</Col>
-    <Col lg={1}>lg-1</Col>
-    <Col lg={1}>lg-1</Col>
-    <Col lg={1}>lg-1</Col>
-    <Col lg={1}>lg-1</Col>
-    <Col lg={1}>lg-1</Col>
-    <Col lg={1}>lg-1</Col>
-    <Col lg={1}>lg-1</Col>
-    <Col lg={1}>lg-1</Col>
+    <StyledCol lg={1}>lg-1</StyledCol>
+    <StyledCol lg={1}>lg-1</StyledCol>
+    <StyledCol lg={1}>lg-1</StyledCol>
+    <StyledCol lg={1}>lg-1</StyledCol>
+    <StyledCol lg={1}>lg-1</StyledCol>
+    <StyledCol lg={1}>lg-1</StyledCol>
+    <StyledCol lg={1}>lg-1</StyledCol>
+    <StyledCol lg={1}>lg-1</StyledCol>
+    <StyledCol lg={1}>lg-1</StyledCol>
+    <StyledCol lg={1}>lg-1</StyledCol>
+    <StyledCol lg={1}>lg-1</StyledCol>
+    <StyledCol lg={1}>lg-1</StyledCol>
   </Row>
   <Row>
-    <Col lg={8}>lg-8</Col>
-    <Col lg={4}>lg-4</Col>
+    <StyledCol lg={8}>lg-8</StyledCol>
+    <StyledCol lg={4}>lg-4</StyledCol>
   </Row>
   <Row>
-    <Col lg={4}>lg-4</Col>
-    <Col lg={4}>lg-4</Col>
-    <Col lg={4}>lg-4</Col>
+    <StyledCol lg={4}>lg-4</StyledCol>
+    <StyledCol lg={4}>lg-4</StyledCol>
+    <StyledCol lg={4}>lg-4</StyledCol>
   </Row>
   <Row>
-    <Col lg={6}>lg-6</Col>
-    <Col lg={6}>lg-6</Col>
+    <StyledCol lg={6}>lg-6</StyledCol>
+    <StyledCol lg={6}>lg-6</StyledCol>
   </Row>
 </Playground>
 
@@ -75,10 +77,10 @@ mobile first로 설계되어 sm만 설정 되어 있을 경우 sm에서의 설�
 
 <Playground>
   <Row>
-    <Col sm={4}>sm-4</Col>
+    <StyledCol sm={4}>sm-4</StyledCol>
   </Row>
   <Row>
-    <Col lg={4}>lg-4</Col>
+    <StyledCol lg={4}>lg-4</StyledCol>
   </Row>
 </Playground>
 
@@ -89,7 +91,7 @@ mobile first로 설계되어 sm만 설정 되어 있을 경우 sm에서의 설�
 <Playground>
   <Grid>
     <Row>
-      <Col lg={12}>With grid container</Col>
+      <StyledCol lg={12}>With grid container</StyledCol>
     </Row>
   </Grid>
 </Playground>
@@ -98,23 +100,23 @@ mobile first로 설계되어 sm만 설정 되어 있을 경우 sm에서의 설�
 
 <Playground>
   <Row>
-    <Col lg={8} sm={12}>
+    <StyledCol lg={8} sm={12}>
       lg-4
-    </Col>
-    <Col lg={4} sm={6}>
+    </StyledCol>
+    <StyledCol lg={4} sm={6}>
       lg-4
-    </Col>
+    </StyledCol>
   </Row>
   <Row>
-    <Col lg={4} sm={6}>
+    <StyledCol lg={4} sm={6}>
       lg-4
-    </Col>
-    <Col lg={4} sm={6}>
+    </StyledCol>
+    <StyledCol lg={4} sm={6}>
       lg-4
-    </Col>
-    <Col lg={4} sm={6}>
+    </StyledCol>
+    <StyledCol lg={4} sm={6}>
       lg-4
-    </Col>
+    </StyledCol>
   </Row>
 </Playground>
 
@@ -123,22 +125,22 @@ mobile first로 설계되어 sm만 설정 되어 있을 경우 sm에서의 설�
 <Playground>
   <Grid>
     <Row>
-      <Col lg={12} sm={12}>
+      <StyledCol lg={12} sm={12}>
         Header
-      </Col>
+      </StyledCol>
     </Row>
     <Row>
-      <Col lg={4} sm={12}>
+      <StyledCol lg={4} sm={12}>
         Side Menu
-      </Col>
-      <Col style={{ height: 300 }} lg={8} sm={12}>
+      </StyledCol>
+      <StyledCol style={{ height: 300 }} lg={8} sm={12}>
         Content
-      </Col>
+      </StyledCol>
     </Row>
     <Row>
-      <Col lg={12} sm={12}>
+      <StyledCol lg={12} sm={12}>
         Footer
-      </Col>
+      </StyledCol>
     </Row>
   </Grid>
 </Playground>
@@ -148,86 +150,44 @@ mobile first로 설계되어 sm만 설정 되어 있을 경우 sm에서의 설�
 <Playground>
   <Grid>
     <Row>
-      <Col sm={8} smOffset={2} lgOffset={0}>
+      <StyledCol sm={8} smOffset={2} lgOffset={0}>
         sm-8, sm-offset-2
         <br />
-        sm-8, lg-offset-0
-      </Col>
+        lg-offset-8
+      </StyledCol>
     </Row>
     <Row>
-      <Col lg={4} lgOffset={8}>
+      <StyledCol lg={4} lgOffset={8}>
         lg-4, lg-offset-8
-      </Col>
+      </StyledCol>
     </Row>
     <Row>
-      <Col lg={4} sm={8} lgOffset={4} smOffset={2}>
+      <StyledCol lg={4} sm={8} lgOffset={4} smOffset={2}>
         lg-4, lg-offset-4
         <br />
         sm-8, sm-offset-2
-      </Col>
+      </StyledCol>
     </Row>
     <Row>
-      <Col lg={2}>
+      <StyledCol lg={2}>
         lg-2
         <br />
-      </Col>
-      <Col lg={2} lgOffset={2}>
+      </StyledCol>
+      <StyledCol lg={2} lgOffset={2}>
         lg-2
         <br />
         lg-offset-2
-      </Col>
-      <Col lg={2} lgOffset={2}>
+      </StyledCol>
+      <StyledCol lg={2} lgOffset={2}>
         lg-2
         <br />
         lg-offset-2
-      </Col>
+      </StyledCol>
     </Row>
     <Row>
-      <Col lg={10} lgOffset={2}>
+      <StyledCol lg={10} lgOffset={2}>
         lg-10, lg-offset-2
-      </Col>
+      </StyledCol>
     </Row>
   </Grid>
-</Playground>
-
-## Margin top, bottom
-
-기본 단위는 `px`입니다. `em`, `rem` 등의 다른 단위는 문자열로 넣어주세요.
-
-<Playground>
-  <Grid>
-    <Row>
-      <Col lg={12}>With grid container</Col>
-    </Row>
-  </Grid>
-  <Grid marginTop={24}>
-    <Row>
-      <Col lg={12}>With grid container - marginTop 24(px)</Col>
-    </Row>
-  </Grid>
-  <Grid marginTop={'2em'} marginBottom={'2em'}>
-    <Row>
-      <Col lg={12}>With grid container - marginTop 2em, marginBottom 2em</Col>
-    </Row>
-  </Grid>
-  <Grid>
-    <Row>
-      <Col lg={12}>With grid container</Col>
-    </Row>
-  </Grid>
-</Playground>
-
-<Playground>
-  <Row>
-    <Col lg={12}>row</Col>
-  </Row>
-  <Row marginTop={24}>
-    <Col lg={12}>row - marginTop 24(px)</Col>
-  </Row>
-  <Row marginTop={'2em'} marginBottom={'2em'}>
-    <Col lg={12}>row - marginTop 2em, marginBottom 2em</Col>
-  </Row>
-  <Row>
-    <Col lg={12}>row</Col>
-  </Row>
 </Playground>

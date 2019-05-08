@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
 import { media } from '../BreakPoints';
@@ -11,9 +11,29 @@ interface Props {
   renderItem: any;
   smColumn: Column;
   lgColumn?: Column;
+  className?: string;
+  divAttributes?: HTMLDivProps;
 }
 
-const List = styled.div``;
+export default class GridList extends PureComponent<Props> {
+  public render() {
+    const { items, renderItem, smColumn, lgColumn, className, divAttributes } = this.props;
+
+    return (
+      <Container className={className} {...divAttributes}>
+        <GridListUl smColumn={smColumn}>
+          {items.map((item, index, arr) => (
+            <GridListItem key={item.id} smColumn={smColumn} lgColumn={lgColumn}>
+              {renderItem(item, index, arr)}
+            </GridListItem>
+          ))}
+        </GridListUl>
+      </Container>
+    );
+  }
+}
+
+const Container = styled.div``;
 
 const GridListUl = styled.ul<{ smColumn?: Column }>`
   overflow: hidden;
@@ -78,21 +98,3 @@ const GridListItem = styled.li<{ lgColumn?: Column; smColumn?: Column }>`
       `}
   `}
 `;
-
-export default class GridList extends React.PureComponent<Props & HTMLDivProps> {
-  public render() {
-    const { items, renderItem, smColumn, lgColumn, ...restProps } = this.props;
-
-    return (
-      <List {...restProps}>
-        <GridListUl smColumn={smColumn}>
-          {items.map((item, index, arr) => (
-            <GridListItem key={item.id} smColumn={smColumn} lgColumn={lgColumn}>
-              {renderItem(item, index, arr)}
-            </GridListItem>
-          ))}
-        </GridListUl>
-      </List>
-    );
-  }
-}
