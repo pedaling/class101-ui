@@ -35,6 +35,10 @@ const Description = styled.p`
   margin-top: 4px;
 `;
 
+const Title = styled(Typography)`
+  margin-right: 4px;
+`;
+
 export default ({ title, description, typography, to, href, target, ...restProps }: Props) => {
   const options: { rel?: string } = {};
 
@@ -47,9 +51,9 @@ export default ({ title, description, typography, to, href, target, ...restProps
       <Header>
         <Link to={to} target={target} {...options}>
           <HeaderTop>
-            <Typography md={typography || ('Subtitle1' as Typo)} marginRight={4} {...restProps}>
+            <Title md={typography || ('Subtitle1' as Typo)} {...restProps}>
               {title}
-            </Typography>
+            </Title>
             <Chevron fillColor={gray300} />
           </HeaderTop>
         </Link>
@@ -62,9 +66,9 @@ export default ({ title, description, typography, to, href, target, ...restProps
       <Header>
         <a href={href} target={target} {...options}>
           <HeaderTop>
-            <Typography md={typography || ('Subtitle1' as Typo)} marginRight={4} {...restProps}>
+            <Title md={typography || ('Subtitle1' as Typo)} {...restProps}>
               {title}
-            </Typography>
+            </Title>
             <Chevron fillColor={gray300} />
           </HeaderTop>
         </a>
@@ -75,9 +79,9 @@ export default ({ title, description, typography, to, href, target, ...restProps
   return (
     <Header>
       <HeaderTop>
-        <Typography md={typography || ('Subtitle1' as Typo)} {...restProps}>
+        <Title md={typography || ('Subtitle1' as Typo)} {...restProps}>
           {title}
-        </Typography>
+        </Title>
       </HeaderTop>
       {description && <Description>{description}</Description>}
     </Header>

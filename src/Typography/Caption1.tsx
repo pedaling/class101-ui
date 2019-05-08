@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+
 import Typography, { TypoProps } from '.';
 
-export default ({ children, ...restProps }: TypoProps) => (
-  <Typography md="Caption1" {...restProps}>
-    {children}
-  </Typography>
-);
+export default class Caption1 extends PureComponent<TypoProps> {
+  public render() {
+    const { children, ...restProps } = this.props;
+    return (
+      <Typography md="Caption1" {...restProps}>
+        {children}
+      </Typography>
+    );
+  }
+}

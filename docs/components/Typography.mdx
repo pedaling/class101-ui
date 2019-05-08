@@ -5,16 +5,14 @@ route: /components/typography
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Component as Headline1 } from './Typography/Headline1';
-import { Component as Headline2 } from './Typography/Headline2';
-import { Component as Headline3 } from './Typography/Headline3';
-import { Component as Subtitle1 } from './Typography/Subtitle1';
-import { Component as Body1 } from './Typography/Body1';
-import { Component as Body2 } from './Typography/Body2';
-import { Component as Caption1 } from './Typography/Caption1';
-import { Component as Caption2 } from './Typography/Caption2';
+import { Headline1, Headline2, Headline3, Subtitle1, Body1, Body2, Caption1, Caption2 } from '@class101/ui';
 
 # Typography
+
+> **NOTE**
+>
+> - v3부터 Bodies에 `paragaph` 속성을 지원하지 않습니다.
+> - v6부터는 margin 스타일을 제어하는 속성을 따로 지원하지 않습니다.
 
 Class101 UI의 Typography는 기기나 뷰포트 크기가 증가함에 따라 적절하게 확대되는 반응형, 모바일 우선 유동 글자 시스템을 지원합니다.
 
@@ -85,8 +83,6 @@ Headings는 더 큰 텍스트 스타일인 `display: 2 | 3`를 지원합니다.
 
 ## Bodies
 
-> v3부터 `paragaph` 속성은 사용하지 않습니다.
-
 <PropsTable of={Body1} />
 
 <Playground>
@@ -117,21 +113,13 @@ Headings는 더 큰 텍스트 스타일인 `display: 2 | 3`를 지원합니다.
   <Caption2>Div caption2</Caption2>
 </Playground>
 
-## With diffrent colors and margins
+## With diffrent colors
 
 <Playground>
-  <Headline1 color="orange" marginLeft={20}>
-    Lorem ipsum dolor sit amet
-  </Headline1>
-  <Subtitle1 color="red" marginLeft={200} marginTop={10}>
-    1914 translation by H. Rackham
-  </Subtitle1>
-  <Body1 color="green" marginBottom={10}>
-    Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
-  </Body1>
-  <Caption1 color="pink" marginLeft={50}>
-    Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
-  </Caption1>
+  <Headline1 color="orange">Lorem ipsum dolor sit amet</Headline1>
+  <Subtitle1 color="red">1914 translation by H. Rackham</Subtitle1>
+  <Body1 color="green">Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC</Body1>
+  <Caption1 color="pink">Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC</Caption1>
 </Playground>
 
 ## text align

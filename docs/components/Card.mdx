@@ -5,8 +5,7 @@ route: /components/card
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Component as Caption1 } from './Typography/Caption1';
-import { Colors, Grid, Row, Button } from '@class101/ui';
+import { Colors, Grid, Row, Button, Caption1 } from '@class101/ui';
 import { NoHiddenStyleCol } from './Col';
 
 import { Component as Card } from './Card';
@@ -104,9 +103,8 @@ import { imageSrc } from './interface';
                 바로 수강 가능
               </Caption1>
               <Caption1
-                style={{ display: 'inline-block' }}
+                style={{ display: 'inline-block', marginLeft: '11px' }}
                 fontWeight={'Bold'}
-                marginLeft={11}
                 color={Colors.orange700}
               >
                 40% 할인

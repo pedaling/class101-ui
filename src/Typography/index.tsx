@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 
 import { media } from '../BreakPoints';
-import { BaseProps } from '../interfaces/props';
 import {
   body1,
   body2,
@@ -23,9 +22,13 @@ interface OwnProps {
   md: Typo;
 }
 
-interface CommonTypoProps extends BaseProps {
+export interface TypoProps {
   lg?: Typo;
   sm?: Typo;
+  color?: string;
+  textAlign?: string;
+  fontWeight?: string | number;
+  className?: string;
   children?: React.ReactNode;
   element?: TypoElement;
 }
@@ -34,25 +37,11 @@ interface HeadlinProps {
   display?: 2 | 3 | '2' | '3';
 }
 
-interface CommonTypoStyleProps {
-  color?: string;
-  marginTop?: number;
-  marginBottom?: number;
-  marginRight?: number;
-  marginLeft?: number;
-  textAlign?: string;
-  fontWeight?: string | number;
-}
-
-type Props = OwnProps & CommonTypoProps & CommonTypoStyleProps;
-export type TypoProps = CommonTypoProps & CommonTypoStyleProps & BaseProps;
+type Props = OwnProps & TypoProps;
 export type HeadlineTypoProps = TypoProps & HeadlinProps;
 
-const customStyle = css<CommonTypoStyleProps>`
-  margin-top: ${props => props.marginTop || 0}px;
-  margin-bottom: ${props => props.marginBottom || 0}px;
-  margin-left: ${props => props.marginLeft || 0}px;
-  margin-right: ${props => props.marginRight || 0}px;
+const customStyle = css<{ textAlign?: string }>`
+  margin: 0;
   ${props => props.textAlign && `text-align: ${props.textAlign}`};
 `;
 
