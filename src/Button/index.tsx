@@ -1,8 +1,9 @@
-import React, { PureComponent, ReactNode } from 'react';
+import React, { AnchorHTMLAttributes, ButtonHTMLAttributes, PureComponent, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 import { gray000, gray200, orange600, white } from '../Colors';
+import { Omit } from '../interfaces/props';
 import Spinner from '../Spinner';
 import { body2 } from '../TextStyles';
 
@@ -20,18 +21,122 @@ interface CommonProps {
   to?: string;
   href?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => void;
-  children?: any;
+  children?: ReactNode;
   disabled?: boolean;
   target?: string;
+  className?: string;
   style?: React.CSSProperties;
 }
 
-interface ContainerProps extends CommonProps {
+type OmittedAnchorAttributes = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof CommonProps>;
+type OmittedButtonAttributes = Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof CommonProps>;
+
+interface Props extends CommonProps {
   fill?: boolean;
+  anchorAttributes?: OmittedAnchorAttributes;
+  buttonAttributes?: OmittedButtonAttributes;
 }
 
-interface StyledContainerProps extends CommonProps {
-  fill?: string;
+export default class Button extends PureComponent<Props> {
+  public render() {
+    const {
+      size = 'md',
+      type = 'button',
+      fill = false,
+      leftIconSrc,
+      rightIconSrc,
+      leftIcon,
+      rightIcon,
+      children,
+      disabled,
+      loading,
+      to,
+      href,
+      target,
+      anchorAttributes,
+      buttonAttributes,
+      ...restProps
+    } = this.props;
+    if (loading) {
+      return (
+        <ButtonContainer type={type} size={size} fill={`${fill}`} disabled {...buttonAttributes} {...restProps}>
+          <StyledSpinner buttonSize={size} />
+        </ButtonContainer>
+      );
+    }
+
+    const options: { rel?: string } = {};
+
+    if (target === '_blank') {
+      options.rel = 'noopener noreferrer';
+    }
+
+    const innerElements = (
+      <>
+        {Boolean(leftIconSrc) && (
+          <LeftIcon>
+            <img src={leftIconSrc} alt="" />
+          </LeftIcon>
+        )}
+        {Boolean(leftIcon) && <LeftIcon>{leftIcon}</LeftIcon>}
+        <Text>{children}</Text>
+        {Boolean(rightIconSrc) && (
+          <RightIcon>
+            <img src={rightIconSrc} alt="" />
+          </RightIcon>
+        )}
+        {Boolean(rightIcon) && <RightIcon>{rightIcon}</RightIcon>}
+      </>
+    );
+
+    const anchorButtonElements = <AnchorButtonInner>{innerElements}</AnchorButtonInner>;
+
+    if (to) {
+      return (
+        <LinkButton
+          to={to}
+          target={target}
+          size={size}
+          disabled={disabled}
+          fill={`${fill}`}
+          {...anchorAttributes}
+          {...restProps}
+          {...options}
+        >
+          {anchorButtonElements}
+        </LinkButton>
+      );
+    }
+    if (href) {
+      return (
+        <AnchorButton
+          href={href}
+          target={target}
+          size={size}
+          disabled={disabled}
+          fill={`${fill}`}
+          {...anchorAttributes}
+          {...restProps}
+          {...options}
+        >
+          {anchorButtonElements}
+        </AnchorButton>
+      );
+    }
+
+    return (
+      <ButtonContainer
+        type={type}
+        size={size}
+        disabled={disabled}
+        fill={`${fill}`}
+        {...buttonAttributes}
+        {...restProps}
+      >
+        {innerElements}
+      </ButtonContainer>
+    );
+  }
 }
 
 interface StyledSpinnerProps {
@@ -101,6 +206,10 @@ const RightIcon = styled.div`
     height: 100%;
   }
 `;
+
+interface StyledContainerProps extends CommonProps {
+  fill?: string;
+}
 
 const buttonStyle = css<StyledContainerProps>`
   ${body2};
@@ -255,94 +364,3 @@ const LinkButton = styled(Link)<StyledContainerProps>`
 const AnchorButton = styled.a<StyledContainerProps>`
   ${anchorButtonStyle};
 `;
-
-export default class Button extends PureComponent<ContainerProps> {
-  public render() {
-    const {
-      size = 'md',
-      type = 'button',
-      fill = false,
-      leftIconSrc,
-      rightIconSrc,
-      leftIcon,
-      rightIcon,
-      children,
-      disabled,
-      loading,
-      to,
-      href,
-      target,
-      ...restProps
-    } = this.props;
-    if (loading) {
-      return (
-        <ButtonContainer type={type} size={size} fill={`${fill}`} {...restProps} disabled>
-          <StyledSpinner buttonSize={size} />
-        </ButtonContainer>
-      );
-    }
-
-    const options: { rel?: string } = {};
-
-    if (target === '_blank') {
-      options.rel = 'noopener noreferrer';
-    }
-
-    const innerElements = (
-      <>
-        {Boolean(leftIconSrc) && (
-          <LeftIcon>
-            <img src={leftIconSrc} alt="" />
-          </LeftIcon>
-        )}
-        {Boolean(leftIcon) && <LeftIcon>{leftIcon}</LeftIcon>}
-        <Text>{children}</Text>
-        {Boolean(rightIconSrc) && (
-          <RightIcon>
-            <img src={rightIconSrc} alt="" />
-          </RightIcon>
-        )}
-        {Boolean(rightIcon) && <RightIcon>{rightIcon}</RightIcon>}
-      </>
-    );
-
-    const anchorButtonElements = <AnchorButtonInner>{innerElements}</AnchorButtonInner>;
-
-    if (to) {
-      return (
-        <LinkButton
-          to={to}
-          target={target}
-          size={size}
-          disabled={disabled}
-          fill={`${fill}`}
-          {...restProps}
-          {...options}
-        >
-          {anchorButtonElements}
-        </LinkButton>
-      );
-    }
-    if (href) {
-      return (
-        <AnchorButton
-          href={href}
-          target={target}
-          size={size}
-          disabled={disabled}
-          fill={`${fill}`}
-          {...restProps}
-          {...options}
-        >
-          {anchorButtonElements}
-        </AnchorButton>
-      );
-    }
-
-    return (
-      <ButtonContainer type={type} size={size} disabled={disabled} fill={`${fill}`} {...restProps}>
-        {innerElements}
-      </ButtonContainer>
-    );
-  }
-}
