@@ -12,8 +12,6 @@ interface CommonProps {
   size?: 'lg' | 'md' | 'sm' | 'xs';
   color?: string;
   backgroundColor?: string;
-  leftIconSrc?: string;
-  rightIconSrc?: string;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   loading?: boolean;
@@ -43,8 +41,6 @@ export default class Button extends PureComponent<Props> {
       size = 'md',
       type = 'button',
       fill = false,
-      leftIconSrc,
-      rightIconSrc,
       leftIcon,
       rightIcon,
       children,
@@ -73,18 +69,8 @@ export default class Button extends PureComponent<Props> {
 
     const innerElements = (
       <>
-        {Boolean(leftIconSrc) && (
-          <LeftIcon>
-            <img src={leftIconSrc} alt="" />
-          </LeftIcon>
-        )}
         {Boolean(leftIcon) && <LeftIcon>{leftIcon}</LeftIcon>}
         <Text>{children}</Text>
-        {Boolean(rightIconSrc) && (
-          <RightIcon>
-            <img src={rightIconSrc} alt="" />
-          </RightIcon>
-        )}
         {Boolean(rightIcon) && <RightIcon>{rightIcon}</RightIcon>}
       </>
     );
@@ -186,10 +172,6 @@ const StyledSpinner = styled(Spinner)<StyledSpinnerProps>`
 `;
 
 const LeftIcon = styled.div`
-  > img {
-    width: 100%;
-    height: 100%;
-  }
   > svg {
     width: 100%;
     height: 100%;
@@ -197,10 +179,6 @@ const LeftIcon = styled.div`
 `;
 
 const RightIcon = styled.div`
-  > img {
-    width: 100%;
-    height: 100%;
-  }
   > svg {
     width: 100%;
     height: 100%;
