@@ -123,7 +123,7 @@ const TopToastsContainer = styled.div`
   left: 0;
   right: 0;
   margin: auto;
-  width: 100%;
+  width: fit-content;
   z-index: 10000;
 `;
 
@@ -148,7 +148,7 @@ const BottomToastsContainer = styled.div`
   left: 0;
   right: 0;
   margin: auto;
-  width: 100%;
+  width: fit-content;
   display: flex;
   flex-direction: column-reverse;
   z-index: 10000;
