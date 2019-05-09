@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Portal from '../Portal';
 import { Position } from '../Position';
-import { default as Toast, Props as ToastProps } from '../Toast';
+import Toast, { Props as ToastProps } from '../Toast';
 
 export type ToasterPosition =
   | typeof Position.TOP
@@ -121,9 +121,6 @@ const TopToastsContainer = styled.div`
   position: fixed;
   top: 0;
   left: 50%;
-  right: 0;
-  margin: auto;
-  pointer-events: none;
   width: auto;
   transform: translateX(-50%);
   z-index: 10000;
@@ -132,6 +129,7 @@ const TopToastsContainer = styled.div`
 const TopLeftToastsContainer = styled.div`
   position: fixed;
   top: 0;
+  left: 0;
   margin-left: 20px;
   z-index: 10000;
 `;
@@ -148,9 +146,6 @@ const BottomToastsContainer = styled.div`
   position: fixed;
   bottom: 0;
   left: 50%;
-  right: 0;
-  margin: auto;
-  pointer-events: none;
   width: auto;
   transform: translateX(-50%);
   flex-direction: column-reverse;
@@ -160,6 +155,7 @@ const BottomToastsContainer = styled.div`
 const BottomLeftToastsContainer = styled.div`
   position: fixed;
   bottom: 0;
+  left: 0;
   margin-left: 20px;
   display: flex;
   flex-direction: column-reverse;
