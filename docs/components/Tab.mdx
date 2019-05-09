@@ -5,7 +5,7 @@ route: /components/tab
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Tab } from '@class101/ui';
+import { Tab, Badge, Icon, Colors } from '@class101/ui';
 
 # Tab
 
@@ -72,13 +72,15 @@ import { Tab } from '@class101/ui';
             SectionElement = <div>커리큘럼 커리큘럼 커리큘럼</div>
             break;
         }
-        return <>
-          <Tab onTabChange={(value) => {this.setState({currentValue: value})}} tabs={tabs} currentValue={this.state.currentValue}/>
-          {SectionElement}
-        </>;
+        return (
+          <Tab onTabChange={(value) => {this.setState({currentValue: value})}} tabs={tabs} currentValue={this.state.currentValue}>
+            {SectionElement}
+          </Tab>
+        );
       }
     }
     return <Example />
+
 }}
 
 </Playground>
@@ -92,17 +94,52 @@ import { Tab } from '@class101/ui';
       {
         value: 'PREVIEW',
         title: '알림 신청',
-        badge: 0,
+        badge: '0개',
       },
       {
         value: 'KLASS',
         title: '클래스 및 패키지',
-        badge: 5,
+        badge: '5개',
       },
       {
         value: 'CURRICULM',
         title: '커리큘럼',
-        badge: 12,
+        badge: '12개',
+      },
+    ]}
+  />
+</Playground>
+
+<Playground>
+  <Tab
+    currentValue="PREVIEW"
+    tabs={[
+      {
+        value: 'PREVIEW',
+        title: '알림 신청',
+        badge: (
+          <Badge pill backgroundColor={Colors.red500}>
+            <Icon.Check fillColor={Colors.white} />
+          </Badge>
+        ),
+      },
+      {
+        value: 'KLASS',
+        title: '클래스 및 패키지',
+        badge: (
+          <Badge pill backgroundColor={Colors.red500}>
+            <Icon.Check fillColor={Colors.white} />
+          </Badge>
+        ),
+      },
+      {
+        value: 'CURRICULM',
+        title: '커리큘럼',
+        badge: (
+          <Badge pill backgroundColor={Colors.gray500}>
+            <Icon.Check fillColor={Colors.white} />
+          </Badge>
+        ),
       },
     ]}
   />
@@ -118,17 +155,17 @@ import { Tab } from '@class101/ui';
       {
         value: 'PREVIEW',
         title: '알림 신청',
-        badge: 0,
+        badge: '0개',
       },
       {
         value: 'KLASS',
         title: '클래스 및 패키지',
-        badge: 5,
+        badge: '5개',
       },
       {
         value: 'CURRICULM',
         title: '커리큘럼',
-        badge: 12,
+        badge: '12개',
       },
     ]}
   />

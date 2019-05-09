@@ -1,5 +1,4 @@
-import { isNil } from 'lodash-es';
-import React, { HTMLAttributes, PureComponent } from 'react';
+import React, { HTMLAttributes, PureComponent, ReactNode } from 'react';
 import styled from 'styled-components';
 
 import { gray100, gray500, orange600 } from '../Colors';
@@ -9,7 +8,7 @@ import TabItem from './TabItem';
 interface Tabs {
   value: string | number;
   title: string;
-  badge?: number;
+  badge?: React.ReactNode;
 }
 
 interface Props {
@@ -22,10 +21,11 @@ interface Props {
   fluid: boolean;
   className?: string;
   onTabChange?: (value: string | number) => void;
-  ulAttributes?: HTMLAttributes<HTMLUListElement>;
+  divAttributes?: HTMLAttributes<HTMLDivElement>;
+  children: ReactNode;
 }
 
-export default class TabContainer extends PureComponent<Props> {
+export default class Tab extends PureComponent<Props> {
   public static defaultProps = {
     fluid: true,
     color: gray500,
@@ -40,36 +40,40 @@ export default class TabContainer extends PureComponent<Props> {
       tabs,
       currentValue,
       onTabChange,
-      borderColor,
       color,
+      borderColor,
       activeColor,
       activeBorderColor,
       fluid,
-      ulAttributes,
+      divAttributes,
+      children,
     } = this.props;
     return (
-      <TabList borderColor={borderColor} className={className} {...ulAttributes}>
-        {tabs.map(tab => (
-          <TabItem
-            key={tab.value}
-            value={tab.value}
-            className={`${className ? `${className}-item ` : ''}${tab.value === currentValue ? 'active' : ''}`}
-            onTabChange={onTabChange}
-            color={color}
-            activeColor={activeColor}
-            activeBorderColor={activeBorderColor}
-            tabCount={tabs.length}
-            fluid={fluid}
-          >
-            {tab.title}
-            {!isNil(tab.badge) && (
-              <Badge color={color} activeColor={activeColor}>
-                {tab.badge}개
-              </Badge>
-            )}
-          </TabItem>
-        ))}
-      </TabList>
+      <div className={className} {...divAttributes}>
+        <TabList borderColor={borderColor}>
+          {tabs.map(tab => (
+            <TabItem
+              key={tab.value}
+              value={tab.value}
+              className={`${className ? `${className}-item ` : ''}${tab.value === currentValue ? 'active' : ''}`}
+              onTabChange={onTabChange}
+              color={color}
+              activeColor={activeColor}
+              activeBorderColor={activeBorderColor}
+              tabCount={tabs.length}
+              fluid={fluid}
+            >
+              {tab.title}
+              {tab.badge && (
+                <Badge color={color} activeColor={activeColor}>
+                  {tab.badge}
+                </Badge>
+              )}
+            </TabItem>
+          ))}
+        </TabList>
+        {children}
+      </div>
     );
   }
 }
@@ -78,6 +82,7 @@ const TabList = styled.ul<{ borderColor: string }>`
   display: flex;
   list-style: none;
   margin: 0;
+  width: 100%;
   white-space: nowrap;
   overflow-x: auto;
   box-shadow: inset 0 -1px 0 0 ${props => props.borderColor};
