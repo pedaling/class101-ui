@@ -159,7 +159,7 @@ const Message = styled.span`
 `;
 
 const Action = styled.button`
-  width: fit-content;
+  width: auto;
   align-items: center;
   border: 0;
   background-color: inherit;
