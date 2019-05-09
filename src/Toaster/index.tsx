@@ -120,10 +120,12 @@ const ToasterContainer = styled.div``;
 const TopToastsContainer = styled.div`
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
   right: 0;
   margin: auto;
-  width: fit-content;
+  pointer-events: none;
+  width: auto;
+  transform: translateX(-50%);
   z-index: 10000;
 `;
 
@@ -145,11 +147,12 @@ const TopRightToastsContainer = styled.div`
 const BottomToastsContainer = styled.div`
   position: fixed;
   bottom: 0;
-  left: 0;
+  left: 50%;
   right: 0;
   margin: auto;
-  width: fit-content;
-  display: flex;
+  pointer-events: none;
+  width: auto;
+  transform: translateX(-50%);
   flex-direction: column-reverse;
   z-index: 10000;
 `;
