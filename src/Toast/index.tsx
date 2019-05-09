@@ -38,7 +38,7 @@ export default class Toast extends React.Component<Props, State> {
   public state: State = {
     unmount: false,
   };
-  private unmountAnimationTimeout?: number;
+  private unmountAnimationTimeout?: NodeJS.Timeout;
 
   public componentDidMount() {
     const { dismiss, timeout } = this.props;
@@ -160,10 +160,12 @@ const Message = styled.span`
 
 const Action = styled.button`
   width: fit-content;
+  align-items: center;
   border: 0;
   background-color: inherit;
   color: inherit;
   cursor: pointer;
+  display: flex;
   font-size: inherit;
   line-height: 20px;
   margin-left: auto;
