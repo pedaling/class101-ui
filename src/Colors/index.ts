@@ -13,17 +13,17 @@ export const gray700 = '#616568';
 export const gray800 = '#3e4042';
 export const gray900 = '#1b1c1d';
 
-export const red000 = '#fff0f0';
+export const red000 = '#feeff2';
 export const red50 = red000;
-export const red100 = '#ffd9d9';
-export const red200 = '#ffc9c9';
-export const red300 = '#f7abb0';
-export const red400 = '#f28896';
-export const red500 = '#ed6b85';
-export const red600 = '#e52c60';
-export const red700 = '#e0004d';
-export const red800 = '#c20042';
-export const red900 = '#a40038';
+export const red100 = '#ffd1d7';
+export const red200 = '#fa9da5';
+export const red300 = '#f77c83';
+export const red400 = '#fc515a';
+export const red500 = '#fc3d46';
+export const red600 = '#f33340';
+export const red700 = '#e02839';
+export const red800 = '#d32032';
+export const red900 = '#c40d24';
 export const redError = '#ff5252';
 
 export const orange000 = '#fff9f2';
