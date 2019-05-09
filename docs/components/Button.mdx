@@ -11,8 +11,11 @@ import { Icon, Colors, Button } from '@class101/ui';
 
 눌러서 제어하는 기능을 담당하는 컴포넌트입니다.
 
-> v4부터 Icon 컴포넌트와 함께 사용할 수 있도록 flex 기반의 스타일링을 지원하고 있습니다.  
-> textAlign 프로퍼티는 v4부터 지원하지 않습니다.
+> **NOTE**
+>
+> - v4부터 Icon 컴포넌트와 함께 사용할 수 있도록 flex 기반의 스타일링을 지원하고 있습니다.
+> - v4부터 textAlign 프로퍼티는 지원하지 않습니다.
+> - v6부터 src를 지원하지 않습니다. 버튼의 아이콘은 Icon 컴포넌트를 사용해주세요.
 
 ## Props
 
@@ -47,8 +50,6 @@ import { Icon, Colors, Button } from '@class101/ui';
 ## With different icons
 
 <Playground>
-  <Button leftIconSrc="https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/ic-plus-black.png">Click me</Button>
-  <Button rightIconSrc="https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/ic-plus-black.png">Click me</Button>
   <Button leftIcon={<Icon.Add fillColor={Colors.white} />}>Click me</Button>
   <Button rightIcon={<Icon.Add fillColor={Colors.white} />}>Click me</Button>
   <Button>
