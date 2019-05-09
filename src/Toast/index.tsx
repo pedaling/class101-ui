@@ -113,7 +113,6 @@ const UnmountAnimation = styled.div<{ unmount: boolean }>`
 `;
 
 const Container = styled.div<Partial<Props>>`
-  width: fit-content;
   min-width: 280px;
   max-width: 612px;
   border-radius: 3px;
@@ -158,7 +157,6 @@ const Message = styled.span`
 `;
 
 const Action = styled.button`
-  width: auto;
   align-items: center;
   border: 0;
   background-color: inherit;
