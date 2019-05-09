@@ -5,14 +5,15 @@ route: /components/card
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Colors, Grid, Row, Button, Caption1 } from '@class101/ui';
+import { Colors, Button, Grid, Row, Caption1, Card } from '@class101/ui';
 import { NoHiddenStyleCol } from './Col';
-
-import { Component as Card } from './Card';
-import { Component as KlassCard } from './KlassCard';
 import { imageSrc } from './interface';
 
 # Card
+
+> **NOTE**
+>
+> - v6부터 KlassCard 컴포넌트는 삭제됩니다.
 
 ## Props
 
@@ -120,99 +121,6 @@ import { imageSrc } from './interface';
           to={'/'}
           target={'_blank'}
           extraBottom={<Caption1 color={Colors.gray400}>10월 12일 ~ 10월 24일</Caption1>}
-        />
-      </NoHiddenStyleCol>
-    </Row>
-  </Grid>
-</Playground>
-
-## KlassCard
-
-<PropsTable of={KlassCard} />
-
-## preview KlassCard
-
-알림신청 카드
-
-<Playground>
-  <Grid>
-    <Row>
-      <NoHiddenStyleCol lg={4}>
-        <KlassCard
-          state="preview"
-          title="아이패드 드로잉"
-          coverImage={imageSrc}
-          creatorName="Kang Han"
-          to={'/'}
-          target={'_blank'}
-          reservationed={false}
-          reservationCount={11}
-          onReservationClick={() => {}}
-        />
-      </NoHiddenStyleCol>
-      <NoHiddenStyleCol lg={4}>
-        <KlassCard
-          state="preview"
-          title="아이패드 드로잉"
-          coverImage={imageSrc}
-          creatorName="Kang Han"
-          to={'/'}
-          target={'_blank'}
-          loading={true}
-          reservationed={false}
-          reservationCount={11}
-          onReservationClick={() => {}}
-        />
-      </NoHiddenStyleCol>
-      <NoHiddenStyleCol lg={4}>
-        <KlassCard
-          state="preview"
-          title="아이패드 드로잉"
-          coverImage={imageSrc}
-          creatorName="Kang Han"
-          to={'/'}
-          target={'_blank'}
-          reservationed={true}
-          reservationCount={11}
-          onReservationClick={() => {}}
-        />
-      </NoHiddenStyleCol>
-    </Row>
-  </Grid>
-</Playground>
-
-## selling KlassCard
-
-바로 수강 가능 / 수강 모집 중 카드
-
-<Playground>
-  <Grid>
-    <Row>
-      <NoHiddenStyleCol lg={4}>
-        <KlassCard
-          state="sale"
-          title="아이패드 드로잉"
-          coverImage={imageSrc}
-          creatorName="Kang Han"
-          sale={40}
-          wishlisted={false}
-          onWishlistClick={() => {}}
-          to={'/'}
-          target={'_blank'}
-        />
-      </NoHiddenStyleCol>
-      <NoHiddenStyleCol lg={4}>
-        <KlassCard
-          state="funding"
-          title="아이패드 드로잉"
-          coverImage={imageSrc}
-          creatorName="Kang Han"
-          openDate="9월 18일"
-          sale={40}
-          wishlisted={true}
-          onWishlistClick={() => {}}
-          to={'/'}
-          target={'_blank'}
         />
       </NoHiddenStyleCol>
     </Row>
