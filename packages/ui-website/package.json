@@ -1,0 +1,15 @@
+{
+  "name": "ui-website",
+  "scripts": {
+    "start": "docz dev",
+    "docz:build": "docz build",
+    "deploy": "gh-pages -d example/build"
+  },
+  "dependencies": {
+    "@class101/ui": "^6.0.0",
+    "docz": "^0.13.7",
+    "docz-theme-default": "^0.12.9",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}

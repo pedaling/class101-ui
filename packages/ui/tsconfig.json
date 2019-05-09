@@ -11,10 +11,15 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "noEmit": true,
     "jsx": "react",
     "baseUrl": "src",
-    "outDir": "lib"
+    "outDir": "lib",
+    "paths": {
+      "@common": ["./Common"],
+      "@components": ["./Components"],
+      "@grid": ["./Grid"],
+      "@typography": ["./Typography"]
+    }
   },
   "files": ["src/index.ts"],
   "exclude": ["docz", "example"]

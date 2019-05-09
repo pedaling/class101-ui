@@ -1,0 +1,71 @@
+---
+menu: Components
+name: Icon
+route: /components/icon
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Icon, Colors } from '@class101/ui';
+import IconItemContainer from './IconItemContainer';
+
+# Icon
+
+Class101 UI의 SVG Icon입니다.
+
+## Import
+
+```
+import { Icon } from '@class101/ui';
+```
+
+## Props
+
+<PropsTable of={Icon} />
+
+## Basic usage
+
+사용할 수 있는 아이콘은 제플린 파일을 참고하세요. 제플린의 `ic-checkbox-on` 컴포넌트의 경우 `<Icon.CheckboxOn />`와 대응합니다.
+
+<Playground>
+  <Icon.Add />
+  <Icon.Bell />
+  <Icon.Alert />
+  <Icon.CheckboxOn />
+  <Icon.Close />
+</Playground>
+
+## Size
+
+Change the size of an icon with the size prop. Icon sizes uses the pixel scale.
+
+<Playground>
+  <Icon.Bell size={16} />
+  <Icon.Bell size={24} />
+  <Icon.Bell size={28} />
+  <Icon.Bell size={36} />
+  <Icon.Bell size={42} />
+  <Icon.Bell size={48} />
+</Playground>
+
+## Color
+
+You can set up to 2 colors for icons.
+It is divided into basic fill color and accent color. The `accentColor` is only a specific icon.
+The props that set the basic fill color are `fillColor`, which is present on all icons.
+
+<Playground>
+  <Icon.Bell fillColor={Colors.gray700} />
+  <Icon.Bell fillColor={Colors.red700} />
+  <Icon.Bell fillColor={Colors.orange700} />
+</Playground>
+
+<Playground>
+  <Icon.StarHalf />
+  <Icon.StarHalf fillColor={Colors.red600} accentColor={Colors.red200} />
+  <Icon.StarNone />
+  <Icon.StarNone accentColor={Colors.red200} />
+</Playground>
+
+## Icon List
+
+<IconItemContainer />
