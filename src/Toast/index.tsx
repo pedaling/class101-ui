@@ -1,4 +1,4 @@
-import React, { ReactNode, ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 
 import * as Colors from '../Colors';
@@ -6,7 +6,6 @@ import { elevation1 } from '../ElevationStyles';
 import { IconProps } from '../Icon';
 import { Position } from '../Position';
 import { ToasterPosition } from '../Toaster';
-
 import { fadeOutKeyFrames, slideDownKeyFrames, slideUpKeyFrames } from './keyframes';
 
 export const DEFAULT_TIMEOUT = 5000;
@@ -38,7 +37,7 @@ export default class Toast extends React.Component<Props, State> {
   public state: State = {
     unmount: false,
   };
-  private unmountAnimationTimeout?: NodeJS.Timeout;
+  private unmountAnimationTimeout?: number;
 
   public componentDidMount() {
     const { dismiss, timeout } = this.props;
