@@ -5,34 +5,95 @@ route: /components/tab
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Tab, Badge, Icon, Colors } from '@class101/ui';
+import { Component as TabComponent } from './Tab';
+import { Tab, Badge, Icon, Colors, Theme } from '@class101/ui';
+import { PlayGroundContainer, ThemeProvider } from '../HelpComponents';
 
 # Tab
 
 ## Props
 
-<PropsTable of={Tab} />
+<PropsTable of={TabComponent} />
 
-## Basic badge
+## Basic usage
 
 <Playground>
-  <Tab
-    currentValue="PREVIEW"
-    tabs={[
-      {
-        value: 'PREVIEW',
-        title: '알림 신청',
-      },
-      {
-        value: 'KLASS',
-        title: '클래스 및 패키지',
-      },
-      {
-        value: 'CURRICULM',
-        title: '커리큘럼',
-      },
-    ]}
-  />
+  <PlayGroundContainer>
+    <Tab
+      currentValue="PREVIEW"
+      tabs={[
+        {
+          value: 'PREVIEW',
+          title: '알림 신청',
+        },
+        {
+          value: 'KLASS',
+          title: '클래스 및 패키지',
+        },
+        {
+          value: 'CURRICULM',
+          title: '커리큘럼',
+        },
+      ]}
+    />
+    <Tab
+      type="orange"
+      currentValue="PREVIEW"
+      tabs={[
+        {
+          value: 'PREVIEW',
+          title: '알림 신청',
+        },
+        {
+          value: 'KLASS',
+          title: '클래스 및 패키지',
+        },
+        {
+          value: 'CURRICULM',
+          title: '커리큘럼',
+        },
+      ]}
+    />
+  </PlayGroundContainer>
+  <ThemeProvider theme={Theme.dark}>
+    <PlayGroundContainer>
+      <Tab
+        currentValue="PREVIEW"
+        tabs={[
+          {
+            value: 'PREVIEW',
+            title: '알림 신청',
+          },
+          {
+            value: 'KLASS',
+            title: '클래스 및 패키지',
+          },
+          {
+            value: 'CURRICULM',
+            title: '커리큘럼',
+          },
+        ]}
+      />
+      <Tab
+        type="red"
+        currentValue="PREVIEW"
+        tabs={[
+          {
+            value: 'PREVIEW',
+            title: '알림 신청',
+          },
+          {
+            value: 'KLASS',
+            title: '클래스 및 패키지',
+          },
+          {
+            value: 'CURRICULM',
+            title: '커리큘럼',
+          },
+        ]}
+      />
+    </PlayGroundContainer>
+  </ThemeProvider>
 </Playground>
 
 ## onTabChange

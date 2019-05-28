@@ -1,9 +1,12 @@
 import React, { HTMLAttributes, PureComponent, ReactNode } from 'react';
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 
-import { gray100, gray500, orange600 } from '../Colors';
+import { gray600 } from '../Colors';
 import { caption1 } from '../TextStyles';
+import Theme from '../Theme';
+import { TabStyleProps } from './interface';
 import TabItem from './TabItem';
+import { getTabActiveColorByTheme, getTabBorderColorByTheme } from './utils';
 
 interface Tabs {
   value: string | number;
@@ -11,61 +14,42 @@ interface Tabs {
   badge?: React.ReactNode;
 }
 
-interface Props {
+interface TabProps extends TabStyleProps {
   tabs: Tabs[];
   currentValue: string | number;
-  color: string;
-  activeColor: string;
-  borderColor: string;
-  activeBorderColor: string;
   fluid: boolean;
   className?: string;
   onTabChange?: (value: string | number) => void;
   divAttributes?: HTMLAttributes<HTMLDivElement>;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
-export default class Tab extends PureComponent<Props> {
+class Tab extends PureComponent<TabProps> {
   public static defaultProps = {
     fluid: true,
-    color: gray500,
-    activeColor: orange600,
-    borderColor: gray100,
-    activeBorderColor: orange600,
+    type: 'default',
+    theme: Theme.light,
   };
 
   public render() {
-    const {
-      className,
-      tabs,
-      currentValue,
-      onTabChange,
-      color,
-      borderColor,
-      activeColor,
-      activeBorderColor,
-      fluid,
-      divAttributes,
-      children,
-    } = this.props;
+    const { className, tabs, type, theme, currentValue, onTabChange, fluid, divAttributes, children } = this.props;
     return (
       <div className={className} {...divAttributes}>
-        <TabList borderColor={borderColor}>
+        <TabList type={type} theme={theme}>
           {tabs.map(tab => (
             <TabItem
               key={tab.value}
               value={tab.value}
               className={`${className ? `${className}-item ` : ''}${tab.value === currentValue ? 'active' : ''}`}
               onTabChange={onTabChange}
-              color={color}
-              activeColor={activeColor}
-              activeBorderColor={activeBorderColor}
+              type={type}
+              theme={theme}
               tabCount={tabs.length}
               fluid={fluid}
             >
               {tab.title}
               {tab.badge && (
-                <Badge color={color} activeColor={activeColor}>
+                <Badge type={type} theme={theme}>
                   {tab.badge}
                 </Badge>
               )}
@@ -78,25 +62,23 @@ export default class Tab extends PureComponent<Props> {
   }
 }
 
-const TabList = styled.ul<{ borderColor: string }>`
+export default withTheme(Tab);
+
+const TabList = styled.ul<TabStyleProps>`
   display: flex;
   list-style: none;
   margin: 0;
   width: 100%;
   white-space: nowrap;
   overflow-x: auto;
-  box-shadow: inset 0 -1px 0 0 ${props => props.borderColor};
+  box-shadow: inset 0 -1px 0 0 ${props => getTabBorderColorByTheme(props.theme)};
 `;
 
-export interface BadgeProps {
-  color: string;
-  activeColor: string;
-}
-const Badge = styled.span<BadgeProps>`
+const Badge = styled.span<TabStyleProps>`
   ${caption1};
   margin-left: 4px;
-  color: ${props => props.color};
+  color: ${gray600};
   .active & {
-    color: ${props => props.activeColor};
+    color: ${props => getTabActiveColorByTheme(props.theme)[props.type]};
   }
 `;

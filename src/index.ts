@@ -33,6 +33,7 @@ export { default as Portal } from './Portal';
 export { default as Toast, Props as ToastProps } from './Toast';
 export { default as Toaster } from './Toaster';
 export { default as Tab } from './Tab';
+export { default as Theme, ThemeConfig, ThemeMode } from './Theme';
 
 export { Colors, BreakPoints, TextStyles, Icon, ElevationStyles, Input, Position, Select };
 export { default as GlobalStyle } from './GlobalStyle';
