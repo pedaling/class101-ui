@@ -8,4 +8,3 @@ export const PlayGroundContainer = styled.div<{ theme: ThemeConfig }>`
 `;
 
 export { ThemeProvider } from 'styled-components';
-export default {};
