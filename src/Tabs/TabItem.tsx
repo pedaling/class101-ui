@@ -1,5 +1,5 @@
 import React, { PureComponent, ReactNode } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { gray600 } from '../Colors';
 import { body2, caption1 } from '../TextStyles';
@@ -80,12 +80,19 @@ interface TabBosProps extends TabStyleProps {
 
 const TabBox = styled.div<TabBosProps>`
   display: flex;
-  flex-basis: ${props => (props.fluid ? 'auto' : `${100 / props.indicatorCount}%`)};
   align-items: center;
   justify-content: center;
   padding: 0 4px 13px 4px;
-  margin-right: ${props => (props.fluid ? '26px' : 0)};
-  color: ${props => (props.active ? getTabActiveColorByType(props.theme)[props.type] : gray600)};
+  ${props =>
+    props.fluid
+      ? `
+    flex-basis: auto;
+    margin-right: 26px;
+    `
+      : `
+    flex-basis: ${100 / props.indicatorCount}%;
+    margin-right: 0;
+    `};
   cursor: pointer;
   position: relative;
   &:before {
@@ -98,13 +105,18 @@ const TabBox = styled.div<TabBosProps>`
     background-color: ${props => getTabActiveColorByType(props.theme)[props.type]};
     transform: translateX(-50%) scaleX(0);
     transition: transform 0.25s cubic-bezier(0.5, 0, 0.75, 0.72);
-    ${props =>
-      props.active
-        ? `
-            transform: translateX(-50%) scaleX(1);
-          `
-        : ''};
   }
+  ${props =>
+    props.active
+      ? css`
+          color: ${getTabActiveColorByType(props.theme)[props.type]};
+          &:before {
+            transform: translateX(-50%) scaleX(1);
+          }
+        `
+      : `
+        color: ${gray600}
+    `};
 `;
 
 interface TabIndicatorProps extends TabStyleProps {
@@ -117,8 +129,15 @@ const TabName = styled.div<TabIndicatorProps>`
   justify-content: center;
   align-items: center;
   transition: color 0.1s ease-out;
-  color: ${props => (props.active ? getTabActiveColorByType(props.theme)[props.type] : gray600)};
-  ${props => (props.active ? `font-weight: bold` : '')}
+  ${props =>
+    props.active
+      ? css`
+          color: ${getTabActiveColorByType(props.theme)[props.type]};
+          font-weight: bold;
+        `
+      : `
+        color: ${gray600};
+      `};
 `;
 
 const TabCaption = styled.span<TabIndicatorProps>`

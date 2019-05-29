@@ -51,7 +51,7 @@ import { PlayGroundContainer, ThemeProvider } from '../HelpComponents';
   </ThemeProvider>
 </Playground>
 
-## onTabChange
+## onChange
 
 <Playground>
   {() => {
@@ -62,7 +62,7 @@ import { PlayGroundContainer, ThemeProvider } from '../HelpComponents';
       }
       render() {
         return (
-          <Tabs value={this.state.currentValue} onTabChange={(value) => {this.setState({currentValue: value})}} >
+          <Tabs value={this.state.currentValue} onChange={(value) => {this.setState({currentValue: value})}} >
             <Tabs.Item value='PREVIEW' title="알림신청" panel={<div>알림신청</div>}/>
             <Tabs.Item value='KLASS' title="클래스 및 패키지" panel={<div>클래스 및 패키지</div>}/>
             <Tabs.Item value='CURRICLUM' title="커리큘럼" panel={<div>커리큘럼</div>}/>
@@ -117,7 +117,7 @@ import { PlayGroundContainer, ThemeProvider } from '../HelpComponents';
       value="CURRICLUM"
       title="커리큘럼"
       caption={
-        <Badge pill size="sm" backgrouncColor={Colors.gray600}>
+        <Badge pill size="sm" backgroundColor={Colors.gray600}>
           <Icon.Check fillColor={Colors.white} />
         </Badge>
       }

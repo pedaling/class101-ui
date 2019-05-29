@@ -57,8 +57,9 @@ export class Tabs<T extends string = string> extends PureComponent<Props<T>> {
   }
 
   private handleClickTabItem = (value: string) => {
-    this.props.onChange(value as T);
-    if (this.props.value === undefined) {
+    const { onChange, value: currentValue } = this.props;
+    onChange(value as T);
+    if (currentValue === undefined) {
       throw new Error('이 컴포넌트는 controlled 하게만 사용 가능합니다.');
     }
   };
