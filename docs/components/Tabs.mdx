@@ -1,0 +1,133 @@
+---
+menu: Components
+name: Tabs
+route: /components/tabs
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Tabs, Badge, Icon, Colors, Theme } from '@class101/ui';
+import { PlayGroundContainer, ThemeProvider } from '../HelpComponents';
+
+# Tab
+
+## Props
+
+<PropsTable of={Tabs} />
+
+## Basic usage
+
+<Playground>
+  <PlayGroundContainer>
+    <Tabs value="PREVIEW">
+      <Tabs.Item value="PREVIEW" title="알림신청" caption="1개" panel={<div>알림신청</div>} />
+      <Tabs.Item value="KLASS" title="클래스 및 패키지" caption="99개" panel={<div>클래스 및 패키지</div>} />
+      <Tabs.Item value="CURRICLUM" title="커리큘럼" caption="1개" panel={<div>커리큘럼</div>} />
+    </Tabs>
+  </PlayGroundContainer>
+  <PlayGroundContainer>
+    <Tabs value="KLASS" type="orange">
+      <Tabs.Item value="PREVIEW" title="알림신청" caption="1개" panel={<div>알림신청</div>} />
+      <Tabs.Item value="KLASS" title="클래스 및 패키지" caption="99개" panel={<div>클래스 및 패키지</div>} />
+      <Tabs.Item value="CURRICLUM" title="커리큘럼" caption="1개" panel={<div>커리큘럼</div>} />
+    </Tabs>
+  </PlayGroundContainer>
+  <PlayGroundContainer theme={Theme.dark}>
+    <Tabs value="PREVIEW" theme={Theme.dark}>
+      <Tabs.Item value="PREVIEW" title="알림신청" caption="1개" panel={<div>알림신청</div>} />
+      <Tabs.Item value="KLASS" title="클래스 및 패키지" caption="99개" panel={<div>클래스 및 패키지</div>} />
+      <Tabs.Item value="CURRICLUM" title="커리큘럼" caption="1개" panel={<div>커리큘럼</div>} />
+    </Tabs>
+  </PlayGroundContainer>
+  <PlayGroundContainer theme={Theme.dark}>
+    <Tabs value="KLASS" type="red" theme={Theme.dark}>
+      <Tabs.Item value="PREVIEW" title="알림신청" caption="1개" panel={<div>알림신청</div>} />
+      <Tabs.Item value="KLASS" title="클래스 및 패키지" caption="99개" panel={<div>클래스 및 패키지</div>} />
+      <Tabs.Item value="CURRICLUM" title="커리큘럼" caption="1개" panel={<div>커리큘럼</div>} />
+    </Tabs>
+  </PlayGroundContainer>
+</Playground>
+
+## onChange
+
+<Playground>
+  {() => {
+    class Example extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { currentValue: 'PREVIEW' };
+      }
+      render() {
+        return (
+          <Tabs value={this.state.currentValue} onChange={(value) => {this.setState({currentValue: value})}} >
+            <Tabs.Item value='PREVIEW' title="알림신청" panel={<div>알림신청</div>}/>
+            <Tabs.Item value='KLASS' title="클래스 및 패키지" panel={<div>클래스 및 패키지</div>}/>
+            <Tabs.Item value='CURRICLUM' title="커리큘럼" panel={<div>커리큘럼</div>}/>
+          </Tabs>
+        );
+      }
+    }
+    return <Example />
+
+}}
+
+</Playground>
+
+## Width caption
+
+<Playground>
+  <Tabs value="PREVIEW">
+    <Tabs.Item value="PREVIEW" title="알림신청" caption="1개" panel={<div>알림신청</div>} />
+    <Tabs.Item value="KLASS" title="클래스 및 패키지" caption="99개" panel={<div>클래스 및 패키지</div>} />
+    <Tabs.Item value="CURRICLUM" title="커리큘럼" caption="1개" panel={<div>커리큘럼</div>} />
+  </Tabs>
+</Playground>
+
+<Playground>
+  <Tabs value="PREVIEW">
+    <Tabs.Item
+      value="PREVIEW"
+      title="알림신청"
+      caption={
+        <Badge pill size="sm">
+          <Icon.Check fillColor={Colors.white} />
+        </Badge>
+      }
+      panel={<div>알림신청</div>}
+    />
+    <Tabs.Item
+      value="KLASS"
+      title="클래스 및 패키지"
+      caption={
+        <Badge pill size="sm">
+          <Icon.Check fillColor={Colors.white} />
+        </Badge>
+      }
+      caption={
+        <Badge pill size="sm">
+          <Icon.Check fillColor={Colors.white} />
+        </Badge>
+      }
+      panel={<div>클래스 및 패키지</div>}
+    />
+    <Tabs.Item
+      value="CURRICLUM"
+      title="커리큘럼"
+      caption={
+        <Badge pill size="sm" backgroundColor={Colors.gray600}>
+          <Icon.Check fillColor={Colors.white} />
+        </Badge>
+      }
+      panel={<div>커리큘럼</div>}
+    />
+  </Tabs>
+</Playground>
+
+## Not fluid
+
+<Playground>
+  <Tabs value="PREVIEW" fluid={false}>
+    <Tabs.Item value="PREVIEW" title="알림신청" caption="1개" panel={<div>알림신청</div>} />
+    <Tabs.Item value="KLASS" title="클래스 및 패키지" caption="99개" panel={<div>클래스 및 패키지</div>} />
+    <Tabs.Item value="CURRICLUM" title="커리큘럼" caption="1개" panel={<div>커리큘럼</div>} />
+  </Tabs>
+</Playground>
