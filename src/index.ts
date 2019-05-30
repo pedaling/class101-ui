@@ -33,8 +33,7 @@ export { default as Portal } from './Portal';
 export { default as Toast, Props as ToastProps } from './Toast';
 export { default as Toaster } from './Toaster';
 
-// TODO(chiabi): docz v1로 올리고 PropsTable용 Tabs named export를 제거한다
-export { default as Tabs, Tabs as TabPropTypes } from './Tabs';
+export { default as Tabs } from './Tabs';
 export { default as Theme, ThemeConfig, ThemeMode } from './Theme';
 
 export { Colors, BreakPoints, TextStyles, Icon, ElevationStyles, Input, Position, Select };

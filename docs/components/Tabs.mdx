@@ -5,14 +5,14 @@ route: /components/tabs
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Tabs, TabPropTypes, Badge, Icon, Colors, Theme } from '@class101/ui';
+import { Tabs, Badge, Icon, Colors, Theme } from '@class101/ui';
 import { PlayGroundContainer, ThemeProvider } from '../HelpComponents';
 
 # Tab
 
 ## Props
 
-<PropsTable of={TabPropTypes} />
+<PropsTable of={Tabs} />
 
 ## Basic usage
 
@@ -31,24 +31,20 @@ import { PlayGroundContainer, ThemeProvider } from '../HelpComponents';
       <Tabs.Item value="CURRICLUM" title="커리큘럼" caption="1개" panel={<div>커리큘럼</div>} />
     </Tabs>
   </PlayGroundContainer>
-  <ThemeProvider theme={Theme.dark}>
-    <>
-      <PlayGroundContainer>
-        <Tabs value="PREVIEW">
-          <Tabs.Item value="PREVIEW" title="알림신청" caption="1개" panel={<div>알림신청</div>} />
-          <Tabs.Item value="KLASS" title="클래스 및 패키지" caption="99개" panel={<div>클래스 및 패키지</div>} />
-          <Tabs.Item value="CURRICLUM" title="커리큘럼" caption="1개" panel={<div>커리큘럼</div>} />
-        </Tabs>
-      </PlayGroundContainer>
-      <PlayGroundContainer>
-        <Tabs value="KLASS" type="red">
-          <Tabs.Item value="PREVIEW" title="알림신청" caption="1개" panel={<div>알림신청</div>} />
-          <Tabs.Item value="KLASS" title="클래스 및 패키지" caption="99개" panel={<div>클래스 및 패키지</div>} />
-          <Tabs.Item value="CURRICLUM" title="커리큘럼" caption="1개" panel={<div>커리큘럼</div>} />
-        </Tabs>
-      </PlayGroundContainer>
-    </>
-  </ThemeProvider>
+  <PlayGroundContainer theme={Theme.dark}>
+    <Tabs value="PREVIEW" theme={Theme.dark}>
+      <Tabs.Item value="PREVIEW" title="알림신청" caption="1개" panel={<div>알림신청</div>} />
+      <Tabs.Item value="KLASS" title="클래스 및 패키지" caption="99개" panel={<div>클래스 및 패키지</div>} />
+      <Tabs.Item value="CURRICLUM" title="커리큘럼" caption="1개" panel={<div>커리큘럼</div>} />
+    </Tabs>
+  </PlayGroundContainer>
+  <PlayGroundContainer theme={Theme.dark}>
+    <Tabs value="KLASS" type="red" theme={Theme.dark}>
+      <Tabs.Item value="PREVIEW" title="알림신청" caption="1개" panel={<div>알림신청</div>} />
+      <Tabs.Item value="KLASS" title="클래스 및 패키지" caption="99개" panel={<div>클래스 및 패키지</div>} />
+      <Tabs.Item value="CURRICLUM" title="커리큘럼" caption="1개" panel={<div>커리큘럼</div>} />
+    </Tabs>
+  </PlayGroundContainer>
 </Playground>
 
 ## onChange

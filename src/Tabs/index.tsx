@@ -1,5 +1,5 @@
 import React, { cloneElement, PureComponent, ReactNode } from 'react';
-import styled, { withTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import Theme from '../Theme';
 import TabItem, { TabItemProps, TabStyleProps } from './TabItem';
@@ -14,7 +14,8 @@ export interface Props<T> extends TabStyleProps {
   className?: string;
 }
 
-export class Tabs<T extends string = string> extends PureComponent<Props<T>> {
+// TODO(chiabi): ThemeProvider 아래에서 모두 같은 테마가 적용되게 만들기
+export default class Tabs<T extends string = string> extends PureComponent<Props<T>> {
   public static Item = TabItem;
   public static defaultProps = {
     fluid: true,
@@ -64,8 +65,6 @@ export class Tabs<T extends string = string> extends PureComponent<Props<T>> {
     }
   };
 }
-
-export default withTheme(Tabs);
 
 const TabList = styled.div<TabStyleProps>`
   display: flex;
