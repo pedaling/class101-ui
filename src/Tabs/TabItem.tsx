@@ -17,6 +17,8 @@ export interface TabItemProps extends TabStyleProps {
   title?: string;
   active?: boolean;
   caption?: ReactNode;
+
+  /** 해당 탭이 활성화 될 때 렌더링되는 콘텐츠 */
   panel?: ReactNode;
   value: string;
   fluid: boolean;

@@ -8,38 +8,44 @@ import { Playground, PropsTable } from 'docz';
 import { Tabs, Badge, Icon, Colors, Theme } from '@class101/ui';
 import { PlayGroundContainer, ThemeProvider } from '../HelpComponents';
 
-# Tab
+# Tabs
 
 ## Props
 
+### Tabs
+
 <PropsTable of={Tabs} />
+
+### Tabs.Item
+
+<PropsTable of={Tabs.Item} />
 
 ## Basic usage
 
 <Playground>
   <PlayGroundContainer>
-    <Tabs value="PREVIEW">
+    <Tabs value="PREVIEW" onChange={value => {}}>
       <Tabs.Item value="PREVIEW" title="알림신청" caption="1개" panel={<div>알림신청</div>} />
       <Tabs.Item value="KLASS" title="클래스 및 패키지" caption="99개" panel={<div>클래스 및 패키지</div>} />
       <Tabs.Item value="CURRICLUM" title="커리큘럼" caption="1개" panel={<div>커리큘럼</div>} />
     </Tabs>
   </PlayGroundContainer>
   <PlayGroundContainer>
-    <Tabs value="KLASS" type="orange">
+    <Tabs value="KLASS" type="orange" onChange={value => {}}>
       <Tabs.Item value="PREVIEW" title="알림신청" caption="1개" panel={<div>알림신청</div>} />
       <Tabs.Item value="KLASS" title="클래스 및 패키지" caption="99개" panel={<div>클래스 및 패키지</div>} />
       <Tabs.Item value="CURRICLUM" title="커리큘럼" caption="1개" panel={<div>커리큘럼</div>} />
     </Tabs>
   </PlayGroundContainer>
   <PlayGroundContainer theme={Theme.dark}>
-    <Tabs value="PREVIEW" theme={Theme.dark}>
+    <Tabs value="PREVIEW" theme={Theme.dark} onChange={value => {}}>
       <Tabs.Item value="PREVIEW" title="알림신청" caption="1개" panel={<div>알림신청</div>} />
       <Tabs.Item value="KLASS" title="클래스 및 패키지" caption="99개" panel={<div>클래스 및 패키지</div>} />
       <Tabs.Item value="CURRICLUM" title="커리큘럼" caption="1개" panel={<div>커리큘럼</div>} />
     </Tabs>
   </PlayGroundContainer>
   <PlayGroundContainer theme={Theme.dark}>
-    <Tabs value="KLASS" type="red" theme={Theme.dark}>
+    <Tabs value="KLASS" type="red" theme={Theme.dark} onChange={value => {}}>
       <Tabs.Item value="PREVIEW" title="알림신청" caption="1개" panel={<div>알림신청</div>} />
       <Tabs.Item value="KLASS" title="클래스 및 패키지" caption="99개" panel={<div>클래스 및 패키지</div>} />
       <Tabs.Item value="CURRICLUM" title="커리큘럼" caption="1개" panel={<div>커리큘럼</div>} />
@@ -75,7 +81,7 @@ import { PlayGroundContainer, ThemeProvider } from '../HelpComponents';
 ## Width caption
 
 <Playground>
-  <Tabs value="PREVIEW">
+  <Tabs value="PREVIEW" onChange={value => {}}>
     <Tabs.Item value="PREVIEW" title="알림신청" caption="1개" panel={<div>알림신청</div>} />
     <Tabs.Item value="KLASS" title="클래스 및 패키지" caption="99개" panel={<div>클래스 및 패키지</div>} />
     <Tabs.Item value="CURRICLUM" title="커리큘럼" caption="1개" panel={<div>커리큘럼</div>} />
@@ -83,7 +89,7 @@ import { PlayGroundContainer, ThemeProvider } from '../HelpComponents';
 </Playground>
 
 <Playground>
-  <Tabs value="PREVIEW">
+  <Tabs value="PREVIEW" onChange={value => {}}>
     <Tabs.Item
       value="PREVIEW"
       title="알림신청"
@@ -125,7 +131,7 @@ import { PlayGroundContainer, ThemeProvider } from '../HelpComponents';
 ## Not fluid
 
 <Playground>
-  <Tabs value="PREVIEW" fluid={false}>
+  <Tabs value="PREVIEW" fluid={false} onChange={value => {}}>
     <Tabs.Item value="PREVIEW" title="알림신청" caption="1개" panel={<div>알림신청</div>} />
     <Tabs.Item value="KLASS" title="클래스 및 패키지" caption="99개" panel={<div>클래스 및 패키지</div>} />
     <Tabs.Item value="CURRICLUM" title="커리큘럼" caption="1개" panel={<div>커리큘럼</div>} />
