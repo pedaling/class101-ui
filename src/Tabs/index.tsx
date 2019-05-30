@@ -1,7 +1,6 @@
 import React, { cloneElement, PureComponent, ReactNode } from 'react';
 import styled from 'styled-components';
 
-import Theme from '../Theme';
 import TabItem, { TabItemProps, TabStyleProps } from './TabItem';
 import { getTabBorderColor } from './utils';
 
@@ -17,11 +16,7 @@ export interface Props<T> extends TabStyleProps {
 // TODO(chiabi): ThemeProvider 아래에서 모두 같은 테마가 적용되게 만들기
 export default class Tabs<T extends string = string> extends PureComponent<Props<T>> {
   public static Item = TabItem;
-  public static defaultProps = {
-    fluid: true,
-    type: 'default',
-    theme: Theme.light,
-  };
+  public static defaultProps = TabItem.defaultProps;
 
   public render() {
     const { value, fluid, theme, type, onChange, children, ...restProps } = this.props;

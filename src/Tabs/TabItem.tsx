@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 import { gray600 } from '../Colors';
 import { body2, caption1 } from '../TextStyles';
-import { ThemeConfig } from '../Theme';
+import Theme, { ThemeConfig } from '../Theme';
 import { getTabActiveColorByType } from './utils';
 
 export type TabType = 'default' | 'red' | 'orange';
@@ -20,12 +20,17 @@ export interface TabItemProps extends TabStyleProps {
   panel?: ReactNode;
   value: string;
   fluid: boolean;
-  indicatorCount: number;
+  indicatorCount?: number;
   onClickItem?: (value: string) => any;
   renderIndicator?: () => ReactNode;
 }
 
 export default class TabItem extends PureComponent<TabItemProps> {
+  public static defaultProps = {
+    fluid: true,
+    type: 'default',
+    theme: Theme.light,
+  };
   public render() {
     const { active, indicatorCount, fluid, theme, type } = this.props;
 
@@ -72,25 +77,25 @@ export default class TabItem extends PureComponent<TabItemProps> {
   };
 }
 
-interface TabBosProps extends TabStyleProps {
-  indicatorCount: number;
+interface TabBoxProps extends TabStyleProps {
   fluid: boolean;
   active?: boolean;
+  indicatorCount?: number;
 }
 
-const TabBox = styled.div<TabBosProps>`
+const TabBox = styled.div<TabBoxProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 4px 13px 4px;
+  padding: 14px 0 13px;
   ${props =>
     props.fluid
       ? `
     flex-basis: auto;
-    margin-right: 26px;
+    margin-right: 24px;
     `
       : `
-    flex-basis: ${100 / props.indicatorCount}%;
+    flex-basis: ${100 / (props.indicatorCount || 1)}%;
     margin-right: 0;
     `};
   cursor: pointer;
@@ -101,17 +106,17 @@ const TabBox = styled.div<TabBosProps>`
     left: 50%;
     content: '';
     width: 100%;
-    height: 2px;
+    height: 3px;
     background-color: ${props => getTabActiveColorByType(props.theme)[props.type]};
-    transform: translateX(-50%) scaleX(0);
-    transition: transform 0.25s cubic-bezier(0.5, 0, 0.75, 0.72);
+    opacity: 0;
+    transform: translateX(-50%);
   }
   ${props =>
     props.active
       ? css`
           color: ${getTabActiveColorByType(props.theme)[props.type]};
           &:before {
-            transform: translateX(-50%) scaleX(1);
+            opacity: 1;
           }
         `
       : `
@@ -128,7 +133,6 @@ const TabName = styled.div<TabIndicatorProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: color 0.1s ease-out;
   ${props =>
     props.active
       ? css`
