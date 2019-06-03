@@ -39,3 +39,5 @@ export { default as Theme, ThemeConfig, ThemeMode } from './Theme';
 export { Colors, BreakPoints, TextStyles, Icon, ElevationStyles, Input, Position, Select };
 export { default as GlobalStyle } from './GlobalStyle';
 export { default as Checkbox } from './Checkbox';
+
+export * from './components';

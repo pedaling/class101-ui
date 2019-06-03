@@ -1,0 +1,25 @@
+---
+menu: Components
+name: Tag
+route: /components/tag
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Tag } from '@class101/ui';
+import { PlayGroundContainer, ThemeProvider } from '../HelpComponents';
+
+# Tag
+
+## Props
+
+<PropsTable of={Tag} />
+
+## Basic usage
+
+<Playground>
+  <PlayGroundContainer>
+    <Tag value="배송 중" />
+    <Tag label="삭제 됨" value="archived" />
+    <Tag value="내 담당" />
+  </PlayGroundContainer>
+</Playground>
