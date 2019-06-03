@@ -1,6 +1,6 @@
 import { css, FlattenSimpleInterpolation } from 'styled-components';
 
-import { gray300, gray400, gray50, gray800 } from '../Colors';
+import { gray300, gray400, gray50, gray800, gray500 } from '../Colors';
 
 // export type InputSize = 'sm' | 'md';
 
@@ -25,6 +25,18 @@ export const FormInputStyle = css`
     &:hover {
       cursor: not-allowed;
     }
+  }
+  &::-webkit-input-placeholder {
+    color: ${gray500};
+  }
+  &::-moz-placeholder {
+    color: ${gray500};
+  }
+  &:-ms-input-placeholder {
+    color: ${gray500};
+  }
+  &:-moz-placeholder {
+    color: ${gray500};
   }
 `;
 

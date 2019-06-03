@@ -1,8 +1,9 @@
 import * as BreakPoints from './BreakPoints';
 import * as Colors from './Colors';
 import * as ElevationStyles from './ElevationStyles';
-import { Input, Select } from './FormInput';
+import { Input, Select, Textarea, InlineError, Intent } from './FormInput';
 import * as Icon from './Icon';
+export { IconProps } from './Icon';
 import { Position } from './Position';
 import * as TextStyles from './TextStyles';
 
@@ -16,7 +17,7 @@ export { default as Spinner } from './Spinner';
 export { default as ProgressBar } from './ProgressBar';
 export { default as ProgressState } from './ProgressState';
 export { default as Button } from './Button';
-export { default as Textarea } from './Textarea';
+
 export { default as BottomSheet } from './BottomSheet';
 export { default as Badge } from './Badge';
 export { default as FormGroup } from './FormGroup';
@@ -36,6 +37,18 @@ export { default as Toaster } from './Toaster';
 export { default as Tabs } from './Tabs';
 export { default as Theme, ThemeConfig, ThemeMode } from './Theme';
 
-export { Colors, BreakPoints, TextStyles, Icon, ElevationStyles, Input, Position, Select };
+export {
+  Colors,
+  BreakPoints,
+  TextStyles,
+  Icon,
+  ElevationStyles,
+  Position,
+  Input,
+  Select,
+  Textarea,
+  InlineError,
+  Intent,
+};
 export { default as GlobalStyle } from './GlobalStyle';
 export { default as Checkbox } from './Checkbox';

@@ -1,11 +1,11 @@
 import { HTMLInputProps } from 'interfaces/props';
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-import { gray500, gray600, gray800, orange500, redError } from '../../Colors';
-import { Alert } from '../../Icon';
+import { gray800, orange500, redError } from '../../Colors';
 import { body2 } from '../../TextStyles';
 import { FormInputFillStyle, FormInputStyle, FormInputStyleBySize, InputSize } from '../common';
+import InlineError, { Intent } from '../InlineError';
 
 interface Props {
   size: InputSize;
@@ -28,19 +28,6 @@ const StyledInput = styled.input<Props>`
   color: ${gray800};
   box-sizing: border-box;
   padding: 0 16px;
-  &::-webkit-input-placeholder {
-    color: ${gray500};
-  }
-  &::-moz-placeholder {
-    color: ${gray500};
-  }
-  &:-ms-input-placeholder {
-    color: ${gray500};
-  }
-  &:-moz-placeholder {
-    color: ${gray500};
-  }
-
   &.error {
     border: solid 1px ${redError};
   }
@@ -48,37 +35,6 @@ const StyledInput = styled.input<Props>`
   &.warn {
     border: solid 1px ${orange500};
   }
-`;
-
-const DescriptionStyle = css`
-  margin: 0;
-  margin-top: 4px;
-  font-size: 11px;
-  line-height: 16px;
-  font-weight: normal;
-
-  * {
-    vertical-align: middle;
-  }
-
-  span {
-    margin-left: 2px;
-  }
-`;
-
-const ErrorText = styled.h6`
-  ${DescriptionStyle};
-  color: ${redError};
-`;
-
-const WarnText = styled.h6`
-  ${DescriptionStyle};
-  color: ${orange500};
-`;
-
-const AllowText = styled.h6`
-  ${DescriptionStyle};
-  color: ${gray600};
 `;
 
 const Container = styled.div<{ inline?: boolean }>`
@@ -115,19 +71,13 @@ export default class Input extends React.PureComponent<HTMLInputProps & Props> {
           style={inputStyle}
           {...restProps}
         />
-        {allowMessage && !errorMessage && <AllowText>{allowMessage}</AllowText>}
-        {errorMessage && (
-          <ErrorText>
-            <Alert size={16} fillColor={redError} />
-            <span>{errorMessage}</span>
-          </ErrorText>
+        {allowMessage && !errorMessage && (
+          <InlineError icon={null} intent={Intent.DEFAULT}>
+            {allowMessage}
+          </InlineError>
         )}
-        {warnMessage && (
-          <WarnText>
-            <Alert size={16} fillColor={orange500} />
-            <span>{warnMessage}</span>
-          </WarnText>
-        )}
+        {errorMessage && <InlineError intent={Intent.DANGER}>{errorMessage}</InlineError>}
+        {warnMessage && <InlineError intent={Intent.WARNING}>{warnMessage}</InlineError>}
       </Container>
     );
   }
