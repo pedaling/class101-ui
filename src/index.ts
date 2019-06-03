@@ -1,12 +1,12 @@
 import * as BreakPoints from './BreakPoints';
 import * as Colors from './Colors';
 import * as ElevationStyles from './ElevationStyles';
-import { Input, Select, Textarea, InlineError, Intent } from './FormInput';
+import { InlineError, Input, Intent, Select, Textarea } from './FormInput';
 import * as Icon from './Icon';
-export { IconProps } from './Icon';
 import { Position } from './Position';
 import * as TextStyles from './TextStyles';
 
+export { IconProps } from './Icon';
 export { default as Grid } from './Grid';
 export { default as GridList } from './GridList';
 export { default as Section } from './Section';
@@ -53,4 +53,5 @@ export {
 export { default as GlobalStyle } from './GlobalStyle';
 export { default as Checkbox } from './Checkbox';
 
+// TODO: refactoring하면서 컴포넌트를 모두 components/로 옮기기
 export * from './components';
