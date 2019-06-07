@@ -30,15 +30,16 @@ A React-based UI Component Library, powered by Class101.
 ## Install
 
 ```console
-npm install --save class101-ui
+npm install --save @class101/ui
+yarn add @class101/ui
 ```
 
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import { Button } from '@class101/ui'
+import { Button } from '@class101/ui';
 
 class Example extends Component {
   render () {
@@ -53,11 +54,13 @@ class Example extends Component {
 
 ## 🎉 Worked
 
-- Grid System(Responsive)
-- Typography(Responsive tag and styles)
+- Responsive Grid System
+- Typography
+- Icon
 - Colors
-- Button(Support Anchor Button)
+- Button
 - Input
+- Select
 - Textarea
 - Progress Bar
 - Progress State
@@ -66,19 +69,25 @@ class Example extends Component {
 - Badge
 - Form Group
 - Control Group
+- Tabs
+- Navigation
+- Toast
 
 These are at [Class101 UI Documents Site](https://class101-ui.netlify.com).
 
 ## 🚀 Roadmap
 
 - Card
-- Tabs
 - Breadcrumb
-- Sync Image
-- Darkness Skin
+- Darkness Theme
+- Table
+- DatePicker
+- Dialog
+- NavTab
+
 
 ## 📝 License
 
-Licensed under the MIT License, Copyright (c) 2018 pedaling.
+Licensed under the MIT License, Copyright (c) 2018 Class101, Co. LTD.
 
 See [LICENSE](https://github.com/pedaling/class101-ui/blob/master/LICENSE) for more information.
