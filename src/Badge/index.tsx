@@ -12,14 +12,14 @@ interface BadgeTextProps {
   className?: string;
 }
 
-interface Props extends BadgeTextProps {
+export interface BadgeProps extends BadgeTextProps {
   color?: string;
   icon?: ReactNode;
   children?: ReactNode;
 }
 
-export default class Badge extends PureComponent<Props> {
-  public static defaultProps: Partial<Props> = {
+export default class Badge extends PureComponent<BadgeProps> {
+  public static defaultProps: Partial<BadgeProps> = {
     color: white,
     backgroundColor: red600,
     pill: false,

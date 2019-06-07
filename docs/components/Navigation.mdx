@@ -1,0 +1,51 @@
+---
+menu: Components
+name: Navigation
+route: /components/navigation
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Navigation, Icon } from '@class101/ui';
+import { PlayGroundContainer, ThemeProvider } from '../HelpComponents';
+
+# Navigation
+
+## Props
+
+<PropsTable of={Navigation} />
+
+## Basic usage
+
+<Playground>
+  <PlayGroundContainer>
+    <Navigation location="/">
+      <Navigation.Section
+        items={[
+          { url: '/', label: '홈', icon: <Icon.Home /> },
+          { url: '/inbox', label: '알림', icon: <Icon.Bell /> },
+          { url: '/dashboard', label: '대시보드', icon: <Icon.Check /> },
+        ]}
+      />
+      <Navigation.Divider />
+      <Navigation.Section
+        title="주문 관리"
+        action={{
+          onClick: () => alert('도움!'),
+          icon: <Icon.Help />,
+        }}
+        items={[
+          {
+            label: '상품 관리',
+            icon: <Icon.Gift />,
+            subItems: [
+              { label: '노출 관리', url: '/' },
+              { label: '재고 관리', url: '/', badge: '2' },
+              { label: '템플릿 관리', url: '/' },
+            ],
+          },
+          { url: '/components/navigation', label: '배송 관리', icon: <Icon.ShippingTruck />, badge: 32 },
+        ]}
+      />
+    </Navigation>
+  </PlayGroundContainer>
+</Playground>
