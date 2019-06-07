@@ -9,7 +9,7 @@ import { gray100, gray700, gray900 } from '../../../Colors';
 import { ChevronDown } from '../../../Icon';
 import { body2, caption1 } from '../../../TextStyles';
 
-interface NavigationSectionProps extends RouteComponentProps {
+export interface NavigationSectionProps {
   title?: string;
   items: NavigationSectionItem[];
   action?: NavigationSectionAction;
@@ -19,7 +19,7 @@ interface State {
   openedIndex: number[];
 }
 
-export class NavigationSection extends React.PureComponent<NavigationSectionProps, State> {
+export class NavigationSection extends React.PureComponent<NavigationSectionProps & RouteComponentProps, State> {
   public state: State = {
     openedIndex: [],
   };
@@ -117,7 +117,7 @@ export class NavigationSection extends React.PureComponent<NavigationSectionProp
   };
 }
 
-export default (withRouter(NavigationSection) as any) as typeof NavigationSection;
+export default withRouter(NavigationSection) as React.ComponentClass<NavigationSectionProps>;
 
 const Container = styled.ul`
   margin: 12px 0;
