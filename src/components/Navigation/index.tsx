@@ -29,7 +29,7 @@ export interface NavigationSectionItem {
 }
 
 interface Props {
-  location?: string;
+  pathname?: string;
   className?: string;
   divAttributes?: HTMLDivProps;
 }
@@ -44,14 +44,17 @@ export default class Navigation extends React.PureComponent<Props> {
   public static Section = NavigationSection;
   public static Divider = Divider;
   public static defaultProps: Partial<Props> = {
-    location: '/',
+    pathname: '/',
   };
 
   public render() {
-    const { children, divAttributes, className } = this.props;
+    const { children, pathname, divAttributes, className } = this.props;
     return (
       <Container {...divAttributes} className={className}>
-        {children}
+        {React.Children.map(
+          children,
+          child => child && React.cloneElement(child as React.ReactElement<any>, { pathname })
+        )}
       </Container>
     );
   }

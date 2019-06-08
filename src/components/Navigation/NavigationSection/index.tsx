@@ -1,6 +1,5 @@
 import pathToRegexp from 'path-to-regexp';
 import React from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
@@ -10,10 +9,14 @@ import { gray50, gray700, gray900 } from '../../../Colors';
 import { ChevronDown } from '../../../Icon';
 import { body2, caption1 } from '../../../TextStyles';
 
-export interface NavigationSectionProps extends RouteComponentProps {
+export interface NavigationSectionProps {
   title?: string;
   items: NavigationSectionItem[];
   action?: NavigationSectionAction;
+}
+
+interface InjectedProps extends NavigationSectionProps {
+  pathname: string;
 }
 
 interface State {
@@ -21,7 +24,7 @@ interface State {
   pathname: string;
 }
 
-export class NavigationSection extends React.PureComponent<NavigationSectionProps, State> {
+export class NavigationSection extends React.PureComponent<InjectedProps, State> {
   public static isActiveLocation = (pathname: string, item?: { url?: string }) => {
     if (item && item.url) {
       return !!pathToRegexp(item.url).exec(pathname);
@@ -29,15 +32,15 @@ export class NavigationSection extends React.PureComponent<NavigationSectionProp
     return false;
   };
 
-  public static getDerivedStateFromProps = (prevProps: NavigationSectionProps, prevState: State) => {
-    if (prevProps.location.pathname !== prevState.pathname) {
+  public static getDerivedStateFromProps = (prevProps: InjectedProps, prevState: State) => {
+    if (prevProps.pathname !== prevState.pathname) {
       const openedSectionIndices: number[] = [];
       prevProps.items.forEach((item, index) => {
-        if ((item.subItems || []).find(item => NavigationSection.isActiveLocation(prevProps.location.pathname, item))) {
+        if ((item.subItems || []).find(item => NavigationSection.isActiveLocation(prevProps.pathname, item))) {
           openedSectionIndices.push(index);
         }
       });
-      return { openedSectionIndices, pathname: prevProps.location.pathname };
+      return { openedSectionIndices, pathname: prevProps.pathname };
     }
 
     return null;
@@ -75,14 +78,14 @@ export class NavigationSection extends React.PureComponent<NavigationSectionProp
   };
 
   private renderSectionItem = (item: NavigationSectionItem, index: number) => {
-    const { location } = this.props;
+    const { pathname } = this.props;
     const isOpened = this.state.openedSectionIndices.indexOf(index) >= 0;
 
     const Element = (
       <>
         {item.icon}
         <SectionText>{item.label}</SectionText>
-        {item.url ? (
+        {item.url || item.onClick ? (
           this.renderAddonComponent(item.badge)
         ) : (
           <ChevronContainer isOpened={isOpened}>
@@ -95,7 +98,7 @@ export class NavigationSection extends React.PureComponent<NavigationSectionProp
     return (
       <SectionItemContainer key={index} onClick={item.onClick}>
         {item.url ? (
-          <SectionLink to={item.url} active={NavigationSection.isActiveLocation(location.pathname, item)}>
+          <SectionLink to={item.url} active={NavigationSection.isActiveLocation(pathname, item)}>
             {Element}
           </SectionLink>
         ) : (
@@ -109,10 +112,10 @@ export class NavigationSection extends React.PureComponent<NavigationSectionProp
   };
 
   private renderSectionSubItem = (item: NavigationSectionSubItem, index: number) => {
-    const { location } = this.props;
+    const { pathname } = this.props;
 
     return (
-      <SectionLink to={item.url} key={index} active={NavigationSection.isActiveLocation(location.pathname, item)}>
+      <SectionLink to={item.url} key={index} active={NavigationSection.isActiveLocation(pathname, item)}>
         <SectionText>{item.label}</SectionText>
         {this.renderAddonComponent(item.badge)}
       </SectionLink>
@@ -133,7 +136,7 @@ export class NavigationSection extends React.PureComponent<NavigationSectionProp
   };
 }
 
-export default (withRouter(NavigationSection) as any) as React.ComponentClass<NavigationSectionProps>;
+export default (NavigationSection as any) as React.ComponentClass<NavigationSectionProps>;
 
 const Container = styled.ul`
   margin: 12px 0;
