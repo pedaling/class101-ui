@@ -34,9 +34,12 @@ export class NavigationSection extends React.PureComponent<InjectedProps, State>
 
   public static getDerivedStateFromProps = (prevProps: InjectedProps, prevState: State) => {
     if (prevProps.pathname !== prevState.pathname) {
-      const openedSectionIndices: number[] = [];
+      const { openedSectionIndices } = prevState;
       prevProps.items.forEach((item, index) => {
-        if ((item.subItems || []).find(item => NavigationSection.isActiveLocation(prevProps.pathname, item))) {
+        if (!item.subItems) {
+          return;
+        }
+        if (item.subItems.find(item => NavigationSection.isActiveLocation(prevProps.pathname, item))) {
           openedSectionIndices.push(index);
         }
       });
