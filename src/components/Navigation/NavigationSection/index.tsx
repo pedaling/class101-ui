@@ -1,38 +1,52 @@
+import pathToRegexp from 'path-to-regexp';
 import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 import { NavigationSectionAction, NavigationSectionItem, NavigationSectionSubItem } from '..';
 import Badge from '../../../Badge';
-import { gray100, gray700, gray900 } from '../../../Colors';
+import { gray50, gray700, gray900 } from '../../../Colors';
 import { ChevronDown } from '../../../Icon';
 import { body2, caption1 } from '../../../TextStyles';
 
-export interface NavigationSectionProps {
+export interface NavigationSectionProps extends RouteComponentProps {
   title?: string;
   items: NavigationSectionItem[];
   action?: NavigationSectionAction;
 }
 
 interface State {
-  openedIndex: number[];
+  openedSectionIndices: number[];
+  pathname: string;
 }
 
-export class NavigationSection extends React.PureComponent<NavigationSectionProps & RouteComponentProps, State> {
-  public state: State = {
-    openedIndex: [],
+export class NavigationSection extends React.PureComponent<NavigationSectionProps, State> {
+  public static isActiveLocation = (pathname: string, item?: { url?: string }) => {
+    if (item && item.url) {
+      return !!pathToRegexp(item.url).exec(pathname);
+    }
+    return false;
   };
 
-  public componentDidMount() {
-    const openedIndex: number[] = [];
-    this.props.items.forEach((item, index) => {
-      if ((item.subItems || []).find(item => item.url === this.props.match.path)) {
-        openedIndex.push(index);
-      }
-    });
-    this.setState({ openedIndex });
-  }
+  public static getDerivedStateFromProps = (prevProps: NavigationSectionProps, prevState: State) => {
+    if (prevProps.location.pathname !== prevState.pathname) {
+      const openedSectionIndices: number[] = [];
+      prevProps.items.forEach((item, index) => {
+        if ((item.subItems || []).find(item => NavigationSection.isActiveLocation(prevProps.location.pathname, item))) {
+          openedSectionIndices.push(index);
+        }
+      });
+      return { openedSectionIndices, pathname: prevProps.location.pathname };
+    }
+
+    return null;
+  };
+
+  public state: State = {
+    pathname: '',
+    openedSectionIndices: [],
+  };
 
   public render() {
     const { items, title, action } = this.props;
@@ -61,7 +75,8 @@ export class NavigationSection extends React.PureComponent<NavigationSectionProp
   };
 
   private renderSectionItem = (item: NavigationSectionItem, index: number) => {
-    const isOpened = this.state.openedIndex.indexOf(index) >= 0;
+    const { location } = this.props;
+    const isOpened = this.state.openedSectionIndices.indexOf(index) >= 0;
 
     const Element = (
       <>
@@ -78,11 +93,11 @@ export class NavigationSection extends React.PureComponent<NavigationSectionProp
     );
 
     return (
-      <SectionItemContainer>
+      <SectionItemContainer key={index} onClick={item.onClick}>
         {item.url ? (
-          <SectionNavLink to={item.url} exact strict activeClassName="active">
+          <SectionLink to={item.url} active={NavigationSection.isActiveLocation(location.pathname, item)}>
             {Element}
-          </SectionNavLink>
+          </SectionLink>
         ) : (
           <SectionItem onClick={this.handleToggleNavLink(index)}>{Element}</SectionItem>
         )}
@@ -93,31 +108,32 @@ export class NavigationSection extends React.PureComponent<NavigationSectionProp
     );
   };
 
-  private renderSectionSubItem = (item: NavigationSectionSubItem) => {
+  private renderSectionSubItem = (item: NavigationSectionSubItem, index: number) => {
+    const { location } = this.props;
+
     return (
-      <SectionNavLink to={item.url} exact strict activeClassName="active">
+      <SectionLink to={item.url} key={index} active={NavigationSection.isActiveLocation(location.pathname, item)}>
         <SectionText>{item.label}</SectionText>
         {this.renderAddonComponent(item.badge)}
-      </SectionNavLink>
+      </SectionLink>
     );
   };
 
   private handleToggleNavLink = (index: number) => () => {
-    const { openedIndex } = this.state;
-    const isOpened = this.state.openedIndex.indexOf(index) >= 0;
-    if (isOpened) {
-      this.setState({
-        openedIndex: openedIndex.filter(i => i !== index),
-      });
-    } else {
-      this.setState({
-        openedIndex: [...openedIndex, index],
-      });
-    }
+    const { openedSectionIndices } = this.state;
+    const isOpened = this.state.openedSectionIndices.indexOf(index) >= 0;
+
+    const nextOpenedSectionIndices = isOpened
+      ? openedSectionIndices.filter(i => i !== index)
+      : [...openedSectionIndices, index];
+
+    this.setState({
+      openedSectionIndices: nextOpenedSectionIndices,
+    });
   };
 }
 
-export default withRouter(NavigationSection) as React.ComponentClass<NavigationSectionProps>;
+export default (withRouter(NavigationSection) as any) as React.ComponentClass<NavigationSectionProps>;
 
 const Container = styled.ul`
   margin: 12px 0;
@@ -150,28 +166,31 @@ const SectionItemStyle = css`
   display: flex;
   flex: 1;
   align-items: center;
-  padding: 6px 8px;
+  padding: 6px 12px;
   border-radius: 4px;
   color: ${gray700};
   path {
     fill: ${gray700};
   }
-  &.active {
+  &:hover {
+    background-color: ${gray50};
+  }
+`;
+
+const SectionLink = styled(Link)<{ active: boolean }>`
+  ${SectionItemStyle};
+  ${props =>
+    props.active
+      ? css`
     font-weight: bold;
     color: ${gray900};
-    background-color: ${gray100};
+    background-color: ${gray50};
 
     path {
       fill: ${gray900};
     }
-  }
-  &:hover {
-    background-color: ${gray100};
-  }
-`;
-
-const SectionNavLink = styled(NavLink)`
-  ${SectionItemStyle}
+  }`
+      : ''};
 `;
 
 const SectionItem = styled.div`

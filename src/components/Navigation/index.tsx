@@ -22,6 +22,7 @@ export interface NavigationSectionSubItem {
 export interface NavigationSectionItem {
   url?: string;
   label: string;
+  onClick?: () => any;
   icon: React.ReactElement<IconProps>;
   badge?: string | React.ReactElement<BadgeProps>;
   subItems?: NavigationSectionSubItem[];
