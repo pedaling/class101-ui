@@ -1,4 +1,5 @@
 import { css } from 'styled-components';
+
 import { gray800 } from '../Colors';
 
 export interface TextStyleProperties {
@@ -7,7 +8,6 @@ export interface TextStyleProperties {
 }
 
 export const display2 = css<TextStyleProperties>`
-  font-family: 'SpoqaHanSans';
   font-size: 96px;
   font-weight: ${props => props.fontWeight || 'normal'};
   color: ${props => props.color || gray800};
@@ -17,7 +17,6 @@ export const display2 = css<TextStyleProperties>`
 `;
 
 export const display3 = css<TextStyleProperties>`
-  font-family: 'SpoqaHanSans';
   font-size: 72px;
   font-weight: ${props => props.fontWeight || 'normal'};
   color: ${props => props.color || gray800};
@@ -27,7 +26,6 @@ export const display3 = css<TextStyleProperties>`
 `;
 
 export const headline1 = css<TextStyleProperties>`
-  font-family: 'SpoqaHanSans';
   font-size: 48px;
   font-weight: ${props => props.fontWeight || 'bold'};
   color: ${props => props.color || gray800};
@@ -37,7 +35,6 @@ export const headline1 = css<TextStyleProperties>`
 `;
 
 export const headline2 = css<TextStyleProperties>`
-  font-family: 'SpoqaHanSans';
   font-size: 32px;
   font-weight: ${props => props.fontWeight || 'bold'};
   color: ${props => props.color || gray800};
@@ -47,7 +44,6 @@ export const headline2 = css<TextStyleProperties>`
 `;
 
 export const headline3 = css<TextStyleProperties>`
-  font-family: 'SpoqaHanSans';
   font-size: 24px;
   font-weight: ${props => props.fontWeight || 'bold'};
   color: ${props => props.color || gray800};
@@ -57,7 +53,6 @@ export const headline3 = css<TextStyleProperties>`
 `;
 
 export const subtitle1 = css<TextStyleProperties>`
-  font-family: 'SpoqaHanSans';
   font-size: 20px;
   font-weight: ${props => props.fontWeight || 'bold'};
   color: ${props => props.color || gray800};
@@ -67,7 +62,6 @@ export const subtitle1 = css<TextStyleProperties>`
 `;
 
 export const body1 = css<TextStyleProperties>`
-  font-family: 'SpoqaHanSans';
   font-size: 16px;
   font-weight: ${props => props.fontWeight || 'normal'};
   color: ${props => props.color || gray800};
@@ -77,7 +71,6 @@ export const body1 = css<TextStyleProperties>`
 `;
 
 export const body2 = css<TextStyleProperties>`
-  font-family: 'SpoqaHanSans';
   font-size: 14px;
   font-weight: ${props => props.fontWeight || 'normal'};
   color: ${props => props.color || gray800};
@@ -87,7 +80,6 @@ export const body2 = css<TextStyleProperties>`
 `;
 
 export const caption1 = css<TextStyleProperties>`
-  font-family: 'SpoqaHanSans';
   font-size: 11px;
   font-weight: ${props => props.fontWeight || 'normal'};
   color: ${props => props.color || gray800};
@@ -97,7 +89,6 @@ export const caption1 = css<TextStyleProperties>`
 `;
 
 export const caption2 = css<TextStyleProperties>`
-  font-family: 'SpoqaHanSans';
   font-size: 9px;
   font-weight: ${props => props.fontWeight || 'normal'};
   color: ${props => props.color || gray800};
