@@ -100,6 +100,7 @@
   "dependencies": {
     "lodash-es": "^4.17.11",
     "path-to-regexp": "^3.0.0",
+    "react-id-swiper": "1.6.9",
     "typescript": "3.1.6"
   },
   "bugs": {
