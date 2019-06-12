@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
-import Swiper from 'react-id-swiper/lib/custom';
+import Swiper, { ReactIdSwiperProps, SwiperInstance } from 'react-id-swiper';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
+import { AutoplayOptions, PaginationOptions, SwiperEvent } from 'swiper';
 
 import { media, SIZES } from '../../BreakPoints';
 import { gray700, white } from '../../Colors';
@@ -14,62 +15,6 @@ export enum CarouselPaginationTheme {
   Light,
 }
 
-interface AutoplayParameterType {
-  delay?: number;
-  stopOnLastSlide?: boolean;
-  disableOnInteraction?: boolean;
-  reverseDirection?: boolean;
-  waitForTransition?: boolean;
-}
-
-interface SwiperOnParameterType {
-  touchMove?: (event: any) => void;
-  touchEnd?: (event: any) => void;
-  slideChange?: () => void;
-  transitionEnd?: () => void;
-  reachEnd?: () => void;
-}
-
-interface SwiperParameterType {
-  autoplay?: boolean | AutoplayParameterType;
-  slideToClickedSlide?: boolean;
-  shouldSwiperUpdate?: boolean;
-  slidesPerView?: SlidesPerView;
-  spaceBetween?: number;
-  slidesOffsetBefore?: number;
-  slidesOffsetAfter?: number;
-  pagination?: {
-    el: string;
-    clickable: boolean;
-    type: string;
-  };
-  navigation?: {
-    nextEl: string;
-    prevEl: string;
-  };
-  breakpoints?: {
-    [key: number]: {
-      slidesPerView?: SlidesPerView;
-      spaceBetween?: number;
-      slidesOffsetBefore?: number;
-      slidesOffsetAfter?: number;
-    };
-  };
-  on?: SwiperOnParameterType;
-  loop?: boolean;
-  threshold?: number;
-}
-
-interface SwiperType {
-  swiper: {
-    isEnd: boolean;
-    activeIndex: number;
-    realIndex: number;
-    slideNext: () => void;
-    slidePrev: () => void;
-  };
-}
-
 export interface CarouselProps {
   navigation: boolean;
   navigationPosition: CarouselNavigationPosition;
@@ -80,8 +25,8 @@ export interface CarouselProps {
   lgSlidesSideOffset: number;
   smSlidesSideOffset: number;
   loop: boolean;
-  autoplay: boolean | AutoplayParameterType;
-  on?: SwiperOnParameterType;
+  autoplay: AutoplayOptions | boolean;
+  on?: { [key in SwiperEvent]?: () => void };
   className?: string;
   children: React.ReactNode;
 }
@@ -92,7 +37,7 @@ const DEFAULT_PARAMS = {
   threshold: 10,
 };
 
-const DEFAULT_PAGINATION_PARAMS = {
+const DEFAULT_PAGINATION_PARAMS: { [key in string]: PaginationOptions } = {
   pagination: {
     el: '.swiper-pagination',
     type: 'bullets',
@@ -114,7 +59,7 @@ export default class Carousel extends PureComponent<CarouselProps> {
     loop: false,
     autoplay: false,
   };
-  private swiper = React.createRef<SwiperType>();
+  private swiper: SwiperInstance = null;
 
   public render() {
     const {
@@ -142,7 +87,7 @@ export default class Carousel extends PureComponent<CarouselProps> {
             lgSlidesSideOffset={lgSlidesSideOffset}
             smSlidesSideOffset={smSlidesSideOffset}
           >
-            <Swiper {...this.getSwiperParams()} ref={this.swiper}>
+            <Swiper {...this.getSwiperParams()} getSwiper={this.updateSwiper}>
               {children}
             </Swiper>
           </SwiperWrapper>
@@ -154,21 +99,25 @@ export default class Carousel extends PureComponent<CarouselProps> {
     );
   }
 
+  private updateSwiper = (swiper: SwiperInstance) => {
+    this.swiper = swiper;
+  };
+
   private goNext = () => {
-    if (this.swiper.current) {
-      this.swiper.current.swiper.slideNext();
+    if (this.swiper) {
+      this.swiper.slideNext();
     }
   };
 
   private goPrev = () => {
-    if (this.swiper.current) {
-      this.swiper.current.swiper.slidePrev();
+    if (this.swiper) {
+      this.swiper.slidePrev();
     }
   };
 
-  private getSwiperParams = (): Partial<SwiperParameterType> => {
+  private getSwiperParams = (): Partial<ReactIdSwiperProps> => {
     const { pagination, lgSlidesPerView, smSlidesPerView, on, loop, autoplay } = this.props;
-    let params: Partial<SwiperParameterType> = {
+    let params: Partial<ReactIdSwiperProps> = {
       ...DEFAULT_PARAMS,
       loop,
       autoplay,
