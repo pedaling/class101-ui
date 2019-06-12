@@ -45,8 +45,8 @@
     ]
   },
   "peerDependencies": {
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
     "react-router-dom": "^4.3.1",
     "styled-components": "4.2.0"
   },
@@ -69,6 +69,7 @@
     "@types/react-dom": "^16.8.3",
     "@types/react-router-dom": "^4.3.1",
     "@types/styled-components": "^4.1.14",
+    "@types/swiper": "^4.4.3",
     "cross-env": "^5.1.4",
     "docz": "^0.13.7",
     "docz-theme-default": "^0.12.9",
@@ -76,8 +77,8 @@
     "husky": "^1.1.2",
     "lint-staged": "^8.0.0",
     "prettier": "^1.15.3",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "^3.1.0",
     "rollup": "^0.64.1",
@@ -100,7 +101,8 @@
   "dependencies": {
     "lodash-es": "^4.17.11",
     "path-to-regexp": "^3.0.0",
-    "react-id-swiper": "1.6.9",
+    "react-id-swiper": "^2.1.2",
+    "swiper": "^4.5.0",
     "typescript": "3.1.6"
   },
   "bugs": {
