@@ -36,6 +36,7 @@ interface Props {
   className?: string;
   children?: React.ReactNode;
   target?: string;
+  onClick?: () => void;
 }
 
 export default class Card extends PureComponent<Props> {
@@ -57,6 +58,7 @@ export default class Card extends PureComponent<Props> {
       href,
       target,
       className,
+      onClick,
     } = this.props;
 
     const options: { rel?: string } = {};
@@ -78,8 +80,10 @@ export default class Card extends PureComponent<Props> {
 
     const innerElements = (
       <>
-        <CoverImage coverImageRatio={coverImageRatio}>{imgElements()}</CoverImage>
-        <Body>
+        <CoverImage coverImageRatio={coverImageRatio} onClick={onClick}>
+          {imgElements()}
+        </CoverImage>
+        <Body onClick={onClick}>
           {extraTop}
           <Title>{title}</Title>
           {extraBottom}

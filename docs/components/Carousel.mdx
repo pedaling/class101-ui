@@ -1,0 +1,224 @@
+---
+menu: Components
+name: Carousel
+route: /components/carousel
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Carousel, CarouselNavigationPosition, CarouselPaginationTheme, Card, Section, Colors } from '@class101/ui';
+import { imageSrc } from './interface';
+import { PlayGroundBanner, PlayGroundSectionCarouselContent } from '../HelpComponents';
+
+# Carousel
+
+## Props
+
+<PropsTable of={Carousel} />
+
+```ts
+interface SwiperOnParameterType {
+  touchMove?: (event: any) => void;
+  touchEnd?: (event: any) => void;
+  slideChange?: () => void;
+  transitionEnd?: () => void;
+  reachEnd?: () => void;
+}
+```
+
+## Basic usage
+
+<Playground>
+  <Carousel>
+    <PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner>
+  </Carousel>
+</Playground>
+
+## Navigation Position
+
+페이지네이션의 위치는 네비게이션 버튼 위치에 따라 정해집니다.
+
+```ts
+enum CarouselNavigationPosition {
+  TopRightOut,
+  BottomRightOut,
+  BottomRightIn,
+}
+```
+
+### TopRightOut
+
+주로 Section에 들어가는 캐러셀일때 사용합니다.
+
+<Playground>
+  <Section title="섹션 타이틀">
+    <Carousel
+      navigationPosition={CarouselNavigationPosition.TopRightOut}
+      lgSlidesPerView={4}
+      smSlidesPerView={2}
+      pagination
+    >
+      <Card title="내 방 안의 자수공장! 재봉틀자수, 어렵지 않아요" coverImage={imageSrc} />
+      <Card title="나만의 그림으로 내 삶을 채우다, 강한의 색연필 일러스트" coverImage={imageSrc} />
+      <Card title="닮고 싶은, 담고 싶은 웹툰 원고 제작 기법" coverImage={imageSrc} />
+      <Card title="내 방 안의 자수공장! 재봉틀자수, 어렵지 않아요" coverImage={imageSrc} />
+      <Card title="나만의 그림으로 내 삶을 채우다, 강한의 색연필 일러스트" coverImage={imageSrc} />
+      <Card title="닮고 싶은, 담고 싶은 웹툰 원고 제작 기법" coverImage={imageSrc} />
+    </Carousel>
+  </Section>
+</Playground>
+
+### BottomRightOut
+
+<Playground>
+  <Carousel
+    navigationPosition={CarouselNavigationPosition.BottomRightOut}
+    lgSlidesPerView={4}
+    smSlidesPerView={2}
+    pagination
+  >
+    <Card title="내 방 안의 자수공장! 재봉틀자수, 어렵지 않아요" coverImage={imageSrc} />
+    <Card title="나만의 그림으로 내 삶을 채우다, 강한의 색연필 일러스트" coverImage={imageSrc} />
+    <Card title="닮고 싶은, 담고 싶은 웹툰 원고 제작 기법" coverImage={imageSrc} />
+    <Card title="내 방 안의 자수공장! 재봉틀자수, 어렵지 않아요" coverImage={imageSrc} />
+    <Card title="나만의 그림으로 내 삶을 채우다, 강한의 색연필 일러스트" coverImage={imageSrc} />
+    <Card title="닮고 싶은, 담고 싶은 웹툰 원고 제작 기법" coverImage={imageSrc} />
+  </Carousel>
+</Playground>
+
+### BottomRightIn
+
+<Playground>
+  <Carousel
+    navigationPosition={CarouselNavigationPosition.BottomRightIn}
+    paginationTheme={CarouselPaginationTheme.Light}
+    pagination
+  >
+    <PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner>
+  </Carousel>
+</Playground>
+
+## Pagination Theme
+
+```ts
+enum CarouselPaginationTheme {
+  Dark,
+  Light,
+}
+```
+
+<Playground>
+  <Carousel
+    navigationPosition={CarouselNavigationPosition.BottomRightIn}
+    paginationTheme={CarouselPaginationTheme.Dark}
+    pagination
+  >
+    <PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner>
+  </Carousel>
+  <Carousel
+    navigationPosition={CarouselNavigationPosition.BottomRightIn}
+    paginationTheme={CarouselPaginationTheme.Light}
+    pagination
+  >
+    <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+  </Carousel>
+</Playground>
+
+## loop
+
+<Playground>
+  <Carousel
+    navigationPosition={CarouselNavigationPosition.BottomRightIn}
+    paginationTheme={CarouselPaginationTheme.Light}
+    loop
+    pagination
+  >
+    <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+  </Carousel>
+</Playground>
+
+## autoplay
+
+[swiper api: Autoplay](https://idangero.us/swiper/api/#autoplay)
+
+```ts
+interface AutoplayParameterType {
+  delay?: number;
+  stopOnLastSlide?: boolean;
+  disableOnInteraction?: boolean;
+  reverseDirection?: boolean;
+  waitForTransition?: boolean;
+}
+```
+
+<Playground>
+  <Carousel
+    navigationPosition={CarouselNavigationPosition.BottomRightIn}
+    paginationTheme={CarouselPaginationTheme.Light}
+    autoplay={{
+      delay: 6000,
+      disableOnInteraction: false,
+    }}
+    pagination
+  >
+    <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+  </Carousel>
+</Playground>
+
+### ViewAllButton
+
+<Playground>
+  <Section title="섹션 타이틀">
+    <Carousel
+      navigationPosition={CarouselNavigationPosition.TopRightOut}
+      lgSlidesPerView={4}
+      smSlidesPerView={2}
+      pagination
+    >
+      <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+      <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
+      <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
+      <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
+      <Carousel.ViewAllButton />
+    </Carousel>
+  </Section>
+</Playground>
+
+## Slides Side Offset
+
+1024이하에서 확인하세요.  
+섹션 콘텐츠를 감싸는 `PlayGroundSectionCarouselContent`에 양옆으로 -24px 음수 마진이 적용되어 있습니다.
+
+<Playground>
+  <Section title="섹션 타이틀">
+    <PlayGroundSectionCarouselContent>
+      <Carousel
+        navigationPosition={CarouselNavigationPosition.TopRightOut}
+        lgSlidesPerView={4}
+        smSlidesPerView={2}
+        smSlidesSideOffset={24}
+        pagination
+      >
+        <Card title="내 방 안의 자수공장! 재봉틀자수, 어렵지 않아요" coverImage={imageSrc} />
+        <Card title="나만의 그림으로 내 삶을 채우다, 강한의 색연필 일러스트" coverImage={imageSrc} />
+        <Card title="닮고 싶은, 담고 싶은 웹툰 원고 제작 기법" coverImage={imageSrc} />
+        <Card title="내 방 안의 자수공장! 재봉틀자수, 어렵지 않아요" coverImage={imageSrc} />
+        <Card title="나만의 그림으로 내 삶을 채우다, 강한의 색연필 일러스트" coverImage={imageSrc} />
+        <Card title="닮고 싶은, 담고 싶은 웹툰 원고 제작 기법" coverImage={imageSrc} />
+      </Carousel>
+    </PlayGroundSectionCarouselContent>
+  </Section>
+</Playground>
