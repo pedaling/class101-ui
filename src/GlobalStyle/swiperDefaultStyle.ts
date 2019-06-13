@@ -1,15 +1,15 @@
 import { css } from 'styled-components';
 
 /**
- * Swiper 4.4.1
+ * Swiper 4.5.0
  * Most modern mobile touch slider and framework with hardware accelerated transitions
  * http://www.idangero.us/swiper/
  *
- * Copyright 2014-2018 Vladimir Kharlampidi
+ * Copyright 2014-2019 Vladimir Kharlampidi
  *
  * Released under the MIT License
  *
- * Released on: September 14, 2018
+ * Released on: February 22, 2019
  */
 const swiperStyle = css`
   .swiper-container {

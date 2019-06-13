@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import Swiper, { ReactIdSwiperProps, SwiperInstance } from 'react-id-swiper';
+import { SwiperModules } from 'react-id-swiper/lib/types';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 import { AutoplayOptions, PaginationOptions, SwiperEvent } from 'swiper';
 import { Autoplay, Pagination } from 'swiper/dist/js/swiper.esm';
@@ -30,7 +31,6 @@ export interface CarouselProps {
   on?: { [key in SwiperEvent]?: () => void };
   className?: string;
   children: React.ReactNode;
-  getSwiper?: (swiper: SwiperInstance) => void;
 }
 
 const DEFAULT_PARAMS = {
@@ -81,18 +81,20 @@ export default class Carousel extends PureComponent<CarouselProps> {
     return (
       <Container className={className}>
         <Inner>
-          <SwiperWrapper
-            navigation={navigation}
-            navigationPosition={navigationPosition}
-            pagination={pagination}
-            paginationTheme={paginationTheme}
-            lgSlidesSideOffset={lgSlidesSideOffset}
-            smSlidesSideOffset={smSlidesSideOffset}
-          >
-            <Swiper {...this.getSwiperParams()} getSwiper={this.updateSwiper}>
-              {children}
-            </Swiper>
-          </SwiperWrapper>
+          {sliderCount >= 0 && (
+            <SwiperWrapper
+              navigation={navigation}
+              navigationPosition={navigationPosition}
+              pagination={pagination}
+              paginationTheme={paginationTheme}
+              lgSlidesSideOffset={lgSlidesSideOffset}
+              smSlidesSideOffset={smSlidesSideOffset}
+            >
+              <Swiper {...this.getSwiperParams()} getSwiper={this.getSwiper}>
+                {children}
+              </Swiper>
+            </SwiperWrapper>
+          )}
           {navigation && !shouldHideNavigation && (
             <Navigation position={navigationPosition} goNext={this.goNext} goPrev={this.goPrev} />
           )}
@@ -101,12 +103,8 @@ export default class Carousel extends PureComponent<CarouselProps> {
     );
   }
 
-  private updateSwiper = (swiper: SwiperInstance) => {
-    const { getSwiper } = this.props;
+  private getSwiper = (swiper: SwiperInstance) => {
     this.swiper = swiper;
-    if (getSwiper) {
-      getSwiper(swiper);
-    }
   };
 
   private goNext = () => {
@@ -126,7 +124,6 @@ export default class Carousel extends PureComponent<CarouselProps> {
     let params: Partial<ReactIdSwiperProps> = {
       ...DEFAULT_PARAMS,
       loop,
-      autoplay,
       on,
       slidesPerView: lgSlidesPerView,
       spaceBetween: typeof lgSlidesPerView !== 'number' || lgSlidesPerView !== 1 ? 24 : 0,
@@ -136,12 +133,20 @@ export default class Carousel extends PureComponent<CarouselProps> {
           spaceBetween: typeof smSlidesPerView !== 'number' || smSlidesPerView !== 1 ? 16 : 0,
         },
       },
-      modules: [Autoplay, Pagination],
+      modules: [],
     };
+    if (autoplay) {
+      params = {
+        ...params,
+        autoplay,
+        modules: [...(params.modules as SwiperModules), Autoplay],
+      };
+    }
     if (pagination) {
       params = {
         ...params,
         ...DEFAULT_PAGINATION_PARAMS,
+        modules: [...(params.modules as SwiperModules), Pagination],
       };
     }
     return params;
