@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import Swiper, { ReactIdSwiperProps, SwiperInstance } from 'react-id-swiper';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 import { AutoplayOptions, PaginationOptions, SwiperEvent } from 'swiper';
+import { Autoplay, Pagination } from 'swiper/dist/js/swiper.esm';
 
 import { media, SIZES } from '../../BreakPoints';
 import { gray700, white } from '../../Colors';
@@ -29,6 +30,7 @@ export interface CarouselProps {
   on?: { [key in SwiperEvent]?: () => void };
   className?: string;
   children: React.ReactNode;
+  getSwiper?: (swiper: SwiperInstance) => void;
 }
 
 const DEFAULT_PARAMS = {
@@ -100,7 +102,11 @@ export default class Carousel extends PureComponent<CarouselProps> {
   }
 
   private updateSwiper = (swiper: SwiperInstance) => {
+    const { getSwiper } = this.props;
     this.swiper = swiper;
+    if (getSwiper) {
+      getSwiper(swiper);
+    }
   };
 
   private goNext = () => {
@@ -130,6 +136,7 @@ export default class Carousel extends PureComponent<CarouselProps> {
           spaceBetween: typeof smSlidesPerView !== 'number' || smSlidesPerView !== 1 ? 16 : 0,
         },
       },
+      modules: [Autoplay, Pagination],
     };
     if (pagination) {
       params = {

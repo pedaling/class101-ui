@@ -13,17 +13,9 @@ import { PlayGroundBanner, PlayGroundSectionCarouselContent } from '../HelpCompo
 
 ## Props
 
-<PropsTable of={Carousel} />
+[swiper api: Events](https://idangero.us/swiper/api/#events)
 
-```ts
-interface SwiperOnParameterType {
-  touchMove?: (event: any) => void;
-  touchEnd?: (event: any) => void;
-  slideChange?: () => void;
-  transitionEnd?: () => void;
-  reachEnd?: () => void;
-}
-```
+<PropsTable of={Carousel} />
 
 ## Basic usage
 
@@ -149,16 +141,6 @@ enum CarouselPaginationTheme {
 ## autoplay
 
 [swiper api: Autoplay](https://idangero.us/swiper/api/#autoplay)
-
-```ts
-interface AutoplayParameterType {
-  delay?: number;
-  stopOnLastSlide?: boolean;
-  disableOnInteraction?: boolean;
-  reverseDirection?: boolean;
-  waitForTransition?: boolean;
-}
-```
 
 <Playground>
   <Carousel
