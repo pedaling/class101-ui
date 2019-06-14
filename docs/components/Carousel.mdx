@@ -123,7 +123,7 @@ enum CarouselPaginationTheme {
   </Carousel>
 </Playground>
 
-## loop
+## Loop
 
 <Playground>
   <Carousel
@@ -138,7 +138,7 @@ enum CarouselPaginationTheme {
   </Carousel>
 </Playground>
 
-## autoplay
+## Autoplay
 
 [swiper api: Autoplay](https://idangero.us/swiper/api/#autoplay)
 
@@ -203,6 +203,18 @@ enum CarouselPaginationTheme {
       </Carousel>
     </PlayGroundSectionCarouselContent>
   </Section>
+</Playground>
+
+## Slides Between
+
+slidesPerView 값이 1일 경우 기본적으로 spaceBetween 값은 0입니다.
+
+<Playground>
+  <Carousel lgSpaceBetween lgSlidesSideOffset={32} smSpaceBetween smSlidesSideOffset={24}>
+    <PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner>
+  </Carousel>
 </Playground>
 
 ## Lazy

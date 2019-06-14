@@ -16,6 +16,7 @@ interface Props {
   goPrev: () => void;
   isBeginning: boolean;
   isEnd: boolean;
+  lgSlidesSideOffset: number;
 }
 
 const classNames = (direction: NavigationDirection, disabled: boolean): string => {
@@ -31,9 +32,9 @@ export default class Navigation extends React.PureComponent<Props> {
   };
 
   public render() {
-    const { position, goNext, goPrev, isBeginning, isEnd } = this.props;
+    const { position, goNext, goPrev, isBeginning, isEnd, lgSlidesSideOffset } = this.props;
     return (
-      <Container position={position}>
+      <Container position={position} lgSlidesSideOffset={lgSlidesSideOffset}>
         <NavigationButton
           direction={NavigationDirection.Prev}
           onClick={goPrev}
@@ -69,12 +70,13 @@ const navigationPositionStyle: { [key in CarouselNavigationPosition]: FlattenSim
 
 const Container = styled.div<{
   position: CarouselNavigationPosition;
+  lgSlidesSideOffset: number;
 }>`
   position: absolute;
   ${props => navigationPositionStyle[props.position]};
   left: 50%;
   z-index: 1;
-  width: 100%;
+  width: ${props => (props.lgSlidesSideOffset ? `calc(100% - ${props.lgSlidesSideOffset * 2}px)` : '100%')};
   /* 여백 계산: 960 + ( 16 * 2) */
   max-width: 992px;
   ${media.sm`

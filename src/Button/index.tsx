@@ -35,6 +35,8 @@ interface Props extends CommonProps {
   buttonAttributes?: OmittedButtonAttributes;
 }
 
+export type ButtonProps = Props;
+
 export default class Button extends PureComponent<Props> {
   public render() {
     const {
