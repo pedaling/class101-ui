@@ -14,16 +14,17 @@ export enum NavigationDirection {
 interface Props {
   direction: NavigationDirection;
   onClick: () => void;
+  className?: string
 }
 
 export default class NavigationButton extends React.PureComponent<Props> {
   public render() {
-    const { direction, onClick } = this.props;
+    const { direction, onClick, className } = this.props;
     return (
       <Button
         onClick={onClick}
         direction={direction}
-        className={`swiper-button-${direction === NavigationDirection.Next ? 'next' : 'prev'}`}
+        className={className}
       >
         <ChevronIcon direction={direction} size={24} />
       </Button>

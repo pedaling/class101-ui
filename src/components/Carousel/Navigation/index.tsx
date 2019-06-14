@@ -14,19 +14,36 @@ interface Props {
   position: CarouselNavigationPosition;
   goNext: () => void;
   goPrev: () => void;
+  isBeginning: boolean;
+  isEnd: boolean;
 }
 
+const classNames = (direction: NavigationDirection, disabled: boolean): string => {
+  let className = `swiper-button-${direction === NavigationDirection.Next ? 'next' : 'prev'}`;
+  if (disabled) {
+    className = `${className} swiper-button-disabled`;
+  }
+  return className;
+};
 export default class Navigation extends React.PureComponent<Props> {
   public static readonly defaultProps: Partial<Props> = {
     position: CarouselNavigationPosition.TopRightOut,
   };
 
   public render() {
-    const { position, goNext, goPrev } = this.props;
+    const { position, goNext, goPrev, isBeginning, isEnd } = this.props;
     return (
       <Container position={position}>
-        <NavigationButton direction={NavigationDirection.Prev} onClick={goPrev} />
-        <NavigationButton direction={NavigationDirection.Next} onClick={goNext} />
+        <NavigationButton
+          direction={NavigationDirection.Prev}
+          onClick={goPrev}
+          className={classNames(NavigationDirection.Prev, isBeginning)}
+        />
+        <NavigationButton
+          direction={NavigationDirection.Next}
+          onClick={goNext}
+          className={classNames(NavigationDirection.Next, isEnd)}
+        />
       </Container>
     );
   }

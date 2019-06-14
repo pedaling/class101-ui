@@ -48,7 +48,11 @@ const DEFAULT_PAGINATION_PARAMS: { [key in string]: PaginationOptions } = {
   },
 };
 
-export default class Carousel extends PureComponent<CarouselProps> {
+interface State {
+  readonly isBeginning: boolean;
+  readonly isEnd: boolean;
+}
+export default class Carousel extends PureComponent<CarouselProps, State> {
   public static ViewAllButton = ViewAllButton;
   public static defaultProps = {
     navigation: true,
@@ -61,6 +65,11 @@ export default class Carousel extends PureComponent<CarouselProps> {
     smSlidesSideOffset: 0,
     loop: false,
   };
+  public readonly state = {
+    isBeginning: true,
+    isEnd: false,
+  };
+
   private swiper: SwiperInstance = null;
 
   public render() {
@@ -75,6 +84,7 @@ export default class Carousel extends PureComponent<CarouselProps> {
       lgSlidesSideOffset,
       smSlidesSideOffset,
     } = this.props;
+    const { isBeginning, isEnd } = this.state;
 
     const sliderCount = React.Children.count(children);
     const shouldHideNavigation = typeof lgSlidesPerView === 'number' && sliderCount <= lgSlidesPerView;
@@ -97,7 +107,13 @@ export default class Carousel extends PureComponent<CarouselProps> {
             </SwiperWrapper>
           )}
           {navigation && !shouldHideNavigation && (
-            <Navigation position={navigationPosition} goNext={this.goNext} goPrev={this.goPrev} />
+            <Navigation
+              position={navigationPosition}
+              goNext={this.goNext}
+              goPrev={this.goPrev}
+              isBeginning={isBeginning}
+              isEnd={isEnd}
+            />
           )}
         </Inner>
       </Container>
@@ -120,12 +136,35 @@ export default class Carousel extends PureComponent<CarouselProps> {
     }
   };
 
+  private progress = () => {
+    if (!this.swiper) return;
+    if (this.props.loop) {
+      return this.setState({
+        isEnd: false,
+        isBeginning: false,
+      });
+    }
+    if (this.swiper.isEnd) {
+      return this.setState({ isEnd: true, isBeginning: false });
+    }
+    if (this.swiper.isBeginning) {
+      return this.setState({ isBeginning: true, isEnd: false });
+    }
+    this.setState({
+      isEnd: false,
+      isBeginning: false,
+    });
+  };
+
   private getSwiperParams = (): Partial<ReactIdSwiperProps> => {
     const { pagination, lgSlidesPerView, smSlidesPerView, on, loop, autoplay, lazy } = this.props;
     let params: Partial<ReactIdSwiperProps> = {
       ...DEFAULT_PARAMS,
       loop,
-      on,
+      on: {
+        ...on,
+        progress: this.progress,
+      },
       slidesPerView: lgSlidesPerView,
       spaceBetween: typeof lgSlidesPerView !== 'number' || lgSlidesPerView !== 1 ? 24 : 0,
       breakpoints: {
