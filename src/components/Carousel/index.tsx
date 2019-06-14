@@ -26,6 +26,8 @@ export interface CarouselProps {
   smSlidesPerView: SlidesPerView;
   lgSlidesSideOffset: number;
   smSlidesSideOffset: number;
+  lgSpaceBetween?: boolean;
+  smSpaceBetween?: boolean;
   loop: boolean;
   autoplay?: AutoplayOptions | boolean;
   lazy?: LazyOptions | boolean;
@@ -108,6 +110,7 @@ export default class Carousel extends PureComponent<CarouselProps, State> {
           )}
           {navigation && !shouldHideNavigation && (
             <Navigation
+              lgSlidesSideOffset={lgSlidesSideOffset}
               position={navigationPosition}
               goNext={this.goNext}
               goPrev={this.goPrev}
@@ -157,7 +160,17 @@ export default class Carousel extends PureComponent<CarouselProps, State> {
   };
 
   private getSwiperParams = (): Partial<ReactIdSwiperProps> => {
-    const { pagination, lgSlidesPerView, smSlidesPerView, on, loop, autoplay, lazy } = this.props;
+    const {
+      pagination,
+      lgSlidesPerView,
+      smSlidesPerView,
+      lgSpaceBetween,
+      smSpaceBetween,
+      on,
+      loop,
+      autoplay,
+      lazy,
+    } = this.props;
     let params: Partial<ReactIdSwiperProps> = {
       ...DEFAULT_PARAMS,
       loop,
@@ -166,11 +179,11 @@ export default class Carousel extends PureComponent<CarouselProps, State> {
         progress: this.progress,
       },
       slidesPerView: lgSlidesPerView,
-      spaceBetween: typeof lgSlidesPerView !== 'number' || lgSlidesPerView !== 1 ? 24 : 0,
+      spaceBetween: lgSpaceBetween || (typeof lgSlidesPerView !== 'number' || lgSlidesPerView !== 1) ? 24 : 0,
       breakpoints: {
         [SIZES.sm.maxWidth]: {
           slidesPerView: smSlidesPerView,
-          spaceBetween: typeof smSlidesPerView !== 'number' || smSlidesPerView !== 1 ? 16 : 0,
+          spaceBetween: smSpaceBetween || (typeof smSlidesPerView !== 'number' || smSlidesPerView !== 1) ? 16 : 0,
         },
       },
       modules: [],
