@@ -21,4 +21,18 @@ export const PlayGroundSectionCarouselContent = styled.div`
   `}
 `;
 
+export const SwiperCard = styled.div`
+  width: 100%;
+  > img {
+    display: block;
+    width: 100%;
+  }
+`;
+
+export const PreloadImage = styled.div`
+  width: 100%;
+  height: 100px;
+  background: ${Colors.red000};
+`;
+
 export { ThemeProvider } from 'styled-components';

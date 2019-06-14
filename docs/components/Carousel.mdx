@@ -7,7 +7,7 @@ route: /components/carousel
 import { Playground, PropsTable } from 'docz';
 import { Carousel, CarouselNavigationPosition, CarouselPaginationTheme, Card, Section, Colors } from '@class101/ui';
 import { imageSrc } from './interface';
-import { PlayGroundBanner, PlayGroundSectionCarouselContent } from '../HelpComponents';
+import { PlayGroundBanner, PlayGroundSectionCarouselContent, SwiperCard, PreloadImage } from '../HelpComponents';
 
 # Carousel
 
@@ -203,4 +203,47 @@ enum CarouselPaginationTheme {
       </Carousel>
     </PlayGroundSectionCarouselContent>
   </Section>
+</Playground>
+
+## Lazy
+
+<Playground>
+  <Carousel navigationPosition={CarouselNavigationPosition.TopRightOut} lgSlidesPerView={4} lazy pagination>
+    <SwiperCard>
+      <img data-src={imageSrc} className="swiper-lazy" />
+      <PreloadImage className="swiper-lazy-preloader" />
+    </SwiperCard>
+    <SwiperCard>
+      <img data-src={imageSrc} className="swiper-lazy" />
+      <PreloadImage className="swiper-lazy-preloader" />
+    </SwiperCard>
+    <SwiperCard>
+      <img data-src={imageSrc} className="swiper-lazy" />
+      <PreloadImage className="swiper-lazy-preloader" />
+    </SwiperCard>
+    <SwiperCard>
+      <img data-src={imageSrc} className="swiper-lazy" />
+      <PreloadImage className="swiper-lazy-preloader" />
+    </SwiperCard>
+    <SwiperCard>
+      <img data-src={imageSrc} className="swiper-lazy" />
+      <PreloadImage className="swiper-lazy-preloader" />
+    </SwiperCard>
+    <SwiperCard>
+      <img data-src={imageSrc} className="swiper-lazy" />
+      <PreloadImage className="swiper-lazy-preloader" />
+    </SwiperCard>
+    <SwiperCard>
+      <img data-src={imageSrc} className="swiper-lazy" />
+      <PreloadImage className="swiper-lazy-preloader" />
+    </SwiperCard>
+    <SwiperCard>
+      <img data-src={imageSrc} className="swiper-lazy" />
+      <PreloadImage className="swiper-lazy-preloader" />
+    </SwiperCard>
+    <SwiperCard>
+      <img data-src={imageSrc} className="swiper-lazy" />
+      <PreloadImage className="swiper-lazy-preloader" />
+    </SwiperCard>
+  </Carousel>
 </Playground>
