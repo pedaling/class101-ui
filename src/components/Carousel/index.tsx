@@ -3,7 +3,7 @@ import Swiper, { ReactIdSwiperProps, SwiperInstance } from 'react-id-swiper';
 import { SwiperModules } from 'react-id-swiper/lib/types';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 import { AutoplayOptions, PaginationOptions, SwiperEvent } from 'swiper';
-import { Autoplay, Pagination } from 'swiper/dist/js/swiper.esm';
+import { Autoplay, Lazy, LazyOptions, Pagination } from 'swiper/dist/js/swiper.esm';
 
 import { media, SIZES } from '../../BreakPoints';
 import { gray700, white } from '../../Colors';
@@ -27,7 +27,8 @@ export interface CarouselProps {
   lgSlidesSideOffset: number;
   smSlidesSideOffset: number;
   loop: boolean;
-  autoplay: AutoplayOptions | boolean;
+  autoplay?: AutoplayOptions | boolean;
+  lazy?: LazyOptions | boolean;
   on?: { [key in SwiperEvent]?: () => void };
   className?: string;
   children: React.ReactNode;
@@ -59,7 +60,6 @@ export default class Carousel extends PureComponent<CarouselProps> {
     lgSlidesSideOffset: 0,
     smSlidesSideOffset: 0,
     loop: false,
-    autoplay: false,
   };
   private swiper: SwiperInstance = null;
 
@@ -78,10 +78,11 @@ export default class Carousel extends PureComponent<CarouselProps> {
 
     const sliderCount = React.Children.count(children);
     const shouldHideNavigation = typeof lgSlidesPerView === 'number' && sliderCount <= lgSlidesPerView;
+    const swiperParams = this.getSwiperParams();
     return (
       <Container className={className}>
         <Inner>
-          {sliderCount >= 0 && (
+          {sliderCount > 0 && (
             <SwiperWrapper
               navigation={navigation}
               navigationPosition={navigationPosition}
@@ -90,7 +91,7 @@ export default class Carousel extends PureComponent<CarouselProps> {
               lgSlidesSideOffset={lgSlidesSideOffset}
               smSlidesSideOffset={smSlidesSideOffset}
             >
-              <Swiper {...this.getSwiperParams()} getSwiper={this.getSwiper}>
+              <Swiper {...swiperParams} getSwiper={this.getSwiper}>
                 {children}
               </Swiper>
             </SwiperWrapper>
@@ -120,7 +121,7 @@ export default class Carousel extends PureComponent<CarouselProps> {
   };
 
   private getSwiperParams = (): Partial<ReactIdSwiperProps> => {
-    const { pagination, lgSlidesPerView, smSlidesPerView, on, loop, autoplay } = this.props;
+    const { pagination, lgSlidesPerView, smSlidesPerView, on, loop, autoplay, lazy } = this.props;
     let params: Partial<ReactIdSwiperProps> = {
       ...DEFAULT_PARAMS,
       loop,
@@ -140,6 +141,14 @@ export default class Carousel extends PureComponent<CarouselProps> {
         ...params,
         autoplay,
         modules: [...(params.modules as SwiperModules), Autoplay],
+      };
+    }
+    if (lazy) {
+      params = {
+        ...params,
+        lazy,
+        preloadImages: false,
+        modules: [...(params.modules as SwiperModules), Lazy],
       };
     }
     if (pagination) {
