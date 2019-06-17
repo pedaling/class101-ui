@@ -1,3 +1,4 @@
+import { isEqual } from 'lodash-es';
 import React, { PureComponent } from 'react';
 import Swiper, { ReactIdSwiperProps, SwiperInstance } from 'react-id-swiper';
 import { SwiperModules } from 'react-id-swiper/lib/types';
@@ -74,6 +75,12 @@ export default class Carousel extends PureComponent<CarouselProps, State> {
 
   private swiper: SwiperInstance = null;
 
+  public componentDidUpdate(prevProps: Readonly<CarouselProps>) {
+    if (this.shouldSwiperUpdate(prevProps) && this.swiper) {
+      this.swiper.update();
+    }
+  }
+
   public render() {
     const {
       children,
@@ -122,6 +129,25 @@ export default class Carousel extends PureComponent<CarouselProps, State> {
       </Container>
     );
   }
+
+  private shouldSwiperUpdate = (prevProps: Readonly<CarouselProps>) => {
+    const prevKeys = this.getKeysFromChildren(prevProps.children);
+    const currentKeys = this.getKeysFromChildren(this.props.children);
+    return !isEqual(prevKeys, currentKeys);
+  };
+
+  private getKeysFromChildren = (children?: React.ReactNode) => {
+    if (children === undefined || children === null) {
+      return [];
+    }
+
+    return React.Children.map(children, child => {
+      if (!React.isValidElement(child)) {
+        return undefined;
+      }
+      return child.key;
+    });
+  };
 
   private getSwiper = (swiper: SwiperInstance) => {
     this.swiper = swiper;
