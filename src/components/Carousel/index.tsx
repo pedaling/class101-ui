@@ -27,6 +27,7 @@ export interface CarouselProps {
   smSlidesPerView: SlidesPerView;
   lgSlidesSideOffset: number;
   smSlidesSideOffset: number;
+  freeMode: boolean;
   lgSpaceBetween?: boolean;
   smSpaceBetween?: boolean;
   autoplay?: AutoplayOptions | boolean;
@@ -67,6 +68,7 @@ export default class Carousel extends PureComponent<CarouselProps, State> {
     lgSlidesSideOffset: 0,
     smSlidesSideOffset: 0,
     shouldSwiperUpdate: false,
+    freeMode: true,
     loop: false,
   };
   public readonly state = {
@@ -197,12 +199,14 @@ export default class Carousel extends PureComponent<CarouselProps, State> {
       loop,
       autoplay,
       lazy,
+      freeMode,
       shouldSwiperUpdate,
     } = this.props;
     let params: Partial<ReactIdSwiperProps> = {
       ...DEFAULT_PARAMS,
       shouldSwiperUpdate,
       loop,
+      freeMode,
       on: {
         ...on,
         progress: this.progress,
