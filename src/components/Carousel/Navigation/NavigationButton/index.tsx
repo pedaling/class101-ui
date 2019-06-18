@@ -14,18 +14,14 @@ export enum NavigationDirection {
 interface Props {
   direction: NavigationDirection;
   onClick: () => void;
-  className?: string
+  className?: string;
 }
 
 export default class NavigationButton extends React.PureComponent<Props> {
   public render() {
     const { direction, onClick, className } = this.props;
     return (
-      <Button
-        onClick={onClick}
-        direction={direction}
-        className={className}
-      >
+      <Button onClick={onClick} direction={direction} className={className}>
         <ChevronIcon direction={direction} size={24} />
       </Button>
     );
@@ -74,6 +70,7 @@ const Button = styled.button<{ direction: NavigationDirection }>`
 `;
 
 const ChevronIcon = styled(Chevron)<{ direction: NavigationDirection }>`
+  flex: none;
   ${props =>
     props.direction === NavigationDirection.Prev
       ? `
