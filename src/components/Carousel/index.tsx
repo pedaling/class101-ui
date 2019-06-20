@@ -40,7 +40,6 @@ export interface CarouselProps {
 }
 
 const DEFAULT_PARAMS = {
-  slideToClickedSlide: true,
   threshold: 10,
 };
 
