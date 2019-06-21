@@ -1,7 +1,7 @@
 import * as BreakPoints from './BreakPoints';
 import * as Colors from './Colors';
 import * as ElevationStyles from './ElevationStyles';
-import { InlineError, Input, Intent, Select, Textarea } from './FormInput';
+import { InlineError, Input, Intent, Select, Textarea, TagInput } from './FormInput';
 import * as Icon from './Icon';
 import { Position } from './Position';
 import * as TextStyles from './TextStyles';
@@ -47,6 +47,7 @@ export {
   Input,
   Select,
   Textarea,
+  TagInput,
   InlineError,
   Intent,
 };

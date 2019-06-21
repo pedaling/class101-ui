@@ -9,13 +9,14 @@ interface TagProps {
   value: string;
   label?: string;
   disabled?: boolean;
+  className?: string;
 }
 
 export default class Tag extends PureComponent<TagProps> {
   public render() {
-    const { value, label } = this.props;
+    const { value, label, className } = this.props;
     return (
-      <Container>
+      <Container className={className}>
         <Text>{label || value}</Text>
         <CloseButton onClick={this.handleRemoveButton}>
           <Close size={16} />
@@ -25,8 +26,8 @@ export default class Tag extends PureComponent<TagProps> {
   }
 
   private handleRemoveButton = () => {
-    const { onRemove } = this.props;
-    if (onRemove) {
+    const { onRemove, disabled } = this.props;
+    if (onRemove && disabled === false) {
       onRemove();
     }
   };
