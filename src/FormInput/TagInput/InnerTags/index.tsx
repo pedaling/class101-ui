@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 
 import Tag from '../../../components/Tag';
 
@@ -8,7 +8,7 @@ interface Props {
   disabled: boolean;
 }
 
-export default class InnerTags extends React.PureComponent<Props> {
+export default class InnerTags extends PureComponent<Props> {
   public static readonly defaultProps: Partial<Props> = {
     value: [],
     disabled: false,
