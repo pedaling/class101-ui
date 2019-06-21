@@ -42,12 +42,8 @@ import React, { Component } from 'react';
 import { Button } from '@class101/ui';
 
 class Example extends Component {
-  render () {
-    return (
-      <Button>
-        Hello, world!
-      </Button>
-    )
+  render() {
+    return <Button>Hello, world!</Button>;
   }
 }
 ```
@@ -72,6 +68,7 @@ class Example extends Component {
 - Tabs
 - Navigation
 - Toast
+- TagInput
 
 These are at [Class101 UI Documents Site](https://class101-ui.netlify.com).
 
@@ -84,7 +81,6 @@ These are at [Class101 UI Documents Site](https://class101-ui.netlify.com).
 - DatePicker
 - Dialog
 - NavTab
-
 
 ## 📝 License
 

@@ -30,7 +30,7 @@ interface State {
 
 const TagInputContainer = styled.div`
   box-sizing: border-box;
-  padding: 16px;
+  padding: 8px 8px 3px;
   border: solid 1px ${gray300};
   margin-bottom: 8px;
   display: flex;
@@ -52,6 +52,9 @@ const TagInputContainer = styled.div`
   }
   .inner-tags__tag {
     margin-bottom: 5px;
+    &:last-child {
+      margin-right: 0 !important;
+    }
   }
 `;
 
@@ -59,9 +62,13 @@ const StyledInput = styled.input`
   ${body2};
   color: ${gray800};
   flex: 1 1 auto;
-  padding: 0 16px;
   background: transparent;
   border: none;
+  outline: none;
+  margin-bottom: 5px;
+  &:focus {
+    outline: none;
+  }
 `;
 
 export default class TagInput extends React.PureComponent<Props, State> {
