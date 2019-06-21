@@ -1,5 +1,5 @@
 import { HTMLInputProps } from 'interfaces/props';
-import React from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
 import { gray800, gray300, orange500, redError } from '../../Colors';
@@ -72,7 +72,7 @@ const StyledInput = styled.input`
   }
 `;
 
-export default class TagInput extends React.PureComponent<Props, State> {
+export default class TagInput extends PureComponent<Props, State> {
   public static readonly defaultProps: Partial<Props> = {
     value: [],
     separator: ',',
