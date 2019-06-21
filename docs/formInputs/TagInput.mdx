@@ -1,0 +1,41 @@
+---
+menu: Form Inputs
+name: TagInput
+route: /form-inputs/tag-input
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Component as TagInput } from './TagInput';
+
+# Textarea
+
+문자열을 입력받는 컴포넌트입니다.
+
+## Props
+
+<PropsTable of={TagInput} />
+
+## Basic Usage
+
+<Playground>
+  {() => {
+    class Example extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          value: ['01082210886', '343433']
+        };
+      }
+      handleChange(newValue) {
+        this.setState({ value: newValue })
+      }
+      render() {
+        return (
+          <TagInput separator={/[, ]/gm} value={this.state.value} onChange={(value) => this.handleChange(value)} allowMessage="Enter와 ','로 구분합니다."/>
+        );
+      }
+    }
+    return <Example />
+}}
+
+</Playground>
