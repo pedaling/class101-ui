@@ -10,6 +10,7 @@ import InnerTags from './InnerTags';
 interface Props {
   className?: string;
   style?: React.CSSProperties;
+  inputStyle?: React.CSSProperties;
   inputProps?: HTMLInputProps;
   allowMessage?: string;
   warnMessage?: string;
