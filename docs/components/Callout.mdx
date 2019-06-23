@@ -1,0 +1,101 @@
+---
+menu: Components
+name: Callout
+route: /components/callout
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Callout, CalloutStatus, Icon, Colors } from '@class101/ui';
+import { imageSrc } from './interface';
+
+# Callout
+
+## Props
+
+<PropsTable of={Callout} />
+
+## Basic usage
+
+<Playground>
+  <Callout title="공지사항">
+    설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다
+  </Callout>
+</Playground>
+
+## Status
+
+<Playground>
+  <Callout title="공지사항" status={CalloutStatus.DEFAULT}>
+    설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다
+  </Callout>
+  <br />
+  <Callout title="공지사항" status={CalloutStatus.SUGGEST}>
+    설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다
+  </Callout>
+  <br />
+  <Callout title="공지사항" status={CalloutStatus.WARNING}>
+    설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다
+  </Callout>
+</Playground>
+
+## Custom Icon
+
+<Playground>
+  <Callout title="공지사항" icon={<Icon.Project fillColor={Colors.red600} />}>
+    설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다
+  </Callout>
+</Playground>
+
+## Action
+
+```ts
+interface ActionProps {
+  content: string;
+  type?: string;
+  size?: 'lg' | 'md' | 'sm' | 'xs';
+  color?: string;
+  backgroundColor?: string;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
+  loading?: boolean;
+  borderRadius?: number;
+  to?: string;
+  href?: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => void;
+  disabled?: boolean;
+  target?: string;
+  fill?: boolean;
+  className?: string;
+}
+```
+
+<Playground>
+  <Callout
+    title="공지사항"
+    icon={<Icon.Project fillColor={Colors.red600} />}
+    action={{ content: '액션 버튼', onClick: () => window.alert('Clicked') }}
+  >
+    설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다
+  </Callout>
+</Playground>
+
+## Content
+
+<Playground>
+  <Callout title="공지사항">
+    <p>
+      설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가
+      들어가는 자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가 들어가는
+      자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다
+    </p>
+    <p>
+      설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가
+      들어가는 자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가 들어가는
+      자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다
+    </p>
+    <p>설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다</p>
+    <div style={{ borderRadius: '3px', overflow: 'hidden', height: '200px' }}>
+      <img src={imageSrc} style={{ display: 'block', objectFit: 'cover', height: '100%' }} />
+    </div>
+  </Callout>
+</Playground>
