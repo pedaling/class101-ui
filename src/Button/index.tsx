@@ -298,18 +298,24 @@ const buttonStyle = css<StyledContainerProps>`
     vertical-align: middle;
   }
 
-  &:hover {
+  &:hover,
+  &[hover] {
     opacity: 0.9;
     text-decoration: none;
   }
 
-  &:disabled {
+  &:disabled,
+  &[disabled] {
     cursor: not-allowed;
     color: ${gray200};
     background-color: ${gray000};
     path {
       fill: ${gray200};
     }
+  }
+
+  &[disabled] {
+    pointer-events: none;
   }
 `;
 
