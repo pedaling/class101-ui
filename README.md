@@ -69,6 +69,7 @@ class Example extends Component {
 - Navigation
 - Toast
 - TagInput
+- NavTab
 
 These are at [Class101 UI Documents Site](https://class101-ui.netlify.com).
 

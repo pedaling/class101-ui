@@ -1,0 +1,43 @@
+---
+menu: Components
+name: NavTab
+route: /components/navtab
+---
+
+import { Playground, PropsTable } from 'docz';
+import { NavTabContainer, NavTabHeading, NavTabGroup, NavTab, Badge } from '@class101/ui';
+
+# NavTab
+
+네비게이션 + 탭 역할을 합니다
+
+## Basic usage
+
+<Playground>
+  <NavTabContainer>
+    <NavTabGroup>
+      <NavTabHeading>발송 관리</NavTabHeading>
+      <NavTab active>
+        결제 완료
+        <Badge size="sm" pill>
+          12
+        </Badge>
+      </NavTab>
+      <NavTab>
+        상품 준비중
+        <Badge size="sm" pill>
+          9
+        </Badge>
+      </NavTab>
+      <NavTab>배송 중</NavTab>
+      <NavTab>배송 완료</NavTab>
+    </NavTabGroup>
+    <NavTabGroup>
+      <NavTabHeading>반품/취소 관리</NavTabHeading>
+      <NavTab>반품 요청됨</NavTab>
+      <NavTab>반품 완료</NavTab>
+      <NavTab />
+      <NavTab />
+    </NavTabGroup>
+  </NavTabContainer>
+</Playground>
