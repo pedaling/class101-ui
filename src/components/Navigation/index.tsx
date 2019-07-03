@@ -32,6 +32,7 @@ interface Props {
   pathname?: string;
   className?: string;
   divAttributes?: HTMLDivProps;
+  onClickLink?: (url: string) => any;
 }
 
 const Divider = styled.hr`
@@ -48,12 +49,13 @@ export default class Navigation extends React.PureComponent<Props> {
   };
 
   public render() {
-    const { children, pathname, divAttributes, className } = this.props;
+    const { children, pathname, divAttributes, className, onClickLink } = this.props;
+
     return (
       <Container {...divAttributes} className={className}>
         {React.Children.map(
           children,
-          child => child && React.cloneElement(child as React.ReactElement<any>, { pathname })
+          child => child && React.cloneElement(child as React.ReactElement<any>, { pathname, onClickLink })
         )}
       </Container>
     );

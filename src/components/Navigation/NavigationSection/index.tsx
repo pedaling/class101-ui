@@ -17,6 +17,7 @@ export interface NavigationSectionProps {
 
 interface InjectedProps extends NavigationSectionProps {
   pathname: string;
+  onClickLink?: (url: string) => any;
 }
 
 interface State {
@@ -101,7 +102,11 @@ export class NavigationSection extends React.PureComponent<InjectedProps, State>
     return (
       <SectionItemContainer key={index} onClick={item.onClick}>
         {item.url ? (
-          <SectionLink to={item.url} active={NavigationSection.isActiveLocation(pathname, item)}>
+          <SectionLink
+            to={item.url}
+            onClick={this.handleOnClickLink(item.url)}
+            active={NavigationSection.isActiveLocation(pathname, item)}
+          >
             {Element}
           </SectionLink>
         ) : (
@@ -118,7 +123,12 @@ export class NavigationSection extends React.PureComponent<InjectedProps, State>
     const { pathname } = this.props;
 
     return (
-      <SectionLink to={item.url} key={index} active={NavigationSection.isActiveLocation(pathname, item)}>
+      <SectionLink
+        key={index}
+        to={item.url}
+        onClick={this.handleOnClickLink(item.url)}
+        active={NavigationSection.isActiveLocation(pathname, item)}
+      >
         <SectionText>{item.label}</SectionText>
         {this.renderAddonComponent(item.badge)}
       </SectionLink>
@@ -136,6 +146,14 @@ export class NavigationSection extends React.PureComponent<InjectedProps, State>
     this.setState({
       openedSectionIndices: nextOpenedSectionIndices,
     });
+  };
+
+  private handleOnClickLink = (url: string) => () => {
+    const { onClickLink } = this.props;
+
+    if (onClickLink) {
+      onClickLink(url);
+    }
   };
 }
 
