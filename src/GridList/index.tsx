@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { media } from '../BreakPoints';
 import { HTMLDivProps } from '../interfaces/props';
+import generateID from '../utils/generateID';
 
 const sizeToPercent = (column?: number) => 100 / (column || 1);
 type Column = 1 | 2 | 3 | 4 | 6 | 12;
@@ -23,7 +24,7 @@ export default class GridList extends PureComponent<Props> {
       <Container className={className} {...divAttributes}>
         <GridListUl smColumn={smColumn}>
           {items.map((item, index, arr) => (
-            <GridListItem key={index} smColumn={smColumn} lgColumn={lgColumn}>
+            <GridListItem key={generateID('grid-list-')} smColumn={smColumn} lgColumn={lgColumn}>
               {renderItem(item, index, arr)}
             </GridListItem>
           ))}
