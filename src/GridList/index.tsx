@@ -23,7 +23,7 @@ export default class GridList extends PureComponent<Props> {
       <Container className={className} {...divAttributes}>
         <GridListUl smColumn={smColumn}>
           {items.map((item, index, arr) => (
-            <GridListItem key={item.id} smColumn={smColumn} lgColumn={lgColumn}>
+            <GridListItem key={index} smColumn={smColumn} lgColumn={lgColumn}>
               {renderItem(item, index, arr)}
             </GridListItem>
           ))}
