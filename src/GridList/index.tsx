@@ -3,9 +3,11 @@ import styled from 'styled-components';
 
 import { media } from '../BreakPoints';
 import { HTMLDivProps } from '../interfaces/props';
-import generateID from '../utils/generateID';
+import createUniqIDGenerator from '../utils/createUniqIDGenerator';
 
 const sizeToPercent = (column?: number) => 100 / (column || 1);
+const generateID = createUniqIDGenerator('grid-list-');
+
 type Column = 1 | 2 | 3 | 4 | 6 | 12;
 interface Props {
   items: any[];
@@ -24,7 +26,7 @@ export default class GridList extends PureComponent<Props> {
       <Container className={className} {...divAttributes}>
         <GridListUl smColumn={smColumn}>
           {items.map((item, index, arr) => (
-            <GridListItem key={generateID('grid-list-')} smColumn={smColumn} lgColumn={lgColumn}>
+            <GridListItem key={generateID()} smColumn={smColumn} lgColumn={lgColumn}>
               {renderItem(item, index, arr)}
             </GridListItem>
           ))}
