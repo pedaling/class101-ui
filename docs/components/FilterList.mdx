@@ -1,0 +1,43 @@
+---
+menu: Components
+name: FilterList
+route: /components/FilterList
+---
+
+import { Playground, PropsTable } from 'docz';
+import { FilterListContainer, FilterListHeading, FilterListGroup, FilterList, Badge } from '@class101/ui';
+
+# FilterList
+
+하단 컨텐츠를 필터링하는 메뉴로 사용되는 컴포넌트입니다.
+
+## Basic usage
+
+<Playground>
+  <FilterListContainer>
+    <FilterListGroup>
+      <FilterListHeading>발송 관리</FilterListHeading>
+      <FilterList active>
+        결제 완료
+        <Badge size="sm" pill>
+          12
+        </Badge>
+      </FilterList>
+      <FilterList>
+        상품 준비중
+        <Badge size="sm" pill>
+          9
+        </Badge>
+      </FilterList>
+      <FilterList>배송 중</FilterList>
+      <FilterList>배송 완료</FilterList>
+    </FilterListGroup>
+    <FilterListGroup>
+      <FilterListHeading>반품/취소 관리</FilterListHeading>
+      <FilterList>반품 요청됨</FilterList>
+      <FilterList>반품 완료</FilterList>
+      <FilterList />
+      <FilterList />
+    </FilterListGroup>
+  </FilterListContainer>
+</Playground>
