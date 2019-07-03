@@ -69,6 +69,7 @@ class Example extends Component {
 - Navigation
 - Toast
 - TagInput
+- FilterList
 
 These are at [Class101 UI Documents Site](https://class101-ui.netlify.com).
 
@@ -80,7 +81,6 @@ These are at [Class101 UI Documents Site](https://class101-ui.netlify.com).
 - Table
 - DatePicker
 - Dialog
-- NavTab
 
 ## 📝 License
 
