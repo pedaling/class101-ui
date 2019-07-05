@@ -1,9 +1,9 @@
 <p><a href="https://class101-ui.netlify.com" target="_blank" rel="noopener noreferrer"><img width="128" src="https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/logo-class101.png" alt="C"></a></p>
 
 <p>
-  <a href="https://www.npmjs.com/package/class101-ui">
+  <a href="https://www.npmjs.com/package/@class101/ui">
     <img
-      src="https://img.shields.io/npm/v/class101-ui.svg"
+      src="https://img.shields.io/npm/v/@class101/ui.svg"
       alt="npm"
     >
   </a>
