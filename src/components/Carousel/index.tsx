@@ -1,10 +1,9 @@
-import { isEqual } from 'lodash-es';
 import React, { PureComponent } from 'react';
-import Swiper, { ReactIdSwiperProps, SwiperInstance } from 'react-id-swiper';
-import { SwiperModules } from 'react-id-swiper/lib/types';
+import ReactIdSwiper from 'react-id-swiper/lib/ReactIdSwiper.custom';
+import { ReactIdSwiperCustomProps, SwiperInstance, SwiperModules } from 'react-id-swiper/lib/types';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 import { AutoplayOptions, PaginationOptions, SwiperEvent } from 'swiper';
-import { Autoplay, Lazy, LazyOptions, Pagination } from 'swiper/dist/js/swiper.esm';
+import { Autoplay, Lazy, LazyOptions, Pagination, Swiper } from 'swiper/dist/js/swiper.esm';
 
 import { media, SIZES } from '../../BreakPoints';
 import { gray700, white } from '../../Colors';
@@ -40,7 +39,9 @@ export interface CarouselProps {
 }
 
 const DEFAULT_PARAMS = {
+  Swiper,
   threshold: 10,
+  modules: [],
 };
 
 const DEFAULT_PAGINATION_PARAMS: { [key in string]: PaginationOptions } = {
@@ -77,12 +78,6 @@ export default class Carousel extends PureComponent<CarouselProps, State> {
 
   private swiper: SwiperInstance = null;
 
-  public componentDidUpdate(prevProps: Readonly<CarouselProps>) {
-    if (this.props.shouldSwiperUpdate && this.shouldSwiperUpdate(prevProps) && this.swiper) {
-      this.swiper.update();
-    }
-  }
-
   public render() {
     const {
       children,
@@ -112,9 +107,9 @@ export default class Carousel extends PureComponent<CarouselProps, State> {
               lgSlidesSideOffset={lgSlidesSideOffset}
               smSlidesSideOffset={smSlidesSideOffset}
             >
-              <Swiper {...swiperParams} getSwiper={this.getSwiper}>
+              <ReactIdSwiper {...swiperParams} getSwiper={this.getSwiper}>
                 {children}
-              </Swiper>
+              </ReactIdSwiper>
             </SwiperWrapper>
           )}
           {navigation && !shouldHideNavigation && (
@@ -131,25 +126,6 @@ export default class Carousel extends PureComponent<CarouselProps, State> {
       </Container>
     );
   }
-
-  private shouldSwiperUpdate = (prevProps: Readonly<CarouselProps>) => {
-    const prevKeys = this.getKeysFromChildren(prevProps.children);
-    const currentKeys = this.getKeysFromChildren(this.props.children);
-    return !isEqual(prevKeys, currentKeys);
-  };
-
-  private getKeysFromChildren = (children?: React.ReactNode) => {
-    if (children === undefined || children === null) {
-      return [];
-    }
-
-    return React.Children.map(children, child => {
-      if (!React.isValidElement(child)) {
-        return undefined;
-      }
-      return child.key;
-    });
-  };
 
   private getSwiper = (swiper: SwiperInstance) => {
     this.swiper = swiper;
@@ -187,7 +163,7 @@ export default class Carousel extends PureComponent<CarouselProps, State> {
     });
   };
 
-  private getSwiperParams = (): Partial<ReactIdSwiperProps> => {
+  private getSwiperParams = (): ReactIdSwiperCustomProps => {
     const {
       pagination,
       lgSlidesPerView,
@@ -201,7 +177,7 @@ export default class Carousel extends PureComponent<CarouselProps, State> {
       freeMode,
       shouldSwiperUpdate,
     } = this.props;
-    let params: Partial<ReactIdSwiperProps> = {
+    let params: ReactIdSwiperCustomProps = {
       ...DEFAULT_PARAMS,
       shouldSwiperUpdate,
       loop,
@@ -218,7 +194,6 @@ export default class Carousel extends PureComponent<CarouselProps, State> {
           spaceBetween: smSpaceBetween || (typeof smSlidesPerView !== 'number' || smSlidesPerView !== 1) ? 16 : 0,
         },
       },
-      modules: [],
     };
     if (autoplay) {
       params = {
