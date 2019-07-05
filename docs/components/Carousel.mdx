@@ -220,7 +220,13 @@ slidesPerView 값이 1일 경우 기본적으로 spaceBetween 값은 0입니다.
 ## Lazy
 
 <Playground>
-  <Carousel navigationPosition={CarouselNavigationPosition.TopRightOut} lgSlidesPerView={4} lazy pagination>
+  <Carousel
+    navigationPosition={CarouselNavigationPosition.TopRightOut}
+    lgSlidesPerView={4}
+    smSlidesPerView={2}
+    lazy
+    pagination
+  >
     <SwiperCard>
       <img data-src={imageSrc} className="swiper-lazy" />
       <PreloadImage className="swiper-lazy-preloader" />
@@ -258,4 +264,37 @@ slidesPerView 값이 1일 경우 기본적으로 spaceBetween 값은 0입니다.
       <PreloadImage className="swiper-lazy-preloader" />
     </SwiperCard>
   </Carousel>
+</Playground>
+
+## External operation
+
+`onChangeSlides`과 `activeSlideIndex`로 외부에서 캐러셀을 조작할 수 있습니다.
+
+<Playground>
+  {() => {
+    class Example extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { currentIndex: 0 };
+      }
+      render() {
+        return (
+          <div>
+            <Carousel onChangeSlides={(index) => this.setState({ currentIndex: index})} activeSlideIndex={this.state.currentIndex}>
+              <PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner>
+              <PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner>
+              <PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner>
+            </Carousel>
+            <div>
+              <button onClick={() => this.setState({ currentIndex: 0 })}>1 {this.state.currentIndex === 0 && 'active!!'}</button>
+              <button onClick={() => this.setState({ currentIndex: 1 })}>2 {this.state.currentIndex === 1 && 'active!!'}</button>
+              <button onClick={() => this.setState({ currentIndex: 2 })}>3 {this.state.currentIndex === 2 && 'active!!'}</button>
+            </div>
+          </div>
+        )
+      }
+    }
+    return <Example/>;
+  }}
+
 </Playground>

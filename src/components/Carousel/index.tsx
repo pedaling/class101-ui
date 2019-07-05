@@ -36,6 +36,8 @@ export interface CarouselProps {
   shouldSwiperUpdate: boolean;
   className?: string;
   children: React.ReactNode;
+  onChangeSlides?: (index: number) => void;
+  activeSlideIndex?: number;
 }
 
 const DEFAULT_PARAMS = {
@@ -71,12 +73,20 @@ export default class Carousel extends PureComponent<CarouselProps, State> {
     freeMode: true,
     loop: false,
   };
+
   public readonly state = {
     isBeginning: true,
     isEnd: false,
   };
 
   private swiper: SwiperInstance = null;
+
+  public componentDidUpdate(prevProps: CarouselProps) {
+    const { activeSlideIndex } = this.props;
+    if (activeSlideIndex !== undefined && activeSlideIndex !== prevProps.activeSlideIndex) {
+      this.goToSlides(activeSlideIndex);
+    }
+  }
 
   public render() {
     const {
@@ -143,6 +153,19 @@ export default class Carousel extends PureComponent<CarouselProps, State> {
     }
   };
 
+  private goToSlides = (index: number) => {
+    if (this.swiper) {
+      this.swiper.slideTo(index);
+    }
+  };
+
+  private onChange = () => {
+    const { onChangeSlides } = this.props;
+    if (this.swiper && onChangeSlides) {
+      onChangeSlides(this.swiper.activeIndex);
+    }
+  };
+
   private progress = () => {
     if (!this.swiper) return;
     if (this.props.loop) {
@@ -185,6 +208,7 @@ export default class Carousel extends PureComponent<CarouselProps, State> {
       on: {
         ...on,
         progress: this.progress,
+        slideChange: this.onChange,
       },
       slidesPerView: lgSlidesPerView,
       spaceBetween: lgSpaceBetween || (typeof lgSlidesPerView !== 'number' || lgSlidesPerView !== 1) ? 24 : 0,
