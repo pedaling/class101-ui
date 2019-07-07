@@ -1,6 +1,6 @@
 {
   "name": "@class101/ui",
-  "version": "7.0.0-rc12",
+  "version": "7.0.0-rc13",
   "description": "A React-based UI Component Library, powered by Class101.",
   "author": "Class101 Co, LTD.",
   "license": "MIT",
@@ -48,7 +48,9 @@
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-router-dom": "^4.3.1",
-    "styled-components": "4.2.0"
+    "styled-components": "4.2.0",
+    "react-id-swiper": "2.1.2",
+    "swiper": "4.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -93,7 +95,9 @@
     "semantic-release": "^15.13.1",
     "styled-components": "4.2.0",
     "tslib": "^1.9.3",
-    "tslint": "^5.12.0"
+    "tslint": "^5.12.0",
+    "react-id-swiper": "2.1.2",
+    "swiper": "4.5.0"
   },
   "files": [
     "dist"
@@ -101,8 +105,6 @@
   "dependencies": {
     "lodash-es": "^4.17.11",
     "path-to-regexp": "^3.0.0",
-    "react-id-swiper": "^2.1.2",
-    "swiper": "^4.5.0",
     "typescript": "3.1.6"
   },
   "bugs": {

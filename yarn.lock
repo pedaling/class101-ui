@@ -12621,7 +12621,7 @@ react-hot-loader@^4.6.0, react-hot-loader@^4.6.3:
     shallowequal "^1.0.2"
     source-map "^0.7.3"
 
-react-id-swiper@^2.1.2:
+react-id-swiper@2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/react-id-swiper/-/react-id-swiper-2.1.2.tgz#57dfb0e8b8703dfe544ea5af94b74663822a2b63"
   integrity sha512-7VLfDUNsY3Mb3lYtltiuyWHb/BMF8YH8+JotpHNuoORFqaj2FER82xHPQdb90HyJ+I3+wL1443suyE2KdAC6aw==
