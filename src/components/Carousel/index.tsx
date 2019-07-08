@@ -83,7 +83,12 @@ export default class Carousel extends PureComponent<CarouselProps, State> {
 
   public componentDidUpdate(prevProps: CarouselProps) {
     const { activeSlideIndex } = this.props;
-    if (activeSlideIndex !== undefined && activeSlideIndex !== prevProps.activeSlideIndex) {
+    if (
+      activeSlideIndex !== undefined &&
+      activeSlideIndex !== prevProps.activeSlideIndex &&
+      this.swiper &&
+      activeSlideIndex !== this.swiper.realIndex
+    ) {
       this.goToSlides(activeSlideIndex);
     }
   }
@@ -155,6 +160,9 @@ export default class Carousel extends PureComponent<CarouselProps, State> {
 
   private goToSlides = (index: number) => {
     if (this.swiper) {
+      if (this.props.loop) {
+        return this.swiper.slideToLoop(index);
+      }
       this.swiper.slideTo(index);
     }
   };
@@ -162,7 +170,7 @@ export default class Carousel extends PureComponent<CarouselProps, State> {
   private onChange = () => {
     const { onChangeSlides } = this.props;
     if (this.swiper && onChangeSlides) {
-      onChangeSlides(this.swiper.activeIndex);
+      onChangeSlides(this.swiper.realIndex);
     }
   };
 

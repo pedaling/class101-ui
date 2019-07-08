@@ -298,3 +298,36 @@ slidesPerView 값이 1일 경우 기본적으로 spaceBetween 값은 0입니다.
   }}
 
 </Playground>
+
+loop 모드
+
+<Playground>
+  {() => {
+    class Example extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { 
+          currentIndex: 0, 
+        };
+      }
+      render() {
+        return (
+          <div>
+            <Carousel onChangeSlides={(index) => this.setState({ currentIndex: index })} activeSlideIndex={this.state.currentIndex} loop>
+              <PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner>
+              <PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner>
+              <PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner>
+            </Carousel>
+            <div>
+              <button onClick={() => this.setState({ currentIndex: 0 })}>1 {this.state.currentIndex === 0 && 'active!!'}</button>
+              <button onClick={() => this.setState({ currentIndex: 1 })}>2 {this.state.currentIndex === 1 && 'active!!'}</button>
+              <button onClick={() => this.setState({ currentIndex: 2 })}>3 {this.state.currentIndex === 2 && 'active!!'}</button>
+            </div>
+          </div>
+        )
+      }
+    }
+    return <Example/>;
+  }}
+
+</Playground>
