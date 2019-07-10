@@ -1,10 +1,10 @@
-import { isEqual, pick } from 'lodash';
+import { isEqual, pick } from 'lodash-es';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
-import RadioButton, { RadioButtonProps } from './RadioButton';
+import RadioButton, { RadioButtonProps, RadioButtonContainerProps } from './RadioButton';
 
-interface Props {
+interface Props extends RadioButtonContainerProps {
   children: React.ComponentElement<RadioButtonProps, RadioButton>;
   onChange: (value: string) => any;
   className?: string;
@@ -57,10 +57,19 @@ export class RadioButtonGroup extends PureComponent<Props, State> {
   };
 
   private renderChild = (child: React.ComponentElement<RadioButtonProps, RadioButton>, index: number) => {
-    const { stackingDirection, children, ...restProps } = this.props;
+    const { stackingDirection, children, onChange, ...restProps } = this.props;
     const { checkedIndex } = this.state;
 
     const checked = index === checkedIndex;
+
+    const injectProps = pick<RadioButtonContainerProps>(
+      restProps,
+      'textAlign',
+      'showDivider',
+      'showBorder',
+      'color',
+      'size'
+    );
 
     return React.cloneElement(child, {
       ...child.props,
@@ -69,7 +78,7 @@ export class RadioButtonGroup extends PureComponent<Props, State> {
       stackingDirection,
       key: index,
       onClick: this.handleClickItem,
-      ...pick(restProps, 'textAlign', 'showDivider', 'showBorder', 'color', 'size'),
+      ...injectProps,
     });
   };
 }

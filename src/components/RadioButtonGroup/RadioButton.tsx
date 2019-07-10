@@ -88,7 +88,7 @@ export const RadioButtonText = styled.div<{ checked?: boolean; color?: string }>
     `};
 `;
 
-interface RadioButtonContainerProps {
+export interface RadioButtonContainerProps {
   stackingDirection?: 'horizontal' | 'vertical';
   showBorder?: boolean;
   showDivider?: boolean;
