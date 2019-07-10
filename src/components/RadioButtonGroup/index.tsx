@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import RadioButton, { RadioButtonProps, RadioButtonContainerProps } from './RadioButton';
 
 interface Props extends RadioButtonContainerProps {
-  children: React.ComponentElement<RadioButtonProps, RadioButton>;
+  children: JSX.Element[];
   onChange: (value: string) => any;
   className?: string;
   value: string;
