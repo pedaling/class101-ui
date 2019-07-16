@@ -1,0 +1,42 @@
+---
+menu: Components
+name: ButtonGroup
+route: /components/button-group
+---
+
+import { Playground, PropsTable } from 'docz';
+import { ButtonGroup, Button } from '@class101/ui';
+
+# ButtonGroup
+
+Button 컴포넌트를 가로나 세로로 묶을 때 사용합니다.
+
+## Props
+
+<PropsTable of={ButtonGroup} />
+
+## Basic usage
+
+<Playground>
+  <ButtonGroup>
+    <Button>Click me</Button>
+    <Button>Click me</Button>
+    <Button>Click me</Button>
+  </ButtonGroup>
+</Playground>
+
+<Playground>
+  <ButtonGroup fill>
+    <Button>Click me</Button>
+    <Button>Click me</Button>
+    <Button>Click me</Button>
+  </ButtonGroup>
+</Playground>
+
+<Playground>
+  <ButtonGroup vertical>
+    <Button>Click me</Button>
+    <Button>Click me</Button>
+    <Button>Click me</Button>
+  </ButtonGroup>
+</Playground>
