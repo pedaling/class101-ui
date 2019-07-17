@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
-import Button, { ButtonProps } from '../../Button';
 import { gray000, gray800, green500, orange600, white } from '../../Colors';
 import { Alert, CheckCircle, Info } from '../../Icon';
 import { body2, caption1 } from '../../TextStyles';
+import Button, { ButtonProps } from '../Button';
 
 export enum CalloutStatus {
   DEFAULT,

@@ -1,7 +1,7 @@
 import * as BreakPoints from './BreakPoints';
 import * as Colors from './Colors';
 import * as ElevationStyles from './ElevationStyles';
-import { InlineError, Input, Intent, Select, Textarea, TagInput } from './FormInput';
+import { InlineError, Input, Intent, Select, TagInput, Textarea } from './FormInput';
 import * as Icon from './Icon';
 import { Position } from './Position';
 import * as TextStyles from './TextStyles';
@@ -16,7 +16,6 @@ export { default as Card } from './Card';
 export { default as Spinner } from './Spinner';
 export { default as ProgressBar } from './ProgressBar';
 export { default as ProgressState } from './ProgressState';
-export { default as Button } from './Button';
 
 export { default as BottomSheet } from './BottomSheet';
 export { default as Badge } from './Badge';

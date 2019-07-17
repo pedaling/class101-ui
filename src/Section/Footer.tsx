@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Button from '../Button';
 import { gray200, gray600, white } from '../Colors';
+import Button from '../components/Button';
 
 interface Props {
   buttonTitle: string;
