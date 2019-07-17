@@ -23,15 +23,21 @@ import { TagInput } from '@class101/ui';
       constructor(props) {
         super(props);
         this.state = {
-          value: ['01082210886', '343433']
+          value: ['01082210886','01082230886', '01082210886', '01082210886','01082210886','01082210886', '01082210886', '01082210886','01082210886','01082210886', '01082210886', '01082210886','01082210886','01082210886', '01082210886', '01082210886']
         };
       }
       handleChange(newValue) {
         this.setState({ value: newValue })
       }
+      handleSubmit(e) {
+        console.log(e)
+        e.preventDefault();
+      }
       render() {
         return (
-          <TagInput separator={/[, ]/gm} value={this.state.value} onChange={(value) => this.handleChange(value)} allowMessage="Enter와 ','로 구분합니다."/>
+          <form onSubmit={this.handleSubmit}>
+            <TagInput separator={/[, ]/gm} value={this.state.value} onChange={(value) => this.handleChange(value)} allowMessage="Enter와 ','로 구분합니다."/>
+          </form>
         );
       }
     }

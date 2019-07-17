@@ -25,11 +25,12 @@ export default class Tag extends PureComponent<TagProps> {
     );
   }
 
-  private handleRemoveButton = () => {
+  private handleRemoveButton = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const { onRemove, disabled } = this.props;
     if (onRemove && disabled === false) {
       onRemove();
     }
+    e.preventDefault();
   };
 }
 
