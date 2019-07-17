@@ -1,10 +1,13 @@
 import { BreakPoints, Colors, ThemeConfig, ThemeMode } from '@class101/ui';
-import React from 'react';
 import styled from 'styled-components';
 
 export const PlayGroundContainer = styled.div<{ theme: ThemeConfig }>`
   padding: 20px;
-  background-color: ${props => (props.theme.mode === ThemeMode.dark ? Colors.gray900 : Colors.white)};
+  background-color: ${props => (props.theme.mode === ThemeMode.DARK ? Colors.gray900 : Colors.white)};
+  > button,
+  > a {
+    margin: 4px;
+  }
 `;
 
 export const PlayGroundBanner = styled.div<{ backgroundColor?: string; fill?: boolean }>`

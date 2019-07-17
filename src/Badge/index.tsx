@@ -53,6 +53,7 @@ const containerStyle = (size: Size = 'md', pill: boolean = false) => {
 
 const Container = styled.div<BadgeTextProps>`
   ${props => containerStyle(props.size, props.pill)};
+  flex: none;
   display: inline-flex;
   justify-content: center;
   align-items: center;

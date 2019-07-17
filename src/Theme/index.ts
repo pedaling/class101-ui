@@ -1,19 +1,19 @@
 export enum ThemeMode {
-  dark = 'dark',
-  light = 'light',
+  DARK = 'DARK',
+  LIGHT = 'LIGHT',
 }
-
-const dark = {
-  mode: ThemeMode.dark,
-};
-
-const light = {
-  mode: ThemeMode.light,
-};
 
 export interface ThemeConfig {
   mode: ThemeMode;
 }
+
+const dark: ThemeConfig = {
+  mode: ThemeMode.DARK,
+};
+
+const light: ThemeConfig = {
+  mode: ThemeMode.LIGHT,
+};
 
 export default {
   dark,

@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Button, { ButtonProps } from '../../../Button';
 import { orange50, orange600 } from '../../../Colors';
 import { Add } from '../../../Icon';
 import { body2 } from '../../../TextStyles';
+import Button, { ButtonProps } from '../../Button';
 
 export default class ViewAllButton extends React.PureComponent<ButtonProps> {
   public render() {

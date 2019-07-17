@@ -5,7 +5,8 @@ route: /components/button
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Icon, Colors, Button } from '@class101/ui';
+import { Icon, Colors, Button, ButtonVariant, ButtonSize, Theme } from '@class101/ui';
+import { PlayGroundContainer } from '../HelpComponents';
 
 # Button
 
@@ -16,6 +17,7 @@ import { Icon, Colors, Button } from '@class101/ui';
 > - v4부터 Icon 컴포넌트와 함께 사용할 수 있도록 flex 기반의 스타일링을 지원하고 있습니다.
 > - v4부터 textAlign 프로퍼티는 지원하지 않습니다.
 > - v6부터 src를 지원하지 않습니다. 버튼의 아이콘은 Icon 컴포넌트를 사용해주세요.
+> - v7부터 color, backgroundColor는 지원하지 않을 예정입니다.
 
 ## Props
 
@@ -27,55 +29,152 @@ import { Icon, Colors, Button } from '@class101/ui';
   <Button>Click me</Button>
 </Playground>
 
-## With different sizes
+## With variant / theme
+
+```ts
+export enum ButtonVariant {
+  DEFAULT = 'DEFAULT',
+  ORANGE = 'ORANGE',
+  ORANGE_LIGHT = 'ORANGE_LIGHT',
+  RED = 'RED',
+  RED_LIGHT = 'RED_LIGHT',
+}
+```
 
 <Playground>
-  <Button size="lg">Click me</Button>
-  <Button size="md">Click me</Button>
-  <Button size="sm">Click me</Button>
-  <Button size="xs">Click me</Button>
+  <PlayGroundContainer>
+    <Button>Click me</Button>
+    <Button leftIcon={<Icon.Add />}>Click me</Button>
+    <Button disabled>Click me</Button>
+    <Button leftIcon={<Icon.Add />} disabled>
+      Click me
+    </Button>
+    <Button loading>Click me</Button>
+  </PlayGroundContainer>
+  <PlayGroundContainer theme={Theme.dark}>
+    <Button theme={Theme.dark}>Click me</Button>
+    <Button theme={Theme.dark} leftIcon={<Icon.Add />}>
+      Click me
+    </Button>
+    <Button theme={Theme.dark} disabled>
+      Click me
+    </Button>
+    <Button theme={Theme.dark} leftIcon={<Icon.Add />} disabled>
+      Click me
+    </Button>
+    <Button theme={Theme.dark} loading>
+      Click me
+    </Button>
+  </PlayGroundContainer>
+  <PlayGroundContainer>
+    <Button variant={ButtonVariant.ORANGE}>Click me</Button>
+    <Button variant={ButtonVariant.ORANGE} leftIcon={<Icon.Add />}>
+      Click me
+    </Button>
+    <Button variant={ButtonVariant.ORANGE} disabled>
+      Click me
+    </Button>
+    <Button variant={ButtonVariant.ORANGE} leftIcon={<Icon.Add />} disabled>
+      Click me
+    </Button>
+    <Button variant={ButtonVariant.ORANGE} loading>
+      Click me
+    </Button>
+  </PlayGroundContainer>
+  <PlayGroundContainer>
+    <Button variant={ButtonVariant.ORANGE_LIGHT}>Click me</Button>
+    <Button variant={ButtonVariant.ORANGE_LIGHT} leftIcon={<Icon.Add />}>
+      Click me
+    </Button>
+    <Button variant={ButtonVariant.ORANGE_LIGHT} disabled>
+      Click me
+    </Button>
+    <Button variant={ButtonVariant.ORANGE_LIGHT} leftIcon={<Icon.Add />} disabled>
+      Click me
+    </Button>
+    <Button variant={ButtonVariant.ORANGE_LIGHT} loading>
+      Click me
+    </Button>
+  </PlayGroundContainer>
+  <PlayGroundContainer>
+    <Button variant={ButtonVariant.RED}>Click me</Button>
+    <Button variant={ButtonVariant.RED} leftIcon={<Icon.Add />}>
+      Click me
+    </Button>
+    <Button variant={ButtonVariant.RED} disabled>
+      Click me
+    </Button>
+    <Button variant={ButtonVariant.RED} leftIcon={<Icon.Add />} disabled>
+      Click me
+    </Button>
+    <Button variant={ButtonVariant.RED} loading>
+      Click me
+    </Button>
+  </PlayGroundContainer>
+  <PlayGroundContainer>
+    <Button variant={ButtonVariant.RED_LIGHT}>Click me</Button>
+    <Button variant={ButtonVariant.RED_LIGHT} leftIcon={<Icon.Add />}>
+      Click me
+    </Button>
+    <Button variant={ButtonVariant.RED_LIGHT} disabled>
+      Click me
+    </Button>
+    <Button variant={ButtonVariant.RED_LIGHT} leftIcon={<Icon.Add />} disabled>
+      Click me
+    </Button>
+    <Button variant={ButtonVariant.RED_LIGHT} loading>
+      Click me
+    </Button>
+  </PlayGroundContainer>
 </Playground>
 
-## With different colors
+## With different sizes
+
+```ts
+export enum ButtonSize {
+  LARGE = 'lg',
+  MEDIUM = 'md',
+  SMALL = 'sm',
+  XSMALL = 'xs',
+}
+```
 
 <Playground>
-  <Button color="black" backgroundColor="pink">
-    BLACKPINK
-  </Button>
-  <Button color="pink" backgroundColor="black">
-    BLACKPINK
-  </Button>
+  <PlayGroundContainer>
+    <Button size={ButtonSize.LARGE}>Click me</Button>
+    <Button size={ButtonSize.MEDIUM}>Click me</Button>
+    <Button size={ButtonSize.SMALL}>Click me</Button>
+    <Button size={ButtonSize.XSMALL}>Click me</Button>
+  </PlayGroundContainer>
 </Playground>
 
 ## With different icons
 
 <Playground>
-  <Button leftIcon={<Icon.Add fillColor={Colors.white} />}>Click me</Button>
-  <Button rightIcon={<Icon.Add fillColor={Colors.white} />}>Click me</Button>
-  <Button>
-    <Icon.Add fillColor={Colors.white} size={16} />
-    <span style={{ marginLeft: '4px' }}>Click me</span>
-  </Button>
-  <Button>
-    <span style={{ marginRight: '4px' }}>Click me</span>
-    <Icon.Add fillColor={Colors.white} size={16} />
-  </Button>
+  <PlayGroundContainer>
+    <Button leftIcon={<Icon.Add />}>Click me</Button>
+    <Button rightIcon={<Icon.Add />}>Click me</Button>
+  </PlayGroundContainer>
 </Playground>
 
 ## With fill
 
 <Playground>
-  <Button>Click me</Button>
-  <Button fill>Click me</Button>
+  <PlayGroundContainer>
+    <Button>Click me</Button>
+    <Button fill>Click me</Button>
+  </PlayGroundContainer>
 </Playground>
 
 ## Disabled button
 
 <Playground>
-  <Button disabled>Click me</Button>
-  <Button rightIcon={<Icon.Heart fillColor={Colors.red600} />} disabled>
-    Click me
-  </Button>
+  <PlayGroundContainer>
+    <Button disabled>Click me</Button>
+    <Button rightIcon={<Icon.Heart />} disabled>
+      Click me
+    </Button>
+  </PlayGroundContainer>
 </Playground>
 
 ## Loading button
@@ -89,10 +188,20 @@ import { Icon, Colors, Button } from '@class101/ui';
 버튼과 똑같이 생겼지만 HTML a 태그로 구성되어 있습니다.
 
 <Playground>
-  <Button href="/" target="_blank">
-    Native A Tag
-  </Button>
-  <Button to="/" target="_blank" disabled>
-    Link of React Router Dom
-  </Button>
+  <PlayGroundContainer>
+    <Button href="/" target="_blank">
+      Native A Tag
+    </Button>
+    <Button to="/" target="_blank">
+      Link of React Router Dom
+    </Button>
+  </PlayGroundContainer>
+  <PlayGroundContainer>
+    <Button href="/" target="_blank" disabled>
+      Native A Tag
+    </Button>
+    <Button to="/" target="_blank" disabled>
+      Link of React Router Dom
+    </Button>
+  </PlayGroundContainer>
 </Playground>
