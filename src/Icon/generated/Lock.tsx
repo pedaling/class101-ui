@@ -8,7 +8,7 @@ export default class SvgLock extends React.PureComponent<IconProps> {
   };
 
   public render() {
-    return <svg width={this.props.size} height={this.props.size} style={this.props.style} className={this.props.className} viewBox="0 0 24 24"><path fill={this.props.fillColor} fillRule="evenodd" d="M6 10V7a6 6 0 1 1 12 0v3h1c.667 0 1 .333 1 1v10c0 .667-.333 1-1 1H5c-.667 0-1-.333-1-1V11c0-.667.333-1 1-1h1zm2 0h8V7a4 4 0 1 0-8 0v3zm3 6.732V18a1 1 0 0 0 2 0v-1.268a2 2 0 1 0-2 0z" /></svg>;
+    return <svg width={this.props.size} height={this.props.size} style={this.props.style} className={this.props.className} viewBox="0 0 24 24"><path fill={this.props.fillColor} fillRule="evenodd" d="M6 10V7a6 6 0 1112 0v3h1c.667 0 1 .333 1 1v10c0 .667-.333 1-1 1H5c-.667 0-1-.333-1-1V11c0-.667.333-1 1-1h1zm2 0h8V7a4 4 0 10-8 0v3zm3 6.732V18a1 1 0 002 0v-1.268a2 2 0 10-2 0z" /></svg>;
   }
 
 }
