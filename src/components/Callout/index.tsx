@@ -55,6 +55,7 @@ export default class Callout extends PureComponent<Readonly<Props>> {
 
 const Container = styled.div`
   padding: 16px;
+  border-radius: 3px;
   background-color: ${gray000};
 `;
 

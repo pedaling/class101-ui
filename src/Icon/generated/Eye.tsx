@@ -8,7 +8,7 @@ export default class SvgEye extends React.PureComponent<IconProps> {
   };
 
   public render() {
-    return <svg width={this.props.size} height={this.props.size} style={this.props.style} className={this.props.className} viewBox="0 0 24 24"><path fill={this.props.fillColor} fillRule="evenodd" d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8zm2.31 0l.104.165a17.523 17.523 0 0 0 1.92 2.467C7.334 16.765 9.572 18 12 18s4.666-1.235 6.666-3.368A17.523 17.523 0 0 0 20.69 12a17.523 17.523 0 0 0-2.025-2.632C16.666 7.235 14.428 6 12 6S7.334 7.235 5.334 9.368A17.523 17.523 0 0 0 3.31 12zM12 8a1 1 0 0 1 0 2 2 2 0 1 0 2 2 1 1 0 0 1 2 0 4 4 0 1 1-4-4z" /></svg>;
+    return <svg width={this.props.size} height={this.props.size} fill="none" style={this.props.style} className={this.props.className} viewBox="0 0 24 24"><path fillRule="evenodd" clipRule="evenodd" d="M4 12c2 4.001 4.667 6.002 8 6.002S18 16 20 12c-2-4-4.667-6-8-6s-6 2-8 6zm-1.789.894a2 2 0 010-1.788C4.524 6.48 7.831 4 12 4c4.17 0 7.476 2.48 9.789 7.106a2 2 0 010 1.788c-2.313 4.627-5.62 7.107-9.789 7.107-4.17 0-7.476-2.48-9.789-7.107zM12 8a1 1 0 110 2 2 2 0 102 2 1 1 0 112 0 4 4 0 11-4-4z" fill={this.props.fillColor} /></svg>;
   }
 
 }
