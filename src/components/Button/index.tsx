@@ -16,7 +16,6 @@ import {
   red100,
   red200,
   red600,
-  white,
 } from '../../Colors';
 import { Omit } from '../../interfaces/props';
 import Theme, { ThemeConfig, ThemeMode } from '../../Theme';
@@ -114,13 +113,13 @@ export default class Button extends PureComponent<Props> {
     const innerElements = (
       <>
         {Boolean(leftIcon) && (
-          <LeftIcon buttonSize={size} variant={variant} theme={theme}>
+          <LeftIcon data-icon buttonSize={size}>
             {leftIcon}
           </LeftIcon>
         )}
         <Text>{children}</Text>
         {Boolean(rightIcon) && (
-          <RightIcon buttonSize={size} variant={variant} theme={theme}>
+          <RightIcon data-icon buttonSize={size}>
             {rightIcon}
           </RightIcon>
         )}
@@ -137,7 +136,7 @@ export default class Button extends PureComponent<Props> {
           size={size}
           variant={variant}
           theme={theme}
-          data-disabled={disabled}
+          data-ui-disabled={disabled}
           disabled={disabled}
           fill={`${fill}`}
           {...anchorAttributes}
@@ -156,7 +155,7 @@ export default class Button extends PureComponent<Props> {
           size={size}
           variant={variant}
           theme={theme}
-          data-disabled={disabled}
+          data-ui-disabled={disabled}
           disabled={disabled}
           fill={`${fill}`}
           {...anchorAttributes}
@@ -174,7 +173,7 @@ export default class Button extends PureComponent<Props> {
         size={size}
         variant={variant}
         theme={theme}
-        data-disabled={disabled}
+        data-ui-disabled={disabled}
         disabled={disabled}
         fill={`${fill}`}
         {...buttonAttributes}
@@ -264,7 +263,7 @@ const buttonStyleBySize: { [key in ButtonSize]: FlattenSimpleInterpolation } = {
 const buttonDefaultStyleByTheme: { [key in ThemeMode]: FlattenSimpleInterpolation } = {
   [ThemeMode.LIGHT]: css`
     background-color: ${gray000};
-    &[data-disabled] {
+    &[data-ui-disabled] {
       color: ${gray200};
       path {
         fill: ${gray200};
@@ -273,7 +272,7 @@ const buttonDefaultStyleByTheme: { [key in ThemeMode]: FlattenSimpleInterpolatio
   `,
   [ThemeMode.DARK]: css`
     background-color: ${gray800};
-    &[data-disabled] {
+    &[data-ui-disabled] {
       color: ${gray700};
       path {
         fill: ${gray700};
@@ -285,13 +284,13 @@ const buttonDefaultStyleByTheme: { [key in ThemeMode]: FlattenSimpleInterpolatio
 const buttonStyleByExcludeDefaultVariant: { [key in ExcludeDefaultVariant]: FlattenSimpleInterpolation } = {
   [ButtonVariant.ORANGE]: css`
     background-color: ${orange600};
-    &[data-disabled] {
+    &[data-ui-disabled] {
       background-color: ${orange200};
     }
   `,
   [ButtonVariant.ORANGE_LIGHT]: css`
     background-color: ${orange000};
-    &[data-disabled] {
+    &[data-ui-disabled] {
       color: ${orange100};
       path {
         fill: ${orange100};
@@ -300,13 +299,13 @@ const buttonStyleByExcludeDefaultVariant: { [key in ExcludeDefaultVariant]: Flat
   `,
   [ButtonVariant.RED]: css`
     background-color: ${red600};
-    &[data-disabled] {
+    &[data-ui-disabled] {
       background-color: ${red200};
     }
   `,
   [ButtonVariant.RED_LIGHT]: css`
     background-color: ${red000};
-    &[data-disabled] {
+    &[data-ui-disabled] {
       color: ${red100};
       path {
         fill: ${red100};
@@ -363,7 +362,7 @@ const buttonCommonStyle = css<StyledContainerProps>`
 
   &:disabled,
   &[disabled],
-  &[data-disabled] {
+  &[data-ui-disabled] {
     pointer-events: none;
     cursor: not-allowed;
   }
@@ -386,7 +385,7 @@ const anchorButtonStyle = css`
   ${buttonCommonStyle};
   text-decoration: none;
   &:hover {
-    color: ${props => props.color || white};
+    color: inherit;
   }
 `;
 
