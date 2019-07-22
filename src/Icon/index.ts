@@ -50,6 +50,7 @@ export { default as EditOutline } from './generated/EditOutline';
 export { default as Eye } from './generated/Eye';
 export { default as EyeOff } from './generated/EyeOff';
 export { default as Facebook } from './generated/Facebook';
+export { default as Filter } from './generated/Filter';
 export { default as FullScreen } from './generated/FullScreen';
 export { default as FullScreenExit } from './generated/FullScreenExit';
 export { default as Gear } from './generated/Gear';
