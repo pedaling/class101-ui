@@ -1,5 +1,6 @@
 import { ThemeConfig } from 'Theme';
 
+export type ButtonSizeValue = 'lg' | 'md' | 'sm' | 'xs';
 export enum ButtonSize {
   LARGE = 'lg',
   MEDIUM = 'md',
@@ -7,18 +8,19 @@ export enum ButtonSize {
   XSMALL = 'xs',
 }
 
+export type ButtonVariantValue = 'default' | 'orange' | 'orangeLight' | 'red' | 'redLight';
 export enum ButtonVariant {
-  DEFAULT = 'DEFAULT',
-  ORANGE = 'ORANGE',
-  ORANGE_LIGHT = 'ORANGE_LIGHT',
-  RED = 'RED',
-  RED_LIGHT = 'RED_LIGHT',
+  DEFAULT = 'default',
+  ORANGE = 'orange',
+  ORANGE_LIGHT = 'orangeLight',
+  RED = 'red',
+  RED_LIGHT = 'redLight',
 }
 
 export type ExcludeDefaultVariant = Exclude<ButtonVariant, ButtonVariant.DEFAULT>;
 
 export interface ButtonContentProps {
-  buttonSize: ButtonSize;
-  variant: ButtonVariant;
+  buttonSize: ButtonSizeValue;
+  variant: ButtonVariantValue;
   theme: ThemeConfig;
 }

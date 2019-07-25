@@ -1,11 +1,11 @@
 import React from 'react';
-import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
+import styled from 'styled-components';
 
 import { white } from '../../../Colors';
 import Spinner from '../../../Spinner';
 import { ThemeMode } from '../../../Theme';
-import { ButtonContentProps, ButtonSize, ButtonVariant, ExcludeDefaultVariant } from '../interface';
-import { getPointColors } from '../utils';
+import { ButtonContentProps, ButtonSizeValue, ButtonVariant, ExcludeDefaultVariant } from '../interface';
+import { getButtonColors, getButtonIconSize } from '../utils';
 
 const WHITE_OPACITY_COLOR = 'rgba(255, 255, 255, 0.5)';
 
@@ -24,45 +24,19 @@ const spinnerColorByButtonVariant: { [key in ExcludeDefaultVariant]: string } = 
 const getSpinnerColor = (props: ButtonContentProps) =>
   props.variant === ButtonVariant.DEFAULT
     ? spinnerDefaultColorByTheme[props.theme.mode as ThemeMode]
-    : spinnerColorByButtonVariant[props.variant];
-
-const spinnerStyleByButtonSize: { [key in ButtonSize]: FlattenSimpleInterpolation } = {
-  [ButtonSize.LARGE]: css`
-    span,
-    span > svg {
-      width: 24px;
-      height: 24px;
-    }
-  `,
-  [ButtonSize.MEDIUM]: css`
-    span,
-    span > svg {
-      width: 18px;
-      height: 18px;
-    }
-  `,
-  [ButtonSize.SMALL]: css`
-    span,
-    span > svg {
-      width: 18px;
-      height: 18px;
-    }
-  `,
-  [ButtonSize.XSMALL]: css`
-    span,
-    span > svg {
-      width: 16px;
-      height: 16px;
-    }
-  `,
-};
-
-const StyledSpinner = styled(Spinner)<{ buttonSize: ButtonSize }>`
-  ${props => spinnerStyleByButtonSize[props.buttonSize]}
-`;
+    : spinnerColorByButtonVariant[props.variant as ExcludeDefaultVariant];
 
 export default (props: ButtonContentProps) => {
   const { buttonSize, variant, theme } = props;
-  const pointColor = getPointColors({ variant, theme });
-  return <StyledSpinner buttonSize={buttonSize} color={getSpinnerColor(props)} backgroundColor={pointColor} />;
+  const pointColor = getButtonColors(variant, theme.mode);
+  return (
+    <StyledSpinner buttonSize={buttonSize} color={getSpinnerColor(props)} backgroundColor={pointColor.textColor} />
+  );
 };
+
+const StyledSpinner = styled(Spinner)<{ buttonSize: ButtonSizeValue }>`
+  span,
+  span > svg {
+    ${props => getButtonIconSize(props.buttonSize)};
+  }
+`;
