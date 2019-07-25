@@ -3,35 +3,22 @@ import React, { AnchorHTMLAttributes, ButtonHTMLAttributes, PureComponent, React
 import { Link } from 'react-router-dom';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
-import {
-  gray000,
-  gray200,
-  gray700,
-  gray800,
-  orange000,
-  orange100,
-  orange200,
-  orange600,
-  red000,
-  red100,
-  red200,
-  red600,
-} from '../../Colors';
 import { Omit } from '../../interfaces/props';
-import Theme, { ThemeConfig, ThemeMode } from '../../Theme';
+import Theme, { ThemeConfig } from '../../Theme';
+import { LeftIcon, RightIcon } from './ButtonIcon';
 import ButtonSpinner from './ButtonSpinner';
-import { ButtonSize, ButtonVariant, ExcludeDefaultVariant } from './interface';
-import { getPointColors } from './utils';
+import { ButtonSize, ButtonSizeValue, ButtonVariant, ButtonVariantValue } from './interface';
+import { getButtonColors } from './utils';
 
 interface CommonProps {
-  // deprecated(variant 중에서만 사용해주세요)
+  // Deprecated - variant 중에서만 사용해주세요
   color?: string;
-  // deprecated
+  // Deprecated
   backgroundColor?: string;
 
   theme: ThemeConfig;
-  size: ButtonSize;
-  variant: ButtonVariant;
+  size: ButtonSizeValue;
+  variant: ButtonVariantValue;
 
   type?: string;
   leftIcon?: ReactNode;
@@ -113,13 +100,13 @@ export default class Button extends PureComponent<Props> {
     const innerElements = (
       <>
         {Boolean(leftIcon) && (
-          <LeftIcon data-icon buttonSize={size}>
+          <LeftIcon buttonSize={size} variant={variant} theme={theme}>
             {leftIcon}
           </LeftIcon>
         )}
         <Text>{children}</Text>
         {Boolean(rightIcon) && (
-          <RightIcon data-icon buttonSize={size}>
+          <RightIcon buttonSize={size} variant={variant} theme={theme}>
             {rightIcon}
           </RightIcon>
         )}
@@ -185,53 +172,6 @@ export default class Button extends PureComponent<Props> {
   }
 }
 
-const iconCommonStyle = css`
-  flex: none;
-  font-size: 0;
-  > svg {
-    width: 100%;
-    height: 100%;
-  }
-`;
-
-const iconStyleByButtonSize: { [key in ButtonSize]: FlattenSimpleInterpolation } = {
-  [ButtonSize.LARGE]: css`
-    width: 24px;
-    height: 24px;
-  `,
-  [ButtonSize.MEDIUM]: css`
-    width: 18px;
-    height: 18px;
-  `,
-  [ButtonSize.SMALL]: css`
-    width: 18px;
-    height: 18px;
-  `,
-  [ButtonSize.XSMALL]: css`
-    width: 16px;
-    height: 16px;
-  `,
-};
-
-const iconMarginByButtonSize: { [key in ButtonSize]: number } = {
-  [ButtonSize.LARGE]: 4,
-  [ButtonSize.MEDIUM]: 4,
-  [ButtonSize.SMALL]: 4,
-  [ButtonSize.XSMALL]: 2,
-};
-
-const LeftIcon = styled.div<{ buttonSize: ButtonSize }>`
-  ${iconCommonStyle};
-  ${props => iconStyleByButtonSize[props.buttonSize]}
-  margin-right: ${props => iconMarginByButtonSize[props.buttonSize]}px;
-`;
-
-const RightIcon = styled.div<{ buttonSize: ButtonSize }>`
-  ${iconCommonStyle};
-  ${props => iconStyleByButtonSize[props.buttonSize]}
-  margin-left: ${props => iconMarginByButtonSize[props.buttonSize]}px;
-`;
-
 interface StyledContainerProps extends CommonProps {
   fill?: string;
 }
@@ -260,60 +200,6 @@ const buttonStyleBySize: { [key in ButtonSize]: FlattenSimpleInterpolation } = {
   `,
 };
 
-const buttonDefaultStyleByTheme: { [key in ThemeMode]: FlattenSimpleInterpolation } = {
-  [ThemeMode.LIGHT]: css`
-    background-color: ${gray000};
-    &[data-ui-disabled] {
-      color: ${gray200};
-      path {
-        fill: ${gray200};
-      }
-    }
-  `,
-  [ThemeMode.DARK]: css`
-    background-color: ${gray800};
-    &[data-ui-disabled] {
-      color: ${gray700};
-      path {
-        fill: ${gray700};
-      }
-    }
-  `,
-};
-
-const buttonStyleByExcludeDefaultVariant: { [key in ExcludeDefaultVariant]: FlattenSimpleInterpolation } = {
-  [ButtonVariant.ORANGE]: css`
-    background-color: ${orange600};
-    &[data-ui-disabled] {
-      background-color: ${orange200};
-    }
-  `,
-  [ButtonVariant.ORANGE_LIGHT]: css`
-    background-color: ${orange000};
-    &[data-ui-disabled] {
-      color: ${orange100};
-      path {
-        fill: ${orange100};
-      }
-    }
-  `,
-  [ButtonVariant.RED]: css`
-    background-color: ${red600};
-    &[data-ui-disabled] {
-      background-color: ${red200};
-    }
-  `,
-  [ButtonVariant.RED_LIGHT]: css`
-    background-color: ${red000};
-    &[data-ui-disabled] {
-      color: ${red100};
-      path {
-        fill: ${red100};
-      }
-    }
-  `,
-};
-
 const buttonCommonStyle = css<StyledContainerProps>`
   flex: none;
   outline: none;
@@ -330,12 +216,8 @@ const buttonCommonStyle = css<StyledContainerProps>`
   border-radius: ${props => defaultTo(props.borderRadius, 3)}px;
   width: ${props => (props.fill === 'true' ? '100%' : 'auto')};
 
-  ${props =>
-    props.variant === ButtonVariant.DEFAULT
-      ? buttonDefaultStyleByTheme[props.theme.mode as ThemeMode]
-      : buttonStyleByExcludeDefaultVariant[props.variant]};
-
-  color: ${props => getPointColors(props)};
+  color: ${props => getButtonColors(props.variant, props.theme.mode).textColor};
+  background: ${props => getButtonColors(props.variant, props.theme.mode).backgroundColor};
 
   ${props =>
     props.color &&
@@ -363,6 +245,8 @@ const buttonCommonStyle = css<StyledContainerProps>`
   &:disabled,
   &[disabled],
   &[data-ui-disabled] {
+    color: ${props => getButtonColors(props.variant, props.theme.mode).disabledTextColor};
+    background: ${props => getButtonColors(props.variant, props.theme.mode).disabledBackgroundColor};
     pointer-events: none;
     cursor: not-allowed;
   }
@@ -370,9 +254,6 @@ const buttonCommonStyle = css<StyledContainerProps>`
 
 const ButtonContainer = styled.button<StyledContainerProps>`
   ${buttonCommonStyle};
-  path {
-    fill: ${props => getPointColors(props)};
-  }
 `;
 
 const Text = styled.div`

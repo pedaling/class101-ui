@@ -152,8 +152,32 @@ export enum ButtonSize {
 
 <Playground>
   <PlayGroundContainer>
-    <Button leftIcon={<Icon.Add />}>Click me</Button>
-    <Button rightIcon={<Icon.Add />}>Click me</Button>
+    <Button leftIcon={<Icon.Heart />} size={ButtonSize.LARGE}>
+      Click me
+    </Button>
+    <Button leftIcon={<Icon.Heart />} size={ButtonSize.MEDIUM}>
+      Click me
+    </Button>
+    <Button leftIcon={<Icon.Heart />} size={ButtonSize.SMALL}>
+      Click me
+    </Button>
+    <Button leftIcon={<Icon.Heart />} size={ButtonSize.XSMALL}>
+      Click me
+    </Button>
+  </PlayGroundContainer>
+  <PlayGroundContainer>
+    <Button rightIcon={<Icon.HeartOutline />} size={ButtonSize.LARGE}>
+      Click me
+    </Button>
+    <Button rightIcon={<Icon.HeartOutline />} size={ButtonSize.MEDIUM}>
+      Click me
+    </Button>
+    <Button rightIcon={<Icon.HeartOutline />} size={ButtonSize.SMALL}>
+      Click me
+    </Button>
+    <Button rightIcon={<Icon.HeartOutline />} size={ButtonSize.XSMALL}>
+      Click me
+    </Button>
   </PlayGroundContainer>
 </Playground>
 
@@ -202,6 +226,16 @@ export enum ButtonSize {
     </Button>
     <Button to="/" target="_blank" disabled>
       Link of React Router Dom
+    </Button>
+  </PlayGroundContainer>
+</Playground>
+
+##
+
+<Playground>
+  <PlayGroundContainer>
+    <Button size="xs" variant="default" theme={Theme.dark} leftIcon={<Icon.Heart />}>
+      Click me
     </Button>
   </PlayGroundContainer>
 </Playground>
