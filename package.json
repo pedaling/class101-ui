@@ -50,7 +50,8 @@
     "react-router-dom": "^4.3.1",
     "styled-components": "4.2.0",
     "react-id-swiper": "2.3.1",
-    "swiper": "4.5.0"
+    "swiper": "4.5.0",
+    "lodash": "^4.17.11"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -103,7 +104,6 @@
     "dist"
   ],
   "dependencies": {
-    "lodash-es": "^4.17.11",
     "path-to-regexp": "^3.0.0",
     "typescript": "3.1.6"
   },
