@@ -1,4 +1,4 @@
-import { isEqual, pick } from 'lodash-es';
+import { isEqual, pick } from 'lodash';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 

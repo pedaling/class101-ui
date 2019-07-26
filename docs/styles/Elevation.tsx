@@ -1,6 +1,6 @@
 import { Colors, ElevationStyles } from '@class101/ui';
 import { ElevationProps } from '@class101/ui/ElevationStyles';
-import { defaultTo } from 'lodash-es';
+import { defaultTo } from 'lodash';
 import React from 'react';
 import styled from 'styled-components';
 
