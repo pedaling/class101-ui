@@ -5,7 +5,7 @@ route: /components/button
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Icon, Colors, Button, ButtonVariant, ButtonSize, Theme } from '@class101/ui';
+import { Icon, Colors, Button, ButtonColor, ButtonSize, Theme } from '@class101/ui';
 import { PlayGroundContainer } from '../HelpComponents';
 
 # Button
@@ -29,15 +29,16 @@ import { PlayGroundContainer } from '../HelpComponents';
   <Button>Click me</Button>
 </Playground>
 
-## With variant / theme
+## With color / theme
 
 ```ts
-export enum ButtonVariant {
+export enum ButtonColor {
   DEFAULT = 'DEFAULT',
   ORANGE = 'ORANGE',
   ORANGE_LIGHT = 'ORANGE_LIGHT',
   RED = 'RED',
   RED_LIGHT = 'RED_LIGHT',
+  WHITE = 'WHITE',
 }
 ```
 
@@ -67,68 +68,83 @@ export enum ButtonVariant {
     </Button>
   </PlayGroundContainer>
   <PlayGroundContainer>
-    <Button variant={ButtonVariant.ORANGE}>Click me</Button>
-    <Button variant={ButtonVariant.ORANGE} leftIcon={<Icon.Add />}>
+    <Button color={ButtonColor.ORANGE}>Click me</Button>
+    <Button color={ButtonColor.ORANGE} leftIcon={<Icon.Add />}>
       Click me
     </Button>
-    <Button variant={ButtonVariant.ORANGE} disabled>
+    <Button color={ButtonColor.ORANGE} disabled>
       Click me
     </Button>
-    <Button variant={ButtonVariant.ORANGE} leftIcon={<Icon.Add />} disabled>
+    <Button color={ButtonColor.ORANGE} leftIcon={<Icon.Add />} disabled>
       Click me
     </Button>
-    <Button variant={ButtonVariant.ORANGE} loading>
-      Click me
-    </Button>
-  </PlayGroundContainer>
-  <PlayGroundContainer>
-    <Button variant={ButtonVariant.ORANGE_LIGHT}>Click me</Button>
-    <Button variant={ButtonVariant.ORANGE_LIGHT} leftIcon={<Icon.Add />}>
-      Click me
-    </Button>
-    <Button variant={ButtonVariant.ORANGE_LIGHT} disabled>
-      Click me
-    </Button>
-    <Button variant={ButtonVariant.ORANGE_LIGHT} leftIcon={<Icon.Add />} disabled>
-      Click me
-    </Button>
-    <Button variant={ButtonVariant.ORANGE_LIGHT} loading>
+    <Button color={ButtonColor.ORANGE} loading>
       Click me
     </Button>
   </PlayGroundContainer>
   <PlayGroundContainer>
-    <Button variant={ButtonVariant.RED}>Click me</Button>
-    <Button variant={ButtonVariant.RED} leftIcon={<Icon.Add />}>
+    <Button color={ButtonColor.ORANGE_LIGHT}>Click me</Button>
+    <Button color={ButtonColor.ORANGE_LIGHT} leftIcon={<Icon.Add />}>
       Click me
     </Button>
-    <Button variant={ButtonVariant.RED} disabled>
+    <Button color={ButtonColor.ORANGE_LIGHT} disabled>
       Click me
     </Button>
-    <Button variant={ButtonVariant.RED} leftIcon={<Icon.Add />} disabled>
+    <Button color={ButtonColor.ORANGE_LIGHT} leftIcon={<Icon.Add />} disabled>
       Click me
     </Button>
-    <Button variant={ButtonVariant.RED} loading>
+    <Button color={ButtonColor.ORANGE_LIGHT} loading>
       Click me
     </Button>
   </PlayGroundContainer>
   <PlayGroundContainer>
-    <Button variant={ButtonVariant.RED_LIGHT}>Click me</Button>
-    <Button variant={ButtonVariant.RED_LIGHT} leftIcon={<Icon.Add />}>
+    <Button color={ButtonColor.RED}>Click me</Button>
+    <Button color={ButtonColor.RED} leftIcon={<Icon.Add />}>
       Click me
     </Button>
-    <Button variant={ButtonVariant.RED_LIGHT} disabled>
+    <Button color={ButtonColor.RED} disabled>
       Click me
     </Button>
-    <Button variant={ButtonVariant.RED_LIGHT} leftIcon={<Icon.Add />} disabled>
+    <Button color={ButtonColor.RED} leftIcon={<Icon.Add />} disabled>
       Click me
     </Button>
-    <Button variant={ButtonVariant.RED_LIGHT} loading>
+    <Button color={ButtonColor.RED} loading>
+      Click me
+    </Button>
+  </PlayGroundContainer>
+  <PlayGroundContainer>
+    <Button color={ButtonColor.RED_LIGHT}>Click me</Button>
+    <Button color={ButtonColor.RED_LIGHT} leftIcon={<Icon.Add />}>
+      Click me
+    </Button>
+    <Button color={ButtonColor.RED_LIGHT} disabled>
+      Click me
+    </Button>
+    <Button color={ButtonColor.RED_LIGHT} leftIcon={<Icon.Add />} disabled>
+      Click me
+    </Button>
+    <Button color={ButtonColor.RED_LIGHT} loading>
+      Click me
+    </Button>
+  </PlayGroundContainer>
+  <PlayGroundContainer theme={Theme.dark}>
+    <Button color={ButtonColor.WHITE}>Click me</Button>
+    <Button color={ButtonColor.WHITE} leftIcon={<Icon.Add />}>
+      Click me
+    </Button>
+    <Button color={ButtonColor.WHITE} disabled>
+      Click me
+    </Button>
+    <Button color={ButtonColor.WHITE} leftIcon={<Icon.Add />} disabled>
+      Click me
+    </Button>
+    <Button color={ButtonColor.WHITE} loading>
       Click me
     </Button>
   </PlayGroundContainer>
 </Playground>
 
-## With different sizes
+## With size
 
 ```ts
 export enum ButtonSize {
@@ -148,7 +164,7 @@ export enum ButtonSize {
   </PlayGroundContainer>
 </Playground>
 
-## With different icons
+## With icon
 
 <Playground>
   <PlayGroundContainer>

@@ -1,17 +1,34 @@
 import { css } from 'styled-components';
 
 import { ThemeMode } from '../../Theme';
-import { ButtonSize, ButtonSizeValue, ButtonVariant, ButtonVariantValue, ExcludeDefaultVariant } from './interface';
 import {
   backgroundColors,
   defaultBackgroundColors,
+  defaultTextButtonColors,
   defaultTextColors,
   disabledBackgroundColors,
   disabledDefaultBackgroundColors,
   disabledDefaultTextColors,
+  disabledTextButtonColors,
   disabledTextColors,
+  textButtonColors,
   textColors,
-} from './theme';
+} from './color';
+import {
+  ButtonColor,
+  ButtonColorValue,
+  ButtonSize,
+  ButtonSizeValue,
+  ExcludeDefaultColor,
+  ExcludeDefaultTextButtonColor,
+} from './interface';
+
+export const iconMarginByButtonSize: { [key in ButtonSize]: number } = {
+  [ButtonSize.LARGE]: 4,
+  [ButtonSize.MEDIUM]: 4,
+  [ButtonSize.SMALL]: 4,
+  [ButtonSize.XSMALL]: 2,
+};
 
 const buttonIconSizeByButtonSize: { [key in ButtonSize]: number } = {
   [ButtonSize.LARGE]: 24,
@@ -28,8 +45,8 @@ export const getButtonIconSize = (buttonSize: ButtonSizeValue) => {
   `;
 };
 
-export const getButtonColors = (variant: ButtonVariantValue, theme: ThemeMode) => {
-  if (variant === ButtonVariant.DEFAULT) {
+export const getButtonColors = (variant: ButtonColorValue, theme: ThemeMode) => {
+  if (variant === ButtonColor.DEFAULT) {
     return {
       textColor: defaultTextColors[theme],
       backgroundColor: defaultBackgroundColors[theme],
@@ -37,11 +54,25 @@ export const getButtonColors = (variant: ButtonVariantValue, theme: ThemeMode) =
       disabledBackgroundColor: disabledDefaultBackgroundColors[theme],
     };
   }
-  const excludeDefaultVariant = variant as ExcludeDefaultVariant;
+  const excludeDefaultColor = variant as ExcludeDefaultColor;
   return {
-    textColor: textColors[excludeDefaultVariant],
-    backgroundColor: backgroundColors[excludeDefaultVariant],
-    disabledTextColor: disabledTextColors[excludeDefaultVariant],
-    disabledBackgroundColor: disabledBackgroundColors[excludeDefaultVariant],
+    textColor: textColors[excludeDefaultColor],
+    backgroundColor: backgroundColors[excludeDefaultColor],
+    disabledTextColor: disabledTextColors[excludeDefaultColor],
+    disabledBackgroundColor: disabledBackgroundColors[excludeDefaultColor],
+  };
+};
+
+export const getTextButtonColors = (variant: ButtonColorValue, theme: ThemeMode) => {
+  if (variant === ButtonColor.DEFAULT) {
+    return {
+      textColor: defaultTextButtonColors[theme],
+      disabledTextColor: disabledDefaultTextColors[theme],
+    };
+  }
+  const excludeDefaultColor = variant as ExcludeDefaultTextButtonColor;
+  return {
+    textColor: textButtonColors[excludeDefaultColor],
+    disabledTextColor: disabledTextButtonColors[excludeDefaultColor],
   };
 };
