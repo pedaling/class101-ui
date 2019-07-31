@@ -3,17 +3,17 @@ import React, { AnchorHTMLAttributes, ButtonHTMLAttributes, PureComponent, React
 import { Link } from 'react-router-dom';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
-import { Omit } from '../../interfaces/props';
-import Theme, { ThemeConfig } from '../../Theme';
-import { LeftIcon, RightIcon } from './ButtonIcon';
-import ButtonSpinner from './ButtonSpinner';
-import { ButtonColor, ButtonColorValue, ButtonSize, ButtonSizeValue } from './interface';
-import { getButtonColors } from './utils';
+import { Omit } from '../../../interfaces/props';
+import Theme, { ThemeConfig } from '../../../Theme';
+import { LeftIcon, RightIcon } from '../ButtonIcon';
+import ButtonSpinner from '../ButtonSpinner';
+import { TextButtonColor, TextButtonColorValue, TextButtonSize, TextButtonSizeValue } from '../interface';
+import { getTextButtonColors } from '../utils';
 
 interface CommonProps {
-  color: ButtonColorValue;
+  color: TextButtonColorValue;
   theme: ThemeConfig;
-  size: ButtonSizeValue;
+  size: TextButtonSizeValue;
   type?: string;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
@@ -32,26 +32,23 @@ type OmittedAnchorAttributes = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, key
 type OmittedButtonAttributes = Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof CommonProps>;
 
 interface Props extends CommonProps {
-  fill?: boolean;
   anchorAttributes?: OmittedAnchorAttributes;
   buttonAttributes?: OmittedButtonAttributes;
 }
 
-export type ButtonProps = Props;
+export type TextButtonProps = Props;
 
-export default class ContainButton extends PureComponent<Props> {
+export default class TextButton extends PureComponent<Props> {
   public static defaultProps: Partial<Props> = {
     theme: Theme.light,
-    size: ButtonSize.MEDIUM,
-    color: ButtonColor.DEFAULT,
+    size: TextButtonSize.MEDIUM,
+    color: TextButtonColor.DEFAULT,
     type: 'button',
-    fill: false,
   };
 
   public render() {
     const {
       type,
-      fill,
       size,
       theme,
       leftIcon,
@@ -74,13 +71,12 @@ export default class ContainButton extends PureComponent<Props> {
           size={size}
           color={color}
           theme={theme}
-          fill={`${fill}`}
           disabled
           {...buttonAttributes}
           {...restProps}
         >
           <Text>{children}</Text>
-          <ButtonSpinner buttonSize={size} color={getButtonColors(color, theme.mode).textColor} />
+          <ButtonSpinner buttonSize={size} color={getTextButtonColors(color, theme.mode).textColor} />
         </ButtonContainer>
       );
     }
@@ -96,8 +92,8 @@ export default class ContainButton extends PureComponent<Props> {
         {Boolean(leftIcon) && (
           <LeftIcon
             buttonSize={size}
-            textColor={getButtonColors(color, theme.mode).textColor}
-            disabledTextColor={getButtonColors(color, theme.mode).disabledTextColor}
+            textColor={getTextButtonColors(color, theme.mode).textColor}
+            disabledTextColor={getTextButtonColors(color, theme.mode).disabledTextColor}
           >
             {leftIcon}
           </LeftIcon>
@@ -106,8 +102,8 @@ export default class ContainButton extends PureComponent<Props> {
         {Boolean(rightIcon) && (
           <RightIcon
             buttonSize={size}
-            textColor={getButtonColors(color, theme.mode).textColor}
-            disabledTextColor={getButtonColors(color, theme.mode).disabledTextColor}
+            textColor={getTextButtonColors(color, theme.mode).textColor}
+            disabledTextColor={getTextButtonColors(color, theme.mode).disabledTextColor}
           >
             {rightIcon}
           </RightIcon>
@@ -127,7 +123,6 @@ export default class ContainButton extends PureComponent<Props> {
           theme={theme}
           data-ui-disabled={disabled}
           disabled={disabled}
-          fill={`${fill}`}
           {...anchorAttributes}
           {...restProps}
           {...options}
@@ -146,7 +141,6 @@ export default class ContainButton extends PureComponent<Props> {
           theme={theme}
           data-ui-disabled={disabled}
           disabled={disabled}
-          fill={`${fill}`}
           {...anchorAttributes}
           {...restProps}
           {...options}
@@ -164,7 +158,6 @@ export default class ContainButton extends PureComponent<Props> {
         theme={theme}
         data-ui-disabled={disabled}
         disabled={disabled}
-        fill={`${fill}`}
         {...buttonAttributes}
         {...restProps}
       >
@@ -174,81 +167,57 @@ export default class ContainButton extends PureComponent<Props> {
   }
 }
 
-interface StyledContainerProps extends CommonProps {
-  fill?: string;
-}
-
-const buttonTextStyleBySize: { [key in ButtonSize]: FlattenSimpleInterpolation } = {
-  [ButtonSize.LARGE]: css`
+const buttonStyleBySize: { [key in TextButtonSize]: FlattenSimpleInterpolation } = {
+  [TextButtonSize.LARGE]: css`
     font-size: 16px;
+    height: 24px;
     letter-spacing: -0.2px;
   `,
-  [ButtonSize.MEDIUM]: css`
+  [TextButtonSize.MEDIUM]: css`
     font-size: 14px;
+    height: 20px;
     letter-spacing: -0.2px;
   `,
-  [ButtonSize.SMALL]: css`
+  [TextButtonSize.SMALL]: css`
     font-size: 14px;
+    height: 20px;
     letter-spacing: -0.2px;
-  `,
-  [ButtonSize.XSMALL]: css`
-    font-size: 11px;
   `,
 };
 
-const buttonStyleBySize: { [key in ButtonSize]: FlattenSimpleInterpolation } = {
-  [ButtonSize.LARGE]: css`
-    padding: 0 20px;
-    height: 48px;
-  `,
-  [ButtonSize.MEDIUM]: css`
-    padding: 0 16px;
-    height: 40px;
-  `,
-  [ButtonSize.SMALL]: css`
-    padding: 0 12px;
-    height: 32px;
-  `,
-  [ButtonSize.XSMALL]: css`
-    padding: 0 10px;
-    height: 28px;
-  `,
-};
-
-const buttonCommonStyle = css<StyledContainerProps>`
+const buttonCommonStyle = css<CommonProps>`
   flex: none;
   outline: none;
   border: none;
+  line-height: 1 !important;
   cursor: pointer;
   box-sizing: border-box;
 
-  width: ${props => (props.fill === 'true' ? '100%' : 'auto')};
-  display: ${props => (props.fill === 'true' ? 'flex' : 'inline-flex')};
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   vertical-align: middle;
-  border-radius: 3px;
+  background: none;
 
-  color: ${props => getButtonColors(props.color, props.theme.mode).textColor};
-  background-color: ${props => getButtonColors(props.color, props.theme.mode).backgroundColor};
-  ${props => buttonTextStyleBySize[props.size]};
+  color: ${props => getTextButtonColors(props.color, props.theme.mode).textColor};
   ${props => buttonStyleBySize[props.size]};
 
-  * {
-    vertical-align: middle;
-  }
-
-  transition: background-color 0.1s;
+  transition: color 0.1s;
 
   &:hover,
   &:focus {
-    background-color: ${props => darken(0.1, getButtonColors(props.color, props.theme.mode).backgroundColor)};
-    text-decoration-line: none;
+    color: ${props => darken(0.1, getTextButtonColors(props.color, props.theme.mode).textColor)};
+    text-decoration-line: underline;
+    ${LeftIcon},
+    ${RightIcon} {
+      path {
+        fill: ${props => darken(0.1, getTextButtonColors(props.color, props.theme.mode).textColor)};
+      }
+    }
   }
 
   &[data-ui-disabled] {
-    color: ${props => getButtonColors(props.color, props.theme.mode).disabledTextColor};
-    background-color: ${props => getButtonColors(props.color, props.theme.mode).disabledBackgroundColor};
+    color: ${props => getTextButtonColors(props.color, props.theme.mode).disabledTextColor};
   }
 
   &:disabled,
@@ -259,7 +228,7 @@ const buttonCommonStyle = css<StyledContainerProps>`
   }
 `;
 
-const ButtonContainer = styled.button<StyledContainerProps>`
+const ButtonContainer = styled.button<CommonProps>`
   ${buttonCommonStyle};
 `;
 
@@ -283,10 +252,10 @@ const AnchorButtonInner = styled.div`
   align-items: center;
 `;
 
-const LinkButton = styled(Link)<StyledContainerProps>`
+const LinkButton = styled(Link)<CommonProps>`
   ${anchorButtonStyle};
 `;
 
-const AnchorButton = styled.a<StyledContainerProps>`
+const AnchorButton = styled.a<CommonProps>`
   ${anchorButtonStyle};
 `;

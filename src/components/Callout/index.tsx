@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
-import { gray000, gray800, green500, orange600, white } from '../../Colors';
+import { gray000, green500, orange600 } from '../../Colors';
 import { Alert, CheckCircle, Info } from '../../Icon';
 import { body2, caption1 } from '../../TextStyles';
 import Button, { ButtonProps } from '../Button';
+import { ButtonColor } from '../Button/interface';
 
 export enum CalloutStatus {
   DEFAULT,
@@ -44,7 +45,7 @@ export default class Callout extends PureComponent<Readonly<Props>> {
         </Title>
         <Content>{children}</Content>
         {action && (
-          <StyledButton size="sm" color={gray800} backgroundColor={white} {...action}>
+          <StyledButton size="sm" color={ButtonColor.WHITE} {...action}>
             {action.content}
           </StyledButton>
         )}

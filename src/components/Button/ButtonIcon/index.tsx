@@ -1,7 +1,13 @@
 import styled, { css } from 'styled-components';
 
-import { ButtonContentProps, ButtonSize } from '../interface';
-import { getButtonColors, getButtonIconSize } from '../utils';
+import { ButtonSizeValue } from '../interface';
+import { getButtonIconSize, iconMarginByButtonSize } from '../utils';
+
+interface ButtonIconProps {
+  buttonSize: ButtonSizeValue;
+  textColor: string;
+  disabledTextColor: string;
+}
 
 const iconCommonStyle = css`
   flex: none;
@@ -12,43 +18,36 @@ const iconCommonStyle = css`
   }
 `;
 
-const iconMarginByButtonSize: { [key in ButtonSize]: number } = {
-  [ButtonSize.LARGE]: 4,
-  [ButtonSize.MEDIUM]: 4,
-  [ButtonSize.SMALL]: 4,
-  [ButtonSize.XSMALL]: 2,
-};
-
-export const LeftIcon = styled.div<ButtonContentProps>`
+export const LeftIcon = styled.div<ButtonIconProps>`
   ${iconCommonStyle};
   ${props => getButtonIconSize(props.buttonSize)};
   margin-right: ${props => iconMarginByButtonSize[props.buttonSize]}px;
   path {
-    fill: ${props => getButtonColors(props.variant, props.theme.mode).textColor};
+    fill: ${props => props.textColor};
   }
 
   :disabled > &,
   [disabled] > &,
   [data-ui-disabled] > & {
     path {
-      fill: ${props => getButtonColors(props.variant, props.theme.mode).disabledTextColor};
+      fill: ${props => props.disabledTextColor};
     }
   }
 `;
 
-export const RightIcon = styled.div<ButtonContentProps>`
+export const RightIcon = styled.div<ButtonIconProps>`
   ${iconCommonStyle};
   ${props => getButtonIconSize(props.buttonSize)};
   margin-left: ${props => iconMarginByButtonSize[props.buttonSize]}px;
   path {
-    fill: ${props => getButtonColors(props.variant, props.theme.mode).textColor};
+    fill: ${props => props.textColor};
   }
 
   :disabled > &,
   [disabled] > &,
   [data-ui-disabled] > & {
     path {
-      fill: ${props => getButtonColors(props.variant, props.theme.mode).disabledTextColor};
+      fill: ${props => props.disabledTextColor};
     }
   }
 `;

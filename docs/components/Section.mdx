@@ -26,36 +26,9 @@ titleStyle은 Typography, buttonStyle은 Button 컴포넌트의 속성을 참고
   </Section>
 </Playground>
 
-## Anchor or Action to Button
-
-`to`, `href`, `onClick`을 지정할 경우 섹션 푸터의 버튼이 액션 가능한 요소가 됩니다.
-
-<Playground>
-  <Section title="가장 완강률이 높은 클래스" buttonTitle="클래스 전체보기" to="/">
-    <GridList
-      items={[
-        {
-          id: 1,
-          title: '리스트 아이템 1',
-          image: imageSrc,
-          to: '/',
-        },
-        {
-          id: 2,
-          title: '리스트 아이템 2',
-          image: imageSrc,
-          to: '/',
-        },
-      ]}
-      smColumn={2}
-      renderItem={item => <Card title={item.title} coverImage={item.image} to={item.to} />}
-    />
-  </Section>
-</Playground>
-
 ## Anchor or Action to Title
 
-ButtonTitle이 없고, `to`, `href`, `onClick`을 지정할 경우 섹션 헤더는 액션이 가능한 요소가 됩니다.
+`to`, `href`, `onClick`을 지정할 경우 섹션 헤더는 액션이 가능한 요소가 됩니다.
 
 <Playground>
   <Section title="가장 완강률이 높은 클래스" to="/">
@@ -118,11 +91,6 @@ ButtonTitle이 없고, `to`, `href`, `onClick`을 지정할 경우 섹션 헤더
       typography: 'Body2',
       color: 'orange',
       sm: 'Caption1',
-    }}
-    buttonTitle="클래스 전체보기"
-    buttonStyle={{
-      color: 'white',
-      backgroundColor: 'black',
     }}
   >
     <GridList

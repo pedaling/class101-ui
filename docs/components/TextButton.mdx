@@ -1,0 +1,162 @@
+---
+menu: Components
+name: TextButton
+route: /components/text-button
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Icon, Colors, TextButton, TextButtonColor, TextButtonSize, Theme } from '@class101/ui';
+import { PlayGroundContainer } from '../HelpComponents';
+
+# TextButton
+
+## Props
+
+<PropsTable of={TextButton} />
+
+## Basic usage
+
+<Playground>
+  <TextButton>Click me</TextButton>
+</Playground>
+
+## With color / theme
+
+```ts
+export enum TextButtonColor {
+  DEFAULT = 'DEFAULT',
+  ORANGE = 'ORANGE',
+  RED = 'RED',
+}
+```
+
+<Playground>
+  <PlayGroundContainer>
+    <TextButton>Click me</TextButton>
+    <TextButton leftIcon={<Icon.Add />}>Click me</TextButton>
+    <TextButton disabled>Click me</TextButton>
+    <TextButton leftIcon={<Icon.Add />} disabled>
+      Click me
+    </TextButton>
+    <TextButton loading>Click me</TextButton>
+  </PlayGroundContainer>
+  <PlayGroundContainer theme={Theme.dark}>
+    <TextButton theme={Theme.dark}>Click me</TextButton>
+    <TextButton theme={Theme.dark} leftIcon={<Icon.Add />}>
+      Click me
+    </TextButton>
+    <TextButton theme={Theme.dark} disabled>
+      Click me
+    </TextButton>
+    <TextButton theme={Theme.dark} leftIcon={<Icon.Add />} disabled>
+      Click me
+    </TextButton>
+    <TextButton theme={Theme.dark} loading>
+      Click me
+    </TextButton>
+  </PlayGroundContainer>
+  <PlayGroundContainer>
+    <TextButton color={TextButtonColor.ORANGE}>Click me</TextButton>
+    <TextButton color={TextButtonColor.ORANGE} leftIcon={<Icon.Add />}>
+      Click me
+    </TextButton>
+    <TextButton color={TextButtonColor.ORANGE} disabled>
+      Click me
+    </TextButton>
+    <TextButton color={TextButtonColor.ORANGE} leftIcon={<Icon.Add />} disabled>
+      Click me
+    </TextButton>
+    <TextButton color={TextButtonColor.ORANGE} loading>
+      Click me
+    </TextButton>
+  </PlayGroundContainer>
+  <PlayGroundContainer>
+    <TextButton color={TextButtonColor.RED}>Click me</TextButton>
+    <TextButton color={TextButtonColor.RED} leftIcon={<Icon.Add />}>
+      Click me
+    </TextButton>
+    <TextButton color={TextButtonColor.RED} disabled>
+      Click me
+    </TextButton>
+    <TextButton color={TextButtonColor.RED} leftIcon={<Icon.Add />} disabled>
+      Click me
+    </TextButton>
+    <TextButton color={TextButtonColor.RED} loading>
+      Click me
+    </TextButton>
+  </PlayGroundContainer>
+</Playground>
+
+## With different sizes
+
+```ts
+export enum TextButtonSize {
+  LARGE = 'lg',
+  MEDIUM = 'md',
+  SMALL = 'sm',
+}
+```
+
+<Playground>
+  <PlayGroundContainer>
+    <TextButton size={TextButtonSize.LARGE}>Click me</TextButton>
+    <TextButton size={TextButtonSize.MEDIUM}>Click me</TextButton>
+    <TextButton size={TextButtonSize.SMALL}>Click me</TextButton>
+  </PlayGroundContainer>
+</Playground>
+
+## With different icons
+
+<Playground>
+  <PlayGroundContainer>
+    <TextButton leftIcon={<Icon.Heart />} size={TextButtonSize.LARGE}>
+      Click me
+    </TextButton>
+    <TextButton leftIcon={<Icon.Heart />} size={TextButtonSize.MEDIUM}>
+      Click me
+    </TextButton>
+    <TextButton leftIcon={<Icon.Heart />} size={TextButtonSize.SMALL}>
+      Click me
+    </TextButton>
+  </PlayGroundContainer>
+  <PlayGroundContainer>
+    <TextButton rightIcon={<Icon.HeartOutline />} size={TextButtonSize.LARGE}>
+      Click me
+    </TextButton>
+    <TextButton rightIcon={<Icon.HeartOutline />} size={TextButtonSize.MEDIUM}>
+      Click me
+    </TextButton>
+    <TextButton rightIcon={<Icon.HeartOutline />} size={TextButtonSize.SMALL}>
+      Click me
+    </TextButton>
+  </PlayGroundContainer>
+</Playground>
+
+## Loading button
+
+<Playground>
+  <TextButton loading>Click me</TextButton>
+</Playground>
+
+## Anchor buttons
+
+버튼과 똑같이 생겼지만 HTML a 태그로 구성되어 있습니다.
+
+<Playground>
+  <PlayGroundContainer>
+    <TextButton href="/" target="_blank">
+      Native A Tag
+    </TextButton>
+    <TextButton to="/" target="_blank">
+      Link of React Router Dom
+    </TextButton>
+  </PlayGroundContainer>
+  <PlayGroundContainer>
+    <TextButton href="/" target="_blank" disabled>
+      Native A Tag
+    </TextButton>
+    <TextButton to="/" target="_blank" disabled>
+      Link of React Router Dom
+    </TextButton>
+  </PlayGroundContainer>
+</Playground>
