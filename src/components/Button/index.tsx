@@ -180,6 +180,7 @@ interface StyledContainerProps extends CommonProps {
 
 const buttonTextStyleBySize: { [key in ButtonSize]: FlattenSimpleInterpolation } = {
   [ButtonSize.LARGE]: css`
+    font-weight: bold;
     font-size: 16px;
     letter-spacing: -0.2px;
   `,
@@ -216,7 +217,7 @@ const buttonStyleBySize: { [key in ButtonSize]: FlattenSimpleInterpolation } = {
 };
 
 const buttonCommonStyle = css<StyledContainerProps>`
-  flex: none;
+  flex: initial;
   outline: none;
   border: none;
   cursor: pointer;
@@ -246,14 +247,14 @@ const buttonCommonStyle = css<StyledContainerProps>`
     text-decoration-line: none;
   }
 
-  &[data-ui-disabled] {
+  &[data-ui-disabled='true'] {
     color: ${props => getButtonColors(props.color, props.theme.mode).disabledTextColor};
     background-color: ${props => getButtonColors(props.color, props.theme.mode).disabledBackgroundColor};
   }
 
   &:disabled,
   &[disabled],
-  &[data-ui-disabled] {
+  &[data-ui-disabled='true'] {
     pointer-events: none;
     cursor: not-allowed;
   }
@@ -264,6 +265,7 @@ const ButtonContainer = styled.button<StyledContainerProps>`
 `;
 
 const Text = styled.div`
+  flex: none;
   display: flex;
   justify-content: center;
   align-items: center;

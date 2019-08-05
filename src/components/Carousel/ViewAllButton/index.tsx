@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { orange50, orange600 } from '../../../Colors';
+import { orange600 } from '../../../Colors';
 import { Add } from '../../../Icon';
-import { body2 } from '../../../TextStyles';
 import Button, { ButtonProps } from '../../Button';
+import { ButtonColor } from '../../Button/interface';
 
-export default class ViewAllButton extends React.PureComponent<ButtonProps> {
+export default class ViewAllButton extends React.PureComponent<Partial<ButtonProps>> {
   public render() {
     return (
-      <AllButton {...this.props}>
+      <AllButton color={ButtonColor.ORANGE_LIGHT} {...this.props}>
         <Inner>
           <Add size={18} fillColor={orange600} />
           <Text>전체보기</Text>
@@ -29,11 +29,6 @@ const AllButton = styled(Button)`
   min-height: 42px;
   height: auto;
   padding: 0;
-  background: none;
-  &:hover,
-  &:focus {
-    background-color: ${orange50};
-  }
 `;
 
 const Inner = styled.div`
@@ -44,7 +39,5 @@ const Inner = styled.div`
 `;
 
 const Text = styled.div`
-  ${body2};
-  color: ${orange600};
   margin-top: 4px;
 `;
