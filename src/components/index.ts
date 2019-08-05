@@ -10,6 +10,6 @@ export { default as Navigation } from './Navigation';
 export * from './FilterList';
 export * from './RadioButtonGroup';
 export * from './Button/interface';
-export { default as Button } from './Button';
-export { default as TextButton } from './Button/TextButton';
+export { default as Button, ButtonProps } from './Button';
+export { default as TextButton, TextButtonProps } from './Button/TextButton';
 export * from './ButtonGroup';
