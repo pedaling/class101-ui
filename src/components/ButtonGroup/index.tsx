@@ -1,43 +1,53 @@
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 
+import { gray100, gray700 } from '../../Colors';
+import { ThemeConfig, ThemeMode } from '../../Theme';
+import { ButtonProps } from '../Button';
+import { ButtonColor } from '../Button/interface';
+
 export interface ButtonGroupProps {
   vertical?: boolean;
   fill?: boolean;
+  theme?: ThemeConfig;
 }
 
 export class ButtonGroup extends PureComponent<ButtonGroupProps> {
   public render() {
-    const { children, vertical, fill } = this.props;
+    const { children, vertical, fill, theme } = this.props;
     return (
-      <ButtonGroupContainer vertical={vertical} fill={fill}>
-        {children}
+      <ButtonGroupContainer vertical={vertical} fill={fill} theme={theme}>
+        {React.Children.map(
+          children,
+          child =>
+            child && React.cloneElement(child as React.ReactElement<ButtonProps>, { theme, color: ButtonColor.DEFAULT })
+        )}
       </ButtonGroupContainer>
     );
   }
 }
 
-const VerticalStyle = css`
+const VerticalStyle = (theme: ThemeMode) => css`
   flex-direction: column;
   & > :not(:first-child) {
+    border-top: 1px solid ${theme === ThemeMode.DARK ? gray700 : gray100};
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
   & > :not(:last-child) {
-    margin-top: -1px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
 `;
 
-const HorizontalStyle = css`
+const HorizontalStyle = (theme: ThemeMode) => css`
   flex-direction: row;
   & > :not(:first-child) {
+    border-left: 1px solid ${theme === ThemeMode.DARK ? gray700 : gray100};
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
   & > :not(:last-child) {
-    margin-right: -1px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
@@ -52,6 +62,6 @@ const FillStyle = css`
 
 const ButtonGroupContainer = styled.div<ButtonGroupProps>`
   display: flex;
-  ${props => (props.vertical ? VerticalStyle : HorizontalStyle)}
+  ${props => (props.vertical ? VerticalStyle(props.theme.mode) : HorizontalStyle(props.theme.mode))}
   ${props => (props.fill ? FillStyle : '')}
 `;
