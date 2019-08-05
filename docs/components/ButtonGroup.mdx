@@ -5,11 +5,13 @@ route: /components/button-group
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { ButtonGroup, Button } from '@class101/ui';
+import { ButtonGroup, Button, ButtonColor, Theme, Icon } from '@class101/ui';
+import { PlayGroundContainer } from '../HelpComponents';
 
 # ButtonGroup
 
-Button 컴포넌트를 가로나 세로로 묶을 때 사용합니다.
+Button 컴포넌트를 가로나 세로로 묶을 때 사용합니다.  
+Button 컴포넌트의 default 컬러만 지원합니다.
 
 ## Props
 
@@ -18,25 +20,72 @@ Button 컴포넌트를 가로나 세로로 묶을 때 사용합니다.
 ## Basic usage
 
 <Playground>
-  <ButtonGroup>
-    <Button>Click me</Button>
-    <Button>Click me</Button>
-    <Button>Click me</Button>
-  </ButtonGroup>
+  <PlayGroundContainer>
+    <ButtonGroup>
+      <Button>Click me</Button>
+      <Button disabled>Click me</Button>
+      <Button loading>Click me</Button>
+      <Button leftIcon={<Icon.Bell />}>Click me</Button>
+    </ButtonGroup>
+  </PlayGroundContainer>
+  <PlayGroundContainer theme={Theme.dark}>
+    <ButtonGroup theme={Theme.dark}>
+      <Button>Click me</Button>
+      <Button disabled>Click me</Button>
+      <Button loading>Click me</Button>
+      <Button leftIcon={<Icon.Bell />}>Click me</Button>
+    </ButtonGroup>
+  </PlayGroundContainer>
 </Playground>
 
-<Playground>
-  <ButtonGroup fill>
-    <Button>Click me</Button>
-    <Button>Click me</Button>
-    <Button>Click me</Button>
-  </ButtonGroup>
-</Playground>
+## Fill
 
 <Playground>
-  <ButtonGroup vertical>
-    <Button>Click me</Button>
-    <Button>Click me</Button>
-    <Button>Click me</Button>
-  </ButtonGroup>
+  <PlayGroundContainer>
+    <ButtonGroup fill>
+      <Button>Click me</Button>
+      <Button>Click me</Button>
+      <Button>Click me</Button>
+    </ButtonGroup>
+  </PlayGroundContainer>
+  <PlayGroundContainer>
+    <ButtonGroup fill>
+      <Button leftIcon={<Icon.Edit />}>수정하기</Button>
+      <Button leftIcon={<Icon.Trash />}>삭제하기</Button>
+      <Button leftIcon={<Icon.Link />}>상세 보기</Button>
+    </ButtonGroup>
+  </PlayGroundContainer>
+  <PlayGroundContainer theme={Theme.dark}>
+    <ButtonGroup theme={Theme.dark} fill>
+      <Button>Click me</Button>
+      <Button>Click me</Button>
+      <Button>Click me</Button>
+    </ButtonGroup>
+  </PlayGroundContainer>
+  <PlayGroundContainer theme={Theme.dark}>
+    <ButtonGroup theme={Theme.dark} fill>
+      <Button leftIcon={<Icon.Edit />}>수정하기</Button>
+      <Button leftIcon={<Icon.Trash />}>삭제하기</Button>
+      <Button leftIcon={<Icon.Link />}>상세 보기</Button>
+    </ButtonGroup>
+  </PlayGroundContainer>
+</Playground>
+
+## Vertical
+
+<Playground>
+  <PlayGroundContainer>
+    <ButtonGroup vertical>
+      <Button>Click me</Button>
+      <Button>Click me</Button>
+      <Button>Click me</Button>
+    </ButtonGroup>
+  </PlayGroundContainer>
+  <PlayGroundContainer theme={Theme.dark}>
+    <ButtonGroup theme={Theme.dark} vertical>
+      <Button>Click me</Button>
+      <Button>Click me</Button>
+      <Button>Click me</Button>
+    </ButtonGroup>
+  </PlayGroundContainer>
 </Playground>
