@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { darken } from 'polished';
 import React, { AnchorHTMLAttributes, ButtonHTMLAttributes, PureComponent, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
@@ -65,6 +66,7 @@ export default class ContainButton extends PureComponent<Props> {
       anchorAttributes,
       buttonAttributes,
       color,
+      className,
       ...restProps
     } = this.props;
     if (loading) {
@@ -125,7 +127,7 @@ export default class ContainButton extends PureComponent<Props> {
           size={size}
           color={color}
           theme={theme}
-          data-ui-disabled={disabled}
+          className={classNames(className, { disabled })}
           disabled={disabled}
           fill={`${fill}`}
           {...anchorAttributes}
@@ -144,7 +146,7 @@ export default class ContainButton extends PureComponent<Props> {
           size={size}
           color={color}
           theme={theme}
-          data-ui-disabled={disabled}
+          className={classNames(className, { disabled })}
           disabled={disabled}
           fill={`${fill}`}
           {...anchorAttributes}
@@ -162,7 +164,7 @@ export default class ContainButton extends PureComponent<Props> {
         size={size}
         color={color}
         theme={theme}
-        data-ui-disabled={disabled}
+        className={classNames(className, { disabled })}
         disabled={disabled}
         fill={`${fill}`}
         {...buttonAttributes}
@@ -247,14 +249,13 @@ const buttonCommonStyle = css<StyledContainerProps>`
     text-decoration-line: none;
   }
 
-  &[data-ui-disabled='true'] {
+  &.disabled {
     color: ${props => getButtonColors(props.color, props.theme.mode).disabledTextColor};
     background-color: ${props => getButtonColors(props.color, props.theme.mode).disabledBackgroundColor};
   }
 
   &:disabled,
-  &[disabled],
-  &[data-ui-disabled='true'] {
+  &.disabled {
     pointer-events: none;
     cursor: not-allowed;
   }

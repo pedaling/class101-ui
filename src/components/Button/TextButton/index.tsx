@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { darken } from 'polished';
 import React, { AnchorHTMLAttributes, ButtonHTMLAttributes, PureComponent, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
@@ -62,6 +63,7 @@ export default class TextButton extends PureComponent<Props> {
       anchorAttributes,
       buttonAttributes,
       color,
+      className,
       ...restProps
     } = this.props;
     if (loading) {
@@ -121,7 +123,7 @@ export default class TextButton extends PureComponent<Props> {
           size={size}
           color={color}
           theme={theme}
-          data-ui-disabled={disabled}
+          className={classNames(className, { disabled })}
           disabled={disabled}
           {...anchorAttributes}
           {...restProps}
@@ -139,7 +141,7 @@ export default class TextButton extends PureComponent<Props> {
           size={size}
           color={color}
           theme={theme}
-          data-ui-disabled={disabled}
+          className={classNames(className, { disabled })}
           disabled={disabled}
           {...anchorAttributes}
           {...restProps}
@@ -156,7 +158,7 @@ export default class TextButton extends PureComponent<Props> {
         size={size}
         color={color}
         theme={theme}
-        data-ui-disabled={disabled}
+        className={classNames(className, { disabled })}
         disabled={disabled}
         {...buttonAttributes}
         {...restProps}
@@ -216,13 +218,12 @@ const buttonCommonStyle = css<CommonProps>`
     }
   }
 
-  &[data-ui-disabled] {
+  &.disabled {
     color: ${props => getTextButtonColors(props.color, props.theme.mode).disabledTextColor};
   }
 
-  &:disabled,
-  &[disabled],
-  &[data-ui-disabled] {
+  &.disabled,
+  &:disabled {
     pointer-events: none;
     cursor: not-allowed;
   }
