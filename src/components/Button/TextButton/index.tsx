@@ -72,6 +72,7 @@ export default class TextButton extends PureComponent<Props> {
           size={size}
           color={color}
           theme={theme}
+          className={className}
           disabled
           {...buttonAttributes}
           {...restProps}
@@ -239,9 +240,6 @@ const Text = styled.div`
 const anchorButtonStyle = css`
   ${buttonCommonStyle};
   text-decoration: none;
-  &:hover {
-    color: inherit;
-  }
 `;
 
 const AnchorButtonInner = styled.div`
