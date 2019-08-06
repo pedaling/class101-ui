@@ -76,6 +76,7 @@ export default class ContainButton extends PureComponent<Props> {
           color={color}
           theme={theme}
           fill={`${fill}`}
+          className={className}
           disabled
           {...buttonAttributes}
           {...restProps}
@@ -272,9 +273,6 @@ const Text = styled.div`
 const anchorButtonStyle = css`
   ${buttonCommonStyle};
   text-decoration: none;
-  &:hover {
-    color: inherit;
-  }
 `;
 
 const AnchorButtonInner = styled.div`
