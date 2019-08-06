@@ -26,7 +26,6 @@ interface CommonProps {
   disabled?: boolean;
   target?: string;
   className?: string;
-  icon?: boolean;
 }
 
 type OmittedAnchorAttributes = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof CommonProps>;
@@ -128,7 +127,6 @@ export default class ContainButton extends PureComponent<Props> {
           color={color}
           theme={theme}
           className={classNames(className, { disabled })}
-          disabled={disabled}
           fill={`${fill}`}
           {...anchorAttributes}
           {...restProps}
@@ -147,7 +145,6 @@ export default class ContainButton extends PureComponent<Props> {
           color={color}
           theme={theme}
           className={classNames(className, { disabled })}
-          disabled={disabled}
           fill={`${fill}`}
           {...anchorAttributes}
           {...restProps}
