@@ -27,6 +27,8 @@ export enum TextButtonColor {
   DEFAULT = 'DEFAULT',
   ORANGE = 'ORANGE',
   RED = 'RED',
+  BLUE = 'BLUE',
+  WHITE = 'WHITE',
 }
 ```
 
@@ -82,6 +84,36 @@ export enum TextButtonColor {
       Click me
     </TextButton>
     <TextButton color={TextButtonColor.RED} loading>
+      Click me
+    </TextButton>
+  </PlayGroundContainer>
+  <PlayGroundContainer>
+    <TextButton color={TextButtonColor.BLUE}>Click me</TextButton>
+    <TextButton color={TextButtonColor.BLUE} leftIcon={<Icon.Add />}>
+      Click me
+    </TextButton>
+    <TextButton color={TextButtonColor.BLUE} disabled>
+      Click me
+    </TextButton>
+    <TextButton color={TextButtonColor.BLUE} leftIcon={<Icon.Add />} disabled>
+      Click me
+    </TextButton>
+    <TextButton color={TextButtonColor.BLUE} loading>
+      Click me
+    </TextButton>
+  </PlayGroundContainer>
+  <PlayGroundContainer theme={Theme.dark}>
+    <TextButton color={TextButtonColor.WHITE}>Click me</TextButton>
+    <TextButton color={TextButtonColor.WHITE} leftIcon={<Icon.Add />}>
+      Click me
+    </TextButton>
+    <TextButton color={TextButtonColor.WHITE} disabled>
+      Click me
+    </TextButton>
+    <TextButton color={TextButtonColor.WHITE} leftIcon={<Icon.Add />} disabled>
+      Click me
+    </TextButton>
+    <TextButton color={TextButtonColor.WHITE} loading>
       Click me
     </TextButton>
   </PlayGroundContainer>
