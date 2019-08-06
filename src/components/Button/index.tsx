@@ -235,10 +235,6 @@ const buttonCommonStyle = css<StyledContainerProps>`
   ${props => buttonTextStyleBySize[props.size]};
   ${props => buttonStyleBySize[props.size]};
 
-  * {
-    vertical-align: middle;
-  }
-
   transition: background-color 0.1s;
 
   &:hover,
