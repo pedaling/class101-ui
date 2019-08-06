@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
 interface CommonProps {
@@ -14,6 +14,22 @@ interface StyledContainerProps extends CommonProps {
   fill?: string;
 }
 
+export default class ControlGroup extends PureComponent<ContainerProps> {
+  public static defaultProps = {
+    fill: false,
+    vertical: false,
+  };
+  public render() {
+    const { fill, children, vertical, ...restProps } = this.props;
+
+    return (
+      <Container fill={`${fill}`} vertical={vertical} {...restProps}>
+        {children}
+      </Container>
+    );
+  }
+}
+
 const Container = styled.div<StyledContainerProps>`
   display: flex;
   align-items: stretch;
@@ -23,7 +39,7 @@ const Container = styled.div<StyledContainerProps>`
       ? `
           flex-direction: column;
 
-          & * {
+          & > * {
             box-sizing: border-box;
             border-radius: 0;
 
@@ -41,7 +57,7 @@ const Container = styled.div<StyledContainerProps>`
       : `
           flex-direction: row;
 
-          & * {
+          & > * {
             box-sizing: border-box;
             border-radius: 0;
 
@@ -58,22 +74,10 @@ const Container = styled.div<StyledContainerProps>`
         `}
 
   ${props =>
-    props.fill &&
+    props.fill === 'true' &&
     `
-      & * {
+      & > * {
         flex: 1 1 auto;
       }
     `};
 `;
-
-export default class ControlGroup extends React.PureComponent<ContainerProps> {
-  public render() {
-    const { fill = false, children, vertical, ...restProps } = this.props;
-
-    return (
-      <Container fill={`${fill}`} vertical={vertical} {...restProps}>
-        {children}
-      </Container>
-    );
-  }
-}
