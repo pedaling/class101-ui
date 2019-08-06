@@ -21,7 +21,7 @@ export default class ViewAllButton extends React.PureComponent<Partial<ButtonPro
 
 const AllButton = styled(Button)`
   display: flex;
-  flex-grow: 0;
+  flex: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
