@@ -56,7 +56,7 @@ const HorizontalStyle = (theme: ThemeMode) => css`
 const FillStyle = css`
   width: 100%;
   & > * {
-    flex: 1;
+    flex: 1 0 auto;
   }
 `;
 
