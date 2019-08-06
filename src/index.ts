@@ -20,7 +20,6 @@ export { default as ProgressState } from './ProgressState';
 export { default as BottomSheet } from './BottomSheet';
 export { default as Badge } from './Badge';
 export { default as FormGroup } from './FormGroup';
-export { default as ControlGroup } from './ControlGroup';
 export { default as Headline1 } from './Typography/Headline1';
 export { default as Headline2 } from './Typography/Headline2';
 export { default as Headline3 } from './Typography/Headline3';

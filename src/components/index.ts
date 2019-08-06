@@ -13,3 +13,4 @@ export * from './Button/interface';
 export { default as Button, ButtonProps } from './Button';
 export { default as TextButton, TextButtonProps } from './Button/TextButton';
 export * from './ButtonGroup';
+export { default as ControlGroup } from './ControlGroup';

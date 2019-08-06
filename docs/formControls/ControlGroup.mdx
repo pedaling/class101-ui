@@ -5,13 +5,11 @@ route: /form-controls/control-group
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Button } from '@class101/ui';
-import { Component as ControlGroup } from './ControlGroup';
-import { Component as Input } from '../formInputs/Input';
+import { Button, ControlGroup, Input, ButtonSize, ButtonColor } from '@class101/ui';
 
 # Control Group
 
-Input을 Label로 묶어줍니다.
+각기 다른 컨트롤을 하나의 단위로 묶어서 보여줍니다.
 
 ## Props
 
@@ -22,12 +20,14 @@ Input을 Label로 묶어줍니다.
 <Playground>
   <ControlGroup>
     <Input placeholder="Placeholder text" />
-    <Button size="lg">Click me</Button>
+    <Button size={ButtonSize.LARGE} color={ButtonColor.ORANGE}>
+      Click me
+    </Button>
   </ControlGroup>
   <br />
   <ControlGroup>
     <Input placeholder="Placeholder text" size="sm" />
-    <Button size="md">Click me</Button>
+    <Button color={ButtonColor.ORANGE}>Click me</Button>
   </ControlGroup>
 </Playground>
 
@@ -36,12 +36,14 @@ Input을 Label로 묶어줍니다.
 <Playground>
   <ControlGroup fill>
     <Input placeholder="Placeholder text" />
-    <Button size="lg">Click me</Button>
+    <Button size={ButtonSize.LARGE} color={ButtonColor.ORANGE}>
+      Click me
+    </Button>
   </ControlGroup>
   <br />
   <ControlGroup fill>
     <Input placeholder="Placeholder text" size="sm" />
-    <Button size="md">Click me</Button>
+    <Button color={ButtonColor.ORANGE}>Click me</Button>
   </ControlGroup>
 </Playground>
 
@@ -50,6 +52,8 @@ Input을 Label로 묶어줍니다.
 <Playground>
   <ControlGroup vertical>
     <Input placeholder="Placeholder text" />
-    <Button size="lg">Click me</Button>
+    <Button size={ButtonSize.LARGE} color={ButtonColor.ORANGE}>
+      Click me
+    </Button>
   </ControlGroup>
 </Playground>
