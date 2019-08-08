@@ -220,7 +220,6 @@ const buttonCommonStyle = css<StyledContainerProps>`
   flex: initial;
   outline: none;
   border: none;
-  cursor: pointer;
   box-sizing: border-box;
 
   width: ${props => (props.fill === 'true' ? '100%' : 'auto')};
@@ -236,9 +235,9 @@ const buttonCommonStyle = css<StyledContainerProps>`
   ${props => buttonStyleBySize[props.size]};
 
   transition: background-color 0.1s;
-
+  // TODO(chiabi): focus 스타일 추가하기
   &:hover,
-  &:focus {
+  &:active {
     background-color: ${props => darken(0.1, getButtonColors(props.color, props.theme.mode).backgroundColor)};
     text-decoration-line: none;
   }
@@ -252,6 +251,10 @@ const buttonCommonStyle = css<StyledContainerProps>`
   &.disabled {
     pointer-events: none;
     cursor: not-allowed;
+  }
+  &:not(:disabled),
+  &:not(.disabled) {
+    cursor: pointer;
   }
 `;
 
