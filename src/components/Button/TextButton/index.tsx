@@ -204,8 +204,9 @@ const buttonCommonStyle = css<CommonProps>`
 
   transition: color 0.1s;
 
+  // TODO(chiabi): focus 스타일 추가하기
   &:hover,
-  &:focus {
+  &:active {
     color: ${props => darken(0.1, getTextButtonColors(props.color, props.theme.mode).textColor)};
     text-decoration-line: underline;
     ${LeftIcon},

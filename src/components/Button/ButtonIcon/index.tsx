@@ -11,6 +11,9 @@ interface ButtonIconProps {
 
 const iconCommonStyle = css`
   flex: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 0;
   > svg {
     width: 100%;
@@ -27,8 +30,7 @@ export const LeftIcon = styled.div<ButtonIconProps>`
   }
 
   :disabled > &,
-  [disabled] > &,
-  [data-ui-disabled] > & {
+  .disabled > & {
     path {
       fill: ${props => props.disabledTextColor};
     }
@@ -44,8 +46,7 @@ export const RightIcon = styled.div<ButtonIconProps>`
   }
 
   :disabled > &,
-  [disabled] > &,
-  [data-ui-disabled] > & {
+  .disabled > & {
     path {
       fill: ${props => props.disabledTextColor};
     }
