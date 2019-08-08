@@ -10,6 +10,8 @@ import { imageSrc } from './interface';
 
 # Callout
 
+한 화면에서 가장 중요한 주의사항이 필요할 때 최소로 쓸 것을 권장합니다.
+
 ## Props
 
 <PropsTable of={Callout} />
@@ -25,15 +27,23 @@ import { imageSrc } from './interface';
 ## Status
 
 <Playground>
+  Normal/info
   <Callout title="공지사항" status={CalloutStatus.DEFAULT}>
     설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다
   </Callout>
   <br />
-  <Callout title="공지사항" status={CalloutStatus.SUGGEST}>
+  Suggest
+  <Callout title="서비스 이용 방법" status={CalloutStatus.SUGGEST}>
     설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다
   </Callout>
   <br />
-  <Callout title="공지사항" status={CalloutStatus.WARNING}>
+  Warning
+  <Callout title="주의사항, 아직 일어나지 않은 사고" status={CalloutStatus.WARNING}>
+    설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다
+  </Callout>
+  <br />
+  Danger
+  <Callout title="금지사항, 오류, 사고" status={CalloutStatus.DANGER}>
     설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다. 설명문구가 들어가는 자리입니다
   </Callout>
 </Playground>
@@ -48,23 +58,21 @@ import { imageSrc } from './interface';
 
 ## Action
 
+Callout의 내용과 관련된 액션을 처리하는 버튼입니다.
+
+> 폼과 관련이 없도록 사용해주세요. (submit x)
+
 ```ts
 interface ActionProps {
   content: string;
-  type?: string;
-  size?: 'lg' | 'md' | 'sm' | 'xs';
-  color?: string;
-  backgroundColor?: string;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   loading?: boolean;
-  borderRadius?: number;
   to?: string;
   href?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => void;
   disabled?: boolean;
   target?: string;
-  fill?: boolean;
   className?: string;
 }
 ```

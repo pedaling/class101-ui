@@ -1,51 +1,37 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
-import { gray000, green500, orange600 } from '../../Colors';
+import { green500, orange600, red600 } from '../../Colors';
 import { Alert, CheckCircle, Info } from '../../Icon';
 import { body2, caption1 } from '../../TextStyles';
-import Button, { ButtonProps } from '../Button';
-import { ButtonColor } from '../Button/interface';
+import Button from '../Button';
+import { ButtonColor, ButtonSize } from '../Button/interface';
+import { backgroundColorByStatus } from './color';
+import { CalloutProps, CalloutStatus, CalloutStatusValue } from './interface';
 
-export enum CalloutStatus {
-  DEFAULT,
-  SUGGEST,
-  WARNING,
-}
-
-interface ActionProps extends ButtonProps {
-  content: string;
-}
-interface Props {
-  title: string;
-  status: CalloutStatus;
-  icon?: React.ReactNode;
-  action?: ActionProps;
-  className?: string;
-}
-
-const iconByCalloutStatus = {
+const iconByStatus = {
   [CalloutStatus.DEFAULT]: <Info />,
   [CalloutStatus.SUGGEST]: <CheckCircle fillColor={green500} />,
   [CalloutStatus.WARNING]: <Alert fillColor={orange600} />,
+  [CalloutStatus.DANGER]: <Alert fillColor={red600} />,
 };
 
-export default class Callout extends PureComponent<Readonly<Props>> {
-  public static defaultProps: Partial<Props> = {
+export default class Callout extends PureComponent<Readonly<CalloutProps>> {
+  public static defaultProps: Partial<CalloutProps> = {
     status: CalloutStatus.DEFAULT,
   };
 
   public render() {
     const { title, icon, status, className, children, action } = this.props;
     return (
-      <Container className={className}>
+      <Container status={status} className={className}>
         <Title>
-          <Icon>{icon ? icon : iconByCalloutStatus[status]}</Icon>
+          <Icon>{icon && status === CalloutStatus.DEFAULT ? icon : iconByStatus[status]}</Icon>
           {title}
         </Title>
         <Content>{children}</Content>
         {action && (
-          <StyledButton size="sm" color={ButtonColor.WHITE} {...action}>
+          <StyledButton size={ButtonSize.SMALL} color={ButtonColor.WHITE} {...action}>
             {action.content}
           </StyledButton>
         )}
@@ -54,10 +40,12 @@ export default class Callout extends PureComponent<Readonly<Props>> {
   }
 }
 
-const Container = styled.div`
+const Container = styled.div<{
+  status: CalloutStatusValue;
+}>`
   padding: 16px;
   border-radius: 3px;
-  background-color: ${gray000};
+  background-color: ${props => backgroundColorByStatus[props.status]};
 `;
 
 const Title = styled.div`
@@ -73,8 +61,8 @@ const Icon = styled.span`
   align-items: center;
   margin-right: 5px;
   > svg {
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
     flex: none;
   }
 `;

@@ -29,6 +29,7 @@ const AllButton = styled(Button)`
   min-height: 42px;
   height: auto;
   padding: 0;
+  background-color: transparent;
 `;
 
 const Inner = styled.div`
