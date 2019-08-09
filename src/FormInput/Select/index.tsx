@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { ChangeEventHandler, PureComponent, SelectHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 import { gray500, gray800, redError } from '../../Colors';
+import { Omit } from '../../interfaces/props';
 import { body2 } from '../../TextStyles';
 import { FormInputFillStyle, FormInputStyle, FormInputStyleBySize, InputSize } from '../common';
 
-export type OptionProps = string | { label?: string; disabled?: boolean; value?: string | number | undefined };
+export type OptionProps = string | { label?: string; disabled?: boolean; value?: string | number };
 
-export interface SelectProps {
-  options?: OptionProps[];
+interface SelectOwnProps {
   size: InputSize;
+  name?: string;
+  value?: string | number;
+  options?: OptionProps[];
   fill?: boolean;
+  placeholder?: string;
+  onChange?: ChangeEventHandler<HTMLSelectElement>;
+}
+
+export type OmittedSelectAttributes = Omit<SelectHTMLAttributes<HTMLSelectElement>, keyof SelectOwnProps>;
+
+export interface SelectProps extends SelectOwnProps {
+  selectAttributes?: OmittedSelectAttributes;
 }
 
 const StyledSelect = styled.select<{ inputSize: InputSize; fill?: boolean }>`
@@ -32,17 +43,23 @@ const StyledSelect = styled.select<{ inputSize: InputSize; fill?: boolean }>`
   }
 `;
 
-export default class Select extends React.PureComponent<React.SelectHTMLAttributes<HTMLSelectElement> & SelectProps> {
+export default class Select extends PureComponent<SelectProps> {
   public static defaultProps = {
     size: InputSize.md,
     fill: true,
   };
 
   public render() {
-    const { value, placeholder, children, options, size, ...htmlProps } = this.props;
+    const { value, placeholder, children, options, size, selectAttributes, ...restProps } = this.props;
 
     return (
-      <StyledSelect inputSize={size} value={value} {...htmlProps} color={value === '' ? gray500 : gray800}>
+      <StyledSelect
+        inputSize={size}
+        value={value}
+        color={value === '' ? gray500 : gray800}
+        {...selectAttributes}
+        {...restProps}
+      >
         {placeholder ? (
           <option value="" hidden disabled>
             {placeholder}
@@ -54,7 +71,7 @@ export default class Select extends React.PureComponent<React.SelectHTMLAttribut
   }
 
   private renderOptions = (o: OptionProps, i: number) => {
-    if (typeof o === 'string') {
+    if (typeof o === 'string' || typeof o === 'number') {
       return (
         <option key={i} value={o}>
           {o}
