@@ -27,6 +27,7 @@ export { default as CheckboxOff } from './generated/CheckboxOff';
 export { default as CheckboxOn } from './generated/CheckboxOn';
 export { default as Chevron } from './generated/Chevron';
 export { default as ChevronDown } from './generated/ChevronDown';
+export { default as Clip } from './generated/Clip';
 export { default as Clock } from './generated/Clock';
 export { default as Close } from './generated/Close';
 export { default as CloseCircle } from './generated/CloseCircle';
