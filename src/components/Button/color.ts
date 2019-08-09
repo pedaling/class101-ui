@@ -3,8 +3,7 @@ import { rgba } from 'polished';
 import {
   blue000,
   blue100,
-  blue200,
-  blue600,
+  blue500,
   gray000,
   gray100,
   gray200,
@@ -15,11 +14,10 @@ import {
   orange000,
   orange100,
   orange200,
-  orange600,
+  orange500,
   red000,
   red100,
-  red200,
-  red600,
+  red500,
   white,
 } from '../../Colors';
 import { ThemeMode } from '../../Theme';
@@ -30,14 +28,19 @@ export const defaultTextColors = {
   [ThemeMode.DARK]: gray100,
 };
 
+export const transparentTextColors = {
+  [ThemeMode.LIGHT]: gray800,
+  [ThemeMode.DARK]: white,
+};
+
 export const textColors = {
   [ButtonColor.ORANGE]: white,
-  [ButtonColor.ORANGE_LIGHT]: orange600,
+  [ButtonColor.ORANGE_LIGHT]: orange500,
   [ButtonColor.RED]: white,
-  [ButtonColor.RED_LIGHT]: red600,
-  [ButtonColor.WHITE]: gray800,
+  [ButtonColor.RED_LIGHT]: red500,
   [ButtonColor.BLUE]: white,
-  [ButtonColor.BLUE_LIGHT]: blue600,
+  [ButtonColor.BLUE_LIGHT]: blue500,
+  [ButtonColor.WHITE]: gray800,
 };
 
 export const defaultBackgroundColors = {
@@ -46,13 +49,13 @@ export const defaultBackgroundColors = {
 };
 
 export const backgroundColors = {
-  [ButtonColor.ORANGE]: orange600,
+  [ButtonColor.ORANGE]: orange500,
   [ButtonColor.ORANGE_LIGHT]: orange000,
-  [ButtonColor.RED]: red600,
+  [ButtonColor.RED]: red500,
   [ButtonColor.RED_LIGHT]: red000,
-  [ButtonColor.WHITE]: white,
-  [ButtonColor.BLUE]: blue600,
+  [ButtonColor.BLUE]: blue500,
   [ButtonColor.BLUE_LIGHT]: blue000,
+  [ButtonColor.WHITE]: white,
 };
 
 export const disabledDefaultTextColors = {
@@ -65,24 +68,21 @@ export const disabledTextColors = {
   [ButtonColor.ORANGE_LIGHT]: orange100,
   [ButtonColor.RED]: white,
   [ButtonColor.RED_LIGHT]: red100,
-  [ButtonColor.WHITE]: gray200,
   [ButtonColor.BLUE]: white,
   [ButtonColor.BLUE_LIGHT]: blue100,
+  [ButtonColor.WHITE]: gray200,
 };
 
-export const disabledDefaultBackgroundColors = {
-  [ThemeMode.LIGHT]: gray000,
-  [ThemeMode.DARK]: gray800,
-};
+export const disabledDefaultBackgroundColors = defaultBackgroundColors;
 
 export const disabledBackgroundColors = {
-  [ButtonColor.ORANGE]: orange200,
+  [ButtonColor.ORANGE]: orange100,
   [ButtonColor.ORANGE_LIGHT]: orange000,
-  [ButtonColor.RED]: red200,
+  [ButtonColor.RED]: red100,
   [ButtonColor.RED_LIGHT]: red000,
-  [ButtonColor.WHITE]: white,
-  [ButtonColor.BLUE]: blue200,
+  [ButtonColor.BLUE]: blue100,
   [ButtonColor.BLUE_LIGHT]: blue000,
+  [ButtonColor.WHITE]: white,
 };
 
 export const defaultTextButtonColors = {
@@ -91,9 +91,9 @@ export const defaultTextButtonColors = {
 };
 
 export const textButtonColors = {
-  [ButtonColor.ORANGE]: orange600,
-  [ButtonColor.RED]: red600,
-  [ButtonColor.BLUE]: blue600,
+  [ButtonColor.ORANGE]: orange500,
+  [ButtonColor.RED]: red500,
+  [ButtonColor.BLUE]: blue500,
   [ButtonColor.WHITE]: white,
 };
 

@@ -5,7 +5,7 @@ route: /components/text-button
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Icon, Colors, TextButton, TextButtonColor, TextButtonSize, Theme } from '@class101/ui';
+import { Icon, Colors, TextButton, ButtonColor, ButtonSize, Theme } from '@class101/ui';
 import { PlayGroundContainer } from '../HelpComponents';
 
 # TextButton
@@ -23,16 +23,17 @@ import { PlayGroundContainer } from '../HelpComponents';
 ## With color / theme
 
 ```ts
-export enum TextButtonColor {
-  DEFAULT = 'DEFAULT',
-  ORANGE = 'ORANGE',
-  RED = 'RED',
-  BLUE = 'BLUE',
-  WHITE = 'WHITE',
+export enum ButtonColor {
+  DEFAULT = 'default',
+  ORANGE = 'orange',
+  RED = 'red',
+  BLUE = 'blue',
+  WHITE = 'white',
 }
 ```
 
 <Playground>
+  Default(Theme)
   <PlayGroundContainer>
     <TextButton>Click me</TextButton>
     <TextButton leftIcon={<Icon.Add />}>Click me</TextButton>
@@ -57,63 +58,68 @@ export enum TextButtonColor {
       Click me
     </TextButton>
   </PlayGroundContainer>
+  <br />
+  Orange
   <PlayGroundContainer>
-    <TextButton color={TextButtonColor.ORANGE}>Click me</TextButton>
-    <TextButton color={TextButtonColor.ORANGE} leftIcon={<Icon.Add />}>
+    <TextButton color={ButtonColor.ORANGE}>Click me</TextButton>
+    <TextButton color={ButtonColor.ORANGE} leftIcon={<Icon.Add />}>
       Click me
     </TextButton>
-    <TextButton color={TextButtonColor.ORANGE} disabled>
+    <TextButton color={ButtonColor.ORANGE} disabled>
       Click me
     </TextButton>
-    <TextButton color={TextButtonColor.ORANGE} leftIcon={<Icon.Add />} disabled>
+    <TextButton color={ButtonColor.ORANGE} leftIcon={<Icon.Add />} disabled>
       Click me
     </TextButton>
-    <TextButton color={TextButtonColor.ORANGE} loading>
+    <TextButton color={ButtonColor.ORANGE} loading>
       Click me
     </TextButton>
   </PlayGroundContainer>
+  Red
   <PlayGroundContainer>
-    <TextButton color={TextButtonColor.RED}>Click me</TextButton>
-    <TextButton color={TextButtonColor.RED} leftIcon={<Icon.Add />}>
+    <TextButton color={ButtonColor.RED}>Click me</TextButton>
+    <TextButton color={ButtonColor.RED} leftIcon={<Icon.Add />}>
       Click me
     </TextButton>
-    <TextButton color={TextButtonColor.RED} disabled>
+    <TextButton color={ButtonColor.RED} disabled>
       Click me
     </TextButton>
-    <TextButton color={TextButtonColor.RED} leftIcon={<Icon.Add />} disabled>
+    <TextButton color={ButtonColor.RED} leftIcon={<Icon.Add />} disabled>
       Click me
     </TextButton>
-    <TextButton color={TextButtonColor.RED} loading>
+    <TextButton color={ButtonColor.RED} loading>
       Click me
     </TextButton>
   </PlayGroundContainer>
+  Blue
   <PlayGroundContainer>
-    <TextButton color={TextButtonColor.BLUE}>Click me</TextButton>
-    <TextButton color={TextButtonColor.BLUE} leftIcon={<Icon.Add />}>
+    <TextButton color={ButtonColor.BLUE}>Click me</TextButton>
+    <TextButton color={ButtonColor.BLUE} leftIcon={<Icon.Add />}>
       Click me
     </TextButton>
-    <TextButton color={TextButtonColor.BLUE} disabled>
+    <TextButton color={ButtonColor.BLUE} disabled>
       Click me
     </TextButton>
-    <TextButton color={TextButtonColor.BLUE} leftIcon={<Icon.Add />} disabled>
+    <TextButton color={ButtonColor.BLUE} leftIcon={<Icon.Add />} disabled>
       Click me
     </TextButton>
-    <TextButton color={TextButtonColor.BLUE} loading>
+    <TextButton color={ButtonColor.BLUE} loading>
       Click me
     </TextButton>
   </PlayGroundContainer>
+  White
   <PlayGroundContainer theme={Theme.dark}>
-    <TextButton color={TextButtonColor.WHITE}>Click me</TextButton>
-    <TextButton color={TextButtonColor.WHITE} leftIcon={<Icon.Add />}>
+    <TextButton color={ButtonColor.WHITE}>Click me</TextButton>
+    <TextButton color={ButtonColor.WHITE} leftIcon={<Icon.Add />}>
       Click me
     </TextButton>
-    <TextButton color={TextButtonColor.WHITE} disabled>
+    <TextButton color={ButtonColor.WHITE} disabled>
       Click me
     </TextButton>
-    <TextButton color={TextButtonColor.WHITE} leftIcon={<Icon.Add />} disabled>
+    <TextButton color={ButtonColor.WHITE} leftIcon={<Icon.Add />} disabled>
       Click me
     </TextButton>
-    <TextButton color={TextButtonColor.WHITE} loading>
+    <TextButton color={ButtonColor.WHITE} loading>
       Click me
     </TextButton>
   </PlayGroundContainer>
@@ -122,7 +128,7 @@ export enum TextButtonColor {
 ## With different sizes
 
 ```ts
-export enum TextButtonSize {
+export enum ButtonSize {
   LARGE = 'lg',
   MEDIUM = 'md',
   SMALL = 'sm',
@@ -131,9 +137,9 @@ export enum TextButtonSize {
 
 <Playground>
   <PlayGroundContainer>
-    <TextButton size={TextButtonSize.LARGE}>Click me</TextButton>
-    <TextButton size={TextButtonSize.MEDIUM}>Click me</TextButton>
-    <TextButton size={TextButtonSize.SMALL}>Click me</TextButton>
+    <TextButton size={ButtonSize.LARGE}>Click me</TextButton>
+    <TextButton size={ButtonSize.MEDIUM}>Click me</TextButton>
+    <TextButton size={ButtonSize.SMALL}>Click me</TextButton>
   </PlayGroundContainer>
 </Playground>
 
@@ -141,24 +147,24 @@ export enum TextButtonSize {
 
 <Playground>
   <PlayGroundContainer>
-    <TextButton leftIcon={<Icon.Heart />} size={TextButtonSize.LARGE}>
+    <TextButton leftIcon={<Icon.Heart />} size={ButtonSize.LARGE}>
       Click me
     </TextButton>
-    <TextButton leftIcon={<Icon.Heart />} size={TextButtonSize.MEDIUM}>
+    <TextButton leftIcon={<Icon.Heart />} size={ButtonSize.MEDIUM}>
       Click me
     </TextButton>
-    <TextButton leftIcon={<Icon.Heart />} size={TextButtonSize.SMALL}>
+    <TextButton leftIcon={<Icon.Heart />} size={ButtonSize.SMALL}>
       Click me
     </TextButton>
   </PlayGroundContainer>
   <PlayGroundContainer>
-    <TextButton rightIcon={<Icon.HeartOutline />} size={TextButtonSize.LARGE}>
+    <TextButton rightIcon={<Icon.HeartOutline />} size={ButtonSize.LARGE}>
       Click me
     </TextButton>
-    <TextButton rightIcon={<Icon.HeartOutline />} size={TextButtonSize.MEDIUM}>
+    <TextButton rightIcon={<Icon.HeartOutline />} size={ButtonSize.MEDIUM}>
       Click me
     </TextButton>
-    <TextButton rightIcon={<Icon.HeartOutline />} size={TextButtonSize.SMALL}>
+    <TextButton rightIcon={<Icon.HeartOutline />} size={ButtonSize.SMALL}>
       Click me
     </TextButton>
   </PlayGroundContainer>

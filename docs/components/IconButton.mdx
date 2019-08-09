@@ -1,0 +1,246 @@
+---
+menu: Components
+name: IconButton
+route: /components/icon-button
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Icon, Colors, IconButton, ButtonColor, ButtonSize, Theme } from '@class101/ui';
+import { PlayGroundButtonContainer } from '../HelpComponents';
+
+# IconButton
+
+아이콘만 포함하는 버튼입니다.
+
+## Props
+
+<PropsTable of={IconButton} />
+
+## Basic usage
+
+<Playground>
+  <IconButton icon={<Icon.Edit />} />
+</Playground>
+
+## With color / theme
+
+```ts
+export enum ButtonColor {
+  DEFAULT = 'default',
+  TRANSPARENT = 'transparent',
+  ORANGE = 'orange',
+  ORANGE_LIGHT = 'orangeLight',
+  RED = 'red',
+  RED_LIGHT = 'redLight',
+  BLUE = 'blue',
+  BLUE_LIGHT = 'blueLight',
+  WHITE = 'white',
+}
+```
+
+<Playground>
+  Default(Theme)
+  <PlayGroundButtonContainer>
+    <IconButton icon={<Icon.Edit />} />
+    <IconButton icon={<Icon.Edit />} disabled />
+    <IconButton icon={<Icon.Edit />} loading />
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer theme={Theme.dark}>
+    <IconButton icon={<Icon.Edit />} theme={Theme.dark} />
+    <IconButton icon={<Icon.Edit />} theme={Theme.dark} disabled />
+    <IconButton icon={<Icon.Edit />} theme={Theme.dark} loading />
+  </PlayGroundButtonContainer>
+  <br />
+  Orage
+  <PlayGroundButtonContainer>
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.ORANGE} />
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.ORANGE} disabled />
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.ORANGE} loading />
+  </PlayGroundButtonContainer>
+  Orange Light
+  <PlayGroundButtonContainer>
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.ORANGE_LIGHT} />
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.ORANGE_LIGHT} disabled />
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.ORANGE_LIGHT} loading />
+  </PlayGroundButtonContainer>
+  Red
+  <PlayGroundButtonContainer>
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.RED} />
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.RED} disabled />
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.RED} loading />
+  </PlayGroundButtonContainer>
+  Red Light
+  <PlayGroundButtonContainer>
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.RED_LIGHT} />
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.RED_LIGHT} disabled />
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.RED_LIGHT} loading />
+  </PlayGroundButtonContainer>
+  Blue
+  <PlayGroundButtonContainer>
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.BLUE} />
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.BLUE} disabled />
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.BLUE} loading />
+  </PlayGroundButtonContainer>
+  Blue Light
+  <PlayGroundButtonContainer>
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.BLUE_LIGHT} />
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.BLUE_LIGHT} disabled />
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.BLUE_LIGHT} loading />
+  </PlayGroundButtonContainer>
+  White
+  <PlayGroundButtonContainer theme={Theme.dark}>
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.WHITE} />
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.WHITE} disabled />
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.WHITE} loading />
+  </PlayGroundButtonContainer>
+  <br />
+  Transparent(Theme)
+  <PlayGroundButtonContainer>
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.TRANSPARENT} />
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.TRANSPARENT} disabled />
+    <IconButton icon={<Icon.Edit />} color={ButtonColor.TRANSPARENT} loading />
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer theme={Theme.dark}>
+    <IconButton icon={<Icon.Edit />} theme={Theme.dark} color={ButtonColor.TRANSPARENT} />
+    <IconButton icon={<Icon.Edit />} theme={Theme.dark} color={ButtonColor.TRANSPARENT} disabled />
+    <IconButton icon={<Icon.Edit />} theme={Theme.dark} color={ButtonColor.TRANSPARENT} loading />
+  </PlayGroundButtonContainer>
+</Playground>
+
+## With size
+
+```ts
+export enum ButtonSize {
+  SMALL = 'sm',
+  XSMALL = 'xs',
+}
+```
+
+<Playground>
+  <PlayGroundButtonContainer>
+    <IconButton icon={<Icon.Edit />} />
+    <IconButton icon={<Icon.Edit />} size={ButtonSize.XSMALL} />
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer>
+    <IconButton to="/" target="_blank" icon={<Icon.Edit />} />
+    <IconButton to="/" target="_blank" icon={<Icon.Edit />} size={ButtonSize.XSMALL} />
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer>
+    <IconButton href="/" target="_blank" icon={<Icon.Edit />} />
+    <IconButton href="/" target="_blank" icon={<Icon.Edit />} size={ButtonSize.XSMALL} />
+  </PlayGroundButtonContainer>
+</Playground>
+
+## fillColor
+
+White, Transparent 컬러의 버튼에서만 사용하길 권장합니다.
+
+<Playground>
+  <PlayGroundButtonContainer theme={Theme.dark}>
+    <IconButton color={ButtonColor.WHITE} fillColor={Colors.red500} icon={<Icon.Heart />} />
+    <IconButton color={ButtonColor.WHITE} fillColor={Colors.red500} icon={<Icon.Heart />} size={ButtonSize.XSMALL} />
+    <IconButton
+      color={ButtonColor.WHITE}
+      fillColor={Colors.red500}
+      icon={<Icon.Heart />}
+      size={ButtonSize.XSMALL}
+      disabled
+    />
+    <IconButton
+      color={ButtonColor.WHITE}
+      fillColor={Colors.red500}
+      icon={<Icon.Heart />}
+      size={ButtonSize.XSMALL}
+      loading
+    />
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer theme={Theme.dark}>
+    <IconButton theme={Theme.dark} color={ButtonColor.TRANSPARENT} fillColor={Colors.red500} icon={<Icon.Heart />} />
+    <IconButton
+      theme={Theme.dark}
+      color={ButtonColor.TRANSPARENT}
+      fillColor={Colors.red500}
+      icon={<Icon.Heart />}
+      size={ButtonSize.XSMALL}
+    />
+    <IconButton
+      theme={Theme.dark}
+      color={ButtonColor.TRANSPARENT}
+      fillColor={Colors.red500}
+      icon={<Icon.Heart />}
+      size={ButtonSize.XSMALL}
+      disabled
+    />
+    <IconButton
+      theme={Theme.dark}
+      color={ButtonColor.TRANSPARENT}
+      fillColor={Colors.red500}
+      icon={<Icon.Heart />}
+      size={ButtonSize.XSMALL}
+      loading
+    />
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer>
+    <IconButton color={ButtonColor.TRANSPARENT} fillColor={Colors.red500} icon={<Icon.Heart />} />
+    <IconButton
+      color={ButtonColor.TRANSPARENT}
+      fillColor={Colors.red500}
+      icon={<Icon.Heart />}
+      size={ButtonSize.XSMALL}
+    />
+    <IconButton
+      color={ButtonColor.TRANSPARENT}
+      fillColor={Colors.red500}
+      icon={<Icon.Heart />}
+      size={ButtonSize.XSMALL}
+      disabled
+    />
+    <IconButton
+      color={ButtonColor.TRANSPARENT}
+      fillColor={Colors.red500}
+      icon={<Icon.Heart />}
+      size={ButtonSize.XSMALL}
+      loading
+    />
+  </PlayGroundButtonContainer>
+</Playground>
+
+## Anchor buttons
+
+버튼과 똑같이 생겼지만 HTML a 태그로 구성되어 있습니다.
+
+<Playground>
+  to
+  <PlayGroundButtonContainer>
+    <IconButton to="/" target="_blank" icon={<Icon.Edit />} />
+    <IconButton to="/" target="_blank" icon={<Icon.Edit />} disabled />
+    <IconButton to="/" target="_blank" icon={<Icon.Edit />} loading />
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer theme={Theme.dark}>
+    <IconButton to="/" target="_blank" icon={<Icon.Edit />} />
+    <IconButton to="/" target="_blank" icon={<Icon.Edit />} disabled />
+    <IconButton to="/" target="_blank" icon={<Icon.Edit />} loading />
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer>
+    <IconButton to="/" target="_blank" icon={<Icon.Edit />} color={ButtonColor.ORANGE} />
+    <IconButton to="/" target="_blank" icon={<Icon.Edit />} color={ButtonColor.ORANGE} disabled />
+    <IconButton to="/" target="_blank" icon={<Icon.Edit />} color={ButtonColor.ORANGE} loading />
+  </PlayGroundButtonContainer>
+  <br />
+  href
+  <PlayGroundButtonContainer>
+    <IconButton href="/" target="_blank" icon={<Icon.Edit />} />
+    <IconButton href="/" target="_blank" icon={<Icon.Edit />} disabled />
+    <IconButton href="/" target="_blank" icon={<Icon.Edit />} loading />
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer theme={Theme.dark}>
+    <IconButton href="/" target="_blank" icon={<Icon.Edit />} />
+    <IconButton href="/" target="_blank" icon={<Icon.Edit />} disabled />
+    <IconButton href="/" target="_blank" icon={<Icon.Edit />} loading />
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer>
+    <IconButton href="/" target="_blank" icon={<Icon.Edit />} color={ButtonColor.ORANGE} />
+    <IconButton href="/" target="_blank" icon={<Icon.Edit />} color={ButtonColor.ORANGE} disabled />
+    <IconButton href="/" target="_blank" icon={<Icon.Edit />} color={ButtonColor.ORANGE} loading />
+  </PlayGroundButtonContainer>
+</Playground>

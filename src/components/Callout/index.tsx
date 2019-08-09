@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { green500, orange600, red600 } from '../../Colors';
 import { Alert, CheckCircle, Info } from '../../Icon';
 import { body2, caption1 } from '../../TextStyles';
-import Button from '../Button';
+import Button from '../Button/ContainButton';
 import { ButtonColor, ButtonSize } from '../Button/interface';
 import { backgroundColorByStatus } from './color';
 import { CalloutProps, CalloutStatus, CalloutStatusValue } from './interface';

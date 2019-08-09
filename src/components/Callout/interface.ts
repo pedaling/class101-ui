@@ -1,7 +1,7 @@
 import { Omit } from '../../interfaces/props';
 import { ThemeConfig } from '../../Theme';
-import { ButtonProps } from '../Button';
-import { ButtonColorValue, ButtonSizeValue } from '../Button/interface';
+import { ButtonProps } from '../Button/ContainButton';
+import { ContainButtonColorValue, ContainButtonSizeValue } from '../Button/interface';
 
 export type CalloutStatusValue = 'default' | 'suggest' | 'warning' | 'danger';
 
@@ -13,9 +13,9 @@ export enum CalloutStatus {
 }
 
 interface ShouldExcludeButtonProps {
-  color: ButtonColorValue;
+  color: ContainButtonColorValue;
   theme: ThemeConfig;
-  size: ButtonSizeValue;
+  size: ContainButtonSizeValue;
   type: string;
 }
 

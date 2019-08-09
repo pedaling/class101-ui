@@ -4,8 +4,12 @@ import styled from 'styled-components';
 export const PlayGroundContainer = styled.div<{ theme: ThemeConfig }>`
   padding: 20px;
   background-color: ${props => (props.theme.mode === ThemeMode.DARK ? Colors.gray900 : Colors.white)};
-  > button,
-  > a {
+`;
+
+export const PlayGroundButtonContainer = styled.div<{ theme: ThemeConfig }>`
+  padding: 16px;
+  background-color: ${props => (props.theme.mode === ThemeMode.DARK ? Colors.gray900 : Colors.white)};
+  > * {
     margin: 4px;
   }
 `;
