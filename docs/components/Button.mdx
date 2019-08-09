@@ -6,7 +6,7 @@ route: /components/button
 
 import { Playground, PropsTable } from 'docz';
 import { Icon, Colors, Button, ButtonColor, ButtonSize, Theme } from '@class101/ui';
-import { PlayGroundContainer } from '../HelpComponents';
+import { PlayGroundButtonContainer } from '../HelpComponents';
 
 # Button
 
@@ -33,17 +33,20 @@ import { PlayGroundContainer } from '../HelpComponents';
 
 ```ts
 export enum ButtonColor {
-  DEFAULT = 'DEFAULT',
-  ORANGE = 'ORANGE',
-  ORANGE_LIGHT = 'ORANGE_LIGHT',
-  RED = 'RED',
-  RED_LIGHT = 'RED_LIGHT',
-  WHITE = 'WHITE',
+  DEFAULT = 'default',
+  ORANGE = 'orange',
+  ORANGE_LIGHT = 'orangeLight',
+  RED = 'red',
+  RED_LIGHT = 'redLight',
+  BLUE = 'blue',
+  BLUE_LIGHT = 'blueLight',
+  WHITE = 'white',
 }
 ```
 
 <Playground>
-  <PlayGroundContainer>
+  Default(Theme)
+  <PlayGroundButtonContainer>
     <Button>Button</Button>
     <Button leftIcon={<Icon.Add />}>Button</Button>
     <Button disabled>Button</Button>
@@ -51,8 +54,8 @@ export enum ButtonColor {
       Button
     </Button>
     <Button loading>Button</Button>
-  </PlayGroundContainer>
-  <PlayGroundContainer theme={Theme.dark}>
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer theme={Theme.dark}>
     <Button theme={Theme.dark}>Button</Button>
     <Button theme={Theme.dark} leftIcon={<Icon.Add />}>
       Button
@@ -66,8 +69,10 @@ export enum ButtonColor {
     <Button theme={Theme.dark} loading>
       Button
     </Button>
-  </PlayGroundContainer>
-  <PlayGroundContainer>
+  </PlayGroundButtonContainer>
+  <br />
+  Orange
+  <PlayGroundButtonContainer>
     <Button color={ButtonColor.ORANGE}>CTA Button</Button>
     <Button color={ButtonColor.ORANGE} leftIcon={<Icon.Add />}>
       CTA Button
@@ -81,8 +86,9 @@ export enum ButtonColor {
     <Button color={ButtonColor.ORANGE} loading>
       CTA Button
     </Button>
-  </PlayGroundContainer>
-  <PlayGroundContainer>
+  </PlayGroundButtonContainer>
+  Orange Light
+  <PlayGroundButtonContainer>
     <Button color={ButtonColor.ORANGE_LIGHT}>Button</Button>
     <Button color={ButtonColor.ORANGE_LIGHT} leftIcon={<Icon.Add />}>
       Button
@@ -96,8 +102,9 @@ export enum ButtonColor {
     <Button color={ButtonColor.ORANGE_LIGHT} loading>
       Button
     </Button>
-  </PlayGroundContainer>
-  <PlayGroundContainer>
+  </PlayGroundButtonContainer>
+  Red
+  <PlayGroundButtonContainer>
     <Button color={ButtonColor.RED}>CTA Button</Button>
     <Button color={ButtonColor.RED} leftIcon={<Icon.Add />}>
       CTA Button
@@ -111,8 +118,9 @@ export enum ButtonColor {
     <Button color={ButtonColor.RED} loading>
       CTA Button
     </Button>
-  </PlayGroundContainer>
-  <PlayGroundContainer>
+  </PlayGroundButtonContainer>
+  Red Light
+  <PlayGroundButtonContainer>
     <Button color={ButtonColor.RED_LIGHT}>Button</Button>
     <Button color={ButtonColor.RED_LIGHT} leftIcon={<Icon.Add />}>
       Button
@@ -126,8 +134,9 @@ export enum ButtonColor {
     <Button color={ButtonColor.RED_LIGHT} loading>
       Button
     </Button>
-  </PlayGroundContainer>
-  <PlayGroundContainer>
+  </PlayGroundButtonContainer>
+  Blue
+  <PlayGroundButtonContainer>
     <Button color={ButtonColor.BLUE}>CTA Button</Button>
     <Button color={ButtonColor.BLUE} leftIcon={<Icon.Add />}>
       CTA Button
@@ -141,8 +150,9 @@ export enum ButtonColor {
     <Button color={ButtonColor.BLUE} loading>
       CTA Button
     </Button>
-  </PlayGroundContainer>
-  <PlayGroundContainer>
+  </PlayGroundButtonContainer>
+  Blue Light
+  <PlayGroundButtonContainer>
     <Button color={ButtonColor.BLUE_LIGHT}>Button</Button>
     <Button color={ButtonColor.BLUE_LIGHT} leftIcon={<Icon.Add />}>
       Button
@@ -156,8 +166,9 @@ export enum ButtonColor {
     <Button color={ButtonColor.BLUE_LIGHT} loading>
       Button
     </Button>
-  </PlayGroundContainer>
-  <PlayGroundContainer theme={Theme.dark}>
+  </PlayGroundButtonContainer>
+  White
+  <PlayGroundButtonContainer theme={Theme.dark}>
     <Button color={ButtonColor.WHITE}>Button</Button>
     <Button color={ButtonColor.WHITE} leftIcon={<Icon.Add />}>
       Button
@@ -171,7 +182,7 @@ export enum ButtonColor {
     <Button color={ButtonColor.WHITE} loading>
       Button
     </Button>
-  </PlayGroundContainer>
+  </PlayGroundButtonContainer>
 </Playground>
 
 ## With size
@@ -186,18 +197,46 @@ export enum ButtonSize {
 ```
 
 <Playground>
-  <PlayGroundContainer>
+  <PlayGroundButtonContainer>
     <Button size={ButtonSize.LARGE}>Click me</Button>
     <Button size={ButtonSize.MEDIUM}>Click me</Button>
     <Button size={ButtonSize.SMALL}>Click me</Button>
     <Button size={ButtonSize.XSMALL}>Click me</Button>
-  </PlayGroundContainer>
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer>
+    <Button to="/" target="_blank" size={ButtonSize.LARGE}>
+      Click me
+    </Button>
+    <Button to="/" target="_blank" size={ButtonSize.MEDIUM}>
+      Click me
+    </Button>
+    <Button to="/" target="_blank" size={ButtonSize.SMALL}>
+      Click me
+    </Button>
+    <Button to="/" target="_blank" size={ButtonSize.XSMALL}>
+      Click me
+    </Button>
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer>
+    <Button href="/" target="_blank" size={ButtonSize.LARGE}>
+      Click me
+    </Button>
+    <Button href="/" target="_blank" size={ButtonSize.MEDIUM}>
+      Click me
+    </Button>
+    <Button href="/" target="_blank" size={ButtonSize.SMALL}>
+      Click me
+    </Button>
+    <Button href="/" target="_blank" size={ButtonSize.XSMALL}>
+      Click me
+    </Button>
+  </PlayGroundButtonContainer>
 </Playground>
 
 ## With icon
 
 <Playground>
-  <PlayGroundContainer>
+  <PlayGroundButtonContainer>
     <Button leftIcon={<Icon.Heart />} size={ButtonSize.LARGE}>
       Click me
     </Button>
@@ -210,8 +249,8 @@ export enum ButtonSize {
     <Button leftIcon={<Icon.Heart />} size={ButtonSize.XSMALL}>
       Click me
     </Button>
-  </PlayGroundContainer>
-  <PlayGroundContainer>
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer>
     <Button rightIcon={<Icon.HeartOutline />} size={ButtonSize.LARGE}>
       Click me
     </Button>
@@ -224,27 +263,27 @@ export enum ButtonSize {
     <Button rightIcon={<Icon.HeartOutline />} size={ButtonSize.XSMALL}>
       Click me
     </Button>
-  </PlayGroundContainer>
+  </PlayGroundButtonContainer>
 </Playground>
 
 ## With fill
 
 <Playground>
-  <PlayGroundContainer>
+  <PlayGroundButtonContainer>
     <Button>Click me</Button>
     <Button fill>Click me</Button>
-  </PlayGroundContainer>
+  </PlayGroundButtonContainer>
 </Playground>
 
 ## Disabled button
 
 <Playground>
-  <PlayGroundContainer>
+  <PlayGroundButtonContainer>
     <Button disabled>Click me</Button>
     <Button rightIcon={<Icon.Heart />} disabled>
       Click me
     </Button>
-  </PlayGroundContainer>
+  </PlayGroundButtonContainer>
 </Playground>
 
 ## Loading button
@@ -258,28 +297,128 @@ export enum ButtonSize {
 버튼과 똑같이 생겼지만 HTML a 태그로 구성되어 있습니다.
 
 <Playground>
-  <PlayGroundContainer>
+  <PlayGroundButtonContainer>
     <Button href="/" target="_blank">
       Native A Tag
     </Button>
     <Button to="/" target="_blank">
       Link of React Router Dom
     </Button>
-  </PlayGroundContainer>
-  <PlayGroundContainer>
-    <Button href="/" target="_blank" disabled>
-      Native A Tag
+  </PlayGroundButtonContainer>
+</Playground>
+
+<Playground>
+  to
+  <PlayGroundButtonContainer>
+    <Button to="/" target="_blank">
+      Button
+    </Button>
+    <Button to="/" target="_blank" leftIcon={<Icon.Add />}>
+      Button
     </Button>
     <Button to="/" target="_blank" disabled>
-      Link of React Router Dom
+      Button
     </Button>
-  </PlayGroundContainer>
+    <Button to="/" target="_blank" leftIcon={<Icon.Add />} disabled>
+      Button
+    </Button>
+    <Button to="/" target="_blank" loading>
+      Button
+    </Button>
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer theme={Theme.dark}>
+    <Button to="/" target="_blank" theme={Theme.dark}>
+      Button
+    </Button>
+    <Button to="/" target="_blank" theme={Theme.dark} leftIcon={<Icon.Add />}>
+      Button
+    </Button>
+    <Button to="/" target="_blank" theme={Theme.dark} disabled>
+      Button
+    </Button>
+    <Button to="/" target="_blank" theme={Theme.dark} leftIcon={<Icon.Add />} disabled>
+      Button
+    </Button>
+    <Button to="/" target="_blank" theme={Theme.dark} loading>
+      Button
+    </Button>
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer>
+    <Button to="/" target="_blank" color={ButtonColor.ORANGE}>
+      CTA Button
+    </Button>
+    <Button to="/" target="_blank" color={ButtonColor.ORANGE} leftIcon={<Icon.Add />}>
+      CTA Button
+    </Button>
+    <Button to="/" target="_blank" color={ButtonColor.ORANGE} disabled>
+      CTA Button
+    </Button>
+    <Button to="/" target="_blank" color={ButtonColor.ORANGE} leftIcon={<Icon.Add />} disabled>
+      CTA Button
+    </Button>
+    <Button to="/" target="_blank" color={ButtonColor.ORANGE} loading>
+      CTA Button
+    </Button>
+  </PlayGroundButtonContainer>
+  <br />
+  href
+  <PlayGroundButtonContainer>
+    <Button href="/" target="_blank">
+      Button
+    </Button>
+    <Button href="/" target="_blank" leftIcon={<Icon.Add />}>
+      Button
+    </Button>
+    <Button href="/" target="_blank" disabled>
+      Button
+    </Button>
+    <Button href="/" target="_blank" leftIcon={<Icon.Add />} disabled>
+      Button
+    </Button>
+    <Button href="/" target="_blank" loading>
+      Button
+    </Button>
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer theme={Theme.dark}>
+    <Button href="/" target="_blank" theme={Theme.dark}>
+      Button
+    </Button>
+    <Button href="/" target="_blank" theme={Theme.dark} leftIcon={<Icon.Add />}>
+      Button
+    </Button>
+    <Button href="/" target="_blank" theme={Theme.dark} disabled>
+      Button
+    </Button>
+    <Button href="/" target="_blank" theme={Theme.dark} leftIcon={<Icon.Add />} disabled>
+      Button
+    </Button>
+    <Button href="/" target="_blank" theme={Theme.dark} loading>
+      Button
+    </Button>
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer>
+    <Button href="/" target="_blank" color={ButtonColor.ORANGE}>
+      CTA Button
+    </Button>
+    <Button href="/" target="_blank" color={ButtonColor.ORANGE} leftIcon={<Icon.Add />}>
+      CTA Button
+    </Button>
+    <Button href="/" target="_blank" color={ButtonColor.ORANGE} disabled>
+      CTA Button
+    </Button>
+    <Button href="/" target="_blank" color={ButtonColor.ORANGE} leftIcon={<Icon.Add />} disabled>
+      CTA Button
+    </Button>
+    <Button href="/" target="_blank" color={ButtonColor.ORANGE} loading>
+      CTA Button
+    </Button>
+  </PlayGroundButtonContainer>
 </Playground>
 
 ##
 
 <Playground>
-  <PlayGroundContainer>
+  <PlayGroundButtonContainer>
     <Button size="xs" variant="default" theme={Theme.dark} leftIcon={<Icon.Heart />}>
       Click me
     </Button>
@@ -289,5 +428,40 @@ export enum ButtonSize {
         Click me
       </Button>
     </div>
-  </PlayGroundContainer>
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer>
+    <Button
+      onClick={() => {
+        alert('Clicked');
+      }}
+    >
+      Button
+    </Button>
+    <Button
+      onClick={() => {
+        alert('Clicked');
+      }}
+      leftIcon={<Icon.Add />}
+    >
+      Button
+    </Button>
+    <Button
+      onClick={() => {
+        alert('Clicked');
+      }}
+      disabled
+    >
+      Button
+    </Button>
+    <Button
+      onClick={() => {
+        alert('Clicked');
+      }}
+      leftIcon={<Icon.Add />}
+      disabled
+    >
+      Button
+    </Button>
+    <Button loading>Button</Button>
+  </PlayGroundButtonContainer>
 </Playground>

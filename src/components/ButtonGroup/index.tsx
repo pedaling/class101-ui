@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 import { gray100, gray700 } from '../../Colors';
 import { ThemeConfig, ThemeMode } from '../../Theme';
-import { ButtonProps } from '../Button';
+import { ButtonProps } from '../Button/ContainButton';
 import { ButtonColor } from '../Button/interface';
 
 export interface ButtonGroupProps {

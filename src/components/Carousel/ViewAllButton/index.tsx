@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { orange600 } from '../../../Colors';
+import { orange000, orange600 } from '../../../Colors';
 import { Add } from '../../../Icon';
-import Button, { ButtonProps } from '../../Button';
+import Button, { ButtonProps } from '../../Button/ContainButton';
 import { ButtonColor } from '../../Button/interface';
 
 export default class ViewAllButton extends React.PureComponent<Partial<ButtonProps>> {
@@ -30,6 +30,10 @@ const AllButton = styled(Button)`
   height: auto;
   padding: 0;
   background-color: transparent;
+  &:hover,
+  &:active {
+    background-color: ${orange000};
+  }
 `;
 
 const Inner = styled.div`

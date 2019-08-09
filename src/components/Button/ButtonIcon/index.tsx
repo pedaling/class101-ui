@@ -1,54 +1,49 @@
 import styled, { css } from 'styled-components';
 
-import { ButtonSizeValue } from '../interface';
-import { getButtonIconSize, iconMarginByButtonSize } from '../utils';
+import { ButtonSize, ButtonSizeValue } from '../interface';
+
+export enum ButtonIconPosition {
+  LEFT,
+  RIGHT,
+  NONE,
+}
 
 interface ButtonIconProps {
   buttonSize: ButtonSizeValue;
-  textColor: string;
-  disabledTextColor: string;
+  position?: ButtonIconPosition;
 }
 
-const iconCommonStyle = css`
+export const iconMarginByButtonSize: { [key in ButtonSize]: number } = {
+  [ButtonSize.LARGE]: 4,
+  [ButtonSize.MEDIUM]: 4,
+  [ButtonSize.SMALL]: 4,
+  [ButtonSize.XSMALL]: 2,
+};
+
+export const buttonIconSizeByButtonSize: { [key in ButtonSize]: number } = {
+  [ButtonSize.LARGE]: 24,
+  [ButtonSize.MEDIUM]: 18,
+  [ButtonSize.SMALL]: 18,
+  [ButtonSize.XSMALL]: 16,
+};
+
+export const getButtonIconSize = (buttonSize: ButtonSizeValue) => {
+  const size = buttonIconSizeByButtonSize[buttonSize];
+  return css`
+    width: ${size}px;
+    height: ${size}px;
+  `;
+};
+
+export const ButtonIcon = styled.div<ButtonIconProps>`
   flex: none;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 0;
-  > svg {
-    width: 100%;
-    height: 100%;
-  }
-`;
-
-export const LeftIcon = styled.div<ButtonIconProps>`
-  ${iconCommonStyle};
   ${props => getButtonIconSize(props.buttonSize)};
-  margin-right: ${props => iconMarginByButtonSize[props.buttonSize]}px;
-  path {
-    fill: ${props => props.textColor};
-  }
-
-  :disabled > &,
-  .disabled > & {
-    path {
-      fill: ${props => props.disabledTextColor};
-    }
-  }
-`;
-
-export const RightIcon = styled.div<ButtonIconProps>`
-  ${iconCommonStyle};
-  ${props => getButtonIconSize(props.buttonSize)};
-  margin-left: ${props => iconMarginByButtonSize[props.buttonSize]}px;
-  path {
-    fill: ${props => props.textColor};
-  }
-
-  :disabled > &,
-  .disabled > & {
-    path {
-      fill: ${props => props.disabledTextColor};
-    }
-  }
+  ${props =>
+    props.position === ButtonIconPosition.RIGHT
+      ? `margin-left: ${iconMarginByButtonSize[props.buttonSize]}px`
+      : `margin-right: ${iconMarginByButtonSize[props.buttonSize]}px`};
 `;

@@ -8,6 +8,7 @@ export enum ButtonSize {
 
 export type ButtonColorValue =
   | 'default'
+  | 'transparent'
   | 'orange'
   | 'orangeLight'
   | 'red'
@@ -18,6 +19,7 @@ export type ButtonColorValue =
 
 export enum ButtonColor {
   DEFAULT = 'default',
+  TRANSPARENT = 'transparent',
   ORANGE = 'orange',
   ORANGE_LIGHT = 'orangeLight',
   RED = 'red',
@@ -27,7 +29,23 @@ export enum ButtonColor {
   WHITE = 'white',
 }
 
-export type ExcludeDefaultColor = Exclude<ButtonColor, ButtonColor.DEFAULT>;
+export type ContainButtonSizeValue = 'lg' | 'md' | 'sm' | 'xs';
+export type ContainButtonColorValue =
+  | 'default'
+  | 'orange'
+  | 'orangeLight'
+  | 'red'
+  | 'redLight'
+  | 'white'
+  | 'blue'
+  | 'blueLight';
+
+export type IconButtonSizeValue = 'sm' | 'xs';
+export enum IconButtonSize {
+  SMALL = 'sm',
+  XSMALL = 'xs',
+}
+export type IconButtonColorValue = ButtonColorValue;
 
 export type TextButtonSizeValue = 'lg' | 'md' | 'sm';
 export enum TextButtonSize {
@@ -45,4 +63,4 @@ export enum TextButtonColor {
   WHITE = 'white',
 }
 
-export type ExcludeDefaultTextButtonColor = Exclude<TextButtonColor, TextButtonColor.DEFAULT>;
+export type ExcludedThemeColor<T> = Exclude<T, 'default'> & Exclude<T, 'transparent'>;
