@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
+import { Colors } from '@class101/ui';
 import { gray600, orange500, redError } from '../Colors';
 import { CheckboxOff, CheckboxOn } from '../Icon';
 import { HTMLInputProps } from '../interfaces/props';
@@ -32,18 +33,28 @@ export default class Checkbox extends React.PureComponent<Props> {
       allowMessage,
       warnMessage,
       errorMessage,
-      color,
       type,
       children,
       checked,
+      disabled,
       ...restProps
     } = this.props;
     return (
       <div style={style} className={className}>
         <Container inline={inline}>
-          {checked ? <CheckboxOn fillColor={color} size={size} /> : <CheckboxOff size={size} fillColor={color} />}
-          <HiddenCheckboxInput onChange={this.handleChange} checked={checked} style={inputStyle} {...restProps} />
-          <ChildText>{children}</ChildText>
+          {checked ? (
+            <CheckboxOn fillColor={disabled ? Colors.gray300 : undefined} size={size} />
+          ) : (
+            <CheckboxOff size={size} fillColor={disabled ? Colors.gray300 : undefined} />
+          )}
+          <HiddenCheckboxInput
+            onChange={this.handleChange}
+            checked={checked}
+            style={inputStyle}
+            disabled={disabled}
+            {...restProps}
+          />
+          <ChildText color={disabled ? Colors.gray300 : undefined}>{children}</ChildText>
         </Container>
 
         {allowMessage && !errorMessage && <Message color={gray600} message={allowMessage} />}
