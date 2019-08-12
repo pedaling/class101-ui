@@ -32,6 +32,7 @@ export default class Checkbox extends React.PureComponent<Props> {
       allowMessage,
       warnMessage,
       errorMessage,
+      color,
       type,
       children,
       checked,
@@ -40,7 +41,7 @@ export default class Checkbox extends React.PureComponent<Props> {
     return (
       <div style={style} className={className}>
         <Container inline={inline}>
-          {checked ? <CheckboxOn size={size} /> : <CheckboxOff size={size} />}
+          {checked ? <CheckboxOn fillColor={color} size={size} /> : <CheckboxOff size={size} fillColor={color} />}
           <HiddenCheckboxInput onChange={this.handleChange} checked={checked} style={inputStyle} {...restProps} />
           <ChildText>{children}</ChildText>
         </Container>
