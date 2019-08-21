@@ -1,7 +1,7 @@
 import React, { PureComponent, ChangeEvent } from 'react';
 import styled, { FlattenSimpleInterpolation, css } from 'styled-components';
 import Theme, { ThemeConfig } from '../../Theme';
-import * as Colors from '../../Colors';
+import { gray100, gray200, white, orange500 } from '../../Colors';
 
 export type SwitchButtonSize = 'md' | 'lg';
 
@@ -20,7 +20,7 @@ export default class SwitchButton extends PureComponent<SwitchButtonProps> {
     theme: Theme.light,
     disabled: false,
     checked: undefined,
-    color: Colors.orange500,
+    color: orange500,
   };
 
   public render() {
@@ -73,7 +73,7 @@ const StyledSwitchButtonInput = styled.input<{ inputSize: SwitchButtonSize; disa
 
   &:before {
     border-radius: 23px;
-    background: ${Colors.gray100};
+    background: ${gray100};
 
     left: -1px;
     top: -1px;
@@ -85,7 +85,7 @@ const StyledSwitchButtonInput = styled.input<{ inputSize: SwitchButtonSize; disa
 
   &:after {
     border-radius: 50%;
-    background: ${props => (props.disabled ? Colors.gray200 : Colors.white)};
+    background: ${props => (props.disabled ? gray200 : white)};
     transform: translate(0, 0);
     transition: transform ${transitionAnimation};
     box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1),
