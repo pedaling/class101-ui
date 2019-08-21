@@ -1,7 +1,7 @@
 import React, { PureComponent, ChangeEvent } from 'react';
 import styled, { FlattenSimpleInterpolation, css } from 'styled-components';
 import Theme, { ThemeConfig } from '../../Theme';
-import { gray100, white, orange500 } from '../../Colors';
+import { gray100, white, orange500, gray300, gray200, gray000 } from '../../Colors';
 
 export type SwitchButtonSize = 'md' | 'lg';
 
@@ -83,7 +83,7 @@ const StyledSwitchButtonInput = styled.input<{ inputSize: SwitchButtonSize; disa
 
   &:after {
     border-radius: 50%;
-    background: ${white};
+    background: ${props => (props.disabled ? gray200 : white)};
     transform: translate(0, 0);
     transition: transform ${transitionAnimation};
     box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1),
