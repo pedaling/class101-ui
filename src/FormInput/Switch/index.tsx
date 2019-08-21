@@ -26,9 +26,9 @@ export default class Switch extends PureComponent<SwitchProps> {
   public render() {
     const { checked, ...restProps } = this.props;
     return (
-      <StyledSwitchButtonBase>
-        <StyledSwitchButtonInput type="checkbox" defaultChecked={checked} {...restProps} />
-      </StyledSwitchButtonBase>
+      <StyledSwitchBase>
+        <StyledSwitchInput type="checkbox" defaultChecked={checked} {...restProps} />
+      </StyledSwitchBase>
     );
   }
 }
@@ -38,14 +38,14 @@ const switcherStyleBySize = css`
   height: 22px;
 `;
 
-const StyledSwitchButtonBase = styled.div`
+const StyledSwitchBase = styled.div`
   ${switcherStyleBySize};
   position: relative;
 `;
 
 const transitionAnimation = '0.15s ease-out 0.08s';
 
-const StyledSwitchButtonInput = styled.input<{ disabled: boolean; color: string }>`
+const StyledSwitchInput = styled.input<{ disabled: boolean; color: string }>`
   box-sizing: border-box;
   appearance: none;
   height: 0;
