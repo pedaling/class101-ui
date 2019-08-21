@@ -19,7 +19,6 @@ export default class SwitchButton extends PureComponent<SwitchButtonProps> {
     size: 'lg',
     theme: Theme.light,
     disabled: false,
-    checked: undefined,
     color: orange500,
   };
 
