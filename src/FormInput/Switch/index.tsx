@@ -43,13 +43,12 @@ const StyledSwitchButtonBase = styled.div`
   position: relative;
 `;
 
-const transitionAnimation = '0.25s ease-out 0.10s';
+const transitionAnimation = '0.15s ease-out 0.08s';
 
 const StyledSwitchButtonInput = styled.input<{ disabled: boolean; color: string }>`
   box-sizing: border-box;
   appearance: none;
   height: 0;
-  font-size: 1em;
   left: 0;
   line-height: 0;
   outline: none;
@@ -60,7 +59,6 @@ const StyledSwitchButtonInput = styled.input<{ disabled: boolean; color: string 
   &:before,
   &:after {
     content: '';
-    font-size: 1em;
     position: absolute;
     box-sizing: border-box;
     cursor: pointer;
