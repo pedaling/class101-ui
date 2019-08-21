@@ -7,7 +7,7 @@ import { body2 } from '../../TextStyles';
 import { FormInputFillStyle, FormInputStyle, FormInputStyleBySize, InputSize } from '../common';
 import InlineError, { Intent } from '../InlineError';
 
-interface Props {
+export interface InputProps {
   size: InputSize;
   type: string;
   className?: string;
@@ -20,7 +20,7 @@ interface Props {
   errorMessage?: string;
 }
 
-const StyledInput = styled.input<Props>`
+const StyledInput = styled.input<InputProps>`
   ${body2};
   ${FormInputStyle};
   ${props => FormInputStyleBySize[props.size]};
@@ -41,8 +41,8 @@ const Container = styled.div<{ inline?: boolean }>`
   display: ${props => (props.inline ? 'inline-block' : 'block')};
 `;
 
-export default class Input extends React.PureComponent<HTMLInputProps & Props> {
-  public static defaultProps: Partial<Props> = {
+export default class Input extends React.PureComponent<HTMLInputProps & InputProps> {
+  public static defaultProps: Partial<InputProps> = {
     size: InputSize.md,
     fill: true,
     type: 'text',
