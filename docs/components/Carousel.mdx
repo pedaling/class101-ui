@@ -108,9 +108,15 @@ enum CarouselPaginationTheme {
     paginationTheme={CarouselPaginationTheme.Dark}
     pagination
   >
-    <PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.red100} onClick={() => alert('clicked')}>
+      배너1
+    </PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.red200} onClick={() => alert('clicked')}>
+      배너2
+    </PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.red300} onClick={() => alert('clicked')}>
+      배너3
+    </PlayGroundBanner>
   </Carousel>
   <Carousel
     navigationPosition={CarouselNavigationPosition.BottomRightIn}

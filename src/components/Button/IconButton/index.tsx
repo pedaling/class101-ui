@@ -20,7 +20,7 @@ export interface IconButtonProps extends ButtonCommonProps<IconButtonColorValue,
   fillColor?: string;
 }
 
-export default class ContainButton extends PureComponent<IconButtonProps> {
+export default class IconButton extends PureComponent<IconButtonProps> {
   public static defaultProps: Partial<IconButtonProps> = {
     theme: Theme.light,
     size: ButtonSize.SMALL,
