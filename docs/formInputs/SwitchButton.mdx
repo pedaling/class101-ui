@@ -5,7 +5,7 @@ route: /form-inputs/switch-button
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { SwitchButton } from '@class101/ui';
+import { SwitchButton, Colors } from '@class101/ui';
 import { PlayGroundButtonContainer } from '../HelpComponents';
 
 # SwitchButton
@@ -16,10 +16,15 @@ import { PlayGroundButtonContainer } from '../HelpComponents';
 
 ## Basic usage
 
+```ts
+import { SwitchButton, Colors } from '@class101/ui';
+```
+
 <Playground>
   <PlayGroundButtonContainer>
     <SwitchButton />
     <SwitchButton size="md" />
+    <SwitchButton color={Colors.blue500} />
   </PlayGroundButtonContainer>
 </Playground>
 

@@ -1,7 +1,7 @@
 import React, { PureComponent, ChangeEvent } from 'react';
 import styled, { FlattenSimpleInterpolation, css } from 'styled-components';
 import Theme, { ThemeConfig } from '../../Theme';
-import { gray100, white, orange500, gray300, gray200, gray000 } from '../../Colors';
+import * as Colors from '../../Colors';
 
 export type SwitchButtonSize = 'md' | 'lg';
 
@@ -10,6 +10,7 @@ export interface SwitchButtonProps {
   theme: ThemeConfig;
   disabled: boolean;
   checked: boolean;
+  color: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -19,6 +20,7 @@ export default class SwitchButton extends PureComponent<SwitchButtonProps> {
     theme: Theme.light,
     disabled: false,
     checked: undefined,
+    color: Colors.orange500,
   };
 
   public render() {
@@ -49,7 +51,7 @@ const StyledSwitchButtonBase = styled.div<{ size: SwitchButtonSize }>`
 
 const transitionAnimation = '0.25s ease-out 0.10s';
 
-const StyledSwitchButtonInput = styled.input<{ inputSize: SwitchButtonSize; disabled: boolean }>`
+const StyledSwitchButtonInput = styled.input<{ inputSize: SwitchButtonSize; disabled: boolean; color: string }>`
   box-sizing: border-box;
   appearance: none;
   height: 0;
@@ -71,7 +73,7 @@ const StyledSwitchButtonInput = styled.input<{ inputSize: SwitchButtonSize; disa
 
   &:before {
     border-radius: 23px;
-    background: ${gray100};
+    background: ${Colors.gray100};
 
     left: -1px;
     top: -1px;
@@ -83,7 +85,7 @@ const StyledSwitchButtonInput = styled.input<{ inputSize: SwitchButtonSize; disa
 
   &:after {
     border-radius: 50%;
-    background: ${props => (props.disabled ? gray200 : white)};
+    background: ${props => (props.disabled ? Colors.gray200 : Colors.white)};
     transform: translate(0, 0);
     transition: transform ${transitionAnimation};
     box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1),
@@ -108,7 +110,7 @@ const StyledSwitchButtonInput = styled.input<{ inputSize: SwitchButtonSize; disa
   }
 
   &:checked:before {
-    background: ${orange500};
+    background: ${props => props.color};
     box-sizing: border-box;
   }
 `;
