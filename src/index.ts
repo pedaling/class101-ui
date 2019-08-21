@@ -1,7 +1,6 @@
 import * as BreakPoints from './BreakPoints';
 import * as Colors from './Colors';
 import * as ElevationStyles from './ElevationStyles';
-import { InlineError, Input, Intent, Select, TagInput, Textarea } from './FormInput';
 import * as Icon from './Icon';
 import { Position } from './Position';
 import * as TextStyles from './TextStyles';
@@ -35,22 +34,10 @@ export { default as Toaster } from './Toaster';
 export { default as Tabs } from './Tabs';
 export { default as Theme, ThemeConfig, ThemeMode } from './Theme';
 
-export {
-  Colors,
-  BreakPoints,
-  TextStyles,
-  Icon,
-  ElevationStyles,
-  Position,
-  Input,
-  Select,
-  Textarea,
-  TagInput,
-  InlineError,
-  Intent,
-};
+export { Colors, BreakPoints, TextStyles, Icon, ElevationStyles, Position };
 export { default as GlobalStyle } from './GlobalStyle';
 export { default as Checkbox } from './Checkbox';
 
 // TODO: refactoring하면서 컴포넌트를 모두 components/로 옮기기
+export * from './FormInput';
 export * from './components';
