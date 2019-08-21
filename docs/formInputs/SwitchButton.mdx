@@ -1,0 +1,33 @@
+---
+menu: Form Inputs
+name: SwitchButton
+route: /form-inputs/switch-button
+---
+
+import { Playground, PropsTable } from 'docz';
+import { SwitchButton } from '@class101/ui';
+import { PlayGroundButtonContainer } from '../HelpComponents';
+
+# SwitchButton
+
+## Props
+
+<PropsTable of={SwitchButton} />
+
+## Basic usage
+
+<Playground>
+  <PlayGroundButtonContainer>
+    <SwitchButton />
+    <SwitchButton size="md" />
+  </PlayGroundButtonContainer>
+</Playground>
+
+## Checked & Disabled
+
+<Playground>
+  <PlayGroundButtonContainer>
+    <SwitchButton checked />
+    <SwitchButton disabled />
+  </PlayGroundButtonContainer>
+</Playground>
