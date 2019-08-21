@@ -1,6 +1,6 @@
 import { css, FlattenSimpleInterpolation } from 'styled-components';
 
-import { gray300, gray400, gray50, gray800, gray500 } from '../Colors';
+import { gray200, gray400, gray50, gray800, gray500 } from '../Colors';
 
 // export type InputSize = 'sm' | 'md';
 
@@ -10,7 +10,7 @@ export enum InputSize {
 }
 
 export const FormInputStyle = css`
-  border: solid 1px ${gray300};
+  border: solid 1px ${gray200};
   border-radius: 1px;
   background-color: white;
   &:hover {
