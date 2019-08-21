@@ -107,7 +107,7 @@ const swiperStyle = css`
     -ms-touch-action: pan-x;
     touch-action: pan-x;
   }
-  .swiper-button-prev,
+  /* .swiper-button-prev,
   .swiper-button-next {
     position: absolute;
     top: 50%;
@@ -125,7 +125,7 @@ const swiperStyle = css`
     opacity: 0.35;
     cursor: auto;
     pointer-events: none;
-  }
+  } */
   .swiper-button-lock {
     display: none;
   }

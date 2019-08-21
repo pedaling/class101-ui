@@ -38,11 +38,13 @@ export default class Navigation extends React.PureComponent<Props> {
         <NavigationButton
           direction={NavigationDirection.Prev}
           onClick={goPrev}
+          disabled={isBeginning}
           className={classNames(NavigationDirection.Prev, isBeginning)}
         />
         <NavigationButton
           direction={NavigationDirection.Next}
           onClick={goNext}
+          disabled={isEnd}
           className={classNames(NavigationDirection.Next, isEnd)}
         />
       </Container>

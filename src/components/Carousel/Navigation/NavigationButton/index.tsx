@@ -3,6 +3,8 @@ import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
 import { elevation1 } from '../../../../ElevationStyles';
 import { Chevron } from '../../../../Icon';
+import IconButton from '../../../Button/IconButton';
+import { ButtonColor } from '../../../Button/interface';
 
 const NAVIGATION_BUTTON_SIZE = 32;
 
@@ -15,15 +17,21 @@ interface Props {
   direction: NavigationDirection;
   onClick: () => void;
   className?: string;
+  disabled: boolean;
 }
 
 export default class NavigationButton extends React.PureComponent<Props> {
   public render() {
-    const { direction, onClick, className } = this.props;
+    const { direction, onClick, className, disabled } = this.props;
     return (
-      <Button onClick={onClick} direction={direction} className={className}>
-        <ChevronIcon direction={direction} size={24} />
-      </Button>
+      <Button
+        color={ButtonColor.WHITE}
+        onClick={onClick}
+        direction={direction}
+        className={className}
+        disabled={disabled}
+        icon={<Chevron />}
+      />
     );
   }
 }
@@ -32,49 +40,23 @@ const navigationDirectionStyle: { [key in NavigationDirection]: FlattenSimpleInt
   [NavigationDirection.Next]: css`
     left: auto;
     right: 0;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   `,
   [NavigationDirection.Prev]: css`
     left: auto;
     right: ${NAVIGATION_BUTTON_SIZE}px;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    svg {
+      transform: rotate(180deg);
+    }
   `,
 };
 
-const Button = styled.button<{ direction: NavigationDirection }>`
+const Button = styled(IconButton)<{ direction: NavigationDirection }>`
   ${elevation1};
-  /* Reset swiper's default style */
-  background: none;
-  border: none;
-  margin: 0;
-
-  /* Customize navigation button  */
   position: absolute;
   top: 0;
   ${props => navigationDirectionStyle[props.direction]};
-  width: ${NAVIGATION_BUTTON_SIZE}px;
-  height: ${NAVIGATION_BUTTON_SIZE}px;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:focus {
-    outline: none;
-  }
-  &:active {
-    opacity: 0.8;
-  }
-`;
-
-const ChevronIcon = styled(Chevron)<{ direction: NavigationDirection }>`
-  flex: none;
-  ${props =>
-    props.direction === NavigationDirection.Prev
-      ? `
-          transform: rotate(180deg);
-        `
-      : ''};
 `;
