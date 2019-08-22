@@ -23,7 +23,17 @@ import { Switch, Colors } from '@class101/ui';
 <Playground>
   <PlayGroundButtonContainer>
     <Switch />
-    <Switch color={Colors.blue500} />
+    <Switch color={Colors.blue500} hoverColor={Colors.blue700} checked />
+  </PlayGroundButtonContainer>
+</Playground>
+
+## With Text
+
+<Playground>
+  <PlayGroundButtonContainer style={{width: '250px'}} >
+    <Switch checked>크레딧 사용 여부</Switch>
+    <Switch onText="다크모드 켜짐" offText="다크모드 꺼짐" />
+
   </PlayGroundButtonContainer>
 </Playground>
 
@@ -33,5 +43,33 @@ import { Switch, Colors } from '@class101/ui';
   <PlayGroundButtonContainer>
     <Switch checked />
     <Switch disabled />
+  </PlayGroundButtonContainer>
+</Playground>
+
+## Block Change
+
+`return false`를 하면 값이 변하지 않습니다.
+
+<Playground>
+  <PlayGroundButtonContainer>
+    <Switch
+      onChange={e => {
+        if (e.target.checked === false) return false;
+      }}
+    />
+  </PlayGroundButtonContainer>
+</Playground>
+
+## Inline
+
+<Playground>
+  <PlayGroundButtonContainer>
+    <Switch inline />
+    <Switch inline />
+  </PlayGroundButtonContainer>
+  <PlayGroundButtonContainer>
+    <Switch onText="다크모드 켜짐" offText="다크모드 꺼짐" inline checked />
+    <Switch onText="다크모드 켜짐" offText="다크모드 꺼짐" inline />
+    <Switch onText="다크모드 켜짐" offText="다크모드 꺼짐" inline disabled />
   </PlayGroundButtonContainer>
 </Playground>
