@@ -1,50 +1,52 @@
 import React, { PureComponent } from 'react';
-import Input, { InputProps } from '../Input';
+import Input from '../Input';
 import styled from 'styled-components';
 import { ControlGroup, IconButton } from '../../components';
 import { MinusCircle, AddCircleOutline } from '../../Icon';
 import { FormInputStyle, InputSize } from '../common';
 import { gray300 } from '../../Colors';
+import { HTMLInputProps } from 'interfaces/props';
 
-export interface StepperProps {
-  value: number;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+interface Props {
   size: InputSize;
-  inputStyle?: React.CSSProperties;
 }
 
-export default class Stepper extends PureComponent<StepperProps> {
-  public static defaultProps: StepperProps = {
-    value: 0,
+export default class Stepper extends PureComponent<HTMLInputProps & Props> {
+  public static defaultProps: Props = {
     size: InputSize.md,
   };
 
   public render() {
-    const { size, inputStyle, ...inputProps } = this.props;
+    const { size, ...inputProps } = this.props;
     return (
-      <StyledStepperGroup fill>
-        <StyledStepperIconButton icon={<MinusCircle />} color="transparent" fillColor={gray300} marginLeft />
-        <StyledStepperInput {...inputProps} type="number" style={inputStyle} />
+      <StyledStepperGroup size={size} fill>
+        {size === InputSize.sm && (
+          <StyledStepperIconButton icon={<MinusCircle />} color="transparent" fillColor={gray300} marginLeft />
+        )}
+        <StyledStepperInput align={size === 'md' ? 'left' : 'center'} {...inputProps} type="number" />
+        {size === InputSize.md && (
+          <StyledStepperIconButton icon={<MinusCircle />} color="transparent" fillColor={gray300} marginRight />
+        )}
         <StyledStepperIconButton icon={<AddCircleOutline />} color="transparent" marginRight />
       </StyledStepperGroup>
     );
   }
 }
 
-const StyledStepperGroup = styled(ControlGroup)`
-  ${FormInputStyle}
-  width: 148px;
+const StyledStepperGroup = styled(ControlGroup)<{ size: InputSize }>`
+  ${FormInputStyle};
+  width: ${props => (props.size === InputSize.md ? 312 : 148)}px;
   align-items: center;
   justify-content: center;
   border-radius: 3px;
 `;
 
-const StyledStepperInput = styled(Input)`
+const StyledStepperInput = styled(Input)<{ align: 'left' | 'center' | 'right' }>`
   border: 0;
   &:hover {
     border: 0;
   }
-  text-align: center;
+  text-align: ${props => props.align};
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
     -webkit-appearance: none;
