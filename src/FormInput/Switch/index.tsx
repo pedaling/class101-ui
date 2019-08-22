@@ -6,7 +6,7 @@ import { elevation1 } from '../../ElevationStyles';
 import { body2 } from '../../TextStyles';
 
 export interface SwitchProps {
-  className: string;
+  style?: React.CSSProperties;
   theme: ThemeConfig;
   disabled: boolean;
   checked: boolean;
@@ -45,11 +45,11 @@ export default class Switch extends PureComponent<SwitchProps, SwitchState> {
   };
 
   public render() {
-    const { inline, onText, offText, children, className, disabled, color, hoverColor } = this.props;
+    const { inline, onText, offText, children, style, disabled, color, hoverColor } = this.props;
     const { checked } = this.state;
     const textExists = children || onText || offText;
     return (
-      <StyledSwitchContainer inline={inline} disabled={disabled} className={className}>
+      <StyledSwitchContainer inline={inline} disabled={disabled} style={style}>
         {textExists && (
           <StyledSwitchText inline={inline} disabled={disabled}>
             {children || (checked ? onText : offText)}

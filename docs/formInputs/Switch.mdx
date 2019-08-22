@@ -5,7 +5,7 @@ route: /form-inputs/switch
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Switch, Colors } from '@class101/ui';
+import { Switch, Colors, Icon } from '@class101/ui';
 import { PlayGroundButtonContainer } from '../HelpComponents';
 
 # Switch
@@ -30,9 +30,11 @@ import { Switch, Colors } from '@class101/ui';
 ## With Text
 
 <Playground>
-  <PlayGroundButtonContainer style={{width: '250px'}} >
+  <PlayGroundButtonContainer style={{ width: '250px' }}>
     <Switch checked>크레딧 사용 여부</Switch>
     <Switch onText="다크모드 켜짐" offText="다크모드 꺼짐" />
+    <Switch onText="다크모드 켜짐" offText="다크모드 꺼짐" disabled />
+    <Switch onText={<span>with component</span>} offText={<Icon.Bell />} />
 
   </PlayGroundButtonContainer>
 </Playground>
