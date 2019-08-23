@@ -1,6 +1,9 @@
+import { range } from 'lodash';
 import React from 'react';
-import { Button, ButtonColor, IconButton } from '../Button';
 import styled, { css } from 'styled-components';
+
+import { ChevronLeft, ChevronRight } from '../../Icon';
+import { Button, ButtonColor, IconButton } from '../Button';
 
 export interface PaginationProps {
   totalPageIndex: number;
@@ -9,24 +12,37 @@ export interface PaginationProps {
 }
 
 const Pagination: React.SFC<PaginationProps> = ({ totalPageIndex, currentPageIndex, onChange }) => {
-  const handleChange = (toAddOrSubtract: number) => {
+  const handleChange = (pageIndex: number) => () => {
     if (onChange) {
-      onChange(currentPageIndex + toAddOrSubtract);
+      onChange(pageIndex);
     }
   };
 
+  const handleIncrease = handleChange(currentPageIndex + 1);
+  const handleDecrease = handleChange(currentPageIndex - 1);
+
+  const indexList = range(0, totalPageIndex + 1);
+
   return (
-    <div>
-      {/* <PageIconBtn icon={<Previ}/> */}
-      <PageBtn color={ButtonColor.ORANGE}>{0 + 1}</PageBtn>
-      <PageBtn color={ButtonColor.ORANGE}>{1 + 1}</PageBtn>
-      <PageBtn color={ButtonColor.WHITE}>{2 + 1}</PageBtn>
-      <PageBtn color={ButtonColor.ORANGE}>{3 + 1}</PageBtn>
-    </div>
+    <PageWrapper>
+      <PageIconBtn icon={<ChevronLeft />} onClick={handleDecrease} disabled={currentPageIndex <= 0} />
+      {indexList.map((_, i) => (
+        <PageBtn
+          color={i === currentPageIndex ? ButtonColor.ORANGE : ButtonColor.WHITE}
+          size="sm"
+          onClick={handleChange(i)}
+        >
+          {i + 1}
+        </PageBtn>
+      ))}
+      <PageIconBtn icon={<ChevronRight />} onClick={handleIncrease} disabled={currentPageIndex >= totalPageIndex} />
+    </PageWrapper>
   );
 };
 
 export default Pagination;
+
+const PageWrapper = styled.div``;
 
 const PageMargin = css`
   margin: 5px;
