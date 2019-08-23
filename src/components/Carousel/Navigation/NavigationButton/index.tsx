@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
 import { elevation1 } from '../../../../ElevationStyles';
-import { Chevron } from '../../../../Icon';
+import { ChevronRight } from '../../../../Icon';
 import IconButton from '../../../Button/IconButton';
 import { ButtonColor } from '../../../Button/interface';
 
@@ -30,7 +30,7 @@ export default class NavigationButton extends React.PureComponent<Props> {
         direction={direction}
         className={className}
         disabled={disabled}
-        icon={<Chevron />}
+        icon={<ChevronRight />}
       />
     );
   }
