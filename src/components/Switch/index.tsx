@@ -47,7 +47,7 @@ export default class Switch extends PureComponent<SwitchProps, SwitchState> {
   public render() {
     const { inline, onText, offText, children, style, disabled, color, hoverColor } = this.props;
     const { checked } = this.state;
-    const textExists = children || onText || offText;
+    const textExists = children || (onText && offText);
     return (
       <StyledSwitchContainer inline={inline} disabled={disabled} style={style}>
         {textExists && (
