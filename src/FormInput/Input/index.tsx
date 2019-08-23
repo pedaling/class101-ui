@@ -74,14 +74,14 @@ export default class Input extends React.PureComponent<HTMLInputProps & InputPro
       inputRef,
       ...restProps
     } = this.props;
-    const labelId = id && label && `input-${label}`;
+    const inputId = id && label && `input-${label}`;
     return (
       <Container style={style} inline={inline}>
-        {label && <InlineLabel htmlFor={labelId}>{label}</InlineLabel>}
+        {label && <InlineLabel htmlFor={inputId}>{label}</InlineLabel>}
         <StyledInput
           className={`${className || ''} ${errorMessage ? ' error' : ''} ${warnMessage ? ' warn' : ''}`}
           type={type}
-          id={labelId}
+          id={inputId}
           size={size}
           style={inputStyle}
           {...inputRef && {
