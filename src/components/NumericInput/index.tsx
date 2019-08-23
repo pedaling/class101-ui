@@ -13,7 +13,7 @@ interface Props extends InputComponentProps {
   inline: boolean;
 }
 
-export default class Stepper extends PureComponent<Props> {
+export default class NumericInput extends PureComponent<Props> {
   public static defaultProps: Partial<Props> = {
     buttonPosition: 'right',
     inline: false,
