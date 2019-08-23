@@ -15,4 +15,4 @@ export * from './Button';
 
 export * from './ButtonGroup';
 export { default as ControlGroup } from './ControlGroup';
-export { default as Stepper } from './Stepper';
+export { default as NumericInput } from './NumericInput';
