@@ -17,7 +17,6 @@ export { default as Spinner } from './Spinner';
 export { default as ProgressBar } from './ProgressBar';
 export { default as ProgressState } from './ProgressState';
 
-export { default as BottomSheet } from './BottomSheet';
 export { default as Badge } from './Badge';
 export { default as FormGroup } from './FormGroup';
 export { default as Headline1 } from './Typography/Headline1';
