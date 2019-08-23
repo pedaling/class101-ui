@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { gray300 } from '../Colors';
-import { Chevron } from '../Icon';
+import { ChevronRight } from '../Icon';
 import { caption1 } from '../TextStyles';
 import Typography, { Typo } from '../Typography';
 
@@ -54,7 +54,7 @@ export default ({ title, description, typography, to, href, target, ...restProps
             <Title md={typography || ('Subtitle1' as Typo)} {...restProps}>
               {title}
             </Title>
-            <Chevron fillColor={gray300} />
+            <ChevronRight fillColor={gray300} />
           </HeaderTop>
         </Link>
         {description && <Description>{description}</Description>}
@@ -69,7 +69,7 @@ export default ({ title, description, typography, to, href, target, ...restProps
             <Title md={typography || ('Subtitle1' as Typo)} {...restProps}>
               {title}
             </Title>
-            <Chevron fillColor={gray300} />
+            <ChevronRight fillColor={gray300} />
           </HeaderTop>
         </a>
         {description && <Description>{description}</Description>}
