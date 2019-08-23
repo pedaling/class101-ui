@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 export interface IconProps {
@@ -25,7 +24,6 @@ export { default as CheckCircleOutline } from './generated/CheckCircleOutline';
 export { default as CheckboxIndeterminated } from './generated/CheckboxIndeterminated';
 export { default as CheckboxOff } from './generated/CheckboxOff';
 export { default as CheckboxOn } from './generated/CheckboxOn';
-export { default as Chevron } from './generated/Chevron';
 export { default as ChevronDown } from './generated/ChevronDown';
 export { default as ChevronLeft } from './generated/ChevronLeft';
 export { default as ChevronRight } from './generated/ChevronRight';
