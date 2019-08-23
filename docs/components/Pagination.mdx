@@ -10,14 +10,22 @@ import { PlayGroundContainer, ThemeProvider } from '../HelpComponents';
 
 # Pagination
 
+페이지네이션이다.
+
 ## Props
 
 <PropsTable of={Pagination} />
+
+훅스라서 직접 쓴다 슬프다.
+
+1. currentPageIndex: `number (required)`
+2. totalPageIndex: `number (required)`
+3. onChange: `(pageIndex: number) => void`
 
 ## Basic usage
 
 <Playground>
   <PlayGroundContainer>
-    <Pagination currentPageIndex={0} totalPageIndex={1} />
+    <Pagination currentPageIndex={0} totalPageIndex={1} onChange={number => console.log(number)} />
   </PlayGroundContainer>
 </Playground>
