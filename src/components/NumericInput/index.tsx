@@ -20,15 +20,32 @@ export default class NumericInput extends PureComponent<Props> {
     step: 1,
   };
 
-  private get inputCurrent() {
+  private get inputElement() {
     return this.inputRef.current!;
   }
 
   private inputRef = createRef<HTMLInputElement>();
 
-  // stepUp, stepDown함수는 onChange이벤트를 발생시키지 않기 때문에 직접 호출
-  private fireOnChangeEvent = () => {
-    this.inputCurrent.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));
+  private triggetChangeEvent = () => {
+    this.inputElement.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));
+  };
+
+  private onStepUpClick = () => {
+    this.inputElement.stepDown();
+    this.triggetChangeEvent();
+  };
+
+  private onStepDownClick = () => {
+    this.inputElement.stepUp();
+    this.triggetChangeEvent();
+  };
+
+  private calculateStepperPosition = (isLeft: boolean) => {
+    if (isLeft)
+      return {
+        left: 8,
+      };
+    return { right: 48 };
   };
 
   public render() {
@@ -45,21 +62,10 @@ export default class NumericInput extends PureComponent<Props> {
         <StyledStepperButton
           icon={<Minus />}
           top={top}
-          onClick={() => {
-            this.inputCurrent.stepDown();
-            this.fireOnChangeEvent();
-          }}
-          {...(buttonPosition === 'side' ? { left: 8 } : { right: 48 })}
+          onClick={this.onStepDownClick}
+          {...this.calculateStepperPosition(buttonPosition === 'side')}
         />
-        <StyledStepperButton
-          icon={<Add />}
-          top={top}
-          onClick={() => {
-            this.inputCurrent.stepUp();
-            this.fireOnChangeEvent();
-          }}
-          right={8}
-        />
+        <StyledStepperButton icon={<Add />} top={top} onClick={this.onStepUpClick} right={8} />
       </StyledStepperContainer>
     );
   }
