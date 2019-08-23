@@ -14,5 +14,6 @@ export * from './RadioButtonGroup';
 export * from './Button';
 
 export * from './ButtonGroup';
+export { default as Switch } from './Switch';
 export { default as ControlGroup } from './ControlGroup';
 export { default as NumericInput } from './NumericInput';
