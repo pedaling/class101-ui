@@ -1,0 +1,23 @@
+---
+menu: Components
+name: Pagination
+route: /components/pagination
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Pagination } from '@class101/ui';
+import { PlayGroundContainer, ThemeProvider } from '../HelpComponents';
+
+# Pagination
+
+## Props
+
+<PropsTable of={Pagination} />
+
+## Basic usage
+
+<Playground>
+  <PlayGroundContainer>
+    <Pagination currentPageIndex={0} totalPageIndex={1} />
+  </PlayGroundContainer>
+</Playground>
