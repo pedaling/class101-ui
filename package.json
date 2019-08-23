@@ -108,7 +108,7 @@
     "classnames": "^2.2.6",
     "path-to-regexp": "^3.0.0",
     "polished": "^3.4.1",
-    "typescript": "^3.5.3"
+    "typescript": "3.5.3"
   },
   "bugs": {
     "url": "https://github.com/pedaling/class101-ui/issues"
