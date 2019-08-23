@@ -4,6 +4,8 @@ export default {
   title: 'Class101 UI Docs',
   description: 'A React-based UI Component Library, powered by Class101.',
   src: './docs/',
+  dest: './public',
+  public: '/pub',
   themeConfig: {
     showPlaygroundEditor: true,
     colors: {
