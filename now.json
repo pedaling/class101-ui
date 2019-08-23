@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "name": "class101-ui",
+  "alias": "ui.class101.dev",
+  "scope": "class101",
+  "builds": [{ "src": "package.json", "use": "@now/static-build", "config": { "distDir": "public" } }],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/assets.json",
+      "dest": "/assets.json"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
