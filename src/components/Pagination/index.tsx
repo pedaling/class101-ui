@@ -1,5 +1,5 @@
 import { range } from 'lodash';
-import React from 'react';
+import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 
 import { ChevronLeft, ChevronRight } from '../../Icon';
@@ -11,36 +11,38 @@ export interface PaginationProps {
   onChange?: (pageIndex: number) => void;
 }
 
-const Pagination: React.SFC<PaginationProps> = ({ totalPageIndex, currentPageIndex, onChange }) => {
-  const handleChange = (pageIndex: number) => () => {
+export class Pagination extends PureComponent<PaginationProps> {
+  public render() {
+    const { totalPageIndex, currentPageIndex } = this.props;
+    const handleIncrease = this.handleChange(currentPageIndex + 1);
+    const handleDecrease = this.handleChange(currentPageIndex - 1);
+
+    const indexList = range(0, totalPageIndex + 1);
+
+    return (
+      <PageWrapper>
+        <PageIconBtn icon={<ChevronLeft />} onClick={handleDecrease} disabled={currentPageIndex <= 0} />
+        {indexList.map((_, i) => (
+          <PageBtn
+            color={i === currentPageIndex ? ButtonColor.ORANGE : ButtonColor.WHITE}
+            size="sm"
+            onClick={this.handleChange(i)}
+          >
+            {i + 1}
+          </PageBtn>
+        ))}
+        <PageIconBtn icon={<ChevronRight />} onClick={handleIncrease} disabled={currentPageIndex >= totalPageIndex} />
+      </PageWrapper>
+    );
+  }
+
+  private handleChange = (pageIndex: number) => () => {
+    const { onChange } = this.props;
     if (onChange) {
       onChange(pageIndex);
     }
   };
-
-  const handleIncrease = handleChange(currentPageIndex + 1);
-  const handleDecrease = handleChange(currentPageIndex - 1);
-
-  const indexList = range(0, totalPageIndex + 1);
-
-  return (
-    <PageWrapper>
-      <PageIconBtn icon={<ChevronLeft />} onClick={handleDecrease} disabled={currentPageIndex <= 0} />
-      {indexList.map((_, i) => (
-        <PageBtn
-          color={i === currentPageIndex ? ButtonColor.ORANGE : ButtonColor.WHITE}
-          size="sm"
-          onClick={handleChange(i)}
-        >
-          {i + 1}
-        </PageBtn>
-      ))}
-      <PageIconBtn icon={<ChevronRight />} onClick={handleIncrease} disabled={currentPageIndex >= totalPageIndex} />
-    </PageWrapper>
-  );
-};
-
-export default Pagination;
+}
 
 const PageWrapper = styled.div``;
 
