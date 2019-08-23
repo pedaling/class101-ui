@@ -44,7 +44,7 @@ const Container = styled.div<{ inline?: boolean }>`
   display: ${props => (props.inline ? 'inline-block' : 'block')};
 `;
 
-const InlineLabel = styled.h4`
+const InlineLabel = styled.label`
   ${body2}
   display: flex;
   align-items: center;
@@ -73,12 +73,14 @@ export default class Input extends React.PureComponent<HTMLInputProps & InputPro
       inputRef,
       ...restProps
     } = this.props;
+    const labelId = label && `input-${label}`;
     return (
       <Container style={style} inline={inline}>
-        {label && <InlineLabel>{label}</InlineLabel>}
+        {label && <InlineLabel htmlFor={labelId}>{label}</InlineLabel>}
         <StyledInput
           className={`${className || ''} ${errorMessage ? ' error' : ''} ${warnMessage ? ' warn' : ''}`}
           type={type}
+          id={labelId}
           size={size}
           style={inputStyle}
           {...inputRef && {
