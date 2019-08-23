@@ -26,26 +26,34 @@ export default class NumericInput extends PureComponent<Props> {
 
   private inputRef = createRef<HTMLInputElement>();
 
-  private triggetChangeEvent = () => {
+  private triggerChangeEvent = () => {
     this.inputElement.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));
   };
 
-  private onStepUpClick = () => {
-    this.inputElement.stepDown();
-    this.triggetChangeEvent();
-  };
-
-  private onStepDownClick = () => {
+  private handleStepUpClick = () => {
     this.inputElement.stepUp();
-    this.triggetChangeEvent();
+    this.triggerChangeEvent();
   };
 
-  private calculateStepperPosition = (isLeft: boolean) => {
-    if (isLeft)
-      return {
-        left: 8,
-      };
-    return { right: 48 };
+  private handleStepDownClick = () => {
+    this.inputElement.stepDown();
+    this.triggerChangeEvent();
+  };
+
+  private stepDownButtonPosition = () => {
+    const { buttonPosition, label } = this.props;
+    const top = this.calculateButtonTop(label);
+    return buttonPosition === 'side' ? { left: 8, top } : { right: 48, top };
+  };
+
+  private stepUpButtonPosition = () => {
+    const { label } = this.props;
+    const top = this.calculateButtonTop(label);
+    return { right: 8, top };
+  };
+
+  private calculateButtonTop = (label?: string) => {
+    return label ? 32 : 8;
   };
 
   public render() {
@@ -59,13 +67,8 @@ export default class NumericInput extends PureComponent<Props> {
           type="number"
           {...inputProps}
         />
-        <StyledStepperButton
-          icon={<Minus />}
-          top={top}
-          onClick={this.onStepDownClick}
-          {...this.calculateStepperPosition(buttonPosition === 'side')}
-        />
-        <StyledStepperButton icon={<Add />} top={top} onClick={this.onStepUpClick} right={8} />
+        <StyledStepperButton icon={<Minus />} onClick={this.handleStepDownClick} {...this.stepDownButtonPosition()} />
+        <StyledStepperButton icon={<Add />} onClick={this.handleStepUpClick} {...this.stepUpButtonPosition()} />
       </StyledStepperContainer>
     );
   }
