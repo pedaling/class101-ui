@@ -16,16 +16,10 @@ import { PlayGroundContainer, ThemeProvider } from '../HelpComponents';
 
 <PropsTable of={Pagination} />
 
-훅스라서 직접 쓴다 슬프다.
-
-1. currentPageIndex: `number (required)`
-2. totalPageIndex: `number (required)`
-3. onChange: `(pageIndex: number) => void`
-
 ## Basic usage
 
 <Playground>
   <PlayGroundContainer>
-    <Pagination currentPageIndex={0} totalPageIndex={1} onChange={number => console.log(number)} />
+    <Pagination currentPageIndex={0} totalPageIndex={1} onChange={number => alert(number)} />
   </PlayGroundContainer>
 </Playground>
