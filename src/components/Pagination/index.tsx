@@ -27,6 +27,7 @@ export class Pagination extends PureComponent<PaginationProps> {
             color={i === currentPageIndex ? ButtonColor.ORANGE : ButtonColor.WHITE}
             size="sm"
             onClick={this.handleChange(i)}
+            key={`pagination-${i}`}
           >
             {i + 1}
           </PageBtn>
