@@ -1,7 +1,7 @@
 import React, { PureComponent, createRef } from 'react';
 import Input, { InputProps } from '../../FormInput/Input';
 import styled from 'styled-components';
-import { IconButton } from '..';
+import IconButton from '../Button/IconButton';
 import { Minus, Add } from '../../Icon';
 import { HTMLInputProps } from 'interfaces/props';
 
