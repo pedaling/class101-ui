@@ -46,14 +46,14 @@ export class Pagination extends PureComponent<PaginationProps> {
 
 const PageWrapper = styled.div``;
 
-const PageMargin = css`
+const PageBtnCommonStyle = css`
   margin: 5px;
 `;
 
 const PageBtn = styled(Button)`
-  ${PageMargin};
+  ${PageBtnCommonStyle};
 `;
 
 const PageIconBtn = styled(IconButton)`
-  ${PageMargin};
+  ${PageBtnCommonStyle};
 `;
