@@ -58,7 +58,6 @@ export default class NumericInput extends PureComponent<Props> {
 
   public render() {
     const { buttonPosition, ...inputProps } = this.props;
-    const top = 8 + (inputProps.label ? 24 : 0);
     return (
       <StyledStepperContainer inline={inputProps.inline}>
         <StyledStepperInput
