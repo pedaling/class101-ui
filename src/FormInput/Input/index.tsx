@@ -8,6 +8,8 @@ import { FormInputFillStyle, FormInputStyle, FormInputStyleBySize, InputSize } f
 import InlineError, { Intent } from '../InlineError';
 
 interface Props {
+  inputRef?: React.RefObject<HTMLInputElement>;
+  label?: string;
   size: InputSize;
   type: string;
   className?: string;
@@ -28,6 +30,7 @@ const StyledInput = styled.input<Props>`
   color: ${gray800};
   box-sizing: border-box;
   padding: 0 16px;
+  border-radius: 3px;
   &.error {
     border: solid 1px ${redError};
   }
@@ -39,6 +42,13 @@ const StyledInput = styled.input<Props>`
 
 const Container = styled.div<{ inline?: boolean }>`
   display: ${props => (props.inline ? 'inline-block' : 'block')};
+`;
+
+const InlineLabel = styled.h4`
+  ${body2}
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
 `;
 
 export default class Input extends React.PureComponent<HTMLInputProps & Props> {
@@ -58,17 +68,22 @@ export default class Input extends React.PureComponent<HTMLInputProps & Props> {
       allowMessage,
       warnMessage,
       errorMessage,
+      label,
       size,
+      inputRef,
       ...restProps
     } = this.props;
-
     return (
       <Container style={style} inline={inline}>
+        {label && <InlineLabel>{label}</InlineLabel>}
         <StyledInput
           className={`${className || ''} ${errorMessage ? ' error' : ''} ${warnMessage ? ' warn' : ''}`}
           type={type}
           size={size}
           style={inputStyle}
+          {...inputRef && {
+            ref: inputRef,
+          }}
           {...restProps}
         />
         {allowMessage && !errorMessage && (
