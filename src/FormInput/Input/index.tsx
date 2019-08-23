@@ -70,10 +70,11 @@ export default class Input extends React.PureComponent<HTMLInputProps & InputPro
       errorMessage,
       label,
       size,
+      id,
       inputRef,
       ...restProps
     } = this.props;
-    const labelId = label && `input-${label}`;
+    const labelId = id && label && `input-${label}`;
     return (
       <Container style={style} inline={inline}>
         {label && <InlineLabel htmlFor={labelId}>{label}</InlineLabel>}
