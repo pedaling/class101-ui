@@ -59,26 +59,30 @@ export default class NumericInput extends PureComponent<Props> {
   public render() {
     const { buttonPosition, ...inputProps } = this.props;
     return (
-      <StyledStepperContainer inline={inputProps.inline}>
-        <StyledStepperInput
+      <StyledNumericInputContainer inline={inputProps.inline}>
+        <StyledNumericInputInput
           inputRef={this.inputRef}
           align={buttonPosition === 'right' ? 'left' : 'center'}
           type="number"
           {...inputProps}
         />
-        <StyledStepperButton icon={<Minus />} onClick={this.handleStepDownClick} {...this.stepDownButtonPosition()} />
-        <StyledStepperButton icon={<Add />} onClick={this.handleStepUpClick} {...this.stepUpButtonPosition()} />
-      </StyledStepperContainer>
+        <StyledNumericInputButton
+          icon={<Minus />}
+          onClick={this.handleStepDownClick}
+          {...this.stepDownButtonPosition()}
+        />
+        <StyledNumericInputButton icon={<Add />} onClick={this.handleStepUpClick} {...this.stepUpButtonPosition()} />
+      </StyledNumericInputContainer>
     );
   }
 }
 
-const StyledStepperContainer = styled.div<{ inline: boolean }>`
+const StyledNumericInputContainer = styled.div<{ inline: boolean }>`
   position: relative;
   display: ${props => (props.inline ? 'inline-block' : 'block')};
 `;
 
-const StyledStepperInput = styled(Input)<{ align: 'left' | 'center' }>`
+const StyledNumericInputInput = styled(Input)<{ align: 'left' | 'center' }>`
   text-align: ${props => props.align};
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
@@ -87,7 +91,7 @@ const StyledStepperInput = styled(Input)<{ align: 'left' | 'center' }>`
   }
 `;
 
-const StyledStepperButton = styled(IconButton)<{ top?: number; right?: number; left?: number }>`
+const StyledNumericInputButton = styled(IconButton)<{ top?: number; right?: number; left?: number }>`
   position: absolute;
   ${props => props.top && `top: ${props.top}px`}
   ${props => props.right && `right: ${props.right}px`}
