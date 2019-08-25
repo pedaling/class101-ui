@@ -1,4 +1,4 @@
-import { gray000, orange000, red000 } from '../../Colors';
+import { gray000, orange000, red000 } from '../../core/Colors';
 import { CalloutStatus } from './interface';
 
 export const backgroundColorByStatus = {

@@ -1,5 +1,5 @@
+import { ThemeConfig } from '../../core/Theme';
 import { Omit } from '../../interfaces/props';
-import { ThemeConfig } from '../../Theme';
 import { ButtonProps } from '../Button/ContainButton';
 import { ContainButtonColorValue, ContainButtonSizeValue } from '../Button/interface';
 

@@ -3,7 +3,7 @@ import { darken } from 'polished';
 import React, { PureComponent } from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
-import Theme from '../../../Theme';
+import { Theme } from '../../../core/Theme';
 import ButtonBase, { ButtonCommonProps } from '../ButtonBase';
 import { ButtonIcon, ButtonIconPosition, buttonIconSizeByButtonSize } from '../ButtonIcon';
 import ButtonSpinner from '../ButtonSpinner';
@@ -14,7 +14,7 @@ export interface ButtonProps extends ButtonCommonProps<ContainButtonColorValue, 
   fill: boolean;
 }
 
-export default class ContainButton extends PureComponent<ButtonProps> {
+export class Button extends PureComponent<ButtonProps> {
   public static defaultProps: Partial<ButtonProps> = {
     theme: Theme.light,
     size: ButtonSize.MEDIUM,

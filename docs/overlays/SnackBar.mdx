@@ -1,0 +1,22 @@
+---
+menu: Overlays
+name: SnackBar
+route: /overlays/snack-bar
+---
+
+import { Playground, PropsTable } from 'docz';
+import { SnackBar, Button } from '@class101/ui';
+
+# SnackBar
+
+> 개발 중
+
+## Props
+
+<PropsTable of={SnackBar} />
+
+## Basic usage
+
+<Playground>
+  <SnackBar message={'Snack Bar!'} actionElement={<Button onClick={() => console.log('Clicked')} />} />
+</Playground>
