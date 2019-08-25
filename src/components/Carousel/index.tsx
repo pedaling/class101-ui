@@ -5,8 +5,8 @@ import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 import { AutoplayOptions, PaginationOptions, SwiperEvent } from 'swiper';
 import { Autoplay, Lazy, LazyOptions, Pagination, Swiper } from 'swiper/dist/js/swiper.esm';
 
-import { media, SIZES } from '../../BreakPoints';
-import { gray700, white } from '../../Colors';
+import { media, SIZES } from '../../core/BreakPoints';
+import { gray700, white } from '../../core/Colors';
 import Navigation, { CarouselNavigationPosition } from './Navigation';
 import ViewAllButton from './ViewAllButton';
 
@@ -58,7 +58,7 @@ interface State {
   readonly isBeginning: boolean;
   readonly isEnd: boolean;
 }
-export default class Carousel extends PureComponent<CarouselProps, State> {
+export class Carousel extends PureComponent<CarouselProps, State> {
   public static ViewAllButton = ViewAllButton;
   public static defaultProps = {
     navigation: true,

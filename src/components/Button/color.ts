@@ -19,8 +19,8 @@ import {
   red100,
   red500,
   white,
-} from '../../Colors';
-import { ThemeMode } from '../../Theme';
+} from '../../core/Colors';
+import { ThemeMode } from '../../core/Theme';
 import { ButtonColor } from './interface';
 
 export const defaultTextColors = {

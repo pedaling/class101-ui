@@ -5,9 +5,9 @@ route: /components/carousel
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Carousel, CarouselNavigationPosition, CarouselPaginationTheme, Card, Section, Colors } from '@class101/ui';
+import { Carousel, CarouselNavigationPosition, CarouselPaginationTheme, Section, Colors } from '@class101/ui';
 import { imageSrc } from './interface';
-import { PlayGroundBanner, PlayGroundSectionCarouselContent, SwiperCard, PreloadImage } from '../HelpComponents';
+import { PlayGroundBanner, PlayGroundSectionCarouselContent, SwiperCard, PreloadImage } from '../docsComponents';
 
 # Carousel
 
@@ -51,12 +51,12 @@ enum CarouselNavigationPosition {
       smSlidesPerView={2}
       pagination
     >
-      <Card title="내 방 안의 자수공장! 재봉틀자수, 어렵지 않아요" coverImage={imageSrc} />
-      <Card title="나만의 그림으로 내 삶을 채우다, 강한의 색연필 일러스트" coverImage={imageSrc} />
-      <Card title="닮고 싶은, 담고 싶은 웹툰 원고 제작 기법" coverImage={imageSrc} />
-      <Card title="내 방 안의 자수공장! 재봉틀자수, 어렵지 않아요" coverImage={imageSrc} />
-      <Card title="나만의 그림으로 내 삶을 채우다, 강한의 색연필 일러스트" coverImage={imageSrc} />
-      <Card title="닮고 싶은, 담고 싶은 웹툰 원고 제작 기법" coverImage={imageSrc} />
+      <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+      <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
+      <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
+      <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
     </Carousel>
   </Section>
 </Playground>
@@ -70,12 +70,12 @@ enum CarouselNavigationPosition {
     smSlidesPerView={2}
     pagination
   >
-    <Card title="내 방 안의 자수공장! 재봉틀자수, 어렵지 않아요" coverImage={imageSrc} />
-    <Card title="나만의 그림으로 내 삶을 채우다, 강한의 색연필 일러스트" coverImage={imageSrc} />
-    <Card title="닮고 싶은, 담고 싶은 웹툰 원고 제작 기법" coverImage={imageSrc} />
-    <Card title="내 방 안의 자수공장! 재봉틀자수, 어렵지 않아요" coverImage={imageSrc} />
-    <Card title="나만의 그림으로 내 삶을 채우다, 강한의 색연필 일러스트" coverImage={imageSrc} />
-    <Card title="닮고 싶은, 담고 싶은 웹툰 원고 제작 기법" coverImage={imageSrc} />
+    <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
   </Carousel>
 </Playground>
 
@@ -87,9 +87,12 @@ enum CarouselNavigationPosition {
     paginationTheme={CarouselPaginationTheme.Light}
     pagination
   >
-    <PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
   </Carousel>
 </Playground>
 
@@ -200,12 +203,12 @@ enum CarouselPaginationTheme {
         smSlidesSideOffset={24}
         pagination
       >
-        <Card title="내 방 안의 자수공장! 재봉틀자수, 어렵지 않아요" coverImage={imageSrc} />
-        <Card title="나만의 그림으로 내 삶을 채우다, 강한의 색연필 일러스트" coverImage={imageSrc} />
-        <Card title="닮고 싶은, 담고 싶은 웹툰 원고 제작 기법" coverImage={imageSrc} />
-        <Card title="내 방 안의 자수공장! 재봉틀자수, 어렵지 않아요" coverImage={imageSrc} />
-        <Card title="나만의 그림으로 내 삶을 채우다, 강한의 색연필 일러스트" coverImage={imageSrc} />
-        <Card title="닮고 싶은, 담고 싶은 웹툰 원고 제작 기법" coverImage={imageSrc} />
+        <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+        <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+        <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+        <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
+        <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
+        <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
       </Carousel>
     </PlayGroundSectionCarouselContent>
   </Section>

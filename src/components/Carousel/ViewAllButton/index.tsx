@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { orange000, orange600 } from '../../../Colors';
+import { orange000, orange600 } from '../../../core/Colors';
 import { Add } from '../../../Icon';
-import Button, { ButtonProps } from '../../Button/ContainButton';
+import { Button, ButtonProps } from '../../Button/ContainButton';
 import { ButtonColor } from '../../Button/interface';
 
 export default class ViewAllButton extends React.PureComponent<Partial<ButtonProps>> {
