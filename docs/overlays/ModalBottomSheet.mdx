@@ -1,0 +1,97 @@
+---
+menu: Overlays
+name: ModalBottomSheet
+route: /overlays/modal-bottom-sheet
+---
+
+import { Playground, PropsTable } from 'docz';
+import { ModalBottomSheet, Button, GridList, Card } from '@class101/ui';
+
+# Modal Bottom Sheet
+
+## Props
+
+<PropsTable of={ModalBottomSheet} />
+
+## Basic usage
+
+<Playground>
+  {
+    () => {
+      function Example() {
+        const imageSrc = 'https://cdn.class101.net/images/1fe7b071-44ab-4e20-a2d4-29e11b56384c/510x380.jpg';
+        const [visible, setVisible] = React.useState(false);
+        const [visible2, setVisible2] = React.useState(false);
+        const showBottomSheet = () => {
+          setVisible(true);
+        }
+        const hideBottomSheet = () => {
+          setVisible(false);
+        }
+        const showModalBottomSheet = () => {
+          setVisible2(true);
+        }
+        const hideModalBottomSheet = () => {
+          setVisible2(false);
+        }
+
+        return <div>
+            <Button onClick={showBottomSheet}>Show</Button>
+            <ModalBottomSheet
+              open={visible}
+              title="수강권 주문 상세"
+              subTitle="설명문구가 들어갑니다.설명문구가 들어갑니다.설명문구가 들어갑니다.설명문구가 들어갑니다."
+              onClose={hideBottomSheet}
+              onCancel={hideBottomSheet}
+              okText="확인"
+              cancelText="취소"
+              >
+              <GridList
+                items={[
+                  {
+                    id: 1,
+                    title: '리스트 아이템 1',
+                    image: imageSrc,
+                  },
+                  {
+                    id: 2,
+                    title: '리스트 아이템 2',
+                    image: imageSrc,
+                  },
+                  {
+                    id: 3,
+                    title: '리스트 아이템 3',
+                    image: imageSrc,
+                  },
+                  {
+                    id: 4,
+                    title: '리스트 아이템 4',
+                    image: imageSrc,
+                  },
+                ]}
+                smColumn={1}
+                renderItem={item => (
+                  <Card title={item.title} coverImage={item.image} to={item.to} />
+                )}
+              />
+            </ModalBottomSheet>
+            <Button onClick={showModalBottomSheet}>Show</Button>
+            <ModalBottomSheet
+              open={visible2}
+              title="수강권 주문 상세"
+              subTitle="설명문구가 들어갑니다.설명문구가 들어갑니다.설명문구가 들어갑니다.설명문구가 들어갑니다."
+              onClose={hideModalBottomSheet}
+              onCancel={hideModalBottomSheet}
+              okText="확인"
+              cancelText="취소"
+              >
+              asfsdfasd
+            </ModalBottomSheet>
+          </div>
+      }
+      return <Example />
+    }
+
+}
+
+</Playground>
