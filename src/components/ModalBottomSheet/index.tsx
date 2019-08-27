@@ -12,6 +12,7 @@ import { media } from '../../BreakPoints';
 
 interface Props {
   open: boolean;
+  opener?: React.ReactElement<{ onClick: () => void }>;
   zIndex: number;
   title: string;
   subTitle?: React.ReactNode;
@@ -20,69 +21,172 @@ interface Props {
   okColor: ContainButtonColorValue;
   cancelText?: string;
   cancelColor: ContainButtonColorValue;
-  closeable?: boolean;
+  closeable: boolean;
+  showScroll: boolean;
+  mounted: boolean;
   onClose?: () => void;
-  onOk?: () => void;
-  onCancel?: () => void;
+  onOk?: (close: () => void) => void;
+  onCancel?: (close: () => void) => void;
 }
 
-export class ModalBottomSheet extends PureComponent<Props> {
+interface State {
+  mounted: boolean;
+  open: boolean;
+}
+
+export class ModalBottomSheet extends PureComponent<Props, State> {
   public static defaultProps: Partial<Props> = {
     zIndex: 1000,
-    closeable: true,
+    closeable: false,
     okColor: 'orange',
     cancelColor: 'default',
+    showScroll: false,
+    mounted: false,
   };
 
-  private blockPropagation = (e: React.MouseEvent) => {
+  public readonly state = {
+    mounted: this.props.mounted,
+    open: false,
+  };
+
+  static getDerivedStateFromProps(nextProps: Props, prevState: State): Partial<State> | null {
+    if (nextProps.open !== undefined && nextProps.open !== prevState.open) {
+      console.log(nextProps);
+      return {
+        open: nextProps.open,
+      };
+    }
+    return null;
+  }
+
+  componentDidMount() {
+    this.setState({
+      mounted: true,
+    });
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    const { open } = this.state;
+    if (prevProps.open !== open) {
+      if (open) {
+        this.disableBodyScroll();
+      } else {
+        setTimeout(() => {
+          this.enableBodyScroll();
+        }, 225);
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    this.enableBodyScroll();
+  }
+
+  private disableBodyScroll = () => {
+    document.body.style.paddingRight = '15px';
+    document.body.style.overflow = 'hidden';
+  };
+
+  private enableBodyScroll = () => {
+    document.body.style.paddingRight = null;
+    document.body.style.overflow = null;
+  };
+
+  private showModal = () => {
+    this.setState({
+      open: true,
+    });
+  };
+
+  private hideModal = () => {
+    this.setState({
+      open: false,
+    });
+  };
+
+  private blockPropagation = (e: React.SyntheticEvent) => {
     e.stopPropagation();
+  };
+
+  private notifyModalClose = () => {
+    const { opener, onClose } = this.props;
+
+    opener && this.hideModal();
+    onClose && onClose();
+  };
+
+  private notifyModalCancel = () => {
+    const { opener, onCancel } = this.props;
+    onCancel && onCancel(this.hideModal);
+  };
+
+  private notifyModalOk = () => {
+    const { onOk } = this.props;
+    onOk && onOk(this.hideModal);
   };
 
   public render() {
     const {
       zIndex,
-      open,
-      onClose,
       children,
       title,
       subTitle,
       okText,
       okColor,
       cancelText,
+      showScroll,
       cancelColor,
       closeable,
-      onOk,
-      onCancel,
+      opener,
     } = this.props;
+    const { mounted, open } = this.state;
+    if (!mounted) return opener || null;
 
-    if (typeof window === 'undefined' || !window.document || !document.body) return null;
-
+    const clonedOpener =
+      opener &&
+      React.cloneElement(opener, {
+        onClick: this.showModal,
+      });
     return (
-      <Portal container={document.body}>
-        <StyledBottomSheetContainer zIndex={zIndex} visible={open} onClick={closeable ? onClose : undefined}>
-          <StyledBottomSheetDialog visible={open} onClick={this.blockPropagation}>
-            <StyledBottomSheetHead>
-              <StyledBottomSheetTitle>{title}</StyledBottomSheetTitle>
-              {closeable && <IconButton icon={<Close />} onClick={onClose} fillColor={gray800} color="transparent" />}
-            </StyledBottomSheetHead>
-            {subTitle && <StyledBottomSheetSubTitle>{subTitle}</StyledBottomSheetSubTitle>}
-            <StyledBottomSheetBody>{children}</StyledBottomSheetBody>
-            <StyledBottomSheetFooter>
-              {cancelText && (
-                <StyledBottomSheetFooterButton onClick={onCancel} color={cancelColor}>
-                  {cancelText}
-                </StyledBottomSheetFooterButton>
-              )}
-              {cancelText && okText && <StyledBottomSheetFooterSpace />}
-              {okText && (
-                <StyledBottomSheetFooterButton onClick={onOk} color={okColor}>
-                  {okText}
-                </StyledBottomSheetFooterButton>
-              )}
-            </StyledBottomSheetFooter>
-          </StyledBottomSheetDialog>
-        </StyledBottomSheetContainer>
-      </Portal>
+      <>
+        {clonedOpener}
+        <Portal container={document.body}>
+          <StyledBottomSheetContainer
+            zIndex={zIndex}
+            visible={open}
+            onClick={closeable ? this.notifyModalClose : undefined}
+          >
+            <StyledBottomSheetDialog visible={open} onClick={this.blockPropagation}>
+              <StyledBottomSheetHead>
+                <StyledBottomSheetTitle>{title}</StyledBottomSheetTitle>
+                {closeable && (
+                  <IconButton
+                    icon={<Close />}
+                    onClick={this.notifyModalClose}
+                    fillColor={gray800}
+                    color="transparent"
+                  />
+                )}
+              </StyledBottomSheetHead>
+              {subTitle && <StyledBottomSheetSubTitle>{subTitle}</StyledBottomSheetSubTitle>}
+              <StyledBottomSheetBody showScroll={showScroll}>{children}</StyledBottomSheetBody>
+              <StyledBottomSheetFooter>
+                {cancelText && (
+                  <StyledBottomSheetFooterButton onClick={this.notifyModalCancel} color={cancelColor}>
+                    {cancelText}
+                  </StyledBottomSheetFooterButton>
+                )}
+                {cancelText && okText && <StyledBottomSheetFooterSpace />}
+                {okText && (
+                  <StyledBottomSheetFooterButton onClick={this.notifyModalOk} color={okColor}>
+                    {okText}
+                  </StyledBottomSheetFooterButton>
+                )}
+              </StyledBottomSheetFooter>
+            </StyledBottomSheetDialog>
+          </StyledBottomSheetContainer>
+        </Portal>
+      </>
     );
   }
 }
@@ -102,6 +206,7 @@ const StyledBottomSheetContainer = styled.div<{ zIndex: number; visible: boolean
   opacity: ${props => (props.visible ? '1' : '0')};
   visibility: ${props => (props.visible ? 'visible' : 'hidden')};
   transition: ${props => !props.visible && `visibility 0s linear 225ms,`} opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  overscroll-behavior: contain;
 `;
 
 const StyledBottomSheetDialog = styled.div<{ visible: boolean }>`
@@ -117,7 +222,9 @@ const StyledBottomSheetDialog = styled.div<{ visible: boolean }>`
     width: 100%;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    height: min-content;
     position: absolute;
+    flex: 1 0 auto;
     bottom: 0;
     left: 0;
     right: 0;
@@ -147,14 +254,19 @@ const StyledBottomSheetSubTitle = styled(body2)`
   color: ${gray600};
 `;
 
-const StyledBottomSheetBody = styled.div`
+const StyledBottomSheetBody = styled.div<{ showScroll: boolean }>`
   margin-top: 16px;
   flex: 1 1 auto;
   overflow-y: scroll;
   overflow-x: hidden;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  ${props =>
+    !props.showScroll &&
+    `
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  `}
+
   overscroll-behavior: contain;
 `;
 

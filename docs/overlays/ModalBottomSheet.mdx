@@ -6,6 +6,7 @@ route: /overlays/modal-bottom-sheet
 
 import { Playground, PropsTable } from 'docz';
 import { ModalBottomSheet, Button, GridList, Card } from '@class101/ui';
+import { imageSrc } from '../components/interface';
 
 # Modal Bottom Sheet
 
@@ -16,82 +17,110 @@ import { ModalBottomSheet, Button, GridList, Card } from '@class101/ui';
 ## Basic usage
 
 <Playground>
+  <ModalBottomSheet
+    opener={<Button>Open Modal</Button>}
+    title="수강권 주문 상세"
+    subTitle="수강권을 한번 더 확인해 주세요."
+    okText="확인"
+    cancelText="취소"
+    closeable
+  >
+    This is Modal
+  </ModalBottomSheet>
+</Playground>
+
+> `opener`에는 onClick이벤트가 가능한 컴포넌트를 작성해야합니다.
+
+## With State
+
+<Playground>
   {
     () => {
       function Example() {
-        const imageSrc = 'https://cdn.class101.net/images/1fe7b071-44ab-4e20-a2d4-29e11b56384c/510x380.jpg';
-        const [visible, setVisible] = React.useState(false);
-        const [visible2, setVisible2] = React.useState(false);
-        const showBottomSheet = () => {
-          setVisible(true);
-        }
-        const hideBottomSheet = () => {
-          setVisible(false);
-        }
-        const showModalBottomSheet = () => {
-          setVisible2(true);
-        }
-        const hideModalBottomSheet = () => {
-          setVisible2(false);
-        }
+        const [opened, setOpened] = React.useState(false);
 
-        return <div>
-            <Button onClick={showBottomSheet}>Show</Button>
-            <ModalBottomSheet
-              open={visible}
-              title="수강권 주문 상세"
-              subTitle="설명문구가 들어갑니다.설명문구가 들어갑니다.설명문구가 들어갑니다.설명문구가 들어갑니다."
-              onClose={hideBottomSheet}
-              onCancel={hideBottomSheet}
-              okText="확인"
-              cancelText="취소"
-              >
-              <GridList
-                items={[
-                  {
-                    id: 1,
-                    title: '리스트 아이템 1',
-                    image: imageSrc,
-                  },
-                  {
-                    id: 2,
-                    title: '리스트 아이템 2',
-                    image: imageSrc,
-                  },
-                  {
-                    id: 3,
-                    title: '리스트 아이템 3',
-                    image: imageSrc,
-                  },
-                  {
-                    id: 4,
-                    title: '리스트 아이템 4',
-                    image: imageSrc,
-                  },
-                ]}
-                smColumn={1}
-                renderItem={item => (
-                  <Card title={item.title} coverImage={item.image} to={item.to} />
-                )}
-              />
+        const openModal = () => setOpened(true);
+        const closeModal = () => setOpened(false);
+
+        return (
+          <>
+            <Button onClick={openModal}>Open Modal</Button>
+            <ModalBottomSheet title="State Modal" subTitle="this is state modal" open={opened} cancelText="취소" onCancel={closeModal}>
+              Modal Children
             </ModalBottomSheet>
-            <Button onClick={showModalBottomSheet}>Show</Button>
-            <ModalBottomSheet
-              open={visible2}
-              title="수강권 주문 상세"
-              subTitle="설명문구가 들어갑니다.설명문구가 들어갑니다.설명문구가 들어갑니다.설명문구가 들어갑니다."
-              onClose={hideModalBottomSheet}
-              onCancel={hideModalBottomSheet}
-              okText="확인"
-              cancelText="취소"
-              >
-              asfsdfasd
-            </ModalBottomSheet>
-          </div>
+          </>
+        )
       }
       return <Example />
     }
 
 }
 
+</Playground>
+
+## Button Action
+
+<Playground>
+  <ModalBottomSheet
+    opener={<Button>Show Modal</Button>}
+    title="수강권 주문 상세"
+    okText="확인"
+    onOk={close => {
+      alert('확인 됨');
+      close();
+    }}
+    onCancel={close => close()}
+  >
+    This is Modal
+  </ModalBottomSheet>
+</Playground>
+
+## closeable & showScroll
+
+`closeable`를 설정하면 modal바깥쪽을 클릭할때와 x버튼을 클릭할 때 닫힙니다.
+
+content가 `max-height`를 넘었을 때 기본적으로 스크롤이 숨겨집니다.
+`showScroll`를 설정하면 스크롤이 보이게 됩니다.
+
+<Playground>
+  <ModalBottomSheet opener={<Button>Show Modal</Button>} closeable showScroll title="수강권 주문 상세" okText="확인">
+    <GridList
+      items={[
+        {
+          id: 1,
+          title: '리스트 아이템 1',
+          image: imageSrc,
+        },
+        {
+          id: 2,
+          title: '리스트 아이템 2',
+          image: imageSrc,
+        },
+        {
+          id: 3,
+          title: '리스트 아이템 3',
+          image: imageSrc,
+        },
+        {
+          id: 4,
+          title: '리스트 아이템 4',
+          image: imageSrc,
+        },
+      ]}
+      smColumn={1}
+      renderItem={item => <Card title={item.title} coverImage={item.image} />}
+    />
+  </ModalBottomSheet>
+</Playground>
+
+## No SSR
+
+ModalBottomSheet는 React Portal을 Server Side Rendering에 사용하기 위해 `componentDidMount`때 렌더링 됩니다.
+
+하지만 SSR을 사용하지 않으면 `mounted`속성을 사용하여 다른 컴포넌트와 동시에 랜더링되게 할 수 있습니다.
+
+<Playground>
+  <ModalBottomSheet opener={<Button>Show Modal</Button>} title="Mounted Modal" okText="확인" closeable mounted>
+    content
+  </ModalBottomSheet>
 </Playground>
