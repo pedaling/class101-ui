@@ -1,11 +1,11 @@
 import React, { PureComponent, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 
-import Badge from '../../Badge';
-import { gray800, white } from '../../Colors';
-import { Chevron } from '../../Icon';
-import { HTMLDivProps } from '../../interfaces/props';
-import { body1, subtitle1 } from '../../TextStyles';
+import Badge from '../Badge';
+import { gray800, white } from '../Colors';
+import { Chevron } from '../Icon';
+import { HTMLDivProps } from '../interfaces/props';
+import { body1, subtitle1 } from '../TextStyles';
 
 interface ContainerProps {
   /** 창 전체에 Fixed 여부(Docs에선 사용 불가) */
