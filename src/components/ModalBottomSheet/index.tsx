@@ -11,19 +11,19 @@ import { ContainButtonColorValue } from '../Button/interface';
 import { media } from '../../BreakPoints';
 
 interface Props {
-  open: boolean;
+  opened: boolean;
   opener?: React.ReactElement<{ onClick: () => void }>;
   zIndex: number;
   title: string;
   subTitle?: React.ReactNode;
   children: React.ReactNode;
-  okText?: string;
-  okColor: ContainButtonColorValue;
+  successText?: string;
+  successColor: ContainButtonColorValue;
   cancelText?: string;
   cancelColor: ContainButtonColorValue;
   closeable: boolean;
   showScroll: boolean;
-  mounted: boolean;
+  noSsr: boolean;
   onClose?: () => void;
   onOk?: (close: () => void) => void;
   onCancel?: (close: () => void) => void;
@@ -31,43 +31,42 @@ interface Props {
 
 interface State {
   mounted: boolean;
-  open: boolean;
+  opened: boolean;
 }
 
 export class ModalBottomSheet extends PureComponent<Props, State> {
   public static defaultProps: Partial<Props> = {
     zIndex: 1000,
     closeable: false,
-    okColor: 'orange',
+    successColor: 'orange',
     cancelColor: 'default',
     showScroll: false,
-    mounted: false,
+    noSsr: false,
   };
 
   public readonly state = {
-    mounted: this.props.mounted,
-    open: false,
+    mounted: this.props.noSsr,
+    opened: false,
   };
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State): Partial<State> | null {
-    if (nextProps.open !== undefined && nextProps.open !== prevState.open) {
-      console.log(nextProps);
+    if (nextProps.opened !== undefined && nextProps.opened !== prevState.opened) {
       return {
-        open: nextProps.open,
+        opened: nextProps.opened,
       };
     }
     return null;
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.setState({
       mounted: true,
     });
   }
 
-  componentDidUpdate(prevProps: Props) {
-    const { open } = this.state;
-    if (prevProps.open !== open) {
+  public componentDidUpdate(prevProps: Props) {
+    const { opened } = this.state;
+    if (prevProps.opened !== opened) {
       if (open) {
         this.disableBodyScroll();
       } else {
@@ -78,7 +77,7 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
     }
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     this.enableBodyScroll();
   }
 
@@ -94,13 +93,13 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
 
   private showModal = () => {
     this.setState({
-      open: true,
+      opened: true,
     });
   };
 
   private hideModal = () => {
     this.setState({
-      open: false,
+      opened: false,
     });
   };
 
@@ -108,14 +107,14 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
     e.stopPropagation();
   };
 
-  private notifyModalClose = () => {
+  private handleCloseModal = () => {
     const { opener, onClose } = this.props;
 
     opener && this.hideModal();
     onClose && onClose();
   };
 
-  private notifyModalCancel = () => {
+  private handleCancelModal = () => {
     const { opener, onCancel } = this.props;
     onCancel && onCancel(this.hideModal);
   };
@@ -131,16 +130,19 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
       children,
       title,
       subTitle,
-      okText,
-      okColor,
+      successText: okText,
+      successColor: okColor,
       cancelText,
       showScroll,
       cancelColor,
       closeable,
       opener,
     } = this.props;
-    const { mounted, open } = this.state;
-    if (!mounted) return opener || null;
+    const { mounted, opened } = this.state;
+
+    if (!mounted) {
+      return opener || null;
+    }
 
     const clonedOpener =
       opener &&
@@ -153,16 +155,16 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
         <Portal container={document.body}>
           <StyledBottomSheetContainer
             zIndex={zIndex}
-            visible={open}
-            onClick={closeable ? this.notifyModalClose : undefined}
+            visible={opened}
+            onClick={closeable ? this.handleCloseModal : undefined}
           >
-            <StyledBottomSheetDialog visible={open} onClick={this.blockPropagation}>
+            <StyledBottomSheetDialog visible={opened} onClick={this.blockPropagation}>
               <StyledBottomSheetHead>
                 <StyledBottomSheetTitle>{title}</StyledBottomSheetTitle>
                 {closeable && (
                   <IconButton
                     icon={<Close />}
-                    onClick={this.notifyModalClose}
+                    onClick={this.handleCloseModal}
                     fillColor={gray800}
                     color="transparent"
                   />
@@ -172,7 +174,7 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
               <StyledBottomSheetBody showScroll={showScroll}>{children}</StyledBottomSheetBody>
               <StyledBottomSheetFooter>
                 {cancelText && (
-                  <StyledBottomSheetFooterButton onClick={this.notifyModalCancel} color={cancelColor}>
+                  <StyledBottomSheetFooterButton onClick={this.handleCancelModal} color={cancelColor}>
                     {cancelText}
                   </StyledBottomSheetFooterButton>
                 )}
