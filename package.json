@@ -20,9 +20,8 @@
   "scripts": {
     "test": "cross-env CI=1 react-scripts-ts test --env=jsdom",
     "test:watch": "react-scripts-ts test --env=jsdom",
-    "build": "tsc -p . && rollup -c",
+    "build": "tsc -p . && rollup -c && docz build",
     "start": "rollup -c -w",
-    "prepare": "yarn run build",
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build",
     "docz:dev": "docz dev",
@@ -108,15 +107,12 @@
     "classnames": "^2.2.6",
     "path-to-regexp": "^3.0.0",
     "polished": "^3.4.1",
-    "typescript": "3.1.6"
+    "typescript": "3.5.3"
   },
   "bugs": {
     "url": "https://github.com/pedaling/class101-ui/issues"
   },
   "homepage": "https://github.com/pedaling/class101-ui#readme",
-  "directories": {
-    "example": "example"
-  },
   "keywords": [
     "ui-library",
     "ui-framework",

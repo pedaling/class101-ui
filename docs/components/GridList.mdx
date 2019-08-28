@@ -6,7 +6,7 @@ route: /components/grid-list
 
 import { Playground, PropsTable } from 'docz';
 import { Router } from 'react-router-dom';
-import { GridList, Card, Body1, Caption1 } from '@class101/ui';
+import { GridList, Body1, Caption1 } from '@class101/ui';
 
 import { imageSrc } from './interface';
 
@@ -84,40 +84,5 @@ Class101 UI의 Grid 시스템 기반의 리스트입니다.
         </div>
       );
     }}
-  />
-</Playground>
-
-## with Card Components
-
-<Playground>
-  <GridList
-    items={[
-      {
-        id: 1,
-        title: '리스트 아이템 1',
-        image: imageSrc,
-        to: '/',
-      },
-      {
-        id: 2,
-        title: '리스트 아이템 2',
-        image: imageSrc,
-        to: '/',
-      },
-      {
-        id: 3,
-        title: '리스트 아이템 3',
-        image: imageSrc,
-        to: '/',
-      },
-      {
-        id: 4,
-        title: '리스트 아이템 4',
-        image: imageSrc,
-        to: '/',
-      },
-    ]}
-    smColumn={2}
-    renderItem={item => <Card title={item.title} coverImage={item.image} to={item.to} />}
   />
 </Playground>

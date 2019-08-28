@@ -3,7 +3,7 @@ import { darken, rgba } from 'polished';
 import React, { PureComponent } from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
-import Theme from '../../../Theme';
+import { Theme } from '../../../core/Theme';
 import ButtonBase, { ButtonCommonProps } from '../ButtonBase';
 import { ButtonIconPosition } from '../ButtonIcon';
 import ButtonSpinner from '../ButtonSpinner';
@@ -20,7 +20,7 @@ export interface IconButtonProps extends ButtonCommonProps<IconButtonColorValue,
   fillColor?: string;
 }
 
-export default class IconButton extends PureComponent<IconButtonProps> {
+export class IconButton extends PureComponent<IconButtonProps> {
   public static defaultProps: Partial<IconButtonProps> = {
     theme: Theme.light,
     size: ButtonSize.SMALL,

@@ -3,9 +3,9 @@ import React, { AnchorHTMLAttributes, ButtonHTMLAttributes } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
+import { ThemeConfig } from '../../../core/Theme';
 import { IconProps } from '../../../Icon';
 import { Omit } from '../../../interfaces/props';
-import { ThemeConfig } from '../../../Theme';
 import { ButtonIconPosition } from '../ButtonIcon';
 
 interface ButtonBaseProps<ColorValue, SizeValue> {

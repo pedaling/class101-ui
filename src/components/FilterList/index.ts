@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
-import { gray800, gray100, gray600, orange000, orange600 } from '../../Colors';
-import { elevation1 } from '../../ElevationStyles';
-import { body2 } from '../../TextStyles';
+import { gray100, gray600, gray800, orange000, orange600 } from '../../core/Colors';
+import { elevation1 } from '../../core/ElevationStyles';
+import { body2 } from '../../core/TextStyles';
 
 const FilterListCommonStyle = css`
   display: flex;

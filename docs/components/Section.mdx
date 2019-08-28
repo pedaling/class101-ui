@@ -4,7 +4,7 @@ name: Section
 route: /components/section
 ---
 
-import { Section, GridList, Card } from '@class101/ui';
+import { Section, GridList, Body1 } from '@class101/ui';
 import { Playground, PropsTable } from 'docz';
 import { imageSrc } from './interface';
 
@@ -48,7 +48,17 @@ titleStyle은 Typography, buttonStyle은 Button 컴포넌트의 속성을 참고
         },
       ]}
       smColumn={2}
-      renderItem={item => <Card title={item.title} coverImage={item.image} to={item.to} />}
+      renderItem={item => {
+        const { title, image } = item;
+        return (
+          <div>
+            <div>
+              <img style={{ width: '100%' }} src={image} alt={title} />
+            </div>
+            <Body1>{title}</Body1>
+          </div>
+        );
+      }}
     />
   </Section>
 </Playground>
@@ -75,7 +85,17 @@ titleStyle은 Typography, buttonStyle은 Button 컴포넌트의 속성을 참고
         },
       ]}
       smColumn={2}
-      renderItem={item => <Card title={item.title} coverImage={item.image} />}
+      renderItem={item => {
+        const { title, image } = item;
+        return (
+          <div>
+            <div>
+              <img style={{ width: '100%' }} src={image} alt={title} />
+            </div>
+            <Body1>{title}</Body1>
+          </div>
+        );
+      }}
     />
   </Section>
 </Playground>
@@ -107,7 +127,17 @@ titleStyle은 Typography, buttonStyle은 Button 컴포넌트의 속성을 참고
         },
       ]}
       smColumn={2}
-      renderItem={item => <Card title={item.title} coverImage={item.image} />}
+      renderItem={item => {
+        const { title, image } = item;
+        return (
+          <div>
+            <div>
+              <img style={{ width: '100%' }} src={image} alt={title} />
+            </div>
+            <Body1>{title}</Body1>
+          </div>
+        );
+      }}
     />
   </Section>
 </Playground>

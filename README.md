@@ -25,7 +25,7 @@
 
 A React-based UI Component Library, powered by Class101.
 
-[**View the full documentation ▸**](https://class101-ui.netlify.com)
+[**View the full documentation ▸**](https://ui.class101.dev)
 
 ## Install
 

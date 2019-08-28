@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
-import { media } from '../../../BreakPoints';
+import { media } from '../../../core/BreakPoints';
 import NavigationButton, { NavigationDirection } from './NavigationButton';
 
 export enum CarouselNavigationPosition {
