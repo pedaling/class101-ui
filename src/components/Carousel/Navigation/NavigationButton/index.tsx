@@ -1,10 +1,9 @@
 import React from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
-import { elevation1 } from '../../../../ElevationStyles';
-import { Chevron } from '../../../../Icon';
-import IconButton from '../../../Button/IconButton';
-import { ButtonColor } from '../../../Button/interface';
+import { elevation1 } from '../../../../core/ElevationStyles';
+import { ChevronRight } from '../../../../Icon';
+import { ButtonColor, IconButton } from '../../../Button';
 
 const NAVIGATION_BUTTON_SIZE = 32;
 
@@ -30,7 +29,7 @@ export default class NavigationButton extends React.PureComponent<Props> {
         direction={direction}
         className={className}
         disabled={disabled}
-        icon={<Chevron />}
+        icon={<ChevronRight />}
       />
     );
   }

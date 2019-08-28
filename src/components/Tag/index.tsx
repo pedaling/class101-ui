@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
-import { gray100, gray200 } from '../../Colors';
+import { gray100, gray200 } from '../../core/Colors';
 import { Close } from '../../Icon';
 
-interface TagProps {
+export interface TagProps {
   onRemove?: () => any;
   value: string;
   label?: string;
@@ -12,7 +12,7 @@ interface TagProps {
   className?: string;
 }
 
-export default class Tag extends PureComponent<TagProps> {
+export class Tag extends PureComponent<TagProps> {
   public render() {
     const { value, label, className } = this.props;
     return (

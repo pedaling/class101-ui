@@ -1,0 +1,25 @@
+---
+menu: Components
+name: Pagination
+route: /components/pagination
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Pagination } from '@class101/ui';
+import { PlayGroundContainer, ThemeProvider } from '../docsComponents';
+
+# Pagination
+
+페이지네이션이다.
+
+## Props
+
+<PropsTable of={Pagination} />
+
+## Basic usage
+
+<Playground>
+  <PlayGroundContainer>
+    <Pagination currentPageIndex={0} totalPageIndex={1} onChange={number => alert(number)} />
+  </PlayGroundContainer>
+</Playground>

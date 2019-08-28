@@ -1,0 +1,47 @@
+---
+menu: Form Inputs
+name: NumericInput
+route: /form-inputs/numeric-input
+---
+
+import { Playground, PropsTable } from 'docz';
+import { NumericInput } from '@class101/ui';
+
+# NumericInput
+
+NumericInput 컴포넌트입니다.
+
+## Props
+
+> [Input Props](/form-inputs/input#props)를 상속받습니다.
+>
+> `size`는 사용이 불가능합니다.
+
+### Additional Props
+
+<PropsTable of={NumericInput} />
+
+## Basic usage
+
+<Playground>
+  <NumericInput label="수량" />
+  <br />
+  <NumericInput buttonPosition="side" label="수량" />
+</Playground>
+
+## Inline
+
+<Playground>
+  <NumericInput label="수량" inline buttonPosition="side" />
+  <NumericInput label="나이" inline />
+</Playground>
+
+## Input Props
+
+<Playground>
+  <NumericInput label="수량" min={3} max={10} defaultValue={5} />
+  <br />
+  <NumericInput label="나이" defaultValue={2000} step={1000} />
+  <br />
+  <NumericInput errorMessage="에러 메시지" />
+</Playground>

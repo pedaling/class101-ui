@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { BadgeProps } from '../../Badge';
-import { media } from '../../BreakPoints';
-import { gray100 } from '../../Colors';
+import { media } from '../../core/BreakPoints';
+import { gray100 } from '../../core/Colors';
 import { IconProps } from '../../Icon';
 import { HTMLDivProps } from '../../interfaces/props';
+import { BadgeProps } from '../Badge';
 import NavigationSection from './NavigationSection';
 
 export interface NavigationSectionAction {
@@ -41,7 +41,7 @@ const Divider = styled.hr`
   border-bottom: 1px solid ${gray100};
 `;
 
-export default class Navigation extends React.PureComponent<Props> {
+export class Navigation extends React.PureComponent<Props> {
   public static Section = NavigationSection;
   public static Divider = Divider;
   public static defaultProps: Partial<Props> = {
