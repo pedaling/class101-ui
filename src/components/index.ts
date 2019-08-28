@@ -8,7 +8,6 @@ export * from './Tag';
 export * from './Tabs';
 export * from './Navigation';
 export * from './FilterList';
-export * from './ModalBottomSheet';
 export * from './Pagination';
 export * from './ProgressBar';
 export * from './ProgressState';

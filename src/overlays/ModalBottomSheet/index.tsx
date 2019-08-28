@@ -1,14 +1,10 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import Portal from '../../Portal';
-import { white, gray800, gray600 } from '../../Colors';
+import { Portal } from '../Portal';
+import { Colors, ElevationStyles, Headline3, BreakPoints, Body2 } from '../../core';
 import { Close } from '../../Icon';
-import { elevation5 } from '../../ElevationStyles';
-import Headline3 from '../../Typography/Headline3';
-import { IconButton, Button } from '../Button';
-import body2 from '../../Typography/Body2';
-import { ContainButtonColorValue } from '../Button/interface';
-import { media } from '../../BreakPoints';
+import { IconButton, Button } from '../../components/Button';
+import { ContainButtonColorValue } from '../../components/Button/interface';
 
 interface Props {
   opened: boolean;
@@ -165,7 +161,7 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
                   <IconButton
                     icon={<Close />}
                     onClick={this.handleCloseModal}
-                    fillColor={gray800}
+                    fillColor={Colors.gray800}
                     color="transparent"
                   />
                 )}
@@ -219,7 +215,7 @@ const StyledBottomSheetDialog = styled.div<{ visible: boolean }>`
   min-height: 360px;
   max-height: 800px;
   border-radius: 8px;
-  ${media.sm`
+  ${BreakPoints.media.sm`
     max-height: calc(100vh - 48px);
     width: 100%;
     border-bottom-left-radius: 0;
@@ -236,9 +232,9 @@ const StyledBottomSheetDialog = styled.div<{ visible: boolean }>`
     transition: all 225ms ease-out;
 
   `}
-  background: ${white};
+  background: ${Colors.white};
   box-sizing: border-box;
-  ${elevation5}
+  ${ElevationStyles.elevation5}
 `;
 
 const StyledBottomSheetHead = styled.div`
@@ -251,9 +247,9 @@ const StyledBottomSheetTitle = styled(Headline3)`
   flex: 1 0 auto;
 `;
 
-const StyledBottomSheetSubTitle = styled(body2)`
+const StyledBottomSheetSubTitle = styled(Body2)`
   margin-top: 16px;
-  color: ${gray600};
+  color: ${Colors.gray600};
 `;
 
 const StyledBottomSheetBody = styled.div<{ showScroll: boolean }>`
