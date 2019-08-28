@@ -277,7 +277,7 @@ const StyledBottomSheetSubTitle = styled(Body2)`
 const StyledBottomSheetBody = styled.div<{ showScroll: boolean; removeContentPadding: boolean }>`
   margin-top: 16px;
   flex: 1 1 auto;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   ${props =>
     !props.showScroll &&
