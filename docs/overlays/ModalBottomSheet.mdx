@@ -82,8 +82,8 @@ import { LongContent } from './ModalBottomSheet';
 
 `closeable`를 설정하면 modal바깥쪽을 클릭할때와 x버튼을 클릭할 때 닫힙니다. 기본으로 설정되어 있습니다.
 
-content가 `max-height`를 넘었을 때 기본적으로 스크롤이 숨겨집니다.
-`showScroll`를 설정하면 스크롤이 보이게 됩니다.
+content가 `max-height`를 넘었을 때
+`hideScroll`를 설정하면 스크롤이 보이게 됩니다.
 
 Modal에 이미지를 꽉차게 설정하고 싶을 때 `removeContentPadding`를 설정하면 됩니다.
 
@@ -91,7 +91,7 @@ Modal에 이미지를 꽉차게 설정하고 싶을 때 `removeContentPadding`�
   <ModalBottomSheet
     opener={<Button>Show Modal</Button>}
     closeable={false}
-    showScroll
+    hideScroll
     title="수강권 주문 상세"
     successText="확인"
   >

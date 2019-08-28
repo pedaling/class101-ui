@@ -21,7 +21,7 @@ interface Props {
   cancelText?: string;
   cancelColor: ContainButtonColorValue;
   closeable: boolean;
-  showScroll: boolean;
+  hideScroll: boolean;
   noSsr: boolean;
   removeContentPadding: boolean;
   modalStyle?: React.CSSProperties;
@@ -42,7 +42,7 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
     closeable: true,
     successColor: 'orange',
     cancelColor: 'default',
-    showScroll: false,
+    hideScroll: false,
     noSsr: false,
     removeContentPadding: false,
   };
@@ -141,7 +141,7 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
       successText: okText,
       successColor: okColor,
       cancelText,
-      showScroll,
+      hideScroll,
       cancelColor,
       closeable,
       modalStyle,
@@ -184,7 +184,7 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
               {subTitle && <StyledBottomSheetSubTitle>{subTitle}</StyledBottomSheetSubTitle>}
               <StyledBottomSheetBody
                 style={contentStyle}
-                showScroll={showScroll}
+                hideScroll={hideScroll}
                 removeContentPadding={removeContentPadding}
               >
                 {children}
@@ -274,13 +274,13 @@ const StyledBottomSheetSubTitle = styled(Body2)`
   color: ${gray600};
 `;
 
-const StyledBottomSheetBody = styled.div<{ showScroll: boolean; removeContentPadding: boolean }>`
+const StyledBottomSheetBody = styled.div<{ hideScroll: boolean; removeContentPadding: boolean }>`
   margin-top: 16px;
   flex: 1 1 auto;
   overflow-y: auto;
   overflow-x: hidden;
   ${props =>
-    !props.showScroll &&
+    props.hideScroll &&
     `
     &::-webkit-scrollbar {
       display: none;
