@@ -23,6 +23,9 @@ interface Props {
   closeable: boolean;
   showScroll: boolean;
   noSsr: boolean;
+  removeContentPadding: boolean;
+  modalStyle?: React.CSSProperties;
+  contentStyle?: React.CSSProperties;
   onClose?: () => void;
   onSuccess?: (close: () => void) => void;
   onCancel?: (close: () => void) => void;
@@ -36,11 +39,12 @@ interface State {
 export class ModalBottomSheet extends PureComponent<Props, State> {
   public static defaultProps: Partial<Props> = {
     zIndex: 1000,
-    closeable: false,
+    closeable: true,
     successColor: 'orange',
     cancelColor: 'default',
     showScroll: false,
     noSsr: false,
+    removeContentPadding: false,
   };
 
   public readonly state: State = {
@@ -115,17 +119,17 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
     const { opener, onClose } = this.props;
 
     opener && this.hideModal();
-    onClose && onClose();
+    onClose ? onClose() : this.hideModal();
   };
 
   private handleCancelModal = () => {
     const { onCancel } = this.props;
-    onCancel && onCancel(this.hideModal);
+    onCancel ? onCancel(this.hideModal) : this.hideModal();
   };
 
   private notifyModalOk = () => {
     const { onSuccess } = this.props;
-    onSuccess && onSuccess(this.hideModal);
+    onSuccess ? onSuccess(this.hideModal) : this.hideModal();
   };
 
   public render() {
@@ -140,6 +144,9 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
       showScroll,
       cancelColor,
       closeable,
+      modalStyle,
+      contentStyle,
+      removeContentPadding,
       opener,
     } = this.props;
     const { mounted, opened } = this.state;
@@ -162,7 +169,7 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
             visible={opened}
             onClick={closeable ? this.handleCloseModal : undefined}
           >
-            <StyledBottomSheetDialog visible={opened} onClick={this.blockPropagation}>
+            <StyledBottomSheetDialog visible={opened} onClick={this.blockPropagation} style={modalStyle}>
               <StyledBottomSheetHead>
                 <StyledBottomSheetTitle>{title}</StyledBottomSheetTitle>
                 {closeable && (
@@ -175,7 +182,13 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
                 )}
               </StyledBottomSheetHead>
               {subTitle && <StyledBottomSheetSubTitle>{subTitle}</StyledBottomSheetSubTitle>}
-              <StyledBottomSheetBody showScroll={showScroll}>{children}</StyledBottomSheetBody>
+              <StyledBottomSheetBody
+                style={contentStyle}
+                showScroll={showScroll}
+                removeContentPadding={removeContentPadding}
+              >
+                {children}
+              </StyledBottomSheetBody>
               <StyledBottomSheetFooter>
                 {cancelText && (
                   <StyledBottomSheetFooterButton onClick={this.handleCancelModal} color={cancelColor}>
@@ -238,7 +251,8 @@ const StyledBottomSheetDialog = styled.div<{ visible: boolean }>`
     ${props => props.visible && `transform: translateY(-100%);`}
     min-height: 240px;
     transition: all 225ms ease-out;
-
+    padding: 24px;
+    padding-bottom: 32px;
   `}
   background: ${white};
   box-sizing: border-box;
@@ -260,7 +274,7 @@ const StyledBottomSheetSubTitle = styled(Body2)`
   color: ${gray600};
 `;
 
-const StyledBottomSheetBody = styled.div<{ showScroll: boolean }>`
+const StyledBottomSheetBody = styled.div<{ showScroll: boolean; removeContentPadding: boolean }>`
   margin-top: 16px;
   flex: 1 1 auto;
   overflow-y: scroll;
@@ -271,6 +285,18 @@ const StyledBottomSheetBody = styled.div<{ showScroll: boolean }>`
     &::-webkit-scrollbar {
       display: none;
     }
+  `}
+
+  ${props =>
+    props.removeContentPadding &&
+    `
+    margin-left: -32px;
+    margin-right: -32px;
+
+    ${media.sm`
+      margin-left: -24px;
+      margin-right: -24px;
+    `}
   `}
 
   overscroll-behavior: contain;
