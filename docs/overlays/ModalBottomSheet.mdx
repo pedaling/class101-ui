@@ -5,8 +5,9 @@ route: /overlays/modal-bottom-sheet
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { ModalBottomSheet, Button, GridList, Card } from '@class101/ui';
+import { ModalBottomSheet, Button } from '@class101/ui';
 import { imageSrc } from '../components/interface';
+import { LongContent } from './ModalBottomSheet';
 
 # Modal Bottom Sheet
 
@@ -65,7 +66,7 @@ import { imageSrc } from '../components/interface';
     opener={<Button>Show Modal</Button>}
     title="수강권 주문 상세"
     successText="확인"
-    onOk={close => {
+    onSuccess={close => {
       alert('확인 됨');
       close();
     }}
@@ -90,32 +91,7 @@ content가 `max-height`를 넘었을 때 기본적으로 스크롤이 숨겨집�
     title="수강권 주문 상세"
     successText="확인"
   >
-    <GridList
-      items={[
-        {
-          id: 1,
-          title: '리스트 아이템 1',
-          image: imageSrc,
-        },
-        {
-          id: 2,
-          title: '리스트 아이템 2',
-          image: imageSrc,
-        },
-        {
-          id: 3,
-          title: '리스트 아이템 3',
-          image: imageSrc,
-        },
-        {
-          id: 4,
-          title: '리스트 아이템 4',
-          image: imageSrc,
-        },
-      ]}
-      smColumn={1}
-      renderItem={item => <Card title={item.title} coverImage={item.image} />}
-    />
+    <LongContent />
   </ModalBottomSheet>
 </Playground>
 
@@ -123,10 +99,10 @@ content가 `max-height`를 넘었을 때 기본적으로 스크롤이 숨겨집�
 
 ModalBottomSheet는 React Portal을 Server Side Rendering에 사용하기 위해 `componentDidMount`때 렌더링 됩니다.
 
-하지만 SSR을 사용하지 않으면 `mounted`속성을 사용하여 다른 컴포넌트와 동시에 랜더링되게 할 수 있습니다.
+하지만 SSR을 사용하지 않으면 `noSsr`속성을 사용하여 다른 컴포넌트와 동시에 랜더링되게 할 수 있습니다.
 
 <Playground>
-  <ModalBottomSheet opener={<Button>Show Modal</Button>} title="Mounted Modal" successText="확인" closeable mounted>
+  <ModalBottomSheet opener={<Button>Show Modal</Button>} title="Mounted Modal" successText="확인" closeable noSsr>
     content
   </ModalBottomSheet>
 </Playground>

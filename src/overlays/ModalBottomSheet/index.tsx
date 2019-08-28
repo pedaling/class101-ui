@@ -1,10 +1,13 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Portal } from '../Portal';
-import { Colors, ElevationStyles, Headline3, BreakPoints, Body2 } from '../../core';
+import { gray800, white, gray600 } from '../../core/Colors';
 import { Close } from '../../Icon';
 import { IconButton, Button } from '../../components/Button';
 import { ContainButtonColorValue } from '../../components/Button/interface';
+import { media } from '../../core/BreakPoints';
+import { elevation5 } from '../../core/ElevationStyles';
+import { Headline3, Body2 } from '../../core/Typography';
 
 interface Props {
   opened: boolean;
@@ -21,7 +24,7 @@ interface Props {
   showScroll: boolean;
   noSsr: boolean;
   onClose?: () => void;
-  onOk?: (close: () => void) => void;
+  onSuccess?: (close: () => void) => void;
   onCancel?: (close: () => void) => void;
 }
 
@@ -40,7 +43,7 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
     noSsr: false,
   };
 
-  public readonly state = {
+  public readonly state: State = {
     mounted: this.props.noSsr,
     opened: false,
   };
@@ -60,10 +63,11 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
     });
   }
 
-  public componentDidUpdate(prevProps: Props) {
+  public componentDidUpdate(prevProps: Props, prevState: State) {
     const { opened } = this.state;
-    if (prevProps.opened !== opened) {
-      if (open) {
+
+    if (prevState.opened !== opened) {
+      if (opened) {
         this.disableBodyScroll();
       } else {
         setTimeout(() => {
@@ -78,13 +82,17 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
   }
 
   private disableBodyScroll = () => {
-    document.body.style.paddingRight = '15px';
-    document.body.style.overflow = 'hidden';
+    if (typeof document !== 'undefined') {
+      document.body.style.paddingRight = '15px';
+      document.body.style.overflow = 'hidden';
+    }
   };
 
   private enableBodyScroll = () => {
-    document.body.style.paddingRight = null;
-    document.body.style.overflow = null;
+    if (typeof document !== 'undefined') {
+      document.body.style.paddingRight = null;
+      document.body.style.overflow = null;
+    }
   };
 
   private showModal = () => {
@@ -111,13 +119,13 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
   };
 
   private handleCancelModal = () => {
-    const { opener, onCancel } = this.props;
+    const { onCancel } = this.props;
     onCancel && onCancel(this.hideModal);
   };
 
   private notifyModalOk = () => {
-    const { onOk } = this.props;
-    onOk && onOk(this.hideModal);
+    const { onSuccess } = this.props;
+    onSuccess && onSuccess(this.hideModal);
   };
 
   public render() {
@@ -161,7 +169,7 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
                   <IconButton
                     icon={<Close />}
                     onClick={this.handleCloseModal}
-                    fillColor={Colors.gray800}
+                    fillColor={gray800}
                     color="transparent"
                   />
                 )}
@@ -215,7 +223,7 @@ const StyledBottomSheetDialog = styled.div<{ visible: boolean }>`
   min-height: 360px;
   max-height: 800px;
   border-radius: 8px;
-  ${BreakPoints.media.sm`
+  ${media.sm`
     max-height: calc(100vh - 48px);
     width: 100%;
     border-bottom-left-radius: 0;
@@ -232,9 +240,9 @@ const StyledBottomSheetDialog = styled.div<{ visible: boolean }>`
     transition: all 225ms ease-out;
 
   `}
-  background: ${Colors.white};
+  background: ${white};
   box-sizing: border-box;
-  ${ElevationStyles.elevation5}
+  ${elevation5}
 `;
 
 const StyledBottomSheetHead = styled.div`
@@ -249,7 +257,7 @@ const StyledBottomSheetTitle = styled(Headline3)`
 
 const StyledBottomSheetSubTitle = styled(Body2)`
   margin-top: 16px;
-  color: ${Colors.gray600};
+  color: ${gray600};
 `;
 
 const StyledBottomSheetBody = styled.div<{ showScroll: boolean }>`
