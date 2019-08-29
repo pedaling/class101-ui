@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 export interface IconProps {
@@ -89,6 +90,7 @@ export { default as NavertalkSymbol } from './generated/NavertalkSymbol';
 export { default as Notice } from './generated/Notice';
 export { default as Paper } from './generated/Paper';
 export { default as Paper2 } from './generated/Paper2';
+export { default as PaperOutline } from './generated/PaperOutline';
 export { default as Person } from './generated/Person';
 export { default as PersonOutline } from './generated/PersonOutline';
 export { default as Phone } from './generated/Phone';
@@ -113,6 +115,8 @@ export { default as Send2 } from './generated/Send2';
 export { default as ShareApple } from './generated/ShareApple';
 export { default as Sheild } from './generated/Sheild';
 export { default as ShippingTruck } from './generated/ShippingTruck';
+export { default as Sorting } from './generated/Sorting';
+export { default as Square } from './generated/Square';
 export { default as StarFull } from './generated/StarFull';
 export { default as StarHalf } from './generated/StarHalf';
 export { default as StarNone } from './generated/StarNone';
