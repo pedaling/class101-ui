@@ -127,7 +127,7 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
     onCancel ? onCancel(this.hideModal) : this.hideModal();
   };
 
-  private notifyModalOk = () => {
+  private handleSuccessModal = () => {
     const { onSuccess } = this.props;
     onSuccess ? onSuccess(this.hideModal) : this.hideModal();
   };
@@ -138,8 +138,8 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
       children,
       title,
       subTitle,
-      successText: okText,
-      successColor: okColor,
+      successText,
+      successColor,
       cancelText,
       hideScroll,
       cancelColor,
@@ -195,10 +195,10 @@ export class ModalBottomSheet extends PureComponent<Props, State> {
                     {cancelText}
                   </StyledBottomSheetFooterButton>
                 )}
-                {cancelText && okText && <StyledBottomSheetFooterSpace />}
-                {okText && (
-                  <StyledBottomSheetFooterButton onClick={this.notifyModalOk} color={okColor}>
-                    {okText}
+                {cancelText && successText && <StyledBottomSheetFooterSpace />}
+                {successText && (
+                  <StyledBottomSheetFooterButton onClick={this.handleSuccessModal} color={successColor}>
+                    {successText}
                   </StyledBottomSheetFooterButton>
                 )}
               </StyledBottomSheetFooter>
