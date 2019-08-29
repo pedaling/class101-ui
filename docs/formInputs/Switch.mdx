@@ -14,8 +14,6 @@ import { PlayGroundButtonContainer } from '../docsComponents';
 
 <PropsTable of={Switch} />
 
-**`onText`와 `offText`는 함께 설정해야 동작합니다.**
-
 ## Basic usage
 
 ```ts
@@ -31,12 +29,16 @@ import { Switch, Colors } from '@class101/ui';
 
 ## With Text
 
+`labeComponent`와 `children`의 타입은 같습니다.
+
+**Checked 상태에 따라 텍스트가 변하는 것은 UX적으로 추천하지 않습니다.**
+
 <Playground>
   <PlayGroundButtonContainer style={{ width: '250px' }}>
-    <Switch checked>크레딧 사용 여부</Switch>
-    <Switch onText="다크모드 켜짐" offText="다크모드 꺼짐" />
-    <Switch onText="다크모드 켜짐" offText="다크모드 꺼짐" disabled />
-    <Switch onText={<span>with component</span>} offText={<Icon.Bell />} />
+    <Switch checked>크레딧 사용</Switch>
+    <Switch labelComponent="내 위치 공유" />
+    <Switch disabled><span>벨소리 사용</span></Switch>
+    <Switch labelComponent={(checked) => checked ? "checked" : "unchecked"} />
 
   </PlayGroundButtonContainer>
 </Playground>
@@ -72,8 +74,8 @@ import { Switch, Colors } from '@class101/ui';
     <Switch inline />
   </PlayGroundButtonContainer>
   <PlayGroundButtonContainer>
-    <Switch onText="다크모드 켜짐" offText="다크모드 꺼짐" inline checked />
-    <Switch onText="다크모드 켜짐" offText="다크모드 꺼짐" inline />
-    <Switch onText="다크모드 켜짐" offText="다크모드 꺼짐" inline disabled />
+    <Switch labelComponent="다크모드 사용" inline checked />
+    <Switch labelComponent="다크모드 사용" inline />
+    <Switch labelComponent="다크모드 사용" inline disabled />
   </PlayGroundButtonContainer>
 </Playground>
