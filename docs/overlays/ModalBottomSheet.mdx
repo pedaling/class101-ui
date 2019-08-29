@@ -1,0 +1,121 @@
+---
+menu: Overlays
+name: ModalBottomSheet
+route: /overlays/modal-bottom-sheet
+---
+
+import { Playground, PropsTable } from 'docz';
+import { ModalBottomSheet, Button } from '@class101/ui';
+import { imageSrc } from '../components/interface';
+import { LongContent } from './ModalBottomSheet';
+
+# Modal Bottom Sheet
+
+## Props
+
+<PropsTable of={ModalBottomSheet} />
+
+## Basic usage
+
+<Playground>
+  <ModalBottomSheet
+    opener={<Button>Open Modal</Button>}
+    title="수강권 주문 상세"
+    subTitle="수강권을 한번 더 확인해 주세요."
+    successText="확인"
+    cancelText="취소"
+  >
+    This is Modal
+  </ModalBottomSheet>
+</Playground>
+
+> `opener`에는 onClick이벤트가 가능한 컴포넌트를 작성해야합니다.
+
+## With State
+
+> State로 사용할 경우 `onSuccess`, `onCancel`, `onClose`를 설정하는것을 추천합니다.
+>
+> 설정을 하지 않을 시 Modal이 state값과는 다르게 동작할 수 있습니다.
+
+<Playground>
+  {
+    () => {
+      function Example() {
+        const [opened, setOpened] = React.useState(false);
+
+        const openModal = () => setOpened(true);
+        const closeModal = () => setOpened(false);
+
+        return (
+          <>
+            <Button onClick={openModal}>Open Modal</Button>
+            <ModalBottomSheet title="State Modal" subTitle="this is state modal" opened={opened} cancelText="취소" onCancel={closeModal} onClose={closeModal}>
+              Modal Children
+            </ModalBottomSheet>
+          </>
+        )
+      }
+      return <Example />
+    }
+
+}
+
+</Playground>
+
+## Button Action
+
+<Playground>
+  <ModalBottomSheet
+    opener={<Button>Show Modal</Button>}
+    title="수강권 주문 상세"
+    successText="확인"
+    onSuccess={close => {
+      alert('확인 됨');
+      close();
+    }}
+  >
+    This is Modal
+  </ModalBottomSheet>
+</Playground>
+
+## Option
+
+`closeable`를 설정하면 modal바깥쪽을 클릭할때와 x버튼을 클릭할 때 닫힙니다. 기본으로 설정되어 있습니다.
+
+content가 `max-height`를 넘었을 때
+`hideScroll`를 설정하면 스크롤이 숨겨지게 됩니다.
+
+Modal에 이미지를 꽉차게 설정하고 싶을 때 `removeContentPadding`를 설정하면 됩니다.
+
+<Playground>
+  <ModalBottomSheet
+    opener={<Button>Show Modal</Button>}
+    closeable={false}
+    hideScroll
+    title="수강권 주문 상세"
+    successText="확인"
+  >
+    <LongContent />
+  </ModalBottomSheet>
+
+  <ModalBottomSheet
+    opener={<Button>Show Modal</Button>}
+    title="이미지 상세보기"
+    cancelText="닫기"
+    removeContentPadding
+  >
+    <img style={{ width: '100%' }} src={imageSrc} />
+  </ModalBottomSheet>
+</Playground>
+
+## No SSR
+
+ModalBottomSheet는 React Portal을 Server Side Rendering에 사용하기 위해 `componentDidMount`때 렌더링 됩니다.
+
+하지만 SSR을 사용하지 않으면 `noSsr`속성을 사용하여 다른 컴포넌트와 동시에 랜더링되게 할 수 있습니다.
+
+<Playground>
+  <ModalBottomSheet opener={<Button>Show Modal</Button>} title="Mounted Modal" successText="확인" noSsr>
+    content
+  </ModalBottomSheet>
+</Playground>
