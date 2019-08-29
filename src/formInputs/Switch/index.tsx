@@ -6,6 +6,8 @@ import { elevation1 } from '../../core/ElevationStyles';
 import { body2 } from '../../core/TextStyles';
 import { Theme, ThemeConfig } from '../../core/Theme';
 
+export type SwitchLabelType = (checked: boolean) => React.ReactNode | React.ReactNode;
+
 export interface SwitchProps {
   theme: ThemeConfig;
   disabled: boolean;
@@ -14,9 +16,8 @@ export interface SwitchProps {
   hoverColor: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => boolean | void;
   inline?: boolean;
-  onText?: React.ReactNode;
-  offText?: React.ReactNode;
-  children?: React.ReactNode;
+  labelComponent?: SwitchLabelType;
+  children?: SwitchLabelType;
 }
 
 export interface SwitchState {
@@ -37,14 +38,14 @@ export class Switch extends PureComponent<SwitchProps, SwitchState> {
   };
 
   public render() {
-    const { inline, onText, offText, children, disabled, color, hoverColor, ...restProps } = this.props;
+    const { inline, labelComponent, children, disabled, color, hoverColor, ...restProps } = this.props;
     const { checked } = this.state;
-    const textExists = children || (onText && offText);
+    const label = children || (typeof labelComponent === 'function' ? labelComponent(checked) : labelComponent);
     return (
       <StyledSwitchContainer inline={inline} disabled={disabled} {...restProps}>
-        {textExists && (
+        {label && (
           <StyledSwitchText inline={inline} disabled={disabled}>
-            {children || (checked ? onText : offText)}
+            {label}
           </StyledSwitchText>
         )}
         <StyledSwitchBase>
