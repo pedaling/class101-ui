@@ -6,7 +6,7 @@ import { elevation1 } from '../../core/ElevationStyles';
 import { body2 } from '../../core/TextStyles';
 import { Theme, ThemeConfig } from '../../core/Theme';
 
-export type SwitchLabelType = (checked: boolean) => React.ReactNode | React.ReactNode;
+export type SwitchLabelType = ((checked: boolean) => React.ReactNode) | React.ReactNode;
 
 export interface SwitchProps {
   theme: ThemeConfig;
