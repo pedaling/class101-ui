@@ -252,7 +252,6 @@ const StyledBottomSheetDialog = styled.div<{ visible: boolean }>`
     min-height: 240px;
     transition: all 225ms ease-out;
     padding: 24px;
-    padding-bottom: 32px;
   `}
   background: ${white};
   box-sizing: border-box;
