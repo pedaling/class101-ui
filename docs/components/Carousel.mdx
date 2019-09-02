@@ -20,7 +20,7 @@ import { PlayGroundBanner, PlayGroundSectionCarouselContent, SwiperCard, Preload
 ## Basic usage
 
 <Playground>
-  <Carousel>
+  <Carousel freeMode={false}>
     <PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner>
     <PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner>
     <PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner>
@@ -115,6 +115,7 @@ enum CarouselPaginationTheme {
   <Carousel
     navigationPosition={CarouselNavigationPosition.BottomRightIn}
     paginationTheme={CarouselPaginationTheme.Dark}
+    freeMode={false}
     pagination
   >
     <PlayGroundBanner backgroundColor={Colors.red100} onClick={() => alert('clicked')}>
@@ -130,6 +131,7 @@ enum CarouselPaginationTheme {
   <Carousel
     navigationPosition={CarouselNavigationPosition.BottomRightIn}
     paginationTheme={CarouselPaginationTheme.Light}
+    freeMode={false}
     pagination
   >
     <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
@@ -144,6 +146,17 @@ enum CarouselPaginationTheme {
   <Carousel
     navigationPosition={CarouselNavigationPosition.BottomRightIn}
     paginationTheme={CarouselPaginationTheme.Light}
+    loop
+    pagination
+  >
+    <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+  </Carousel>
+  <Carousel
+    navigationPosition={CarouselNavigationPosition.BottomRightIn}
+    paginationTheme={CarouselPaginationTheme.Light}
+    freeMode={false}
     loop
     pagination
   >

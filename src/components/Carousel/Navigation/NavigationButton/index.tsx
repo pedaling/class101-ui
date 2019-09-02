@@ -54,11 +54,22 @@ const navigationDirectionStyle: { [key in NavigationDirection]: FlattenSimpleInt
 };
 
 const Button = styled(IconButton)<{ direction: NavigationDirection }>`
-  /* for reset swiper.css */
+  /* Reset swiper's default style */
   background-image: none;
+  margin: 0;
 
-  ${elevation1};
+  /* Customize navigation button  */
+  ${elevation1}
   position: absolute;
   top: 0;
   ${props => navigationDirectionStyle[props.direction]};
+
+  &:focus {
+    outline: none;
+  }
+  &:active,
+  &:disabled {
+    opacity: 1;
+    pointer-events: auto;
+  }
 `;
