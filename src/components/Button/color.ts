@@ -8,7 +8,6 @@ import {
   gray100,
   gray200,
   gray500,
-  gray600,
   gray700,
   gray800,
   orange000,
@@ -86,7 +85,7 @@ export const disabledBackgroundColors = {
 };
 
 export const defaultTextButtonColors = {
-  [ThemeMode.LIGHT]: gray600,
+  [ThemeMode.LIGHT]: gray500,
   [ThemeMode.DARK]: gray500,
 };
 
