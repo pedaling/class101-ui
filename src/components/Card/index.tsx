@@ -5,6 +5,16 @@ import styled, { css } from 'styled-components';
 import { gray800 } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
 
+export type CoverRatioType = 0.5625 | 0.625 | 0.75 | 1.333 | 1;
+
+export enum CoverRatio {
+  RATIO_16X9 = 0.5625,
+  RATIO_16X10 = 0.625,
+  RATIO_4X3 = 0.75,
+  RATIO_3X4 = 1.333,
+  RATIO_1X1 = 1,
+}
+
 export interface CardProps {
   /** 카드 타이틀 */
   title: string;
@@ -19,7 +29,7 @@ export interface CardProps {
   coverImageAlt?: string;
 
   /** 카드 이미지 비율 */
-  coverImageRatio: '1*1' | '4*3' | '16*9';
+  coverImageRatio: CoverRatioType;
 
   /** 타이틀 위에 들어갈 추가 노드 */
   extraTop?: React.ReactNode;
@@ -41,7 +51,7 @@ export interface CardProps {
 
 export class Card extends PureComponent<CardProps> {
   public static defaultProps: Partial<CardProps> = {
-    coverImageRatio: '4*3',
+    coverImageRatio: CoverRatio.RATIO_4X3,
   };
 
   public render() {
@@ -132,14 +142,13 @@ const CoverImage = styled.div`
   border-radius: 3px;
 `;
 
-const RatioCoverImage = styled(CoverImage)<{ coverImageRatio: '1*1' | '4*3' | '16*9' }>`
+const RatioCoverImage = styled(CoverImage)<{ coverImageRatio: CoverRatio }>`
   overflow: hidden;
   border-radius: 3px;
   ${props => {
-    const ratios = props.coverImageRatio.split('*');
     return css`
       position: relative;
-      padding-bottom: ${(Number(ratios[1]) / Number(ratios[0])) * 100}%;
+      padding-bottom: ${props.coverImageRatio * 100}%;
       img {
         position: absolute;
         top: 0;
