@@ -33,7 +33,8 @@ export interface CarouselProps {
   lazy?: LazyOptions | boolean;
   on?: { [key in SwiperEvent]?: () => void };
   loop: boolean;
-  shouldSwiperUpdate: boolean;
+  shouldSwiperUpdate?: boolean;
+  rebuildOnUpdate?: boolean;
   className?: string;
   children: React.ReactNode;
   onChangeSlides?: (index: number) => void;
@@ -42,6 +43,7 @@ export interface CarouselProps {
 
 const DEFAULT_PARAMS = {
   Swiper,
+  watchOverflow: true,
   threshold: 10,
   modules: [],
 };
@@ -70,6 +72,7 @@ export class Carousel extends PureComponent<CarouselProps, State> {
     lgSlidesSideOffset: 0,
     smSlidesSideOffset: 0,
     shouldSwiperUpdate: false,
+    rebuildOnUpdate: false,
     freeMode: true,
     loop: false,
   };
@@ -207,10 +210,13 @@ export class Carousel extends PureComponent<CarouselProps, State> {
       lazy,
       freeMode,
       shouldSwiperUpdate,
+      rebuildOnUpdate,
     } = this.props;
     let params: ReactIdSwiperCustomProps = {
       ...DEFAULT_PARAMS,
       shouldSwiperUpdate,
+      rebuildOnUpdate,
+
       loop,
       freeMode,
       on: {
