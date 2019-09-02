@@ -35,6 +35,8 @@ export interface CarouselProps {
   loop: boolean;
   shouldSwiperUpdate?: boolean;
   rebuildOnUpdate?: boolean;
+  observer?: boolean;
+  observeParents?: boolean;
   className?: string;
   children: React.ReactNode;
   onChangeSlides?: (index: number) => void;
@@ -43,7 +45,6 @@ export interface CarouselProps {
 
 const DEFAULT_PARAMS = {
   Swiper,
-  watchOverflow: true,
   threshold: 10,
   modules: [],
 };
@@ -211,12 +212,16 @@ export class Carousel extends PureComponent<CarouselProps, State> {
       freeMode,
       shouldSwiperUpdate,
       rebuildOnUpdate,
+      observer,
+      observeParents,
     } = this.props;
+
     let params: ReactIdSwiperCustomProps = {
       ...DEFAULT_PARAMS,
       shouldSwiperUpdate,
       rebuildOnUpdate,
-
+      observer,
+      observeParents,
       loop,
       freeMode,
       on: {
@@ -233,6 +238,7 @@ export class Carousel extends PureComponent<CarouselProps, State> {
         },
       },
     };
+
     if (autoplay) {
       params = {
         ...params,
