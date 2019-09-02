@@ -54,6 +54,9 @@ const navigationDirectionStyle: { [key in NavigationDirection]: FlattenSimpleInt
 };
 
 const Button = styled(IconButton)<{ direction: NavigationDirection }>`
+  /* for reset swiper.css */
+  background-image: none;
+
   ${elevation1};
   position: absolute;
   top: 0;
