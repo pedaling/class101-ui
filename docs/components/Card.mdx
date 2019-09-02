@@ -5,7 +5,7 @@ route: /components/card
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Colors, Button, Grid, Row, Caption1, Card } from '@class101/ui';
+import { Colors, Button, Grid, Row, Caption1, Card, CoverRatio } from '@class101/ui';
 import { NoHiddenStyleCol } from './Col';
 import { imageSrc } from './interface';
 
@@ -39,11 +39,24 @@ import { imageSrc } from './interface';
 
 ## With Image Ratio
 
+```ts
+export enum CoverRatio {
+  RATIO_16X9 = 0.5625,
+  RATIO_16X10 = 0.625,
+  RATIO_4X3 = 0.75,
+  RATIO_3X4 = 1.333,
+  RATIO_1X1 = 1,
+}
+```
+
 <Playground>
   <Grid>
     <Row>
-      <NoHiddenStyleCol lg={8}>
-        <Card title="아이패드 드로잉" coverImageRatio="4*3" coverImage={imageSrc} />
+      <NoHiddenStyleCol lg={6}>
+        <Card title="아이패드 드로잉" coverImageRatio={CoverRatio.RATIO_16X9} coverImage={imageSrc} />
+      </NoHiddenStyleCol>
+      <NoHiddenStyleCol lg={6}>
+        <Card title="아이패드 드로잉" coverImageRatio={CoverRatio.RATIO_1X1} coverImage={imageSrc} />
       </NoHiddenStyleCol>
     </Row>
   </Grid>
