@@ -107,13 +107,13 @@ const StyledSwitchInput = styled.input<{ disabled: boolean; color: string; hover
   position: absolute;
   top: 0;
   width: 0;
+  cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
 
   &:before,
   &:after {
     content: '';
     position: absolute;
     box-sizing: border-box;
-    cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
   }
 
   &:before {
