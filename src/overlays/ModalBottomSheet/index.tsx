@@ -246,6 +246,8 @@ const Dialog = styled.div<{ visible: boolean }>`
   ${media.sm`
     flex: none;
     padding: 24px;
+    padding-bottom: calc(constant(safe-area-inset-bottom) + 24px);
+    padding-bottom: calc(env(safe-area-inset-bottom) + 24px);
     width: 100%;
     min-height: 240px;
     max-height: calc(100vh - 48px);
