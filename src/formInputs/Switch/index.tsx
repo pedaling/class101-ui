@@ -5,6 +5,7 @@ import { gray100, gray300, gray500, gray800, orange500, orange700 } from '../../
 import { elevation1 } from '../../core/ElevationStyles';
 import { body2 } from '../../core/TextStyles';
 import { Theme, ThemeConfig } from '../../core/Theme';
+import { HTMLInputProps } from '../../interfaces/props';
 
 export type SwitchLabelType = ((checked: boolean) => React.ReactNode) | React.ReactNode;
 
@@ -18,6 +19,7 @@ export interface SwitchProps {
   inline?: boolean;
   labelComponent?: SwitchLabelType;
   children?: SwitchLabelType;
+  inputAttributes?: HTMLInputProps;
 }
 
 export interface SwitchState {
@@ -38,27 +40,36 @@ export class Switch extends PureComponent<SwitchProps, SwitchState> {
   };
 
   public render() {
-    const { inline, labelComponent, children, disabled, color, hoverColor, ...restProps } = this.props;
+    const {
+      inline,
+      labelComponent,
+      children,
+      disabled,
+      color,
+      hoverColor,
+      onChange,
+      inputAttributes,
+      ...restProps
+    } = this.props;
     const { checked } = this.state;
     const label = children || (typeof labelComponent === 'function' ? labelComponent(checked) : labelComponent);
     return (
-      <StyledSwitchContainer inline={inline} disabled={disabled} {...restProps}>
+      <Container inline={inline} disabled={disabled} {...restProps}>
         {label && (
-          <StyledSwitchText inline={inline} disabled={disabled}>
+          <SwitchText inline={inline} disabled={disabled}>
             {label}
-          </StyledSwitchText>
+          </SwitchText>
         )}
-        <StyledSwitchBase>
-          <StyledSwitchInput
-            type="checkbox"
-            checked={checked}
-            onChange={this.changeChecked}
-            color={color}
-            hoverColor={hoverColor}
-            disabled={disabled}
-          />
-        </StyledSwitchBase>
-      </StyledSwitchContainer>
+        <SwitchInput
+          type="checkbox"
+          checked={checked}
+          onChange={this.changeChecked}
+          disabled={disabled}
+          hidden={true}
+          {...inputAttributes}
+        />
+        <Indicator checked={checked} color={color} hoverColor={hoverColor} disabled={disabled} />
+      </Container>
     );
   }
 
@@ -72,23 +83,13 @@ export class Switch extends PureComponent<SwitchProps, SwitchState> {
   };
 }
 
-const switcherSize = css`
-  width: 36px;
-  height: 22px;
-`;
-
-const StyledSwitchBase = styled.div`
-  ${switcherSize};
-  display: flex;
+const Container = styled.label<{ inline?: boolean; disabled: boolean }>`
+  display: ${props => (props.inline ? 'inline-flex' : 'flex')};
+  align-items: center;
   position: relative;
 `;
 
-const StyledSwitchContainer = styled.div<{ inline?: boolean; disabled: boolean }>`
-  display: ${props => (props.inline ? 'inline-flex' : 'flex')};
-  align-items: center;
-`;
-
-const StyledSwitchText = styled.span<{ disabled: boolean; inline?: boolean }>`
+const SwitchText = styled.span<{ disabled: boolean; inline?: boolean }>`
   ${body2};
   color: ${props => (props.disabled ? gray300 : gray800)};
   margin-right: 9px;
@@ -97,77 +98,67 @@ const StyledSwitchText = styled.span<{ disabled: boolean; inline?: boolean }>`
 
 const transitionAnimation = '0.15s ease-out 0.08s';
 
-const StyledSwitchInput = styled.input<{ disabled: boolean; color: string; hoverColor: string }>`
-  box-sizing: border-box;
-  appearance: none;
-  height: 0;
-  left: 0;
-  line-height: 0;
-  outline: none;
+const switcherSize = css`
+  width: 36px;
+  height: 22px;
+`;
+
+const SwitchInput = styled.input`
   position: absolute;
   top: 0;
-  width: 0;
+  left: 0;
+  opacity: 0;
+  z-index: -1;
+`;
 
-  &:before,
+const Indicator = styled.div<{ checked: boolean; disabled: boolean; color: string; hoverColor: string }>`
+  ${switcherSize};
+  display: flex;
+  position: relative;
+  padding: 2px;
+  box-sizing: border-box;
+  cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
+  border-radius: 23px;
+
+  transition: background-color ${transitionAnimation};
+  ${switcherSize};
+
   &:after {
     content: '';
-    position: absolute;
     box-sizing: border-box;
-    cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
-  }
-
-  &:before {
-    border-radius: 23px;
-
-    left: -2px;
-    top: -2px;
-
-    transition: background-color ${transitionAnimation};
-    ${switcherSize};
-
-    ${props =>
-      props.disabled
-        ? `
-      background: ${gray100};
-      `
-        : `
-      background: ${gray300};
-    `}
-  }
-
-  &:after {
     border-radius: 50%;
     background: white;
     transform: translate(0, 0);
     transition: transform ${transitionAnimation};
-    ${elevation1};
 
+    ${elevation1};
     width: 18px;
     height: 18px;
   }
 
-  &:checked {
-    &:after {
-      transform: translate(14px, 0);
-    }
-    &:before {
-      background: ${props => props.color};
-      box-sizing: border-box;
-    }
-  }
+  ${props =>
+    props.disabled
+      ? `
+        background-color: ${gray100};
+      `
+      : `
+        background-color: ${gray300};
+        &:hover {
+          background-color: ${gray500};
+          ${props.checked &&
+            `
+              background-color: ${props.hoverColor}
+            `}
+        }
+    ;
+  `}
 
   ${props =>
-    !props.disabled &&
+    props.checked &&
     `
-  &:hover {
-    &:before {
-      background: ${gray500}
-    }
-    &:checked {
-      &:before {
-        background: ${props.hoverColor}
+      background-color: ${props.color};
+      &:after {
+        transform: translate(14px, 0);
       }
-    }
-  }
   `}
 `;

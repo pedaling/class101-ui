@@ -147,6 +147,9 @@ export default class ButtonBase<ColorValue extends string, SizeValue extends str
 }
 
 const buttonCommonStyle = css`
+  margin: 0;
+  padding: 0;
+
   flex: initial;
   box-sizing: border-box;
   display: flex;

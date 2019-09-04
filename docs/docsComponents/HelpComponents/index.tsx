@@ -1,4 +1,4 @@
-import { BreakPoints, Button, Colors, Modal, ThemeConfig, ThemeMode } from '@class101/ui';
+import { BreakPoints, Colors, ThemeConfig, ThemeMode } from '@class101/ui';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -44,23 +44,3 @@ export const PreloadImage = styled.div`
 `;
 
 export { ThemeProvider } from 'styled-components';
-
-export class ModalOpener extends React.PureComponent<{}, { isVisible: boolean }> {
-  public state = {
-    isVisible: false,
-  };
-  public render() {
-    return (
-      <>
-        <Button onClick={() => this.setState({ isVisible: true })}>Open Modal</Button>
-        <Modal
-          isOpened={this.state.isVisible}
-          title={'Modal\nModal2'}
-          onClose={() => this.setState({ isVisible: false })}
-        >
-          Content
-        </Modal>
-      </>
-    );
-  }
-}
