@@ -127,7 +127,18 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
           <Container zIndex={zIndex} visible={opened} onClick={closeable ? this.handleCloseModal : undefined}>
             <Dialog visible={opened} onClick={this.blockPropagation} style={modalStyle}>
               <DialogHead>
-                <DialogTitle>{title}</DialogTitle>
+                <DialogTitle>
+                  {title.split('\n').reduce(
+                    (prev, curr) => (
+                      <>
+                        {prev}
+                        {prev && <br />}
+                        {curr}
+                      </>
+                    ),
+                    '' as React.ReactNode
+                  )}
+                </DialogTitle>
                 {closeable && (
                   <IconButton
                     icon={<Close />}
