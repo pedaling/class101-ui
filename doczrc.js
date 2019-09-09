@@ -6,6 +6,7 @@ export default {
   src: './docs/',
   dest: './public',
   public: '/pub',
+  port: '3003',
   themeConfig: {
     showPlaygroundEditor: true,
     colors: {
