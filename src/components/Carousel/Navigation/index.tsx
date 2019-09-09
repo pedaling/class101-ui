@@ -17,9 +17,10 @@ interface Props {
   isBeginning: boolean;
   isEnd: boolean;
   lgSlidesSideOffset: number;
+  navigationContainerMaxWidth?: number;
 }
 
-const classNames = (direction: NavigationDirection, disabled: boolean): string => {
+const generateClassNames = (direction: NavigationDirection, disabled: boolean): string => {
   let className = `swiper-button-${direction === NavigationDirection.Next ? 'next' : 'prev'}`;
   if (disabled) {
     className = `${className} swiper-button-disabled`;
@@ -32,20 +33,28 @@ export default class Navigation extends React.PureComponent<Props> {
   };
 
   public render() {
-    const { position, goNext, goPrev, isBeginning, isEnd, lgSlidesSideOffset } = this.props;
+    const {
+      position,
+      goNext,
+      goPrev,
+      isBeginning,
+      isEnd,
+      lgSlidesSideOffset,
+      navigationContainerMaxWidth,
+    } = this.props;
     return (
-      <Container position={position} lgSlidesSideOffset={lgSlidesSideOffset}>
+      <Container position={position} lgSlidesSideOffset={lgSlidesSideOffset} maxWidth={navigationContainerMaxWidth}>
         <NavigationButton
           direction={NavigationDirection.Prev}
           onClick={goPrev}
           disabled={isBeginning}
-          className={classNames(NavigationDirection.Prev, isBeginning)}
+          className={generateClassNames(NavigationDirection.Prev, isBeginning)}
         />
         <NavigationButton
           direction={NavigationDirection.Next}
           onClick={goNext}
           disabled={isEnd}
-          className={classNames(NavigationDirection.Next, isEnd)}
+          className={generateClassNames(NavigationDirection.Next, isEnd)}
         />
       </Container>
     );
@@ -73,14 +82,14 @@ const navigationPositionStyle: { [key in CarouselNavigationPosition]: FlattenSim
 const Container = styled.div<{
   position: CarouselNavigationPosition;
   lgSlidesSideOffset: number;
+  maxWidth?: number;
 }>`
   position: absolute;
   ${props => navigationPositionStyle[props.position]};
   left: 50%;
   z-index: 1;
   width: ${props => (props.lgSlidesSideOffset ? `calc(100% - ${props.lgSlidesSideOffset * 2}px)` : '100%')};
-  /* 여백 계산: 960 + ( 16 * 2) */
-  max-width: 992px;
+  ${props => props.maxWidth && `max-width: ${props.maxWidth}px`};
   ${media.sm`
     display: none;
   `};

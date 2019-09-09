@@ -18,6 +18,7 @@ export enum CarouselPaginationTheme {
 }
 
 export interface CarouselProps {
+  navigationContainerMaxWidth?: number;
   navigation: boolean;
   navigationPosition: CarouselNavigationPosition;
   pagination: boolean;
@@ -108,6 +109,7 @@ export class Carousel extends PureComponent<CarouselProps, State> {
       pagination,
       lgSlidesSideOffset,
       smSlidesSideOffset,
+      navigationContainerMaxWidth,
     } = this.props;
     const { isBeginning, isEnd } = this.state;
 
@@ -133,6 +135,7 @@ export class Carousel extends PureComponent<CarouselProps, State> {
           )}
           {navigation && !shouldHideNavigation && (
             <Navigation
+              navigationContainerMaxWidth={navigationContainerMaxWidth}
               lgSlidesSideOffset={lgSlidesSideOffset}
               position={navigationPosition}
               goNext={this.goNext}
