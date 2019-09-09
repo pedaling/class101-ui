@@ -19,10 +19,10 @@ export interface ModalBottomSheetProps {
   children: React.ReactNode;
   successText?: string;
   successColor: ContainButtonColorValue;
-  successAttributes?: ButtonProps;
+  successAttributes?: Partial<ButtonProps>;
   cancelText?: string;
   cancelColor: ContainButtonColorValue;
-  cancelAttributes?: ButtonProps;
+  cancelAttributes?: Partial<ButtonProps>;
   closeable: boolean;
   hideScroll: boolean;
   noSsr: boolean;
