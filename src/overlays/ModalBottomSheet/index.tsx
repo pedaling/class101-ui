@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
-import { Button, IconButton } from '../../components/Button';
+import { Button, IconButton, ButtonProps } from '../../components/Button';
 import { ButtonColor, ContainButtonColorValue } from '../../components/Button/interface';
 import { media } from '../../core/BreakPoints';
 import { gray600, gray800, white } from '../../core/Colors';
@@ -19,8 +19,10 @@ export interface ModalBottomSheetProps {
   children: React.ReactNode;
   successText?: string;
   successColor: ContainButtonColorValue;
+  successAttributes?: ButtonProps;
   cancelText?: string;
   cancelColor: ContainButtonColorValue;
+  cancelAttributes?: ButtonProps;
   closeable: boolean;
   hideScroll: boolean;
   noSsr: boolean;
@@ -108,6 +110,8 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
       contentStyle,
       removeContentPadding,
       opener,
+      successAttributes,
+      cancelAttributes,
     } = this.props;
     const { mounted, opened } = this.state;
 
@@ -154,12 +158,12 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
               </DialogBody>
               <DialogFooter>
                 {cancelText && (
-                  <DialogFooterButton onClick={this.handleCancelModal} color={cancelColor}>
+                  <DialogFooterButton onClick={this.handleCancelModal} color={cancelColor} {...cancelAttributes}>
                     {cancelText}
                   </DialogFooterButton>
                 )}
                 {successText && (
-                  <DialogFooterButton onClick={this.handleSuccessModal} color={successColor}>
+                  <DialogFooterButton onClick={this.handleSuccessModal} color={successColor} {...successAttributes}>
                     {successText}
                   </DialogFooterButton>
                 )}
@@ -181,7 +185,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
   private enableBodyScroll = () => {
     if (typeof document !== 'undefined') {
       document.body.style.paddingRight = null;
-      document.body.style.overflow = null;
+      document.body.style.overflow = '';
     }
   };
 
