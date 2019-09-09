@@ -108,6 +108,21 @@ Modal에 이미지를 꽉차게 설정하고 싶을 때 `removeContentPadding`�
   </ModalBottomSheet>
 </Playground>
 
+## Button Attributes
+
+`successAttributes`와 `cancelAttributes`로 버튼의 속성을 정할 수 있습니다.
+
+<Playground>
+  <ModalBottomSheet
+    opener={<Button>Show Modal</Button>}
+    title="Modal"
+    successText="확인"
+    successAttributes={{ loading: true }}
+    >
+
+  </ModalBottomSheet>
+</Playground>
+
 ## No SSR
 
 ModalBottomSheet는 React Portal을 Server Side Rendering에 사용하기 위해 `componentDidMount`때 렌더링 됩니다.
