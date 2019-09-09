@@ -105,8 +105,10 @@ enum CarouselNavigationPosition {
 ### Navigation Container Max Width
 
 <Playground>
-  <Carousel navigationContainerMaxWidth={320}>
-    <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+  <Carousel navigationPosition={CarouselNavigationPosition.BottomRightIn} navigationContainerMaxWidth={560}>
+    <PlayGroundBanner backgroundColor={Colors.blue100} style={{ display: 'flex', justifyContent: 'center' }}>
+      <div style={{ width: '100%', maxWidth: 560, backgroundColor: 'yellow', height: 100 }}>배너1</div>
+    </PlayGroundBanner>
     <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
     <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
     <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
