@@ -75,7 +75,7 @@ const navigationPositionStyle: { [key in CarouselNavigationPosition]: FlattenSim
   [CarouselNavigationPosition.BottomRightIn]: css`
     top: auto;
     bottom: 47px;
-    transform: translateX(calc(-50% - 15px));
+    transform: translateX(calc(-50% - 31px));
   `,
 };
 
@@ -89,7 +89,7 @@ const Container = styled.div<{
   left: 50%;
   z-index: 1;
   width: ${props => (props.lgSlidesSideOffset ? `calc(100% - ${props.lgSlidesSideOffset * 2}px)` : '100%')};
-  ${props => props.maxWidth && `max-width: ${props.maxWidth}px`};
+  ${props => props.maxWidth && `max-width: ${props.maxWidth + 32 * 2}px`};
   ${media.sm`
     display: none;
   `};
