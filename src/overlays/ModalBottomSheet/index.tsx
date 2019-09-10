@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-
 import { Button, IconButton, ButtonProps } from '../../components/Button';
-import { ButtonColor, ContainButtonColorValue } from '../../components/Button/interface';
 import { media } from '../../core/BreakPoints';
 import { gray600, gray800, white } from '../../core/Colors';
 import { elevation5 } from '../../core/ElevationStyles';
@@ -18,11 +16,9 @@ export interface ModalBottomSheetProps {
   subTitle?: React.ReactNode;
   children: React.ReactNode;
   successText?: string;
-  successColor: ContainButtonColorValue;
-  successAttributes?: Partial<ButtonProps>;
+  successAttributes: Partial<ButtonProps>;
   cancelText?: string;
-  cancelColor: ContainButtonColorValue;
-  cancelAttributes?: Partial<ButtonProps>;
+  cancelAttributes: Partial<ButtonProps>;
   closeable: boolean;
   hideScroll: boolean;
   noSsr: boolean;
@@ -37,16 +33,17 @@ export interface ModalBottomSheetProps {
 interface State {
   mounted: boolean;
   opened: boolean;
+  scrollbarWidth: number;
 }
 
 export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State> {
   public static defaultProps: Partial<ModalBottomSheetProps> = {
     zIndex: 1000,
     closeable: true,
-    successColor: ButtonColor.ORANGE,
-    cancelColor: 'default',
     hideScroll: false,
     noSsr: false,
+    cancelAttributes: {},
+    successAttributes: {},
     removeContentPadding: false,
   };
 
@@ -62,6 +59,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
   public readonly state: State = {
     mounted: this.props.noSsr,
     opened: false,
+    scrollbarWidth: 0,
   };
 
   private unmountScrollTimeout?: number;
@@ -69,6 +67,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
   public componentDidMount() {
     this.setState({
       mounted: true,
+      scrollbarWidth: this.getScrollbarWidth(),
     });
   }
 
@@ -101,10 +100,8 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
       title,
       subTitle,
       successText,
-      successColor,
       cancelText,
       hideScroll,
-      cancelColor,
       closeable,
       modalStyle,
       contentStyle,
@@ -117,6 +114,12 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
 
     if (!mounted) {
       return opener || null;
+    }
+    if (!successAttributes.color) {
+      successAttributes.color = 'orange';
+    }
+    if (!cancelAttributes.color) {
+      cancelAttributes.color = 'default';
     }
 
     const clonedOpener =
@@ -158,12 +161,12 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
               </DialogBody>
               <DialogFooter>
                 {cancelText && (
-                  <DialogFooterButton onClick={this.handleCancelModal} color={cancelColor} {...cancelAttributes}>
+                  <DialogFooterButton onClick={this.handleCancelModal} {...cancelAttributes}>
                     {cancelText}
                   </DialogFooterButton>
                 )}
                 {successText && (
-                  <DialogFooterButton onClick={this.handleSuccessModal} color={successColor} {...successAttributes}>
+                  <DialogFooterButton onClick={this.handleSuccessModal} {...successAttributes}>
                     {successText}
                   </DialogFooterButton>
                 )}
@@ -176,8 +179,9 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
   }
 
   private disableBodyScroll = () => {
+    const { scrollbarWidth } = this.state;
     if (typeof document !== 'undefined') {
-      document.body.style.paddingRight = '15px';
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
       document.body.style.overflow = 'hidden';
     }
   };
@@ -199,6 +203,23 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     this.setState({
       opened: false,
     });
+  };
+
+  private getScrollbarWidth = () => {
+    const outer = document.createElement('div');
+    outer.style.visibility = 'hidden';
+    outer.style.overflow = 'scroll';
+    outer.style.msOverflowStyle = 'scrollbar';
+    document.body.appendChild(outer);
+
+    const inner = document.createElement('div');
+    outer.appendChild(inner);
+
+    const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
+
+    outer.parentNode && outer.parentNode.removeChild(outer);
+
+    return scrollbarWidth;
   };
 
   private blockPropagation = (e: React.SyntheticEvent) => {
