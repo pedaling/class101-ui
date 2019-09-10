@@ -201,7 +201,30 @@ enum CarouselPaginationTheme {
   </Carousel>
 </Playground>
 
-### ViewAllButton
+## Slide To Clicked Slide
+
+<Playground>
+  <Carousel
+    navigationPosition={CarouselNavigationPosition.BottomRightIn}
+    paginationTheme={CarouselPaginationTheme.Light}
+    lgSlidesPerView={4}
+    smSlidesPerView={2}
+    smSlidesSideOffset={24}
+    slideToClickedSlide
+    pagination
+  >
+    <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
+    <PlayGroundBanner backgroundColor={Colors.blue700}>배너7</PlayGroundBanner>
+  </Carousel>
+</Playground>
+
+## ViewAllButton
 
 <Playground>
   <Section title="섹션 타이틀">
