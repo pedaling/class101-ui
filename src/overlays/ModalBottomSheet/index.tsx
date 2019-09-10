@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import { Button, IconButton, ButtonProps } from '../../components/Button';
+import { Button, IconButton, ButtonProps, ButtonColor } from '../../components/Button';
 import { media } from '../../core/BreakPoints';
 import { gray600, gray800, white } from '../../core/Colors';
 import { elevation5 } from '../../core/ElevationStyles';
@@ -116,10 +116,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
       return opener || null;
     }
     if (!successAttributes.color) {
-      successAttributes.color = 'orange';
-    }
-    if (!cancelAttributes.color) {
-      cancelAttributes.color = 'default';
+      successAttributes.color = ButtonColor.ORANGE;
     }
 
     const clonedOpener =
