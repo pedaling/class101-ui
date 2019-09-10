@@ -12628,10 +12628,10 @@ react-hot-loader@^4.6.0, react-hot-loader@^4.6.3:
     shallowequal "^1.0.2"
     source-map "^0.7.3"
 
-react-id-swiper@2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/react-id-swiper/-/react-id-swiper-2.3.1.tgz#a5718c717f722868a2d18cf39a3db87878e48af3"
-  integrity sha512-ftdKp6l6WImE7RRPMlfByogB3fz+8c0zVla92MpPpcuewcO3znNCBcPEqaU6PIT2fDf3RWqwOFEbj6wxdey3MQ==
+react-id-swiper@2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/react-id-swiper/-/react-id-swiper-2.3.2.tgz#acd35e51f1068b94a8066829b121ff9b29febaaa"
+  integrity sha512-lxlASsBok+M8YmwYICEXUaVj44AyCaGfSc+YGZX5vWCqKLnVj3ceUbFFBfO+G8Glrya7WJhrfvzMae0r77MCSQ==
   dependencies:
     object-assign "^4.1.1"
 
