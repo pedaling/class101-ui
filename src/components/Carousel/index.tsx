@@ -39,6 +39,7 @@ export interface CarouselProps {
   observer?: boolean;
   observeParents?: boolean;
   className?: string;
+  slideToClickedSlide?: boolean;
   children: React.ReactNode;
   onChangeSlides?: (index: number) => void;
   activeSlideIndex?: number;
@@ -77,6 +78,7 @@ export class Carousel extends PureComponent<CarouselProps, State> {
     rebuildOnUpdate: false,
     freeMode: true,
     loop: false,
+    slideToClickedSlide: false,
   };
 
   public readonly state = {
@@ -217,6 +219,7 @@ export class Carousel extends PureComponent<CarouselProps, State> {
       rebuildOnUpdate,
       observer,
       observeParents,
+      slideToClickedSlide,
     } = this.props;
 
     let params: ReactIdSwiperCustomProps = {
@@ -227,6 +230,7 @@ export class Carousel extends PureComponent<CarouselProps, State> {
       observeParents,
       loop,
       freeMode,
+      slideToClickedSlide,
       on: {
         ...on,
         progress: this.progress,
