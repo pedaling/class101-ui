@@ -73,6 +73,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
 
   public componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
+    this.calculateInputValue();
   }
 
   public componentWillUnmount() {
