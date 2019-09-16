@@ -1,0 +1,119 @@
+---
+menu: Form Inputs
+name: DatePicker
+route: /form-inputs/datePicker
+---
+
+import { DatePicker } from '@class101/ui';
+import en from '@class101/ui/formInputs/DatePicker/locales/en_US';
+import { Playground, PropsTable } from 'docz';
+
+# DatePicker
+
+날짜를 선택할 수 있고 범위를 지정할 수 있는 DatePicker입니다.
+
+## Props
+
+> 모든 Props는 Optional입니다.
+
+<PropsTable of={DatePicker} />
+
+## DatePicker
+
+> Docs 페이지에서는 DatePicker가 숨겨져서 `alwaysShow`를 사용하였습니다. 기본적으로 DatePicker는 숨겨집니다.
+
+달력은 기본적으로 날짜 선택과 범위 선택이 있습니다.
+
+`useRange`로 범위 선택을 할 수 있습니다.
+
+<Playground>
+  <DatePicker alwaysShow inline />
+  <DatePicker alwaysShow useRange inline />
+</Playground>
+
+## change Event & default Value
+
+**`new Date()`의 month는 0부터 11까지입니다.**
+
+- 날짜 선택은 `onChange`와 `value`를 사용합니다.
+- 범위 선택은 `onRangeChange`와 `rangeValue`를 사용합니다.
+
+<Playground>
+  <DatePicker
+    value={new Date(2020, 0, 1)}
+    onChange={date => {
+      alert('Changed ' + date.toLocaleString());
+    }}
+    alwaysShow
+    inline
+  />
+  <DatePicker
+    rangeValue={{
+      start: new Date(2020, 0, 1),
+      end: new Date(2020, 0, 15),
+    }}
+    onRangeChange={(start, end) => {
+      alert('Changed ' + start.toLocaleString() + ' > ' + end.toLocaleString());
+    }}
+    alwaysShow
+    useRange
+    inline
+  />
+</Playground>
+
+## Prevent Changes
+
+onChange 이벤트 내에서 `return false`를 하면 날짜 선택이 막힙니다.
+
+<Playground>
+  <DatePicker
+    onChange={date => {
+      if (date.getDate() > 20) return false;
+    }}
+    alwaysShow
+    inline
+  />
+  <DatePicker
+    onRangeChange={(start, end) => {
+      if (start.getDate() < 5) return false;
+      if (end.getDate() > 20) return false;
+    }}
+    alwaysShow
+    useRange
+    inline
+  />
+</Playground>
+
+## alwaysShow
+
+`alwaysShow`를 설정하면 항상 달력 선택창이 보이게 할 수 있습니다.
+
+<Playground>
+  <DatePicker inline style={{ verticalAlign: 'top' }} />
+  <DatePicker alwaysShow inline />
+</Playground>
+
+## Locale
+
+`locale`을 통해 언어를 설정할 수 있습니다.
+현재 영어와 한국어가 있습니다. (기본은 한국어입니다.)
+
+### Import
+
+```typescript
+import en from '@class101/ui/formInputs/DatePicker/locales/en_US';
+import ko from '@class101/ui/formInputs/DatePicker/locales/ko_KR';
+```
+
+<Playground>
+  <DatePicker locale={en} alwaysShow />
+</Playground>
+
+## Min & Max
+
+`min`과 `max`를 통해 최소, 최대기간을 설정할 수 있습니다.
+
+<Playground>
+  <DatePicker min={new Date(2019, 0, 1)} value={new Date(2019, 3, 1)} max={new Date(2019, 11, 31)} alwaysShow inline />
+  <DatePicker min={new Date(2020, 4, 1)} max={new Date(2020, 6, 30)} alwaysShow useRange inline />
+</Playground>
