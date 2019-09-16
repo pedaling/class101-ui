@@ -6,3 +6,4 @@ export * from './Select';
 export * from './Switch';
 export * from './TagInput';
 export * from './Textarea';
+export * from './DatePicker';
