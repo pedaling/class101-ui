@@ -43,4 +43,8 @@ export const PreloadImage = styled.div`
   background: ${Colors.red000};
 `;
 
+export const FlexWrapper = styled.div`
+  display: flex;
+`;
+
 export { ThemeProvider } from 'styled-components';
