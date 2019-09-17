@@ -24,7 +24,9 @@ const Month = styled.div<{ isSelected: boolean }>`
   display: flex;
   justify-content: center;
   color: ${props => {
-    if (props.isSelected) return white;
+    if (props.isSelected) {
+      return white;
+    }
     return gray800;
   }};
   ${props =>

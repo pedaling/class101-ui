@@ -52,8 +52,8 @@ import { Playground, PropsTable } from 'docz';
       start: new Date(2020, 0, 1),
       end: new Date(2020, 0, 15),
     }}
-    onRangeChange={(start, end) => {
-      alert('Changed ' + start.toLocaleString() + ' > ' + end.toLocaleString());
+    onRangeChange={dateRange => {
+      alert('Changed ' + dateRange.start.toLocaleString() + ' > ' + dateRange.end.toLocaleString());
     }}
     alwaysShow
     useRange
@@ -109,11 +109,11 @@ import ko from '@class101/ui/formInputs/DatePicker/locales/ko_KR';
   <DatePicker locale={en} alwaysShow />
 </Playground>
 
-## Min & Max
+## MinDate & MaxDate
 
-`min`과 `max`를 통해 최소, 최대기간을 설정할 수 있습니다.
+`minDate`과 `maxDate`를 통해 최소, 최대기간을 설정할 수 있습니다.
 
 <Playground>
-  <DatePicker min={new Date(2019, 0, 1)} value={new Date(2019, 3, 1)} max={new Date(2019, 11, 31)} alwaysShow inline />
-  <DatePicker min={new Date(2020, 4, 1)} max={new Date(2020, 6, 30)} alwaysShow useRange inline />
+  <DatePicker minDate={new Date(2019, 0, 1)} value={new Date(2019, 3, 1)} maxDate={new Date(2019, 11, 31)} alwaysShow inline />
+  <DatePicker minDate={new Date(2020, 4, 1)} maxDate={new Date(2020, 6, 30)} alwaysShow useRange inline />
 </Playground>
