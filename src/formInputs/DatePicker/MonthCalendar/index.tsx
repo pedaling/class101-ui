@@ -1,5 +1,5 @@
 import React from 'react';
-import lodash from 'lodash';
+import { range } from 'lodash';
 import { MonthCalendarDay, MonthCalendarDayProps } from './Day';
 import styled from 'styled-components';
 import { DatePickerLocale } from '../interface';
@@ -42,8 +42,8 @@ export class MonthCalendar extends React.PureComponent<Props, State> {
           {days.map(day => (
             <MonthCalendarDay
               key={day.date}
-              onClick={this.onDateClick}
-              onHover={useHover ? this.onHoverChange : undefined}
+              onClick={this.onClickDate}
+              onHover={useHover ? this.onChangeHover : undefined}
               {...day}
             />
           ))}
@@ -52,7 +52,7 @@ export class MonthCalendar extends React.PureComponent<Props, State> {
     );
   }
 
-  private onDateClick = (date: Date) => {
+  private onClickDate = (date: Date) => {
     const { onChange } = this.props;
 
     this.setState({
@@ -61,7 +61,7 @@ export class MonthCalendar extends React.PureComponent<Props, State> {
     onChange(date);
   };
 
-  private onHoverChange = (hoverDate: Date | null) => {
+  private onChangeHover = (hoverDate: Date | null) => {
     this.setState({
       hoverDate,
     });
@@ -94,7 +94,7 @@ export class MonthCalendar extends React.PureComponent<Props, State> {
         hoverTimeNumber
       : null;
 
-    return lodash.range(dayStart, dayEnd).map(value => {
+    return range(dayStart, dayEnd).map(value => {
       const dayInfo = new Date(year, month, value).getTime();
       const disabled =
         (minTimeNumber !== null && minTimeNumber > dayInfo) || (maxTimeNumber !== null && maxTimeNumber < dayInfo);
@@ -132,7 +132,9 @@ export class MonthCalendar extends React.PureComponent<Props, State> {
 
     days.push(...this.createDays(1, lastDay + 1, nowYear, nowMonth, false));
 
-    if (days.length % 7 > 0) days.push(...this.createDays(1, 7 - (days.length % 7) + 1, nowYear, nowMonth + 1, true));
+    if (days.length % 7 > 0) {
+      days.push(...this.createDays(1, 7 - (days.length % 7) + 1, nowYear, nowMonth + 1, true));
+    }
     return days;
   }
 }

@@ -17,14 +17,18 @@ export interface MonthCalendarDayProps {
 const Component = (props: MonthCalendarDayProps) => {
   const { date, onClick, onHover, ...otherProps } = props;
   const dateObject = new Date(date);
-  const onDateClick = React.useCallback(() => {
-    if (!otherProps.disabled) onClick(dateObject);
+  const onClickDate = React.useCallback(() => {
+    if (!otherProps.disabled) {
+      onClick(dateObject);
+    }
   }, [otherProps, dateObject]);
-  const onDateHover = React.useCallback(() => {
-    onHover && onHover(dateObject);
+  const onHoverDate = React.useCallback(() => {
+    if (onHover) {
+      onHover(dateObject);
+    }
   }, [dateObject, onHover]);
   return (
-    <Day {...otherProps} onClick={onDateClick} onMouseOver={onDateHover}>
+    <Day {...otherProps} onClick={onClickDate} onMouseOver={onHoverDate}>
       {dateObject.getDate()}
     </Day>
   );

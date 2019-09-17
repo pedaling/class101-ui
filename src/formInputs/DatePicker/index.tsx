@@ -12,14 +12,19 @@ import { elevation2 } from '../../core/ElevationStyles';
 import { body1 } from '../../core/TextStyles';
 import { HTMLInputProps } from 'interfaces/props';
 
+interface DateRange {
+  start?: Date;
+  end?: Date;
+}
+
 export interface DatePickerProps {
   readonly value?: Date;
-  readonly rangeValue: { start?: Date; end?: Date };
+  readonly rangeValue: DateRange;
   readonly onChange?: (date: Date) => boolean | void;
-  readonly onRangeChange?: (startDate: Date, endDate: Date) => boolean | void;
+  readonly onRangeChange?: (dateRange: DateRange) => boolean | void;
   readonly locale: DatePickerLocale;
-  readonly min?: Date;
-  readonly max?: Date;
+  readonly minDate?: Date;
+  readonly maxDate?: Date;
   readonly useRange: boolean;
   readonly alwaysShow?: boolean;
   readonly inline?: boolean;
@@ -51,7 +56,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
   public constructor(props: DatePickerProps) {
     super(props);
 
-    const { value, rangeValue, min } = props;
+    const { value, rangeValue, minDate: min } = props;
 
     this.state = {
       selectorType: 'day',
@@ -72,25 +77,29 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
   }
 
   public componentDidMount() {
-    document.addEventListener('mousedown', this.handleClickOutside);
+    if (document) {
+      document.addEventListener('mousedown', this.handleClickOutside);
+    }
     this.calculateInputValue();
   }
 
   public componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside);
+    if (document) {
+      document.removeEventListener('mousedown', this.handleClickOutside);
+    }
   }
 
   public render() {
     const { selectedDate, currentMonth, selectorType, modalVisible, secondDate, inputValue } = this.state;
-    const { locale, min, max, inputAttributes, alwaysShow, useRange, inline, style } = this.props;
+    const { locale, minDate: min, maxDate: max, inputAttributes, alwaysShow, useRange, inline, style } = this.props;
 
     return (
       <Container inline={inline} style={style}>
         <PickerInput
           type="text"
           value={inputValue}
-          onChange={this.onInputChange}
-          onBlur={this.onInputBlur}
+          onChange={this.handleChangeInput}
+          onBlur={this.handleBlurInput}
           placeholder={this.getInputPlaceHolder()}
           onClick={this.showModal}
           inline={inline}
@@ -98,7 +107,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
         />
         <Picker position={alwaysShow ? 'static' : 'absolute'} visible={alwaysShow || modalVisible} ref={this.modalRef}>
           <DatePickerNav>
-            <IconButton onClick={this.onDecreaseBtnClick} icon={<ChevronLeft />} color="white" />
+            <IconButton onClick={this.handleClickDecreaseBtn} icon={<ChevronLeft />} color="white" />
             {selectorType === 'day' && (
               <NavText onClick={() => this.changeSelectorType('month')} size="sm">
                 {currentMonth.toLocaleDateString(locale.name, { year: 'numeric', month: 'short' })}
@@ -109,7 +118,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
                 {currentMonth.toLocaleDateString(locale.name, { year: 'numeric' })}
               </NavText>
             )}
-            <IconButton onClick={this.onIncreaseBtnClick} icon={<ChevronRight />} color="white" />
+            <IconButton onClick={this.handleClickIncreaseBtn} icon={<ChevronRight />} color="white" />
           </DatePickerNav>
           <DatePickerBody>
             {selectorType === 'day' && (
@@ -121,7 +130,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
                 selectedDate={selectedDate}
                 secondDate={secondDate}
                 currentMonth={currentMonth}
-                onChange={this.onDateChanged}
+                onChange={this.handleChangeDate}
               />
             )}
             {selectorType === 'month' && (
@@ -130,7 +139,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
                 currentYear={currentMonth}
                 selectedDate={selectedDate}
                 secondDate={secondDate}
-                onChange={this.onMonthSelected}
+                onChange={this.onSelectMonth}
               />
             )}
           </DatePickerBody>
@@ -181,13 +190,13 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     return [firstDate, secondDate];
   };
 
-  private onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  private handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
       inputValue: e.target.value,
     });
   };
 
-  private onInputBlur = () => {
+  private handleBlurInput = () => {
     const { useRange } = this.props;
     const { inputValue } = this.state;
     const dateText = inputValue;
@@ -230,34 +239,40 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     return 'YYYY. MM. DD.';
   };
 
-  private onIncreaseBtnClick = () => {
+  private handleClickIncreaseBtn = () => {
     const { currentMonth, selectorType } = this.state;
 
-    if (selectorType === 'month') currentMonth.setFullYear(currentMonth.getFullYear() + 1);
-    else if (selectorType === 'day') currentMonth.setMonth(currentMonth.getMonth() + 1);
+    if (selectorType === 'month') {
+      currentMonth.setFullYear(currentMonth.getFullYear() + 1);
+    } else if (selectorType === 'day') {
+      currentMonth.setMonth(currentMonth.getMonth() + 1);
+    }
     this.setState({
       currentMonth: new Date(currentMonth),
     });
   };
 
-  private onDecreaseBtnClick = () => {
+  private handleClickDecreaseBtn = () => {
     const { currentMonth, selectorType } = this.state;
 
-    if (selectorType === 'month') currentMonth.setFullYear(currentMonth.getFullYear() - 1);
-    else if (selectorType === 'day') currentMonth.setMonth(currentMonth.getMonth() - 1);
+    if (selectorType === 'month') {
+      currentMonth.setFullYear(currentMonth.getFullYear() - 1);
+    } else if (selectorType === 'day') {
+      currentMonth.setMonth(currentMonth.getMonth() - 1);
+    }
     this.setState({
       currentMonth: new Date(currentMonth),
     });
   };
 
-  private onDateChanged = (date: Date) => {
+  private handleChangeDate = (date: Date) => {
     const { onChange, onRangeChange, useRange } = this.props;
     const { selectedDate, secondDate } = this.state;
 
     if (useRange) {
       if (selectedDate && !secondDate) {
         const [startDate, endDate] = this.sortDate(selectedDate, date);
-        if (onRangeChange && onRangeChange(startDate, endDate) === false) {
+        if (onRangeChange && onRangeChange({ start: startDate, end: endDate }) === false) {
           return this.setState(
             {
               selectedDate: null,
@@ -291,7 +306,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     }
   };
 
-  private onMonthSelected = (date: Date) => {
+  private onSelectMonth = (date: Date) => {
     this.setState({
       currentMonth: date,
       selectorType: 'day',
