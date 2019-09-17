@@ -1,9 +1,8 @@
+import ReactIdSwiper from '@class101/swiper';
+import { ReactIdSwiperProps, SwiperInstance } from '@class101/swiper/lib/types';
 import React, { PureComponent } from 'react';
-import ReactIdSwiper from 'react-id-swiper/lib/ReactIdSwiper.custom';
-import { ReactIdSwiperCustomProps, SwiperInstance, SwiperModules } from 'react-id-swiper/lib/types';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 import { AutoplayOptions, PaginationOptions, SwiperEvent } from 'swiper';
-import { Autoplay, Lazy, LazyOptions, Pagination, Swiper } from 'swiper/dist/js/swiper.esm';
 
 import { media, SIZES } from '../../core/BreakPoints';
 import { gray700, white } from '../../core/Colors';
@@ -31,7 +30,6 @@ export interface CarouselProps {
   lgSpaceBetween?: boolean;
   smSpaceBetween?: boolean;
   autoplay?: AutoplayOptions | boolean;
-  lazy?: LazyOptions | boolean;
   on?: { [key in SwiperEvent]?: () => void };
   loop: boolean;
   shouldSwiperUpdate?: boolean;
@@ -46,9 +44,7 @@ export interface CarouselProps {
 }
 
 const DEFAULT_PARAMS = {
-  Swiper,
   threshold: 10,
-  modules: [],
 };
 
 const DEFAULT_PAGINATION_PARAMS: { [key in string]: PaginationOptions } = {
@@ -203,7 +199,7 @@ export class Carousel extends PureComponent<CarouselProps, State> {
     });
   };
 
-  private getSwiperParams = (): ReactIdSwiperCustomProps => {
+  private getSwiperParams = (): ReactIdSwiperProps => {
     const {
       pagination,
       lgSlidesPerView,
@@ -213,7 +209,6 @@ export class Carousel extends PureComponent<CarouselProps, State> {
       on,
       loop,
       autoplay,
-      lazy,
       freeMode,
       shouldSwiperUpdate,
       rebuildOnUpdate,
@@ -222,7 +217,7 @@ export class Carousel extends PureComponent<CarouselProps, State> {
       slideToClickedSlide,
     } = this.props;
 
-    let params: ReactIdSwiperCustomProps = {
+    let params: ReactIdSwiperProps = {
       ...DEFAULT_PARAMS,
       shouldSwiperUpdate,
       rebuildOnUpdate,
@@ -250,22 +245,13 @@ export class Carousel extends PureComponent<CarouselProps, State> {
       params = {
         ...params,
         autoplay,
-        modules: [...(params.modules as SwiperModules), Autoplay],
       };
     }
-    if (lazy) {
-      params = {
-        ...params,
-        lazy,
-        preloadImages: false,
-        modules: [...(params.modules as SwiperModules), Lazy],
-      };
-    }
+
     if (pagination) {
       params = {
         ...params,
         ...DEFAULT_PAGINATION_PARAMS,
-        modules: [...(params.modules as SwiperModules), Pagination],
       };
     }
     return params;
