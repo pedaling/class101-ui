@@ -11,6 +11,7 @@ import { IconButton, Button } from '../../components/Button';
 import { elevation2 } from '../../core/ElevationStyles';
 import { body1 } from '../../core/TextStyles';
 import { HTMLInputProps } from 'interfaces/props';
+import { isClient } from 'utils';
 
 interface DateRange {
   start?: Date;
@@ -21,12 +22,12 @@ export interface DatePickerProps {
   readonly value?: Date;
   readonly rangeValue: DateRange;
   readonly onChange?: (date: Date) => boolean | void;
-  readonly onRangeChange?: (dateRange: DateRange) => boolean | void;
+  readonly onChangeRange?: (dateRange: DateRange) => boolean | void;
   readonly locale: DatePickerLocale;
   readonly minDate?: Date;
   readonly maxDate?: Date;
   readonly useRange: boolean;
-  readonly alwaysShow?: boolean;
+  readonly alwaysShow: boolean;
   readonly inline?: boolean;
   readonly inputAttributes?: HTMLInputProps & InputProps;
   readonly style?: React.CSSProperties;
@@ -49,6 +50,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     locale: ko_KR,
     useRange: false,
     rangeValue: {},
+    alwaysShow: false,
   };
 
   private readonly modalRef = createRef<HTMLDivElement>();
@@ -77,14 +79,14 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
   }
 
   public componentDidMount() {
-    if (document) {
+    if (isClient()) {
       document.addEventListener('mousedown', this.handleClickOutside);
     }
     this.calculateInputValue();
   }
 
   public componentWillUnmount() {
-    if (document) {
+    if (isClient()) {
       document.removeEventListener('mousedown', this.handleClickOutside);
     }
   }
@@ -105,7 +107,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
           inline={inline}
           {...inputAttributes}
         />
-        <Picker position={alwaysShow ? 'static' : 'absolute'} visible={alwaysShow || modalVisible} ref={this.modalRef}>
+        <Picker alwaysShow={alwaysShow} modalVisible={alwaysShow || modalVisible} ref={this.modalRef}>
           <DatePickerNav>
             <IconButton onClick={this.handleClickDecreaseBtn} icon={<ChevronLeft />} color="white" />
             {selectorType === 'day' && (
@@ -266,7 +268,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
   };
 
   private handleChangeDate = (date: Date) => {
-    const { onChange, onRangeChange, useRange } = this.props;
+    const { onChange, onChangeRange: onRangeChange, useRange } = this.props;
     const { selectedDate, secondDate } = this.state;
 
     if (useRange) {
@@ -339,8 +341,8 @@ const Container = styled.div<{ inline?: boolean }>`
   display: ${props => (props.inline ? 'inline-block' : 'block')};
 `;
 
-const Picker = styled.div<{ visible: boolean; position: string }>`
-  position: ${props => props.position};
+const Picker = styled.div<{ modalVisible: boolean; alwaysShow: boolean }>`
+  position: ${props => (props.alwaysShow ? 'static' : 'absolute')};
   background: ${white};
   text-align: center;
   transform: none;
@@ -351,7 +353,7 @@ const Picker = styled.div<{ visible: boolean; position: string }>`
   font-size: 16px;
   left: 0;
   margin-top: 8px;
-  display: ${props => (props.visible ? 'flex' : 'none')};
+  display: ${props => (props.modalVisible ? 'flex' : 'none')};
   padding: 12px;
   flex-direction: column;
   z-index: 500;

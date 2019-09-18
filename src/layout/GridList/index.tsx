@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { media } from '../../core/BreakPoints';
 import { HTMLDivProps } from '../../interfaces/props';
-import createUniqIDGenerator from '../../utils/createUniqIDGenerator';
+import { createUniqIDGenerator } from '../../utils/createUniqIDGenerator';
 
 const sizeToPercent = (column?: number) => 100 / (column || 1);
 const generateID = createUniqIDGenerator('grid-list-');
