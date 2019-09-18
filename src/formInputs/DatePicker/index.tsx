@@ -11,7 +11,7 @@ import { IconButton, Button } from '../../components/Button';
 import { elevation2 } from '../../core/ElevationStyles';
 import { body1 } from '../../core/TextStyles';
 import { HTMLInputProps } from 'interfaces/props';
-import { isClient } from 'utils';
+import { isClient } from '../../utils';
 
 interface DateRange {
   start?: Date;

@@ -7,7 +7,7 @@ import { elevation5 } from '../../core/ElevationStyles';
 import { Body2, Headline3 } from '../../core/Typography';
 import { Close } from '../../Icon';
 import { Portal } from '../Portal';
-import { isServer } from 'utils';
+import { isServer, isClient } from '../../utils';
 
 export interface ModalBottomSheetProps {
   opened: boolean;
@@ -178,14 +178,14 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
 
   private disableBodyScroll = () => {
     const { scrollbarWidth } = this.state;
-    if (typeof document !== 'undefined') {
+    if (isClient()) {
       document.body.style.paddingRight = `${scrollbarWidth}px`;
       document.body.style.overflow = 'hidden';
     }
   };
 
   private enableBodyScroll = () => {
-    if (typeof document !== 'undefined') {
+    if (isClient()) {
       document.body.style.paddingRight = null;
       document.body.style.overflow = '';
     }
@@ -204,6 +204,9 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
   };
 
   private getScrollbarWidth = () => {
+    if (isServer()) {
+      return 0;
+    }
     const outer = document.createElement('div');
     outer.style.visibility = 'hidden';
     outer.style.overflow = 'scroll';
