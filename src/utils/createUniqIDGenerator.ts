@@ -1,4 +1,4 @@
-export default function createUniqIDGenerator(prefix: string) {
+export function createUniqIDGenerator(prefix: string) {
   let count = 0;
   return () => {
     count = count + 1;

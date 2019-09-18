@@ -36,7 +36,7 @@ import { Playground, PropsTable } from 'docz';
 **`new Date()`의 month는 0부터 11까지입니다.**
 
 - 날짜 선택은 `onChange`와 `value`를 사용합니다.
-- 범위 선택은 `onRangeChange`와 `rangeValue`를 사용합니다.
+- 범위 선택은 `onChangeRange`와 `rangeValue`를 사용합니다.
 
 <Playground>
   <DatePicker
@@ -52,7 +52,7 @@ import { Playground, PropsTable } from 'docz';
       start: new Date(2020, 0, 1),
       end: new Date(2020, 0, 15),
     }}
-    onRangeChange={dateRange => {
+    onChangeRange={dateRange => {
       alert('Changed ' + dateRange.start.toLocaleString() + ' > ' + dateRange.end.toLocaleString());
     }}
     alwaysShow
@@ -74,7 +74,7 @@ onChange 이벤트 내에서 `return false`를 하면 날짜 선택이 막힙니
     inline
   />
   <DatePicker
-    onRangeChange={(start, end) => {
+    onChangeRange={(start, end) => {
       if (start.getDate() < 5) return false;
       if (end.getDate() > 20) return false;
     }}
@@ -114,6 +114,12 @@ import ko from '@class101/ui/formInputs/DatePicker/locales/ko_KR';
 `minDate`과 `maxDate`를 통해 최소, 최대기간을 설정할 수 있습니다.
 
 <Playground>
-  <DatePicker minDate={new Date(2019, 0, 1)} value={new Date(2019, 3, 1)} maxDate={new Date(2019, 11, 31)} alwaysShow inline />
+  <DatePicker
+    minDate={new Date(2019, 0, 1)}
+    value={new Date(2019, 3, 1)}
+    maxDate={new Date(2019, 11, 31)}
+    alwaysShow
+    inline
+  />
   <DatePicker minDate={new Date(2020, 4, 1)} maxDate={new Date(2020, 6, 30)} alwaysShow useRange inline />
 </Playground>

@@ -7,6 +7,7 @@ import { elevation5 } from '../../core/ElevationStyles';
 import { Body2, Headline3 } from '../../core/Typography';
 import { Close } from '../../Icon';
 import { Portal } from '../Portal';
+import { isServer } from 'utils';
 
 export interface ModalBottomSheetProps {
   opened: boolean;
@@ -112,7 +113,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     } = this.props;
     const { mounted, opened } = this.state;
 
-    if (!mounted) {
+    if (!mounted && !isServer()) {
       return opener || null;
     }
     if (!successAttributes.color) {
