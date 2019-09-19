@@ -74,7 +74,7 @@ onChange 이벤트 내에서 `return false`를 하면 날짜 선택이 막힙니
     inline
   />
   <DatePicker
-    onChangeRange={(start, end) => {
+    onChangeRange={({ start, end }) => {
       if (start.getDate() < 5) return false;
       if (end.getDate() > 20) return false;
     }}

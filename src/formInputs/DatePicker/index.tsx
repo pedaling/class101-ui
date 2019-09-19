@@ -268,13 +268,13 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
   };
 
   private handleChangeDate = (date: Date) => {
-    const { onChange, onChangeRange: onRangeChange, useRange } = this.props;
+    const { onChange, onChangeRange, useRange } = this.props;
     const { selectedDate, secondDate } = this.state;
 
     if (useRange) {
       if (selectedDate && !secondDate) {
         const [startDate, endDate] = this.sortDate(selectedDate, date);
-        if (onRangeChange && onRangeChange({ start: startDate, end: endDate }) === false) {
+        if (onChangeRange && onChangeRange({ start: startDate, end: endDate }) === false) {
           return this.setState(
             {
               selectedDate: null,
