@@ -5,6 +5,7 @@ import postcss from 'rollup-plugin-postcss';
 import resolve from 'rollup-plugin-node-resolve';
 import url from 'rollup-plugin-url';
 import typescript from 'rollup-plugin-typescript2';
+import visualizer from 'rollup-plugin-visualizer';
 
 import pkg from './package.json';
 
@@ -34,7 +35,12 @@ export default {
     resolve({
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
     }),
-    typescript(),
+    typescript({ typescript: require('typescript'), objectHashIgnoreUnknownHack: true }),
     commonjs({ extensions: ['.js', '.ts'] }),
+    visualizer({
+      sourcemap: false,
+      bundlesRelative: false,
+      template: 'treemap', // sunburst, treemap, circlepacking, network
+    }),
   ],
 };
