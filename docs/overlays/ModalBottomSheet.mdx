@@ -34,7 +34,7 @@ import { LongContent } from './ModalBottomSheet';
 ## With State
 
 > State로 사용할 경우 `onSuccess`, `onCancel`, `onClose`를 설정하는것을 추천합니다.
->
+> `onOpen`은 동작하지 않습니다.
 > 설정을 하지 않을 시 Modal이 state값과는 다르게 동작할 수 있습니다.
 
 <Playground>
@@ -64,11 +64,14 @@ import { LongContent } from './ModalBottomSheet';
 
 ## Button Action
 
+`onOpen`에서 false를 리턴할 경우 열리지 않습니다.
+
 <Playground>
   <ModalBottomSheet
     opener={<Button>Show Modal</Button>}
     title="수강권 주문 상세"
     successText="확인"
+    onOpen={() => confirm('open?')}
     onSuccess={close => {
       alert('확인 됨');
       close();
