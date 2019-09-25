@@ -36,6 +36,13 @@ NumericInput 컴포넌트입니다.
   <NumericInput label="나이" inline />
 </Playground>
 
+## Disabled butttons
+
+<Playground>
+  <NumericInput label="수량" disabledIncrease />
+  <NumericInput label="나이" disabledDecrease />
+</Playground>
+
 ## Input Props
 
 <Playground>
@@ -44,4 +51,8 @@ NumericInput 컴포넌트입니다.
   <NumericInput label="나이" defaultValue={2000} step={1000} />
   <br />
   <NumericInput errorMessage="에러 메시지" />
+  <br />
+  <NumericInput warnMessage="워닝 메시지" />
+  <br />
+  <NumericInput allowMessage="그냥 메시지" />
 </Playground>

@@ -12,6 +12,8 @@ interface Props extends InputComponentProps {
   buttonPosition: 'right' | 'side';
   step: number;
   inline: boolean;
+  disabledIncrease: boolean;
+  disabledDecrease: boolean;
 }
 
 export class NumericInput extends PureComponent<Props> {
@@ -19,6 +21,8 @@ export class NumericInput extends PureComponent<Props> {
     buttonPosition: 'right',
     inline: false,
     step: 1,
+    disabledIncrease: false,
+    disabledDecrease: false,
   };
 
   private get inputElement() {
@@ -28,7 +32,7 @@ export class NumericInput extends PureComponent<Props> {
   private inputRef = createRef<HTMLInputElement>();
 
   public render() {
-    const { buttonPosition, ...inputProps } = this.props;
+    const { buttonPosition, disabledIncrease, disabledDecrease, ...inputProps } = this.props;
     return (
       <StyledNumericInputContainer inline={inputProps.inline}>
         <StyledNumericInputInput
@@ -40,9 +44,15 @@ export class NumericInput extends PureComponent<Props> {
         <StyledNumericInputButton
           icon={<Minus />}
           onClick={this.handleStepDownClick}
+          disabled={disabledIncrease}
           {...this.stepDownButtonPosition()}
         />
-        <StyledNumericInputButton icon={<Add />} onClick={this.handleStepUpClick} {...this.stepUpButtonPosition()} />
+        <StyledNumericInputButton
+          icon={<Add />}
+          onClick={this.handleStepUpClick}
+          disabled={disabledDecrease}
+          {...this.stepUpButtonPosition()}
+        />
       </StyledNumericInputContainer>
     );
   }
