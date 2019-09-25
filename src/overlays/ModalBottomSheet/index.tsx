@@ -1,13 +1,14 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import { Button, IconButton, ButtonProps, ButtonColor } from '../../components/Button';
+
+import { Button, ButtonColor, ButtonProps, IconButton } from '../../components/Button';
 import { media } from '../../core/BreakPoints';
 import { gray600, gray800, white } from '../../core/Colors';
 import { elevation5 } from '../../core/ElevationStyles';
 import { Body2, Headline3 } from '../../core/Typography';
 import { Close } from '../../Icon';
+import { isClient, isServer } from '../../utils';
 import { Portal } from '../Portal';
-import { isServer, isClient } from '../../utils';
 
 export interface ModalBottomSheetProps {
   opened: boolean;
@@ -26,6 +27,7 @@ export interface ModalBottomSheetProps {
   removeContentPadding: boolean;
   modalStyle?: React.CSSProperties;
   contentStyle?: React.CSSProperties;
+  onOpen?: () => boolean | void;
   onClose?: () => void;
   onSuccess?: (close: () => void) => void;
   onCancel?: (close: () => void) => void;
@@ -192,9 +194,13 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
   };
 
   private showModal = () => {
-    this.setState({
-      opened: true,
-    });
+    const { onOpen } = this.props;
+
+    if (!onOpen || onOpen() !== false) {
+      this.setState({
+        opened: true,
+      });
+    }
   };
 
   private hideModal = () => {
