@@ -12,8 +12,8 @@ interface Props extends InputComponentProps {
   buttonPosition: 'right' | 'side';
   step: number;
   inline: boolean;
-  disabledIncrease: boolean;
-  disabledDecrease: boolean;
+  minValue?: number;
+  maxValue?: number;
 }
 
 export class NumericInput extends PureComponent<Props> {
@@ -21,8 +21,6 @@ export class NumericInput extends PureComponent<Props> {
     buttonPosition: 'right',
     inline: false,
     step: 1,
-    disabledIncrease: false,
-    disabledDecrease: false,
   };
 
   private get inputElement() {
@@ -32,25 +30,29 @@ export class NumericInput extends PureComponent<Props> {
   private inputRef = createRef<HTMLInputElement>();
 
   public render() {
-    const { buttonPosition, disabledIncrease, disabledDecrease, ...inputProps } = this.props;
+    const { buttonPosition, minValue, maxValue, disabled, value, ...inputProps } = this.props;
     return (
       <StyledNumericInputContainer inline={inputProps.inline}>
         <StyledNumericInputInput
           inputRef={this.inputRef}
           align={buttonPosition === 'right' ? 'left' : 'center'}
+          value={value}
           type="number"
+          min={minValue}
+          max={maxValue}
+          disabled={disabled}
           {...inputProps}
         />
         <StyledNumericInputButton
           icon={<Minus />}
           onClick={this.handleStepDownClick}
-          disabled={disabledIncrease}
+          disabled={Number(value) === minValue || disabled}
           {...this.stepDownButtonPosition()}
         />
         <StyledNumericInputButton
           icon={<Add />}
           onClick={this.handleStepUpClick}
-          disabled={disabledDecrease}
+          disabled={Number(value) === maxValue || disabled}
           {...this.stepUpButtonPosition()}
         />
       </StyledNumericInputContainer>

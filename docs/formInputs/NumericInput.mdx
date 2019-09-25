@@ -26,7 +26,11 @@ NumericInput 컴포넌트입니다.
 <Playground>
   <NumericInput label="수량" />
   <br />
+  <NumericInput label="수량" disabled />
+  <br />
   <NumericInput buttonPosition="side" label="수량" />
+  <br />
+  <NumericInput buttonPosition="side" label="수량" disabled />
 </Playground>
 
 ## Inline
@@ -36,11 +40,11 @@ NumericInput 컴포넌트입니다.
   <NumericInput label="나이" inline />
 </Playground>
 
-## Disabled butttons
+## Min and Max
 
 <Playground>
-  <NumericInput label="수량" disabledIncrease />
-  <NumericInput label="나이" disabledDecrease />
+  <NumericInput label="수량" maxValue={5} value={5} />
+  <NumericInput label="나이" minValue={-1} value={-1} />
 </Playground>
 
 ## Input Props
