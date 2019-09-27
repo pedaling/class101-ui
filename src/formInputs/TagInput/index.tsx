@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { gray300, gray800, orange500, redError } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
 import { InlineError, Intent } from '../InlineError';
+import { uniq } from 'lodash';
 import InnerTags from './InnerTags';
 
 export interface TagInputProps {
@@ -39,76 +40,6 @@ export class TagInput extends PureComponent<TagInputProps, State> {
   public readonly state: State = {
     tempValue: '',
     focused: false,
-  };
-
-  private inputElement?: HTMLInputElement;
-
-  private inputRefHandler = (ref: HTMLInputElement) => {
-    this.inputElement = ref;
-  };
-
-  private getNewValue = () => {
-    const { separator } = this.props;
-    const { tempValue } = this.state;
-    const newValue = tempValue ? tempValue.split(separator).map(v => v.trim()) : [];
-    return newValue;
-  };
-
-  private handleContainerClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    this.inputElement!.focus();
-  };
-
-  private handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    const { onChange, value, onEnter } = this.props;
-    const { tempValue } = this.state;
-    if (event.key === 'Enter') {
-      if (onChange) {
-        const newValue = this.getNewValue();
-        onChange(value.concat(newValue));
-        this.setState({ tempValue: '' });
-      }
-      if (onEnter) {
-        onEnter(value);
-      }
-    }
-    if (event.key === 'Backspace' && tempValue === '') {
-      this.handleTagRemove(value.length - 1);
-    }
-  };
-
-  private handleInputFocus = (event: React.FocusEvent<HTMLInputElement>) => {
-    this.setState({ focused: true });
-  };
-
-  private handleInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    const { addOnBlur, onChange, value } = this.props;
-    if (addOnBlur) {
-      const newValue = this.getNewValue();
-      if (onChange) {
-        onChange(value.concat(newValue));
-      }
-    }
-
-    this.setState({
-      focused: false,
-      tempValue: addOnBlur ? '' : this.state.tempValue,
-    });
-  };
-
-  private handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ tempValue: event.target.value });
-  };
-
-  private handleTagRemove = (index: number) => {
-    const { value, onChange, onRemove } = this.props;
-    const nextValue = value.slice(0);
-    nextValue.splice(index, 1);
-    if (onChange) {
-      onChange(nextValue);
-    }
-    if (onRemove) {
-      onRemove(this.props.value);
-    }
   };
 
   public render() {
@@ -158,6 +89,85 @@ export class TagInput extends PureComponent<TagInputProps, State> {
       </>
     );
   }
+
+  private inputElement?: HTMLInputElement;
+
+  private inputRefHandler = (ref: HTMLInputElement) => {
+    this.inputElement = ref;
+  };
+
+  private getNextValue = () => {
+    const { separator, value } = this.props;
+    const { tempValue } = this.state;
+    const newValue = tempValue
+      ? tempValue
+          .split(separator)
+          .map(v => v.trim())
+          .filter(Boolean)
+      : [];
+
+    return uniq([...value, ...newValue]);
+  };
+
+  private handleContainerClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    this.inputElement!.focus();
+  };
+
+  private handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const { onChange, value, onEnter } = this.props;
+    const { tempValue } = this.state;
+    if (event.key === 'Enter') {
+      if (onChange) {
+        onChange(this.getNextValue());
+        this.setState({ tempValue: '' });
+      }
+      if (onEnter) {
+        onEnter(value);
+      }
+    }
+    if (event.key === 'Backspace' && tempValue === '') {
+      this.handleTagRemove(value.length - 1);
+    }
+  };
+
+  private handleInputFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+    this.setState({ focused: true });
+  };
+
+  private handleInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    const { addOnBlur, onChange } = this.props;
+    if (addOnBlur) {
+      if (onChange) {
+        onChange(this.getNextValue());
+        this.setState({ tempValue: '' });
+      }
+    }
+
+    this.setState({
+      focused: false,
+      tempValue: addOnBlur ? '' : this.state.tempValue,
+    });
+  };
+
+  private handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ tempValue: event.target.value });
+  };
+
+  private handleTagRemove = (index: number) => {
+    const { value, onChange, onRemove } = this.props;
+    let nextValue: string[] = [];
+    if (index > 0) {
+      nextValue = [...value];
+      nextValue.splice(index, 1);
+    }
+
+    if (onChange) {
+      onChange(nextValue);
+    }
+    if (onRemove) {
+      onRemove(value);
+    }
+  };
 }
 
 const TagInputContainer = styled.div`
@@ -168,10 +178,9 @@ const TagInputContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
-  align-self: stretch;
   flex-grow: 1;
   flex-shrink: 1;
+  align-items: center;
   &.error {
     border: solid 1px ${redError};
   }
@@ -184,6 +193,7 @@ const TagInputContainer = styled.div`
   }
   .inner-tags__tag {
     margin-bottom: 5px;
+    margin-right: 5px;
     &:last-child {
       margin-right: 0 !important;
     }

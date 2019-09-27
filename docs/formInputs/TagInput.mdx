@@ -20,10 +20,11 @@ import { TagInput } from '@class101/ui';
 <Playground>
   {() => {
     class Example extends React.Component {
+      
       constructor(props) {
         super(props);
         this.state = {
-          value: ['01082210886','01082230886', '01082210886', '01082210886','01082210886','01082210886', '01082210886', '01082210886','01082210886','01082210886', '01082210886', '01082210886','01082210886','01082210886', '01082210886', '01082210886']
+          value: []
         };
       }
       handleChange(newValue) {
@@ -35,9 +36,7 @@ import { TagInput } from '@class101/ui';
       }
       render() {
         return (
-          <form onSubmit={this.handleSubmit}>
-            <TagInput separator={/[, ]/gm} value={this.state.value} onChange={(value) => this.handleChange(value)} allowMessage="Enter와 ','로 구분합니다."/>
-          </form>
+          <TagInput separator="," value={this.state.value} onChange={(value) => this.handleChange(value)} allowMessage="Enter와 ','로 구분합니다."/>
         );
       }
     }
