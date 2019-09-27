@@ -18,7 +18,7 @@ const ColorByIntent: { [key in Intent]: string } = {
 
 export interface InlineErrorProps {
   intent?: Intent;
-  children: string;
+  children: React.ReactNode;
   icon?: React.ReactElement<IconProps> | null;
 }
 

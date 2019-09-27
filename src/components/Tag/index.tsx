@@ -41,7 +41,7 @@ const Container = styled.div`
   border-radius: 3px;
   align-items: center;
   overflow: hidden;
-  height: 24px;
+  height: 28px;
 `;
 
 const Text = styled.span`
