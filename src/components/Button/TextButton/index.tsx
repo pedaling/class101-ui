@@ -59,19 +59,19 @@ const buttonStyleBySize: { [key in TextButtonSize]: FlattenSimpleInterpolation }
   [ButtonSize.LARGE]: css`
     font-size: 16px;
     font-weight: 700;
-    height: 24px;
+    line-height: 24px;
     letter-spacing: -0.2px;
   `,
   [ButtonSize.MEDIUM]: css`
     font-size: 14px;
     font-weight: 500;
-    height: 20px;
+    line-height: 20px;
     letter-spacing: -0.2px;
   `,
   [ButtonSize.SMALL]: css`
     font-size: 14px;
     font-weight: 500;
-    height: 20px;
+    line-height: 20px;
     letter-spacing: -0.2px;
   `,
 };
