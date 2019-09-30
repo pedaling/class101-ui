@@ -175,14 +175,14 @@ const ButtonContainer = styled.button<{ iconPosition?: ButtonIconPosition }>`
   flex-direction: ${props => (props.iconPosition === ButtonIconPosition.RIGHT ? 'row-reverse' : 'row')};
 `;
 
-const Text = styled.div`
+const Text = styled.span`
   flex: none;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const AnchorButtonWrapper = styled.div`
+const AnchorButtonWrapper = styled.span`
   ${buttonCommonStyle};
   &.disabled {
     cursor: not-allowed;
