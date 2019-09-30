@@ -1,11 +1,11 @@
 import { HTMLInputProps } from 'interfaces/props';
+import { uniq } from 'lodash';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
-import { gray300, gray800, orange500, redError } from '../../core/Colors';
+import { gray300, gray800, orange500, redError, white } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
 import { InlineError, Intent } from '../InlineError';
-import { uniq } from 'lodash';
 import InnerTags from './InnerTags';
 
 export interface TagInputProps {
@@ -71,7 +71,7 @@ export class TagInput extends PureComponent<TagInputProps, State> {
             style={inputStyle}
             onChange={this.handleInputChange}
             onBlur={this.handleInputBlur}
-            onKeyDown={this.handleInputKeyDown}
+            onKeyUp={this.handleInputKeyUp}
             onFocus={this.handleInputFocus}
             value={tempValue}
             ref={this.inputRefHandler}
@@ -113,7 +113,7 @@ export class TagInput extends PureComponent<TagInputProps, State> {
     this.inputElement!.focus();
   };
 
-  private handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  private handleInputKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const { onChange, value, onEnter } = this.props;
     const { tempValue } = this.state;
     if (event.key === 'Enter') {
@@ -181,6 +181,8 @@ const TagInputContainer = styled.div`
   flex-grow: 1;
   flex-shrink: 1;
   align-items: center;
+  background-color: ${white};
+  border-radius: 3px;
   &.error {
     border: solid 1px ${redError};
   }
