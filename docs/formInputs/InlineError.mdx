@@ -5,8 +5,7 @@ route: /form-inputs/inline-error
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Intent } from '@class101/ui';
-import { StyledInlineError as InlineError } from './InlineError';
+import { Intent, InlineError } from '@class101/ui';
 
 # InlineError
 
@@ -20,6 +19,7 @@ This is InlineError component.
 
 <Playground>
   <InlineError intent={Intent.DANGER}>보안에 매우 취약한 값입니다. 사용할 수 없습니다.</InlineError>
+  <br />
   <InlineError intent={Intent.WARNING}>보안에 취약한 값입니다. 특수문자와 숫자를 섞어주세요</InlineError>
 </Playground>
 

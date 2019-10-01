@@ -5,7 +5,7 @@ route: /form-inputs/numeric-input
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { NumericInput } from '@class101/ui';
+import { NumericInput, Intent } from '@class101/ui';
 
 # NumericInput
 
@@ -54,9 +54,7 @@ NumericInput 컴포넌트입니다.
   <br />
   <NumericInput label="나이" defaultValue={2000} step={1000} />
   <br />
-  <NumericInput errorMessage="에러 메시지" />
+  <NumericInput intent={Intent.WARNING} />
   <br />
-  <NumericInput warnMessage="워닝 메시지" />
-  <br />
-  <NumericInput allowMessage="그냥 메시지" />
+  <NumericInput intent={Intent.DANGER} />
 </Playground>

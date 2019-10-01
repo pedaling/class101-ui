@@ -3,22 +3,26 @@ import styled from 'styled-components';
 
 import { IconButton } from '../../components/Button/IconButton';
 import { Add, Minus } from '../../Icon';
-import { HTMLInputProps, Omit } from '../../interfaces/props';
 import { Input, InputProps } from '../Input';
 
-type InputComponentProps = Omit<InputProps & HTMLInputProps, 'size'>;
+export enum NumericInputButtonPosition {
+  RIGHT = 'right',
+  SIDE = 'side',
+}
 
-interface Props extends InputComponentProps {
-  buttonPosition: 'right' | 'side';
-  step: number;
+export type NumericInputButtonPositionValue = 'right' | 'side';
+
+export interface NumericInputProps extends InputProps {
+  buttonPosition: NumericInputButtonPositionValue;
   inline: boolean;
   minValue?: number;
   maxValue?: number;
+  step: number;
 }
 
-export class NumericInput extends PureComponent<Props> {
-  public static defaultProps: Partial<Props> = {
-    buttonPosition: 'right',
+export class NumericInput extends PureComponent<NumericInputProps> {
+  public static defaultProps: Partial<NumericInputProps> = {
+    buttonPosition: NumericInputButtonPosition.RIGHT,
     inline: false,
     step: 1,
   };
@@ -30,32 +34,41 @@ export class NumericInput extends PureComponent<Props> {
   private inputRef = createRef<HTMLInputElement>();
 
   public render() {
-    const { buttonPosition, minValue, maxValue, disabled, value, ...inputProps } = this.props;
+    const {
+      buttonPosition,
+      minValue,
+      maxValue,
+      inline,
+      disabled,
+      value,
+      className,
+      inputAttributes,
+      ...restProps
+    } = this.props;
     return (
-      <StyledNumericInputContainer inline={inputProps.inline}>
-        <StyledNumericInputInput
+      <Container inline={inline} className={className}>
+        <StyledInput
           inputRef={this.inputRef}
-          align={buttonPosition === 'right' ? 'left' : 'center'}
+          align={buttonPosition === NumericInputButtonPosition.RIGHT ? 'left' : 'center'}
+          disabled={disabled}
           value={value}
           type="number"
-          min={minValue}
-          max={maxValue}
-          disabled={disabled}
-          {...inputProps}
+          inputAttributes={{ ...inputAttributes, min: minValue, max: maxValue }}
+          {...restProps}
         />
-        <StyledNumericInputButton
+        <InputButton
           icon={<Minus />}
           onClick={this.handleStepDownClick}
           disabled={Number(value) === minValue || disabled}
           {...this.stepDownButtonPosition()}
         />
-        <StyledNumericInputButton
+        <InputButton
           icon={<Add />}
-          onClick={this.handleStepUpClick}
           disabled={Number(value) === maxValue || disabled}
-          {...this.stepUpButtonPosition()}
+          onClick={this.handleStepUpClick}
+          right={8}
         />
-      </StyledNumericInputContainer>
+      </Container>
     );
   }
 
@@ -74,28 +87,17 @@ export class NumericInput extends PureComponent<Props> {
   };
 
   private stepDownButtonPosition = () => {
-    const { buttonPosition, label } = this.props;
-    const top = this.calculateButtonTop(label);
-    return buttonPosition === 'side' ? { top, left: 8 } : { top, right: 48 };
-  };
-
-  private stepUpButtonPosition = () => {
-    const { label } = this.props;
-    const top = this.calculateButtonTop(label);
-    return { top, right: 8 };
-  };
-
-  private calculateButtonTop = (label?: string) => {
-    return label ? 32 : 8;
+    const { buttonPosition } = this.props;
+    return buttonPosition === 'side' ? { left: 8 } : { right: 48 };
   };
 }
 
-const StyledNumericInputContainer = styled.div<{ inline: boolean }>`
+const Container = styled.div<{ inline: boolean }>`
   position: relative;
   display: ${props => (props.inline ? 'inline-block' : 'block')};
 `;
 
-const StyledNumericInputInput = styled(Input)<{ align: 'left' | 'center' }>`
+const StyledInput = styled(Input)<{ align: 'left' | 'center' }>`
   text-align: ${props => props.align};
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
@@ -104,9 +106,9 @@ const StyledNumericInputInput = styled(Input)<{ align: 'left' | 'center' }>`
   }
 `;
 
-const StyledNumericInputButton = styled(IconButton)<{ top?: number; right?: number; left?: number }>`
+const InputButton = styled(IconButton)<{ top?: number; right?: number; left?: number }>`
   position: absolute;
-  ${props => props.top && `top: ${props.top}px`}
+  top: 8px;
   ${props => props.right && `right: ${props.right}px`}
   ${props => props.left && `left: ${props.left}px`}
 `;

@@ -1,17 +1,18 @@
-import React, { PureComponent, createRef } from 'react';
-import { DatePickerLocale, DatePickerSelectorType } from './interface';
+import { HTMLInputProps } from 'interfaces/props';
+import React, { createRef, PureComponent } from 'react';
 import styled from 'styled-components';
-import { white, gray800 } from '../../core/Colors';
+
+import { Button, IconButton } from '../../components/Button';
+import { gray800, white } from '../../core/Colors';
+import { elevation2 } from '../../core/ElevationStyles';
+import { body1 } from '../../core/TextStyles';
+import { ChevronLeft, ChevronRight } from '../../Icon';
+import { isClient } from '../../utils';
+import { Input, InputProps } from '../Input';
+import { DatePickerLocale, DatePickerSelectorType } from './interface';
 import ko_KR from './locales/ko_KR';
 import { MonthCalendar } from './MonthCalendar';
 import { MonthSelector } from './MonthSelector';
-import { Input, InputProps } from '../Input';
-import { ChevronLeft, ChevronRight } from '../../Icon';
-import { IconButton, Button } from '../../components/Button';
-import { elevation2 } from '../../core/ElevationStyles';
-import { body1 } from '../../core/TextStyles';
-import { HTMLInputProps } from 'interfaces/props';
-import { isClient } from '../../utils';
 
 interface DateRange {
   start?: Date;
@@ -29,7 +30,9 @@ export interface DatePickerProps {
   readonly useRange: boolean;
   readonly alwaysShow: boolean;
   readonly inline?: boolean;
-  readonly inputAttributes?: HTMLInputProps & InputProps;
+  readonly disabled?: boolean;
+  readonly inputProps?: InputProps;
+  readonly inputAttributes?: HTMLInputProps;
   readonly style?: React.CSSProperties;
 }
 
@@ -93,21 +96,38 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
 
   public render() {
     const { selectedDate, currentMonth, selectorType, modalVisible, secondDate, inputValue } = this.state;
-    const { locale, minDate: min, maxDate: max, inputAttributes, alwaysShow, useRange, inline, style } = this.props;
+    const {
+      locale,
+      minDate: min,
+      maxDate: max,
+      inline,
+      disabled,
+      inputProps,
+      inputAttributes,
+      alwaysShow,
+      useRange,
+      style,
+    } = this.props;
 
     return (
       <Container inline={inline} style={style}>
         <PickerInput
-          type="text"
           value={inputValue}
           onChange={this.handleChangeInput}
           onBlur={this.handleBlurInput}
           placeholder={this.getInputPlaceHolder()}
           onClick={this.showModal}
           inline={inline}
-          {...inputAttributes}
+          disabled={disabled}
+          {...inputProps}
+          inputAttributes={inputAttributes}
         />
-        <Picker alwaysShow={alwaysShow} modalVisible={alwaysShow || modalVisible} ref={this.modalRef}>
+        <Picker
+          disabled={disabled}
+          alwaysShow={alwaysShow}
+          modalVisible={alwaysShow || modalVisible}
+          ref={this.modalRef}
+        >
           <DatePickerNav>
             <IconButton onClick={this.handleClickDecreaseBtn} icon={<ChevronLeft />} color="white" />
             {selectorType === 'day' && (
@@ -242,6 +262,9 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
   };
 
   private handleClickIncreaseBtn = () => {
+    if (this.props.disabled) {
+      return;
+    }
     const { currentMonth, selectorType } = this.state;
 
     if (selectorType === 'month') {
@@ -255,6 +278,9 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
   };
 
   private handleClickDecreaseBtn = () => {
+    if (this.props.disabled) {
+      return;
+    }
     const { currentMonth, selectorType } = this.state;
 
     if (selectorType === 'month') {
@@ -268,9 +294,11 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
   };
 
   private handleChangeDate = (date: Date) => {
-    const { onChange, onChangeRange, useRange } = this.props;
+    const { onChange, onChangeRange, useRange, disabled } = this.props;
     const { selectedDate, secondDate } = this.state;
-
+    if (disabled) {
+      return;
+    }
     if (useRange) {
       if (selectedDate && !secondDate) {
         const [startDate, endDate] = this.sortDate(selectedDate, date);
@@ -309,6 +337,9 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
   };
 
   private onSelectMonth = (date: Date) => {
+    if (this.props.disabled) {
+      return;
+    }
     this.setState({
       currentMonth: date,
       selectorType: 'day',
@@ -316,18 +347,27 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
   };
 
   private showModal = () => {
+    if (this.props.disabled) {
+      return;
+    }
     this.setState({
       modalVisible: true,
     });
   };
 
   private changeSelectorType = (selectorType: DatePickerSelectorType) => {
+    if (this.props.disabled) {
+      return;
+    }
     this.setState({
       selectorType,
     });
   };
 
   private handleClickOutside = (event: MouseEvent) => {
+    if (this.props.disabled) {
+      return;
+    }
     if (this.modalRef.current && !this.modalRef.current.contains(event.target as Node)) {
       this.setState({
         modalVisible: false,
@@ -341,7 +381,7 @@ const Container = styled.div<{ inline?: boolean }>`
   display: ${props => (props.inline ? 'inline-block' : 'block')};
 `;
 
-const Picker = styled.div<{ modalVisible: boolean; alwaysShow: boolean }>`
+const Picker = styled.div<{ modalVisible: boolean; alwaysShow: boolean; disabled?: boolean }>`
   position: ${props => (props.alwaysShow ? 'static' : 'absolute')};
   background: ${white};
   text-align: center;
@@ -358,6 +398,7 @@ const Picker = styled.div<{ modalVisible: boolean; alwaysShow: boolean }>`
   flex-direction: column;
   z-index: 500;
   ${elevation2}
+  ${props => props.disabled && 'pointer-events: none'}
 `;
 
 const DatePickerNav = styled.nav`

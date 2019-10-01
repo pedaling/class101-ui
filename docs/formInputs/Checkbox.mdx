@@ -5,7 +5,7 @@ route: /form-inputs/checkbox
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { MyCheckbox as Checkbox } from './Checkbox';
+import { Checkbox, FormGroup, Intent } from '@class101/ui';
 
 # Checkbox
 
@@ -19,12 +19,65 @@ This is Checkbox component.
 
 <Playground>
   <Checkbox>Check1</Checkbox>
-  <Checkbox>Check2</Checkbox>
   <Checkbox size={18}>Check3</Checkbox>
+  <Checkbox checked>Check1</Checkbox>
+  <Checkbox size={18} checked>
+    Check3
+  </Checkbox>
 </Playground>
 
-## With allow message
+## Disabled
 
 <Playground>
-  <Checkbox allowMessage={'Hello'}>Check1</Checkbox>
+  <Checkbox disabled>Check2</Checkbox>
+  <Checkbox size={18} disabled>
+    Check3
+  </Checkbox>
+  <Checkbox disabled checked>
+    Check1
+  </Checkbox>
+  <Checkbox size={18} disabled checked>
+    Check3
+  </Checkbox>
+</Playground>
+
+## onChange
+
+<Playground>
+  {() => {
+    class Example extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          checked: false,
+        };
+      }
+      render() {
+        return (
+          <Checkbox checked={this.state.checked} onChange={e => this.setState({ checked: e.target.checked })}>
+            You can check this
+          </Checkbox>
+        );
+      }
+    }
+    return <Example />;
+  }}
+</Playground>
+
+## Inline
+
+<Playground>
+  <Checkbox inline>Check1</Checkbox>
+  <Checkbox inline>Check2</Checkbox>
+</Playground>
+
+## with FormGroup
+
+<Playground>
+  <FormGroup intent={Intent.WARNING} message="주의 사항입니다.">
+    <Checkbox>Check1</Checkbox>
+  </FormGroup>
+  <FormGroup intent={Intent.DANGER} message="경고 입니다.">
+    <Checkbox>Check1</Checkbox>
+  </FormGroup>
 </Playground>

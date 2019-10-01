@@ -34,7 +34,15 @@ export class ControlGroup extends PureComponent<ContainerProps> {
 const Container = styled.div<StyledContainerProps>`
   display: flex;
   align-items: stretch;
-
+  ${props =>
+    props.fill === 'true' &&
+    `
+      flex-grow: 1;
+      & > * {
+        flex: 1 1 auto;
+        margin-left: -1px;
+      }
+  `}
   ${props =>
     props.vertical
       ? `
@@ -45,13 +53,13 @@ const Container = styled.div<StyledContainerProps>`
             border-radius: 0;
 
             &:first-child {
-              border-top-left-radius: 1px;
-              border-top-right-radius: 1px;
+              border-top-left-radius: 3px;
+              border-top-right-radius: 3px;
             }
 
             &:last-child {
-              border-bottom-left-radius: 1px;
-              border-bottom-right-radius: 1px;
+              border-bottom-left-radius: 3px;
+              border-bottom-right-radius: 3px;
             }
           }
         `
@@ -63,22 +71,14 @@ const Container = styled.div<StyledContainerProps>`
             border-radius: 0;
 
             &:first-child {
-              border-top-left-radius: 1px;
-              border-bottom-left-radius: 1px;
+              border-top-left-radius: 3px;
+              border-bottom-left-radius: 3px;
             }
 
             &:last-child {
-              border-top-right-radius: 1px;
-              border-bottom-right-radius: 1px;
+              border-top-right-radius: 3px;
+              border-bottom-right-radius: 3px;
             }
           }
         `}
-
-  ${props =>
-    props.fill === 'true' &&
-    `
-      & > * {
-        flex: 1 1 auto;
-      }
-    `};
 `;

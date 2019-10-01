@@ -1,76 +1,59 @@
-import * as React from 'react';
+import classNames from 'classnames';
+import React, { InputHTMLAttributes, PureComponent, RefObject } from 'react';
 import styled from 'styled-components';
 
 import { gray300 } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
 import { CheckboxOff, CheckboxOn } from '../../Icon';
-import { HTMLInputProps, Omit } from '../../interfaces/props';
-import { InlineError, Intent } from '../InlineError';
 
-export interface CheckboxOwnProps {
-  className?: string;
+export interface CheckboxProps {
   size: number;
-  style?: React.CSSProperties;
-  inputStyle?: React.CSSProperties;
   inline?: boolean;
-  allowMessage?: string;
   checked?: boolean;
   disabled?: boolean;
-  warnMessage?: string;
-  errorMessage?: string;
-  inputAttributes?: HTMLInputProps;
+  inputRef?: RefObject<HTMLInputElement>;
+  inputAttributes?: InputHTMLAttributes<HTMLInputElement>;
+  className?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export type OmittedCheckboxAttributes = Omit<HTMLInputProps, keyof CheckboxOwnProps>;
-
-export interface CheckboxProps extends CheckboxOwnProps {
-  inputAttributes?: OmittedCheckboxAttributes;
-}
-
-export class Checkbox extends React.PureComponent<CheckboxProps> {
+export class Checkbox extends PureComponent<CheckboxProps> {
   public static defaultProps: Partial<CheckboxProps> = {
     size: 24,
   };
   public render() {
     const {
-      className,
-      style,
       size,
-      inputStyle,
       inline,
-      allowMessage,
-      warnMessage,
-      errorMessage,
-      children,
       checked,
       disabled,
+      onChange,
+      className,
+      inputRef,
       inputAttributes,
+      children,
       ...restProps
     } = this.props;
     return (
-      <div style={style} className={className} {...restProps}>
-        <Container inline={inline}>
-          {checked ? (
-            <CheckboxOn fillColor={disabled ? gray300 : undefined} size={size} />
-          ) : (
-            <CheckboxOff size={size} fillColor={disabled ? gray300 : undefined} />
-          )}
-          <HiddenCheckboxInput
-            onChange={this.handleChange}
-            checked={checked}
-            style={inputStyle}
-            disabled={disabled}
-            {...inputAttributes}
-            type="checkbox"
-          />
-          <ChildText color={disabled ? gray300 : undefined}>{children}</ChildText>
-        </Container>
-
-        {allowMessage && !errorMessage && <InlineError intent={Intent.DEFAULT}>{allowMessage}</InlineError>}
-        {errorMessage && <InlineError intent={Intent.DANGER}>{errorMessage}</InlineError>}
-        {warnMessage && <InlineError intent={Intent.WARNING}>{warnMessage}</InlineError>}
-      </div>
+      <Container inline={inline} className={classNames(className, { disabled })}>
+        {checked ? (
+          <CheckboxOn fillColor={disabled ? gray300 : undefined} size={size} />
+        ) : (
+          <CheckboxOff size={size} fillColor={disabled ? gray300 : undefined} />
+        )}
+        <HiddenCheckboxInput
+          onChange={this.handleChange}
+          checked={checked}
+          disabled={disabled}
+          {...inputAttributes}
+          {...restProps}
+          {...inputRef && {
+            ref: inputRef,
+          }}
+          type="checkbox"
+        />
+        <ChildText color={disabled ? gray300 : undefined}>{children}</ChildText>
+      </Container>
     );
   }
 
@@ -81,10 +64,14 @@ export class Checkbox extends React.PureComponent<CheckboxProps> {
   };
 }
 
-const Container = styled.label<{ inline?: boolean }>`
+const Container = styled.label<Partial<CheckboxProps>>`
   display: ${props => (props.inline ? 'inline-flex' : 'flex')};
   align-items: center;
   position: relative;
+  cursor: pointer;
+  &.disabled {
+    cursor: not-allowed;
+  }
 `;
 
 const HiddenCheckboxInput = styled.input`

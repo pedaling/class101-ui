@@ -5,7 +5,7 @@ route: /form-inputs/select
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Select } from '@class101/ui';
+import { Select, Intent, InputSize } from '@class101/ui';
 
 # Select
 
@@ -17,9 +17,77 @@ import { Select } from '@class101/ui';
 
 <Playground>
   <Select value="" placeholder="Select one" options={['Apple', 'Banana', 'Candy']} />
-  <Select value="" placeholder="Select one" options={['Apple', 'Banana', 'Candy']} fill />
+  <br />
+  <Select value="" placeholder="Select one" options={['Apple', 'Banana', 'Candy']} fill={false} />
+  <br />
+  <Select value="" placeholder="Select one" options={['Apple', 'Banana', 'Candy']} size={InputSize.sm} />
+  <br />
+  <Select value="" placeholder="Select one" options={['Apple', 'Banana', 'Candy']} size={InputSize.sm} fill={false} />
 </Playground>
 
 <Playground>
   <Select value="Success" options={[{ label: 'Success', value: 'Success' }, { label: 'Fail', value: 'Fail' }]} />
+</Playground>
+
+## onChagne
+
+<Playground>
+  {() => {
+    class Example extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          value: '',
+        };
+      }
+      render() {
+        return (
+          <Select
+            value={this.state.value}
+            onChange={e => this.setState({ value: e.target.value })}
+            options={['Apple', 'Banana', 'Candy']}
+          />
+        );
+      }
+    }
+    return <Example />;
+  }}
+</Playground>
+
+## Inline select
+
+<Playground>
+  <Select value="" placeholder="Select one" options={['Apple', 'Banana', 'Candy']} inline={true} />
+  <Select value="" placeholder="Select one" options={['Apple', 'Banana', 'Candy']} inline={true} />
+</Playground>
+
+## Fill
+
+블록 영역에서 꽉차게 사용할 지를 결정합니다.
+
+> `inline:true`를 사용할 경우에 `fill` 값을 변경해도 형태가 바뀌지 않습니다.
+
+<Playground>
+  <Select value="" placeholder="Select one" options={['Apple', 'Banana', 'Candy']} fill={true} />
+  <Select value="" placeholder="Select one" options={['Apple', 'Banana', 'Candy']} fill={false} />
+
+  <Select value="" placeholder="Select one" options={['Apple', 'Banana', 'Candy']} inline={true} fill={true} />
+  <Select value="" placeholder="Select one" options={['Apple', 'Banana', 'Candy']} inline={true} fill={false} />
+</Playground>
+
+## Disabled select
+
+<Playground>
+  <Select value="" placeholder="Select one" options={['Apple', 'Banana', 'Candy']} disabled />
+</Playground>
+
+## Intent
+
+<Playground>
+  (Default)
+  <Select intent={Intent.DEFAULT} placeholder="Select one" options={['Apple', 'Banana', 'Candy']} />
+  <br />
+  <Select intent={Intent.WARNING} placeholder="Select one" options={['Apple', 'Banana', 'Candy']} />
+  <br />
+  <Select intent={Intent.DANGER} placeholder="Select one" options={['Apple', 'Banana', 'Candy']} />
 </Playground>

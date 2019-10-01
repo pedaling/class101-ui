@@ -1,102 +1,77 @@
-import { HTMLInputProps } from 'interfaces/props';
-import React from 'react';
+import React, {
+  ChangeEventHandler,
+  FocusEventHandler,
+  InputHTMLAttributes,
+  MouseEventHandler,
+  PureComponent,
+  RefObject,
+} from 'react';
 import styled from 'styled-components';
 
-import { gray800, orange500, redError } from '../../core/Colors';
+import { generateIntentClassName, Intent, IntentValue } from '../../core/common';
 import { body2 } from '../../core/TextStyles';
-import { FormInputFillStyle, FormInputStyle, FormInputStyleBySize, InputSize } from '../common';
-import { InlineError, Intent } from '../InlineError';
+import { FormInputBaseStyle, FormInputFillStyle, FormInputStyleBySize, InputSize, InputSizeValue } from '../common';
 
-export interface InputProps {
-  inputRef?: React.RefObject<HTMLInputElement>;
-  label?: string;
-  size: InputSize;
-  type: string;
-  fill?: boolean;
-  inline?: boolean;
-  allowMessage?: string;
-  warnMessage?: string;
-  errorMessage?: string;
-  style?: React.CSSProperties;
-  inputStyle?: React.CSSProperties;
+export interface FormInputBaseProps<T> {
+  id?: string;
+  intent?: IntentValue;
+  disabled?: boolean;
+  placeholder?: string;
+  onChange?: ChangeEventHandler<T>;
+  onBlur?: FocusEventHandler<T>;
+  onClick?: MouseEventHandler<T>;
+  inputRef?: RefObject<T>;
   className?: string;
 }
 
-export class Input extends React.PureComponent<HTMLInputProps & InputProps> {
+export interface InputProps extends FormInputBaseProps<HTMLInputElement> {
+  size?: InputSizeValue;
+  fill?: boolean;
+  inline?: boolean;
+  value?: string | string[] | number;
+  type?: string;
+  inputAttributes?: InputHTMLAttributes<HTMLInputElement>;
+}
+
+export class Input extends PureComponent<InputProps> {
   public static defaultProps: Partial<InputProps> = {
     size: InputSize.md,
     fill: true,
     type: 'text',
+    intent: Intent.DEFAULT,
   };
 
   public render() {
-    const {
-      type,
-      className,
-      style,
-      inputStyle,
-      inline,
-      allowMessage,
-      warnMessage,
-      errorMessage,
-      label,
-      size,
-      id,
-      inputRef,
-      ...restProps
-    } = this.props;
-    const inputId = id && label && `input-${label}`;
+    const { fill, type, className, size, intent, inputRef, inputAttributes, ...restProps } = this.props;
     return (
-      <Container style={style} inline={inline} className={className}>
-        {label && <InlineLabel htmlFor={inputId}>{label}</InlineLabel>}
-        <StyledInput
-          className={`${className || ''} ${errorMessage ? ' error' : ''} ${warnMessage ? ' warn' : ''}`}
-          type={type}
-          id={inputId}
-          size={size}
-          style={inputStyle}
-          {...inputRef && {
-            ref: inputRef,
-          }}
-          {...restProps}
-        />
-        {allowMessage && !errorMessage && (
-          <InlineError icon={null} intent={Intent.DEFAULT}>
-            {allowMessage}
-          </InlineError>
-        )}
-        {errorMessage && <InlineError intent={Intent.DANGER}>{errorMessage}</InlineError>}
-        {warnMessage && <InlineError intent={Intent.WARNING}>{warnMessage}</InlineError>}
-      </Container>
+      <StyledInput
+        className={generateIntentClassName(className, intent)}
+        type={type}
+        fill={`${fill}`}
+        inputSize={size || InputSize.md}
+        {...inputAttributes}
+        {...restProps}
+        {...inputRef && {
+          ref: inputRef,
+        }}
+      />
     );
   }
 }
 
-const StyledInput = styled.input<InputProps>`
+const StyledInput = styled.input<{ inputSize: InputSizeValue; fill?: string; inline?: boolean }>`
   ${body2};
-  ${FormInputStyle};
-  ${props => FormInputStyleBySize[props.size]};
-  ${props => (props.fill ? FormInputFillStyle : null)};
-  color: ${gray800};
+  ${FormInputBaseStyle};
+  ${props => FormInputStyleBySize[props.inputSize]};
+  ${props =>
+    props.inline
+      ? `
+    display: inline-block;
+  `
+      : `
+    display: block;
+    ${props.fill === 'true' ? FormInputFillStyle : ''}
+  `}
   box-sizing: border-box;
   padding: 0 16px;
-  border-radius: 3px;
-  &.error {
-    border: solid 1px ${redError};
-  }
-
-  &.warn {
-    border: solid 1px ${orange500};
-  }
-`;
-
-const Container = styled.div<{ inline?: boolean }>`
-  display: ${props => (props.inline ? 'inline-block' : 'block')};
-`;
-
-const InlineLabel = styled.label`
-  ${body2}
-  display: flex;
-  align-items: center;
-  margin-bottom: 4px;
 `;

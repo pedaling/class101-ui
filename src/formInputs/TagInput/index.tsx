@@ -1,28 +1,27 @@
-import { HTMLInputProps } from 'interfaces/props';
+import classNames from 'classnames';
 import { uniq } from 'lodash';
-import React, { PureComponent } from 'react';
+import React, { CSSProperties, InputHTMLAttributes, PureComponent } from 'react';
 import styled from 'styled-components';
 
-import { gray300, gray800, orange500, redError, white } from '../../core/Colors';
+import { gray800 } from '../../core/Colors';
+import { generateIntentClassName, IntentValue } from '../../core/common';
 import { body2 } from '../../core/TextStyles';
-import { InlineError, Intent } from '../InlineError';
+import { FormInputBaseStyle } from '../../formInputs/common';
 import InnerTags from './InnerTags';
 
 export interface TagInputProps {
-  className?: string;
-  style?: React.CSSProperties;
-  inputStyle?: React.CSSProperties;
-  inputProps?: HTMLInputProps;
-  allowMessage?: string;
-  warnMessage?: string;
-  errorMessage?: string;
-  value: string[];
   disabled?: boolean;
+  value: string[];
   onChange?: (value?: string[]) => void;
   onRemove?: (value?: string[]) => void;
   onEnter?: (value?: string[]) => void;
   addOnBlur?: boolean;
   separator: RegExp | string;
+  className?: string;
+  style?: CSSProperties;
+  inputStyle?: CSSProperties;
+  inputAttributes?: InputHTMLAttributes<HTMLInputElement>;
+  intent: IntentValue;
 }
 
 interface State {
@@ -42,55 +41,33 @@ export class TagInput extends PureComponent<TagInputProps, State> {
     focused: false,
   };
 
+  private inputElement?: HTMLInputElement;
+
   public render() {
-    const {
-      className,
-      style,
-      inputStyle,
-      allowMessage,
-      warnMessage,
-      errorMessage,
-      value,
-      inputProps,
-      disabled,
-    } = this.props;
+    const { intent, inputStyle, className, value, disabled, inputAttributes } = this.props;
     const { focused, tempValue } = this.state;
 
     return (
-      <>
-        <TagInputContainer
-          className={`${className || ''} ${errorMessage ? ' error' : ''} ${warnMessage ? ' warn' : ''} ${
-            focused ? ' focused' : ''
-          }`}
-          style={style}
-          onClick={this.handleContainerClick}
-        >
-          <InnerTags value={value} onRemove={this.handleTagRemove} disabled={disabled} />
-          <StyledInput
-            type="text"
-            style={inputStyle}
-            onChange={this.handleInputChange}
-            onBlur={this.handleInputBlur}
-            onKeyUp={this.handleInputKeyUp}
-            onFocus={this.handleInputFocus}
-            value={tempValue}
-            ref={this.inputRefHandler}
-            disabled={disabled}
-            {...inputProps}
-          />
-        </TagInputContainer>
-        {allowMessage && !errorMessage && (
-          <InlineError icon={null} intent={Intent.DEFAULT}>
-            {allowMessage}
-          </InlineError>
-        )}
-        {errorMessage && <InlineError intent={Intent.DANGER}>{errorMessage}</InlineError>}
-        {warnMessage && <InlineError intent={Intent.WARNING}>{warnMessage}</InlineError>}
-      </>
+      <TagInputContainer
+        className={classNames(generateIntentClassName(className, intent), { focused, disabled })}
+        onClick={this.handleContainerClick}
+      >
+        <InnerTags value={value} onRemove={this.handleTagRemove} disabled={disabled} />
+        <StyledInput
+          type="text"
+          style={inputStyle}
+          onChange={this.handleInputChange}
+          onBlur={this.handleInputBlur}
+          onKeyUp={this.handleInputKeyUp}
+          onFocus={this.handleInputFocus}
+          value={tempValue}
+          ref={this.inputRefHandler}
+          disabled={disabled}
+          {...inputAttributes}
+        />
+      </TagInputContainer>
     );
   }
-
-  private inputElement?: HTMLInputElement;
 
   private inputRefHandler = (ref: HTMLInputElement) => {
     this.inputElement = ref;
@@ -171,28 +148,16 @@ export class TagInput extends PureComponent<TagInputProps, State> {
 }
 
 const TagInputContainer = styled.div`
+  ${FormInputBaseStyle};
   box-sizing: border-box;
   padding: 8px 8px 3px;
-  border: solid 1px ${gray300};
-  margin-bottom: 8px;
   display: flex;
-  flex-direction: row;
+  flex: auto;
   flex-wrap: wrap;
   flex-grow: 1;
   flex-shrink: 1;
   align-items: center;
-  background-color: ${white};
-  border-radius: 3px;
-  &.error {
-    border: solid 1px ${redError};
-  }
-  &.warn {
-    border: solid 1px ${orange500};
-  }
-  &.focused {
-    outline: none;
-    border-color: ${gray800};
-  }
+  align-self: stretch;
   .inner-tags__tag {
     margin-bottom: 5px;
     margin-right: 5px;
@@ -210,6 +175,7 @@ const StyledInput = styled.input`
   border: none;
   outline: none;
   margin-bottom: 5px;
+  ${props => props.disabled && `cursor: not-allowed`}
   &:focus {
     outline: none;
   }

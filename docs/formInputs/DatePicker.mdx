@@ -93,6 +93,22 @@ onChange 이벤트 내에서 `return false`를 하면 날짜 선택이 막힙니
   <DatePicker alwaysShow inline />
 </Playground>
 
+## Disabled
+
+<Playground>
+  <DatePicker style={{ verticalAlign: 'top' }} disabled />
+  <DatePicker alwaysShow disabled />
+  <DatePicker
+    alwaysShow
+    disabled
+    rangeValue={{
+      start: new Date(2020, 0, 1),
+      end: new Date(2020, 0, 15),
+    }}
+    useRange
+  />
+</Playground>
+
 ## Locale
 
 `locale`을 통해 언어를 설정할 수 있습니다.

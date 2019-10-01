@@ -1,3 +1,5 @@
+export { InputSize } from './common';
+
 export * from './Checkbox';
 export * from './InlineError';
 export * from './Input';

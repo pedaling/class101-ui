@@ -1,66 +1,46 @@
-import React from 'react';
+import React, { HTMLAttributes, PureComponent } from 'react';
 import styled from 'styled-components';
 
-import { gray300, gray800, orange500, redError } from '../../core/Colors';
+import { generateIntentClassName, IntentValue } from '../../core/common';
 import { body2 } from '../../core/TextStyles';
-import { HTMLTextareaProps } from '../../interfaces/props';
-import { FormInputStyle } from '../common';
-import { InlineError, Intent } from '../InlineError';
+import { FormInputBaseStyle } from '../common';
 
 export interface TextareaProps {
-  className?: string;
-  style?: React.CSSProperties;
-  inputStyle?: React.CSSProperties;
+  /** 옆으로 쌓이게 할 것인지 여부 */
   inline?: boolean;
-  allowMessage?: string;
-  warnMessage?: string;
-  errorMessage?: string;
+
+  intent?: IntentValue;
+
+  /** input의 className */
+  inputRef?: React.RefObject<HTMLTextAreaElement>;
+  className?: string;
+  inputAttributes?: React.HTMLAttributes<HTMLTextAreaElement>;
 }
 
-export class Textarea extends React.PureComponent<HTMLTextareaProps & TextareaProps> {
+export class Textarea extends PureComponent<TextareaProps> {
   public render() {
-    const { className, style, inputStyle, inline, allowMessage, warnMessage, errorMessage, ...restProps } = this.props;
+    const { className, intent, inputRef, inputAttributes, ...restProps } = this.props;
 
     return (
-      <Container style={style} inline={inline}>
-        <StyledTextarea
-          className={`${className || ''} ${errorMessage ? ' error' : ''} ${warnMessage ? ' warn' : ''}`}
-          style={inputStyle}
-          {...restProps}
-        />
-        {allowMessage && !errorMessage && (
-          <InlineError icon={null} intent={Intent.DEFAULT}>
-            {allowMessage}
-          </InlineError>
-        )}
-        {errorMessage && <InlineError intent={Intent.DANGER}>{errorMessage}</InlineError>}
-        {warnMessage && <InlineError intent={Intent.WARNING}>{warnMessage}</InlineError>}
-      </Container>
+      <StyledTextarea
+        className={generateIntentClassName(className, intent)}
+        {...inputAttributes}
+        {...restProps}
+        {...inputRef && {
+          ref: inputRef,
+        }}
+        {...restProps}
+      />
     );
   }
 }
 
-const StyledTextarea = styled.textarea`
-  ${FormInputStyle}
+const StyledTextarea = styled.textarea<TextareaProps>`
+  ${FormInputBaseStyle}
   ${body2};
-  color: ${gray800};
-  border-radius: 1px;
-  background-color: white;
-  border: solid 1px ${gray300};
   width: 100%;
-  height: 104px;
+  height: 108px;
   padding: 12px 16px;
   box-sizing: border-box;
-
-  &.error {
-    border: solid 1px ${redError};
-  }
-
-  &.warn {
-    border: solid 1px ${orange500};
-  }
-`;
-
-const Container = styled.div<TextareaProps>`
   display: ${props => (props.inline ? 'inline-block' : 'block')};
 `;

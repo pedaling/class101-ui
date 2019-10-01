@@ -5,11 +5,11 @@ route: /form-inputs/tag-input
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { TagInput } from '@class101/ui';
+import { TagInput, Intent } from '@class101/ui';
 
-# Textarea
+# TagInput
 
-문자열을 입력받는 컴포넌트입니다.
+입력한 텍스트를 태그 형태로 보여주는 인풋입니다.
 
 ## Props
 
@@ -43,4 +43,129 @@ import { TagInput } from '@class101/ui';
     return <Example />
 }}
 
+</Playground>
+
+<Playground>
+  {() => {
+    class Example extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          value: ['01082210886','01082230886', '01082210886', '01082210886','01082210886','01082210886', '01082210886', '01082210886','01082210886','01082210886', '01082210886', '01082210886','01082210886','01082210886', '01082210886', '01082210886']
+        };
+      }
+      handleChange(newValue) {
+        this.setState({ value: newValue })
+      }
+      handleSubmit(e) {
+        console.log(e)
+        e.preventDefault();
+      }
+      render() {
+        return (
+          <form onSubmit={this.handleSubmit}>
+            <TagInput separator={/[, ]/gm} value={this.state.value} onChange={(value) => this.handleChange(value)} disabled={true}/>
+          </form>
+        );
+      }
+    }
+    return <Example />
+}}
+
+</Playground>
+
+<Playground>
+  (Disabled)
+  <TagInput
+    separator={/[, ]/gm}
+    value={[
+      '01082210886',
+      '01082230886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+    ]}
+    disabled={true}
+  />
+  <br />
+  (Default)
+  <TagInput
+    separator={/[, ]/gm}
+    value={[
+      '01082210886',
+      '01082230886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+    ]}
+    intent={Intent.DEFAULT}
+  />
+  <br />
+  <TagInput
+    separator={/[, ]/gm}
+    value={[
+      '01082210886',
+      '01082230886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+    ]}
+    intent={Intent.WARNING}
+  />
+  <br />
+  <TagInput
+    separator={/[, ]/gm}
+    value={[
+      '01082210886',
+      '01082230886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+      '01082210886',
+    ]}
+    intent={Intent.DANGER}
+  />
 </Playground>

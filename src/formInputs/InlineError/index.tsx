@@ -1,58 +1,53 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
-import { gray600, orange500, redError } from '../../core/Colors';
+import { gray500, orange500, redError } from '../../core/Colors';
+import { Intent, IntentValue } from '../../core/common/intent';
+import { caption2 } from '../../core/TextStyles';
 import { Alert, IconProps } from '../../Icon';
-
-export enum Intent {
-  DANGER = 'DANGER',
-  WARNING = 'WARNING',
-  DEFAULT = 'DEFAULT',
-}
 
 const ColorByIntent: { [key in Intent]: string } = {
   [Intent.DANGER]: redError,
   [Intent.WARNING]: orange500,
-  [Intent.DEFAULT]: gray600,
+  [Intent.DEFAULT]: gray500,
 };
 
 export interface InlineErrorProps {
-  intent?: Intent;
-  children: React.ReactNode;
+  intent?: IntentValue;
   icon?: React.ReactElement<IconProps> | null;
+  children: React.ReactNode;
 }
 
-export class InlineError extends React.PureComponent<InlineErrorProps> {
+export class InlineError extends PureComponent<InlineErrorProps> {
   public static defaultProps: Partial<InlineErrorProps> = {
     intent: Intent.DEFAULT,
-    icon: <Alert size={16} />,
+    icon: <Alert size={12} />,
   };
   public render() {
-    const { icon, children, intent = Intent.DEFAULT } = this.props;
+    const { icon, children, intent = Intent.DEFAULT, ...restProps } = this.props;
 
     return (
-      <Container intent={intent}>
+      <Container intent={intent} {...restProps}>
         {icon}
-        <Message>{children}</Message>
+        <Message color={ColorByIntent[intent]}>{children}</Message>
       </Container>
     );
   }
 }
 
-const Container = styled.h6<{ intent: Intent }>`
+const Container = styled.strong<{ intent: Intent }>`
   display: flex;
   align-items: center;
   margin: 2px 0;
-  color: ${props => ColorByIntent[props.intent]};
+  font-weight: normal;
+
   path {
     fill: ${props => ColorByIntent[props.intent]};
   }
 `;
 
 const Message = styled.span`
-  font-size: 11px;
-  line-height: 16px;
-  font-weight: normal;
+  ${caption2};
   display: flex;
 
   * + & {

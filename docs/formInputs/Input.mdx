@@ -5,7 +5,7 @@ route: /form-inputs/input
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Component as Input } from './Input';
+import { Input, Intent, InputSize } from '@class101/ui';
 
 # Input
 
@@ -30,50 +30,49 @@ import { Component as Input } from './Input';
 > class101 제품에서 `sm` 사이즈는 폼이 많은 관리자 단에서만 사용해주세요.
 
 <Playground>
-  <Input size="md" />
+  <Input size={InputSize.md} />
   <br />
-  <Input size="sm" />
+  <Input size={InputSize.sm} />
   <br />
-  <Input size="md" fill={false} />
+  <Input size={InputSize.md} fill={false} />
   <br />
-  <Input size="sm" fill={false} />
+  <Input size={InputSize.sm} fill={false} />
 </Playground>
 
-## Inline inputs
+## Inline input
 
 <Playground>
   <Input inline placeholder="입력해주세요." />
   <Input inline placeholder="입력해주세요." />
 </Playground>
 
-## With label
+## Fill
+
+블록 영역에서 꽉차게 사용할 지를 결정합니다.
+
+> `inline:true`를 사용할 경우에 `fill` 값을 변경해도 형태가 바뀌지 않습니다.
 
 <Playground>
-  <Input label="제목" />
-  <Input label="주소" size="sm" inline />
-  <Input label="전화번호" size="sm" inline />
-</Playground>
+  <Input placeholder="입력해주세요." fill={true}/>
+  <Input placeholder="입력해주세요." fill={false}/>
 
-## With allow message
-
-<Playground>
-  <Input allowMessage="올바른 값입니다." />
-</Playground>
-
-## With error message
-
-<Playground>
-  <Input errorMessage="특수문자를 제외하고 입력해주세요." />
-</Playground>
-
-## With warn message
-
-<Playground>
-  <Input warnMessage="보안에 취약한 값입니다." />
+  <Input placeholder="입력해주세요." inline={true} fill={true}/>
+  <Input placeholder="입력해주세요." inline={true} fill={false}/>
 </Playground>
 
 ## Disabled input
 
 <Playground>
   <Input placeholder="잠금 상태입니다." disabled />
+</Playground>
+
+## Intent
+
+<Playground>
+  (Default)
+  <Input intent={Intent.DEFAULT} />
+  <br />
+  <Input intent={Intent.WARNING} />
+  <br />
+  <Input intent={Intent.DANGER} />
 </Playground>

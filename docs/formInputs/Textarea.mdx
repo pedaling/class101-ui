@@ -5,7 +5,7 @@ route: /form-inputs/textarea
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Component as Textarea } from './Textarea';
+import { Textarea, Intent } from '@class101/ui';
 
 # Textarea
 
@@ -28,26 +28,18 @@ import { Component as Textarea } from './Textarea';
   <Textarea inline placeholder="입력해주세요." />
 </Playground>
 
-## With allow message
-
-<Playground>
-  <Textarea allowMessage="올바른 값입니다." />
-</Playground>
-
-## With error message
-
-<Playground>
-  <Textarea errorMessage="특수문자를 제외하고 입력해주세요." />
-</Playground>
-
-## With warn message
-
-<Playground>
-  <Textarea warnMessage="보안에 취약한 값입니다." />
-</Playground>
-
 ## Disabled textarea
 
 <Playground>
   <Textarea placeholder="잠금 상태입니다." disabled />
+</Playground>
+
+## Intent
+
+<Playground>
+  <Textarea intent={Intent.DEFAULT} />
+  <br />
+  <Textarea intent={Intent.WARNING} />
+  <br />
+  <Textarea intent={Intent.DANGER} />
 </Playground>

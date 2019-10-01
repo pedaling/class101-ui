@@ -5,7 +5,7 @@ route: /form-controls/form-group
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Input, FormGroup } from '@class101/ui';
+import { Input, Select, ControlGroup, FormGroup, Intent } from '@class101/ui';
 
 # Form Group
 
@@ -18,18 +18,33 @@ import { Input, FormGroup } from '@class101/ui';
 ## Basic usage
 
 <Playground>
-  <FormGroup label="Label">
-    <Input placeholder="Placeholder text" />
+  <FormGroup label="라벨" htmlLabelFor="input-1">
+    <Input placeholder="Placeholder text" id="input-1" />
+  </FormGroup>
+  <FormGroup label="라벨" htmlLabelFor="input-2">
+    <Select
+      placeholder="Placeholder text"
+      value=""
+      placeholder="Select one"
+      options={['Apple', 'Banana', 'Candy']}
+      id="input-2"
+    />
+  </FormGroup>
+  <FormGroup label="라벨" htmlLabelFor="input-3">
+    <ControlGroup>
+      <Input placeholder="Placeholder text" id="input-3" />
+      <Select placeholder="Placeholder text" value="" placeholder="Select one" options={['Apple', 'Banana', 'Candy']} />
+    </ControlGroup>
   </FormGroup>
 </Playground>
 
 ## With different label colors
 
 <Playground>
-  <FormGroup label="Label" labelColor="gray">
+  <FormGroup label="라벨" labelColor="gray">
     <Input placeholder="Placeholder text" />
   </FormGroup>
-  <FormGroup label="Label" labelColor="pink">
+  <FormGroup label="라벨" labelColor="pink">
     <Input placeholder="Placeholder text" />
   </FormGroup>
 </Playground>
@@ -37,7 +52,63 @@ import { Input, FormGroup } from '@class101/ui';
 ## Inline form group
 
 <Playground>
-  <FormGroup label="Label" inline>
+  <FormGroup label="라벨" isHorizontal>
+    <Input placeholder="Placeholder text" />
+  </FormGroup>
+  <FormGroup label="라벨" isHorizontal message="안내 / 경고 메시지 등" helperText="40자 이상">
+    <Input placeholder="Placeholder text" />
+  </FormGroup>
+</Playground>
+
+> `helperText`를 가지고 있는 `FormGroup` 안에서 formInput 컴포넌트에 `fill:false` 또는 `inline: true`를 사용할 경우 다음과 같이 보일 수 있습니다 주의해주세요.
+
+<Playground>
+  <h3>DON'T</h3>
+  <FormGroup label="라벨" isHorizontal message="안내 / 경고 메시지 등" helperText="40자 이상">
+    <Input placeholder="Placeholder text" fill={false} />
+  </FormGroup>
+  <FormGroup label="라벨" isHorizontal message="안내 / 경고 메시지 등" helperText="40자 이상">
+    <Input placeholder="Placeholder text" inline={true} />
+  </FormGroup>
+  <h3>DO</h3>
+  <div>
+    <FormGroup
+      label="라벨"
+      isHorizontal
+      message="안내 / 경고 메시지 등"
+      helperText="40자 이상"
+      divAttributes={{ style: { display: 'inline-flex' } }}
+    >
+      <Input placeholder="Placeholder text" />
+    </FormGroup>
+    <FormGroup
+      label="라벨"
+      isHorizontal
+      message="안내 / 경고 메시지 등"
+      helperText="40자 이상"
+      divAttributes={{ style: { display: 'inline-flex', marginLeft: '16px' } }}
+    >
+      <Input placeholder="Placeholder text" />
+    </FormGroup>
+  </div>
+</Playground>
+
+## Intent & message & helperText
+
+<Playground>
+  <FormGroup label="라벨" message="안내 / 경고 메시지 등" intent={Intent.WARNING}>
+    <Input placeholder="Placeholder text" intent={Intent.WARNING} />
+  </FormGroup>
+  <FormGroup label="라벨" message="안내 / 경고 메시지 등" intent={Intent.DANGER}>
+    <Input placeholder="Placeholder text" intent={Intent.DANGER} />
+  </FormGroup>
+  <FormGroup label="라벨" helperText="40자 이상">
+    <Input placeholder="Placeholder text" />
+  </FormGroup>
+  <FormGroup label="라벨" message="안내 / 경고 메시지 등" helperText="40자 이상">
+    <Input placeholder="Placeholder text" />
+  </FormGroup>
+  <FormGroup label="라벨" message="안내 / 경고 메시지 등" helperText="40자 이상" isHorizontal={true}>
     <Input placeholder="Placeholder text" />
   </FormGroup>
 </Playground>
