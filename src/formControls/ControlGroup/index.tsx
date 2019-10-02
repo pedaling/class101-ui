@@ -1,84 +1,45 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
-interface CommonProps {
-  vertical?: boolean;
-  children: React.ReactNode;
-}
+import { gray200 } from '../../core/Colors';
 
-export interface ContainerProps extends CommonProps {
-  fill?: boolean;
-}
-
-// FixMe: https://github.com/styled-components/styled-components/issues/1198
-interface StyledContainerProps extends CommonProps {
-  fill?: string;
-}
-
-export class ControlGroup extends PureComponent<ContainerProps> {
-  public static defaultProps = {
-    fill: false,
-    vertical: false,
-  };
+export class ControlGroup extends PureComponent {
   public render() {
-    const { fill, children, vertical, ...restProps } = this.props;
+    const { children, ...restProps } = this.props;
 
-    return (
-      <Container fill={`${fill}`} vertical={vertical} {...restProps}>
-        {children}
-      </Container>
-    );
+    return <Container {...restProps}>{children}</Container>;
   }
 }
 
-const Container = styled.div<StyledContainerProps>`
+const Container = styled.div`
   display: flex;
   align-items: stretch;
-  ${props =>
-    props.fill === 'true' &&
-    `
-      flex-grow: 1;
-      & > * {
-        flex: 1 1 auto;
-        margin-left: -1px;
-      }
-  `}
-  ${props =>
-    props.vertical
-      ? `
-          flex-direction: column;
+  & > a,
+  & > button {
+    flex: none;
+    border: 1px solid ${gray200};
+    border-left: none;
+    margin-left: -1px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
 
-          & > * {
-            box-sizing: border-box;
-            border-radius: 0;
-
-            &:first-child {
-              border-top-left-radius: 3px;
-              border-top-right-radius: 3px;
-            }
-
-            &:last-child {
-              border-bottom-left-radius: 3px;
-              border-bottom-right-radius: 3px;
-            }
-          }
-        `
-      : `
-          flex-direction: row;
-
-          & > * {
-            box-sizing: border-box;
-            border-radius: 0;
-
-            &:first-child {
-              border-top-left-radius: 3px;
-              border-bottom-left-radius: 3px;
-            }
-
-            &:last-child {
-              border-top-right-radius: 3px;
-              border-bottom-right-radius: 3px;
-            }
-          }
-        `}
+  & > input,
+  & > select {
+    &:not(:first-child) {
+      margin-left: -1px;
+      border-radius: 0;
+    }
+    &:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    &:last-child {
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+  }
+  & > select {
+    max-width: 30%;
+  }
 `;

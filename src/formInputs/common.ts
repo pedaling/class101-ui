@@ -13,12 +13,15 @@ export const FormInputBaseStyle = css`
   border: solid 1px ${gray200};
   border-radius: 3px;
   background-color: white;
+  transition: box-shadow 0.1s ease-in-out;
   &:hover {
     border-color: ${gray400};
   }
   &:focus,
   &.focused {
     outline: none;
+    position: relative;
+    z-index: 2;
     border-color: ${gray800};
   }
   &:disabled,
@@ -42,10 +45,14 @@ export const FormInputBaseStyle = css`
   }
 
   &.error {
+    position: relative;
+    z-index: 1;
     border-color: ${redError};
   }
 
   &.warn {
+    position: relative;
+    z-index: 1;
     border-color: ${orange500};
   }
 `;

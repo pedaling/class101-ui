@@ -5,55 +5,68 @@ route: /form-controls/control-group
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Button, ControlGroup, Input, ButtonSize, ButtonColor } from '@class101/ui';
+import { Button, Select, ControlGroup, Input, ButtonSize, ButtonColor, Intent } from '@class101/ui';
 
 # Control Group
 
 각기 다른 컨트롤을 하나의 단위로 묶어서 보여줍니다.
-
-## Props
-
-<PropsTable of={ControlGroup} />
 
 ## Basic usage
 
 <Playground>
   <ControlGroup>
     <Input placeholder="Placeholder text" />
-    <Button size={ButtonSize.LARGE} color={ButtonColor.ORANGE}>
-      Click me
-    </Button>
+    <Button size={ButtonSize.LARGE}>Click me</Button>
   </ControlGroup>
   <br />
   <ControlGroup>
     <Input placeholder="Placeholder text" size="sm" />
-    <Button color={ButtonColor.ORANGE}>Click me</Button>
+    <Button>Click me</Button>
   </ControlGroup>
 </Playground>
 
-## Block control group
-
 <Playground>
-  <ControlGroup fill>
-    <Input placeholder="Placeholder text" />
-    <Button size={ButtonSize.LARGE} color={ButtonColor.ORANGE}>
-      Click me
-    </Button>
+    <ControlGroup>
+    <Input placeholder="Placeholder text" fill={false} />
+    <Button size={ButtonSize.LARGE}>Click me</Button>
   </ControlGroup>
   <br />
-  <ControlGroup fill>
-    <Input placeholder="Placeholder text" size="sm" />
-    <Button color={ButtonColor.ORANGE}>Click me</Button>
+  <ControlGroup>
+    <Input placeholder="Placeholder text" size="sm" fill={false} />
+    <Button>Click me</Button>
   </ControlGroup>
 </Playground>
 
-## Vertical control group
+<Playground>
+  <ControlGroup>
+    <Select value="CandyCandyCandyCandyCandy" placeholder="Select one" options={['Apple', 'Banana', 'CandyCandyCandyCandyCandy']} size="sm" fill={false} />
+    <Input placeholder="Placeholder text" size="sm" />
+    <Input placeholder="Placeholder text" size="sm" />
+  </ControlGroup>
+  <br />
+  <ControlGroup>
+    <Select value="" placeholder="Select one" options={['Apple', 'Banana', 'Candy']} size="sm" fill={false} />
+    <Input placeholder="Placeholder text" size="sm" />
+    <Button>Click me</Button>
+  </ControlGroup>
+</Playground>
 
 <Playground>
-  <ControlGroup vertical>
+  <ControlGroup>
+    <Select value="" placeholder="Select one" options={['Apple', 'Banana', 'Candy']} fill={false} />
     <Input placeholder="Placeholder text" />
-    <Button size={ButtonSize.LARGE} color={ButtonColor.ORANGE}>
-      Click me
-    </Button>
+    <Button size={ButtonSize.LARGE}>Click me</Button>
+  </ControlGroup>
+  <br />
+  <ControlGroup>
+    <Select value="" placeholder="Select one" options={['Apple', 'Banana', 'Candy']} fill={false} />
+    <Input placeholder="Placeholder text" intent={Intent.WARNING} />
+    <Button size={ButtonSize.LARGE}>Click me</Button>
+  </ControlGroup>
+  <br />
+  <ControlGroup>
+    <Select value="" placeholder="Select one" options={['Apple', 'Banana', 'Candy']} fill={false} />
+    <Input placeholder="Placeholder text" intent={Intent.DANGER} />
+    <Button size={ButtonSize.LARGE}>Click me</Button>
   </ControlGroup>
 </Playground>
