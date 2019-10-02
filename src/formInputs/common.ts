@@ -1,6 +1,6 @@
 import { css, FlattenSimpleInterpolation } from 'styled-components';
 
-import { gray200, gray400, gray50, gray500, gray800, orange500, redError } from '../core/Colors';
+import { gray200, gray400, gray50, gray500, gray800, orange500, red500 } from '../core/Colors';
 
 export enum InputSize {
   sm = 'sm',
@@ -47,7 +47,7 @@ export const FormInputBaseStyle = css`
   &.error {
     position: relative;
     z-index: 1;
-    border-color: ${redError};
+    border-color: ${red500};
   }
 
   &.warn {

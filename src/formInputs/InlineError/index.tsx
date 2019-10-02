@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
-import { gray500, orange500, redError } from '../../core/Colors';
+import { gray500, orange500, red500 } from '../../core/Colors';
 import { Intent, IntentValue } from '../../core/common/intent';
 import { caption2 } from '../../core/TextStyles';
 import { Alert, IconProps } from '../../Icon';
 
 const ColorByIntent: { [key in Intent]: string } = {
-  [Intent.DANGER]: redError,
+  [Intent.DANGER]: red500,
   [Intent.WARNING]: orange500,
   [Intent.DEFAULT]: gray500,
 };
