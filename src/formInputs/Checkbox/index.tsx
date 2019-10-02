@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import React, { InputHTMLAttributes, PureComponent, RefObject } from 'react';
 import styled from 'styled-components';
 
@@ -35,7 +34,7 @@ export class Checkbox extends PureComponent<CheckboxProps> {
       ...restProps
     } = this.props;
     return (
-      <Container inline={inline} className={classNames(className, { disabled })}>
+      <Container inline={inline} className={className} disabled={disabled}>
         {checked ? (
           <CheckboxOn fillColor={disabled ? gray300 : undefined} size={size} />
         ) : (
@@ -68,10 +67,7 @@ const Container = styled.label<Partial<CheckboxProps>>`
   display: ${props => (props.inline ? 'inline-flex' : 'flex')};
   align-items: center;
   position: relative;
-  cursor: pointer;
-  &.disabled {
-    cursor: not-allowed;
-  }
+  cursor: ${props => (!props.disabled ? 'pointer' : 'not-allowed')};
 `;
 
 const HiddenCheckboxInput = styled.input`

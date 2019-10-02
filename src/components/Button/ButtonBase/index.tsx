@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import React, { AnchorHTMLAttributes, ButtonHTMLAttributes } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
@@ -100,11 +99,12 @@ export default class ButtonBase<ColorValue extends string, SizeValue extends str
 
     if (to) {
       return (
-        <AnchorButtonWrapper className={classNames(className, { disabled })}>
+        <AnchorButtonWrapper className={className} disabled={disabled}>
           <LinkButton
             to={to}
             target={target}
             icon-position={iconPosition}
+            disabled={disabled}
             {...anchorAttributes}
             {...restProps}
             {...options}
@@ -116,11 +116,12 @@ export default class ButtonBase<ColorValue extends string, SizeValue extends str
     }
     if (href) {
       return (
-        <AnchorButtonWrapper className={classNames(className, { disabled })}>
+        <AnchorButtonWrapper className={className} disabled={disabled}>
           <AnchorButton
             href={href}
             target={target}
             icon-position={iconPosition}
+            disabled={disabled}
             {...anchorAttributes}
             {...restProps}
             {...options}
@@ -136,7 +137,7 @@ export default class ButtonBase<ColorValue extends string, SizeValue extends str
         type={type}
         icon-position={iconPosition}
         disabled={disabled}
-        className={classNames(className, { disabled })}
+        className={className}
         {...buttonAttributes}
         {...restProps}
       >
@@ -146,7 +147,7 @@ export default class ButtonBase<ColorValue extends string, SizeValue extends str
   }
 }
 
-const buttonCommonStyle = css`
+const buttonCommonStyle = css<{ disabled?: boolean }>`
   margin: 0;
   padding: 0;
 
@@ -156,16 +157,15 @@ const buttonCommonStyle = css`
   justify-content: center;
   align-items: center;
 
-  &:not(:disabled):not(.disabled) {
-    cursor: pointer;
-  }
-
-  &.disabled {
-    cursor: not-allowed;
-  }
+  cursor: ${props => (!props.disabled ? 'pointer' : 'not-allowed')};
 `;
 
-const ButtonContainer = styled.button<{ 'icon-position'?: ButtonIconPosition }>`
+interface ButtonContainerProps {
+  ['icon-position']?: ButtonIconPosition;
+  disabled?: boolean;
+}
+
+const ButtonContainer = styled.button<ButtonContainerProps>`
   border: 0;
   outline: none;
   box-sizing: border-box;
@@ -184,28 +184,24 @@ const Text = styled.span`
 
 const AnchorButtonWrapper = styled.span`
   ${buttonCommonStyle};
-  &.disabled {
-    cursor: not-allowed;
-  }
+  cursor: ${props => (props.disabled ? 'pointer' : 'not-allowed')};
 `;
 
-const getAnchorButtonStyle = (iconPosition?: ButtonIconPosition) => css`
+const getAnchorButtonStyle = css<ButtonContainerProps>`
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  flex-direction: ${iconPosition === ButtonIconPosition.RIGHT ? 'row-reverse' : 'row'};
-  .disabled & {
-    pointer-events: none;
-  }
+  flex-direction: ${props => (props['icon-position'] === ButtonIconPosition.RIGHT ? 'row-reverse' : 'row')};
+  ${props => (props.disabled ? 'pointer-events: none' : '')};
 `;
 
-const LinkButton = styled(Link)<{ 'icon-position'?: ButtonIconPosition }>`
-  ${props => getAnchorButtonStyle(props['icon-position'])};
+const LinkButton = styled(Link)<ButtonContainerProps>`
+  ${getAnchorButtonStyle};
 `;
 
-const AnchorButton = styled.a<{ 'icon-position'?: ButtonIconPosition }>`
-  ${props => getAnchorButtonStyle(props['icon-position'])};
+const AnchorButton = styled.a<ButtonContainerProps>`
+  ${getAnchorButtonStyle};
 `;

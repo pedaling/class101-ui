@@ -76,24 +76,28 @@ const StyledButtonBase = styled(ButtonBase)<ButtonCommonProps<IconButtonColorVal
   padding: 0;
   border-radius: 3px;
 
-  color: ${props => getButtonColors(props.color, props.theme.mode).textColor};
-  background-color: ${props => getButtonColors(props.color, props.theme.mode).backgroundColor};
-
   ${props => buttonStyleBySize[props.size as IconButtonSize]};
 
   transition: background-color 0.1s;
-  // TODO(chiabi): focus 스타일 추가하기
-  &:hover,
-  &:active {
-    background-color: ${props =>
-      props.color === ButtonColor.TRANSPARENT
-        ? rgba(getButtonColors(ButtonColor.DEFAULT, props.theme.mode).backgroundColor, 0.2)
-        : darken(0.1, getButtonColors(props.color, props.theme.mode).backgroundColor)};
-    text-decoration-line: none;
-  }
 
-  &.disabled {
-    color: ${props => getButtonColors(props.color, props.theme.mode).disabledTextColor};
-    background-color: ${props => getButtonColors(props.color, props.theme.mode).disabledBackgroundColor};
-  }
+  ${props =>
+    props.disabled
+      ? `
+          color: ${getButtonColors(props.color, props.theme.mode).disabledTextColor};
+          background-color: ${getButtonColors(props.color, props.theme.mode).disabledBackgroundColor};
+        `
+      : `
+          color: ${getButtonColors(props.color, props.theme.mode).textColor};
+          background-color: ${getButtonColors(props.color, props.theme.mode).backgroundColor};
+          // TODO(chiabi): focus 스타일 추가하기
+          &:hover,
+          &:active {
+            background-color: ${
+              props.color === ButtonColor.TRANSPARENT
+                ? rgba(getButtonColors(ButtonColor.DEFAULT, props.theme.mode).backgroundColor, 0.2)
+                : darken(0.1, getButtonColors(props.color, props.theme.mode).backgroundColor)
+            };
+            text-decoration-line: none;
+          }
+        `}
 `;

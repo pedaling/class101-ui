@@ -81,18 +81,22 @@ const StyledButtonBase = styled(ButtonBase)<TextButtonProps>`
   vertical-align: middle;
   background: none;
 
-  color: ${props => getTextButtonColors(props.color, props.theme.mode).textColor};
   ${props => buttonStyleBySize[props.size as TextButtonSize]};
 
   transition: color 0.1s;
   // TODO(chiabi): focus 스타일 추가하기
-  &:not(.disabled):hover,
-  &:not(.disabled):active {
-    color: ${props => darken(0.1, getTextButtonColors(props.color, props.theme.mode).textColor)};
-    text-decoration-line: underline;
-  }
 
-  &.disabled {
-    color: ${props => getTextButtonColors(props.color, props.theme.mode).disabledTextColor};
-  }
+  ${props =>
+    props.disabled
+      ? `
+          color: ${getTextButtonColors(props.color, props.theme.mode).disabledTextColor};
+        `
+      : `
+          color: ${getTextButtonColors(props.color, props.theme.mode).textColor};
+          &:hover,
+          &:active {
+            color: ${darken(0.1, getTextButtonColors(props.color, props.theme.mode).textColor)};
+            text-decoration-line: underline;
+          }
+        `}
 `;

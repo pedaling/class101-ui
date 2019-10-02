@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, PureComponent } from 'react';
 import styled from 'styled-components';
 
-import { generateIntentClassName, IntentValue } from '../../core/common';
+import { Intent, IntentValue } from '../../core/common';
 import { body2 } from '../../core/TextStyles';
 import { FormInputBaseStyle } from '../common';
 
@@ -9,7 +9,7 @@ export interface TextareaProps {
   /** 옆으로 쌓이게 할 것인지 여부 */
   inline?: boolean;
 
-  intent?: IntentValue;
+  intent: IntentValue;
 
   /** input의 className */
   inputRef?: React.RefObject<HTMLTextAreaElement>;
@@ -18,12 +18,15 @@ export interface TextareaProps {
 }
 
 export class Textarea extends PureComponent<TextareaProps> {
+  public static defaultProps: Partial<TextareaProps> = {
+    intent: Intent.DEFAULT,
+  };
+
   public render() {
-    const { className, intent, inputRef, inputAttributes, ...restProps } = this.props;
+    const { inputRef, inputAttributes, ...restProps } = this.props;
 
     return (
       <StyledTextarea
-        className={generateIntentClassName(className, intent)}
         {...inputAttributes}
         {...restProps}
         {...inputRef && {

@@ -1,10 +1,9 @@
-import classNames from 'classnames';
 import { uniq } from 'lodash';
 import React, { CSSProperties, InputHTMLAttributes, PureComponent } from 'react';
 import styled from 'styled-components';
 
 import { gray800 } from '../../core/Colors';
-import { generateIntentClassName, IntentValue } from '../../core/common';
+import { Intent, IntentValue } from '../../core/common';
 import { body2 } from '../../core/TextStyles';
 import { FormInputBaseStyle } from '../../formInputs/common';
 import InnerTags from './InnerTags';
@@ -34,6 +33,7 @@ export class TagInput extends PureComponent<TagInputProps, State> {
     value: [],
     separator: ',',
     disabled: false,
+    intent: Intent.DEFAULT,
   };
 
   public readonly state: State = {
@@ -49,7 +49,10 @@ export class TagInput extends PureComponent<TagInputProps, State> {
 
     return (
       <TagInputContainer
-        className={classNames(generateIntentClassName(className, intent), { focused, disabled })}
+        className={className}
+        focused={focused}
+        disabled={disabled}
+        intent={intent}
         onClick={this.handleContainerClick}
       >
         <InnerTags value={value} onRemove={this.handleTagRemove} disabled={disabled} />
@@ -147,7 +150,7 @@ export class TagInput extends PureComponent<TagInputProps, State> {
   };
 }
 
-const TagInputContainer = styled.div`
+const TagInputContainer = styled.div<{ disabled?: boolean; focused?: boolean; intent: IntentValue }>`
   ${FormInputBaseStyle};
   box-sizing: border-box;
   padding: 8px 8px 3px;

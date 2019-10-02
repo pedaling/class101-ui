@@ -1,5 +1,6 @@
 import { css, FlattenSimpleInterpolation } from 'styled-components';
 
+import { Intent } from '../core';
 import { gray200, gray400, gray50, gray500, gray800, orange500, red500 } from '../core/Colors';
 
 export enum InputSize {
@@ -9,28 +10,48 @@ export enum InputSize {
 
 export type InputSizeValue = 'sm' | 'md';
 
-export const FormInputBaseStyle = css`
-  border: solid 1px ${gray200};
+const FormInputIntentIStyle: { [key in Intent]: FlattenSimpleInterpolation } = {
+  [Intent.DEFAULT]: css`
+    border-color: ${gray200};
+    &:hover {
+      border-color: ${gray400};
+    }
+  `,
+  [Intent.DANGER]: css`
+    position: relative;
+    z-index: 1;
+    border-color: ${red500};
+  `,
+  [Intent.WARNING]: css`
+    position: relative;
+    z-index: 1;
+    border-color: ${orange500};
+  `,
+};
+
+export const FormInputBaseStyle = css<{ focused?: boolean; disabled?: boolean; intent: Intent }>`
+  border-width: 1px;
+  border-style: solid;
   border-radius: 3px;
   background-color: white;
   transition: box-shadow 0.1s ease-in-out;
-  &:hover {
-    border-color: ${gray400};
-  }
-  &:focus,
-  &.focused {
-    outline: none;
-    position: relative;
-    z-index: 2;
-    border-color: ${gray800};
-  }
-  &:disabled,
-  &.disabled {
-    background-color: ${gray50};
-    &:hover {
-      cursor: not-allowed;
-    }
-  }
+
+  ${props =>
+    props.focused &&
+    css`
+      outline: none;
+      position: relative;
+      z-index: 2;
+      border-color: ${gray800};
+    `}
+  ${props =>
+    props.disabled &&
+    css`
+      background-color: ${gray50};
+      &:hover {
+        cursor: not-allowed;
+      }
+    `}
   &::-webkit-input-placeholder {
     color: ${gray500};
   }
@@ -44,17 +65,7 @@ export const FormInputBaseStyle = css`
     color: ${gray500};
   }
 
-  &.error {
-    position: relative;
-    z-index: 1;
-    border-color: ${red500};
-  }
-
-  &.warn {
-    position: relative;
-    z-index: 1;
-    border-color: ${orange500};
-  }
+  ${props => FormInputIntentIStyle[props.intent]}
 `;
 
 export const FormInputFillStyle = css`

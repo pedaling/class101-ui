@@ -8,13 +8,13 @@ import React, {
 } from 'react';
 import styled from 'styled-components';
 
-import { generateIntentClassName, Intent, IntentValue } from '../../core/common';
+import { Intent, IntentValue } from '../../core/common';
 import { body2 } from '../../core/TextStyles';
 import { FormInputBaseStyle, FormInputFillStyle, FormInputStyleBySize, InputSize, InputSizeValue } from '../common';
 
 export interface FormInputBaseProps<T> {
   id?: string;
-  intent?: IntentValue;
+  intent: IntentValue;
   disabled?: boolean;
   placeholder?: string;
   onChange?: ChangeEventHandler<T>;
@@ -42,10 +42,9 @@ export class Input extends PureComponent<InputProps> {
   };
 
   public render() {
-    const { fill, type, className, size, intent, inputRef, inputAttributes, ...restProps } = this.props;
+    const { fill, type, size, inputRef, inputAttributes, ...restProps } = this.props;
     return (
       <StyledInput
-        className={generateIntentClassName(className, intent)}
         type={type}
         fill={`${fill}`}
         inputSize={size || InputSize.md}
@@ -59,7 +58,7 @@ export class Input extends PureComponent<InputProps> {
   }
 }
 
-const StyledInput = styled.input<{ inputSize: InputSizeValue; fill?: string; inline?: boolean }>`
+const StyledInput = styled.input<{ inputSize: InputSizeValue; fill?: string; inline?: boolean; intent: Intent }>`
   ${body2};
   ${FormInputBaseStyle};
   ${props => FormInputStyleBySize[props.inputSize]};

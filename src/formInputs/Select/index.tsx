@@ -2,7 +2,7 @@ import React, { PureComponent, SelectHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 import { gray500, gray800 } from '../../core/Colors';
-import { generateIntentClassName, Intent } from '../../core/common';
+import { Intent } from '../../core/common';
 import { body2 } from '../../core/TextStyles';
 import { FormInputBaseStyle, FormInputFillStyle, FormInputStyleBySize, InputSize, InputSizeValue } from '../common';
 import { FormInputBaseProps } from '../Input';
@@ -26,22 +26,9 @@ export class Select extends PureComponent<SelectProps> {
   };
 
   public render() {
-    const {
-      value,
-      placeholder,
-      children,
-      options,
-      size,
-      fill,
-      intent,
-      inputRef,
-      className,
-      inputAttributes,
-      ...restProps
-    } = this.props;
+    const { value, placeholder, children, options, size, fill, inputRef, inputAttributes, ...restProps } = this.props;
     return (
       <StyledSelect
-        className={generateIntentClassName(className, intent)}
         inputSize={size || InputSize.md}
         value={value}
         color={value === '' ? gray500 : gray800}
@@ -78,7 +65,7 @@ export class Select extends PureComponent<SelectProps> {
   };
 }
 
-const StyledSelect = styled.select<{ inputSize: InputSizeValue; fill?: string; inline?: boolean }>`
+const StyledSelect = styled.select<{ inputSize: InputSizeValue; fill?: string; inline?: boolean; intent: Intent }>`
   ${body2}
   ${FormInputBaseStyle}
   ${props => FormInputStyleBySize[props.inputSize]};
