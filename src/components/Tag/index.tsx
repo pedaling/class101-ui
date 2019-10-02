@@ -14,11 +14,11 @@ export interface TagProps {
 
 export class Tag extends PureComponent<TagProps> {
   public render() {
-    const { value, label, className } = this.props;
+    const { value, label, disabled, className } = this.props;
     return (
       <Container className={className}>
         <Text>{label || value}</Text>
-        <CloseButton onClick={this.handleRemoveButton}>
+        <CloseButton disabled={disabled} onClick={this.handleRemoveButton}>
           <Close size={16} />
         </CloseButton>
       </Container>
@@ -59,8 +59,11 @@ const CloseButton = styled.button`
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease-in;
-
   &:hover {
     background-color: ${gray200};
+  }
+  &:disabled {
+    background: none;
+    cursor: not-allowed;
   }
 `;
