@@ -115,8 +115,8 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     } = this.props;
     const { mounted, opened } = this.state;
 
-    if (!mounted && !isServer()) {
-      return opener || null;
+    if (!mounted || isServer()) {
+      return opener || <React.Fragment />;
     }
     if (!successAttributes.color) {
       successAttributes.color = ButtonColor.ORANGE;
