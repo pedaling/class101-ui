@@ -41,7 +41,7 @@ interface State {
 
 export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State> {
   public static defaultProps: Partial<ModalBottomSheetProps> = {
-    zIndex: 1000,
+    zIndex: 3000,
     closeable: true,
     hideScroll: false,
     noSsr: false,
