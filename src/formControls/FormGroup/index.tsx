@@ -24,6 +24,10 @@ enum HelperTextContainerDirection {
 }
 
 export class FormGroup extends PureComponent<FormGroupProps> {
+  public static defaultProps: Partial<FormGroupProps> = {
+    labelColor: gray800,
+  };
+
   public render() {
     const {
       label,
@@ -42,7 +46,7 @@ export class FormGroup extends PureComponent<FormGroupProps> {
 
     return (
       <Container isHorizontal={isHorizontal} {...divAttributes} {...restProps}>
-        <Label color={labelColor || gray800} htmlFor={htmlLabelFor} shouldAlignLabel={isHorizontal && hasHelperText}>
+        <Label color={labelColor} htmlFor={htmlLabelFor} shouldAlignLabel={isHorizontal && hasHelperText}>
           {label || ''}
         </Label>
         <Content isHorizontal={isHorizontal}>

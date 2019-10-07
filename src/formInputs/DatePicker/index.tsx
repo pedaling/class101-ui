@@ -129,7 +129,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
           ref={this.modalRef}
         >
           <DatePickerNav>
-            <IconButton onClick={this.handleClickDecreaseBtn} icon={<ChevronLeft />} color="white" />
+            <IconButton onClick={this.handleClickDecreaseButton} icon={<ChevronLeft />} color="white" />
             {selectorType === 'day' && (
               <NavText onClick={() => this.changeSelectorType('month')} size="sm">
                 {currentMonth.toLocaleDateString(locale.name, { year: 'numeric', month: 'short' })}
@@ -140,7 +140,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
                 {currentMonth.toLocaleDateString(locale.name, { year: 'numeric' })}
               </NavText>
             )}
-            <IconButton onClick={this.handleClickIncreaseBtn} icon={<ChevronRight />} color="white" />
+            <IconButton onClick={this.handleClickIncreaseButton} icon={<ChevronRight />} color="white" />
           </DatePickerNav>
           <DatePickerBody>
             {selectorType === 'day' && (
@@ -233,8 +233,8 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
       }
       this.setState(
         {
+          secondDate,
           selectedDate: firstDate,
-          secondDate: secondDate,
         },
         this.calculateInputValue
       );
@@ -261,7 +261,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     return 'YYYY. MM. DD.';
   };
 
-  private handleClickIncreaseBtn = () => {
+  private handleClickIncreaseButton = () => {
     if (this.props.disabled) {
       return;
     }
@@ -277,7 +277,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     });
   };
 
-  private handleClickDecreaseBtn = () => {
+  private handleClickDecreaseButton = () => {
     if (this.props.disabled) {
       return;
     }
