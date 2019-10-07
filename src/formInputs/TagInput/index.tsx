@@ -1,5 +1,5 @@
 import { uniq } from 'lodash';
-import React, { CSSProperties, InputHTMLAttributes, PureComponent } from 'react';
+import React, { createRef, CSSProperties, InputHTMLAttributes, PureComponent } from 'react';
 import styled from 'styled-components';
 
 import { gray800 } from '../../core/Colors';
@@ -41,7 +41,11 @@ export class TagInput extends PureComponent<TagInputProps, State> {
     focused: false,
   };
 
-  private inputElement?: HTMLInputElement;
+  private get inputElement() {
+    return this.inputRef.current!;
+  }
+
+  private inputRef = createRef<HTMLInputElement>();
 
   public render() {
     const { intent, inputStyle, className, value, disabled, inputAttributes } = this.props;
@@ -64,17 +68,13 @@ export class TagInput extends PureComponent<TagInputProps, State> {
           onKeyUp={this.handleInputKeyUp}
           onFocus={this.handleInputFocus}
           value={tempValue}
-          ref={this.inputRefHandler}
+          ref={this.inputRef}
           disabled={disabled}
           {...inputAttributes}
         />
       </TagInputContainer>
     );
   }
-
-  private inputRefHandler = (ref: HTMLInputElement) => {
-    this.inputElement = ref;
-  };
 
   private getNextValue = () => {
     const { separator, value } = this.props;
@@ -90,7 +90,7 @@ export class TagInput extends PureComponent<TagInputProps, State> {
   };
 
   private handleContainerClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    this.inputElement!.focus();
+    this.inputElement.focus();
   };
 
   private handleInputKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -152,6 +152,17 @@ export class TagInput extends PureComponent<TagInputProps, State> {
 
 const TagInputContainer = styled.div<{ disabled?: boolean; focused?: boolean; intent: IntentValue }>`
   ${FormInputBaseStyle};
+  ${props =>
+    props.intent === Intent.DEFAULT &&
+    props.focused &&
+    `
+      position: relative;
+      z-index: 2;
+      border-color: ${gray800};
+      &:hover {
+        border-color: ${gray800};
+      }
+    `}
   box-sizing: border-box;
   padding: 8px 8px 3px;
   display: flex;

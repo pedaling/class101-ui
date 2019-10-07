@@ -16,6 +16,11 @@ const FormInputIntentIStyle: { [key in Intent]: FlattenSimpleInterpolation } = {
     &:hover {
       border-color: ${gray400};
     }
+    &:focus {
+      position: relative;
+      z-index: 2;
+      border-color: ${gray800};
+    }
   `,
   [Intent.DANGER]: css`
     position: relative;
@@ -29,21 +34,16 @@ const FormInputIntentIStyle: { [key in Intent]: FlattenSimpleInterpolation } = {
   `,
 };
 
-export const FormInputBaseStyle = css<{ focused?: boolean; disabled?: boolean; intent: Intent }>`
+export const FormInputBaseStyle = css<{ disabled?: boolean; intent: Intent }>`
   border-width: 1px;
   border-style: solid;
   border-radius: 3px;
   background-color: white;
-  transition: box-shadow 0.1s ease-in-out;
 
-  ${props =>
-    props.focused &&
-    css`
-      outline: none;
-      position: relative;
-      z-index: 2;
-      border-color: ${gray800};
-    `}
+  &:focus {
+    outline: none;
+  }
+
   ${props =>
     props.disabled &&
     css`
@@ -52,6 +52,7 @@ export const FormInputBaseStyle = css<{ focused?: boolean; disabled?: boolean; i
         cursor: not-allowed;
       }
     `}
+
   &::-webkit-input-placeholder {
     color: ${gray500};
   }

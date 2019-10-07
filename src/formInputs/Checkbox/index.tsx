@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, PureComponent, RefObject } from 'react';
+import React, { forwardRef, InputHTMLAttributes, PureComponent, Ref, RefObject } from 'react';
 import styled from 'styled-components';
 
 import { gray300 } from '../../core/Colors';
@@ -10,13 +10,13 @@ export interface CheckboxProps {
   inline?: boolean;
   checked?: boolean;
   disabled?: boolean;
-  inputRef?: RefObject<HTMLInputElement>;
+  forwardedRef: Ref<HTMLInputElement>;
   inputAttributes?: InputHTMLAttributes<HTMLInputElement>;
   className?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export class Checkbox extends PureComponent<CheckboxProps> {
+export class CheckboxComponent extends PureComponent<CheckboxProps> {
   public static defaultProps: Partial<CheckboxProps> = {
     size: 24,
   };
@@ -28,7 +28,7 @@ export class Checkbox extends PureComponent<CheckboxProps> {
       disabled,
       onChange,
       className,
-      inputRef,
+      forwardedRef,
       inputAttributes,
       children,
       ...restProps
@@ -46,9 +46,7 @@ export class Checkbox extends PureComponent<CheckboxProps> {
           disabled={disabled}
           {...inputAttributes}
           {...restProps}
-          {...inputRef && {
-            ref: inputRef,
-          }}
+          ref={forwardedRef}
           type="checkbox"
         />
         <ChildText color={disabled ? gray300 : undefined}>{children}</ChildText>
@@ -62,6 +60,10 @@ export class Checkbox extends PureComponent<CheckboxProps> {
     }
   };
 }
+
+export const Checkbox = forwardRef((props: Omit<CheckboxProps, 'forwardedRef'>, ref: Ref<HTMLInputElement>) => {
+  return <CheckboxComponent {...props} forwardedRef={ref} />;
+});
 
 const Container = styled.label<Partial<CheckboxProps>>`
   display: ${props => (props.inline ? 'inline-flex' : 'flex')};

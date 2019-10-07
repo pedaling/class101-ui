@@ -1,4 +1,4 @@
-import React, { PureComponent, SelectHTMLAttributes } from 'react';
+import React, { forwardRef, PureComponent, Ref, SelectHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 import { gray500, gray800 } from '../../core/Colors';
@@ -18,7 +18,7 @@ export interface SelectProps extends FormInputBaseProps<HTMLSelectElement> {
   inputAttributes?: SelectHTMLAttributes<HTMLSelectElement>;
 }
 
-export class Select extends PureComponent<SelectProps> {
+export class SelectComponent extends PureComponent<SelectProps> {
   public static defaultProps: Partial<SelectProps> = {
     size: InputSize.md,
     fill: true,
@@ -26,18 +26,28 @@ export class Select extends PureComponent<SelectProps> {
   };
 
   public render() {
-    const { value, placeholder, children, options, size, fill, inputRef, inputAttributes, ...restProps } = this.props;
+    const {
+      value,
+      placeholder,
+      children,
+      options,
+      size,
+      intent,
+      fill,
+      forwardedRef,
+      inputAttributes,
+      ...restProps
+    } = this.props;
     return (
       <StyledSelect
-        inputSize={size || InputSize.md}
+        inputSize={size!}
+        intent={intent!}
         value={value}
         color={value === '' ? gray500 : gray800}
         fill={`${fill}`}
         {...inputAttributes}
         {...restProps}
-        {...inputRef && {
-          ref: inputRef,
-        }}
+        ref={forwardedRef}
       >
         {placeholder ? (
           <option value="" hidden disabled>
@@ -64,6 +74,10 @@ export class Select extends PureComponent<SelectProps> {
     );
   };
 }
+
+export const Select = forwardRef((props: Omit<SelectProps, 'forwardedRef'>, ref: Ref<HTMLSelectElement>) => {
+  return <SelectComponent {...props} forwardedRef={ref} />;
+});
 
 const StyledSelect = styled.select<{ inputSize: InputSizeValue; fill?: string; inline?: boolean; intent: Intent }>`
   ${body2}

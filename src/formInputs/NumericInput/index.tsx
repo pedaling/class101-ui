@@ -48,7 +48,7 @@ export class NumericInput extends PureComponent<NumericInputProps> {
     return (
       <Container inline={inline} className={className}>
         <StyledInput
-          inputRef={this.inputRef}
+          ref={this.inputRef}
           align={buttonPosition === NumericInputButtonPosition.RIGHT ? 'left' : 'center'}
           disabled={disabled}
           value={value}

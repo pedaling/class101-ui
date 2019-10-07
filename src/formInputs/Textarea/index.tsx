@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, PureComponent } from 'react';
+import React, { forwardRef, HTMLAttributes, PureComponent, Ref } from 'react';
 import styled from 'styled-components';
 
 import { Intent, IntentValue } from '../../core/common';
@@ -12,31 +12,26 @@ export interface TextareaProps {
   intent: IntentValue;
 
   /** input의 className */
-  inputRef?: React.RefObject<HTMLTextAreaElement>;
+  forwardedRef?: Ref<HTMLTextAreaElement>;
   className?: string;
   inputAttributes?: React.HTMLAttributes<HTMLTextAreaElement>;
 }
 
-export class Textarea extends PureComponent<TextareaProps> {
+class TextareaComponent extends PureComponent<TextareaProps> {
   public static defaultProps: Partial<TextareaProps> = {
     intent: Intent.DEFAULT,
   };
 
   public render() {
-    const { inputRef, inputAttributes, ...restProps } = this.props;
+    const { forwardedRef, inputAttributes, ...restProps } = this.props;
 
-    return (
-      <StyledTextarea
-        {...inputAttributes}
-        {...restProps}
-        {...inputRef && {
-          ref: inputRef,
-        }}
-        {...restProps}
-      />
-    );
+    return <StyledTextarea {...inputAttributes} {...restProps} ref={forwardedRef} />;
   }
 }
+
+export const Textarea = forwardRef((props: Omit<TextareaProps, 'forwardedRef'>, ref: Ref<HTMLTextAreaElement>) => {
+  return <TextareaComponent {...props} forwardedRef={ref} />;
+});
 
 const StyledTextarea = styled.textarea<TextareaProps>`
   ${FormInputBaseStyle}

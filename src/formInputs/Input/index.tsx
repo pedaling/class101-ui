@@ -1,10 +1,11 @@
 import React, {
   ChangeEventHandler,
   FocusEventHandler,
+  forwardRef,
   InputHTMLAttributes,
   MouseEventHandler,
   PureComponent,
-  RefObject,
+  Ref,
 } from 'react';
 import styled from 'styled-components';
 
@@ -14,13 +15,13 @@ import { FormInputBaseStyle, FormInputFillStyle, FormInputStyleBySize, InputSize
 
 export interface FormInputBaseProps<T> {
   id?: string;
-  intent: IntentValue;
+  intent?: IntentValue;
   disabled?: boolean;
   placeholder?: string;
   onChange?: ChangeEventHandler<T>;
   onBlur?: FocusEventHandler<T>;
   onClick?: MouseEventHandler<T>;
-  inputRef?: RefObject<T>;
+  forwardedRef: Ref<T>;
   className?: string;
 }
 
@@ -33,7 +34,7 @@ export interface InputProps extends FormInputBaseProps<HTMLInputElement> {
   inputAttributes?: InputHTMLAttributes<HTMLInputElement>;
 }
 
-export class Input extends PureComponent<InputProps> {
+class InputComponent extends PureComponent<InputProps> {
   public static defaultProps: Partial<InputProps> = {
     size: InputSize.md,
     fill: true,
@@ -42,21 +43,24 @@ export class Input extends PureComponent<InputProps> {
   };
 
   public render() {
-    const { fill, type, size, inputRef, inputAttributes, ...restProps } = this.props;
+    const { fill, type, size, forwardedRef, inputAttributes, intent, ...restProps } = this.props;
     return (
       <StyledInput
         type={type}
         fill={`${fill}`}
-        inputSize={size || InputSize.md}
+        inputSize={size!}
+        intent={intent!}
         {...inputAttributes}
         {...restProps}
-        {...inputRef && {
-          ref: inputRef,
-        }}
+        ref={forwardedRef}
       />
     );
   }
 }
+
+export const Input = forwardRef((props: Omit<InputProps, 'forwardedRef'>, ref: Ref<HTMLInputElement>) => {
+  return <InputComponent {...props} forwardedRef={ref} />;
+});
 
 const StyledInput = styled.input<{ inputSize: InputSizeValue; fill?: string; inline?: boolean; intent: Intent }>`
   ${body2};
