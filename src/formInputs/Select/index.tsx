@@ -1,4 +1,4 @@
-import React, { forwardRef, PureComponent, Ref, SelectHTMLAttributes } from 'react';
+import React, { forwardRef, memo, PureComponent, ReactNode, Ref, SelectHTMLAttributes, useMemo } from 'react';
 import styled from 'styled-components';
 
 import { gray500, gray800 } from '../../core/Colors';
@@ -15,69 +15,66 @@ export interface SelectProps extends FormInputBaseProps<HTMLSelectElement> {
   inline?: boolean;
   value?: string | number;
   options?: OptionProps[];
+  children?: ReactNode;
   inputAttributes?: SelectHTMLAttributes<HTMLSelectElement>;
 }
 
-export class SelectComponent extends PureComponent<SelectProps> {
-  public static defaultProps: Partial<SelectProps> = {
-    size: InputSize.md,
-    fill: true,
-    intent: Intent.DEFAULT,
-  };
+export const Select = memo(
+  forwardRef(
+    (
+      {
+        size = InputSize.md,
+        intent = Intent.DEFAULT,
+        fill = true,
+        value,
+        placeholder,
+        options,
+        inputAttributes,
+        children,
+        ...restProps
+      }: SelectProps,
+      ref: Ref<HTMLSelectElement>
+    ) => {
+      const renderOptions = useMemo(
+        () => (o: OptionProps, i: number) => {
+          if (typeof o === 'string' || typeof o === 'number') {
+            return (
+              <option key={i} value={o}>
+                {o}
+              </option>
+            );
+          }
+          return (
+            <option disabled={o.disabled || false} key={i} value={o.value}>
+              {o.label}
+            </option>
+          );
+        },
+        [options]
+      );
 
-  public render() {
-    const {
-      value,
-      placeholder,
-      children,
-      options,
-      size,
-      intent,
-      fill,
-      forwardedRef,
-      inputAttributes,
-      ...restProps
-    } = this.props;
-    return (
-      <StyledSelect
-        inputSize={size!}
-        intent={intent!}
-        value={value}
-        color={value === '' ? gray500 : gray800}
-        fill={`${fill}`}
-        {...inputAttributes}
-        {...restProps}
-        ref={forwardedRef}
-      >
-        {placeholder ? (
-          <option value="" hidden disabled>
-            {placeholder}
-          </option>
-        ) : null}
-        {children || (options && options.map(this.renderOptions))}
-      </StyledSelect>
-    );
-  }
-
-  private renderOptions = (o: OptionProps, i: number) => {
-    if (typeof o === 'string' || typeof o === 'number') {
       return (
-        <option key={i} value={o}>
-          {o}
-        </option>
+        <StyledSelect
+          inputSize={size}
+          intent={intent}
+          value={value}
+          color={value === '' ? gray500 : gray800}
+          fill={`${fill}`}
+          {...inputAttributes}
+          {...restProps}
+          ref={ref}
+        >
+          {placeholder ? (
+            <option value="" hidden disabled>
+              {placeholder}
+            </option>
+          ) : null}
+          {children || (options && options.map(renderOptions))}
+        </StyledSelect>
       );
     }
-    return (
-      <option disabled={o.disabled || false} key={i} value={o.value}>
-        {o.label}
-      </option>
-    );
-  };
-}
-
-export const Select = forwardRef((props: Omit<SelectProps, 'forwardedRef'>, ref: Ref<HTMLSelectElement>) => {
-  return <SelectComponent {...props} forwardedRef={ref} />;
-});
+  )
+);
 
 const StyledSelect = styled.select<{ inputSize: InputSizeValue; fill?: string; inline?: boolean; intent: Intent }>`
   ${body2}
