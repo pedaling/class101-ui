@@ -104,7 +104,7 @@ export default class ButtonBase<ColorValue extends string, SizeValue extends str
           <LinkButton
             to={to}
             target={target}
-            iconPosition={iconPosition}
+            icon-position={iconPosition}
             {...anchorAttributes}
             {...restProps}
             {...options}
@@ -120,7 +120,7 @@ export default class ButtonBase<ColorValue extends string, SizeValue extends str
           <AnchorButton
             href={href}
             target={target}
-            iconPosition={iconPosition}
+            icon-position={iconPosition}
             {...anchorAttributes}
             {...restProps}
             {...options}
@@ -134,7 +134,7 @@ export default class ButtonBase<ColorValue extends string, SizeValue extends str
     return (
       <ButtonContainer
         type={type}
-        iconPosition={iconPosition}
+        icon-position={iconPosition}
         disabled={disabled}
         className={classNames(className, { disabled })}
         {...buttonAttributes}
@@ -165,14 +165,14 @@ const buttonCommonStyle = css`
   }
 `;
 
-const ButtonContainer = styled.button<{ iconPosition?: ButtonIconPosition }>`
+const ButtonContainer = styled.button<{ 'icon-position'?: ButtonIconPosition }>`
   border: 0;
   outline: none;
   box-sizing: border-box;
 
   ${buttonCommonStyle};
 
-  flex-direction: ${props => (props.iconPosition === ButtonIconPosition.RIGHT ? 'row-reverse' : 'row')};
+  flex-direction: ${props => (props['icon-position'] === ButtonIconPosition.RIGHT ? 'row-reverse' : 'row')};
 `;
 
 const Text = styled.span`
@@ -202,10 +202,10 @@ const getAnchorButtonStyle = (iconPosition?: ButtonIconPosition) => css`
   }
 `;
 
-const LinkButton = styled(Link)<{ iconPosition?: ButtonIconPosition }>`
-  ${props => getAnchorButtonStyle(props.iconPosition)};
+const LinkButton = styled(Link)<{ 'icon-position'?: ButtonIconPosition }>`
+  ${props => getAnchorButtonStyle(props['icon-position'])};
 `;
 
-const AnchorButton = styled.a<{ iconPosition?: ButtonIconPosition }>`
-  ${props => getAnchorButtonStyle(props.iconPosition)};
+const AnchorButton = styled.a<{ 'icon-position'?: ButtonIconPosition }>`
+  ${props => getAnchorButtonStyle(props['icon-position'])};
 `;
