@@ -1,0 +1,43 @@
+---
+menu: Components
+name: Divider
+route: /components/divider
+---
+
+import { Section, Divider } from '@class101/ui';
+import { Playground, PropsTable } from 'docz';
+import { StyledDivider } from '../docsComponents';
+
+# Divider
+
+두 섹션을 나눌 수 있는 Divider입니다.
+
+## PropsTable
+
+<PropsTable of={Divider} />
+
+## Basic usage
+
+섹션 사이에 Divider를 넣어서 사용할 수 있습니다.
+
+기본적으로 margin이나 padding이 적용되어 있지 않습니다.
+
+<Playground>
+  <Section title="Section1">Content1</Section>
+  <Divider />
+  <Section title="Section2">Content2</Section>
+</Playground>
+
+## Styled Divider
+
+```typescript
+export const StyledDivider = styled(Divider)`
+  padding: 12px 0;
+`;
+```
+
+<Playground>
+  <Section title="Section1">Content1</Section>
+  <StyledDivider />
+  <Section title="Section2">Content2</Section>
+</Playground>
