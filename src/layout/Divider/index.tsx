@@ -1,23 +1,30 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
-import { Colors } from '../../core';
+import { Colors, Theme, ThemeConfig, ThemeMode } from '../../core';
 
 
 interface Props {
   className?: string;
-  color: string;
+  color?: string;
   width: number | string;
+  theme: ThemeConfig;
 }
 
 export class Divider extends PureComponent<Props> {
-  public static defaultProps: Props = {
-    color: Colors.gray200,
+  public static defaultProps: Partial<Props> = {
     width: '100%',
+    theme: Theme.light,
   };
 
+  private get color() {
+    const { color, theme } = this.props;
+    return color || theme.mode === ThemeMode.LIGHT ? Colors.gray200 : Colors.gray800;
+  }
+
   public render() {
-    const { className, width, color } = this.props;
+    const { color } = this;
+    const { className, width } = this.props;
 
     return (
       <Container className={className} width={width}>
