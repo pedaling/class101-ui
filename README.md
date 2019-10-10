@@ -79,8 +79,6 @@ These are at [Class101 UI Documents Site](https://class101-ui.netlify.com).
 - Breadcrumb
 - Darkness Theme
 - Table
-- DatePicker
-- Dialog
 
 ## 📝 License
 
