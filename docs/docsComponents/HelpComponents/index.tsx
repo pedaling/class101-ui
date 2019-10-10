@@ -1,4 +1,4 @@
-import { BreakPoints, Colors, ThemeConfig, ThemeMode } from '@class101/ui';
+import { BreakPoints, Colors, Divider, ThemeConfig, ThemeMode } from '@class101/ui';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -41,6 +41,10 @@ export const PreloadImage = styled.div`
   width: 100%;
   height: 100px;
   background: ${Colors.red000};
+`;
+
+export const StyledDivider = styled(Divider)`
+  padding: 12px 0;
 `;
 
 export { ThemeProvider } from 'styled-components';
