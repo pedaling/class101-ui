@@ -70,6 +70,8 @@ class Example extends Component {
 - Toast
 - TagInput
 - FilterList
+- DatePicker
+- Dialog
 
 These are at [Class101 UI Documents Site](https://class101-ui.netlify.com).
 
