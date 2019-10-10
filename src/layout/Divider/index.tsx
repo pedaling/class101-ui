@@ -7,7 +7,7 @@ import { Colors, Theme, ThemeConfig, ThemeMode } from '../../core';
 interface Props {
   className?: string;
   color?: string;
-  width: number | string;
+  width: string;
   theme: ThemeConfig;
 }
 
@@ -34,7 +34,7 @@ export class Divider extends PureComponent<Props> {
   }
 }
 
-const Container = styled.div<{ width: number | string }>`
+const Container = styled.div<{ width: string }>`
   width: ${props => props.width};
 `;
 
