@@ -39,8 +39,13 @@
     }
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write",
+    "*.{js,jsx,ts,tsx,css,scss,md}": [
+      "prettier --write --loglevel warn",
+      "git add"
+    ],
+    "*.{ts,tsx}": [
+      "tslint --fix",
+      "eslint --fix",
       "git add"
     ]
   },
@@ -62,8 +67,9 @@
     "@babel/plugin-transform-template-literals": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "@class101/eslint-config": "^2.2.1",
+    "@class101/tslint-config": "^1.5.0",
     "@emotion/core": "^10.0.6",
-    "@pedaling/tslint-config-class101": "^1.0.3",
     "@types/classnames": "^2.2.9",
     "@types/jest": "^23.3.12",
     "@types/lodash": "^4.14.136",
@@ -71,10 +77,11 @@
     "@types/react-dom": "^16.8.3",
     "@types/react-router-dom": "^4.3.1",
     "@types/styled-components": "^4.1.14",
-    "@types/swiper": "^4.4.3",
+    "@types/swiper": "^4.4.5",
     "cross-env": "^5.1.4",
     "docz": "^0.13.7",
     "docz-theme-default": "^0.12.9",
+    "eslint": "^6.5.1",
     "gh-pages": "^1.2.0",
     "husky": "^1.1.2",
     "lint-staged": "^8.0.0",
