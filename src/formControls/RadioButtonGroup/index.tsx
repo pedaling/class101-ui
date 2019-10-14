@@ -83,8 +83,6 @@ export class RadioButtonGroup extends PureComponent<RadioButtonGroupProps, State
   };
 }
 
-export { RadioButton, RadioButtonProps };
-
 const Container = styled.div<{ stackingDirection: 'horizontal' | 'vertical' }>`
   display: flex;
   flex-direction: ${props => (props.stackingDirection === 'horizontal' ? 'row' : 'column')};

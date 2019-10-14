@@ -2,7 +2,7 @@ import React, { createRef, PureComponent } from 'react';
 import styled from 'styled-components';
 
 import { IconButton } from '../../components/Button/IconButton';
-import { Add, Minus } from '../../Icon';
+import { Add, Minus } from '../../Icon/generated';
 import { HTMLInputProps, Omit } from '../../interfaces/props';
 import { Input, InputProps } from '../Input';
 

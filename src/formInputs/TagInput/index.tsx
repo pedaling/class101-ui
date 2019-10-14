@@ -1,10 +1,10 @@
-import { HTMLInputProps } from 'interfaces/props';
 import { uniq } from 'lodash';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
 import { gray300, gray800, orange500, redError, white } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
+import { HTMLInputProps } from '../../interfaces/props';
 import { InlineError, Intent } from '../InlineError';
 import InnerTags from './InnerTags';
 

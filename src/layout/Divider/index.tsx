@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import { Colors, Theme, ThemeConfig, ThemeMode } from '../../core';
 
-
 interface Props {
   className?: string;
   color?: string;
@@ -23,12 +22,11 @@ export class Divider extends PureComponent<Props> {
   }
 
   public render() {
-    const { color } = this;
     const { className, width } = this.props;
 
     return (
       <Container className={className} width={width}>
-        <Line color={color} />
+        <Line color={this.color} />
       </Container>
     );
   }

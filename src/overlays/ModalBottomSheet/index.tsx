@@ -6,7 +6,7 @@ import { media } from '../../core/BreakPoints';
 import { gray600, gray800, white } from '../../core/Colors';
 import { elevation5 } from '../../core/ElevationStyles';
 import { Body2, Headline3 } from '../../core/Typography';
-import { Close } from '../../Icon';
+import { Close } from '../../Icon/generated';
 import { isClient, isServer } from '../../utils';
 import { Portal } from '../Portal';
 

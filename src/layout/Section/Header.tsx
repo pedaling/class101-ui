@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { gray300 } from '../../core/Colors';
 import { caption1 } from '../../core/TextStyles';
 import { BaseTypography, Typo } from '../../core/Typography/BaseTypography';
-import { ChevronRight } from '../../Icon';
+import { ChevronRight } from '../../Icon/generated';
 
 interface Props {
   title?: ReactNode;

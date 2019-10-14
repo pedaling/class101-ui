@@ -13,11 +13,10 @@
     "resolveJsonModule": true,
     "noEmit": true,
     "jsx": "react",
-    "baseUrl": "src",
+    "baseUrl": ".",
+    "typeRoots": ["./node_modules/@types"],
     "outDir": "dist",
-    "paths": {
-      "interface/*": ["interface/*"]
-    }
+    "paths": {}
   },
   "include": ["src/**/*"],
   "exclude": ["docz", "example"]

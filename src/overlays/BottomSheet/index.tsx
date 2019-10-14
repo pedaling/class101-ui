@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { Badge } from '../../components/Badge';
 import { gray800, white } from '../../core/Colors';
 import { body1, subtitle1 } from '../../core/TextStyles';
-import { ChevronRight } from '../../Icon';
+import { ChevronRight } from '../../Icon/generated';
 import { HTMLDivProps } from '../../interfaces/props';
 
 interface ContainerProps {

@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components';
 import { NavigationSectionAction, NavigationSectionItem, NavigationSectionSubItem } from '..';
 import { gray50, gray700, gray900 } from '../../../core/Colors';
 import { body2, caption1 } from '../../../core/TextStyles';
-import { ChevronDown } from '../../../Icon';
+import { ChevronDown } from '../../../Icon/generated';
 import { Badge } from '../../Badge';
 
 export interface NavigationSectionProps {

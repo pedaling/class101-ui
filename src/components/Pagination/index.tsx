@@ -2,7 +2,7 @@ import { range } from 'lodash';
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 
-import { ChevronLeft, ChevronRight } from '../../Icon';
+import { ChevronLeft, ChevronRight } from '../../Icon/generated';
 import { Button, ButtonColor, IconButton } from '../Button';
 
 export interface PaginationProps {

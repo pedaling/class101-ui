@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { gray300 } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
-import { CheckboxOff, CheckboxOn } from '../../Icon';
+import { CheckboxOff, CheckboxOn } from '../../Icon/generated';
 import { HTMLInputProps, Omit } from '../../interfaces/props';
 import { InlineError, Intent } from '../InlineError';
 

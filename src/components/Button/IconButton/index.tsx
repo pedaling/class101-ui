@@ -1,9 +1,9 @@
-import { IconProps } from 'Icon';
 import { darken, rgba } from 'polished';
 import React, { PureComponent } from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
 import { Theme } from '../../../core/Theme';
+import { IconProps } from '../../../Icon';
 import ButtonBase, { ButtonCommonProps } from '../ButtonBase';
 import { ButtonIconPosition } from '../ButtonIcon';
 import ButtonSpinner from '../ButtonSpinner';

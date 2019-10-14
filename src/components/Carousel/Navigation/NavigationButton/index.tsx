@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
 import { elevation1 } from '../../../../core/ElevationStyles';
-import { ChevronRight } from '../../../../Icon';
+import { ChevronRight } from '../../../../Icon/generated';
 import { ButtonColor, IconButton } from '../../../Button';
 
 const NAVIGATION_BUTTON_SIZE = 32;

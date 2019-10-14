@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { gray600, orange500, redError } from '../../core/Colors';
-import { Alert, IconProps } from '../../Icon';
+import { IconProps } from '../../Icon';
+import { Alert } from '../../Icon/generated';
 
 export enum Intent {
   DANGER = 'DANGER',

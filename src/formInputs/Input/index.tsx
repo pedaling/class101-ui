@@ -1,9 +1,9 @@
-import { HTMLInputProps } from 'interfaces/props';
 import React from 'react';
 import styled from 'styled-components';
 
 import { gray800, orange500, redError } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
+import { HTMLInputProps } from '../../interfaces/props';
 import { FormInputFillStyle, FormInputStyle, FormInputStyleBySize, InputSize } from '../common';
 import { InlineError, Intent } from '../InlineError';
 

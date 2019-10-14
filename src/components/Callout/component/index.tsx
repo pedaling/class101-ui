@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { green500, orange600, red600 } from '../../../core/Colors';
 import { body2, caption1 } from '../../../core/TextStyles';
-import { Alert, CheckCircle, Info } from '../../../Icon';
+import { Alert, CheckCircle, Info } from '../../../Icon/generated';
 import { Button } from '../../Button/ContainButton';
 import { ButtonColor, ButtonSize } from '../../Button/interface';
 import { backgroundColorByStatus } from '../color';

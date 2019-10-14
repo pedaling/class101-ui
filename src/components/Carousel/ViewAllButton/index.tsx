@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { orange000, orange600 } from '../../../core/Colors';
-import { Add } from '../../../Icon';
+import { Add } from '../../../Icon/generated';
 import { Button, ButtonProps } from '../../Button/ContainButton';
 import { ButtonColor } from '../../Button/interface';
 

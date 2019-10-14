@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
 import { gray100, gray200 } from '../../core/Colors';
-import { Close } from '../../Icon';
+import { Close } from '../../Icon/generated';
 
 export interface TagProps {
   onRemove?: () => any;
