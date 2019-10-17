@@ -13,3 +13,7 @@ export * from './Pagination';
 export * from './ProgressBar';
 export * from './ProgressState';
 export * from './Spinner';
+export * from './Swiper';
+export * from './Swiper/Slide';
+export * from './Swiper/ArrowNavigation';
+export * from './Swiper/DefaultNavigation';
