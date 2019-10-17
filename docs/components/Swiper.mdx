@@ -1,0 +1,137 @@
+---
+menu: Components
+name: Swiper
+route: /compnents/swiper
+---
+
+import { Playground, PropsTable } from 'docz';
+import {
+  Swiper,
+  Slide,
+  Colors,
+  ArrowNavigation,
+  DefaultNavigation,
+  SwiperNavigationPosition,
+  SwiperPaginationTheme,
+} from '@class101/ui';
+import { PlayGroundBanner } from '../docsComponents';
+
+# Swiper
+
+[Swiper](https://swiperjs.com)를 래핑한 컴포넌트입니다.
+
+## Props
+
+<PropsTable of={Swiper} />
+
+## Default Swiper
+
+<Playground>
+  <Swiper>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red100} fill>
+        배너1
+      </PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red200} fill>
+        배너2
+      </PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red300} fill>
+        배너3
+      </PlayGroundBanner>
+    </Slide>
+  </Swiper>
+</Playground>
+
+## Swiper Navigation Position
+
+### BottomRightIn
+
+<Playground>
+  <Swiper navigationPosition={SwiperNavigationPosition.BottomRightIn}>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red100} fill>
+        배너1
+      </PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red200} fill>
+        배너2
+      </PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red300} fill>
+        배너3
+      </PlayGroundBanner>
+    </Slide>
+  </Swiper>
+</Playground>
+
+## BottomRightOut
+
+<Playground>
+  <Swiper navigationPosition={SwiperNavigationPosition.BottomRightOut} paginationTheme={SwiperPaginationTheme.Dark}>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red100} fill>
+        배너1
+      </PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red200} fill>
+        배너2
+      </PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red300} fill>
+        배너3
+      </PlayGroundBanner>
+    </Slide>
+  </Swiper>
+</Playground>
+
+## Container Content Max Width
+
+<Playground>
+  <Swiper containerContentMaxWidth={200}>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red100} fill>
+        배너1
+      </PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red200} fill>
+        배너2
+      </PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red300} fill>
+        배너3
+      </PlayGroundBanner>
+    </Slide>
+  </Swiper>
+</Playground>
+
+## Arrow Navigation
+
+<Playground>
+  <Swiper customNavigation={<ArrowNavigation />} transparentPagination>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red100} fill>
+        배너1
+      </PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red200} fill>
+        배너2
+      </PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red300} fill>
+        배너3
+      </PlayGroundBanner>
+    </Slide>
+  </Swiper>
+</Playground>

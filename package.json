@@ -82,6 +82,7 @@
     "docz": "^0.13.7",
     "docz-theme-default": "^0.12.9",
     "eslint": "^6.5.1",
+    "eslint-plugin-prettier": "^3.1.1",
     "gh-pages": "^1.2.0",
     "husky": "^1.1.2",
     "lint-staged": "^8.0.0",

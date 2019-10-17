@@ -33,20 +33,20 @@ import { PlayGroundBanner, PlayGroundSectionCarouselContent, SwiperCard, Preload
 
 ```ts
 enum CarouselNavigationPosition {
-  TopRightOut,
+  TopRightIn,
   BottomRightOut,
   BottomRightIn,
 }
 ```
 
-### TopRightOut
+### TopRightIn
 
 주로 Section에 들어가는 캐러셀일때 사용합니다.
 
 <Playground>
   <Section title="섹션 타이틀">
     <Carousel
-      navigationPosition={CarouselNavigationPosition.TopRightOut}
+      navigationPosition={CarouselNavigationPosition.TopRightIn}
       lgSlidesPerView={4}
       smSlidesPerView={2}
       pagination
@@ -229,7 +229,7 @@ enum CarouselPaginationTheme {
 <Playground>
   <Section title="섹션 타이틀">
     <Carousel
-      navigationPosition={CarouselNavigationPosition.TopRightOut}
+      navigationPosition={CarouselNavigationPosition.TopRightIn}
       lgSlidesPerView={4}
       smSlidesPerView={2}
       pagination
@@ -254,7 +254,7 @@ enum CarouselPaginationTheme {
   <Section title="섹션 타이틀">
     <PlayGroundSectionCarouselContent>
       <Carousel
-        navigationPosition={CarouselNavigationPosition.TopRightOut}
+        navigationPosition={CarouselNavigationPosition.TopRightIn}
         lgSlidesPerView={4}
         smSlidesPerView={2}
         smSlidesSideOffset={24}
