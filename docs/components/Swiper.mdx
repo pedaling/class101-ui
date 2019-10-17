@@ -1,7 +1,7 @@
 ---
 menu: Components
 name: Swiper
-route: /compnents/swiper
+route: /components/swiper
 ---
 
 import { Playground, PropsTable } from 'docz';
@@ -71,9 +71,24 @@ import { PlayGroundBanner } from '../docsComponents';
 
 ## Swiper Navigation Position
 
-### BottomRightIn
-
 <Playground>
+  <Swiper navigationPosition={SwiperNavigationPosition.TopRightOut}>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red100} fill>
+        배너1
+      </PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red200} fill>
+        배너2
+      </PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red300} fill>
+        배너3
+      </PlayGroundBanner>
+    </Slide>
+  </Swiper>
   <Swiper navigationPosition={SwiperNavigationPosition.BottomRightIn}>
     <Slide>
       <PlayGroundBanner backgroundColor={Colors.red100} fill>
@@ -91,11 +106,6 @@ import { PlayGroundBanner } from '../docsComponents';
       </PlayGroundBanner>
     </Slide>
   </Swiper>
-</Playground>
-
-## BottomRightOut
-
-<Playground>
   <Swiper navigationPosition={SwiperNavigationPosition.BottomRightOut} paginationTheme={SwiperPaginationTheme.Dark}>
     <Slide>
       <PlayGroundBanner backgroundColor={Colors.red100} fill>

@@ -1,50 +1,55 @@
 import React, { PureComponent } from 'react';
-import { AutoplayOptions, SwiperEvent } from 'swiper';
-import { Swiper as OriginalSwiper } from 'swiper/dist/js/swiper.esm.js';
 
 import { SIZES } from '../../core/BreakPoints';
-import { Swiper, SwiperNavigationPosition, SwiperPaginationTheme, SwiperProps } from '../Swiper';
+import { Swiper, SwiperInstance, SwiperNavigationPosition, SwiperPaginationTheme, SwiperProps } from '../Swiper';
 import ViewAllButton from './ViewAllButton';
 
 type SlidesPerView = 'auto' | 1 | 2 | 3 | 4 | 6;
 
-export interface CarouselProps {
-  navigationContainerMaxWidth?: number;
-  hasNavigation?: boolean;
-  navigationPosition?: SwiperNavigationPosition;
-  hasPagination?: boolean;
-  paginationTheme?: SwiperPaginationTheme;
+type UsingSwiperProps = Pick<
+  SwiperProps,
+  | 'containerContentMaxWidth'
+  | 'hasPagination'
+  | 'hasNavigation'
+  | 'paginationTheme'
+  | 'freeMode'
+  | 'autoplay'
+  | 'loop'
+  | 'customNavigation'
+  | 'customPagination'
+  | 'children'
+  | 'slideToClickedSlide'
+  | 'speed'
+  | 'getSwiperInstance'
+  | 'observer'
+>;
+
+export interface OwnCarouselProps {
   lgSlidesPerView: SlidesPerView;
   smSlidesPerView: SlidesPerView;
   lgSlidesSideOffset: number;
   smSlidesSideOffset: number;
-  freeMode?: boolean;
   lgSpaceBetween?: boolean;
   smSpaceBetween?: boolean;
-  autoplay?: AutoplayOptions | boolean;
-  on?: { [key in SwiperEvent]?: () => void };
-  loop: boolean;
-  observer?: boolean;
-  observeParents?: boolean;
   className?: string;
-  slideToClickedSlide?: boolean;
-  children: React.ReactNode;
   onChangeSlides?: (index: number) => void;
   activeSlideIndex?: number;
 }
 
+export type CarouselProps = UsingSwiperProps & OwnCarouselProps;
+export type CarouselNavigationPosition = SwiperNavigationPosition;
+export type CarouselPaginationTheme = SwiperPaginationTheme;
+
 export class Carousel extends PureComponent<CarouselProps> {
   public static ViewAllButton = ViewAllButton;
   public static defaultProps = {
-    hasNavigation: true,
-    hasPagination: false,
     lgSlidesPerView: 1,
     smSlidesPerView: 1,
     lgSlidesSideOffset: 0,
     smSlidesSideOffset: 0,
   };
 
-  private swiper?: OriginalSwiper;
+  private swiper?: SwiperInstance;
 
   public componentDidUpdate(prevProps: CarouselProps) {
     const { activeSlideIndex } = this.props;
@@ -64,8 +69,11 @@ export class Carousel extends PureComponent<CarouselProps> {
     return <Swiper {...swiperParams}>{children}</Swiper>;
   }
 
-  private getSwiper = (swiper: OriginalSwiper) => {
+  private handleGetSwiperInstance = (swiper: SwiperInstance) => {
     this.swiper = swiper;
+    if (this.props.getSwiperInstance) {
+      this.props.getSwiperInstance(swiper);
+    }
   };
 
   private goToSlides = (index: number) => {
@@ -88,30 +96,17 @@ export class Carousel extends PureComponent<CarouselProps> {
     const {
       lgSlidesPerView,
       smSlidesPerView,
+      lgSlidesSideOffset,
+      smSlidesSideOffset,
       lgSpaceBetween,
       smSpaceBetween,
-      on,
-      loop,
-      autoplay,
-      freeMode,
-      observer,
-      observeParents,
-      slideToClickedSlide,
-      hasNavigation,
-      hasPagination,
+      activeSlideIndex,
+      ...props
     } = this.props;
 
-    let params: Partial<SwiperProps> = {
-      observer,
-      observeParents,
-      loop,
-      autoplay,
-      freeMode,
-      slideToClickedSlide,
-      hasNavigation,
-      hasPagination,
+    const params: Partial<SwiperProps> = {
+      ...props,
       on: {
-        ...on,
         slideChange: this.onChange,
       },
       slidesPerView: lgSlidesPerView,
@@ -122,7 +117,7 @@ export class Carousel extends PureComponent<CarouselProps> {
           spaceBetween: smSpaceBetween || (typeof smSlidesPerView !== 'number' || smSlidesPerView !== 1) ? 16 : 0,
         },
       },
-      getSwiperInstance: this.getSwiper,
+      getSwiperInstance: this.handleGetSwiperInstance,
     };
     return params;
   };
