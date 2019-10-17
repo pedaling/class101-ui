@@ -946,13 +946,6 @@
     eslint-plugin-react-hooks "^1.6.1"
     prettier "^1.18.2"
 
-"@class101/swiper@2.3.2-test12":
-  version "2.3.2-test12"
-  resolved "https://registry.yarnpkg.com/@class101/swiper/-/swiper-2.3.2-test12.tgz#6101aba87401aabf43790d423847253c055d7f61"
-  integrity sha512-9q7C5LqAPCgReog9LvB5Z8RrVORwYeZiowXT+3Y6Bo18hydeusaDJb/1vLHPNyANJLiUxCYWebW3FNBZx6bzfw==
-  dependencies:
-    object-assign "^4.1.1"
-
 "@class101/tslint-config@^1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@class101/tslint-config/-/tslint-config-1.5.0.tgz#c49ca55a05d0de526d55e1f07af1d39205320d97"

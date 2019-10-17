@@ -4,7 +4,6 @@ export * from './Button';
 export * from './ButtonGroup';
 export * from './Callout';
 export * from './Carousel';
-export { CarouselNavigationPosition } from './Carousel/Navigation';
 export * from './Tag';
 export * from './Tabs';
 export * from './Navigation';
