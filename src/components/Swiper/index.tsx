@@ -11,7 +11,7 @@ import { DefaultNavigation } from './DefaultNavigation';
 OriginalSwiper.use([Navigation, Pagination, Autoplay]);
 
 export enum SwiperNavigationPosition {
-  TopRightIn,
+  TopRightOut,
   BottomRightOut,
   BottomRightIn,
 }
@@ -21,7 +21,7 @@ export enum SwiperPaginationTheme {
   Light,
 }
 
-interface SwiperProps extends SwiperOptions {
+export interface SwiperProps extends SwiperOptions {
   children: React.ReactNode;
   customNavigation: ReactNode;
   customPagination: ReactNode;
@@ -29,6 +29,9 @@ interface SwiperProps extends SwiperOptions {
   navigationPosition: SwiperNavigationPosition;
   transparentPagination: boolean;
   containerContentMaxWidth?: number;
+  hasPagination: boolean;
+  hasNavigation: boolean;
+  getSwiperInstance?: (swiperInstance: OriginalSwiper) => void;
 }
 
 const generateId = createUniqIDGenerator('swiper-');
@@ -36,22 +39,24 @@ const generateId = createUniqIDGenerator('swiper-');
 export const Swiper = (props: SwiperProps) => {
   const containerId = generateId();
   const swiperRef: React.MutableRefObject<OriginalSwiper | null> = useRef<OriginalSwiper>(null);
-
   useEffect(() => {
     swiperRef.current = new OriginalSwiper(`#${containerId}`, props);
+    if (props.getSwiperInstance) {
+      props.getSwiperInstance(swiperRef.current);
+    }
     return () => {
       if (swiperRef.current) {
         swiperRef.current.destroy(true, true);
       }
     };
-  }, [containerId, props, swiperRef]);
+  }, []);
 
   return (
     <SwiperContainer
       id={containerId}
       className="swiper-container"
-      navigation={!!props.customNavigation}
-      pagination={!!props.customPagination}
+      navigation={props.hasNavigation}
+      pagination={props.hasPagination}
       paginationTheme={props.paginationTheme}
       navigationPosition={props.navigationPosition}
       transparentPagination={props.transparentPagination}
@@ -65,7 +70,8 @@ export const Swiper = (props: SwiperProps) => {
 };
 
 Swiper.defaultProps = {
-  loop: true,
+  loop: false,
+  slideToClickedSlide: false,
   pagination: {
     el: '.swiper-pagination',
     type: 'bullets',
@@ -77,16 +83,20 @@ Swiper.defaultProps = {
   },
   customNavigation: <DefaultNavigation />,
   customPagination: <div className="swiper-pagination" />,
-  navigationPosition: SwiperNavigationPosition.TopRightIn,
-  paginationTheme: SwiperPaginationTheme.Light,
+  navigationPosition: SwiperNavigationPosition.TopRightOut,
+  paginationTheme: SwiperPaginationTheme.Dark,
   transparentPagination: false,
-  threshold: 100,
+  threshold: 10,
   speed: 400,
   spaceBetween: 16,
+  slidesOffsetAfter: 16,
+  slidesOffsetBefore: 16,
+  hasNavigation: true,
+  hasPagination: false,
 } as Partial<SwiperProps>;
 
 const paginationPositionStyle: { [key in SwiperNavigationPosition]: FlattenSimpleInterpolation } = {
-  [SwiperNavigationPosition.TopRightIn]: css`
+  [SwiperNavigationPosition.TopRightOut]: css`
     bottom: 16px;
   `,
   [SwiperNavigationPosition.BottomRightOut]: css`
@@ -99,9 +109,9 @@ const paginationPositionStyle: { [key in SwiperNavigationPosition]: FlattenSimpl
 
 // box-shadow가 잘리지 않도록 영역에서 1px 가감합니다.
 const navigationPositionStyle: { [key in SwiperNavigationPosition]: FlattenSimpleInterpolation } = {
-  [SwiperNavigationPosition.TopRightIn]: css`
-    top: 24px;
-    transform: translateX(calc(-50% - 31px));
+  [SwiperNavigationPosition.TopRightOut]: css`
+    top: 0;
+    transform: translateX(calc(-50% - 1px));
   `,
   [SwiperNavigationPosition.BottomRightOut]: css`
     top: auto;
@@ -137,6 +147,25 @@ const SwiperContainer = styled.div<SwiperContainerProps>`
       display: none;
     `};
   }
+
+  ${props =>
+    !props.pagination &&
+    css`
+      .swiper-pagination {
+        display: none;
+      }
+    `};
+
+  ${props =>
+    !props.navigation &&
+    css`
+      .swiper-default-naviation,
+      .swiper-button-next,
+      .swiper-button-prev {
+        display: none;
+      }
+    `};
+
   ${props =>
     props.navigation &&
     props.navigationPosition === SwiperNavigationPosition.BottomRightOut &&
@@ -145,9 +174,17 @@ const SwiperContainer = styled.div<SwiperContainerProps>`
     `};
 
   ${props =>
+    props.navigation &&
+    props.navigationPosition === SwiperNavigationPosition.TopRightOut &&
+    css`
+      padding-top: 48px;
+      margin-top: -48px;
+    `};
+
+  ${props =>
     props.pagination &&
     props.navigationPosition !== SwiperNavigationPosition.BottomRightIn &&
-    props.navigationPosition !== SwiperNavigationPosition.TopRightIn &&
+    props.navigationPosition !== SwiperNavigationPosition.TopRightOut &&
     css`
       padding-bottom: 48px;
     `};
