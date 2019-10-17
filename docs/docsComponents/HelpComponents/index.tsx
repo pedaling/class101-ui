@@ -16,7 +16,7 @@ export const PlayGroundButtonContainer = styled.div<{ theme: ThemeConfig }>`
 `;
 
 export const PlayGroundBanner = styled.div<{ backgroundColor?: string; fill?: boolean }>`
-  width: ${props => (props.fill ? '100%' : '100px')};
+  width: 100%;
   height: 208px;
   padding: 20px;
   box-sizing: border-box;

@@ -5,7 +5,7 @@ route: /components/carousel
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Carousel, CarouselNavigationPosition, CarouselPaginationTheme, Section, Colors } from '@class101/ui';
+import { Carousel, Slide, SwiperNavigationPosition, SwiperPaginationTheme, Section, Colors } from '@class101/ui';
 import { imageSrc } from './interface';
 import { PlayGroundBanner, PlayGroundSectionCarouselContent, SwiperCard, PreloadImage } from '../docsComponents';
 
@@ -21,9 +21,21 @@ import { PlayGroundBanner, PlayGroundSectionCarouselContent, SwiperCard, Preload
 
 <Playground>
   <Carousel freeMode={false}>
-    <PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner>
+    <Slide>
+      <PlayGroundBanner fill backgroundColor={Colors.red100}>
+        배너1
+      </PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner fill backgroundColor={Colors.red200}>
+        배너2
+      </PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner fill backgroundColor={Colors.red300}>
+        배너3
+      </PlayGroundBanner>
+    </Slide>
   </Carousel>
 </Playground>
 
@@ -32,37 +44,61 @@ import { PlayGroundBanner, PlayGroundSectionCarouselContent, SwiperCard, Preload
 페이지네이션의 위치는 네비게이션 버튼 위치에 따라 정해집니다.
 
 ```ts
-enum CarouselNavigationPosition {
-  TopRightIn,
+enum SwiperNavigationPosition {
+  TopRightOut,
   BottomRightOut,
   BottomRightIn,
 }
 ```
 
-### TopRightIn
+### TopRightOut
 
 주로 Section에 들어가는 캐러셀일때 사용합니다.
 
 <Playground>
   <Section title="섹션 타이틀">
     <Carousel
-      navigationPosition={CarouselNavigationPosition.TopRightIn}
+      navigationPosition={SwiperNavigationPosition.TopRightOut}
       lgSlidesPerView={4}
       smSlidesPerView={2}
-      pagination
+      hasPagination
     >
-      <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-      <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
-      <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
-      <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
-      <PlayGroundBanner backgroundColor={Colors.blue100}>배너7</PlayGroundBanner>
-      <PlayGroundBanner backgroundColor={Colors.blue200}>배너8</PlayGroundBanner>
-      <PlayGroundBanner backgroundColor={Colors.blue300}>배너9</PlayGroundBanner>
-      <PlayGroundBanner backgroundColor={Colors.blue400}>배너10</PlayGroundBanner>
-      <PlayGroundBanner backgroundColor={Colors.blue500}>배너11</PlayGroundBanner>
-      <PlayGroundBanner backgroundColor={Colors.blue600}>배너12</PlayGroundBanner>
+      <Slide>
+        <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+      </Slide>
+      <Slide>
+        <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+      </Slide>
+      <Slide>
+        <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+      </Slide>
+      <Slide>
+        <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
+      </Slide>
+      <Slide>
+        <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
+      </Slide>
+      <Slide>
+        <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
+      </Slide>
+      <Slide>
+        <PlayGroundBanner backgroundColor={Colors.blue100}>배너7</PlayGroundBanner>
+      </Slide>
+      <Slide>
+        <PlayGroundBanner backgroundColor={Colors.blue200}>배너8</PlayGroundBanner>
+      </Slide>
+      <Slide>
+        <PlayGroundBanner backgroundColor={Colors.blue300}>배너9</PlayGroundBanner>
+      </Slide>
+      <Slide>
+        <PlayGroundBanner backgroundColor={Colors.blue400}>배너10</PlayGroundBanner>
+      </Slide>
+      <Slide>
+        <PlayGroundBanner backgroundColor={Colors.blue500}>배너11</PlayGroundBanner>
+      </Slide>
+      <Slide>
+        <PlayGroundBanner backgroundColor={Colors.blue600}>배너12</PlayGroundBanner>
+      </Slide>
     </Carousel>
   </Section>
 </Playground>
@@ -71,17 +107,29 @@ enum CarouselNavigationPosition {
 
 <Playground>
   <Carousel
-    navigationPosition={CarouselNavigationPosition.BottomRightOut}
+    navigationPosition={SwiperNavigationPosition.BottomRightOut}
     lgSlidesPerView={4}
     smSlidesPerView={2}
-    pagination
+    hasPagination
   >
-    <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
+    </Slide>
   </Carousel>
 </Playground>
 
@@ -89,38 +137,62 @@ enum CarouselNavigationPosition {
 
 <Playground>
   <Carousel
-    navigationPosition={CarouselNavigationPosition.BottomRightIn}
-    paginationTheme={CarouselPaginationTheme.Light}
-    pagination
+    navigationPosition={SwiperNavigationPosition.BottomRightIn}
+    paginationTheme={SwiperPaginationTheme.Light}
+    hasPagination
   >
-    <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
+    </Slide>
   </Carousel>
 </Playground>
 
 ### Navigation Container Max Width
 
 <Playground>
-  <Carousel navigationPosition={CarouselNavigationPosition.BottomRightIn} navigationContainerMaxWidth={560}>
-    <PlayGroundBanner backgroundColor={Colors.blue100} style={{ display: 'flex', justifyContent: 'center' }}>
-      <div style={{ width: '100%', maxWidth: 560, backgroundColor: 'yellow', height: 100 }}>배너1</div>
-    </PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
+  <Carousel navigationPosition={SwiperNavigationPosition.BottomRightIn} navigationContainerMaxWidth={560}>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue100} style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ width: '100%', maxWidth: 560, backgroundColor: 'yellow', height: 100 }}>배너1</div>
+      </PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
+    </Slide>
   </Carousel>
 </Playground>
 
 ## Pagination Theme
 
 ```ts
-enum CarouselPaginationTheme {
+enum SwiperPaginationTheme {
   Dark,
   Light,
 }
@@ -128,30 +200,42 @@ enum CarouselPaginationTheme {
 
 <Playground>
   <Carousel
-    navigationPosition={CarouselNavigationPosition.BottomRightIn}
-    paginationTheme={CarouselPaginationTheme.Dark}
+    navigationPosition={SwiperNavigationPosition.BottomRightIn}
+    paginationTheme={SwiperPaginationTheme.Dark}
     freeMode={false}
-    pagination
+    hasPagination
   >
-    <PlayGroundBanner backgroundColor={Colors.red100} onClick={() => alert('clicked')}>
-      배너1
-    </PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.red200} onClick={() => alert('clicked')}>
-      배너2
-    </PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.red300} onClick={() => alert('clicked')}>
-      배너3
-    </PlayGroundBanner>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red100} onClick={() => alert('clicked')}>
+        배너1
+      </PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red200} onClick={() => alert('clicked')}>
+        배너2
+      </PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red300} onClick={() => alert('clicked')}>
+        배너3
+      </PlayGroundBanner>
+    </Slide>
   </Carousel>
   <Carousel
-    navigationPosition={CarouselNavigationPosition.BottomRightIn}
-    paginationTheme={CarouselPaginationTheme.Light}
+    navigationPosition={SwiperNavigationPosition.BottomRightIn}
+    paginationTheme={SwiperPaginationTheme.Light}
     freeMode={false}
-    pagination
+    hasPagination
   >
-    <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+    </Slide>
   </Carousel>
 </Playground>
 
@@ -159,25 +243,37 @@ enum CarouselPaginationTheme {
 
 <Playground>
   <Carousel
-    navigationPosition={CarouselNavigationPosition.BottomRightIn}
-    paginationTheme={CarouselPaginationTheme.Light}
+    navigationPosition={SwiperNavigationPosition.BottomRightIn}
+    paginationTheme={SwiperPaginationTheme.Light}
     loop
-    pagination
+    hasPagination
   >
-    <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+    </Slide>
   </Carousel>
   <Carousel
-    navigationPosition={CarouselNavigationPosition.BottomRightIn}
-    paginationTheme={CarouselPaginationTheme.Light}
-    freeMode={false}
+    navigationPosition={SwiperNavigationPosition.BottomRightIn}
+    paginationTheme={SwiperPaginationTheme.Light}
+    freeMode={true}
     loop
-    pagination
+    hasPagination
   >
-    <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+    </Slide>
   </Carousel>
 </Playground>
 
@@ -187,17 +283,23 @@ enum CarouselPaginationTheme {
 
 <Playground>
   <Carousel
-    navigationPosition={CarouselNavigationPosition.BottomRightIn}
-    paginationTheme={CarouselPaginationTheme.Light}
+    navigationPosition={SwiperNavigationPosition.BottomRightIn}
+    paginationTheme={SwiperPaginationTheme.Light}
     autoplay={{
       delay: 6000,
       disableOnInteraction: false,
     }}
-    pagination
+    hasPagination
   >
-    <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+    </Slide>
   </Carousel>
 </Playground>
 
@@ -205,22 +307,38 @@ enum CarouselPaginationTheme {
 
 <Playground>
   <Carousel
-    navigationPosition={CarouselNavigationPosition.BottomRightIn}
-    paginationTheme={CarouselPaginationTheme.Light}
+    navigationPosition={SwiperNavigationPosition.BottomRightIn}
+    paginationTheme={SwiperPaginationTheme.Light}
     lgSlidesPerView={4}
     smSlidesPerView={2}
     smSlidesSideOffset={24}
     slideToClickedSlide
-    pagination
+    hasPagination
   >
-    <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.blue700}>배너7</PlayGroundBanner>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.blue700}>배너7</PlayGroundBanner>
+    </Slide>
   </Carousel>
 </Playground>
 
@@ -229,17 +347,29 @@ enum CarouselPaginationTheme {
 <Playground>
   <Section title="섹션 타이틀">
     <Carousel
-      navigationPosition={CarouselNavigationPosition.TopRightIn}
+      navigationPosition={SwiperNavigationPosition.TopRightOut}
       lgSlidesPerView={4}
       smSlidesPerView={2}
-      pagination
+      hasPagination
     >
-      <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-      <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
-      <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
-      <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
+      <Slide>
+        <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+      </Slide>
+      <Slide>
+        <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+      </Slide>
+      <Slide>
+        <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+      </Slide>
+      <Slide>
+        <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
+      </Slide>
+      <Slide>
+        <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
+      </Slide>
+      <Slide>
+        <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
+      </Slide>
       <Carousel.ViewAllButton />
     </Carousel>
   </Section>
@@ -254,18 +384,30 @@ enum CarouselPaginationTheme {
   <Section title="섹션 타이틀">
     <PlayGroundSectionCarouselContent>
       <Carousel
-        navigationPosition={CarouselNavigationPosition.TopRightIn}
+        navigationPosition={SwiperNavigationPosition.TopRightOut}
         lgSlidesPerView={4}
         smSlidesPerView={2}
         smSlidesSideOffset={24}
-        pagination
+        hasPagination
       >
-        <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-        <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-        <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-        <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
-        <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
-        <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
+        <Slide>
+          <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
+        </Slide>
+        <Slide>
+          <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
+        </Slide>
+        <Slide>
+          <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
+        </Slide>
+        <Slide>
+          <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
+        </Slide>
+        <Slide>
+          <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
+        </Slide>
+        <Slide>
+          <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
+        </Slide>
       </Carousel>
     </PlayGroundSectionCarouselContent>
   </Section>
@@ -277,9 +419,15 @@ slidesPerView 값이 1일 경우 기본적으로 spaceBetween 값은 0입니다.
 
 <Playground>
   <Carousel lgSpaceBetween lgSlidesSideOffset={32} smSpaceBetween smSlidesSideOffset={24}>
-    <PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner>
-    <PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner>
+    </Slide>
   </Carousel>
 </Playground>
 
@@ -298,9 +446,9 @@ slidesPerView 값이 1일 경우 기본적으로 spaceBetween 값은 0입니다.
         return (
           <div>
             <Carousel onChangeSlides={(index) => this.setState({ currentIndex: index})} activeSlideIndex={this.state.currentIndex}>
-              <PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner>
-              <PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner>
-              <PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner>
+              <Slide><PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner></Slide>
+              <Slide><PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner></Slide>
+              <Slide><PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner></Slide>
             </Carousel>
             <div>
               <button onClick={() => this.setState({ currentIndex: 0 })}>1 {this.state.currentIndex === 0 && 'active!!'}</button>
@@ -331,9 +479,9 @@ loop 모드
         return (
           <div>
             <Carousel onChangeSlides={(index) => this.setState({ currentIndex: index })} activeSlideIndex={this.state.currentIndex} loop>
-              <PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner>
-              <PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner>
-              <PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner>
+              <Slide><PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner></Slide>
+              <Slide><PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner></Slide>
+              <Slide><PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner></Slide>
             </Carousel>
             <div>
               <button onClick={() => this.setState({ currentIndex: 0 })}>1 {this.state.currentIndex === 0 && 'active!!'}</button>

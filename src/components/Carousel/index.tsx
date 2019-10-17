@@ -1,39 +1,29 @@
-import ReactIdSwiper from '@class101/swiper';
-import { ReactIdSwiperProps, SwiperInstance } from '@class101/swiper/lib/types';
 import React, { PureComponent } from 'react';
-import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
-import { AutoplayOptions, PaginationOptions, SwiperEvent } from 'swiper';
+import { AutoplayOptions, SwiperEvent } from 'swiper';
+import { Swiper as OriginalSwiper } from 'swiper/dist/js/swiper.esm.js';
 
-import { media, SIZES } from '../../core/BreakPoints';
-import { gray700, white } from '../../core/Colors';
-import Navigation, { CarouselNavigationPosition } from './Navigation';
+import { SIZES } from '../../core/BreakPoints';
+import { Swiper, SwiperNavigationPosition, SwiperPaginationTheme, SwiperProps } from '../Swiper';
 import ViewAllButton from './ViewAllButton';
 
 type SlidesPerView = 'auto' | 1 | 2 | 3 | 4 | 6;
 
-export enum CarouselPaginationTheme {
-  Dark,
-  Light,
-}
-
 export interface CarouselProps {
   navigationContainerMaxWidth?: number;
-  navigation: boolean;
-  navigationPosition: CarouselNavigationPosition;
-  pagination: boolean;
-  paginationTheme: CarouselPaginationTheme;
+  hasNavigation?: boolean;
+  navigationPosition?: SwiperNavigationPosition;
+  hasPagination?: boolean;
+  paginationTheme?: SwiperPaginationTheme;
   lgSlidesPerView: SlidesPerView;
   smSlidesPerView: SlidesPerView;
   lgSlidesSideOffset: number;
   smSlidesSideOffset: number;
-  freeMode: boolean;
+  freeMode?: boolean;
   lgSpaceBetween?: boolean;
   smSpaceBetween?: boolean;
   autoplay?: AutoplayOptions | boolean;
   on?: { [key in SwiperEvent]?: () => void };
   loop: boolean;
-  shouldSwiperUpdate?: boolean;
-  rebuildOnUpdate?: boolean;
   observer?: boolean;
   observeParents?: boolean;
   className?: string;
@@ -43,46 +33,18 @@ export interface CarouselProps {
   activeSlideIndex?: number;
 }
 
-const DEFAULT_PARAMS = {
-  threshold: 10,
-};
-
-const DEFAULT_PAGINATION_PARAMS: { [key in string]: PaginationOptions } = {
-  pagination: {
-    el: '.swiper-pagination',
-    type: 'bullets',
-    clickable: true,
-  },
-};
-
-interface State {
-  readonly isBeginning: boolean;
-  readonly isEnd: boolean;
-}
-export class Carousel extends PureComponent<CarouselProps, State> {
+export class Carousel extends PureComponent<CarouselProps> {
   public static ViewAllButton = ViewAllButton;
   public static defaultProps = {
-    navigation: true,
-    navigationPosition: CarouselNavigationPosition.TopRightOut,
-    pagination: false,
-    paginationTheme: CarouselPaginationTheme.Dark,
+    hasNavigation: true,
+    hasPagination: false,
     lgSlidesPerView: 1,
     smSlidesPerView: 1,
     lgSlidesSideOffset: 0,
     smSlidesSideOffset: 0,
-    shouldSwiperUpdate: false,
-    rebuildOnUpdate: false,
-    freeMode: true,
-    loop: false,
-    slideToClickedSlide: false,
   };
 
-  public readonly state = {
-    isBeginning: true,
-    isEnd: false,
-  };
-
-  private swiper: SwiperInstance = null;
+  private swiper?: OriginalSwiper;
 
   public componentDidUpdate(prevProps: CarouselProps) {
     const { activeSlideIndex } = this.props;
@@ -97,70 +59,13 @@ export class Carousel extends PureComponent<CarouselProps, State> {
   }
 
   public render() {
-    const {
-      children,
-      lgSlidesPerView,
-      className,
-      navigation,
-      navigationPosition,
-      paginationTheme,
-      pagination,
-      lgSlidesSideOffset,
-      smSlidesSideOffset,
-      navigationContainerMaxWidth,
-    } = this.props;
-    const { isBeginning, isEnd } = this.state;
-
-    const sliderCount = React.Children.count(children);
-    const shouldHideNavigation = typeof lgSlidesPerView === 'number' && sliderCount <= lgSlidesPerView;
+    const { children } = this.props;
     const swiperParams = this.getSwiperParams();
-    return (
-      <Container className={className}>
-        <Inner>
-          {sliderCount > 0 && (
-            <SwiperWrapper
-              navigation={navigation}
-              navigationPosition={navigationPosition}
-              pagination={pagination}
-              paginationTheme={paginationTheme}
-              lgSlidesSideOffset={lgSlidesSideOffset}
-              smSlidesSideOffset={smSlidesSideOffset}
-            >
-              <ReactIdSwiper {...swiperParams} getSwiper={this.getSwiper}>
-                {children}
-              </ReactIdSwiper>
-            </SwiperWrapper>
-          )}
-          {navigation && !shouldHideNavigation && (
-            <Navigation
-              navigationContainerMaxWidth={navigationContainerMaxWidth}
-              lgSlidesSideOffset={lgSlidesSideOffset}
-              position={navigationPosition}
-              goNext={this.goNext}
-              goPrev={this.goPrev}
-              isBeginning={isBeginning}
-              isEnd={isEnd}
-            />
-          )}
-        </Inner>
-      </Container>
-    );
+    return <Swiper {...swiperParams}>{children}</Swiper>;
   }
 
-  private getSwiper = (swiper: SwiperInstance) => {
+  private getSwiper = (swiper: OriginalSwiper) => {
     this.swiper = swiper;
-  };
-
-  private goNext = () => {
-    if (this.swiper) {
-      this.swiper.slideNext();
-    }
-  };
-
-  private goPrev = () => {
-    if (this.swiper) {
-      this.swiper.slidePrev();
-    }
   };
 
   private goToSlides = (index: number) => {
@@ -179,29 +84,8 @@ export class Carousel extends PureComponent<CarouselProps, State> {
     }
   };
 
-  private progress = () => {
-    if (!this.swiper) return;
-    if (this.props.loop) {
-      return this.setState({
-        isEnd: false,
-        isBeginning: false,
-      });
-    }
-    if (this.swiper.isEnd) {
-      return this.setState({ isEnd: true, isBeginning: false });
-    }
-    if (this.swiper.isBeginning) {
-      return this.setState({ isBeginning: true, isEnd: false });
-    }
-    this.setState({
-      isEnd: false,
-      isBeginning: false,
-    });
-  };
-
-  private getSwiperParams = (): ReactIdSwiperProps => {
+  private getSwiperParams = (): Partial<SwiperProps> => {
     const {
-      pagination,
       lgSlidesPerView,
       smSlidesPerView,
       lgSpaceBetween,
@@ -210,25 +94,24 @@ export class Carousel extends PureComponent<CarouselProps, State> {
       loop,
       autoplay,
       freeMode,
-      shouldSwiperUpdate,
-      rebuildOnUpdate,
       observer,
       observeParents,
       slideToClickedSlide,
+      hasNavigation,
+      hasPagination,
     } = this.props;
 
-    let params: ReactIdSwiperProps = {
-      ...DEFAULT_PARAMS,
-      shouldSwiperUpdate,
-      rebuildOnUpdate,
+    let params: Partial<SwiperProps> = {
       observer,
       observeParents,
       loop,
+      autoplay,
       freeMode,
       slideToClickedSlide,
+      hasNavigation,
+      hasPagination,
       on: {
         ...on,
-        progress: this.progress,
         slideChange: this.onChange,
       },
       slidesPerView: lgSlidesPerView,
@@ -239,106 +122,8 @@ export class Carousel extends PureComponent<CarouselProps, State> {
           spaceBetween: smSpaceBetween || (typeof smSlidesPerView !== 'number' || smSlidesPerView !== 1) ? 16 : 0,
         },
       },
+      getSwiperInstance: this.getSwiper,
     };
-
-    if (autoplay) {
-      params = {
-        ...params,
-        autoplay,
-      };
-    }
-
-    if (pagination) {
-      params = {
-        ...params,
-        ...DEFAULT_PAGINATION_PARAMS,
-      };
-    }
     return params;
   };
 }
-
-const Container = styled.div``;
-
-const paginationStyleByNavigationPosition: { [key in CarouselNavigationPosition]: FlattenSimpleInterpolation } = {
-  [CarouselNavigationPosition.TopRightOut]: css`
-    bottom: -24px;
-  `,
-  [CarouselNavigationPosition.BottomRightOut]: css`
-    bottom: -24px;
-  `,
-  [CarouselNavigationPosition.BottomRightIn]: css`
-    bottom: 16px;
-  `,
-};
-
-const Inner = styled.div`
-  position: relative;
-`;
-
-interface SwiperWrapperProps {
-  navigation: boolean;
-  navigationPosition: CarouselNavigationPosition;
-  pagination: boolean;
-  paginationTheme: CarouselPaginationTheme;
-  lgSlidesSideOffset: number;
-  smSlidesSideOffset: number;
-}
-
-const SwiperWrapper = styled.div<SwiperWrapperProps>`
-  overflow: hidden;
-
-  ${props =>
-    props.navigation &&
-    props.navigationPosition === CarouselNavigationPosition.BottomRightOut &&
-    css`
-      padding-bottom: 48px;
-    `};
-  ${props =>
-    props.pagination &&
-    props.navigationPosition !== CarouselNavigationPosition.BottomRightIn &&
-    css`
-      padding-bottom: 48px;
-    `};
-  ${props =>
-    props.lgSlidesSideOffset
-      ? css`
-          padding-left: ${props.lgSlidesSideOffset}px;
-          padding-right: ${props.lgSlidesSideOffset}px;
-        `
-      : ''};
-  ${props =>
-    props.smSlidesSideOffset
-      ? css`
-          ${media.sm`
-            padding-left: ${props.smSlidesSideOffset}px;
-            padding-right: ${props.smSlidesSideOffset}px;
-            `};
-        `
-      : ''};
-
-  .swiper-container {
-    overflow: visible;
-  }
-
-  /* swiper pagination */
-  .swiper-pagination {
-    ${props => paginationStyleByNavigationPosition[props.navigationPosition]};
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .swiper-pagination-bullet {
-    width: 6px;
-    height: 6px;
-    margin: 0 8px;
-    border-radius: 3px;
-    background-color: ${props => (props.paginationTheme === CarouselPaginationTheme.Light ? white : gray700)};
-    opacity: 0.56;
-  }
-  .swiper-pagination-bullet-active {
-    width: 24px;
-    background-color: ${props => (props.paginationTheme === CarouselPaginationTheme.Light ? white : gray700)};
-    opacity: 1;
-  }
-`;
