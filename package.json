@@ -112,7 +112,6 @@
     "dist"
   ],
   "dependencies": {
-    "@class101/swiper": "2.3.2-test12",
     "classnames": "^2.2.6",
     "path-to-regexp": "^3.0.0",
     "polished": "^3.4.1",
