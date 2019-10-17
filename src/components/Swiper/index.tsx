@@ -34,6 +34,11 @@ export interface SwiperProps extends SwiperOptions {
   hasPagination?: boolean;
   hasNavigation?: boolean;
   getSwiperInstance?: (swiperInstance: OriginalSwiper) => void;
+  /**
+   * TODO(Yozzing): media에 대한 slidesOffset는 Carousel에서 구현해야한다.
+   */
+  lgSlidesSideOffset: number;
+  smSlidesSideOffset: number;
 }
 
 const generateId = createUniqIDGenerator('swiper-');
@@ -66,6 +71,8 @@ export const Swiper = (props: SwiperProps) => {
       navigationPosition={props.navigationPosition}
       transparentPagination={props.transparentPagination}
       containerContentMaxWidth={props.containerContentMaxWidth}
+      lgSlidesSideOffset={props.lgSlidesSideOffset}
+      smSlidesSideOffset={props.smSlidesSideOffset}
     >
       <SwiperWrapper className="swiper-wrapper">{props.children}</SwiperWrapper>
       {props.customNavigation}
@@ -95,6 +102,8 @@ Swiper.defaultProps = {
   speed: 400,
   hasNavigation: true,
   hasPagination: false,
+  lgSlidesSideOffset: 0,
+  smSlidesSideOffset: 0,
 } as Partial<SwiperProps>;
 
 const paginationPositionStyle: { [key in SwiperNavigationPosition]: FlattenSimpleInterpolation } = {
@@ -117,9 +126,28 @@ type SwiperContainerProps = Pick<
   | 'transparentPagination'
   | 'containerContentMaxWidth'
   | 'paginationTheme'
+  | 'lgSlidesSideOffset'
+  | 'smSlidesSideOffset'
 >;
 
 const SwiperContainer = styled.div<SwiperContainerProps>`
+  ${props =>
+    props.lgSlidesSideOffset
+      ? css`
+          padding-left: ${props.lgSlidesSideOffset}px;
+          padding-right: ${props.lgSlidesSideOffset}px;
+        `
+      : ''};
+  ${props =>
+    props.smSlidesSideOffset
+      ? css`
+          ${media.sm`
+          padding-left: ${props.smSlidesSideOffset}px;
+          padding-right: ${props.smSlidesSideOffset}px;
+          `};
+        `
+      : ''};
+
   .swiper-default-navigation {
     position: absolute;
     ${props =>

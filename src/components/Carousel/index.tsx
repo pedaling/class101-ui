@@ -22,13 +22,13 @@ type UsingSwiperProps = Pick<
   | 'speed'
   | 'getSwiperInstance'
   | 'observer'
+  | 'lgSlidesSideOffset'
+  | 'smSlidesSideOffset'
 >;
 
 export interface OwnCarouselProps {
   lgSlidesPerView: SlidesPerView;
   smSlidesPerView: SlidesPerView;
-  lgSlidesSideOffset: number;
-  smSlidesSideOffset: number;
   lgSpaceBetween?: boolean;
   smSpaceBetween?: boolean;
   className?: string;
@@ -45,8 +45,6 @@ export class Carousel extends PureComponent<CarouselProps> {
   public static defaultProps = {
     lgSlidesPerView: 1,
     smSlidesPerView: 1,
-    lgSlidesSideOffset: 0,
-    smSlidesSideOffset: 0,
   };
 
   private swiper?: SwiperInstance;
@@ -93,16 +91,7 @@ export class Carousel extends PureComponent<CarouselProps> {
   };
 
   private getSwiperParams = (): Partial<SwiperProps> => {
-    const {
-      lgSlidesPerView,
-      smSlidesPerView,
-      lgSlidesSideOffset,
-      smSlidesSideOffset,
-      lgSpaceBetween,
-      smSpaceBetween,
-      activeSlideIndex,
-      ...props
-    } = this.props;
+    const { lgSlidesPerView, smSlidesPerView, lgSpaceBetween, smSpaceBetween, activeSlideIndex, ...props } = this.props;
 
     const params: Partial<SwiperProps> = {
       ...props,
