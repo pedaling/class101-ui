@@ -20,27 +20,40 @@ export interface SwiperProps extends SwiperOptions {
 
 const generateId = createUniqIDGenerator('swiper-');
 
-export const Swiper: FC<SwiperProps> = props => {
+export const Swiper: FC<SwiperProps> = ({
+  getSwiperInstance,
+  className,
+  children,
+  navigationChildren,
+  paginationChildren,
+  ...swiperOptions
+}) => {
   const swiperRef: React.MutableRefObject<OriginalSwiper | null> = useRef<OriginalSwiper>(null);
   const containerId = useMemo(() => generateId(), []);
 
   useEffect(() => {
-    swiperRef.current = new OriginalSwiper(`#${containerId}`, props);
-    if (props.getSwiperInstance) {
-      props.getSwiperInstance(swiperRef.current);
+    if (swiperRef.current) {
+      swiperRef.current.destroy(true, true);
     }
+    swiperRef.current = new OriginalSwiper(`#${containerId}`, swiperOptions);
+    if (getSwiperInstance) {
+      getSwiperInstance(swiperRef.current);
+    }
+  }, [containerId, swiperRef, swiperOptions, getSwiperInstance]);
+
+  useEffect(() => {
     return () => {
       if (swiperRef.current) {
         swiperRef.current.destroy(true, true);
       }
     };
-  }, [containerId, props, swiperRef]);
+  }, [swiperRef]);
 
   return (
-    <div id={containerId} className={classNames('swiper-container', props.className)}>
-      <div className="swiper-wrapper">{props.children}</div>
-      {props.navigationChildren}
-      {props.paginationChildren}
+    <div id={containerId} className={classNames('swiper-container', className)}>
+      <div className="swiper-wrapper">{children}</div>
+      {navigationChildren}
+      {paginationChildren}
     </div>
   );
 };
