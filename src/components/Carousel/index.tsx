@@ -1,4 +1,4 @@
-import React, { PureComponent, ReactNode } from 'react';
+import React, { PureComponent, ReactNode, Children, ReactElement } from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
 import { media, SIZES } from '../../core/BreakPoints';
@@ -34,7 +34,7 @@ export interface CarouselProps {
   smSpaceBetween?: boolean;
   lgSlidesSideOffset: number;
   smSlidesSideOffset: number;
-  activeSlideIndex?: number;
+  activeIndex?: number;
   onChangeSlide?: (index: number) => void;
   onTouchEnd?: () => void;
   paginationTheme?: CarouselPaginationTheme;
@@ -71,17 +71,16 @@ export class Carousel extends PureComponent<CarouselProps> {
   private swiper?: SwiperInstance;
 
   public componentDidUpdate(prevProps: CarouselProps) {
-    const { activeSlideIndex } = this.props;
+    const { activeIndex } = this.props;
     if (
-      activeSlideIndex !== undefined &&
-      activeSlideIndex !== prevProps.activeSlideIndex &&
+      activeIndex !== undefined &&
+      activeIndex !== prevProps.activeIndex &&
       this.swiper &&
-      activeSlideIndex !== this.swiper.realIndex
+      activeIndex !== this.swiper.realIndex
     ) {
-      this.goToSlides(activeSlideIndex);
+      this.goToSlides(activeIndex);
     }
   }
-
   public render() {
     const {
       children,
@@ -144,7 +143,7 @@ export class Carousel extends PureComponent<CarouselProps> {
   };
 
   private getSwiperParams = (): Partial<SwiperProps> => {
-    const { swiperProps, lgSlidesPerView, smSlidesPerView, lgSpaceBetween, smSpaceBetween } = this.props;
+    const { swiperProps, lgSlidesPerView, smSlidesPerView, lgSpaceBetween, smSpaceBetween, activeIndex } = this.props;
 
     const params: Partial<SwiperProps> = {
       ...swiperProps,
