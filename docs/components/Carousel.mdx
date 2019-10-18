@@ -437,7 +437,7 @@ slidesPerView 값이 1일 경우 기본적으로 spaceBetween 값은 0입니다.
 
 ## External operation
 
-`onChangeSlides`과 `activeSlideIndex`로 외부에서 캐러셀을 조작할 수 있습니다.
+`onChangeSlide`과 `activeIndex`로 외부에서 캐러셀을 조작할 수 있습니다.
 
 <Playground>
   {() => {
@@ -449,7 +449,7 @@ slidesPerView 값이 1일 경우 기본적으로 spaceBetween 값은 0입니다.
       render() {
         return (
           <div>
-            <Carousel onChangeSlides={(index) => this.setState({ currentIndex: index})} activeSlideIndex={this.state.currentIndex}>
+            <Carousel onChangeSlide={(index) => this.setState({ currentIndex: index})} activeIndex={this.state.currentIndex}>
               <Slide><PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner></Slide>
               <Slide><PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner></Slide>
               <Slide><PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner></Slide>
@@ -482,7 +482,7 @@ loop 모드
       render() {
         return (
           <div>
-            <Carousel onChangeSlides={(index) => this.setState({ currentIndex: index })} activeSlideIndex={this.state.currentIndex} swiperProps={{loop: true}}>
+            <Carousel onChangeSlide={(index) => this.setState({ currentIndex: index })} activeIndex={this.state.currentIndex} swiperProps={{loop: true}}>
               <Slide><PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner></Slide>
               <Slide><PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner></Slide>
               <Slide><PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner></Slide>

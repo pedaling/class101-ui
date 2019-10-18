@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { FC, ReactNode, useEffect, useMemo, useRef } from 'react';
+import React, { FC, ReactNode, useEffect, useMemo, useRef, MutableRefObject } from 'react';
 import { SwiperOptions } from 'swiper';
 import { Autoplay, Navigation, Pagination, Swiper as OriginalSwiper } from 'swiper/dist/js/swiper.esm.js';
 
@@ -28,26 +28,24 @@ export const Swiper: FC<SwiperProps> = ({
   paginationChildren,
   ...swiperOptions
 }) => {
-  const swiperRef: React.MutableRefObject<OriginalSwiper | null> = useRef<OriginalSwiper>(null);
+  const swiperRef: MutableRefObject<OriginalSwiper | null> = useRef(null);
+  const swiperOptionsRef: MutableRefObject<SwiperOptions> = useRef(swiperOptions);
   const containerId = useMemo(() => generateId(), []);
 
   useEffect(() => {
-    if (swiperRef.current) {
-      swiperRef.current.destroy(true, true);
-    }
-    swiperRef.current = new OriginalSwiper(`#${containerId}`, swiperOptions);
-    if (getSwiperInstance) {
-      getSwiperInstance(swiperRef.current);
-    }
-  }, [containerId, swiperRef, swiperOptions, getSwiperInstance]);
-
-  useEffect(() => {
+    swiperRef.current = new OriginalSwiper(`#${containerId}`, swiperOptionsRef.current);
     return () => {
       if (swiperRef.current) {
         swiperRef.current.destroy(true, true);
       }
     };
-  }, [swiperRef]);
+  }, [containerId, swiperRef, swiperOptionsRef]);
+
+  useEffect(() => {
+    if (getSwiperInstance && swiperRef.current) {
+      getSwiperInstance(swiperRef.current);
+    }
+  }, [getSwiperInstance, swiperRef]);
 
   return (
     <div id={containerId} className={classNames('swiper-container', className)}>

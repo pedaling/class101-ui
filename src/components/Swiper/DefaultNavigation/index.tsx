@@ -19,11 +19,9 @@ export const DefaultNavigation = () => {
 };
 
 const Button = styled(IconButton)<{ direction: 'right' | 'left' }>`
-  /* Reset swiper's default style */
   background-image: none;
   margin: 0;
-  /* Customize navigation button  */
-  ${elevation1}
+  ${elevation1};
   position: absolute;
   top: 0;
   ${props =>

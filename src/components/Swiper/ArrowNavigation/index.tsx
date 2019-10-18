@@ -17,16 +17,14 @@ export const ArrowNavigation = () => {
 };
 
 const Button = styled.button<{ direction: 'right' | 'left' }>`
-  /* Reset swiper's default style */
   background: none;
-
-  /* Customize navigation button  */
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
   position: absolute;
   width: 48px;
+  margin-top: 0;
   top: 0;
   height: 100%;
   border: 0;
