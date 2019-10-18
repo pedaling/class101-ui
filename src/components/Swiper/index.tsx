@@ -1,4 +1,5 @@
-import React, { ReactNode, useEffect, useMemo, useRef } from 'react';
+import classNames from 'classnames';
+import React, { FC, ReactNode, useEffect, useMemo, useRef } from 'react';
 import { SwiperOptions } from 'swiper';
 import { Autoplay, Navigation, Pagination, Swiper as OriginalSwiper } from 'swiper/dist/js/swiper.esm.js';
 
@@ -19,11 +20,10 @@ export interface SwiperProps extends SwiperOptions {
 
 const generateId = createUniqIDGenerator('swiper-');
 
-export const Swiper = (props: SwiperProps) => {
+export const Swiper: FC<SwiperProps> = props => {
   const swiperRef: React.MutableRefObject<OriginalSwiper | null> = useRef<OriginalSwiper>(null);
   const containerId = useMemo(() => generateId(), []);
 
-  /* eslint-disable */
   useEffect(() => {
     swiperRef.current = new OriginalSwiper(`#${containerId}`, props);
     if (props.getSwiperInstance) {
@@ -34,11 +34,10 @@ export const Swiper = (props: SwiperProps) => {
         swiperRef.current.destroy(true, true);
       }
     };
-  }, []);
-  /* eslint-enable */
+  }, [containerId, props, swiperRef]);
 
   return (
-    <div id={containerId} className={`swiper-container ${props.className}`}>
+    <div id={containerId} className={classNames('swiper-container', props.className)}>
       <div className="swiper-wrapper">{props.children}</div>
       {props.navigationChildren}
       {props.paginationChildren}

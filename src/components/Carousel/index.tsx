@@ -46,14 +46,14 @@ export interface CarouselProps {
 }
 
 export enum CarouselNavigationPosition {
-  TopRightOut,
-  BottomRightOut,
-  BottomRightIn,
+  TopRightOut = 'TopRightOut',
+  BottomRightOut = 'BottomRightOut',
+  BottomRightIn = 'BottomRightIn',
 }
 
 export enum CarouselPaginationTheme {
-  Dark,
-  Light,
+  Dark = 'Dark',
+  Light = 'Light',
 }
 export class Carousel extends PureComponent<CarouselProps> {
   public static ViewAllButton = ViewAllButton;
@@ -190,17 +190,34 @@ const paginationPositionStyle: { [key in CarouselNavigationPosition]: FlattenSim
   `,
 };
 
+const navigationPositionStyle: { [key in CarouselNavigationPosition]: FlattenSimpleInterpolation } = {
+  [CarouselNavigationPosition.TopRightOut]: css`
+    top: 0;
+    transform: translateX(calc(-50% - 1px));
+  `,
+  [CarouselNavigationPosition.BottomRightOut]: css`
+    top: auto;
+    bottom: 33px;
+    transform: translateX(calc(-50% - 1px));
+  `,
+  [CarouselNavigationPosition.BottomRightIn]: css`
+    top: auto;
+    bottom: 47px;
+    transform: translateX(calc(-50% - 31px));
+  `,
+};
+
 const StyledSwiper = styled(Swiper)<StyledSwiperProps>`
   ${props =>
     props.lgSlidesSideOffset
-      ? css`
+      ? `
           padding-left: ${props.lgSlidesSideOffset}px;
           padding-right: ${props.lgSlidesSideOffset}px;
         `
       : ''};
   ${props =>
     props.smSlidesSideOffset
-      ? css`
+      ? `
           ${media.sm`
           padding-left: ${props.smSlidesSideOffset}px;
           padding-right: ${props.smSlidesSideOffset}px;
@@ -210,26 +227,7 @@ const StyledSwiper = styled(Swiper)<StyledSwiperProps>`
 
   .swiper-default-navigation {
     position: absolute;
-    ${props =>
-      props.navigationPosition === CarouselNavigationPosition.TopRightOut &&
-      css`
-        top: 0;
-        transform: translateX(calc(-50% - 1px));
-      `};
-    ${props =>
-      props.navigationPosition === CarouselNavigationPosition.BottomRightOut &&
-      css`
-        top: auto;
-        bottom: 33px;
-        transform: translateX(calc(-50% - 1px));
-      `};
-    ${props =>
-      props.navigationPosition === CarouselNavigationPosition.BottomRightIn &&
-      css`
-        top: auto;
-        bottom: 47px;
-        transform: translateX(calc(-50% - 31px));
-      `};
+    ${props => (props.navigationPosition ? navigationPositionStyle[props.navigationPosition] : '')}
     left: 50%;
     z-index: 1;
     width: ${props => (props.containerContentMaxWidth ? `calc(100% - ${32 * 2}px)` : '100%')};
@@ -240,60 +238,63 @@ const StyledSwiper = styled(Swiper)<StyledSwiperProps>`
   }
 
   ${props =>
-    !props.hasPagination &&
-    css`
-      .swiper-pagination {
-        display: none !important;
-      }
-    `};
+    !props.hasPagination
+      ? css`
+          .swiper-pagination {
+            display: none !important;
+          }
+        `
+      : ''};
 
   ${props =>
-    !props.hasNavigation &&
-    css`
-      .swiper-default-naviation,
-      .swiper-button-next,
-      .swiper-button-prev {
-        display: none !important;
-      }
-    `};
+    !props.hasNavigation
+      ? css`
+          .swiper-default-naviation,
+          .swiper-button-next,
+          .swiper-button-prev {
+            display: none !important;
+          }
+        `
+      : ''};
 
   ${props =>
-    props.hasNavigation &&
-    props.navigationPosition === CarouselNavigationPosition.BottomRightOut &&
-    css`
-      padding-bottom: 48px;
-    `};
+    (props.hasNavigation && props.navigationPosition === CarouselNavigationPosition.BottomRightOut) ||
+    (props.hasNavigation && props.hasPagination && props.navigationPosition === CarouselNavigationPosition.TopRightOut)
+      ? css`
+          padding-bottom: 48px;
+        `
+      : ''};
 
   ${props =>
-    props.hasNavigation &&
-    props.navigationPosition === CarouselNavigationPosition.TopRightOut &&
-    css`
-      padding-top: 48px;
-      margin-top: -48px;
-      padding-bottom: 48px;
-    `};
+    props.hasNavigation && props.navigationPosition === CarouselNavigationPosition.TopRightOut
+      ? css`
+          padding-top: 48px;
+          margin-top: -48px;
+        `
+      : ''};
 
   ${props =>
-    props.transparentPagination &&
-    css`
-      .swiper-button-next,
-      .swiper-button-prev {
-        opacity: 0 !important;
-        transition: opacity 0.2s !important;
-      }
-      &:hover {
-        .swiper-button-next,
-        .swiper-button-prev {
-          opacity: 1 !important;
-        }
-      }
-      @media (max-width: 632px) {
-        .swiper-button-next,
-        .swiper-button-prev {
-          opacity: 0 !important;
-        }
-      }
-    `}
+    props.transparentPagination
+      ? css`
+          .swiper-button-next,
+          .swiper-button-prev {
+            opacity: 0 !important;
+            transition: opacity 0.2s !important;
+          }
+          &:hover {
+            .swiper-button-next,
+            .swiper-button-prev {
+              opacity: 1 !important;
+            }
+          }
+          @media (max-width: 632px) {
+            .swiper-button-next,
+            .swiper-button-prev {
+              opacity: 0 !important;
+            }
+          }
+        `
+      : ''}
   .swiper-pagination {
     ${props => props.navigationPosition && paginationPositionStyle[props.navigationPosition]};
     display: flex;

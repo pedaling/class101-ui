@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -11,7 +12,7 @@ export default class ViewAllButton extends React.PureComponent<Partial<ButtonPro
     const { className, ...props } = this.props;
 
     return (
-      <AllButton color={ButtonColor.ORANGE_LIGHT} className={`swiper-slide ${className}`} {...props}>
+      <AllButton color={ButtonColor.ORANGE_LIGHT} className={classNames('swiper-slide', className)} {...props}>
         <Inner>
           <Add size={18} fillColor={orange600} />
           <Text>전체보기</Text>
