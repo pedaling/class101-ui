@@ -5,7 +5,7 @@ route: /components/carousel
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Carousel, Slide, SwiperNavigationPosition, SwiperPaginationTheme, Section, Colors } from '@class101/ui';
+import { Carousel, Slide, CarouselNavigationPosition, CarouselPaginationTheme, Section, Colors } from '@class101/ui';
 import { imageSrc } from './interface';
 import { PlayGroundBanner, PlayGroundSectionCarouselContent, SwiperCard, PreloadImage } from '../docsComponents';
 
@@ -20,7 +20,7 @@ import { PlayGroundBanner, PlayGroundSectionCarouselContent, SwiperCard, Preload
 ## Basic usage
 
 <Playground>
-  <Carousel freeMode={false}>
+  <Carousel swiperProps={{ freeMode: true }}>
     <Slide>
       <PlayGroundBanner fill backgroundColor={Colors.red100}>
         배너1
@@ -44,7 +44,7 @@ import { PlayGroundBanner, PlayGroundSectionCarouselContent, SwiperCard, Preload
 페이지네이션의 위치는 네비게이션 버튼 위치에 따라 정해집니다.
 
 ```ts
-enum SwiperNavigationPosition {
+enum CarouselNavigationPosition {
   TopRightOut,
   BottomRightOut,
   BottomRightIn,
@@ -58,10 +58,10 @@ enum SwiperNavigationPosition {
 <Playground>
   <Section title="섹션 타이틀">
     <Carousel
-      navigationPosition={SwiperNavigationPosition.TopRightOut}
+      navigationPosition={CarouselNavigationPosition.TopRightOut}
       lgSlidesPerView={4}
       smSlidesPerView={2}
-      hasPagination
+      pagination
     >
       <Slide>
         <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
@@ -107,10 +107,10 @@ enum SwiperNavigationPosition {
 
 <Playground>
   <Carousel
-    navigationPosition={SwiperNavigationPosition.BottomRightOut}
+    navigationPosition={CarouselNavigationPosition.BottomRightOut}
     lgSlidesPerView={4}
     smSlidesPerView={2}
-    hasPagination
+    pagination
   >
     <Slide>
       <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
@@ -137,9 +137,9 @@ enum SwiperNavigationPosition {
 
 <Playground>
   <Carousel
-    navigationPosition={SwiperNavigationPosition.BottomRightIn}
-    paginationTheme={SwiperPaginationTheme.Light}
-    hasPagination
+    navigationPosition={CarouselNavigationPosition.BottomRightIn}
+    paginationTheme={CarouselPaginationTheme.Light}
+    pagination
   >
     <Slide>
       <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
@@ -165,7 +165,7 @@ enum SwiperNavigationPosition {
 ### Navigation Container Max Width
 
 <Playground>
-  <Carousel navigationPosition={SwiperNavigationPosition.BottomRightIn} containerContentMaxWidth={560}>
+  <Carousel navigationPosition={CarouselNavigationPosition.BottomRightIn} containerContentMaxWidth={560}>
     <Slide>
       <PlayGroundBanner backgroundColor={Colors.blue100} style={{ display: 'flex', justifyContent: 'center' }}>
         <div style={{ width: '100%', maxWidth: 560, backgroundColor: 'yellow', height: 100 }}>배너1</div>
@@ -192,7 +192,7 @@ enum SwiperNavigationPosition {
 ## Pagination Theme
 
 ```ts
-enum SwiperPaginationTheme {
+enum CarouselPaginationTheme {
   Dark,
   Light,
 }
@@ -200,10 +200,10 @@ enum SwiperPaginationTheme {
 
 <Playground>
   <Carousel
-    navigationPosition={SwiperNavigationPosition.BottomRightIn}
-    paginationTheme={SwiperPaginationTheme.Dark}
-    freeMode={false}
-    hasPagination
+    navigationPosition={CarouselNavigationPosition.BottomRightIn}
+    paginationTheme={CarouselPaginationTheme.Dark}
+    swiperProps={{ freeMode: false }}
+    pagination
   >
     <Slide>
       <PlayGroundBanner backgroundColor={Colors.red100} onClick={() => alert('clicked')}>
@@ -222,10 +222,10 @@ enum SwiperPaginationTheme {
     </Slide>
   </Carousel>
   <Carousel
-    navigationPosition={SwiperNavigationPosition.BottomRightIn}
-    paginationTheme={SwiperPaginationTheme.Light}
-    freeMode={false}
-    hasPagination
+    navigationPosition={CarouselNavigationPosition.BottomRightIn}
+    paginationTheme={CarouselPaginationTheme.Light}
+    swiperProps={{ freeMode: false }}
+    pagination
   >
     <Slide>
       <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
@@ -243,10 +243,10 @@ enum SwiperPaginationTheme {
 
 <Playground>
   <Carousel
-    navigationPosition={SwiperNavigationPosition.BottomRightIn}
-    paginationTheme={SwiperPaginationTheme.Light}
-    loop
-    hasPagination
+    navigationPosition={CarouselNavigationPosition.BottomRightIn}
+    paginationTheme={CarouselPaginationTheme.Light}
+    swiperProps={{ freeMode: true, loop: true }}
+    pagination
   >
     <Slide>
       <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
@@ -259,11 +259,10 @@ enum SwiperPaginationTheme {
     </Slide>
   </Carousel>
   <Carousel
-    navigationPosition={SwiperNavigationPosition.BottomRightIn}
-    paginationTheme={SwiperPaginationTheme.Light}
-    freeMode={true}
-    loop
-    hasPagination
+    navigationPosition={CarouselNavigationPosition.BottomRightIn}
+    paginationTheme={CarouselPaginationTheme.Light}
+    swiperProps={{ freeMode: false, loop: true }}
+    pagination
   >
     <Slide>
       <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
@@ -283,13 +282,15 @@ enum SwiperPaginationTheme {
 
 <Playground>
   <Carousel
-    navigationPosition={SwiperNavigationPosition.BottomRightIn}
-    paginationTheme={SwiperPaginationTheme.Light}
-    autoplay={{
-      delay: 6000,
-      disableOnInteraction: false,
+    navigationPosition={CarouselNavigationPosition.BottomRightIn}
+    paginationTheme={CarouselPaginationTheme.Light}
+    swiperProps={{
+      autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+      },
     }}
-    hasPagination
+    pagination
   >
     <Slide>
       <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
@@ -307,13 +308,16 @@ enum SwiperPaginationTheme {
 
 <Playground>
   <Carousel
-    navigationPosition={SwiperNavigationPosition.BottomRightIn}
-    paginationTheme={SwiperPaginationTheme.Light}
+    navigationPosition={CarouselNavigationPosition.BottomRightIn}
+    paginationTheme={CarouselPaginationTheme.Light}
     lgSlidesPerView={4}
     smSlidesPerView={2}
     smSlidesSideOffset={24}
+    swiperProps={{
+      slideToClickedSlide: true,
+    }}
     slideToClickedSlide
-    hasPagination
+    pagination
   >
     <Slide>
       <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
@@ -347,10 +351,10 @@ enum SwiperPaginationTheme {
 <Playground>
   <Section title="섹션 타이틀">
     <Carousel
-      navigationPosition={SwiperNavigationPosition.TopRightOut}
+      navigationPosition={CarouselNavigationPosition.TopRightOut}
       lgSlidesPerView={4}
       smSlidesPerView={2}
-      hasPagination
+      pagination
     >
       <Slide>
         <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
@@ -384,11 +388,11 @@ enum SwiperPaginationTheme {
   <Section title="섹션 타이틀">
     <PlayGroundSectionCarouselContent>
       <Carousel
-        navigationPosition={SwiperNavigationPosition.TopRightOut}
+        navigationPosition={CarouselNavigationPosition.TopRightOut}
         lgSlidesPerView={4}
         smSlidesPerView={2}
         smSlidesSideOffset={24}
-        hasPagination
+        pagination
       >
         <Slide>
           <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
@@ -478,7 +482,7 @@ loop 모드
       render() {
         return (
           <div>
-            <Carousel onChangeSlides={(index) => this.setState({ currentIndex: index })} activeSlideIndex={this.state.currentIndex} loop>
+            <Carousel onChangeSlides={(index) => this.setState({ currentIndex: index })} activeSlideIndex={this.state.currentIndex} swiperProps={{loop: true}}>
               <Slide><PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner></Slide>
               <Slide><PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner></Slide>
               <Slide><PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner></Slide>

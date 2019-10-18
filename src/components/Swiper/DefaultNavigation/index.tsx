@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { elevation1 } from '../../../core/ElevationStyles';
 import { ChevronRight } from '../../../Icon';
@@ -16,23 +16,7 @@ export const DefaultNavigation = () => {
   );
 };
 
-export default class NavigationButton extends React.PureComponent<Props> {
-  public render() {
-    const { direction, onClick, className, disabled } = this.props;
-    return (
-      <Button
-        color={ButtonColor.WHITE}
-        onClick={onClick}
-        direction={direction}
-        className={className}
-        disabled={disabled}
-        icon={<ChevronRight />}
-      />
-    );
-  }
-}
-
-const navigationDirectionStyle = {
+const navigationDirectionStyle: { [direaction: string]: any } = {
   right: css`
     left: auto;
     right: 0;
@@ -58,7 +42,7 @@ const Button = styled(IconButton)<{ direction: string }>`
   ${elevation1}
   position: absolute;
   top: 0;
-  ${props => navigationDirectionStyle[props.direction]};
+  ${props => props.direction && navigationDirectionStyle[props.direction]};
   &:focus {
     outline: none;
   }
