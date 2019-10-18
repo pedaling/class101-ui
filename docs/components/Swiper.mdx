@@ -10,7 +10,7 @@ import { PlayGroundBanner } from '../docsComponents';
 
 # Swiper
 
-[Swiper](https://swiperjs.com)를 래핑한 컴포넌트입니다.
+[swiper api: Events](https://idangero.us/swiper/api/#events)
 
 ## Props
 
@@ -36,51 +36,7 @@ import { PlayGroundBanner } from '../docsComponents';
       </PlayGroundBanner>
     </Slide>
   </Swiper>
-</Playground>
-
-## Navigation
-
-<Playground>
   <Swiper navigationChildren={<ArrowNavigation />}>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.red100} fill>
-        배너1
-      </PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.red200} fill>
-        배너2
-      </PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.red300} fill>
-        배너3
-      </PlayGroundBanner>
-    </Slide>
-  </Swiper>
-  <Swiper navigationChildren={<DefaultNavigation />}>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.red100} fill>
-        배너1
-      </PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.red200} fill>
-        배너2
-      </PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.red300} fill>
-        배너3
-      </PlayGroundBanner>
-    </Slide>
-  </Swiper>
-</Playground>
-
-## Pagination
-
-<Playground>
-  <Swiper paginationChildren={<div className="swiper-pagination" />}>
     <Slide>
       <PlayGroundBanner backgroundColor={Colors.red100} fill>
         배너1
