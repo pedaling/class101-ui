@@ -1,50 +1,71 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, ReactNode } from 'react';
+import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
-import { SIZES } from '../../core/BreakPoints';
-import { Swiper, SwiperInstance, SwiperNavigationPosition, SwiperPaginationTheme, SwiperProps } from '../Swiper';
+import { media, SIZES } from '../../core/BreakPoints';
+import { gray700, white } from '../../core/Colors';
+import { Swiper, SwiperInstance, SwiperProps } from '../Swiper';
 import ViewAllButton from './ViewAllButton';
 
 type SlidesPerView = 'auto' | 1 | 2 | 3 | 4 | 6;
 
-type UsingSwiperProps = Pick<
-  SwiperProps,
-  | 'containerContentMaxWidth'
-  | 'hasPagination'
-  | 'hasNavigation'
-  | 'paginationTheme'
-  | 'freeMode'
-  | 'autoplay'
-  | 'loop'
-  | 'customNavigation'
-  | 'customPagination'
-  | 'children'
-  | 'slideToClickedSlide'
-  | 'speed'
-  | 'getSwiperInstance'
-  | 'observer'
-  | 'lgSlidesSideOffset'
-  | 'smSlidesSideOffset'
+type SwiperPropsForCaorusel = Partial<
+  Pick<
+    SwiperProps,
+    | 'freeMode'
+    | 'autoplay'
+    | 'loop'
+    | 'children'
+    | 'slideToClickedSlide'
+    | 'speed'
+    | 'getSwiperInstance'
+    | 'observer'
+    | 'centeredSlides'
+    | 'paginationChildren'
+    | 'navigationChildren'
+  >
 >;
 
-export interface OwnCarouselProps {
+export interface CarouselProps {
+  swiperProps: SwiperPropsForCaorusel;
+  className?: string;
   lgSlidesPerView: SlidesPerView;
   smSlidesPerView: SlidesPerView;
   lgSpaceBetween?: boolean;
   smSpaceBetween?: boolean;
-  className?: string;
-  onChangeSlides?: (index: number) => void;
+  lgSlidesSideOffset: number;
+  smSlidesSideOffset: number;
   activeSlideIndex?: number;
+  onChangeSlide?: (index: number) => void;
+  onTouchEnd?: () => void;
+  paginationTheme?: CarouselPaginationTheme;
+  navigationPosition?: CarouselNavigationPosition;
+  transparentPagination?: boolean;
+  containerContentMaxWidth?: number;
+  pagination?: boolean;
+  navigation?: boolean;
 }
 
-export type CarouselProps = UsingSwiperProps & OwnCarouselProps;
-export type CarouselNavigationPosition = SwiperNavigationPosition;
-export type CarouselPaginationTheme = SwiperPaginationTheme;
+export enum CarouselNavigationPosition {
+  TopRightOut,
+  BottomRightOut,
+  BottomRightIn,
+}
 
+export enum CarouselPaginationTheme {
+  Dark,
+  Light,
+}
 export class Carousel extends PureComponent<CarouselProps> {
   public static ViewAllButton = ViewAllButton;
   public static defaultProps = {
     lgSlidesPerView: 1,
     smSlidesPerView: 1,
+    lgSlidesSideOffset: 0,
+    smSlidesSideOffset: 0,
+    navigation: true,
+    navigationPosition: CarouselNavigationPosition.TopRightOut,
+    pagination: false,
+    paginationTheme: CarouselPaginationTheme.Dark,
   };
 
   private swiper?: SwiperInstance;
@@ -62,41 +83,74 @@ export class Carousel extends PureComponent<CarouselProps> {
   }
 
   public render() {
-    const { children } = this.props;
+    const {
+      children,
+      navigation,
+      pagination,
+      navigationPosition,
+      transparentPagination,
+      containerContentMaxWidth,
+      paginationTheme,
+      lgSlidesSideOffset,
+      smSlidesSideOffset,
+      className,
+    } = this.props;
+
     const swiperParams = this.getSwiperParams();
-    return <Swiper {...swiperParams}>{children}</Swiper>;
+
+    return (
+      <StyledSwiper
+        className={className}
+        hasNavigation={navigation}
+        hasPagination={pagination}
+        navigationPosition={navigationPosition}
+        transparentPagination={transparentPagination}
+        containerContentMaxWidth={containerContentMaxWidth}
+        paginationTheme={paginationTheme}
+        lgSlidesSideOffset={lgSlidesSideOffset}
+        smSlidesSideOffset={smSlidesSideOffset}
+        {...swiperParams}
+      >
+        {children}
+      </StyledSwiper>
+    );
   }
 
   private handleGetSwiperInstance = (swiper: SwiperInstance) => {
     this.swiper = swiper;
-    if (this.props.getSwiperInstance) {
-      this.props.getSwiperInstance(swiper);
-    }
   };
 
   private goToSlides = (index: number) => {
     if (this.swiper) {
-      if (this.props.loop) {
+      if (this.props && this.props.swiperProps.loop) {
         return this.swiper.slideToLoop(index);
       }
       this.swiper.slideTo(index);
     }
   };
 
-  private onChange = () => {
-    const { onChangeSlides } = this.props;
-    if (this.swiper && onChangeSlides) {
-      onChangeSlides(this.swiper.realIndex);
+  private handelChangeSlide = () => {
+    const { onChangeSlide } = this.props;
+    if (this.swiper && onChangeSlide) {
+      onChangeSlide(this.swiper.realIndex);
+    }
+  };
+
+  private handleTouchEnd = () => {
+    const { onTouchEnd } = this.props;
+    if (this.swiper && onTouchEnd) {
+      onTouchEnd();
     }
   };
 
   private getSwiperParams = (): Partial<SwiperProps> => {
-    const { lgSlidesPerView, smSlidesPerView, lgSpaceBetween, smSpaceBetween, activeSlideIndex, ...props } = this.props;
+    const { swiperProps, lgSlidesPerView, smSlidesPerView, lgSpaceBetween, smSpaceBetween } = this.props;
 
     const params: Partial<SwiperProps> = {
-      ...props,
+      ...swiperProps,
       on: {
-        slideChange: this.onChange,
+        slideChange: this.handelChangeSlide,
+        touchEnd: this.handleTouchEnd,
       },
       slidesPerView: lgSlidesPerView,
       spaceBetween: lgSpaceBetween || (typeof lgSlidesPerView !== 'number' || lgSlidesPerView !== 1) ? 24 : 0,
@@ -111,3 +165,152 @@ export class Carousel extends PureComponent<CarouselProps> {
     return params;
   };
 }
+
+type StyledSwiperProps = Partial<
+  Pick<
+    CarouselProps,
+    | 'navigationPosition'
+    | 'transparentPagination'
+    | 'containerContentMaxWidth'
+    | 'paginationTheme'
+    | 'lgSlidesSideOffset'
+    | 'smSlidesSideOffset'
+  >
+> & { hasPagination?: boolean; hasNavigation?: boolean };
+
+const paginationPositionStyle: { [key in CarouselNavigationPosition]: FlattenSimpleInterpolation } = {
+  [CarouselNavigationPosition.TopRightOut]: css`
+    bottom: 16px;
+  `,
+  [CarouselNavigationPosition.BottomRightOut]: css`
+    bottom: 8px;
+  `,
+  [CarouselNavigationPosition.BottomRightIn]: css`
+    bottom: 16px;
+  `,
+};
+
+const StyledSwiper = styled(Swiper)<StyledSwiperProps>`
+  ${props =>
+    props.lgSlidesSideOffset
+      ? css`
+          padding-left: ${props.lgSlidesSideOffset}px;
+          padding-right: ${props.lgSlidesSideOffset}px;
+        `
+      : ''};
+  ${props =>
+    props.smSlidesSideOffset
+      ? css`
+          ${media.sm`
+          padding-left: ${props.smSlidesSideOffset}px;
+          padding-right: ${props.smSlidesSideOffset}px;
+          `};
+        `
+      : ''};
+
+  .swiper-default-navigation {
+    position: absolute;
+    ${props =>
+      props.navigationPosition === CarouselNavigationPosition.TopRightOut &&
+      css`
+        top: 0;
+        transform: translateX(calc(-50% - 1px));
+      `};
+    ${props =>
+      props.navigationPosition === CarouselNavigationPosition.BottomRightOut &&
+      css`
+        top: auto;
+        bottom: 33px;
+        transform: translateX(calc(-50% - 1px));
+      `};
+    ${props =>
+      props.navigationPosition === CarouselNavigationPosition.BottomRightIn &&
+      css`
+        top: auto;
+        bottom: 47px;
+        transform: translateX(calc(-50% - 31px));
+      `};
+    left: 50%;
+    z-index: 1;
+    width: ${props => (props.containerContentMaxWidth ? `calc(100% - ${32 * 2}px)` : '100%')};
+    ${props => props.containerContentMaxWidth && `max-width: ${props.containerContentMaxWidth + 32 * 2}px`};
+    ${media.sm`
+      display: none;
+    `};
+  }
+
+  ${props =>
+    !props.hasPagination &&
+    css`
+      .swiper-pagination {
+        display: none !important;
+      }
+    `};
+
+  ${props =>
+    !props.hasNavigation &&
+    css`
+      .swiper-default-naviation,
+      .swiper-button-next,
+      .swiper-button-prev {
+        display: none !important;
+      }
+    `};
+
+  ${props =>
+    props.hasNavigation &&
+    props.navigationPosition === CarouselNavigationPosition.BottomRightOut &&
+    css`
+      padding-bottom: 48px;
+    `};
+
+  ${props =>
+    props.hasNavigation &&
+    props.navigationPosition === CarouselNavigationPosition.TopRightOut &&
+    css`
+      padding-top: 48px;
+      margin-top: -48px;
+      padding-bottom: 48px;
+    `};
+
+  ${props =>
+    props.transparentPagination &&
+    css`
+      .swiper-button-next,
+      .swiper-button-prev {
+        opacity: 0 !important;
+        transition: opacity 0.2s !important;
+      }
+      &:hover {
+        .swiper-button-next,
+        .swiper-button-prev {
+          opacity: 1 !important;
+        }
+      }
+      @media (max-width: 632px) {
+        .swiper-button-next,
+        .swiper-button-prev {
+          opacity: 0 !important;
+        }
+      }
+    `}
+  .swiper-pagination {
+    ${props => props.navigationPosition && paginationPositionStyle[props.navigationPosition]};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .swiper-pagination-bullet {
+    width: 6px;
+    height: 6px;
+    margin: 0 8px;
+    border-radius: 3px;
+    background-color: ${props => (props.paginationTheme === CarouselPaginationTheme.Light ? white : gray700)};
+    opacity: 0.56;
+  }
+  .swiper-pagination-bullet-active {
+    width: 24px;
+    background-color: ${props => (props.paginationTheme === CarouselPaginationTheme.Light ? white : gray700)};
+    opacity: 1;
+  }
+`;

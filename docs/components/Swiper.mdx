@@ -5,16 +5,7 @@ route: /components/swiper
 ---
 
 import { Playground, PropsTable } from 'docz';
-import {
-  Swiper,
-  Slide,
-  Colors,
-  ArrowNavigation,
-  DefaultNavigation,
-  SwiperNavigationPosition,
-  SwiperPaginationTheme,
-  Section,
-} from '@class101/ui';
+import { Swiper, Slide, Colors, ArrowNavigation, DefaultNavigation, Section } from '@class101/ui';
 import { PlayGroundBanner } from '../docsComponents';
 
 # Swiper
@@ -47,32 +38,10 @@ import { PlayGroundBanner } from '../docsComponents';
   </Swiper>
 </Playground>
 
-<Playground>
-  <Section title="섹션 타이틀">
-    <Swiper>
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.red100} fill>
-          배너1
-        </PlayGroundBanner>
-      </Slide>
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.red200} fill>
-          배너2
-        </PlayGroundBanner>
-      </Slide>
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.red300} fill>
-          배너3
-        </PlayGroundBanner>
-      </Slide>
-    </Swiper>
-  </Section>
-</Playground>
-
-## Swiper Navigation Position
+## Navigation
 
 <Playground>
-  <Swiper navigationPosition={SwiperNavigationPosition.TopRightOut}>
+  <Swiper navigationChildren={<ArrowNavigation />}>
     <Slide>
       <PlayGroundBanner backgroundColor={Colors.red100} fill>
         배너1
@@ -89,24 +58,7 @@ import { PlayGroundBanner } from '../docsComponents';
       </PlayGroundBanner>
     </Slide>
   </Swiper>
-  <Swiper navigationPosition={SwiperNavigationPosition.BottomRightIn}>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.red100} fill>
-        배너1
-      </PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.red200} fill>
-        배너2
-      </PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.red300} fill>
-        배너3
-      </PlayGroundBanner>
-    </Slide>
-  </Swiper>
-  <Swiper navigationPosition={SwiperNavigationPosition.BottomRightOut} paginationTheme={SwiperPaginationTheme.Dark}>
+  <Swiper navigationChildren={<DefaultNavigation />}>
     <Slide>
       <PlayGroundBanner backgroundColor={Colors.red100} fill>
         배너1
@@ -125,32 +77,10 @@ import { PlayGroundBanner } from '../docsComponents';
   </Swiper>
 </Playground>
 
-## Container Content Max Width
+## Pagination
 
 <Playground>
-  <Swiper containerContentMaxWidth={200}>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.red100} fill>
-        배너1
-      </PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.red200} fill>
-        배너2
-      </PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.red300} fill>
-        배너3
-      </PlayGroundBanner>
-    </Slide>
-  </Swiper>
-</Playground>
-
-## Arrow Navigation
-
-<Playground>
-  <Swiper customNavigation={<ArrowNavigation />} transparentPagination>
+  <Swiper paginationChildren={<div className="swiper-pagination" />}>
     <Slide>
       <PlayGroundBanner backgroundColor={Colors.red100} fill>
         배너1
