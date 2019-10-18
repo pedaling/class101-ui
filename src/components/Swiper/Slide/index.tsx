@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 
 export interface SlideProps {
@@ -6,5 +7,5 @@ export interface SlideProps {
 }
 
 export const Slide = (props: SlideProps) => {
-  return <div className={`swiper-slide ${props.className}`}>{props.children}</div>;
+  return <div className={classNames('swiper-slide', props.className)}>{props.children}</div>;
 };
