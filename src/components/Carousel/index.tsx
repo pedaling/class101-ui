@@ -26,7 +26,7 @@ type SwiperPropsForCaorusel = Partial<
 >;
 
 export interface CarouselProps {
-  swiperProps: SwiperPropsForCaorusel;
+  swiperProps?: SwiperPropsForCaorusel;
   className?: string;
   lgSlidesPerView: SlidesPerView;
   smSlidesPerView: SlidesPerView;
@@ -122,7 +122,7 @@ export class Carousel extends PureComponent<CarouselProps> {
 
   private goToSlides = (index: number) => {
     if (this.swiper) {
-      if (this.props && this.props.swiperProps.loop) {
+      if (this.props.swiperProps && this.props.swiperProps.loop) {
         return this.swiper.slideToLoop(index);
       }
       this.swiper.slideTo(index);
