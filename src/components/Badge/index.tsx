@@ -8,7 +8,7 @@ type Size = 'sm' | 'md';
 interface BadgeTextProps {
   backgroundColor?: string;
   pill?: boolean;
-  size?: Size;
+  size?: Size | number;
   className?: string;
 }
 
@@ -42,8 +42,8 @@ const minWidthBySize: { [key in Size]: number } = {
   md: 20,
 };
 
-const containerStyle = (size: Size = 'md', pill: boolean = false) => {
-  const minWidth = minWidthBySize[size];
+const containerStyle = (size: Size | number = 'md', pill: boolean = false) => {
+  const minWidth = typeof size === 'number' ? size : minWidthBySize[size];
   return css`
     min-width: ${minWidth}px;
     height: ${minWidth}px;
