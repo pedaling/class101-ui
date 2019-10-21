@@ -37,6 +37,7 @@ interface State {
   mounted: boolean;
   opened: boolean;
   scrollbarWidth: number;
+  viewPortHeight: number;
 }
 
 export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State> {
@@ -63,6 +64,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     mounted: this.props.noSsr,
     opened: false,
     scrollbarWidth: 0,
+    viewPortHeight: 0,
   };
 
   private unmountScrollTimeout?: number;
@@ -71,7 +73,12 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     this.setState({
       mounted: true,
       scrollbarWidth: this.getScrollbarWidth(),
+      viewPortHeight: this.getViewPortHeight(),
     });
+
+    if (isClient()) {
+      window.addEventListener('resize', this.setViewPortHeight);
+    }
   }
 
   public componentDidUpdate(prevProps: ModalBottomSheetProps, prevState: State) {
@@ -91,6 +98,10 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
   public componentWillUnmount() {
     if (this.unmountScrollTimeout) {
       clearTimeout(this.unmountScrollTimeout);
+    }
+
+    if (isClient()) {
+      window.removeEventListener('resize', this.setViewPortHeight);
     }
 
     this.enableBodyScroll();
@@ -113,7 +124,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
       successAttributes,
       cancelAttributes,
     } = this.props;
-    const { mounted, opened } = this.state;
+    const { mounted, opened, viewPortHeight } = this.state;
 
     if (!mounted || isServer()) {
       return opener || <React.Fragment />;
@@ -132,7 +143,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
         {clonedOpener}
         <Portal container={document.body}>
           <Container zIndex={zIndex} visible={opened} onClick={closeable ? this.handleCloseModal : undefined}>
-            <Dialog visible={opened} onClick={this.blockPropagation} style={modalStyle}>
+            <Dialog visible={opened} onClick={this.blockPropagation} style={modalStyle} viewPortHeight={viewPortHeight}>
               <DialogHead>
                 <DialogTitle>
                   {title.split('\n').reduce(
@@ -229,6 +240,19 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     return scrollbarWidth;
   };
 
+  private getViewPortHeight = () => {
+    if (isServer()) {
+      return 0;
+    }
+    return window.innerHeight;
+  };
+
+  private setViewPortHeight = () => {
+    this.setState({
+      viewPortHeight: this.getViewPortHeight(),
+    });
+  };
+
   private blockPropagation = (e: React.SyntheticEvent) => {
     e.stopPropagation();
   };
@@ -274,7 +298,7 @@ const Container = styled.div<{ zIndex: number; visible: boolean }>`
   `}
 `;
 
-const Dialog = styled.div<{ visible: boolean }>`
+const Dialog = styled.div<{ visible: boolean; viewPortHeight: number }>`
   display: flex;
   flex-direction: column;
   padding: 32px;
@@ -293,7 +317,7 @@ const Dialog = styled.div<{ visible: boolean }>`
     padding-bottom: calc(env(safe-area-inset-bottom) + 24px);
     width: 100%;
     min-height: 240px;
-    max-height: calc(100vh - 48px);
+    max-height: ${props => (props.viewPortHeight > 48 ? `${props.viewPortHeight - 48}px` : `calc(100vh - 48px)`)}
     height: auto;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
