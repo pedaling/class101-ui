@@ -1,0 +1,36 @@
+---
+menu: Components
+name: Avatar
+route: /components/avatar
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Avatar, AvatarSize, Icon, Colors, Badge } from '@class101/ui';
+import { IMAGE_URL, IMAGE_URL_2 } from './Avatar';
+
+# Avatar
+
+Avatar
+
+## Props
+
+<PropsTable of={Avatar} />
+
+## Basic usage
+
+<Playground>
+  <Avatar src={IMAGE_URL} />
+  <Avatar
+    size={AvatarSize.LARGE}
+    src={IMAGE_URL_2}
+    icon={
+      <Badge backgroundColor={Colors.orange600} pill>
+        <Icon.Crown fillColor={Colors.white} />
+      </Badge>
+    }
+  />
+  <Avatar text="가나다라" />
+  <Avatar size={AvatarSize.SMALL} src={IMAGE_URL_2} icon={<Icon.Heart fillColor={Colors.orange600} />} />
+  <Avatar size={64} src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} />
+  <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} />
+</Playground>
