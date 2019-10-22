@@ -9,10 +9,11 @@ export enum AvatarSize {
   LARGE = 'lg',
 }
 
-export interface AvatarProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+export interface AvatarProps {
   size: AvatarSize | number;
   iconRatio: number;
   src?: string;
+  imageAttributes?: React.ImgHTMLAttributes<HTMLImageElement>;
   className?: string;
   text?: string;
   icon?: React.ReactElement<{ size: number }>;
@@ -25,7 +26,7 @@ export class Avatar extends PureComponent<AvatarProps> {
   };
 
   public render() {
-    const { size, src, text, className, icon, iconRatio, ...imgProps } = this.props;
+    const { size, src, text, className, icon, iconRatio, imageAttributes } = this.props;
     const avatarSize = typeof size === 'number' ? size : avatarSizeBySize[size];
 
     const sizedIcon = icon && React.cloneElement(icon, { size: avatarSize * iconRatio });
@@ -33,7 +34,7 @@ export class Avatar extends PureComponent<AvatarProps> {
     return (
       <Container size={avatarSize} className={className}>
         {src ? (
-          <AvatarImage src={src} {...imgProps} />
+          <AvatarImage src={src} {...imageAttributes} />
         ) : (
           text && <TextWrapper>{text.substr(0, 2).toUpperCase()}</TextWrapper>
         )}
