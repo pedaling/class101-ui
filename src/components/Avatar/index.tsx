@@ -59,6 +59,7 @@ const Container = styled.span<{ size: number }>`
   border-radius: 50%;
   background: ${Colors.gray100};
   text-align: center;
+  vertical-align: top;
 `;
 
 const AvatarImage = styled.img`
