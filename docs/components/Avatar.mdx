@@ -20,6 +20,17 @@ Avatar
 
 <Playground>
   <Avatar src={IMAGE_URL} />
+  <Avatar text="가나다라" />
+  <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} />
+</Playground>
+
+## With Icon
+
+Avatar의 icon에 들어가는 컴포넌트는 자동적으로 size={number}를 주입받습니다.
+
+`<Badge />`나 `<Icon />` 컴포넌트를 넣는 것을 추천합니다.
+
+<Playground>
   <Avatar
     size={AvatarSize.LARGE}
     src={IMAGE_URL_2}
@@ -29,8 +40,6 @@ Avatar
       </Badge>
     }
   />
-  <Avatar text="가나다라" />
   <Avatar size={AvatarSize.SMALL} src={IMAGE_URL_2} icon={<Icon.Heart fillColor={Colors.orange600} />} />
   <Avatar size={64} src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} />
-  <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} />
 </Playground>
