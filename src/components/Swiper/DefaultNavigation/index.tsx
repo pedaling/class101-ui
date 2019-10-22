@@ -24,16 +24,15 @@ const Button = styled(IconButton)<{ direction: 'right' | 'left' }>`
   ${elevation1};
   position: absolute;
   top: 0;
+  left: auto;
   ${props =>
     props.direction === 'right'
       ? `
-      left: auto;
       right: 0;
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
       `
       : `
-      left: auto;
       right: ${NAVIGATION_BUTTON_SIZE}px;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;

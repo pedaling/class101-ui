@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import React, { FC, ReactNode, useEffect, useMemo, useRef, MutableRefObject } from 'react';
+import { omit } from 'lodash';
+import React, { createRef, PureComponent, ReactNode } from 'react';
 import { SwiperOptions } from 'swiper';
 import { Autoplay, Navigation, Pagination, Swiper as OriginalSwiper } from 'swiper/dist/js/swiper.esm.js';
 
@@ -20,58 +21,55 @@ export interface SwiperProps extends SwiperOptions {
 
 const generateId = createUniqIDGenerator('swiper-');
 
-export const Swiper: FC<SwiperProps> = ({
-  getSwiperInstance,
-  className,
-  children,
-  navigationChildren,
-  paginationChildren,
-  ...swiperOptions
-}) => {
-  const swiperRef: MutableRefObject<OriginalSwiper | null> = useRef(null);
-  const swiperOptionsRef: MutableRefObject<SwiperOptions> = useRef(swiperOptions);
-  const containerId = useMemo(() => generateId(), []);
+export class Swiper extends PureComponent<SwiperProps> {
+  public static defaultProps = {
+    paginationChildren: <div className="swiper-pagination" />,
+    navigationChildren: <DefaultNavigation />,
+    freeMode: false,
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullets',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    threshold: 10,
+    speed: 400,
+  };
 
-  useEffect(() => {
-    swiperRef.current = new OriginalSwiper(`#${containerId}`, swiperOptionsRef.current);
-    return () => {
-      if (swiperRef.current) {
-        swiperRef.current.destroy(true, true);
-      }
-    };
-  }, [containerId, swiperRef, swiperOptionsRef]);
+  private swiperInstance?: OriginalSwiper;
 
-  useEffect(() => {
-    if (getSwiperInstance && swiperRef.current) {
-      getSwiperInstance(swiperRef.current);
+  private containerRef = createRef<HTMLDivElement>();
+
+  private containerId = generateId();
+
+  public componentDidMount() {
+    this.swiperInstance = new OriginalSwiper(
+      `#${this.containerId}`,
+      omit(this.props, ['getSwiperInstance', 'className', 'children', 'navigationChildren', 'paginationChildren'])
+    );
+    if (this.props.getSwiperInstance) {
+      this.props.getSwiperInstance(this.swiperInstance);
     }
-  }, [getSwiperInstance, swiperRef]);
+  }
 
-  return (
-    <div id={containerId} className={classNames('swiper-container', className)}>
-      <div className="swiper-wrapper">{children}</div>
-      {navigationChildren}
-      {paginationChildren}
-    </div>
-  );
-};
+  public componentWillUnmount() {
+    if (this.swiperInstance) {
+      this.swiperInstance.destroy(true, true);
+    }
+  }
 
-Swiper.defaultProps = {
-  paginationChildren: <div className="swiper-pagination" />,
-  navigationChildren: <DefaultNavigation />,
-  loop: false,
-  slideToClickedSlide: false,
-  freeMode: true,
-  pagination: {
-    el: '.swiper-pagination',
-    type: 'bullets',
-    clickable: true,
-  },
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-  threshold: 10,
-  speed: 400,
-  className: '',
-} as Partial<SwiperProps>;
+  public render() {
+    const { className, children, navigationChildren, paginationChildren } = this.props;
+
+    return (
+      <div id={this.containerId} className={classNames('swiper-container', className)} ref={this.containerRef}>
+        <div className="swiper-wrapper">{children}</div>
+        {navigationChildren}
+        {paginationChildren}
+      </div>
+    );
+  }
+}
