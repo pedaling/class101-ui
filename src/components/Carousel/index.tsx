@@ -209,17 +209,17 @@ const navigationPositionStyle: { [key in CarouselNavigationPosition]: FlattenSim
 const StyledSwiper = styled(Swiper)<StyledSwiperProps>`
   ${props =>
     props.lgSlidesSideOffset
-      ? `
+      ? css`
           padding-left: ${props.lgSlidesSideOffset}px;
           padding-right: ${props.lgSlidesSideOffset}px;
         `
       : ''};
   ${props =>
     props.smSlidesSideOffset
-      ? `
+      ? css`
           ${media.sm`
-          padding-left: ${props.smSlidesSideOffset}px;
-          padding-right: ${props.smSlidesSideOffset}px;
+            padding-left: ${props.smSlidesSideOffset}px;
+            padding-right: ${props.smSlidesSideOffset}px;
           `};
         `
       : ''};
