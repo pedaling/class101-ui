@@ -22,7 +22,7 @@ src가 없거나 이미지 로딩에 실패했을 때 text가 보이게 됩니�
 
 <Playground>
   <Avatar src={IMAGE_URL} />
-  <Avatar src="invaild_url" text="가나다라" />
+  <Avatar src="invaild_url" text="가나다라" onClick={() => alert('click')} />
   <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} />
 </Playground>
 
@@ -60,7 +60,7 @@ iconPosition으로 아이콘이 위치할 곳을 정할 수 있습니다.
   <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} iconPosition="bottom-right" />
   <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} iconPosition="left" />
   <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} iconPosition="right" />
-  <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} iconPosition="top" />
   <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} iconPosition="top-left" />
+  <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} iconPosition="top" />
   <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} iconPosition="top-right" />
 </Playground>

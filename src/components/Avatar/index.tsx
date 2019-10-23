@@ -24,10 +24,14 @@ export interface AvatarProps {
   iconRatio: number;
   iconPosition: AvatarIconPosition;
   src?: string;
-  imageAttributes?: React.ImgHTMLAttributes<HTMLImageElement>;
+  srcSet?: string;
+  alt?: string;
   className?: string;
   text?: string;
   icon?: React.ReactElement<{ size: number }>;
+  onClick?: React.MouseEventHandler<HTMLSpanElement>;
+  onIconClick?: React.MouseEventHandler<HTMLDivElement>;
+  onError?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
 }
 
 interface AvatarState {
@@ -46,7 +50,7 @@ export class Avatar extends PureComponent<AvatarProps, AvatarState> {
   };
 
   public render() {
-    const { size, src, text, className, icon, iconRatio, iconPosition, imageAttributes } = this.props;
+    const { size, src, text, className, icon, iconRatio, iconPosition, srcSet, alt, onClick, onIconClick } = this.props;
     const { isError } = this.state;
 
     const avatarSize = typeof size === 'number' ? size : avatarSizeBySize[size];
@@ -54,26 +58,28 @@ export class Avatar extends PureComponent<AvatarProps, AvatarState> {
     const sizedIcon = icon && React.cloneElement(icon, { size: avatarSize * iconRatio });
 
     return (
-      <Container size={avatarSize} className={className}>
+      <Container onClick={onClick} size={avatarSize} className={className}>
         {src && !isError ? (
-          <AvatarImage src={src} {...imageAttributes} onError={this.handleImageError} />
+          <AvatarImage src={src} srcSet={srcSet} alt={alt} onError={this.handleImageError} />
         ) : (
           text && <TextWrapper>{text.substr(0, 2).toUpperCase()}</TextWrapper>
         )}
-        {sizedIcon && <IconWrapper position={iconPosition}>{sizedIcon}</IconWrapper>}
+        {sizedIcon && (
+          <IconWrapper position={iconPosition} onClick={onIconClick}>
+            {sizedIcon}
+          </IconWrapper>
+        )}
       </Container>
     );
   }
 
   private handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    const { imageAttributes } = this.props;
-    const defaultOnError = imageAttributes && imageAttributes.onError;
-
+    const { onError } = this.props;
     this.setState({
       isError: true,
     });
-    if (defaultOnError) {
-      defaultOnError(e);
+    if (onError) {
+      onError(e);
     }
   };
 }
