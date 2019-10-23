@@ -10,7 +10,7 @@ const generateID = createUniqIDGenerator('grid-list-');
 
 type Column = 1 | 2 | 3 | 4 | 6 | 12;
 interface Props {
-  items: any[];
+  items: any[] | ReadonlyArray<any>;
   renderItem: any;
   smColumn: Column;
   lgColumn?: Column;
@@ -25,7 +25,7 @@ export class GridList extends PureComponent<Props> {
     return (
       <Container className={className} {...divAttributes}>
         <GridListUl smColumn={smColumn}>
-          {items.map((item, index, arr) => (
+          {items.concat().map((item, index, arr) => (
             <GridListItem key={generateID()} smColumn={smColumn} lgColumn={lgColumn}>
               {renderItem(item, index, arr)}
             </GridListItem>
