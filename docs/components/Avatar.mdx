@@ -6,7 +6,7 @@ route: /components/avatar
 
 import { Playground, PropsTable } from 'docz';
 import { Avatar, AvatarSize, Icon, Colors, Badge } from '@class101/ui';
-import { IMAGE_URL, IMAGE_URL_2 } from './Avatar';
+import { IMAGE_URL } from './Avatar';
 
 # Avatar
 
@@ -18,9 +18,11 @@ Avatar
 
 ## Basic usage
 
+src가 없거나 이미지 로딩에 실패했을 때 text가 보이게 됩니다.
+
 <Playground>
   <Avatar src={IMAGE_URL} />
-  <Avatar text="가나다라" />
+  <Avatar src="invaild_url" text="가나다라" />
   <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} />
 </Playground>
 
@@ -33,13 +35,32 @@ Avatar의 icon에 들어가는 컴포넌트는 자동적으로 size={number}를 
 <Playground>
   <Avatar
     size={AvatarSize.LARGE}
-    src={IMAGE_URL_2}
+    src={IMAGE_URL}
     icon={
       <Badge backgroundColor={Colors.orange600} pill>
         <Icon.Crown fillColor={Colors.white} />
       </Badge>
     }
   />
-  <Avatar size={AvatarSize.SMALL} src={IMAGE_URL_2} icon={<Icon.Heart fillColor={Colors.orange600} />} />
+  <Avatar size={AvatarSize.SMALL} src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} />
   <Avatar size={64} src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} />
+  <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} iconPosition="bottom-left" />
+  <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} iconPosition="bottom" />
+</Playground>
+
+## Icon Position
+
+iconPosition으로 아이콘이 위치할 곳을 정할 수 있습니다.
+
+기본은 `bottom-right`입니다.
+
+<Playground>
+  <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} iconPosition="bottom-left" />
+  <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} iconPosition="bottom" />
+  <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} iconPosition="bottom-right" />
+  <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} iconPosition="left" />
+  <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} iconPosition="right" />
+  <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} iconPosition="top" />
+  <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} iconPosition="top-left" />
+  <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} iconPosition="top-right" />
 </Playground>
