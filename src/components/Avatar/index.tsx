@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
-import { Colors } from '../../core';
+import { Colors, Position } from '../../core';
 
 export enum AvatarSize {
   SMALL = 'sm',
@@ -9,9 +9,20 @@ export enum AvatarSize {
   LARGE = 'lg',
 }
 
+export type AvatarIconPosition =
+  | typeof Position.TOP_RIGHT
+  | typeof Position.TOP
+  | typeof Position.TOP_LEFT
+  | typeof Position.BOTTOM
+  | typeof Position.BOTTOM_LEFT
+  | typeof Position.BOTTOM_RIGHT
+  | typeof Position.LEFT
+  | typeof Position.RIGHT;
+
 export interface AvatarProps {
   size: AvatarSize | number;
   iconRatio: number;
+  iconPosition: AvatarIconPosition;
   src?: string;
   imageAttributes?: React.ImgHTMLAttributes<HTMLImageElement>;
   className?: string;
@@ -19,30 +30,92 @@ export interface AvatarProps {
   icon?: React.ReactElement<{ size: number }>;
 }
 
-export class Avatar extends PureComponent<AvatarProps> {
+interface AvatarState {
+  isError: boolean;
+}
+
+export class Avatar extends PureComponent<AvatarProps, AvatarState> {
   public static defaultProps: Partial<AvatarProps> = {
     size: AvatarSize.MEDIUM,
     iconRatio: 0.55,
+    iconPosition: Position.BOTTOM_RIGHT,
+  };
+
+  public readonly state: AvatarState = {
+    isError: false,
   };
 
   public render() {
-    const { size, src, text, className, icon, iconRatio, imageAttributes } = this.props;
+    const { size, src, text, className, icon, iconRatio, iconPosition, imageAttributes } = this.props;
+    const { isError } = this.state;
+
     const avatarSize = typeof size === 'number' ? size : avatarSizeBySize[size];
 
     const sizedIcon = icon && React.cloneElement(icon, { size: avatarSize * iconRatio });
 
     return (
       <Container size={avatarSize} className={className}>
-        {src ? (
-          <AvatarImage src={src} {...imageAttributes} />
+        {src && !isError ? (
+          <AvatarImage src={src} {...imageAttributes} onError={this.handleImageError} />
         ) : (
           text && <TextWrapper>{text.substr(0, 2).toUpperCase()}</TextWrapper>
         )}
-        {sizedIcon && <IconWrapper>{sizedIcon}</IconWrapper>}
+        {sizedIcon && <IconWrapper position={iconPosition}>{sizedIcon}</IconWrapper>}
       </Container>
     );
   }
+
+  private handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const { imageAttributes } = this.props;
+    const defaultOnError = imageAttributes && imageAttributes.onError;
+
+    this.setState({
+      isError: true,
+    });
+    if (defaultOnError) {
+      defaultOnError(e);
+    }
+  };
 }
+
+const iconPositionByPosition: { [key in AvatarIconPosition]: FlattenSimpleInterpolation } = {
+  [Position.BOTTOM]: css`
+    bottom: -2px;
+    right: 50%;
+    transform: translateX(50%);
+  `,
+  [Position.BOTTOM_RIGHT]: css`
+    bottom: -2px;
+    right: -2px;
+  `,
+  [Position.BOTTOM_LEFT]: css`
+    bottom: -2px;
+    left: -2px;
+  `,
+  [Position.TOP]: css`
+    top: -2px;
+    right: 50%;
+    transform: translateX(50%);
+  `,
+  [Position.TOP_RIGHT]: css`
+    top: -2px;
+    right: -2px;
+  `,
+  [Position.TOP_LEFT]: css`
+    top: -2px;
+    left: -2px;
+  `,
+  [Position.LEFT]: css`
+    bottom: 50%;
+    left: -2px;
+    transform: translateY(50%);
+  `,
+  [Position.RIGHT]: css`
+    bottom: 50%;
+    right: -2px;
+    transform: translateY(50%);
+  `,
+};
 
 const avatarSizeBySize: { [key in AvatarSize]: number } = {
   [AvatarSize.LARGE]: 40,
@@ -75,10 +148,9 @@ const TextWrapper = styled.span`
   text-align: center;
 `;
 
-const IconWrapper = styled.div`
+const IconWrapper = styled.div<{ position: Position }>`
   display: flex;
   position: absolute;
-  right: -2px;
-  bottom: -2px;
   z-index: 100;
+  ${props => iconPositionByPosition[props.position]}
 `;
