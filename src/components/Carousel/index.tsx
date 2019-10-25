@@ -36,7 +36,7 @@ export interface CarouselProps {
   smSlidesSideOffset: number;
   activeIndex?: number;
   onChangeSlide?: (index: number) => void;
-  onTouchEnd?: () => void;
+  onTransitionEnd?: () => void;
   paginationTheme?: CarouselPaginationTheme;
   navigationPosition?: CarouselNavigationPosition;
   transparentPagination?: boolean;
@@ -135,10 +135,10 @@ export class Carousel extends PureComponent<CarouselProps> {
     }
   };
 
-  private handleTouchEnd = () => {
-    const { onTouchEnd } = this.props;
-    if (this.swiper && onTouchEnd) {
-      onTouchEnd();
+  private handleTransitionEnd = () => {
+    const { onTransitionEnd } = this.props;
+    if (this.swiper && onTransitionEnd) {
+      onTransitionEnd();
     }
   };
 
@@ -149,7 +149,7 @@ export class Carousel extends PureComponent<CarouselProps> {
       ...swiperProps,
       on: {
         slideChange: this.handelChangeSlide,
-        touchEnd: this.handleTouchEnd,
+        transitionEnd: this.handleTransitionEnd,
       },
       slidesPerView: lgSlidesPerView,
       spaceBetween: lgSpaceBetween || (typeof lgSlidesPerView !== 'number' || lgSlidesPerView !== 1) ? 24 : 0,
