@@ -43,6 +43,7 @@ export interface CarouselProps {
   containerContentMaxWidth?: number;
   pagination?: boolean;
   navigation?: boolean;
+  id?: string;
 }
 
 export enum CarouselNavigationPosition {
@@ -83,6 +84,8 @@ export class Carousel extends PureComponent<CarouselProps> {
   }
   public render() {
     const {
+      id,
+      className,
       children,
       navigation,
       pagination,
@@ -92,13 +95,13 @@ export class Carousel extends PureComponent<CarouselProps> {
       paginationTheme,
       lgSlidesSideOffset,
       smSlidesSideOffset,
-      className,
     } = this.props;
 
     const swiperParams = this.getSwiperParams();
 
     return (
       <StyledSwiper
+        id={id}
         className={className}
         hasNavigation={navigation}
         hasPagination={pagination}

@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import { omit } from 'lodash';
-import React, { createRef, PureComponent, ReactNode } from 'react';
+import React, { PureComponent, ReactNode } from 'react';
 import { SwiperOptions } from 'swiper';
 import { Autoplay, Navigation, Pagination, Swiper as OriginalSwiper } from 'swiper/dist/js/swiper.esm.js';
+import { isServer } from 'utils';
 
 import { createUniqIDGenerator } from '../../utils/createUniqIDGenerator';
 import { DefaultNavigation } from './DefaultNavigation';
@@ -10,13 +11,13 @@ import { DefaultNavigation } from './DefaultNavigation';
 OriginalSwiper.use([Navigation, Pagination, Autoplay]);
 
 export type SwiperInstance = OriginalSwiper;
-
 export interface SwiperProps extends SwiperOptions {
   children?: ReactNode;
   navigationChildren?: ReactNode;
   paginationChildren?: ReactNode;
   getSwiperInstance?: (swiperInstance: OriginalSwiper) => void;
   className?: string;
+  id?: string;
 }
 
 const generateId = createUniqIDGenerator('swiper-');
@@ -26,6 +27,7 @@ export class Swiper extends PureComponent<SwiperProps> {
     paginationChildren: <div className="swiper-pagination" />,
     navigationChildren: <DefaultNavigation />,
     freeMode: false,
+    observer: true,
     pagination: {
       el: '.swiper-pagination',
       type: 'bullets',
@@ -41,35 +43,53 @@ export class Swiper extends PureComponent<SwiperProps> {
 
   private swiperInstance?: OriginalSwiper;
 
-  private containerRef = createRef<HTMLDivElement>();
-
-  private containerId = generateId();
+  private generatedId = generateId();
 
   public componentDidMount() {
-    this.swiperInstance = new OriginalSwiper(
-      `#${this.containerId}`,
-      omit(this.props, ['getSwiperInstance', 'className', 'children', 'navigationChildren', 'paginationChildren'])
-    );
-    if (this.props.getSwiperInstance) {
-      this.props.getSwiperInstance(this.swiperInstance);
-    }
+    this.buildSwiper();
   }
 
   public componentWillUnmount() {
-    if (this.swiperInstance) {
-      this.swiperInstance.destroy(true, true);
-    }
+    this.destorySwiper();
   }
 
   public render() {
-    const { className, children, navigationChildren, paginationChildren } = this.props;
+    const { className, children, navigationChildren, paginationChildren, id } = this.props;
+
+    if (isServer() && !id) {
+      throw Error('Set `id` when SSR');
+    }
 
     return (
-      <div id={this.containerId} className={classNames('swiper-container', className)} ref={this.containerRef}>
+      <div id={id || this.generatedId} className={classNames('swiper-container', className)}>
         <div className="swiper-wrapper">{children}</div>
         {navigationChildren}
         {paginationChildren}
       </div>
     );
+  }
+
+  private buildSwiper() {
+    const { id } = this.props;
+
+    if (this.swiperInstance) {
+      return;
+    }
+
+    this.swiperInstance = new OriginalSwiper(
+      `#${id || this.generatedId}`,
+      omit(this.props, ['getSwiperInstance', 'className', 'children', 'navigationChildren', 'paginationChildren'])
+    );
+
+    if (this.props.getSwiperInstance) {
+      this.props.getSwiperInstance(this.swiperInstance);
+    }
+  }
+
+  private destorySwiper() {
+    if (!this.swiperInstance) {
+      return;
+    }
+    this.swiperInstance.destroy(true, true);
   }
 }
