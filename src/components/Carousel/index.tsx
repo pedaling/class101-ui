@@ -44,6 +44,7 @@ export interface CarouselProps {
   pagination?: boolean;
   navigation?: boolean;
   id?: string;
+  initialSlide?: number;
 }
 
 export enum CarouselNavigationPosition {
@@ -95,6 +96,7 @@ export class Carousel extends PureComponent<CarouselProps> {
       paginationTheme,
       lgSlidesSideOffset,
       smSlidesSideOffset,
+      initialSlide,
     } = this.props;
 
     const swiperParams = this.getSwiperParams();
@@ -111,6 +113,7 @@ export class Carousel extends PureComponent<CarouselProps> {
         paginationTheme={paginationTheme}
         lgSlidesSideOffset={lgSlidesSideOffset}
         smSlidesSideOffset={smSlidesSideOffset}
+        initialSlide={initialSlide}
         {...swiperParams}
       >
         {children}
