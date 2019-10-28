@@ -3,7 +3,7 @@ import { omit } from 'lodash';
 import React, { PureComponent, ReactNode } from 'react';
 import { SwiperOptions } from 'swiper';
 import { Autoplay, Navigation, Pagination, Swiper as OriginalSwiper } from 'swiper/dist/js/swiper.esm.js';
-import { isServer } from 'utils';
+import { isServer } from '../../utils';
 
 import { createUniqIDGenerator } from '../../utils/createUniqIDGenerator';
 import { DefaultNavigation } from './DefaultNavigation';
