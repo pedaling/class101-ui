@@ -61,6 +61,15 @@ export const subtitle1 = css<TextStyleProperties>`
   margin: 0;
 `;
 
+export const subtitle2 = css<TextStyleProperties>`
+  font-size: 18px;
+  font-weight: ${props => props.fontWeight || 'normal'};
+  color: ${props => props.color || gray800};
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  margin: 0;
+`;
+
 export const body1 = css<TextStyleProperties>`
   font-size: 16px;
   font-weight: ${props => props.fontWeight || 'normal'};
