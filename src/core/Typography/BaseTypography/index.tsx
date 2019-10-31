@@ -13,6 +13,7 @@ import {
   headline2,
   headline3,
   subtitle1,
+  subtitle2,
 } from '../../TextStyles';
 
 export type Typo = keyof typeof typographyList;
@@ -65,6 +66,7 @@ const defaultElement = {
   Headline2: 'h2',
   Headline3: 'h3',
   Subtitle1: 'h4',
+  Subtitle2: 'h4',
   Body1: 'div',
   Body2: 'div',
   Caption1: 'div',
@@ -76,6 +78,7 @@ const typographyList = {
   Headline2: headline2,
   Headline3: headline3,
   Subtitle1: subtitle1,
+  Subtitle2: subtitle2,
   Body1: body1,
   Body2: body2,
   Caption1: caption1,
