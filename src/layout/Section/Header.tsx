@@ -1,9 +1,11 @@
-import React, { ReactNode } from 'react';
+import React, { memo, ReactNode, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-import { gray300 } from '../../core/Colors';
-import { caption1 } from '../../core/TextStyles';
+import { TextButton } from '../../components';
+import { media } from '../../core/BreakPoints';
+import { gray300, gray600 } from '../../core/Colors';
+import { body2 } from '../../core/TextStyles';
 import { BaseTypography, Typo } from '../../core/Typography/BaseTypography';
 import { ChevronRight } from '../../Icon';
 
@@ -14,14 +16,137 @@ interface Props {
   to?: string;
   href?: string;
   target?: string;
+  linkText?: string;
+  onClick?: () => void;
 }
 
-const Header = styled.div`
+export const Header = memo(
+  ({ title, description, typography = 'Subtitle1', to, href, target, linkText, onClick }: Props) => {
+    const hasLinkText = Boolean(linkText);
+
+    const renderTitle = useCallback(() => {
+      return <Title md={typography}>{title}</Title>;
+    }, [title, typography]);
+
+    const renderLinkHeaderTop = useCallback(() => {
+      return (
+        <>
+          <HeaderTop>
+            {renderTitle()}
+            <LinkButton />
+          </HeaderTop>
+          {description && <Description color={gray600}>{description}</Description>}
+        </>
+      );
+    }, [description, renderTitle]);
+
+    const renderActionHeader = useCallback(() => {
+      const options: { rel?: string } = {};
+
+      if (target === '_blank') {
+        options.rel = 'noopener noreferrer';
+      }
+
+      if (to) {
+        return (
+          <>
+            <Link to={to} target={target} {...options}>
+              {renderLinkHeaderTop()}
+            </Link>
+            {hasLinkText && (
+              <TextLink to={to} {...options}>
+                {linkText}
+              </TextLink>
+            )}
+          </>
+        );
+      }
+      if (href) {
+        return (
+          <>
+            <a href={href} target={target} {...options}>
+              {renderLinkHeaderTop()}
+            </a>
+            {hasLinkText && (
+              <TextLink href={href} target={target} {...options}>
+                {linkText}
+              </TextLink>
+            )}
+          </>
+        );
+      }
+
+      if (onClick) {
+        return (
+          <>
+            <ActionContainer onClick={onClick}>{renderLinkHeaderTop()}</ActionContainer>
+            {hasLinkText && <TextLink onClick={onClick}>{linkText}</TextLink>}
+          </>
+        );
+      }
+    }, [target, to, href, onClick, renderLinkHeaderTop, hasLinkText, linkText]);
+
+    return (
+      <Container hasLinkText={hasLinkText}>
+        {to || href || onClick ? (
+          renderActionHeader()
+        ) : (
+          <>
+            <HeaderTop>{renderTitle()}</HeaderTop>
+            {description && <Description color={gray600}>{description}</Description>}
+          </>
+        )}
+      </Container>
+    );
+  }
+);
+
+const TextLink = styled(TextButton)`
+  ${media.sm`
+    display: none;
+  `}
+`;
+
+const LinkButton = styled(ChevronRight)`
+  transition: opacity 150ms ease-in-out;
+  opacity: 0;
+  ${media.sm`
+    opacity: 1;
+    path {
+      fill: ${gray300}
+    }
+  `};
+`;
+
+const ActionContainerStyle = css`
+  display: inline-flex;
+  flex-direction: column;
+  padding-right: 24px;
+  &:hover {
+    ${LinkButton} {
+      opacity: 1;
+    }
+  }
+`;
+
+const ActionContainer = styled.div`
+  ${ActionContainerStyle};
+  cursor: pointer;
+`;
+
+const Container = styled.div<{ hasLinkText?: boolean }>`
   margin-bottom: 16px;
+  ${props =>
+    props.hasLinkText
+      ? `display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      `
+      : `display: inline-flex;
+        flex-direction: column
+  `};
   a {
-    display: inline-block;
-    position: relative;
-    padding-right: 24px;
+    ${ActionContainerStyle};
   }
 `;
 
@@ -31,59 +156,8 @@ const HeaderTop = styled.div`
 `;
 
 const Description = styled.p`
-  ${caption1};
+  ${body2};
   margin-top: 4px;
 `;
 
-const Title = styled(BaseTypography)`
-  margin-right: 4px;
-`;
-
-export default ({ title, description, typography, to, href, target, ...restProps }: Props) => {
-  const options: { rel?: string } = {};
-
-  if (target === '_blank') {
-    options.rel = 'noopener noreferrer';
-  }
-
-  if (to) {
-    return (
-      <Header>
-        <Link to={to} target={target} {...options}>
-          <HeaderTop>
-            <Title md={typography || ('Subtitle1' as Typo)} {...restProps}>
-              {title}
-            </Title>
-            <ChevronRight fillColor={gray300} />
-          </HeaderTop>
-        </Link>
-        {description && <Description>{description}</Description>}
-      </Header>
-    );
-  }
-  if (href) {
-    return (
-      <Header>
-        <a href={href} target={target} {...options}>
-          <HeaderTop>
-            <Title md={typography || ('Subtitle1' as Typo)} {...restProps}>
-              {title}
-            </Title>
-            <ChevronRight fillColor={gray300} />
-          </HeaderTop>
-        </a>
-        {description && <Description>{description}</Description>}
-      </Header>
-    );
-  }
-  return (
-    <Header>
-      <HeaderTop>
-        <Title md={typography || ('Subtitle1' as Typo)} {...restProps}>
-          {title}
-        </Title>
-      </HeaderTop>
-      {description && <Description>{description}</Description>}
-    </Header>
-  );
-};
+const Title = styled(BaseTypography)``;

@@ -7,6 +7,7 @@ route: /components/section
 import { Section, GridList, Body1 } from '@class101/ui';
 import { Playground, PropsTable } from 'docz';
 import { imageSrc } from './interface';
+import { PlayGroundBanner } from '../docsComponents';
 
 # Section
 
@@ -18,17 +19,18 @@ titleStyle은 Typography, buttonStyle은 Button 컴포넌트의 속성을 참고
 
 ## Basic usage
 
-섹션의 헤더 타이틀과 푸터 버튼을 지정할 수 있습니다.
+섹션은 헤더를 반드시 가지고 있어야 합니다.
 
 <Playground>
-  <Section title="가장 완강률이 높은 클래스" buttonTitle="클래스 전체보기">
-    리스트나 캐러셀 등이 들어갈 수 있습니다.
+  <Section title="가장 완강률이 높은 클래스">
+    <PlayGroundBanner>리스트나 캐러셀 등이 들어갈 수 있습니다.</PlayGroundBanner>
   </Section>
 </Playground>
 
 ## Anchor or Action to Title
 
-`to`, `href`, `onClick`을 지정할 경우 섹션 헤더는 액션이 가능한 요소가 됩니다.
+`to`, `href`, `onClick`을 지정할 경우 섹션 헤더는 액션이 가능한 요소가 됩니다.  
+BreakPoint에 따라 'lg'에서는 오버시에 나오고 'sm'에서는 항상 보이는 요소입니다.
 
 <Playground>
   <Section title="가장 완강률이 높은 클래스" to="/">
@@ -124,6 +126,126 @@ titleStyle은 Typography, buttonStyle은 Button 컴포넌트의 속성을 참고
           id: 2,
           title: '리스트 아이템 2',
           image: imageSrc,
+        },
+      ]}
+      smColumn={2}
+      renderItem={item => {
+        const { title, image } = item;
+        return (
+          <div>
+            <div>
+              <img style={{ width: '100%' }} src={image} alt={title} />
+            </div>
+            <Body1>{title}</Body1>
+          </div>
+        );
+      }}
+    />
+  </Section>
+</Playground>
+
+## with LinkText
+
+`to`, `href`, `onClick`와 함께 지정할 경우 같은 액션을 취하는 텍스트 링크/버튼이 추가됩니다.  
+BreakPoint에 따라 'sm'에서는 사라집니다.
+
+<Playground>
+  <Section
+    title="가장 완강률이 높은 클래스"
+    description="알림신청 하신 분들에게는 할인 및 이벤트 소식과 제작 과정을 전해드려요."
+    to="/"
+    linkText="전체 클래스 보기"
+  >
+    <GridList
+      items={[
+        {
+          id: 1,
+          title: '리스트 아이템 1',
+          image: imageSrc,
+          to: '/',
+        },
+        {
+          id: 2,
+          title: '리스트 아이템 2',
+          image: imageSrc,
+          to: '/',
+        },
+      ]}
+      smColumn={2}
+      renderItem={item => {
+        const { title, image } = item;
+        return (
+          <div>
+            <div>
+              <img style={{ width: '100%' }} src={image} alt={title} />
+            </div>
+            <Body1>{title}</Body1>
+          </div>
+        );
+      }}
+    />
+  </Section>
+</Playground>
+
+<Playground>
+  <Section
+    title="가장 완강률이 높은 클래스"
+    description="알림신청 하신 분들에게는 할인 및 이벤트 소식과 제작 과정을 전해드려요."
+    href="https://ui.class101.dev"
+    target="_blank"
+    linkText="전체 클래스 보기"
+  >
+    <GridList
+      items={[
+        {
+          id: 1,
+          title: '리스트 아이템 1',
+          image: imageSrc,
+          to: '/',
+        },
+        {
+          id: 2,
+          title: '리스트 아이템 2',
+          image: imageSrc,
+          to: '/',
+        },
+      ]}
+      smColumn={2}
+      renderItem={item => {
+        const { title, image } = item;
+        return (
+          <div>
+            <div>
+              <img style={{ width: '100%' }} src={image} alt={title} />
+            </div>
+            <Body1>{title}</Body1>
+          </div>
+        );
+      }}
+    />
+  </Section>
+</Playground>
+
+<Playground>
+  <Section
+    title="가장 완강률이 높은 클래스"
+    description="알림신청 하신 분들에게는 할인 및 이벤트 소식과 제작 과정을 전해드려요."
+    onClick={() => alert('Clicked!!')}
+    linkText="전체 클래스 보기"
+  >
+    <GridList
+      items={[
+        {
+          id: 1,
+          title: '리스트 아이템 1',
+          image: imageSrc,
+          to: '/',
+        },
+        {
+          id: 2,
+          title: '리스트 아이템 2',
+          image: imageSrc,
+          to: '/',
         },
       ]}
       smColumn={2}
