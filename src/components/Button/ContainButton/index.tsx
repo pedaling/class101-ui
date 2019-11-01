@@ -103,11 +103,15 @@ const StyledButtonBase = styled(ButtonBase)<StyledContainerProps>`
   ${props => buttonStyleBySize[props.size as ButtonSize]};
 
   transition: background-color 0.1s;
+  text-decoration-line: none;
+
+  & > a {
+    color: ${props => getButtonColors(props.color, props.theme.mode).textColor};
+  }
   // TODO(chiabi): focus 스타일 추가하기
   &:hover,
   &:active {
     background-color: ${props => darken(0.1, getButtonColors(props.color, props.theme.mode).backgroundColor)};
-    text-decoration-line: none;
   }
 
   &.disabled {

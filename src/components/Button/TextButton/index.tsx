@@ -76,6 +76,11 @@ const buttonStyleBySize: { [key in TextButtonSize]: FlattenSimpleInterpolation }
   `,
 };
 
+const buttonHoverStyle = css<TextButtonProps>`
+  color: ${props => darken(0.1, getTextButtonColors(props.color, props.theme.mode).textColor)};
+  text-decoration-line: underline;
+`;
+
 const StyledButtonBase = styled(ButtonBase)<TextButtonProps>`
   display: inline-flex;
   vertical-align: middle;
@@ -85,11 +90,17 @@ const StyledButtonBase = styled(ButtonBase)<TextButtonProps>`
   ${props => buttonStyleBySize[props.size as TextButtonSize]};
 
   transition: color 0.1s;
+
+  & > a {
+    color: ${props => getTextButtonColors(props.color, props.theme.mode).textColor};
+  }
   // TODO(chiabi): focus 스타일 추가하기
   &:not(.disabled):hover,
   &:not(.disabled):active {
-    color: ${props => darken(0.1, getTextButtonColors(props.color, props.theme.mode).textColor)};
-    text-decoration-line: underline;
+    ${buttonHoverStyle};
+    & > a {
+      ${buttonHoverStyle};
+    }
   }
 
   &.disabled {
