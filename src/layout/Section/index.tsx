@@ -1,7 +1,7 @@
 import React, { PureComponent, ReactNode } from 'react';
 
 import { HTMLDivProps } from '../../interfaces/props';
-import Header from './Header';
+import { Header } from './Header';
 
 interface Props {
   title: ReactNode;
@@ -10,6 +10,7 @@ interface Props {
   to?: string;
   href?: string;
   target?: string;
+  linkText?: string;
   onClick?: () => void;
   children?: ReactNode;
   className?: string;
@@ -29,6 +30,7 @@ export class Section extends PureComponent<Props> {
       children,
       className,
       divAttributes,
+      linkText,
     } = this.props;
     return (
       <section className={className} {...divAttributes}>
@@ -39,6 +41,7 @@ export class Section extends PureComponent<Props> {
           target={target}
           onClick={onClick}
           description={description}
+          linkText={linkText}
           {...titleStyle}
         />
         {children}
