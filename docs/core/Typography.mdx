@@ -5,7 +5,7 @@ route: /core/typography
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Headline1, Headline2, Headline3, Subtitle1, Body1, Body2, Caption1, Caption2 } from '@class101/ui';
+import { Headline1, Headline2, Headline3, Subtitle1, Subtitle2, Body1, Body2, Caption1, Caption2 } from '@class101/ui';
 
 # Typography
 
@@ -22,7 +22,8 @@ Class101 UI의 Typography는 기기나 뷰포트 크기가 증가함에 따라 �
   <Headline1>H1 heading</Headline1>
   <Headline2>H2 heading</Headline2>
   <Headline3>H3 heading</Headline3>
-  <Subtitle1>H4 subtitle</Subtitle1>
+  <Subtitle1>H4 subtitle1</Subtitle1>
+  <Subtitle1>H4 subtitle2</Subtitle1>
   <Body1>P and div body1</Body1>
   <Body2>P and div body2</Body2>
   <Caption1>Div caption1</Caption1>
@@ -45,7 +46,7 @@ element: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div';
 ## Responsive examples
 
 lg: >= 1024px <br />
-sm: < 1013px
+sm: < 1023px
 
 데스크탑(lg)과 모바일(sm)에서 스타일이 바뀝니다! 브라우저 창의 가로를 늘렸다 줄였다 해보세요!<br/>
 
@@ -78,7 +79,8 @@ Headings는 더 큰 텍스트 스타일인 `display: 2 | 3`를 지원합니다.
 <PropsTable of={Subtitle1} />
 
 <Playground>
-  <Subtitle1>H4 subtitle</Subtitle1>
+  <Subtitle1>H4 subtitle1</Subtitle1>
+  <Subtitle2>H4 subtitle2</Subtitle2>
 </Playground>
 
 ## Bodies
@@ -129,6 +131,7 @@ Headings는 더 큰 텍스트 스타일인 `display: 2 | 3`를 지원합니다.
   <Headline2 textAlign={'center'}>Lorem ipsum dolor sit amet</Headline2>
   <Headline3 textAlign={'center'}>Lorem ipsum dolor sit amet</Headline3>
   <Subtitle1 textAlign={'center'}>1914 translation by H. Rackham</Subtitle1>
+  <Subtitle2 textAlign={'center'}>1914 translation by H. Rackham</Subtitle2>
   <Body1 textAlign={'center'}>Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC</Body1>
   <Body2 textAlign={'center'}>Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC</Body2>
   <Caption1 textAlign={'center'}>
