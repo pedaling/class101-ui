@@ -1,10 +1,11 @@
 import classNames from 'classnames';
 import { omit } from 'lodash';
 import React, { PureComponent, ReactNode } from 'react';
+import styled from 'styled-components';
 import { SwiperOptions } from 'swiper';
 import { Autoplay, Navigation, Pagination, Swiper as OriginalSwiper } from 'swiper/dist/js/swiper.esm.js';
-import { isServer } from '../../utils';
 
+import { isServer } from '../../utils';
 import { createUniqIDGenerator } from '../../utils/createUniqIDGenerator';
 import { DefaultNavigation } from './DefaultNavigation';
 
@@ -17,6 +18,8 @@ export interface SwiperProps extends SwiperOptions {
   paginationChildren?: ReactNode;
   getSwiperInstance?: (swiperInstance: OriginalSwiper) => void;
   className?: string;
+  nextButton?: ReactNode;
+  prevButton?: ReactNode;
   id?: string;
 }
 
@@ -54,14 +57,37 @@ export class Swiper extends PureComponent<SwiperProps> {
   }
 
   public render() {
-    const { className, children, navigationChildren, paginationChildren, id } = this.props;
+    const { className, children, nextButton, prevButton, navigationChildren, paginationChildren, id } = this.props;
 
     if (isServer() && !id) {
       throw Error('Set `id` when SSR');
     }
 
+    const generatedId = id || this.generatedId;
+
+    if (nextButton && prevButton) {
+      return (
+        <Container className={className}>
+          <div id={generatedId} className="swiper-container">
+            <div className="swiper-wrapper">{children}</div>
+            {paginationChildren}
+          </div>
+          <div className="swiper-default-navigation">
+            {prevButton &&
+              React.cloneElement(prevButton as React.ReactElement<any>, {
+                className: `swiper-button-prev ${generatedId}-prev`,
+              })}
+            {nextButton &&
+              React.cloneElement(nextButton as React.ReactElement<any>, {
+                className: `swiper-button-next ${generatedId}-next`,
+              })}
+          </div>
+        </Container>
+      );
+    }
+
     return (
-      <div id={id || this.generatedId} className={classNames('swiper-container', className)}>
+      <div id={generatedId} className={classNames('swiper-container', className)}>
         <div className="swiper-wrapper">{children}</div>
         {navigationChildren}
         {paginationChildren}
@@ -70,16 +96,25 @@ export class Swiper extends PureComponent<SwiperProps> {
   }
 
   private buildSwiper() {
-    const { id } = this.props;
+    const { id, prevButton, nextButton } = this.props;
 
     if (this.swiperInstance) {
       return;
     }
 
-    this.swiperInstance = new OriginalSwiper(
-      `#${id || this.generatedId}`,
-      omit(this.props, ['getSwiperInstance', 'className', 'children', 'navigationChildren', 'paginationChildren'])
-    );
+    const generatedId = id || this.generatedId;
+
+    this.swiperInstance = new OriginalSwiper(`#${id || this.generatedId}`, {
+      ...omit(this.props, ['getSwiperInstance', 'className', 'children', 'navigationChildren', 'paginationChildren']),
+      navigation: {
+        ...(prevButton && nextButton
+          ? {
+              nextEl: `.swiper-button-next.${generatedId}-next`,
+              prevEl: `.swiper-button-prev.${generatedId}-prev`,
+            }
+          : this.props.navigation),
+      },
+    });
 
     if (this.props.getSwiperInstance) {
       this.props.getSwiperInstance(this.swiperInstance);
@@ -93,3 +128,7 @@ export class Swiper extends PureComponent<SwiperProps> {
     this.swiperInstance.destroy(true, true);
   }
 }
+
+const Container = styled.div`
+  position: relative;
+`;

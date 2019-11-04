@@ -1,8 +1,10 @@
-import React, { PureComponent, ReactNode, Children, ReactElement } from 'react';
+import React, { PureComponent } from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
 import { media, SIZES } from '../../core/BreakPoints';
 import { gray700, white } from '../../core/Colors';
+import { ChevronLeft, ChevronRight } from '../../Icon';
+import { ButtonColor, IconButton } from '../Button';
 import { Swiper, SwiperInstance, SwiperProps } from '../Swiper';
 import ViewAllButton from './ViewAllButton';
 
@@ -111,6 +113,8 @@ export class Carousel extends PureComponent<CarouselProps> {
         paginationTheme={paginationTheme}
         lgSlidesSideOffset={lgSlidesSideOffset}
         smSlidesSideOffset={smSlidesSideOffset}
+        prevButton={<IconButton color={ButtonColor.WHITE} icon={<ChevronLeft />} />}
+        nextButton={<IconButton color={ButtonColor.WHITE} icon={<ChevronRight />} />}
         {...swiperParams}
       >
         {children}
@@ -210,22 +214,24 @@ const navigationPositionStyle: { [key in CarouselNavigationPosition]: FlattenSim
 };
 
 const StyledSwiper = styled(Swiper)<StyledSwiperProps>`
-  ${props =>
-    props.lgSlidesSideOffset
-      ? css`
-          padding-left: ${props.lgSlidesSideOffset}px;
-          padding-right: ${props.lgSlidesSideOffset}px;
-        `
-      : ''};
-  ${props =>
-    props.smSlidesSideOffset
-      ? css`
-          ${media.sm`
+  .swiper-container {
+    ${props =>
+      props.lgSlidesSideOffset
+        ? css`
+            padding-left: ${props.lgSlidesSideOffset}px;
+            padding-right: ${props.lgSlidesSideOffset}px;
+          `
+        : ''};
+    ${props =>
+      props.smSlidesSideOffset
+        ? css`
+            ${media.sm`
             padding-left: ${props.smSlidesSideOffset}px;
             padding-right: ${props.smSlidesSideOffset}px;
           `};
-        `
-      : ''};
+          `
+        : ''};
+  }
 
   .swiper-default-navigation {
     position: absolute;
@@ -233,10 +239,17 @@ const StyledSwiper = styled(Swiper)<StyledSwiperProps>`
     left: 50%;
     z-index: 1;
     width: ${props => (props.containerContentMaxWidth ? `calc(100% - ${32 * 2}px)` : '100%')};
-    ${props => props.containerContentMaxWidth && `max-width: ${props.containerContentMaxWidth + 32 * 2}px`};
+    ${props => (props.containerContentMaxWidth ? `max-width: ${props.containerContentMaxWidth + 32 * 2}px` : '')};
     ${media.sm`
       display: none;
     `};
+  }
+
+  .swiper-button-next {
+    right: 0;
+  }
+  .swiper-button-prev {
+    right: 32px;
   }
 
   ${props =>
@@ -263,15 +276,21 @@ const StyledSwiper = styled(Swiper)<StyledSwiperProps>`
     (props.hasNavigation && props.navigationPosition === CarouselNavigationPosition.BottomRightOut) ||
     (props.hasNavigation && props.hasPagination && props.navigationPosition === CarouselNavigationPosition.TopRightOut)
       ? css`
-          padding-bottom: 48px;
+          .swiper-container {
+            padding-bottom: 48px;
+          }
         `
       : ''};
 
   ${props =>
     props.hasNavigation && props.navigationPosition === CarouselNavigationPosition.TopRightOut
       ? css`
-          padding-top: 48px;
-          margin-top: -48px;
+          .swiper-button-next {
+            top: -48px;
+          }
+          .swiper-button-prev {
+            top: -48px;
+          }
         `
       : ''};
 
@@ -297,8 +316,9 @@ const StyledSwiper = styled(Swiper)<StyledSwiperProps>`
           }
         `
       : ''}
+
   .swiper-pagination {
-    ${props => props.navigationPosition && paginationPositionStyle[props.navigationPosition]};
+    ${props => (props.navigationPosition ? paginationPositionStyle[props.navigationPosition] : '')};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -306,7 +326,7 @@ const StyledSwiper = styled(Swiper)<StyledSwiperProps>`
   .swiper-pagination-bullet {
     width: 6px;
     height: 6px;
-    margin: 0 8px;
+    margin: 0 5px;
     border-radius: 3px;
     background-color: ${props => (props.paginationTheme === CarouselPaginationTheme.Light ? white : gray700)};
     opacity: 0.56;

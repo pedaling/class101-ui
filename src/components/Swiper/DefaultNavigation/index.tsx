@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { elevation1 } from '../../../core/ElevationStyles';
 import { ChevronRight } from '../../../Icon';
 import { ButtonColor, IconButton } from '../../Button';
 
@@ -21,7 +20,6 @@ export const DefaultNavigation = () => {
 const Button = styled(IconButton)<{ direction: 'right' | 'left' }>`
   background-image: none;
   margin: 0;
-  ${elevation1};
   position: absolute;
   top: 0;
   left: auto;
@@ -29,13 +27,9 @@ const Button = styled(IconButton)<{ direction: 'right' | 'left' }>`
     props.direction === 'right'
       ? `
       right: 0;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
       `
       : `
       right: ${NAVIGATION_BUTTON_SIZE}px;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
       svg {
         transform: rotate(180deg);
       }
