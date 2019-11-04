@@ -17,3 +17,4 @@ export * from './Swiper/Slide';
 export * from './Swiper/ArrowNavigation';
 export * from './Swiper/DefaultNavigation';
 export * from './Avatar';
+export * from './Comment';

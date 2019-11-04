@@ -1,0 +1,182 @@
+---
+menu: Components
+name: Comment
+route: /components/comment
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Comment, Avatar, Icon, Colors, TextButton, ButtonSize, Body2, Badge, CommentSize } from '@class101/ui';
+import { IMAGE_URL } from './Avatar';
+import { LARGE_CONTENT } from './Comment';
+
+# Comment
+
+댓글과 대댓글을 표시하는 Comment 컴포넌트입니다.
+
+## Comment Props
+
+<PropsTable of={Comment} />
+
+### Comment Action Props ([IconButton Props](/components/icon-button#props)를 일부 상속받습니다.)
+
+<PropsTable of={Comment.Action} />
+
+## Basic usage
+
+Comment 컴포넌트
+
+<Playground>
+  <Comment
+    avatar={
+      <Avatar
+        src={IMAGE_URL}
+        icon={
+          <Badge backgroundColor={Colors.orange600} pill>
+            <Icon.Crown fillColor={Colors.white} />
+          </Badge>
+        }
+      />
+    }
+    name="Class101"
+    time="2시간 전"
+    width="312px"
+    nameDescription="크리에이터"
+    leftAction={[
+      <Comment.Action icon={<Icon.HeartOutline />} text="2" />,
+      <Comment.Action icon={<Icon.Reply />} text="2" />,
+    ]}
+    rightAction={[<Comment.Action icon={<Icon.Trash />} />]}
+    content={
+      <div>
+        <Comment.Image
+          style={{ width: '100%' }}
+          src="https://stg-cdn.class101.net/images/577a4e56-444f-45e1-bf93-33381c30cac6/640xauto@2x"
+        />
+        이곳에는 댓글 내용이 들어갑니다. 기본값으로 이미지까지 포함해 4줄까지 표시합니다. 아래의 미리보기로 보여주는 대댓글은
+        최대 2개까지 보여줍니다.
+      </div>
+    }
+  >
+    <Comment
+      avatar={<Avatar src={IMAGE_URL} />}
+      name="피터펜"
+      time="1시간 전"
+      leftAction={[<Comment.Action icon={<Icon.HeartOutline />} />]}
+      content="이곳은 대댓글 구역입니다. 최대 2줄까지 보이며 댓글보다 작은 프로필사진을 가지고 있습니다."
+    />
+    <Comment
+      avatar={<Avatar src={IMAGE_URL} />}
+      name="피터2"
+      time="30분 전"
+      leftAction={[
+        <Comment.Action icon={<Icon.HeartOutline />} />,
+        <Comment.Action
+          icon={<Avatar size={18} src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} />}
+        />,
+      ]}
+      content="또다른 대댓글"
+    >
+      <Comment
+        avatar={<Avatar src={IMAGE_URL} />}
+        name="피터"
+        time="방금 전"
+        leftAction={[
+          <Comment.Action icon={<Icon.HeartOutline />} />,
+          <Comment.Action
+            icon={<Avatar size={18} src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} />}
+          />,
+        ]}
+        content="대대댓글"
+      />
+    </Comment>
+  </Comment>
+</Playground>
+
+## Size
+
+`CommentSize.SMALL`과 `CommentSize.LARGE`가 있습니다.
+
+기본값은 `LARGE`이지만 Comment의 자식으로 들어가는 컴포넌트는 `SMALL`이 됩니다.
+
+width는 기본값으로 `100%`입니다.
+
+<Playground>
+  <Comment avatar={<Avatar src={IMAGE_URL} />} name="Class101" content={LARGE_CONTENT} />
+  <Comment avatar={<Avatar src={IMAGE_URL} />} name="Class101" content={LARGE_CONTENT} width="312px" />
+  <Comment avatar={<Avatar src={IMAGE_URL} />} name="Class101" content={LARGE_CONTENT} size={CommentSize.SMALL} />
+</Playground>
+
+## Content
+
+`content`에는 comment의 내용이 들어갑니다. `ReactNode`타입으로 image를 추가할 수도 있습니다.
+
+> Image는 `Comment.Image`를 사용해 주세요.
+
+<Playground>
+  <Comment
+    avatar={<Avatar src={IMAGE_URL} />}
+    name="Class101"
+    content={
+      <div>
+        <Comment.Image src="https://stg-cdn.class101.net/images/577a4e56-444f-45e1-bf93-33381c30cac6/640xauto" />
+        댓글 내용입니다.
+      </div>
+    }
+  />
+</Playground>
+
+## Action
+
+`leftAction`과 `rightAction`으로 Button의 Action을 지정할 수 있습니다.
+배열로 되어있으며 `Comment.Action`을 통해 버튼을 생성합니다.
+
+- icon: 사용할 icon입니다. 필수로 입력해야 합니다.
+- text: icon옆에 표시할 텍스트입니다.
+- visible: 보임/숨김 여부입니다. 삭제버튼과 같이 숨길 경우에 사용합니다.
+- onClick, disabled와 같은 props는 [IconButton Props](/components/icon-button#props)를 상속받습니다.
+
+<Playground>
+  <Comment
+    avatar={<Avatar src={IMAGE_URL} />}
+    name="Class101"
+    content="댓글 1"
+    leftAction={[
+      <Comment.Action icon={<Icon.HeartOutline />} text="3" />,
+      <Comment.Action icon={<Icon.Trash />} onClick={() => alert('clicked!')} />,
+      <Comment.Action icon={<Icon.Bell />} visible={false} />,
+      <Comment.Action icon={<Icon.CheckboxOn />} disabled />,
+    ]}
+  />
+</Playground>
+
+## Children
+
+`Comment`에 children으로 넣은 컴포넌트는 자동으로 대댓글로 들어가집니다.
+
+- showChildren: 대댓글이 표시되는 여부를 결정합니다.
+
+<Playground>
+  <Comment avatar={<Avatar src={IMAGE_URL} />} name="Class101" content="댓글1">
+    <Comment avatar={<Avatar src={IMAGE_URL} />} name="피터" content="대댓글1" />
+    <Comment avatar={<Avatar src={IMAGE_URL} />} name="피터" content="대댓글2" />
+  </Comment>
+
+  <Comment avatar={<Avatar src={IMAGE_URL} />} name="Class101" content="댓글1" showChildren={false}>
+    <Comment avatar={<Avatar src={IMAGE_URL} />} name="피터" content="대댓글1" />
+    <Comment avatar={<Avatar src={IMAGE_URL} />} name="피터" content="대댓글2" />
+  </Comment>
+</Playground>
+
+## Other
+
+- disableLineClamp: 항상 모든 내용이 보이게 합니다.
+- maxLine: 숨겨질 라인의 개수를 선택합니다.
+- nameDescription: 이름 옆에 수식어를 붙입니다.
+- time 오른쪽에 표시할 시간입니다.
+
+<Playground>
+  <Comment avatar={<Avatar src={IMAGE_URL} />} name="Class101" content={LARGE_CONTENT} disableLineClamp />
+  <Comment avatar={<Avatar src={IMAGE_URL} />} name="Class101" content={LARGE_CONTENT} maxLine={3} />
+  <Comment avatar={<Avatar src={IMAGE_URL} />} name="Class101" nameDescription="크리에이터" content={LARGE_CONTENT} />
+  <Comment avatar={<Avatar src={IMAGE_URL} />} name="Class101" content={LARGE_CONTENT} time="방금 전" />
+</Playground>
