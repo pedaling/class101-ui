@@ -14,12 +14,18 @@ export enum CommentSize {
 
 export interface CommentProps {
   name: string;
+
+  /** 라인 숨김 여부. */
+  disableLineClamp: boolean;
+
+  /** 대댓글이 표시되는 여부. */
+  showChildren: boolean;
+
+  /** 보여질 라인의 개수. */
+  maxLine?: number;
+
   size: CommentSize;
   width: string;
-  disableLineClamp: boolean;
-  showChildren: boolean;
-  marginLeft?: string;
-  maxLine?: number;
   nameDescription?: string;
   avatar?: ReactElement<AvatarProps>;
   time?: ReactNode;

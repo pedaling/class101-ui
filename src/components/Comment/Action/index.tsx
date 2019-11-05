@@ -5,26 +5,33 @@ import { Body2, Colors } from '../../../core';
 import { IconButton, IconButtonProps } from '../../Button';
 import { ButtonIconPosition } from '../../Button/ButtonIcon';
 
-export interface CommentActionProps
-  extends Omit<IconButtonProps, 'leftIcon' | 'rightIcon' | 'color' | 'size' | 'theme'> {
+export type ButtonPropsForComment = Omit<IconButtonProps, 'leftIcon' | 'rightIcon' | 'color' | 'size' | 'theme'>;
+
+export interface CommentActionProps extends ButtonPropsForComment {
+  /** 사용할 icon. */
   icon: ReactElement<{ size: number }>;
-  visible: boolean;
+
+  /** 보임/숨김 여부. */
+  active: boolean;
+
   position: ButtonIconPosition;
+
+  /** icon옆에 표시할 텍스트. */
   text?: ReactNode;
 }
 
 export class CommentAction extends PureComponent<CommentActionProps> {
   public static defaultProps: Partial<CommentActionProps> = {
-    visible: true,
+    active: true,
     position: ButtonIconPosition.NONE,
     fillColor: Colors.gray500,
   };
 
   public render() {
-    const { visible, position, text, fillColor, children, ...restProps } = this.props;
+    const { active, position, text, fillColor, children, ...restProps } = this.props;
 
     return (
-      <Container visible={visible} position={position}>
+      <Container active={active} position={position}>
         <FilledIconButton size="xs" color="transparent" fillColor={fillColor} {...restProps} />
         {text && <TextWrapper color={Colors.gray500}>{text}</TextWrapper>}
         {children}
@@ -33,8 +40,9 @@ export class CommentAction extends PureComponent<CommentActionProps> {
   }
 }
 
-const Container = styled.div<{ position: ButtonIconPosition; visible: boolean }>`
-  display: ${props => (props.visible ? 'flex' : 'none')};
+const Container = styled.div<Pick<CommentActionProps, 'active' | 'position'>>`
+  display: ${props => (props.active ? 'flex' : 'none')};
+  align-items: center;
   ${({ position }) => {
     if (position === ButtonIconPosition.RIGHT) {
       return css`
@@ -47,7 +55,6 @@ const Container = styled.div<{ position: ButtonIconPosition; visible: boolean }>
       `;
     }
   }}
-  align-items: center;
 `;
 
 const TextWrapper = styled(Body2)`
