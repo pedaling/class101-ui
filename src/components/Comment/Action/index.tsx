@@ -12,7 +12,7 @@ export interface CommentActionProps extends ButtonPropsForComment {
   icon: ReactElement<{ size: number }>;
 
   /** 보임/숨김 여부. */
-  active: boolean;
+  display: boolean;
 
   position: ButtonIconPosition;
 
@@ -22,16 +22,16 @@ export interface CommentActionProps extends ButtonPropsForComment {
 
 export class CommentAction extends PureComponent<CommentActionProps> {
   public static defaultProps: Partial<CommentActionProps> = {
-    active: true,
+    display: true,
     position: ButtonIconPosition.NONE,
     fillColor: Colors.gray500,
   };
 
   public render() {
-    const { active, position, text, fillColor, children, ...restProps } = this.props;
+    const { display, position, text, fillColor, children, ...restProps } = this.props;
 
     return (
-      <Container active={active} position={position}>
+      <Container display={display} position={position}>
         <FilledIconButton size="xs" color="transparent" fillColor={fillColor} {...restProps} />
         {text && <TextWrapper color={Colors.gray500}>{text}</TextWrapper>}
         {children}
@@ -40,8 +40,8 @@ export class CommentAction extends PureComponent<CommentActionProps> {
   }
 }
 
-const Container = styled.div<Pick<CommentActionProps, 'active' | 'position'>>`
-  display: ${props => (props.active ? 'flex' : 'none')};
+const Container = styled.div<Pick<CommentActionProps, 'display' | 'position'>>`
+  display: ${props => (props.display ? 'flex' : 'none')};
   align-items: center;
   ${({ position }) => {
     if (position === ButtonIconPosition.RIGHT) {
