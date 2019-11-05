@@ -102,6 +102,7 @@ export const Header = memo(
 );
 
 const TextLink = styled(TextButton)`
+  margin-left: 24px;
   ${media.sm`
     display: none;
   `}
@@ -121,7 +122,6 @@ const LinkButton = styled(ChevronRight)`
 const ActionContainerStyle = css`
   display: inline-flex;
   flex-direction: column;
-  padding-right: 24px;
   &:hover {
     ${LinkButton} {
       opacity: 1;
