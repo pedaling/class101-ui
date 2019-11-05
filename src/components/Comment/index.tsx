@@ -45,15 +45,6 @@ export class Comment extends PureComponent<CommentProps> {
     showChildren: true,
   };
 
-  private contentRef = React.createRef<HTMLDivElement>();
-
-  public componentDidMount() {
-    const { disableLineClamp } = this.props;
-    this.setState({
-      isClampable: !disableLineClamp && this.getContentClamped(),
-    });
-  }
-
   public render() {
     const {
       avatar,
@@ -123,17 +114,6 @@ export class Comment extends PureComponent<CommentProps> {
       </Container>
     );
   }
-
-  private getContentClamped = () => {
-    const { content } = this.props;
-    const { current } = this.contentRef;
-
-    if (content && current) {
-      return current.scrollHeight > current.clientHeight;
-    }
-
-    return false;
-  };
 }
 
 const Container = styled.div<{ width: string }>`
