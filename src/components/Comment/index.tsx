@@ -28,7 +28,7 @@ export interface CommentProps {
   width: string;
   nameDescription?: string;
   avatar?: ReactElement<AvatarProps>;
-  time?: ReactNode;
+  timeText?: ReactNode;
   leftAction?: ReactElement<CommentActionProps>[];
   rightAction?: ReactElement<CommentActionProps>[];
   content?: ReactNode;
@@ -56,7 +56,7 @@ export class Comment extends PureComponent<CommentProps> {
       avatar,
       name,
       nameDescription,
-      time,
+      timeText,
       width,
       leftAction,
       rightAction,
@@ -88,7 +88,7 @@ export class Comment extends PureComponent<CommentProps> {
               </Caption1>
               {nameDescription && <NameDescription>{nameDescription}</NameDescription>}
             </NameContainer>
-            <Caption1 color={Colors.gray600}>{time}</Caption1>
+            <Caption1 color={Colors.gray600}>{timeText}</Caption1>
           </TitleContainer>
           <CommentContent useLineClamp={!disableLineClamp} maxLine={maxLine}>
             {content}
