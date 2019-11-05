@@ -35,7 +35,7 @@ export class CommentContent extends PureComponent<Props, State> {
           {children}
         </Content>
         {lineClampable && (
-          <ClampToggleButton size={ButtonSize.SMALL} onClick={this.handleClampToggleButtonClick}>
+          <ClampToggleButton size={ButtonSize.SMALL} onClick={this.handleToggleClampButton}>
             {lineClamped ? '전체보기' : '숨기기'}
           </ClampToggleButton>
         )}
@@ -62,7 +62,7 @@ export class CommentContent extends PureComponent<Props, State> {
     return false;
   };
 
-  private handleClampToggleButtonClick = () => {
+  private handleToggleClampButton = () => {
     const { lineClamped } = this.state;
     this.setState({
       lineClamped: !lineClamped,
