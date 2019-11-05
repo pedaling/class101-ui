@@ -38,7 +38,7 @@ Comment 컴포넌트
       />
     }
     name="Class101"
-    time="2시간 전"
+    timeText="2시간 전"
     width="312px"
     nameDescription="크리에이터"
     leftAction={[
@@ -47,27 +47,27 @@ Comment 컴포넌트
     ]}
     rightAction={[<Comment.Action icon={<Icon.Trash />} />]}
     content={
-      <div>
+      <>
         <Comment.Image
           style={{ width: '100%' }}
           src="https://stg-cdn.class101.net/images/577a4e56-444f-45e1-bf93-33381c30cac6/640xauto@2x"
         />
         이곳에는 댓글 내용이 들어갑니다. 기본값으로 이미지까지 포함해 4줄까지 표시합니다. 아래의 미리보기로 보여주는 대댓글은
         최대 2개까지 보여줍니다.
-      </div>
+      </>
     }
   >
     <Comment
       avatar={<Avatar src={IMAGE_URL} />}
       name="피터펜"
-      time="1시간 전"
+      timeText="1시간 전"
       leftAction={[<Comment.Action icon={<Icon.HeartOutline />} />]}
       content="이곳은 대댓글 구역입니다. 최대 2줄까지 보이며 댓글보다 작은 프로필사진을 가지고 있습니다."
     />
     <Comment
       avatar={<Avatar src={IMAGE_URL} />}
       name="피터2"
-      time="30분 전"
+      timeText="30분 전"
       leftAction={[
         <Comment.Action icon={<Icon.HeartOutline />} />,
         <Comment.Action
@@ -79,7 +79,7 @@ Comment 컴포넌트
       <Comment
         avatar={<Avatar src={IMAGE_URL} />}
         name="피터"
-        time="방금 전"
+        timeText="방금 전"
         leftAction={[
           <Comment.Action icon={<Icon.HeartOutline />} />,
           <Comment.Action
@@ -168,5 +168,5 @@ width는 기본값으로 `100%`입니다.
   <Comment avatar={<Avatar src={IMAGE_URL} />} name="Class101" content={LARGE_CONTENT} disableLineClamp />
   <Comment avatar={<Avatar src={IMAGE_URL} />} name="Class101" content={LARGE_CONTENT} maxLine={3} />
   <Comment avatar={<Avatar src={IMAGE_URL} />} name="Class101" nameDescription="크리에이터" content={LARGE_CONTENT} />
-  <Comment avatar={<Avatar src={IMAGE_URL} />} name="Class101" content={LARGE_CONTENT} time="방금 전" />
+  <Comment avatar={<Avatar src={IMAGE_URL} />} name="Class101" content={LARGE_CONTENT} timeText="방금 전" />
 </Playground>
