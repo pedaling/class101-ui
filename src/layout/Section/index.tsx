@@ -3,9 +3,11 @@ import React, { PureComponent, ReactNode } from 'react';
 import { HTMLDivProps } from '../../interfaces/props';
 import { Header, TypographyProps } from './Header';
 
+export type SectionTitleStyleProps = TypographyProps;
+
 interface Props {
   title: ReactNode;
-  titleStyle?: TypographyProps;
+  titleStyle?: SectionTitleStyleProps;
   description?: string;
   to?: string;
   href?: string;
