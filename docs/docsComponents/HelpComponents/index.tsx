@@ -1,15 +1,17 @@
-import { BreakPoints, Colors, Divider, ThemeConfig, ThemeMode } from '@class101/ui';
+import { BreakPoints, Colors, Divider, ThemeConfig, ThemeMode, ifDarkTheme } from '@class101/ui';
 import React from 'react';
 import styled from 'styled-components';
 
 export const PlayGroundContainer = styled.div<{ theme: ThemeConfig }>`
   padding: 20px;
-  background-color: ${props => (props.theme.mode === ThemeMode.DARK ? Colors.gray900 : Colors.white)};
+  background-color: ${Colors.white};
+  ${ifDarkTheme(`background-color: ${Colors.gray900}`)};
 `;
 
 export const PlayGroundButtonContainer = styled.div<{ theme: ThemeConfig }>`
   padding: 16px;
-  background-color: ${props => (props.theme.mode === ThemeMode.DARK ? Colors.gray900 : Colors.white)};
+  background-color: ${Colors.white};
+  ${ifDarkTheme(`background-color: ${Colors.gray900}`)};
   > * {
     margin: 4px;
   }
