@@ -9,7 +9,7 @@ import { body2 } from '../../core/TextStyles';
 import { BaseTypography, HeadlineTypoProps, Typo } from '../../core/Typography/BaseTypography';
 import { ChevronRight } from '../../Icon';
 
-export type TypographyProps = { typography: Typo } & HeadlineTypoProps;
+export type TypographyProps = { typography?: Typo } & Partial<HeadlineTypoProps>;
 
 interface Props {
   title?: ReactNode;
