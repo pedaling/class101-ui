@@ -6,13 +6,15 @@ import { TextButton } from '../../components';
 import { media } from '../../core/BreakPoints';
 import { gray300, gray600 } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
-import { BaseTypography, Typo } from '../../core/Typography/BaseTypography';
+import { BaseTypography, HeadlineTypoProps, Typo } from '../../core/Typography/BaseTypography';
 import { ChevronRight } from '../../Icon';
+
+export type TypographyProps = { typography: Typo } & HeadlineTypoProps;
 
 interface Props {
   title?: ReactNode;
   description?: string;
-  typography?: Typo;
+  typographyProps?: TypographyProps;
   to?: string;
   href?: string;
   target?: string;
@@ -20,86 +22,89 @@ interface Props {
   onClick?: () => void;
 }
 
-export const Header = memo(
-  ({ title, description, typography = 'Subtitle1', to, href, target, linkText, onClick }: Props) => {
-    const hasLinkText = Boolean(linkText);
+export const Header = memo(({ title, description, typographyProps, to, href, target, linkText, onClick }: Props) => {
+  const hasLinkText = Boolean(linkText);
 
-    const renderTitle = useCallback(() => {
-      return <Title md={typography}>{title}</Title>;
-    }, [title, typography]);
+  const renderTitle = useCallback(() => {
+    const { typography = 'Subtitle1', ...restTypographyProps } = typographyProps || {};
+    return (
+      <Title md={typography} {...restTypographyProps}>
+        {title}
+      </Title>
+    );
+  }, [title, typographyProps]);
 
-    const renderLinkHeaderTop = useCallback(() => {
+  const renderLinkHeaderTop = useCallback(() => {
+    return (
+      <>
+        <HeaderTop>
+          {renderTitle()}
+          <LinkButton />
+        </HeaderTop>
+        {description && <Description color={gray600}>{description}</Description>}
+      </>
+    );
+  }, [description, renderTitle]);
+
+  const renderActionHeader = useCallback(() => {
+    const options: { rel?: string } = {};
+
+    if (target === '_blank') {
+      options.rel = 'noopener noreferrer';
+    }
+
+    if (to) {
       return (
         <>
-          <HeaderTop>
-            {renderTitle()}
-            <LinkButton />
-          </HeaderTop>
-          {description && <Description color={gray600}>{description}</Description>}
+          <Link to={to} target={target} {...options}>
+            {renderLinkHeaderTop()}
+          </Link>
+          {hasLinkText && (
+            <TextLink to={to} {...options}>
+              {linkText}
+            </TextLink>
+          )}
         </>
       );
-    }, [description, renderTitle]);
+    }
+    if (href) {
+      return (
+        <>
+          <a href={href} target={target} {...options}>
+            {renderLinkHeaderTop()}
+          </a>
+          {hasLinkText && (
+            <TextLink href={href} target={target} {...options}>
+              {linkText}
+            </TextLink>
+          )}
+        </>
+      );
+    }
 
-    const renderActionHeader = useCallback(() => {
-      const options: { rel?: string } = {};
+    if (onClick) {
+      return (
+        <>
+          <ActionContainer onClick={onClick}>{renderLinkHeaderTop()}</ActionContainer>
+          {hasLinkText && <TextLink onClick={onClick}>{linkText}</TextLink>}
+        </>
+      );
+    }
+  }, [target, to, href, onClick, renderLinkHeaderTop, hasLinkText, linkText]);
 
-      if (target === '_blank') {
-        options.rel = 'noopener noreferrer';
-      }
-
-      if (to) {
-        return (
-          <>
-            <Link to={to} target={target} {...options}>
-              {renderLinkHeaderTop()}
-            </Link>
-            {hasLinkText && (
-              <TextLink to={to} {...options}>
-                {linkText}
-              </TextLink>
-            )}
-          </>
-        );
-      }
-      if (href) {
-        return (
-          <>
-            <a href={href} target={target} {...options}>
-              {renderLinkHeaderTop()}
-            </a>
-            {hasLinkText && (
-              <TextLink href={href} target={target} {...options}>
-                {linkText}
-              </TextLink>
-            )}
-          </>
-        );
-      }
-
-      if (onClick) {
-        return (
-          <>
-            <ActionContainer onClick={onClick}>{renderLinkHeaderTop()}</ActionContainer>
-            {hasLinkText && <TextLink onClick={onClick}>{linkText}</TextLink>}
-          </>
-        );
-      }
-    }, [target, to, href, onClick, renderLinkHeaderTop, hasLinkText, linkText]);
-
-    return (
-      <Container hasLinkText={hasLinkText}>
-        {to || href || onClick ? (
-          renderActionHeader()
-        ) : (
-          <>
-            <HeaderTop>{renderTitle()}</HeaderTop>
-            {description && <Description color={gray600}>{description}</Description>}
-          </>
-        )}
-      </Container>
-    );
-  }
-);
+  return (
+    <Container hasLinkText={hasLinkText}>
+      {to || href || onClick ? (
+        renderActionHeader()
+      ) : (
+        <>
+          <HeaderTop>{renderTitle()}</HeaderTop>
+          {description && <Description color={gray600}>{description}</Description>}
+        </>
+      )}
+    </Container>
+  );
+});
 
 const TextLink = styled(TextButton)`
   ${media.sm`
