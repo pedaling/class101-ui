@@ -82,7 +82,6 @@ const Content = styled.div<{ useLineClamp: boolean; maxLine: number }>`
   color: ${Colors.gray800};
   word-wrap: break-word;
   overflow: hidden;
-  text-align: justify;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   ${props =>
