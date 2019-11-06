@@ -1,6 +1,6 @@
 {
   "name": "@class101/ui",
-  "version": "7.1.0-rc0",
+  "version": "7.1.0-rc1",
   "description": "A React-based UI Component Library, powered by Class101.",
   "author": "Class101 Co, LTD.",
   "license": "MIT",
@@ -29,7 +29,7 @@
     "docz:build": "docz build",
     "prettier": "prettier --write src/**/*",
     "semantic-release": "semantic-release",
-    "generated-icon-export": "cd src/Icon && node generate-exports.js",
+    "generated-icon-export": "cd src/Icon && node generate-exgports.js",
     "generated-svgr": "cd src/Icon/svgs && npx @svgr/cli --template ../svgr-cli.template.js --config-file ../.svgrrc  *.svg --out-dir ../generated --ext tsx",
     "svgr": "yarn generated-svgr && yarn generated-icon-export"
   },
