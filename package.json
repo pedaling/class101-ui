@@ -53,8 +53,7 @@
     "lodash": "^4.17.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-router-dom": "^4.2.2",
-    "styled-components": "4.2.0"
+    "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -116,7 +115,8 @@
     "classnames": "^2.2.6",
     "path-to-regexp": "^3.0.0",
     "polished": "^3.4.1",
-    "swiper": "4.4.6"
+    "swiper": "4.4.6",
+    "styled-components": "4.2.0"
   },
   "bugs": {
     "url": "https://github.com/pedaling/class101-ui/issues"
