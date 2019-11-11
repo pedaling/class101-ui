@@ -1,4 +1,4 @@
-import React, { memo, ReactNode, useCallback } from 'react';
+import React, { ReactNode, PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
@@ -22,31 +22,49 @@ interface Props {
   onClick?: () => void;
 }
 
-export const Header = memo(({ title, description, typographyProps, to, href, target, linkText, onClick }: Props) => {
-  const hasLinkText = Boolean(linkText);
+export class Header extends PureComponent<Props> {
+  public render = () => {
+    const { to, href, onClick, description, linkText } = this.props;
 
-  const renderTitle = useCallback(() => {
+    return (
+      <Container hasLinkText={!!linkText}>
+        {to || href || onClick ? (
+          this.renderActionHeader()
+        ) : (
+          <>
+            <HeaderTop>{this.renderTitle()}</HeaderTop>
+            {description && <Description color={gray600}>{description}</Description>}
+          </>
+        )}
+      </Container>
+    );
+  };
+
+  private renderTitle = () => {
+    const { typographyProps, title } = this.props;
     const { typography = 'Subtitle1', ...restTypographyProps } = typographyProps || {};
     return (
       <Title md={typography} {...restTypographyProps}>
         {title}
       </Title>
     );
-  }, [title, typographyProps]);
+  };
 
-  const renderLinkHeaderTop = useCallback(() => {
+  private renderLinkHeaderTop = () => {
+    const { description } = this.props;
     return (
       <>
         <HeaderTop>
-          {renderTitle()}
+          {this.renderTitle()}
           <LinkButton />
         </HeaderTop>
         {description && <Description color={gray600}>{description}</Description>}
       </>
     );
-  }, [description, renderTitle]);
+  };
 
-  const renderActionHeader = useCallback(() => {
+  private renderActionHeader = () => {
+    const { target, to, href, onClick, linkText } = this.props;
     const options: { rel?: string } = {};
 
     if (target === '_blank') {
@@ -57,9 +75,9 @@ export const Header = memo(({ title, description, typographyProps, to, href, tar
       return (
         <>
           <Link to={to} target={target} {...options}>
-            {renderLinkHeaderTop()}
+            {this.renderLinkHeaderTop()}
           </Link>
-          {hasLinkText && (
+          {!!linkText && (
             <TextLink to={to} {...options}>
               {linkText}
             </TextLink>
@@ -71,9 +89,9 @@ export const Header = memo(({ title, description, typographyProps, to, href, tar
       return (
         <>
           <a href={href} target={target} {...options}>
-            {renderLinkHeaderTop()}
+            {this.renderLinkHeaderTop()}
           </a>
-          {hasLinkText && (
+          {!!linkText && (
             <TextLink href={href} target={target} {...options}>
               {linkText}
             </TextLink>
@@ -85,26 +103,13 @@ export const Header = memo(({ title, description, typographyProps, to, href, tar
     if (onClick) {
       return (
         <>
-          <ActionContainer onClick={onClick}>{renderLinkHeaderTop()}</ActionContainer>
-          {hasLinkText && <TextLink onClick={onClick}>{linkText}</TextLink>}
+          <ActionContainer onClick={onClick}>{this.renderLinkHeaderTop()}</ActionContainer>
+          {!!linkText && <TextLink onClick={onClick}>{linkText}</TextLink>}
         </>
       );
     }
-  }, [target, to, href, onClick, renderLinkHeaderTop, hasLinkText, linkText]);
-
-  return (
-    <Container hasLinkText={hasLinkText}>
-      {to || href || onClick ? (
-        renderActionHeader()
-      ) : (
-        <>
-          <HeaderTop>{renderTitle()}</HeaderTop>
-          {description && <Description color={gray600}>{description}</Description>}
-        </>
-      )}
-    </Container>
-  );
-});
+  };
+}
 
 const TextLink = styled(TextButton)`
   margin-left: 24px;
