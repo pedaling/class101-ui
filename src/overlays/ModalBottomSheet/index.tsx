@@ -199,7 +199,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
 
   private enableBodyScroll = () => {
     if (isClient()) {
-      document.body.style.paddingRight = null;
+      document.body.style.paddingRight = '';
       document.body.style.overflow = '';
     }
   };

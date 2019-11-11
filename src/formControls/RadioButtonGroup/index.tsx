@@ -21,9 +21,9 @@ export class RadioButtonGroup extends PureComponent<RadioButtonGroupProps, State
     const { children, value } = props;
 
     if (value) {
-      const index = React.Children.toArray<React.ComponentElement<RadioButtonProps, RadioButton>>(children).findIndex(
-        c => isEqual(c.props.value, value)
-      );
+      const index = React.Children.toArray<React.ComponentElement<RadioButtonProps, RadioButton>>(
+        children
+      ).findIndex(c => isEqual(c.props.value, value));
       if (state.checkedIndex !== index) {
         return { checkedIndex: index };
       }

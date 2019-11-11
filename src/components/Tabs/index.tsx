@@ -27,15 +27,17 @@ export class Tabs<T extends string = string> extends PureComponent<Props<T>> {
 
     React.Children.forEach(this.props.children, child => {
       const tab = child as TabElement;
-      tabIndicators.push(cloneElement(tab, {
-        type,
-        theme,
-        fluid,
-        indicatorCount,
-        key: tab.props.value,
-        active: value === tab.props.value,
-        onClickItem: this.handleClickTabItem,
-      }) as TabElement);
+      tabIndicators.push(
+        cloneElement(tab, {
+          type,
+          theme,
+          fluid,
+          indicatorCount,
+          key: tab.props.value,
+          active: value === tab.props.value,
+          onClickItem: this.handleClickTabItem,
+        }) as TabElement
+      );
 
       if (value === tab.props.value) {
         activePanel = tab.props.panel;

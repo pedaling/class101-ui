@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import { Colors, Theme, ThemeConfig, ThemeMode } from '../../core';
 
-
 interface Props {
   className?: string;
   color?: string;

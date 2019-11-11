@@ -29,7 +29,6 @@ export class CommentAction extends PureComponent<CommentActionProps> {
 
   public render() {
     const { display, position, text, fillColor, children, ...restProps } = this.props;
-
     return (
       <Container display={display} position={position}>
         <FilledIconButton size="xs" color="transparent" fillColor={fillColor} {...restProps} />

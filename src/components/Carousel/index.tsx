@@ -155,11 +155,11 @@ export class Carousel extends PureComponent<CarouselProps> {
         transitionEnd: this.handleTransitionEnd,
       },
       slidesPerView: lgSlidesPerView,
-      spaceBetween: lgSpaceBetween || (typeof lgSlidesPerView !== 'number' || lgSlidesPerView !== 1) ? 24 : 0,
+      spaceBetween: lgSpaceBetween || typeof lgSlidesPerView !== 'number' || lgSlidesPerView !== 1 ? 24 : 0,
       breakpoints: {
         [SIZES.sm.maxWidth]: {
           slidesPerView: smSlidesPerView,
-          spaceBetween: smSpaceBetween || (typeof smSlidesPerView !== 'number' || smSlidesPerView !== 1) ? 16 : 0,
+          spaceBetween: smSpaceBetween || typeof smSlidesPerView !== 'number' || smSlidesPerView !== 1 ? 16 : 0,
         },
       },
       getSwiperInstance: this.handleGetSwiperInstance,
