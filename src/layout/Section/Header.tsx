@@ -1,6 +1,7 @@
 import React, { memo, ReactNode, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+import { Colors } from '../../core';
 
 import { TextButton } from '../../components';
 import { media } from '../../core/BreakPoints';
@@ -108,6 +109,11 @@ export const Header = memo(({ title, description, typographyProps, to, href, tar
 
 const TextLink = styled(TextButton)`
   margin-left: 24px;
+  font-weight: bold;
+  color: ${Colors.gray600};
+  > a {
+    color: ${Colors.gray600};
+  }
   ${media.sm`
     display: none;
   `}
