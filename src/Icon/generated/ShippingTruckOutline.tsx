@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconProps } from '../index';
-export default class SvgTalkHelp extends React.PureComponent<IconProps> {
+export default class SvgShippingTruckOutline extends React.PureComponent<IconProps> {
   public static defaultProps: Partial<IconProps> = {
     fillColor: '#3E4042',
     accentColor: '#DDE0E2',
@@ -20,7 +20,7 @@ export default class SvgTalkHelp extends React.PureComponent<IconProps> {
         <path
           fillRule="evenodd"
           clipRule="evenodd"
-          d="M23 12c0 2.224-.66 4.294-1.795 6.025L22 22l-3.975-.795A10.949 10.949 0 0112 23C5.925 23 1 18.075 1 12S5.925 1 12 1s11 4.925 11 11zm-10 6v-2h-2v2h2zM12 6c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 .88-.58 1.323-1.23 1.822C11.942 12.457 11 13.179 11 15h2c0-1.095.705-1.712 1.432-2.347l.009-.008C15.21 11.973 16 11.283 16 10c0-2.21-1.79-4-4-4z"
+          d="M4 17H3a1 1 0 01-1-1V5a1 1 0 011-1h11a1 1 0 011 1v1h4l3 4v6a1 1 0 01-1 1h-1c0 1.66-1.34 3-3 3s-3-1.34-3-3h-4c0 1.66-1.34 3-3 3s-3-1.34-3-3zm14-9h-3v5h5v-2.5L18 8zm-1 10c.553 0 1-.447 1-1 0-.553-.447-1-1-1-.553 0-1 .447-1 1 0 .553.447 1 1 1zM7 18c.553 0 1-.447 1-1 0-.553-.447-1-1-1-.553 0-1 .447-1 1 0 .553.447 1 1 1zM4 6h9v7H4V6z"
           fill={this.props.fillColor}
         />
       </svg>
