@@ -18,7 +18,14 @@ export default class InnerTags extends PureComponent<Props> {
     const { value, disabled } = this.props;
 
     if (value.length > 5000) {
-      return <Tag value={`${value.slice(value.length - 3, value.length).join(', ')} 포함 총 ${value.length}개`} onRemove={this.handleRemoveTag(-1)} disabled={disabled} className="inner-tags__tag" />
+      return (
+        <Tag
+          value={`${value.slice(value.length - 3, value.length).join(', ')} 포함 총 ${value.length}개`}
+          onRemove={this.handleRemoveTag(-1)}
+          disabled={disabled}
+          className="inner-tags__tag"
+        />
+      );
     }
 
     return (

@@ -55,9 +55,9 @@ export class Input extends React.PureComponent<HTMLInputProps & InputProps> {
           id={inputId}
           size={size}
           style={inputStyle}
-          {...inputRef && {
+          {...(inputRef && {
             ref: inputRef,
-          }}
+          })}
           {...restProps}
         />
         {allowMessage && !errorMessage && (
