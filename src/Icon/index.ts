@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 export interface IconProps {
@@ -88,6 +87,7 @@ export { default as Naver } from './generated/Naver';
 export { default as NaverTalk } from './generated/NaverTalk';
 export { default as NavertalkSymbol } from './generated/NavertalkSymbol';
 export { default as Notice } from './generated/Notice';
+export { default as NoticeOutline } from './generated/NoticeOutline';
 export { default as Paper } from './generated/Paper';
 export { default as Paper2 } from './generated/Paper2';
 export { default as PaperOutline } from './generated/PaperOutline';
@@ -115,6 +115,7 @@ export { default as Send2 } from './generated/Send2';
 export { default as ShareApple } from './generated/ShareApple';
 export { default as Sheild } from './generated/Sheild';
 export { default as ShippingTruck } from './generated/ShippingTruck';
+export { default as ShippingTruckOutline } from './generated/ShippingTruckOutline';
 export { default as Sorting } from './generated/Sorting';
 export { default as Square } from './generated/Square';
 export { default as StarFull } from './generated/StarFull';
@@ -124,12 +125,15 @@ export { default as StopPlay } from './generated/StopPlay';
 export { default as Store } from './generated/Store';
 export { default as TalkHelp } from './generated/TalkHelp';
 export { default as TalkHelp2 } from './generated/TalkHelp2';
+export { default as TalkHelpOutlineR } from './generated/TalkHelpOutlineR';
 export { default as Thunder } from './generated/Thunder';
 export { default as Timer } from './generated/Timer';
 export { default as TimerOutline } from './generated/TimerOutline';
 export { default as Trash } from './generated/Trash';
 export { default as Undo } from './generated/Undo';
 export { default as Video } from './generated/Video';
+export { default as Volume } from './generated/Volume';
+export { default as VolumeOutline } from './generated/VolumeOutline';
 export { default as Web } from './generated/Web';
 export { default as Won } from './generated/Won';
 export { default as WonCricle } from './generated/WonCricle';
