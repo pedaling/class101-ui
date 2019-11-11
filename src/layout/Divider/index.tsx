@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
-import { Colors, Theme, ThemeConfig, ThemeMode } from '../../core';
+import { Theme, ThemeConfig, ThemeMode } from '../../core';
+import { gray200, gray800 } from '../../core/Colors';
 
 interface Props {
   className?: string;
@@ -18,7 +19,7 @@ export class Divider extends PureComponent<Props> {
 
   private get color() {
     const { color, theme } = this.props;
-    return color || theme.mode === ThemeMode.LIGHT ? Colors.gray200 : Colors.gray800;
+    return color || theme.mode === ThemeMode.LIGHT ? gray200 : gray800;
   }
 
   public render() {

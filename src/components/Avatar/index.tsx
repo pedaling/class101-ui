@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
-import { Colors, Position } from '../../core';
+import { Position } from '../../core';
+import { gray100 } from '../../core/Colors';
 
 export enum AvatarSize {
   SMALL = 'sm',
@@ -137,7 +138,7 @@ const Container = styled.span<{ size: number }>`
     height: ${props.size}px;
   `};
   border-radius: 50%;
-  background: ${Colors.gray100};
+  background: ${gray100};
   text-align: center;
   vertical-align: top;
 `;
