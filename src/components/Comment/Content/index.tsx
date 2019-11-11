@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 
-import { Colors } from '../../../core';
+import { gray500 } from 'core/Colors';
+import { body2 } from 'core/TextStyles';
 import { ButtonSize, TextButton } from '../../Button';
 
 interface Props {
@@ -76,10 +77,8 @@ const Container = styled.div`
 `;
 
 const Content = styled.div<{ useLineClamp: boolean; maxLine: number }>`
-  font-size: 14px;
-  line-height: 20px;
+  ${body2};
   margin-top: 6px;
-  color: ${Colors.gray800};
   word-wrap: break-word;
   overflow: hidden;
   display: -webkit-box;
@@ -94,7 +93,7 @@ const Content = styled.div<{ useLineClamp: boolean; maxLine: number }>`
 const ClampToggleButton = styled(TextButton)`
   font-size: 11px;
   line-height: 16px;
-  color: ${Colors.gray500};
+  color: ${gray500};
   font-weight: 300;
   align-self: flex-start;
 `;

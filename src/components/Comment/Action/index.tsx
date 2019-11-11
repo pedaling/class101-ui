@@ -1,7 +1,8 @@
 import React, { PureComponent, ReactElement, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 
-import { Body2, Colors } from '../../../core';
+import { Body2 } from '../../../core';
+import { gray500 } from '../../../core/Colors';
 import { IconButton, IconButtonProps } from '../../Button';
 import { ButtonIconPosition } from '../../Button/ButtonIcon';
 
@@ -24,7 +25,7 @@ export class CommentAction extends PureComponent<CommentActionProps> {
   public static defaultProps: Partial<CommentActionProps> = {
     display: true,
     position: ButtonIconPosition.NONE,
-    fillColor: Colors.gray500,
+    fillColor: gray500,
   };
 
   public render() {
@@ -32,7 +33,7 @@ export class CommentAction extends PureComponent<CommentActionProps> {
     return (
       <Container display={display} position={position}>
         <FilledIconButton size="xs" color="transparent" fillColor={fillColor} {...restProps} />
-        {text && <TextWrapper color={Colors.gray500}>{text}</TextWrapper>}
+        {text && <TextWrapper color={gray500}>{text}</TextWrapper>}
         {children}
       </Container>
     );
@@ -58,7 +59,7 @@ const Container = styled.div<Pick<CommentActionProps, 'display' | 'position'>>`
 
 const TextWrapper = styled(Body2)`
   margin-left: 4px;
-  color: ${Colors.gray500};
+  color: ${gray500};
 `;
 
 const FilledIconButton = styled(IconButton)`

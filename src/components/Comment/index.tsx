@@ -1,7 +1,8 @@
 import React, { PureComponent, ReactElement, ReactNode } from 'react';
 import styled from 'styled-components';
 
-import { Caption1, Caption2, Colors } from '../../core';
+import { Caption1, Caption2 } from '../../core';
+import { gray600, orange600 } from '../../core/Colors';
 import { Avatar, AvatarProps, AvatarSize } from '../Avatar';
 import { ButtonIconPosition } from '../Button/ButtonIcon';
 import { CommentAction, CommentActionProps } from './Action';
@@ -83,12 +84,10 @@ export class Comment extends PureComponent<CommentProps> {
         <ContentContainer>
           <TitleContainer>
             <NameContainer>
-              <Caption1 fontWeight="600" color={Colors.gray800}>
-                {name}
-              </Caption1>
+              <Caption1 fontWeight="600">{name}</Caption1>
               {nameDescription && <NameDescription>{nameDescription}</NameDescription>}
             </NameContainer>
-            <Caption1 color={Colors.gray600}>{timeText}</Caption1>
+            <Caption1 color={gray600}>{timeText}</Caption1>
           </TitleContainer>
           <CommentContent useLineClamp={!disableLineClamp} maxLine={maxLine}>
             {content}
@@ -156,7 +155,7 @@ const TitleContainer = styled.div`
 
 const NameDescription = styled(Caption2)`
   margin-left: 4px;
-  color: ${Colors.orange600};
+  color: ${orange600};
   font-weight: 600;
 `;
 

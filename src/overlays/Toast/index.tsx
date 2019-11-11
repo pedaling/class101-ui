@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 
-import * as Colors from '../../core/Colors';
+import { gray900 } from '../../core/Colors';
 import { elevation1 } from '../../core/ElevationStyles';
 import { Position } from '../../core/Position';
 import { IconProps } from '../../Icon';
@@ -121,7 +121,7 @@ const Container = styled.div<Partial<ToastProps>>`
   font-size: 14px;
   display: flex;
   align-items: center;
-  background-color: ${props => props.backgroundColor || Colors.gray900};
+  background-color: ${props => props.backgroundColor || gray900};
   color: ${props => props.color || 'white'};
   margin-top: ${props =>
     props.position === Position.TOP || props.position === Position.TOP_LEFT || props.position === Position.TOP_RIGHT
