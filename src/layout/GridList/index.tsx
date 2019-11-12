@@ -3,31 +3,33 @@ import styled from 'styled-components';
 
 import { media } from '../../core/BreakPoints';
 import { HTMLDivProps } from '../../interfaces/props';
+import { mapArray } from '../../utils';
 import { createUniqIDGenerator } from '../../utils/createUniqIDGenerator';
 
 const sizeToPercent = (column?: number) => 100 / (column || 1);
 const generateID = createUniqIDGenerator('grid-list-');
 
 type Column = 1 | 2 | 3 | 4 | 6 | 12;
-interface Props {
-  items: any[] | ReadonlyArray<any>;
-  renderItem: any;
+interface Props<T> {
+  items: T[] | ReadonlyArray<T>;
+  renderItem: (item: T, index: number, itemArray: ReadonlyArray<T>) => JSX.Element;
   smColumn: Column;
   lgColumn?: Column;
   className?: string;
   divAttributes?: HTMLDivProps;
 }
 
-export class GridList extends PureComponent<Props> {
+// TODO(chiabi): BREAKING CHANGE 8.0 버전 올릴때 any 없애기
+export class GridList<T = any> extends PureComponent<Props<T>> {
   public render() {
     const { items, renderItem, smColumn, lgColumn, className, divAttributes } = this.props;
 
     return (
       <Container className={className} {...divAttributes}>
         <GridListUl smColumn={smColumn}>
-          {items.concat().map((item, index, arr) => (
+          {mapArray(items, (item, index, itemArray) => (
             <GridListItem key={generateID()} smColumn={smColumn} lgColumn={lgColumn}>
-              {renderItem(item, index, arr)}
+              {renderItem(item, index, itemArray)}
             </GridListItem>
           ))}
         </GridListUl>
