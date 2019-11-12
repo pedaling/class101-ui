@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 
-import { gray500 } from 'core/Colors';
-import { body2 } from 'core/TextStyles';
+import { gray500 } from '../../../core/Colors';
+import { body2 } from '../../../core/TextStyles';
 import { ButtonSize, TextButton } from '../../Button';
 
 interface Props {
