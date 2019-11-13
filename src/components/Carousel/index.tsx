@@ -37,6 +37,7 @@ export interface CarouselProps {
   activeIndex?: number;
   onChangeSlide?: (index: number) => void;
   onTransitionEnd?: () => void;
+  onInit?: () => void;
   paginationTheme?: CarouselPaginationTheme;
   navigationPosition?: CarouselNavigationPosition;
   transparentPagination?: boolean;
@@ -145,12 +146,20 @@ export class Carousel extends PureComponent<CarouselProps> {
     }
   };
 
+  private handleInit = () => {
+    const { onInit } = this.props;
+    if (this.swiper && onInit) {
+      onInit();
+    }
+  };
+
   private getSwiperParams = (): Partial<SwiperProps> => {
     const { swiperProps, lgSlidesPerView, smSlidesPerView, lgSpaceBetween, smSpaceBetween, activeIndex } = this.props;
 
     const params: Partial<SwiperProps> = {
       ...swiperProps,
       on: {
+        init: this.handleInit,
         slideChange: this.handelChangeSlide,
         transitionEnd: this.handleTransitionEnd,
       },
