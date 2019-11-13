@@ -8,6 +8,7 @@ import { ButtonSize, TextButton } from '../../Button';
 interface Props {
   useLineClamp: boolean;
   maxLine: number;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
 interface State {
@@ -28,11 +29,11 @@ export class CommentContent extends PureComponent<Props, State> {
   }
 
   public render() {
-    const { children, maxLine } = this.props;
+    const { children, maxLine, onClick } = this.props;
     const { lineClampable, lineClamped } = this.state;
     return (
       <Container>
-        <Content useLineClamp={lineClamped} maxLine={maxLine} ref={this.contentRef}>
+        <Content useLineClamp={lineClamped} maxLine={maxLine} ref={this.contentRef} onClick={onClick}>
           {children}
         </Content>
         {lineClampable && (
@@ -63,11 +64,12 @@ export class CommentContent extends PureComponent<Props, State> {
     return false;
   };
 
-  private handleToggleClampButton = () => {
+  private handleToggleClampButton: React.MouseEventHandler = event => {
     const { lineClamped } = this.state;
     this.setState({
       lineClamped: !lineClamped,
     });
+    event.stopPropagation();
   };
 }
 
