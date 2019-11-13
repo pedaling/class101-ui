@@ -2,7 +2,7 @@ import React, { PureComponent, ReactElement, ReactNode } from 'react';
 import styled from 'styled-components';
 
 import { Caption1, Caption2 } from '../../core';
-import { gray600, orange600 } from '../../core/Colors';
+import { gray500, orange600 } from '../../core/Colors';
 import { Avatar, AvatarProps, AvatarSize } from '../Avatar';
 import { ButtonIconPosition } from '../Button/ButtonIcon';
 import { CommentAction, CommentActionProps } from './Action';
@@ -34,6 +34,9 @@ export interface CommentProps {
   rightAction?: ReactElement<CommentActionProps>[];
   content?: ReactNode;
   className?: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  onContentClick?: React.MouseEventHandler<HTMLDivElement>;
+  passingClickEventClampButton?: boolean;
 }
 
 const CommentImage = styled.img`
@@ -68,8 +71,10 @@ export class Comment extends PureComponent<CommentProps> {
       showChildren,
       maxLine = size === CommentSize.SMALL ? 2 : 4,
       className,
+      onClick,
+      onContentClick,
     } = this.props;
-    const avatarSize = size === CommentSize.LARGE ? AvatarSize.LARGE : AvatarSize.SMALL;
+    const avatarSize = size === CommentSize.LARGE ? AvatarSize.LARGE : AvatarSize.MEDIUM;
     const clonedAvatar = avatar ? (
       React.cloneElement(avatar, {
         size: avatarSize,
@@ -79,7 +84,7 @@ export class Comment extends PureComponent<CommentProps> {
     );
 
     return (
-      <Container width={width} className={className}>
+      <Container width={width} className={className} onClick={onClick}>
         <AvatarWrapper>{clonedAvatar}</AvatarWrapper>
         <ContentContainer>
           <TitleContainer>
@@ -87,17 +92,17 @@ export class Comment extends PureComponent<CommentProps> {
               <Caption1 fontWeight="600">{name}</Caption1>
               {nameDescription && <NameDescription>{nameDescription}</NameDescription>}
             </NameContainer>
-            <Caption1 color={gray600}>{timeText}</Caption1>
+            <Caption2 color={gray500}>{timeText}</Caption2>
           </TitleContainer>
-          <CommentContent useLineClamp={!disableLineClamp} maxLine={maxLine}>
+          <CommentContent useLineClamp={!disableLineClamp} maxLine={maxLine} onClick={onContentClick}>
             {content}
           </CommentContent>
           <ActionWrapper>
-            <LeftActionContainer>
+            <LeftActionContainer onClick={this.preventPropagation}>
               {leftAction &&
                 leftAction.map((action, key) => React.cloneElement(action, { position: ButtonIconPosition.LEFT, key }))}
             </LeftActionContainer>
-            <RightActionContainer>
+            <RightActionContainer onClick={this.preventPropagation}>
               {rightAction &&
                 rightAction.map((action, key) =>
                   React.cloneElement(action, { position: ButtonIconPosition.RIGHT, key })
@@ -119,6 +124,10 @@ export class Comment extends PureComponent<CommentProps> {
       </Container>
     );
   }
+
+  private preventPropagation: React.MouseEventHandler<HTMLDivElement> = event => {
+    event.stopPropagation();
+  };
 }
 
 const Container = styled.div<{ width: string }>`
@@ -134,7 +143,6 @@ const AvatarWrapper = styled.div`
 
 const ContentContainer = styled.div`
   display: flex;
-  margin-top: 4px;
   margin-left: 8px;
   flex: 1 1 auto;
   flex-direction: column;
@@ -143,14 +151,12 @@ const ContentContainer = styled.div`
 const NameContainer = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 2px;
   align-items: flex-end;
 `;
 
 const TitleContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
 `;
 
 const NameDescription = styled(Caption2)`

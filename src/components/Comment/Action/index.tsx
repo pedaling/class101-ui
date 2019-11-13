@@ -33,7 +33,7 @@ export class CommentAction extends PureComponent<CommentActionProps> {
     return (
       <Container display={display} position={position}>
         <FilledIconButton size="xs" color="transparent" fillColor={fillColor} {...restProps} />
-        {text && <TextWrapper color={gray500}>{text}</TextWrapper>}
+        {text !== undefined && <TextWrapper color={gray500}>{text}</TextWrapper>}
         {children}
       </Container>
     );

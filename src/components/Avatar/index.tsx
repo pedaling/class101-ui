@@ -55,8 +55,8 @@ export class Avatar extends PureComponent<AvatarProps, AvatarState> {
     const { isError } = this.state;
 
     const avatarSize = typeof size === 'number' ? size : avatarSizeBySize[size];
-
-    const sizedIcon = icon && React.cloneElement(icon, { size: avatarSize * iconRatio });
+    const iconSize = typeof size === 'number' ? avatarSize * iconRatio : iconSizeBySize[size];
+    const sizedIcon = icon && React.cloneElement(icon, { size: iconSize });
 
     return (
       <Container onClick={onClick} size={avatarSize} className={className}>
@@ -126,8 +126,14 @@ const iconPositionByPosition: { [key in AvatarIconPosition]: FlattenSimpleInterp
 
 const avatarSizeBySize: { [key in AvatarSize]: number } = {
   [AvatarSize.LARGE]: 40,
-  [AvatarSize.MEDIUM]: 32,
-  [AvatarSize.SMALL]: 24,
+  [AvatarSize.MEDIUM]: 24,
+  [AvatarSize.SMALL]: 18,
+};
+
+const iconSizeBySize: { [key in AvatarSize]: number } = {
+  [AvatarSize.LARGE]: 20,
+  [AvatarSize.MEDIUM]: 16,
+  [AvatarSize.SMALL]: 12,
 };
 
 const Container = styled.span<{ size: number }>`

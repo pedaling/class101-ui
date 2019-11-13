@@ -58,7 +58,16 @@ Comment 컴포넌트
     }
   >
     <Comment
-      avatar={<Avatar src={IMAGE_URL} />}
+      avatar={
+        <Avatar
+          src={IMAGE_URL}
+          icon={
+            <Badge backgroundColor={Colors.orange600} pill>
+              <Icon.Crown fillColor={Colors.white} />
+            </Badge>
+          }
+        />
+      }
       name="피터펜"
       timeText="1시간 전"
       leftAction={[<Comment.Action icon={<Icon.HeartOutline />} />]}
