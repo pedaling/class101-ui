@@ -17,7 +17,8 @@ import { PlayGroundButtonContainer } from '../docsComponents';
 > - v4부터 Icon 컴포넌트와 함께 사용할 수 있도록 flex 기반의 스타일링을 지원하고 있습니다.
 > - v4부터 textAlign 프로퍼티는 지원하지 않습니다.
 > - v6부터 src를 지원하지 않습니다. 버튼의 아이콘은 Icon 컴포넌트를 사용해주세요.
-> - v7부터 color, backgroundColor는 지원하지 않을 예정입니다.
+> - v7부터 기존의 color, backgroundColor는 지원하지 않습니다.
+> - v8부터 href과 target 프로퍼티는 사용하지 않을 예정입니다.
 
 ## Props
 
@@ -204,30 +205,16 @@ export enum ButtonSize {
     <Button size={ButtonSize.XSMALL}>Click me</Button>
   </PlayGroundButtonContainer>
   <PlayGroundButtonContainer>
-    <Button to="/" target="_blank" size={ButtonSize.LARGE}>
+    <Button to="/" size={ButtonSize.LARGE}>
       Click me
     </Button>
-    <Button to="/" target="_blank" size={ButtonSize.MEDIUM}>
+    <Button to="/" size={ButtonSize.MEDIUM}>
       Click me
     </Button>
-    <Button to="/" target="_blank" size={ButtonSize.SMALL}>
+    <Button to="/" size={ButtonSize.SMALL}>
       Click me
     </Button>
-    <Button to="/" target="_blank" size={ButtonSize.XSMALL}>
-      Click me
-    </Button>
-  </PlayGroundButtonContainer>
-  <PlayGroundButtonContainer>
-    <Button href="/" target="_blank" size={ButtonSize.LARGE}>
-      Click me
-    </Button>
-    <Button href="/" target="_blank" size={ButtonSize.MEDIUM}>
-      Click me
-    </Button>
-    <Button href="/" target="_blank" size={ButtonSize.SMALL}>
-      Click me
-    </Button>
-    <Button href="/" target="_blank" size={ButtonSize.XSMALL}>
+    <Button to="/" size={ButtonSize.XSMALL}>
       Click me
     </Button>
   </PlayGroundButtonContainer>
@@ -298,119 +285,78 @@ export enum ButtonSize {
 
 <Playground>
   <PlayGroundButtonContainer>
-    <Button href="/" target="_blank">
+    <Button to="https://class101.net">
       Native A Tag
     </Button>
-    <Button to="/" target="_blank">
+    <Button to="/">
       Link of React Router Dom
     </Button>
   </PlayGroundButtonContainer>
 </Playground>
 
 <Playground>
-  to
   <PlayGroundButtonContainer>
-    <Button to="/" target="_blank">
+    <Button to="/" >
       Button
     </Button>
-    <Button to="/" target="_blank" leftIcon={<Icon.Add />}>
+    <Button to="/"  leftIcon={<Icon.Add />}>
       Button
     </Button>
-    <Button to="/" target="_blank" disabled>
+    <Button to="/"  disabled>
       Button
     </Button>
-    <Button to="/" target="_blank" leftIcon={<Icon.Add />} disabled>
+    <Button to="/"  leftIcon={<Icon.Add />} disabled>
       Button
     </Button>
-    <Button to="/" target="_blank" loading>
+    <Button to="/"  loading>
       Button
     </Button>
   </PlayGroundButtonContainer>
   <PlayGroundButtonContainer theme={Theme.dark}>
-    <Button to="/" target="_blank" theme={Theme.dark}>
+    <Button to="/"  theme={Theme.dark}>
       Button
     </Button>
-    <Button to="/" target="_blank" theme={Theme.dark} leftIcon={<Icon.Add />}>
+    <Button to="/"  theme={Theme.dark} leftIcon={<Icon.Add />}>
       Button
     </Button>
-    <Button to="/" target="_blank" theme={Theme.dark} disabled>
+    <Button to="/"  theme={Theme.dark} disabled>
       Button
     </Button>
-    <Button to="/" target="_blank" theme={Theme.dark} leftIcon={<Icon.Add />} disabled>
+    <Button to="/"  theme={Theme.dark} leftIcon={<Icon.Add />} disabled>
       Button
     </Button>
-    <Button to="/" target="_blank" theme={Theme.dark} loading>
-      Button
-    </Button>
-  </PlayGroundButtonContainer>
-  <PlayGroundButtonContainer>
-    <Button to="/" target="_blank" color={ButtonColor.ORANGE}>
-      CTA Button
-    </Button>
-    <Button to="/" target="_blank" color={ButtonColor.ORANGE} leftIcon={<Icon.Add />}>
-      CTA Button
-    </Button>
-    <Button to="/" target="_blank" color={ButtonColor.ORANGE} disabled>
-      CTA Button
-    </Button>
-    <Button to="/" target="_blank" color={ButtonColor.ORANGE} leftIcon={<Icon.Add />} disabled>
-      CTA Button
-    </Button>
-    <Button to="/" target="_blank" color={ButtonColor.ORANGE} loading>
-      CTA Button
-    </Button>
-  </PlayGroundButtonContainer>
-  <br />
-  href
-  <PlayGroundButtonContainer>
-    <Button href="/" target="_blank">
-      Button
-    </Button>
-    <Button href="/" target="_blank" leftIcon={<Icon.Add />}>
-      Button
-    </Button>
-    <Button href="/" target="_blank" disabled>
-      Button
-    </Button>
-    <Button href="/" target="_blank" leftIcon={<Icon.Add />} disabled>
-      Button
-    </Button>
-    <Button href="/" target="_blank" loading>
-      Button
-    </Button>
-  </PlayGroundButtonContainer>
-  <PlayGroundButtonContainer theme={Theme.dark}>
-    <Button href="/" target="_blank" theme={Theme.dark}>
-      Button
-    </Button>
-    <Button href="/" target="_blank" theme={Theme.dark} leftIcon={<Icon.Add />}>
-      Button
-    </Button>
-    <Button href="/" target="_blank" theme={Theme.dark} disabled>
-      Button
-    </Button>
-    <Button href="/" target="_blank" theme={Theme.dark} leftIcon={<Icon.Add />} disabled>
-      Button
-    </Button>
-    <Button href="/" target="_blank" theme={Theme.dark} loading>
+    <Button to="/"  theme={Theme.dark} loading>
       Button
     </Button>
   </PlayGroundButtonContainer>
   <PlayGroundButtonContainer>
-    <Button href="/" target="_blank" color={ButtonColor.ORANGE}>
+    <Button to="/"  color={ButtonColor.ORANGE}>
       CTA Button
     </Button>
-    <Button href="/" target="_blank" color={ButtonColor.ORANGE} leftIcon={<Icon.Add />}>
+    <Button to="/"  color={ButtonColor.ORANGE} leftIcon={<Icon.Add />}>
       CTA Button
     </Button>
-    <Button href="/" target="_blank" color={ButtonColor.ORANGE} disabled>
+    <Button to="/"  color={ButtonColor.ORANGE} disabled>
       CTA Button
     </Button>
-    <Button href="/" target="_blank" color={ButtonColor.ORANGE} leftIcon={<Icon.Add />} disabled>
+    <Button to="/"  color={ButtonColor.ORANGE} leftIcon={<Icon.Add />} disabled>
       CTA Button
     </Button>
-    <Button href="/" target="_blank" color={ButtonColor.ORANGE} loading>
+    <Button to="/"  color={ButtonColor.ORANGE} loading>
       CTA Button
+    </Button>
+  </PlayGroundButtonContainer>
+</Playground>
+
+## External link
+
+<Playground>
+  <PlayGroundButtonContainer>
+    <Button to="https://class101.net" leftIcon={<Icon.Web/>} external>
+      Native A Tag
+    </Button>
+    <Button to="/" leftIcon={<Icon.Web/>} external>
+      Link of React Router Dom
     </Button>
   </PlayGroundButtonContainer>
 </Playground>

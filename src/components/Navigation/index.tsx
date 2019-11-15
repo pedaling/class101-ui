@@ -16,11 +16,13 @@ export interface NavigationSectionAction {
 export interface NavigationSectionSubItem {
   url: string;
   label: string;
+  external?: boolean;
   badge?: string | React.ReactElement<BadgeProps>;
 }
 
 export interface NavigationSectionItem {
   url?: string;
+  external?: boolean;
   label: string;
   onClick?: () => any;
   icon: React.ReactElement<IconProps>;
