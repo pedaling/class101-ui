@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import React, { AnchorHTMLAttributes, ButtonHTMLAttributes } from 'react';
-import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
+import { LinkBlock } from '../../../core/LinkBlock';
 import { ThemeConfig } from '../../../core/Theme';
 import { IconProps } from '../../../Icon';
 import { Omit } from '../../../interfaces/props';
@@ -21,8 +21,10 @@ interface ButtonBaseProps<ColorValue, SizeValue> {
   onClick?: (event: React.MouseEvent<HTMLElement>) => void;
   children?: React.ReactNode;
   disabled?: boolean;
+  // deprecated
   target?: string;
   className?: string;
+  external?: boolean;
 }
 
 type OmittedAnchorAttributes<ColorValue, SizeValue> = Omit<
@@ -64,6 +66,7 @@ export default class ButtonBase<ColorValue extends string, SizeValue extends str
       to,
       href,
       target,
+      external,
       anchorAttributes,
       buttonAttributes,
       className,
@@ -85,12 +88,6 @@ export default class ButtonBase<ColorValue extends string, SizeValue extends str
       );
     }
 
-    const options: { rel?: string } = {};
-
-    if (target === '_blank') {
-      options.rel = 'noopener noreferrer';
-    }
-
     const innerElements = (
       <>
         {icon}
@@ -98,35 +95,18 @@ export default class ButtonBase<ColorValue extends string, SizeValue extends str
       </>
     );
 
-    if (to) {
+    if (to || href) {
       return (
         <AnchorButtonWrapper className={classNames(className, { disabled })}>
           <LinkButton
-            to={to}
-            target={target}
+            to={to || href}
+            external={target === '_blank' || external}
             icon-position={iconPosition}
             {...anchorAttributes}
             {...restProps}
-            {...options}
           >
             {innerElements}
           </LinkButton>
-        </AnchorButtonWrapper>
-      );
-    }
-    if (href) {
-      return (
-        <AnchorButtonWrapper className={classNames(className, { disabled })}>
-          <AnchorButton
-            href={href}
-            target={target}
-            icon-position={iconPosition}
-            {...anchorAttributes}
-            {...restProps}
-            {...options}
-          >
-            {innerElements}
-          </AnchorButton>
         </AnchorButtonWrapper>
       );
     }
@@ -202,10 +182,6 @@ const getAnchorButtonStyle = (iconPosition?: ButtonIconPosition) => css`
   }
 `;
 
-const LinkButton = styled(Link)<{ 'icon-position'?: ButtonIconPosition }>`
-  ${props => getAnchorButtonStyle(props['icon-position'])};
-`;
-
-const AnchorButton = styled.a<{ 'icon-position'?: ButtonIconPosition }>`
+const LinkButton = styled(LinkBlock)<{ 'icon-position'?: ButtonIconPosition }>`
   ${props => getAnchorButtonStyle(props['icon-position'])};
 `;

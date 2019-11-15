@@ -1,10 +1,10 @@
 import pathToRegexp from 'path-to-regexp';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 import { NavigationSectionAction, NavigationSectionItem, NavigationSectionSubItem } from '..';
 import { gray50, gray700, gray900 } from '../../../core/Colors';
+import { LinkBlock } from '../../../core/LinkBlock';
 import { body2, caption1 } from '../../../core/TextStyles';
 import { ChevronDown } from '../../../Icon';
 import { Badge } from '../../Badge';
@@ -104,6 +104,7 @@ export class NavigationSection extends React.PureComponent<InjectedProps, State>
         {item.url ? (
           <SectionLink
             to={item.url}
+            external={item.external}
             onClick={this.handleOnClickLink(item.url)}
             active={NavigationSection.isActiveLocation(pathname, item)}
           >
@@ -126,6 +127,7 @@ export class NavigationSection extends React.PureComponent<InjectedProps, State>
       <SectionLink
         key={index}
         to={item.url}
+        external={item.external}
         onClick={this.handleOnClickLink(item.url)}
         active={NavigationSection.isActiveLocation(pathname, item)}
       >
@@ -201,7 +203,7 @@ const SectionItemStyle = css`
   }
 `;
 
-const SectionLink = styled(Link)<{ active: boolean }>`
+const SectionLink = styled(LinkBlock)<{ active: boolean }>`
   ${SectionItemStyle};
   ${props =>
     props.active

@@ -49,3 +49,30 @@ import { PlayGroundContainer, ThemeProvider } from '../docsComponents';
     </Navigation>
   </PlayGroundContainer>
 </Playground>
+
+## External Link
+
+<Playground>
+  <PlayGroundContainer>
+    <Navigation pathname="/components/navigation">
+      <Navigation.Section
+        items={[{ url: 'https://class101.net', shouldOpenWindow: true, label: '클래스101 가기', icon: <Icon.Home /> }]}
+      />
+      <Navigation.Divider />
+      <Navigation.Section
+        title="도움말"
+        action={{
+          onClick: () => alert('도움!'),
+          icon: <Icon.Help />,
+        }}
+        items={[
+          {
+            label: '클래스101',
+            icon: <Icon.Gift />,
+            subItems: [{ label: '가기', url: 'https://class101.net', shouldOpenWindow: true }],
+          },
+        ]}
+      />
+    </Navigation>
+  </PlayGroundContainer>
+</Playground>

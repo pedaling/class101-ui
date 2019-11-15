@@ -10,6 +10,10 @@ import { PlayGroundContainer } from '../docsComponents';
 
 # TextButton
 
+> **NOTE**
+>
+> - v8부터 href과 target 프로퍼티는 사용하지 않을 예정입니다.
+
 ## Props
 
 <PropsTable of={TextButton} />
@@ -182,18 +186,28 @@ export enum ButtonSize {
 
 <Playground>
   <PlayGroundContainer>
-    <TextButton href="/" target="_blank">
-      Native A Tag
-    </TextButton>
-    <TextButton to="/" target="_blank">
+    <TextButton to="https://class101.net">
       Link of React Router Dom
     </TextButton>
   </PlayGroundContainer>
   <PlayGroundContainer>
-    <TextButton href="/" target="_blank" disabled>
-      Native A Tag
+    <TextButton to="/" disabled>
+      Link of React Router Dom
     </TextButton>
-    <TextButton to="/" target="_blank" disabled>
+  </PlayGroundContainer>
+</Playground>
+
+
+## External link
+
+<Playground>
+  <PlayGroundContainer>
+    <TextButton to="https://class101.net" external>
+      Link of React Router Dom
+    </TextButton>
+  </PlayGroundContainer>
+  <PlayGroundContainer>
+    <TextButton to="/" external>
       Link of React Router Dom
     </TextButton>
   </PlayGroundContainer>
