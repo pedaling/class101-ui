@@ -1,4 +1,4 @@
-import React, { PureComponent, ReactNode, Children, ReactElement } from 'react';
+import React, { PureComponent } from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
 import { media, SIZES } from '../../core/BreakPoints';
@@ -44,7 +44,6 @@ export interface CarouselProps {
   containerContentMaxWidth?: number;
   pagination?: boolean;
   navigation?: boolean;
-  id?: string;
 }
 
 export enum CarouselNavigationPosition {
@@ -85,7 +84,6 @@ export class Carousel extends PureComponent<CarouselProps> {
   }
   public render() {
     const {
-      id,
       className,
       children,
       navigation,
@@ -102,7 +100,6 @@ export class Carousel extends PureComponent<CarouselProps> {
 
     return (
       <StyledSwiper
-        id={id}
         className={className}
         hasNavigation={navigation}
         hasPagination={pagination}
