@@ -5,6 +5,9 @@ interface Theme {
   mode: ThemeMode.DARK | ThemeMode.LIGHT;
 }
 
-export const ifDarkTheme = (darkThemeStyle: string | FlattenSimpleInterpolation) => ({ theme }: { theme: Theme }) => {
-  return theme.mode === ThemeMode.DARK ? darkThemeStyle : '';
+export const ifDarkTheme = (
+  darkThemeStyle: string | FlattenSimpleInterpolation,
+  anotherThemeStyle: string | FlattenSimpleInterpolation = ''
+) => ({ theme }: { theme: Theme }) => {
+  return theme.mode === ThemeMode.DARK ? darkThemeStyle : anotherThemeStyle;
 };
