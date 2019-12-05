@@ -1,0 +1,44 @@
+---
+menu: Components
+name: Skeleton
+route: /components/skeleton
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Skeleton, Colors } from '@class101/ui';
+
+# Skeleton
+
+콘텐츠 로딩을 나타내기 유용한 컴포넌트 입니다.
+
+## Props
+
+<PropsTable of={Skeleton} />
+
+## Basic usage
+
+<Playground>
+  <Skeleton count={10} />
+  <br />
+  <Skeleton count={20} color={Colors.orange500} />
+  <br />
+  <Skeleton count={30} rounded={false} />
+  <br />
+  <Skeleton count={40} circle />
+</Playground>
+
+**count**가 있다면 `display: inline-block`으로 변합니다.
+
+## Width & Height
+
+<Playground>
+  <Skeleton width={80} />
+  <br />
+  <Skeleton width={30} height={80} />
+</Playground>
+
+## Circle
+
+<Playground>
+  <Skeleton width={80} height={80} circle />
+</Playground>
