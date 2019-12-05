@@ -33,14 +33,17 @@ export interface SkeletonProps {
   /**
    * placeholder words count.
    */
-  count: number;
+  count?: number;
 }
 
 export const Skeleton: FC<SkeletonProps> = memo(
   ({ style, className, circle, width, height, count, color, rounded, children }) => {
     const content = useMemo(() => {
-      let result = 'F';
-      for (let i = 1; i < count; i += 1) {
+      if (!count) {
+        return 'F';
+      }
+      let result = '';
+      for (let i = 0; i < count; i += 1) {
         result += 'F';
       }
       return result;
