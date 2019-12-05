@@ -5,7 +5,7 @@ route: /components/skeleton
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Skeleton, Colors } from '@class101/ui';
+import { Skeleton, Colors, Headline2, Body2, Body1 } from '@class101/ui';
 
 # Skeleton
 
@@ -18,16 +18,29 @@ import { Skeleton, Colors } from '@class101/ui';
 ## Basic usage
 
 <Playground>
-  <Skeleton count={10} />
+  <Skeleton>FFFFF</Skeleton>
+  <br />
+  <Skeleton count={5}></Skeleton>
   <br />
   <Skeleton count={20} color={Colors.orange500} />
   <br />
-  <Skeleton count={30} rounded={false} />
+  <Headline2>
+    <Skeleton rounded={false}>Hello World</Skeleton>
+  </Headline2>
   <br />
-  <Skeleton count={40} circle />
+  <Body1>
+    <Skeleton>
+      Heollo <br />
+      World
+    </Skeleton>
+  </Body1>
+  <Body2>
+    <Skeleton>
+      Heollo <br />
+      World
+    </Skeleton>
+  </Body2>
 </Playground>
-
-**count**가 있다면 `display: inline-block`으로 변합니다.
 
 ## Width & Height
 
@@ -36,6 +49,8 @@ import { Skeleton, Colors } from '@class101/ui';
   <br />
   <Skeleton width={30} height={80} />
 </Playground>
+
+**with** 또는 **hegiht**가 있다면 `display: block`으로 변합니다.
 
 ## Circle
 
