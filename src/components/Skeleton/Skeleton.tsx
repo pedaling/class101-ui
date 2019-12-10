@@ -1,7 +1,8 @@
 import React, { FC, memo, useMemo } from 'react';
 import styled, { keyframes } from 'styled-components';
 
-import { gray100 } from '../../core/Colors';
+import { gray100, gray800 } from '../../core/Colors';
+import { ifDarkTheme } from '../../utils';
 
 export interface SkeletonProps {
   style?: React.CSSProperties;
@@ -67,7 +68,6 @@ export const Skeleton: FC<SkeletonProps> = memo(
 
 Skeleton.defaultProps = {
   rounded: true,
-  color: gray100,
   count: 0,
 };
 
@@ -88,7 +88,9 @@ const Container = styled.span<ContainerProps>`
   ${props => props.rounded && `border-radius: 3px`};
   ${props => props.circle && `border-radius: 50%`};
   ${props => (props.width || props.height) && `display: block`};
-  background-color: ${props => props.color};
+  background-color: ${gray100};
+  ${ifDarkTheme(`background-color: ${gray800};`)}
+  ${props => props.color && `background-color: ${props.color}`};
   animation: ${fadeOut} 1s infinite linear alternate;
 `;
 
