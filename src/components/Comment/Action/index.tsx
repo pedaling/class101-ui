@@ -12,9 +12,6 @@ export interface CommentActionProps extends ButtonPropsForComment {
   /** 사용할 icon. */
   icon: ReactElement<{ size: number }>;
 
-  /** 보임/숨김 여부. */
-  display: boolean;
-
   position: ButtonIconPosition;
 
   /** icon옆에 표시할 텍스트. */
@@ -23,15 +20,14 @@ export interface CommentActionProps extends ButtonPropsForComment {
 
 export class CommentAction extends PureComponent<CommentActionProps> {
   public static defaultProps: Partial<CommentActionProps> = {
-    display: true,
     position: ButtonIconPosition.NONE,
     fillColor: gray500,
   };
 
   public render() {
-    const { display, position, text, fillColor, children, ...restProps } = this.props;
+    const { position, text, fillColor, children, ...restProps } = this.props;
     return (
-      <Container display={display} position={position}>
+      <Container position={position}>
         <FilledIconButton size="xs" color="transparent" fillColor={fillColor} {...restProps} />
         {text !== undefined && <TextWrapper color={gray500}>{text}</TextWrapper>}
         {children}
@@ -40,8 +36,8 @@ export class CommentAction extends PureComponent<CommentActionProps> {
   }
 }
 
-const Container = styled.div<Pick<CommentActionProps, 'display' | 'position'>>`
-  display: ${props => (props.display ? 'flex' : 'none')};
+const Container = styled.div<Pick<CommentActionProps, 'position'>>`
+  display: flex;
   align-items: center;
 
   ${props =>
