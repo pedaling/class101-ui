@@ -25,10 +25,10 @@ export class CommentAction extends PureComponent<CommentActionProps> {
   };
 
   public render() {
-    const { position, text, fillColor, children, ...restProps } = this.props;
+    const { position, text, fillColor, children, onClick, ...restProps } = this.props;
     return (
-      <Container position={position}>
-        <FilledIconButton size="xs" color="transparent" fillColor={fillColor} {...restProps} />
+      <Container position={position} onClick={onClick}>
+        <FilledIconButton size="xs" color="transparent" fillColor={fillColor} hasCursor={!!onClick} {...restProps} />
         {text !== undefined && <TextWrapper color={gray500}>{text}</TextWrapper>}
         {children}
       </Container>
@@ -36,7 +36,7 @@ export class CommentAction extends PureComponent<CommentActionProps> {
   }
 }
 
-const Container = styled.div<Pick<CommentActionProps, 'position'>>`
+const Container = styled.div<Pick<CommentActionProps, 'position' | 'onClick'>>`
   display: flex;
   align-items: center;
 
@@ -64,8 +64,12 @@ const TextWrapper = styled(Body2)`
   color: ${gray500};
 `;
 
-const FilledIconButton = styled(IconButton)`
+const FilledIconButton = styled(IconButton)<{ hasCursor: boolean }>`
   width: auto;
   height: auto;
-  cursor: default !important;
+  ${props =>
+    !props.hasCursor &&
+    css`
+      cursor: default !important;
+    `};
 `;
