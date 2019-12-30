@@ -8,6 +8,8 @@ import { ButtonSize, TextButton } from '../../Button';
 interface Props {
   useLineClamp: boolean;
   maxLine: number;
+  readMoreText: string;
+  hideText: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
@@ -29,7 +31,7 @@ export class CommentContent extends PureComponent<Props, State> {
   }
 
   public render() {
-    const { children, maxLine, onClick } = this.props;
+    const { children, maxLine, onClick, readMoreText, hideText } = this.props;
     const { lineClampable, lineClamped } = this.state;
     return (
       <Container>
@@ -38,7 +40,7 @@ export class CommentContent extends PureComponent<Props, State> {
         </Content>
         {lineClampable && (
           <ClampToggleButton size={ButtonSize.SMALL} onClick={this.handleToggleClampButton}>
-            {lineClamped ? '전체보기' : '숨기기'}
+            {lineClamped ? readMoreText : hideText}
           </ClampToggleButton>
         )}
       </Container>

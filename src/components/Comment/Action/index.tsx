@@ -43,6 +43,12 @@ export class CommentAction extends PureComponent<CommentActionProps> {
 const Container = styled.div<Pick<CommentActionProps, 'display' | 'position'>>`
   display: ${props => (props.display ? 'flex' : 'none')};
   align-items: center;
+
+  ${props =>
+    props.onClick &&
+    css`
+      cursor: pointer;
+    `};
   ${({ position }) => {
     if (position === ButtonIconPosition.RIGHT) {
       return css`
@@ -54,7 +60,7 @@ const Container = styled.div<Pick<CommentActionProps, 'display' | 'position'>>`
         margin-right: 16px;
       `;
     }
-  }}
+  }};
 `;
 
 const TextWrapper = styled(Body2)`
@@ -65,4 +71,5 @@ const TextWrapper = styled(Body2)`
 const FilledIconButton = styled(IconButton)`
   width: auto;
   height: auto;
+  cursor: default !important;
 `;

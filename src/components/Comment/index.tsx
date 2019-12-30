@@ -19,6 +19,9 @@ export interface CommentProps {
   /** 라인 숨김 여부. */
   disableLineClamp: boolean;
 
+  readMoreText: string;
+  hideText: string;
+
   /** 대댓글이 표시되는 여부. */
   showChildren: boolean;
 
@@ -53,6 +56,8 @@ export class Comment extends PureComponent<CommentProps> {
     width: '100%',
     disableLineClamp: false,
     showChildren: true,
+    readMoreText: '전체보기',
+    hideText: '숨기기',
   };
 
   public render() {
@@ -73,6 +78,8 @@ export class Comment extends PureComponent<CommentProps> {
       className,
       onClick,
       onContentClick,
+      readMoreText,
+      hideText,
     } = this.props;
     const avatarSize = size === CommentSize.LARGE ? AvatarSize.LARGE : AvatarSize.MEDIUM;
     const clonedAvatar = avatar ? (
@@ -94,7 +101,13 @@ export class Comment extends PureComponent<CommentProps> {
             </NameContainer>
             <Caption2 color={gray500}>{timeText}</Caption2>
           </TitleContainer>
-          <CommentContent useLineClamp={!disableLineClamp} maxLine={maxLine} onClick={onContentClick}>
+          <CommentContent
+            readMoreText={readMoreText}
+            hideText={hideText}
+            useLineClamp={!disableLineClamp}
+            maxLine={maxLine}
+            onClick={onContentClick}
+          >
             {content}
           </CommentContent>
           <ActionWrapper>
