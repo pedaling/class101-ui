@@ -71,6 +71,7 @@ export class CommentContent extends PureComponent<Props, State> {
     this.setState({
       lineClamped: !lineClamped,
     });
+    event.preventDefault();
     event.stopPropagation();
   };
 }
