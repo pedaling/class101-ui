@@ -1,14 +1,14 @@
 import { IconProps } from 'Icon';
 import { darken } from 'polished';
 import React, { PureComponent } from 'react';
-import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
+import styled from 'styled-components';
 
 import { Theme } from '../../../core/Theme';
 import ButtonBase, { ButtonCommonProps } from '../ButtonBase';
 import { ButtonIcon, ButtonIconPosition, buttonIconSizeByButtonSize } from '../ButtonIcon';
 import ButtonSpinner from '../ButtonSpinner';
 import { ButtonColor, ButtonSize, ContainButtonColorValue, ContainButtonSizeValue } from '../interface';
-import { getButtonColors } from '../utils';
+import { getButtonColors, getButtonStyleBySize } from '../utils';
 
 export interface ButtonProps extends ButtonCommonProps<ContainButtonColorValue, ContainButtonSizeValue> {
   fill: boolean;
@@ -61,36 +61,6 @@ interface StyledContainerProps extends ButtonCommonProps<ContainButtonColorValue
   fill?: string;
 }
 
-const buttonStyleBySize: { [key in ButtonSize]: FlattenSimpleInterpolation } = {
-  [ButtonSize.LARGE]: css`
-    font-weight: 700;
-    font-size: 16px;
-    letter-spacing: -0.2px;
-    padding: 0 20px;
-    height: 48px;
-  `,
-  [ButtonSize.MEDIUM]: css`
-    font-weight: 500;
-    font-size: 14px;
-    letter-spacing: -0.2px;
-    padding: 0 16px;
-    height: 40px;
-  `,
-  [ButtonSize.SMALL]: css`
-    font-weight: 500;
-    font-size: 14px;
-    letter-spacing: -0.2px;
-    padding: 0 12px;
-    height: 32px;
-  `,
-  [ButtonSize.XSMALL]: css`
-    font-weight: 500;
-    font-size: 11px;
-    padding: 0 10px;
-    height: 28px;
-  `,
-};
-
 const StyledButtonBase = styled(ButtonBase)<StyledContainerProps>`
   width: ${props => (props.fill === 'true' ? '100%' : 'auto')};
   display: ${props => (props.fill === 'true' ? 'flex' : 'inline-flex')};
@@ -99,8 +69,12 @@ const StyledButtonBase = styled(ButtonBase)<StyledContainerProps>`
 
   color: ${props => getButtonColors(props.color, props.theme.mode).textColor};
   background-color: ${props => getButtonColors(props.color, props.theme.mode).backgroundColor};
-
-  ${props => buttonStyleBySize[props.size as ButtonSize]};
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: -0.2px;
+  padding: 0 16px;
+  height: 40px;
+  ${props => getButtonStyleBySize(props.size as ButtonSize)};
 
   transition: background-color 0.1s;
   text-decoration-line: none;
