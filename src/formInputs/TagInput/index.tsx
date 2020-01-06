@@ -3,8 +3,10 @@ import { uniq } from 'lodash';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
+import { ButtonColor, ButtonSize, IconButton } from '../../components/Button';
 import { gray300, gray800, orange500, redError, white } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
+import { Close } from '../../Icon';
 import { InlineError, Intent } from '../InlineError';
 import InnerTags from './InnerTags';
 
@@ -42,6 +44,8 @@ export class TagInput extends PureComponent<TagInputProps, State> {
     focused: false,
   };
 
+  private inputElement?: HTMLInputElement;
+
   public render() {
     const {
       className,
@@ -65,19 +69,29 @@ export class TagInput extends PureComponent<TagInputProps, State> {
           style={style}
           onClick={this.handleContainerClick}
         >
-          <InnerTags value={value} onRemove={this.handleTagRemove} disabled={disabled} />
-          <StyledInput
-            type="text"
-            style={inputStyle}
-            onChange={this.handleInputChange}
-            onBlur={this.handleInputBlur}
-            onKeyUp={this.handleInputKeyUp}
-            onFocus={this.handleInputFocus}
-            value={tempValue}
-            ref={this.inputRefHandler}
-            disabled={disabled}
-            {...inputProps}
-          />
+          <InnerContainer>
+            <InnerTags value={value} onRemove={this.handleTagRemove} disabled={disabled} />
+            <StyledInput
+              type="text"
+              style={inputStyle}
+              onChange={this.handleInputChange}
+              onBlur={this.handleInputBlur}
+              onKeyUp={this.handleInputKeyUp}
+              onFocus={this.handleInputFocus}
+              value={tempValue}
+              ref={this.inputRefHandler}
+              disabled={disabled}
+              {...inputProps}
+            />
+          </InnerContainer>
+          {value.length > 0 && (
+            <IconButton
+              icon={<Close />}
+              size={ButtonSize.XSMALL}
+              color={ButtonColor.TRANSPARENT}
+              onClick={this.handleTagRemoveAll}
+            />
+          )}
         </TagInputContainer>
         {allowMessage && !errorMessage && (
           <InlineError icon={null} intent={Intent.DEFAULT}>
@@ -89,8 +103,6 @@ export class TagInput extends PureComponent<TagInputProps, State> {
       </>
     );
   }
-
-  private inputElement?: HTMLInputElement;
 
   private inputRefHandler = (ref: HTMLInputElement) => {
     this.inputElement = ref;
@@ -155,11 +167,8 @@ export class TagInput extends PureComponent<TagInputProps, State> {
 
   private handleTagRemove = (index: number) => {
     const { value, onChange, onRemove } = this.props;
-    let nextValue: string[] = [];
-    if (index > 0) {
-      nextValue = [...value];
-      nextValue.splice(index, 1);
-    }
+    const nextValue: string[] = [...value];
+    nextValue.splice(index, 1);
 
     if (onChange) {
       onChange(nextValue);
@@ -168,19 +177,23 @@ export class TagInput extends PureComponent<TagInputProps, State> {
       onRemove(value);
     }
   };
+
+  private handleTagRemoveAll = () => {
+    const { onChange } = this.props;
+    if (onChange) {
+      onChange([]);
+    }
+  };
 }
 
 const TagInputContainer = styled.div`
   box-sizing: border-box;
-  padding: 8px 8px 3px;
+  padding: 8px;
   border: solid 1px ${gray300};
   margin-bottom: 8px;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
   flex-grow: 1;
-  flex-shrink: 1;
-  align-items: center;
+  align-items: flex-start;
   background-color: ${white};
   border-radius: 3px;
   &.error {
@@ -193,6 +206,15 @@ const TagInputContainer = styled.div`
     outline: none;
     border-color: ${gray800};
   }
+`;
+
+const InnerContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  align-self: center;
+  align-items: center;
+  margin-bottom: -5px;
   .inner-tags__tag {
     margin-bottom: 5px;
     margin-right: 5px;
