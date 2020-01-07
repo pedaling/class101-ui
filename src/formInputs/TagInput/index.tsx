@@ -167,8 +167,12 @@ export class TagInput extends PureComponent<TagInputProps, State> {
 
   private handleTagRemove = (index: number) => {
     const { value, onChange, onRemove } = this.props;
-    const nextValue: string[] = [...value];
-    nextValue.splice(index, 1);
+
+    let nextValue: string[] = [];
+    if (index >= 0) {
+      nextValue = [...value];
+      nextValue.splice(index, 1);
+    }
 
     if (onChange) {
       onChange(nextValue);
