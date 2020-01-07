@@ -43,3 +43,39 @@ import { TagInput } from '@class101/ui';
 }}
 
 </Playground>
+
+5000개 이상일 경우 하나의 태그로 보여지며 해당 태그를 삭제하면 5000여개의 모든 값이 삭제됩니다.
+
+<Playground>
+  {() => {
+    const defaultValue = () => {
+      const array = [];
+      for (let i = 0; i < 5300; i++) {
+        array.push(`${i}-1010`);
+      }
+      return array;
+    };
+    class Example extends React.Component {
+      
+      constructor(props) {
+        super(props);
+        this.state = {
+          value: defaultValue()
+        };
+      }
+      handleChange(newValue) {
+        this.setState({ value: newValue })
+      }
+      handleSubmit(e) {
+        e.preventDefault();
+      }
+      render() {
+        return (
+          <TagInput separator="," value={this.state.value} onChange={(value) => this.handleChange(value)} allowMessage="Enter와 ','로 구분합니다."/>
+        );
+      }
+    }
+    return <Example />
+}}
+
+</Playground>
