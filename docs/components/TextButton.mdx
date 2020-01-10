@@ -136,14 +136,16 @@ export enum ButtonSize {
   LARGE = 'lg',
   MEDIUM = 'md',
   SMALL = 'sm',
+  XSMALL = 'xs',
 }
 ```
 
 <Playground>
   <PlayGroundContainer>
-    <TextButton size={ButtonSize.LARGE}>Click me</TextButton>
-    <TextButton size={ButtonSize.MEDIUM}>Click me</TextButton>
-    <TextButton size={ButtonSize.SMALL}>Click me</TextButton>
+    <TextButton size={ButtonSize.LARGE} leftIcon={<Icon.Heart />}>Click me</TextButton>
+    <TextButton size={ButtonSize.MEDIUM} leftIcon={<Icon.Heart />}>Click me</TextButton>
+    <TextButton size={ButtonSize.SMALL} leftIcon={<Icon.Heart />}>Click me</TextButton>
+    <TextButton size={ButtonSize.XSMALL} leftIcon={<Icon.Heart />}>Click me</TextButton>
   </PlayGroundContainer>
 </Playground>
 
