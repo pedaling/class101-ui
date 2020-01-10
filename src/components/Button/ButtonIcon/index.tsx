@@ -24,7 +24,7 @@ export const buttonIconSizeByButtonSize: { [key in ButtonSize]: number } = {
   [ButtonSize.LARGE]: 24,
   [ButtonSize.MEDIUM]: 18,
   [ButtonSize.SMALL]: 18,
-  [ButtonSize.XSMALL]: 16,
+  [ButtonSize.XSMALL]: 12,
 };
 
 export const getButtonIconSize = (buttonSize: ButtonSizeValue) => {

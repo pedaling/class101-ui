@@ -74,6 +74,12 @@ const buttonStyleBySize: { [key in TextButtonSize]: FlattenSimpleInterpolation }
     line-height: 20px;
     letter-spacing: -0.2px;
   `,
+  [ButtonSize.XSMALL]: css`
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: normal;
+  `,
 };
 
 const buttonHoverStyle = css<TextButtonProps>`

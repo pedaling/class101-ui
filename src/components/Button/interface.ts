@@ -47,11 +47,12 @@ export enum IconButtonSize {
 }
 export type IconButtonColorValue = ButtonColorValue;
 
-export type TextButtonSizeValue = 'lg' | 'md' | 'sm';
+export type TextButtonSizeValue = 'lg' | 'md' | 'sm' | 'xs';
 export enum TextButtonSize {
   LARGE = 'lg',
   MEDIUM = 'md',
   SMALL = 'sm',
+  XSMALL = 'xs',
 }
 
 export type TextButtonColorValue = 'default' | 'orange' | 'red' | 'white' | 'blue';
