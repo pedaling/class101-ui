@@ -5,7 +5,7 @@ route: /components/button
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Icon, Colors, Button, ButtonColor, ButtonSize, Theme } from '@class101/ui';
+import { Icon, Colors, AnchorButton, Button, ButtonColor, ButtonSize, Theme } from '@class101/ui';
 import { PlayGroundButtonContainer } from '../docsComponents';
 
 # Button
@@ -285,66 +285,66 @@ export enum ButtonSize {
 
 <Playground>
   <PlayGroundButtonContainer>
-    <Button to="https://class101.net">
+    <AnchorButton to="https://class101.net">
       Native A Tag
-    </Button>
-    <Button to="/">
+    </AnchorButton>
+    <AnchorButton to="/">
       Link of React Router Dom
-    </Button>
+    </AnchorButton>
   </PlayGroundButtonContainer>
 </Playground>
 
 <Playground>
   <PlayGroundButtonContainer>
-    <Button to="/" >
+    <AnchorButton to="/" >
       Button
-    </Button>
-    <Button to="/"  leftIcon={<Icon.Add />}>
+    </AnchorButton>
+    <AnchorButton to="/"  leftIcon={<Icon.Add />}>
       Button
-    </Button>
-    <Button to="/"  disabled>
+    </AnchorButton>
+    <AnchorButton to="/"  disabled>
       Button
-    </Button>
-    <Button to="/"  leftIcon={<Icon.Add />} disabled>
+    </AnchorButton>
+    <AnchorButton to="/"  leftIcon={<Icon.Add />} disabled>
       Button
-    </Button>
-    <Button to="/"  loading>
+    </AnchorButton>
+    <AnchorButton to="/"  loading>
       Button
-    </Button>
+    </AnchorButton>
   </PlayGroundButtonContainer>
   <PlayGroundButtonContainer theme={Theme.dark}>
-    <Button to="/"  theme={Theme.dark}>
+    <AnchorButton to="/"  theme={Theme.dark}>
       Button
-    </Button>
-    <Button to="/"  theme={Theme.dark} leftIcon={<Icon.Add />}>
+    </AnchorButton>
+    <AnchorButton to="/"  theme={Theme.dark} leftIcon={<Icon.Add />}>
       Button
-    </Button>
-    <Button to="/"  theme={Theme.dark} disabled>
+    </AnchorButton>
+    <AnchorButton to="/"  theme={Theme.dark} disabled>
       Button
-    </Button>
-    <Button to="/"  theme={Theme.dark} leftIcon={<Icon.Add />} disabled>
+    </AnchorButton>
+    <AnchorButton to="/"  theme={Theme.dark} leftIcon={<Icon.Add />} disabled>
       Button
-    </Button>
-    <Button to="/"  theme={Theme.dark} loading>
+    </AnchorButton>
+    <AnchorButton to="/"  theme={Theme.dark} loading>
       Button
-    </Button>
+    </AnchorButton>
   </PlayGroundButtonContainer>
   <PlayGroundButtonContainer>
-    <Button to="/"  color={ButtonColor.ORANGE}>
+    <AnchorButton to="/"  color={ButtonColor.ORANGE}>
       CTA Button
-    </Button>
-    <Button to="/"  color={ButtonColor.ORANGE} leftIcon={<Icon.Add />}>
+    </AnchorButton>
+    <AnchorButton to="/"  color={ButtonColor.ORANGE} leftIcon={<Icon.Add />}>
       CTA Button
-    </Button>
-    <Button to="/"  color={ButtonColor.ORANGE} disabled>
+    </AnchorButton>
+    <AnchorButton to="/"  color={ButtonColor.ORANGE} disabled>
       CTA Button
-    </Button>
-    <Button to="/"  color={ButtonColor.ORANGE} leftIcon={<Icon.Add />} disabled>
+    </AnchorButton>
+    <AnchorButton to="/"  color={ButtonColor.ORANGE} leftIcon={<Icon.Add />} disabled>
       CTA Button
-    </Button>
-    <Button to="/"  color={ButtonColor.ORANGE} loading>
+    </AnchorButton>
+    <AnchorButton to="/"  color={ButtonColor.ORANGE} loading>
       CTA Button
-    </Button>
+    </AnchorButton>
   </PlayGroundButtonContainer>
 </Playground>
 
@@ -352,12 +352,12 @@ export enum ButtonSize {
 
 <Playground>
   <PlayGroundButtonContainer>
-    <Button to="https://class101.net" leftIcon={<Icon.Web/>} external>
+    <AnchorButton to="https://class101.net" leftIcon={<Icon.Web/>} external>
       Native A Tag
-    </Button>
-    <Button to="/" leftIcon={<Icon.Web/>} external>
+    </AnchorButton>
+    <AnchorButton to="/" leftIcon={<Icon.Web/>} external>
       Link of React Router Dom
-    </Button>
+    </AnchorButton>
   </PlayGroundButtonContainer>
 </Playground>
 
