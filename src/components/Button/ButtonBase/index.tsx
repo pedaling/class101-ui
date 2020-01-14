@@ -126,7 +126,7 @@ export default class ButtonBase<ColorValue extends string, SizeValue extends str
   }
 }
 
-const buttonCommonStyle = css`
+export const buttonCommonStyle = css`
   margin: 0;
   padding: 0;
 
