@@ -12,12 +12,13 @@ import { Portal } from '../Portal';
 
 export interface ModalBottomSheetProps {
   opened: boolean;
+  title: React.ReactNode;
   opener?: React.ReactElement<{ onClick: () => void }>;
   zIndex: number;
-  title: string;
-  subTitle?: React.ReactNode;
   children: React.ReactNode;
+  subTitle?: React.ReactNode;
   successText?: string;
+  className?: string;
   successAttributes: Partial<ButtonProps>;
   cancelText?: string;
   cancelAttributes: Partial<ButtonProps>;
@@ -114,6 +115,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
       title,
       subTitle,
       successText,
+      className,
       cancelText,
       hideScroll,
       closeable,
@@ -143,20 +145,15 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
         {clonedOpener}
         <Portal container={document.body}>
           <Container zIndex={zIndex} visible={opened} onClick={closeable ? this.handleCloseModal : undefined}>
-            <Dialog visible={opened} onClick={this.blockPropagation} style={modalStyle} viewPortHeight={viewPortHeight}>
+            <Dialog
+              visible={opened}
+              onClick={this.blockPropagation}
+              style={modalStyle}
+              viewPortHeight={viewPortHeight}
+              className={className}
+            >
               <DialogHead>
-                <DialogTitle>
-                  {title.split('\n').reduce(
-                    (prev, curr) => (
-                      <>
-                        {prev}
-                        {prev && <br />}
-                        {curr}
-                      </>
-                    ),
-                    '' as React.ReactNode
-                  )}
-                </DialogTitle>
+                <DialogTitle>{title}</DialogTitle>
                 {closeable && (
                   <IconButton
                     icon={<Close />}
@@ -335,6 +332,7 @@ const DialogHead = styled.div`
 
 const DialogTitle = styled(Headline3)`
   flex: auto;
+  white-space: pre-line;
 `;
 
 const DialogSubTitle = styled(Body2)`
