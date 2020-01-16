@@ -149,6 +149,7 @@ width는 기본값으로 `100%`입니다.
     leftAction={[
       <Comment.Action icon={<Icon.HeartOutline />} text="3" />,
       <Comment.Action icon={<Icon.Trash />} onClick={() => alert('clicked!')} />,
+      <Comment.Action icon={<Icon.CheckboxOff />} active={false} />,
       <Comment.Action icon={<Icon.CheckboxOn />} disabled />,
     ]}
   />
