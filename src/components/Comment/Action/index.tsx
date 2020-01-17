@@ -14,6 +14,8 @@ export interface CommentActionProps extends ButtonPropsForComment {
 
   position: ButtonIconPosition;
 
+  hidden: boolean;
+
   /** icon옆에 표시할 텍스트. */
   text?: ReactNode;
 }
@@ -22,10 +24,15 @@ export class CommentAction extends PureComponent<CommentActionProps> {
   public static defaultProps: Partial<CommentActionProps> = {
     position: ButtonIconPosition.NONE,
     fillColor: gray500,
+    hidden: false,
   };
 
   public render() {
-    const { position, text, fillColor, children, onClick, ...restProps } = this.props;
+    const { position, text, fillColor, children, onClick, hidden, ...restProps } = this.props;
+
+    if (hidden) {
+      return <></>;
+    }
     return (
       <Container position={position} onClick={onClick}>
         <FilledIconButton size="xs" color="transparent" fillColor={fillColor} hasCursor={!!onClick} {...restProps} />
