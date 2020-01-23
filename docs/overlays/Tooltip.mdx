@@ -1,0 +1,45 @@
+---
+menu: Overlays
+name: Tooltip
+route: /overlays/tooltip
+---
+
+import { Tooltip, Position, Button, TooltipColor } from '@class101/ui';
+import { Playground, PropsTable } from 'docz';
+import { Component } from './Tooltip';
+
+# Tooltip
+
+The component that appears when the mouse hovers over it.
+
+## Props
+
+<PropsTable of={Component} />
+
+## Basic usage
+
+```tsx
+<Tooltip content="This is tooltip">
+  <Button>Mouse hover</Button>
+</Tooltip>
+```
+
+## with Position
+
+<Tooltip content="This is tooltip" position={Position.LEFT}>
+  <Tooltip content="This is tooltip" position={Position.TOP}>
+    <Tooltip content="This is tooltip" position={Position.RIGHT}>
+      <Tooltip content="This is tooltip" position={Position.BOTTOM} contentTitle="This tooltip has title">
+        <Button>Mouse hover</Button>
+      </Tooltip>
+    </Tooltip>
+  </Tooltip>
+</Tooltip>
+
+## with Color
+
+<Playground>
+  <Tooltip content="This is tooltip" position={Position.RIGHT} color={TooltipColor.ORANGE}>
+    <Button>Mouse hover</Button>
+  </Tooltip>
+</Playground>

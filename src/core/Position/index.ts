@@ -14,3 +14,7 @@ export const Position = {
 };
 
 export type Position = typeof Position[keyof typeof Position];
+
+export function getOppositePosition(position: Position) {
+  // TBD
+}
