@@ -18,6 +18,7 @@ interface Props {
   wrapperStyle?: React.CSSProperties;
   targetStyle?: React.CSSProperties;
   fill?: boolean;
+  isOpen?: boolean;
 }
 
 export const Tooltip: React.FC<Props> = React.memo(props => {
@@ -31,9 +32,10 @@ export const Tooltip: React.FC<Props> = React.memo(props => {
     targetStyle,
     wrapperTagName = 'span',
     fill,
+    ...restProps
   } = props;
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(props.isOpen || false);
 
   const handleMouseEnter = useCallback(() => {
     if (!isOpen) {
@@ -54,11 +56,12 @@ export const Tooltip: React.FC<Props> = React.memo(props => {
         style: { display: fill ? 'flex' : 'inline-flex', ...(wrapperStyle || {}) },
         onMouseEnter: handleMouseEnter,
         onMouseLeave: handleMouseLeave,
+        ...restProps,
       };
 
       return React.createElement(wrapperTagName, props, children);
     },
-    [children, wrapperTagName, handleMouseEnter, handleMouseLeave, wrapperStyle, fill]
+    [children, wrapperTagName, handleMouseEnter, handleMouseLeave, wrapperStyle, fill, restProps]
   );
 
   return (
