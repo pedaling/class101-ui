@@ -10,6 +10,7 @@ export interface Props {
   wrapperStyle?: React.CSSProperties;
   targetStyle?: React.CSSProperties;
   fill?: boolean;
+  isOpen?: boolean;
 }
 
 export const Component = (props: Props) => <Tooltip {...props} />;
