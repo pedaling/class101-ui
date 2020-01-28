@@ -132,6 +132,7 @@ const PopoverTitle = styled.h2`
 
 const PopoverTarget = styled.div<{ isVisible: boolean }>`
   opacity: ${props => (props.isVisible ? 1 : 0)};
+  visibility: ${props => (props.isVisible ? 'visible' : 'hidden')};
   transition: opacity 200ms;
 `;
 
