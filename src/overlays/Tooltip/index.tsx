@@ -67,7 +67,7 @@ export const Tooltip: React.FC<Props> = React.memo(props => {
   return (
     <Manager>
       <Reference>{({ ref }) => renderChild(ref)}</Reference>{' '}
-      <Portal>
+      <Portal container={document.body}>
         <Popper
           placement={adjustPositionWithTooltip(position)}
           modifiers={{
@@ -77,14 +77,12 @@ export const Tooltip: React.FC<Props> = React.memo(props => {
           }}
         >
           {({ ref, style, placement }) => (
-            <PopoverTarget ref={ref} style={{ ...style, ...(targetStyle || {}) }}>
-              <TransitionGroup isVisible={isOpen}>
-                <PopoverContent tooltipColor={color} data-placement={placement}>
-                  {contentTitle && <PopoverTitle>{contentTitle}</PopoverTitle>}
-                  {content}
-                </PopoverContent>
-                <PopperArrow data-placement={placement} tooltipColor={color} />
-              </TransitionGroup>
+            <PopoverTarget isVisible={isOpen} ref={ref} style={{ ...style, ...(targetStyle || {}) }}>
+              <PopoverContent tooltipColor={color} data-placement={placement}>
+                {contentTitle && <PopoverTitle>{contentTitle}</PopoverTitle>}
+                {content}
+              </PopoverContent>
+              <PopperArrow data-placement={placement} tooltipColor={color} />
             </PopoverTarget>
           )}
         </Popper>
@@ -125,11 +123,6 @@ const PopperArrow = styled(ArrowSVG)`
   }
 `;
 
-const TransitionGroup = styled.div<{ isVisible: boolean }>`
-  opacity: ${props => (props.isVisible ? 1 : 0)};
-  transition: opacity 200ms;
-`;
-
 const PopoverTitle = styled.h2`
   ${body2};
   color: inherit;
@@ -137,7 +130,10 @@ const PopoverTitle = styled.h2`
   margin-bottom: 2px;
 `;
 
-const PopoverTarget = styled.div``;
+const PopoverTarget = styled.div<{ isVisible: boolean }>`
+  opacity: ${props => (props.isVisible ? 1 : 0)};
+  transition: opacity 200ms;
+`;
 
 const PopoverContent = styled.div<{ tooltipColor: TooltipColor }>`
   ${caption1};
