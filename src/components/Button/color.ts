@@ -3,6 +3,7 @@ import { rgba } from 'polished';
 import {
   blue000,
   blue100,
+  blue200,
   blue500,
   gray000,
   gray100,
@@ -64,11 +65,11 @@ export const disabledDefaultTextColors = {
 
 export const disabledTextColors = {
   [ButtonColor.ORANGE]: white,
-  [ButtonColor.ORANGE_LIGHT]: orange100,
+  [ButtonColor.ORANGE_LIGHT]: orange200,
   [ButtonColor.RED]: white,
   [ButtonColor.RED_LIGHT]: red100,
   [ButtonColor.BLUE]: white,
-  [ButtonColor.BLUE_LIGHT]: blue100,
+  [ButtonColor.BLUE_LIGHT]: blue200,
   [ButtonColor.WHITE]: gray200,
 };
 
