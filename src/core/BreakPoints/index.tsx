@@ -25,6 +25,7 @@ export function buildMediaQuery({ minWidth, maxWidth }: { minWidth?: number; max
 export default buildMediaQuery;
 
 export const SIZES = {
+  xs: { maxWidth: 576 },
   sm: { maxWidth: 1023 },
   md: {}, // TODO: 태블릿 사이즈가 추가되면 수정합니다.
   lg: { minWidth: 1024 },
@@ -33,6 +34,17 @@ export const SIZES = {
 type Size = keyof typeof SIZES;
 
 export const media = {
+  xs<T extends object>(
+    first: TemplateStringsArray | CSSObject | InterpolationFunction<ThemedStyledProps<T, {}>>,
+    ...interpolations: Interpolation<ThemedStyledProps<T, {}>>[]
+  ) {
+    const mediaQuery = buildMediaQuery(SIZES.xs);
+    return css<T>`
+      @media ${mediaQuery} {
+        ${css<T>(first, ...interpolations)};
+      }
+    `;
+  },
   sm<T extends object>(
     first: TemplateStringsArray | CSSObject | InterpolationFunction<ThemedStyledProps<T, {}>>,
     ...interpolations: Interpolation<ThemedStyledProps<T, {}>>[]
