@@ -154,6 +154,7 @@ const AvatarImage = styled.img`
   border-radius: 50%;
   height: 100%;
   display: block;
+  object-fit: cover;
 `;
 
 const TextWrapper = styled.span`
