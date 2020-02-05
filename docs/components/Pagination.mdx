@@ -4,6 +4,7 @@ name: Pagination
 route: /components/pagination
 ---
 
+import { useState } from 'react'
 import { Playground, PropsTable } from 'docz';
 import { Pagination } from '@class101/ui';
 import { PlayGroundContainer, ThemeProvider } from '../docsComponents';
@@ -22,4 +23,14 @@ import { PlayGroundContainer, ThemeProvider } from '../docsComponents';
   <PlayGroundContainer>
     <Pagination currentPageIndex={0} totalPageIndex={1} onChange={number => alert(number)} />
   </PlayGroundContainer>
+</Playground>
+
+## With Many Datas
+<Playground>
+  {() => {
+    const [currentPageIndex, setCurrentPageIndex] = useState(0);
+    return (
+      <Pagination currentPageIndex={currentPageIndex} totalPageIndex={8} onChange={number => setCurrentPageIndex(number)} />
+    )
+  }}
 </Playground>
