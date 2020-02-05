@@ -19,9 +19,9 @@ export const elevation3 = css`
 `;
 
 export const elevation4 = css`
-  box-shadow: 0px 24px 32px rgba(41, 42, 43, 0.24);
+  box-shadow: 0px 12px 16px rgba(41, 42, 43, 0.2);
 `;
 
 export const elevation5 = css`
-  box-shadow: 0 24px 32px -8px rgba(41, 42, 43, 0.24);
+  box-shadow: 0px 24px 32px rgba(41, 42, 43, 0.24);
 `;
