@@ -22,12 +22,16 @@ export class Pagination extends PureComponent<PaginationProps> {
       this.props.showingNumberedIndexButtonCount
     );
 
-    const indexList = this.getIndexList(currentPageIndex, totalPageIndex, showingNumberedIndexButtonCount);
+    const indexListToDisplay = this.getIndexListToDisplay(
+      currentPageIndex,
+      totalPageIndex,
+      showingNumberedIndexButtonCount
+    );
 
     return (
       <PageWrapper>
         <PageIconBtn icon={<ChevronLeft />} onClick={handleDecrease} disabled={currentPageIndex <= 0} />
-        {indexList.map(index => (
+        {indexListToDisplay.map(index => (
           <PageBtn
             color={index === currentPageIndex ? ButtonColor.ORANGE : ButtonColor.WHITE}
             size="sm"
@@ -53,7 +57,7 @@ export class Pagination extends PureComponent<PaginationProps> {
       : showingNumberedIndexButtonCount;
   };
 
-  private getIndexList = (
+  private getIndexListToDisplay = (
     currentPageIndex: number,
     totalPageIndex: number,
     showingNumberedIndexButtonCount: number
