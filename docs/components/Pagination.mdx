@@ -37,7 +37,7 @@ import { PlayGroundContainer, ThemeProvider } from '../docsComponents';
 
 ## Assigning how many numbered index buttons to be shown
 You can assign how many numbered index buttons to be showing by passing down
-`number` to the `showingNumberedIndexButtonCount` prop. It should be an odd
+`number` to the `pageCountPerView` prop. It should be an odd
 number since the focused button needs to be centered
 
 <Playground>
@@ -47,7 +47,7 @@ number since the focused button needs to be centered
       <Pagination
         currentPageIndex={currentPageIndex}
         totalPageIndex={15}
-        showingNumberedIndexButtonCount={9}
+        pageCountPerView={9}
         onChange={number => setCurrentPageIndex(number)}
       />
     )

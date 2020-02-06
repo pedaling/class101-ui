@@ -5,10 +5,11 @@ import styled, { css } from 'styled-components';
 import { ChevronLeft, ChevronRight } from '../../Icon';
 import { Button, ButtonColor, IconButton } from '../Button';
 
+const DEFAULT_PAGE_COUNT_PER_VIEW = 5;
 export interface PaginationProps {
   totalPageIndex: number;
   currentPageIndex: number;
-  showingNumberedIndexButtonCount?: number;
+  pageCountPerView?: number;
   onChange?: (pageIndex: number) => void;
 }
 
@@ -18,15 +19,8 @@ export class Pagination extends PureComponent<PaginationProps> {
     const handleIncrease = this.handleChange(currentPageIndex + 1);
     const handleDecrease = this.handleChange(currentPageIndex - 1);
 
-    const showingNumberedIndexButtonCount = this.getValidatedShowingNumberedIndexButtonCount(
-      this.props.showingNumberedIndexButtonCount
-    );
-
-    const indexListToDisplay = this.getIndexListToDisplay(
-      currentPageIndex,
-      totalPageIndex,
-      showingNumberedIndexButtonCount
-    );
+    const pageCountPerView = this.getValidatedShowingNumberedIndexButtonCount(this.props.pageCountPerView);
+    const indexListToDisplay = this.getIndexListToDisplay(currentPageIndex, totalPageIndex, pageCountPerView);
 
     return (
       <PageWrapper>
@@ -46,48 +40,30 @@ export class Pagination extends PureComponent<PaginationProps> {
     );
   }
 
-  // currentPageIndex가 중앙에 보여지는 상황 때문에 홀수만 받습니다.
-  private getValidatedShowingNumberedIndexButtonCount = (showingNumberedIndexButtonCount: number | undefined) => {
-    if (!showingNumberedIndexButtonCount) {
-      return 5;
+  private getValidatedShowingNumberedIndexButtonCount = (pageCountPerView: number | undefined) => {
+    if (!pageCountPerView) {
+      return DEFAULT_PAGE_COUNT_PER_VIEW;
     }
 
-    return showingNumberedIndexButtonCount % 2 === 0
-      ? showingNumberedIndexButtonCount - 1
-      : showingNumberedIndexButtonCount;
+    return pageCountPerView % 2 === 0 ? pageCountPerView - 1 : pageCountPerView;
   };
 
-  private getIndexListToDisplay = (
-    currentPageIndex: number,
-    totalPageIndex: number,
-    showingNumberedIndexButtonCount: number
-  ) => {
-    /**
-     * currentPageIndex가 중앙에서 보여질때 양옆으로 몇개까지 보여주어야 하는지 계산. 보여주어야 할 numbered
-     * index가 5개이면 양옆에는 2개씩 9개라면 4개씩
-     */
-    const aroundCurrentNumberedIndexShowingCount = Math.floor(showingNumberedIndexButtonCount / 2);
+  private getIndexListToDisplay = (currentPageIndex: number, totalPageIndex: number, pageCountPerView: number) => {
+    const sidePageCountToView = Math.floor(pageCountPerView / 2);
 
-    // 보여줄수 있는거 다 보여주기
-    if (totalPageIndex < showingNumberedIndexButtonCount) {
+    if (totalPageIndex < pageCountPerView) {
       return range(0, totalPageIndex + 1);
     }
 
-    // 맨 앞에서부터 보여 주어야 할 만큼 보여주기
-    if (currentPageIndex - aroundCurrentNumberedIndexShowingCount <= 0) {
-      return range(0, showingNumberedIndexButtonCount);
+    if (currentPageIndex <= sidePageCountToView) {
+      return range(0, pageCountPerView);
     }
 
-    // 맨 뒤에서부터 보여 주어야 할 만큼 보여주기
-    if (currentPageIndex + aroundCurrentNumberedIndexShowingCount >= totalPageIndex) {
-      return range(totalPageIndex - showingNumberedIndexButtonCount + 1, totalPageIndex + 1);
+    if (currentPageIndex + sidePageCountToView >= totalPageIndex) {
+      return range(totalPageIndex - pageCountPerView + 1, totalPageIndex + 1);
     }
 
-    // currentPageIndex와 앞뒤 보여 주어야 할 만큼 보여주기
-    return range(
-      currentPageIndex - aroundCurrentNumberedIndexShowingCount,
-      currentPageIndex + aroundCurrentNumberedIndexShowingCount + 1
-    );
+    return range(currentPageIndex - sidePageCountToView, currentPageIndex + sidePageCountToView + 1);
   };
 
   private handleChange = (pageIndex: number) => () => {
