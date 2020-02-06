@@ -19,7 +19,7 @@ export class Pagination extends PureComponent<PaginationProps> {
     const handleIncrease = this.handleChange(currentPageIndex + 1);
     const handleDecrease = this.handleChange(currentPageIndex - 1);
 
-    const pageCountPerView = this.getValidatedShowingNumberedIndexButtonCount(this.props.pageCountPerView);
+    const pageCountPerView = this.getValidatedPageCountPerView(this.props.pageCountPerView);
     const indexListToDisplay = this.getIndexListToDisplay(currentPageIndex, totalPageIndex, pageCountPerView);
 
     return (
@@ -40,7 +40,7 @@ export class Pagination extends PureComponent<PaginationProps> {
     );
   }
 
-  private getValidatedShowingNumberedIndexButtonCount = (pageCountPerView: number | undefined) => {
+  private getValidatedPageCountPerView = (pageCountPerView: number | undefined) => {
     if (!pageCountPerView) {
       return DEFAULT_PAGE_COUNT_PER_VIEW;
     }
