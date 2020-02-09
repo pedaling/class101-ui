@@ -4,8 +4,9 @@ name: Checkbox
 route: /form-inputs/checkbox
 ---
 
+import { useState } from 'react'
 import { Playground, PropsTable } from 'docz';
-import { MyCheckbox as Checkbox } from './Checkbox';
+import { Checkbox } from '@class101/ui';
 
 # Checkbox
 
@@ -17,14 +18,45 @@ This is Checkbox component.
 
 ## Basic usage
 
-<Playground>
-  <Checkbox>Check1</Checkbox>
-  <Checkbox>Check2</Checkbox>
-  <Checkbox size={18}>Check3</Checkbox>
+<Playground>  
+  {() => {
+    const [isChecked1, setIsChecked1] = useState(false);
+    const [isChecked2, setIsChecked2] = useState(false);
+    
+    return (
+      <>
+        <Checkbox
+          checked={isChecked1}
+          onChange={() => setIsChecked1(!isChecked1) }
+        >
+          Check 1
+        </Checkbox>
+        <Checkbox
+          checked={isChecked2}
+          size={18}
+          onChange={() => setIsChecked2(!isChecked2) }
+        >
+          Check 2
+        </Checkbox>
+      </>
+    )
+  }}
 </Playground>
 
 ## With allow message
 
 <Playground>
-  <Checkbox allowMessage={'Hello'}>Check1</Checkbox>
+{() => {
+    const [isChecked, setIsChecked] = useState(false);
+    
+    return (
+      <Checkbox
+        allowMessage={'Hello'}
+        checked={isChecked}
+        onChange={() => setIsChecked(!isChecked) }
+      >
+        Check 1
+      </Checkbox>
+    )
+  }}
 </Playground>
