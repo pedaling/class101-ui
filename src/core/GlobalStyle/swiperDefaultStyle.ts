@@ -138,6 +138,7 @@ const swiperStyle = css`
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     z-index: 10;
+    pointer-events: none;
   }
   .swiper-pagination.swiper-pagination-hidden {
     opacity: 0;
@@ -198,6 +199,7 @@ const swiperStyle = css`
     border-radius: 100%;
     background: #000;
     opacity: 0.2;
+    pointer-events: auto;
   }
   button.swiper-pagination-bullet {
     border: none;
