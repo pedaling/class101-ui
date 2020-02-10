@@ -1,6 +1,6 @@
 {
   "name": "@class101/ui",
-  "version": "8.0.0-rc24",
+  "version": "8.0.0",
   "description": "A React-based UI Component Library, powered by Class101.",
   "author": "Class101 Co, LTD.",
   "license": "MIT",
