@@ -339,6 +339,7 @@ const DialogTitle = styled(Headline3)`
 const DialogSubTitle = styled(Body2)`
   flex: none;
   margin-bottom: 16px;
+  word-break: break-all;
   color: ${gray600};
 `;
 
@@ -346,6 +347,7 @@ const DialogBody = styled.div<{ hideScroll: boolean; removeContentPadding: boole
   flex: auto;
   overflow-y: auto;
   overflow-x: hidden;
+  word-break: break-all;
   ${props =>
     props.hideScroll &&
     `
