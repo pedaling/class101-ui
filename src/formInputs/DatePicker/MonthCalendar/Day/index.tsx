@@ -11,7 +11,7 @@ export interface MonthCalendarDayProps {
   readonly isSelected: boolean;
   readonly isInRange: boolean;
   readonly dayIndex: number;
-  readonly showWeekEnd: boolean;
+  readonly showWeekEnd: boolean | undefined;
   readonly onClick: (date: Date) => void;
   readonly onHover?: (date: Date | null) => void;
 }
