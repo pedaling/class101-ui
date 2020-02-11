@@ -15,7 +15,7 @@ interface Props {
   readonly onChange: MonthCalendarDayProps['onClick'];
   readonly min: Date | undefined;
   readonly max: Date | undefined;
-  readonly highlightWeekEnd: boolean | undefined;
+  readonly highlightWeekEnd: boolean;
 }
 
 interface State {
