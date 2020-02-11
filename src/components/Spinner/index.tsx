@@ -1,7 +1,6 @@
+import { gray800 } from 'core/Colors';
 import React from 'react';
 import styled from 'styled-components';
-
-import { gray200, gray600 } from '../../core/Colors';
 
 interface SpinnerProps {
   size?: number;
@@ -19,12 +18,12 @@ const strokeOffset = PATH_LENGTH - PATH_LENGTH * 0.25;
 const SpinnerHead = styled.path<SpinnerProps>`
   transform-origin: center;
   transition: stroke-dashoffset 2s cubic-bezier(0.4, 1, 0.75, 0.9);
-  stroke: ${props => props.backgroundColor || gray600};
+  stroke: ${props => props.backgroundColor || gray800};
   stroke-linecap: round;
 `;
 
 const SpinnerTrack = styled.path`
-  stroke: ${props => props.color || gray200};
+  stroke: ${props => props.color || 'rgba(0,0,0,0.7)'};
 `;
 
 const SpinnerContainer = styled.div`
@@ -53,7 +52,7 @@ const SpinnerAnimation = styled.span`
       transform: rotate(360deg);
     }
   }
-  animation: pt-spinner-animation 0.62s ease-in-out infinite;
+  animation: pt-spinner-animation 0.8s linear infinite;
 `;
 
 const Container = styled.div`
