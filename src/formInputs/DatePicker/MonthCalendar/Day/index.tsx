@@ -11,7 +11,7 @@ export interface MonthCalendarDayProps {
   readonly isSelected: boolean;
   readonly isInRange: boolean;
   readonly dayIndex: number;
-  readonly showWeekEnd: boolean | undefined;
+  readonly highlightWeekEnd: boolean | undefined;
   readonly onClick: (date: Date) => void;
   readonly onHover?: (date: Date | null) => void;
 }
@@ -53,7 +53,7 @@ const Day = styled.div<Omit<MonthCalendarDayProps, 'onClick' | 'onHover' | 'date
     if (props.isOtherMonth) {
       return gray300;
     }
-    if (props.showWeekEnd) {
+    if (props.highlightWeekEnd) {
       if (props.dayIndex === 6) {
         return blue500;
       }

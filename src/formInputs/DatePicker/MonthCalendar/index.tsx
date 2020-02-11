@@ -15,7 +15,7 @@ interface Props {
   readonly onChange: MonthCalendarDayProps['onClick'];
   readonly min: Date | undefined;
   readonly max: Date | undefined;
-  readonly showWeekEnd: boolean | undefined;
+  readonly highlightWeekEnd: boolean | undefined;
 }
 
 interface State {
@@ -82,7 +82,7 @@ export class MonthCalendar extends React.PureComponent<Props, State> {
   }
 
   private createDays(dayStart: number, dayEnd: number, year: number, month: number, isOtherMonth: boolean): DayType[] {
-    const { selectedDate, min, max, isRange, secondDate, showWeekEnd } = this.props;
+    const { selectedDate, min, max, isRange, secondDate, highlightWeekEnd } = this.props;
     const { hoverDate } = this.state;
     const minTimeNumber = min ? min.getTime() : null;
     const maxTimeNumber = max ? max.getTime() : null;
@@ -109,7 +109,7 @@ export class MonthCalendar extends React.PureComponent<Props, State> {
         disabled,
         isInRange,
         isOtherMonth,
-        showWeekEnd,
+        highlightWeekEnd,
         isSelected: selectedTimeNumber === dayInfo || secondTimeNumber === dayInfo,
       };
     });

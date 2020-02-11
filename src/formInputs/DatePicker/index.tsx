@@ -30,7 +30,7 @@ export interface DatePickerProps {
   readonly alwaysShow: boolean;
   readonly inline?: boolean;
   readonly inputAttributes?: HTMLInputProps & InputProps;
-  readonly showWeekEnd?: boolean;
+  readonly highlightWeekEnd?: boolean;
   readonly style?: React.CSSProperties;
 }
 
@@ -52,7 +52,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     useRange: false,
     rangeValue: {},
     alwaysShow: false,
-    showWeekEnd: false,
+    highlightWeekEnd: false,
   };
 
   private readonly modalRef = createRef<HTMLDivElement>();
@@ -103,7 +103,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
       alwaysShow,
       useRange,
       inline,
-      showWeekEnd,
+      highlightWeekEnd,
       style,
     } = this.props;
 
@@ -145,7 +145,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
                 secondDate={secondDate}
                 currentMonth={currentMonth}
                 onChange={this.handleChangeDate}
-                showWeekEnd={showWeekEnd}
+                highlightWeekEnd={highlightWeekEnd}
               />
             )}
             {selectorType === 'month' && (
