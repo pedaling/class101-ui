@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { gray200, white, orange500, gray300, gray800, orange100 } from '../../../../core/Colors';
+import { gray200, white, orange500, gray300, gray800, orange100, red500, blue500 } from '../../../../core/Colors';
 import { body2 } from '../../../../core/TextStyles';
 import { darken } from 'polished';
 
@@ -10,6 +10,8 @@ export interface MonthCalendarDayProps {
   readonly isOtherMonth: boolean;
   readonly isSelected: boolean;
   readonly isInRange: boolean;
+  readonly dayIndex: number;
+  readonly highlightWeekEnd: boolean;
   readonly onClick: (date: Date) => void;
   readonly onHover?: (date: Date | null) => void;
 }
@@ -21,7 +23,7 @@ const Component = (props: MonthCalendarDayProps) => {
     if (!otherProps.disabled) {
       onClick(dateObject);
     }
-  }, [otherProps, dateObject]);
+  }, [otherProps.disabled, onClick, dateObject]);
   const onHoverDate = React.useCallback(() => {
     if (onHover) {
       onHover(dateObject);
@@ -50,6 +52,14 @@ const Day = styled.div<Omit<MonthCalendarDayProps, 'onClick' | 'onHover' | 'date
     }
     if (props.isOtherMonth) {
       return gray300;
+    }
+    if (props.highlightWeekEnd) {
+      if (props.dayIndex === 6) {
+        return blue500;
+      }
+      if (props.dayIndex === 0) {
+        return red500;
+      }
     }
     return gray800;
   }};
