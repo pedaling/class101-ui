@@ -1,12 +1,40 @@
-import { gray800 } from 'core/Colors';
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
+
+import { gray800 } from '../../core/Colors';
 
 interface SpinnerProps {
   size?: number;
   backgroundColor?: string;
   color?: string;
 }
+
+export const Spinner: FC<SpinnerProps> = React.memo(({ size, backgroundColor, color, ...restProps }) => {
+  return (
+    <Container {...restProps}>
+      <SpinnerContainer>
+        <SpinnerAnimation>
+          <svg height={size} width={size} viewBox="0 0 100 100" strokeWidth={strokeWidth}>
+            <SpinnerTrack color={color} d={SPINNER_TRACK} />
+            <SpinnerHead
+              backgroundColor={backgroundColor}
+              d={SPINNER_TRACK}
+              pathLength={PATH_LENGTH}
+              strokeDasharray={`${PATH_LENGTH} ${PATH_LENGTH}`}
+              strokeDashoffset={strokeOffset}
+            />
+          </svg>
+        </SpinnerAnimation>
+      </SpinnerContainer>
+    </Container>
+  );
+});
+
+Spinner.defaultProps = {
+  size: 24,
+  backgroundColor: gray800,
+  color: 'rgba(0, 0, 0, 0.07)',
+};
 
 const SPINNER_TRACK = 'M 50,50 m 0,-44.5 a 44.5,44.5 0 1 1 0,89 a 44.5,44.5 0 1 1 0,-89';
 const PATH_LENGTH = 280;
@@ -15,15 +43,15 @@ const STROKE_WIDTH = 4;
 const strokeWidth = (STROKE_WIDTH * 100) / 50;
 const strokeOffset = PATH_LENGTH - PATH_LENGTH * 0.25;
 
-const SpinnerHead = styled.path<SpinnerProps>`
+const SpinnerHead = styled.path<Pick<SpinnerProps, 'backgroundColor'>>`
   transform-origin: center;
   transition: stroke-dashoffset 2s cubic-bezier(0.4, 1, 0.75, 0.9);
-  stroke: ${props => props.backgroundColor || gray800};
+  stroke: ${props => props.backgroundColor};
   stroke-linecap: round;
 `;
 
 const SpinnerTrack = styled.path`
-  stroke: ${props => props.color || 'rgba(0,0,0,0.7)'};
+  stroke: ${props => props.color};
 `;
 
 const SpinnerContainer = styled.div`
@@ -58,22 +86,3 @@ const SpinnerAnimation = styled.span`
 const Container = styled.div`
   display: inline-block;
 `;
-
-export const Spinner = ({ size = 50, backgroundColor, color, ...restProps }: SpinnerProps) => (
-  <Container {...restProps}>
-    <SpinnerContainer>
-      <SpinnerAnimation>
-        <svg height={size} width={size} viewBox="0 0 100 100" strokeWidth={strokeWidth}>
-          <SpinnerTrack color={color} d={SPINNER_TRACK} />
-          <SpinnerHead
-            backgroundColor={backgroundColor}
-            d={SPINNER_TRACK}
-            pathLength={PATH_LENGTH}
-            strokeDasharray={`${PATH_LENGTH} ${PATH_LENGTH}`}
-            strokeDashoffset={strokeOffset}
-          />
-        </svg>
-      </SpinnerAnimation>
-    </SpinnerContainer>
-  </Container>
-);
