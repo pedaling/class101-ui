@@ -28,6 +28,7 @@ export interface ModalBottomSheetProps {
   removeContentPadding: boolean;
   modalStyle?: React.CSSProperties;
   contentStyle?: React.CSSProperties;
+  destroyOnClose?: boolean;
   onOpen?: () => boolean | void;
   onClose?: () => void;
   onSuccess?: (close: () => void) => void;
@@ -125,6 +126,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
       opener,
       successAttributes,
       cancelAttributes,
+      destroyOnClose,
     } = this.props;
     const { mounted, opened, viewPortHeight } = this.state;
 
@@ -143,7 +145,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     return (
       <>
         {clonedOpener}
-        <Portal container={document.body}>
+        <Portal container={document.body} key={destroyOnClose ? new Date().getTime() : undefined}>
           <Container zIndex={zIndex} visible={opened} onClick={closeable ? this.handleCloseModal : undefined}>
             <Dialog
               visible={opened}
