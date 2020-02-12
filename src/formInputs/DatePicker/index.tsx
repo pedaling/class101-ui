@@ -45,6 +45,8 @@ export interface DatePickerState {
 
 const DatePickerWidth = 312;
 const DatePickerRangeText = '-';
+const KEY_ENTER = 13;
+const KEY_ESCAPE = 27;
 
 export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> {
   public static defaultProps: Partial<DatePickerProps> = {
@@ -114,7 +116,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
           value={inputValue}
           onChange={this.handleChangeInput}
           onBlur={this.handleBlurInput}
-          onKeyUp={this.handleKeyPress}
+          onKeyUp={this.handleKeyUp}
           placeholder={this.getInputPlaceHolder()}
           onClick={this.showModal}
           inline={inline}
@@ -206,8 +208,8 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     return [firstDate, secondDate];
   };
 
-  private handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' || e.key === 'Escape' || e.keyCode === 27 || e.keyCode === 13) {
+  private handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' || e.key === 'Escape' || e.keyCode === KEY_ENTER || e.keyCode === KEY_ESCAPE) {
       this.handleBlurInput();
     }
   };
