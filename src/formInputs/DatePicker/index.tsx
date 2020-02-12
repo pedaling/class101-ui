@@ -45,6 +45,8 @@ export interface DatePickerState {
 
 const DatePickerWidth = 312;
 const DatePickerRangeText = '-';
+const KEY_ENTER = 13;
+const KEY_ESCAPE = 27;
 
 export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> {
   public static defaultProps: Partial<DatePickerProps> = {
@@ -114,6 +116,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
           value={inputValue}
           onChange={this.handleChangeInput}
           onBlur={this.handleBlurInput}
+          onKeyUp={this.handleKeyUp}
           placeholder={this.getInputPlaceHolder()}
           onClick={this.showModal}
           inline={inline}
@@ -205,6 +208,12 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     return [firstDate, secondDate];
   };
 
+  private handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' || e.key === 'Escape' || e.keyCode === KEY_ENTER || e.keyCode === KEY_ESCAPE) {
+      this.handleBlurInput();
+    }
+  };
+
   private handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
       inputValue: e.target.value,
@@ -212,7 +221,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
   };
 
   private handleBlurInput = () => {
-    const { useRange } = this.props;
+    const { useRange, minDate, maxDate } = this.props;
     const { inputValue } = this.state;
     const dateText = inputValue;
 
@@ -221,27 +230,56 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
       const firstDate = new Date(firstDateText);
       const secondDate = new Date(secondDateText);
 
-      if (isNaN(firstDate.getTime()) || isNaN(secondDate.getTime())) {
-        return this.calculateInputValue();
+      if (!isNaN(firstDate.getTime()) && isNaN(secondDate.getTime())) {
+        if (minDate && minDate.getTime() > firstDate.getTime()) {
+          return this.calculateInputValue();
+        }
+        this.setState(
+          {
+            selectedDate: firstDate,
+            secondDate: null,
+            currentMonth: this.getDateMonth(firstDate),
+          },
+          this.calculateInputValue
+        );
+      } else if (!isNaN(firstDate.getTime()) && !isNaN(secondDate.getTime())) {
+        if (
+          (minDate && minDate.getTime() > firstDate.getTime()) ||
+          (maxDate && maxDate.getTime() < secondDate.getTime())
+        ) {
+          return this.calculateInputValue();
+        }
+        const [, second] = this.sortDate(firstDate, secondDate);
+        this.setState(
+          {
+            selectedDate: firstDate,
+            secondDate: secondDate,
+            currentMonth: this.getDateMonth(second),
+          },
+          this.calculateInputValue
+        );
+      } else {
+        this.calculateInputValue();
       }
-      this.setState(
-        {
-          selectedDate: firstDate,
-          secondDate: secondDate,
-        },
-        this.calculateInputValue
-      );
-      return;
     }
 
     const currentDate = new Date(dateText);
 
-    if (isNaN(currentDate.getTime())) {
+    if (
+      isNaN(currentDate.getTime()) ||
+      (minDate && minDate.getTime() > currentDate.getTime()) ||
+      (maxDate && maxDate.getTime() < currentDate.getTime())
+    ) {
       return this.calculateInputValue();
     }
-    this.setState({
-      selectedDate: currentDate,
-    });
+
+    this.setState(
+      {
+        selectedDate: currentDate,
+        currentMonth: this.getDateMonth(currentDate),
+      },
+      this.calculateInputValue
+    );
   };
 
   private getInputPlaceHolder = () => {
