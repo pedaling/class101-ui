@@ -1,14 +1,30 @@
-import React from "react";
+import React from 'react';
 import { IconProps } from '../index';
 export default class SvgGift extends React.PureComponent<IconProps> {
   public static defaultProps: Partial<IconProps> = {
     fillColor: '#3E4042',
     accentColor: '#DDE0E2',
-    size: 24
+    size: 24,
   };
 
   public render() {
-    return <svg width={this.props.size} height={this.props.size} style={this.props.style} className={this.props.className} viewBox="0 0 24 24"><path fill={this.props.fillColor} fillRule="evenodd" d="M11 10H4v2h7v-2zm2 0v2h7v-2h-7zm-2 4H5v6h6v-6zm2 0v6h6v-6h-6zM5.535 8A4 4 0 0112 3.354 4 4 0 0118.465 8H20c1.219 0 2 .781 2 2v2c0 .843-.374 1.477-1.008 1.788.005.069.008.14.008.212v6c0 1.219-.781 2-2 2H5c-1.219 0-2-.781-2-2v-6c0-.072.003-.143.008-.212C2.374 13.478 2 12.843 2 12v-2c0-1.219.781-2 2-2h1.535zM15 8a2 2 0 10-2-2v2h2zm-4-2a2 2 0 10-2 2h2V6z" /></svg>;
+    return (
+      <svg
+        width={this.props.size}
+        height={this.props.size}
+        fill="none"
+        style={this.props.style}
+        className={this.props.className}
+        viewBox="0 0 24 24"
+      >
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M13 6h-2v4H3a1 1 0 01-1-1V7a1 1 0 011-1h3.337A3.5 3.5 0 0112 2.05 3.5 3.5 0 0117.663 6H21a1 1 0 011 1v2a1 1 0 01-1 1h-8V6zm-2.085-2c.055.156.085.325.085.5V6H9.5A1.498 1.498 0 018 4.5a1.5 1.5 0 012.915-.5zM13 6V4.5A1.497 1.497 0 0114.5 3a1.5 1.5 0 010 3H13z"
+          fill={this.props.fillColor}
+        />
+        <path d="M11 12H3v8a1 1 0 001 1h7v-9zM13 21h7a1 1 0 001-1v-8h-8v9z" fill={this.props.fillColor} />
+      </svg>
+    );
   }
-
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconProps } from '../index';
-export default class SvgCoupon extends React.PureComponent<IconProps> {
+export default class SvgToteBag extends React.PureComponent<IconProps> {
   public static defaultProps: Partial<IconProps> = {
     fillColor: '#3E4042',
     accentColor: '#DDE0E2',
@@ -20,7 +20,7 @@ export default class SvgCoupon extends React.PureComponent<IconProps> {
         <path
           fillRule="evenodd"
           clipRule="evenodd"
-          d="M1 5a1 1 0 011-1h11a1 1 0 011 1 1 1 0 102 0 1 1 0 011-1h5a1 1 0 011 1v14a1 1 0 01-1 1h-5a1 1 0 01-1-1 1 1 0 10-2 0 1 1 0 01-1 1H2a1 1 0 01-1-1V5zm2 1v12h9.17a3.001 3.001 0 015.66 0H21V6h-3.17a3.001 3.001 0 01-5.66 0H3z"
+          d="M9.17 5a3.001 3.001 0 015.66 0H9.17zM7 7v2h2V7h6v2h2V7h3l-2 12H6L4 7h3zm.1-2a5.002 5.002 0 019.8 0H20a2 2 0 011.973 2.329l-2 12A2 2 0 0118 21H6a2 2 0 01-1.973-1.671l-2-12A2 2 0 014 5h3.1z"
           fill={this.props.fillColor}
         />
       </svg>
