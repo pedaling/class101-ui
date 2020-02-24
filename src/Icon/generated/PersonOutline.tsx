@@ -12,14 +12,16 @@ export default class SvgPersonOutline extends React.PureComponent<IconProps> {
       <svg
         width={this.props.size}
         height={this.props.size}
+        fill="none"
         style={this.props.style}
         className={this.props.className}
         viewBox="0 0 24 24"
       >
         <path
-          fill={this.props.fillColor}
           fillRule="evenodd"
-          d="M18 21v-2c0-2.347-1.495-6-6-6s-6 3.653-6 6v2H4v-2c0-2.826 1.607-6.544 5.505-7.666A4.997 4.997 0 017 7c0-2.762 2.238-5 5-5 2.763 0 5 2.238 5 5a4.997 4.997 0 01-2.505 4.334C18.393 12.456 20 16.174 20 19v2h-2zm-6-11c1.658 0 3-1.342 3-3s-1.342-3-3-3-3 1.342-3 3 1.342 3 3 3z"
+          clipRule="evenodd"
+          d="M8.443 12.832a6 6 0 117.114 0A8 8 0 0120 20v1H4v-1a8 8 0 014.443-7.168zM6 21h12v-1a6 6 0 00-12 0v1zm6-9a4 4 0 100-8 4 4 0 000 8z"
+          fill={this.props.fillColor}
         />
       </svg>
     );

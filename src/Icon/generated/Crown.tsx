@@ -12,11 +12,12 @@ export default class SvgCrown extends React.PureComponent<IconProps> {
       <svg
         width={this.props.size}
         height={this.props.size}
+        fill="none"
         style={this.props.style}
         className={this.props.className}
         viewBox="0 0 24 24"
       >
-        <path fill={this.props.fillColor} fillRule="evenodd" d="M15.96 11.04L21 6v14H3V6l5.04 5.04L12 4l3.96 7.04z" />
+        <path d="M21 6l-5.04 5.04L12 4l-3.96 7.04L3 6v14h18V6z" fill={this.props.fillColor} />
       </svg>
     );
   }

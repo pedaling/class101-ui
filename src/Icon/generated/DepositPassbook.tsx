@@ -12,14 +12,16 @@ export default class SvgDepositPassbook extends React.PureComponent<IconProps> {
       <svg
         width={this.props.size}
         height={this.props.size}
+        fill="none"
         style={this.props.style}
         className={this.props.className}
         viewBox="0 0 24 24"
       >
         <path
-          fill={this.props.fillColor}
           fillRule="evenodd"
-          d="M21 13l1.69 6.757A1 1 0 0121.72 21H2.28a1 1 0 01-.97-1.243L3 13V4a1 1 0 011-1h16a1 1 0 011 1v9zm-2 0V5H5v8h14zM4.562 15l-1 4h16.876l-1-4H4.562zM7 7h10v2H7V7z"
+          clipRule="evenodd"
+          d="M5 13h14V5H5v8zm17.949 6.684A1 1 0 0122 21H2a1 1 0 01-.949-1.316L3 13.838V4a1 1 0 011-1h16a1 1 0 011 1v9.838l1.949 5.846zM19.279 15H4.721l-1.334 4h17.226l-1.334-4zM7 7h10v2H7V7z"
+          fill={this.props.fillColor}
         />
       </svg>
     );

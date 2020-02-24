@@ -12,11 +12,12 @@ export default class SvgMinus extends React.PureComponent<IconProps> {
       <svg
         width={this.props.size}
         height={this.props.size}
+        fill="none"
         style={this.props.style}
         className={this.props.className}
         viewBox="0 0 24 24"
       >
-        <path fill={this.props.fillColor} fillRule="evenodd" d="M4 11h16v2H4z" />
+        <path d="M20 11H4v2h16v-2z" fill={this.props.fillColor} />
       </svg>
     );
   }

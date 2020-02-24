@@ -12,14 +12,16 @@ export default class SvgComment extends React.PureComponent<IconProps> {
       <svg
         width={this.props.size}
         height={this.props.size}
+        fill="none"
         style={this.props.style}
         className={this.props.className}
         viewBox="0 0 24 24"
       >
         <path
-          fill={this.props.fillColor}
           fillRule="evenodd"
-          d="M8.948 4h6.104c1.782 0 2.9.278 3.879.801a5.452 5.452 0 012.268 2.268c.523.978.801 2.097.801 3.879v1.104c0 1.782-.278 2.9-.801 3.879a5.452 5.452 0 01-2.268 2.268c-.978.523-2.097.801-3.879.801H14l-2 2-2-2H8.948c-1.782 0-2.9-.278-3.879-.801a5.452 5.452 0 01-2.268-2.268C2.278 14.953 2 13.834 2 12.052v-1.104c0-1.782.278-2.9.801-3.879A5.452 5.452 0 015.07 4.801C6.047 4.278 7.166 4 8.948 4zM8 13a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2z"
+          clipRule="evenodd"
+          d="M1 12a8 8 0 018-8h6a8 8 0 110 16h-1.5L12 21.5 10.5 20H9a8 8 0 01-8-8zm8 0a1 1 0 11-2 0 1 1 0 012 0zm3 1a1 1 0 100-2 1 1 0 000 2zm5-1a1 1 0 11-2 0 1 1 0 012 0z"
+          fill={this.props.fillColor}
         />
       </svg>
     );
