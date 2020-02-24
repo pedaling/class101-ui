@@ -17,6 +17,8 @@ const BLACK_LIST = [
   'Youtube',
 ];
 
+const ICON_TO_BE_DEPRECATE = ['Category', 'TalkHelpOutlineR', 'StarFull'];
+
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -29,7 +31,7 @@ export class IconItemContainer extends PureComponent<{}> {
         {Object.keys(Icon)
           .filter(key => !BLACK_LIST.includes(key))
           .map(key => (
-            <IconItem iconName={key} />
+            <IconItem iconName={key} deprecated={ICON_TO_BE_DEPRECATE.includes(key)} />
           ))}
       </Container>
     );

@@ -1,9 +1,10 @@
-import { Caption1, Icon, TextStyles } from '@class101/ui';
+import { Caption1, Caption2, Icon, TextStyles } from '@class101/ui';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
 interface Props {
   iconName: string;
+  deprecated?: boolean;
 }
 
 const Container = styled.div<Props>`
@@ -61,12 +62,13 @@ export default class IconItem extends PureComponent<Props> {
   };
 
   public render() {
-    const { iconName, ...restProps } = this.props;
-    const IconItem = Icon[iconName];
+    const { iconName, deprecated, ...restProps } = this.props;
+    const IconItemByIconName = Icon[iconName];
     return (
       <Container onClick={this.handleClickItem} iconName={iconName} {...restProps}>
-        <IconItem />
+        <IconItemByIconName />
         <IconName>{iconName}</IconName>
+        {deprecated && <Caption2>(deprecated)</Caption2>}
       </Container>
     );
   }
