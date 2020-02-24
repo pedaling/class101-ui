@@ -12,14 +12,16 @@ export default class SvgStore extends React.PureComponent<IconProps> {
       <svg
         width={this.props.size}
         height={this.props.size}
+        fill="none"
         style={this.props.style}
         className={this.props.className}
         viewBox="0 0 24 24"
       >
         <path
-          fill={this.props.fillColor}
           fillRule="evenodd"
-          d="M4.387 8h15.226l-1.334-4H5.721L4.387 8zM20 10H4a2 2 0 104 0h2a2 2 0 104 0h2a2 2 0 104 0zM6 14v6h12v-6a3.99 3.99 0 01-3-1.354A3.99 3.99 0 0112 14a3.99 3.99 0 01-3-1.354A3.99 3.99 0 016 14zm14-.535v7.82c0 .395-.448.715-1 .715H5c-.552 0-1-.32-1-.714v-7.821A3.998 3.998 0 012 10V9a1 1 0 01.051-.316l2-6A1 1 0 015 2h14a1 1 0 01.949.684l2 6A1 1 0 0122 9v1c0 1.48-.804 2.773-2 3.465z"
+          clipRule="evenodd"
+          d="M5 13.874V20h14v-6.126a4.01 4.01 0 01-4-1.228A3.99 3.99 0 0112 14a3.99 3.99 0 01-3-1.354 3.99 3.99 0 01-4 1.228zm16-1.228V20a2 2 0 01-2 2H5a2 2 0 01-2-2v-7.354a3.985 3.985 0 01-1-2.604c-.004-.103.008-.21.038-.317l2-7A1 1 0 015 2h14a1 1 0 01.962.725l2 7c.03.107.042.214.038.317a3.985 3.985 0 01-1 2.604zM19.389 8l-1.143-4H5.754L4.611 8h14.777zM6 12a2 2 0 002-2H4a2 2 0 002 2zm6 0a2 2 0 002-2h-4a2 2 0 002 2zm6 0a2 2 0 002-2h-4a2 2 0 002 2z"
+          fill={this.props.fillColor}
         />
       </svg>
     );

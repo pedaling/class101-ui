@@ -12,11 +12,17 @@ export default class SvgEditBody extends React.PureComponent<IconProps> {
       <svg
         width={this.props.size}
         height={this.props.size}
+        fill="none"
         style={this.props.style}
         className={this.props.className}
         viewBox="0 0 24 24"
       >
-        <path fill={this.props.fillColor} fillRule="evenodd" d="M9 4.5v3h5v12h3v-12h5v-3H9zm-6 8h3v7h3v-7h3v-3H3v3z" />
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M9 4.5v3h5v12h3v-12h5v-3H9zm-6 8h3v7h3v-7h3v-3H3v3z"
+          fill={this.props.fillColor}
+        />
       </svg>
     );
   }

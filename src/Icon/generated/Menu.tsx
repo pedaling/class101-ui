@@ -12,11 +12,17 @@ export default class SvgMenu extends React.PureComponent<IconProps> {
       <svg
         width={this.props.size}
         height={this.props.size}
+        fill="none"
         style={this.props.style}
         className={this.props.className}
         viewBox="0 0 24 24"
       >
-        <path fill={this.props.fillColor} fillRule="evenodd" d="M3 8h18V6H3v2zm0 5h18v-2H3v2zm0 5h18v-2H3v2z" />
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M4 7h16V5H4v2zm0 6h16v-2H4v2zm0 6h16v-2H4v2z"
+          fill={this.props.fillColor}
+        />
       </svg>
     );
   }

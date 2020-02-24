@@ -12,14 +12,16 @@ export default class SvgPerson extends React.PureComponent<IconProps> {
       <svg
         width={this.props.size}
         height={this.props.size}
+        fill="none"
         style={this.props.style}
         className={this.props.className}
         viewBox="0 0 24 24"
       >
         <path
-          fill={this.props.fillColor}
           fillRule="evenodd"
-          d="M12 12c2.762 0 5-2.238 5-5s-2.238-5-5-5-5 2.238-5 5 2.238 5 5 5zm-7 7.5V22h14v-2.5c0-2.992-2.622-5.5-7-5.5s-7 2.508-7 5.5z"
+          clipRule="evenodd"
+          d="M15.557 12.832A8 8 0 0120 20v1H4v-1a8 8 0 014.443-7.168 6 6 0 117.114 0z"
+          fill={this.props.fillColor}
         />
       </svg>
     );

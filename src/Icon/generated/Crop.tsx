@@ -12,14 +12,14 @@ export default class SvgCrop extends React.PureComponent<IconProps> {
       <svg
         width={this.props.size}
         height={this.props.size}
+        fill="none"
         style={this.props.style}
         className={this.props.className}
         viewBox="0 0 24 24"
       >
         <path
+          d="M8 3a1 1 0 00-2 0v3H3a1 1 0 000 2h3v9a1 1 0 001 1h14a1 1 0 100-2h-3V7a1 1 0 00-1-1H9v2h7v8H8V3zM17 22a1 1 0 001-1v-2h-2v2a1 1 0 001 1z"
           fill={this.props.fillColor}
-          fillRule="evenodd"
-          d="M6 6V3a1 1 0 012 0v3h9a1 1 0 011 1v9.002L21 16a1 1 0 010 2l-14 .008a1 1 0 01-1-1V9h2v7.007l8-.004V8H3a1 1 0 010-2h3zm12 15a1 1 0 01-2 0v-2h2v2z"
         />
       </svg>
     );

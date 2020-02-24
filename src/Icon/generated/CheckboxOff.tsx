@@ -12,14 +12,16 @@ export default class SvgCheckboxOff extends React.PureComponent<IconProps> {
       <svg
         width={this.props.size}
         height={this.props.size}
+        fill="none"
         style={this.props.style}
         className={this.props.className}
         viewBox="0 0 24 24"
       >
         <path
-          fill={this.props.fillColor}
           fillRule="evenodd"
+          clipRule="evenodd"
           d="M19 19H5V5h14v14zM5 3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5z"
+          fill={this.props.fillColor}
         />
       </svg>
     );

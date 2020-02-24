@@ -12,14 +12,16 @@ export default class SvgLink extends React.PureComponent<IconProps> {
       <svg
         width={this.props.size}
         height={this.props.size}
+        fill="none"
         style={this.props.style}
         className={this.props.className}
         viewBox="0 0 24 24"
       >
         <path
-          fill={this.props.fillColor}
           fillRule="evenodd"
-          d="M5 19h14v-5h2v6a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1h6v2H5v14zm16-9h-2V6.5L13.5 12 12 10.5 17.5 5H14V3h7v7z"
+          clipRule="evenodd"
+          d="M14 8a1 1 0 011-1h3a5 5 0 010 10h-3a1 1 0 110-2h3a3 3 0 100-6h-3a1 1 0 01-1-1zm-4 8a1 1 0 01-1 1H6A5 5 0 016 7h3a1 1 0 010 2H6a3 3 0 100 6h3a1 1 0 011 1zm-3-4a1 1 0 011-1h8a1 1 0 110 2H8a1 1 0 01-1-1z"
+          fill={this.props.fillColor}
         />
       </svg>
     );

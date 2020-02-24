@@ -12,14 +12,16 @@ export default class SvgWon extends React.PureComponent<IconProps> {
       <svg
         width={this.props.size}
         height={this.props.size}
+        fill="none"
         style={this.props.style}
         className={this.props.className}
         viewBox="0 0 24 24"
       >
         <path
-          fill={this.props.fillColor}
           fillRule="evenodd"
-          d="M6.107 10.071L5.25 6.214h1.607l1.929 9 1.928-9h2.572l1.928 9 1.929-9h1.607l-.857 3.857h1.821v1.286h-2.107l-1.428 6.429H14.25L12 8.143l-2.25 9.643H7.821l-1.428-6.429H4.286v-1.286h1.821z"
+          clipRule="evenodd"
+          d="M3 5h2.5l1.136 5h2.728L10.5 5h3l1.136 5h2.728L18.5 5H21l-1.071 5H22v2h-2.5L18 19h-4l-1.75-7h-.5L10 19H6l-1.5-7H2v-2h2.071L3 5zm4.09 7L8 16l.91-4H7.09zm8 0l.91 4 .91-4h-1.82z"
+          fill={this.props.fillColor}
         />
       </svg>
     );
