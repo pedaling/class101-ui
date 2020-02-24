@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { IconProps } from '../index';
 export default class SvgCopy extends React.PureComponent<IconProps> {
   public static defaultProps: Partial<IconProps> = {
