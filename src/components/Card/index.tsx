@@ -162,6 +162,7 @@ const Body = styled.div``;
 const Title = styled.div`
   ${body2};
   color: ${ifDarkTheme(gray100, gray900)};
+  height: 40px;
   overflow: hidden;
   margin-bottom: 6px;
   display: -webkit-box;
