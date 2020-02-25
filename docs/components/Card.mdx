@@ -5,7 +5,7 @@ route: /components/card
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Colors, Button, Grid, Row, Caption1, Card, CoverRatio } from '@class101/ui';
+import { Colors, Button, Grid, Row, Caption1, Card, CoverRatio, Badge, Icon, Divider, DiscountPecent, OriginalPrice, InstallmentText, SellingPrice } from '@class101/ui';
 import { NoHiddenStyleCol } from './Col';
 import { imageSrc } from './interface';
 
@@ -20,14 +20,38 @@ import { imageSrc } from './interface';
 <Playground>
   <Grid>
     <Row>
-      <NoHiddenStyleCol lg={8}>
+      <NoHiddenStyleCol lg={6}>
         <Card
-          title="카드 타이틀 세 줄 까지만 허용합니다 세 줄 넘어가면 말 줄임표가 생깁니다 카드 타이틀 세 줄 까지만 허용합니다 세 줄 넘어가면 말 줄임표가 생깁니다"
+          title="카드 타이틀 두 줄 까지만 허용합니다 두 줄 넘어가면 말 줄임표가 생깁니다 카드 타이틀 두 줄 까지만 허용합니다 두 줄 넘어가면 말 줄임표가 생깁니다"
           coverImage={imageSrc}
-        />
+          extraTop={<Caption1 fontWeight={600} color={Colors.gray900}>사진영상 ・ 정멜멜</Caption1>}
+          extraBottom={
+            <div style={{ marginLeft: '-4px', lineHeight: '0' }}>
+              <Badge icon={<Icon.Heart fillColor={Colors.gray400} />} backgroundColor="transparent" color={Colors.gray400} size="sm">
+                1874
+              </Badge>
+              {' '} 
+              <Badge icon={<Icon.Like fillColor={Colors.gray400} />} backgroundColor="transparent" color={Colors.gray400} size="sm">
+                98%
+              </Badge>
+            </div>
+              
+          }
+        >
+          <div style={{ marginTop: 10, marginBottom: 10}}>
+            <Divider color="#F2F4F5"/>
+          </div>
+          <div style={{ lineHeight: '0' }}>
+            <OriginalPrice>275,000원</OriginalPrice> <DiscountPecent>28%</DiscountPecent>
+          </div>
+          <div style={{ lineHeight: '0' }}>
+            <SellingPrice>월 41,343원</SellingPrice> <InstallmentText>(5개월)</InstallmentText>
+          </div>
+          <Badge size="lg" color={Colors.gray600} backgroundColor={Colors.gray000} style={{ marginTop: '8px' }}>바로수강가능</Badge>
+        </Card>
       </NoHiddenStyleCol>
-      <NoHiddenStyleCol lg={4}>
-        <Card size={'sm'} title="나만의 그림으로 내 삶을 채우다, 강한의 색연필 일러스트" coverImage={imageSrc} />
+      <NoHiddenStyleCol lg={6}>
+        <Card title="나만의 그림으로 내 삶을 채우다, 강한의 색연필 일러스트" coverImage={imageSrc} />
       </NoHiddenStyleCol>
     </Row>
   </Grid>
@@ -110,7 +134,7 @@ export enum CoverRatio {
           to={'/'}
           target={'_blank'}
           extraTop={
-            <div style={{ lineHeight: '16px' }}>
+            <div style={{ lineHeight: '0' }}>
               <Caption1 style={{ display: 'inline-block' }} fontWeight={'Bold'}>
                 바로 수강 가능
               </Caption1>
