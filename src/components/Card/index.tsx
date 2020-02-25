@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-import { gray800 } from '../../core/Colors';
+import { gray900 } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
 
 export type CoverRatioType = 0.5625 | 0.625 | 0.75 | 1.333 | 1;
@@ -40,7 +40,7 @@ export interface CardProps {
   /** Link(React Router Dom)에 쓸 URL */
   to?: string;
 
-  /**	Native Anchor에 쓸 URL */
+  /** a(Dom Element)에 쓸 URL */
   href?: string;
 
   className?: string;
@@ -80,25 +80,21 @@ export class Card extends PureComponent<CardProps> {
     const imgElements = () => {
       if (typeof coverImage === 'string') {
         return (
-          <RatioCoverImage coverImageRatio={coverImageRatio} onClick={onClick}>
-            {coverImageSrcSet ? (
-              <img src={coverImage} alt={coverImageAlt || ''} srcSet={coverImageSrcSet} />
-            ) : (
-              <img src={coverImage} alt={coverImageAlt || ''} />
-            )}
-          </RatioCoverImage>
+          <RatioCoverImageArea coverImageRatio={coverImageRatio} onClick={onClick}>
+            <img src={coverImage} alt={coverImageAlt || ''} srcSet={coverImageSrcSet ?? undefined} />
+          </RatioCoverImageArea>
         );
       }
-      return <CoverImage onClick={onClick}>{coverImage}</CoverImage>;
+      return <CoverImageArea onClick={onClick}>{coverImage}</CoverImageArea>;
     };
 
     const innerElements = (
       <>
         {imgElements()}
         <Body onClick={onClick}>
-          {extraTop}
+          {extraTop && <ExtraTopArea>{extraTop}</ExtraTopArea>}
           <Title>{title}</Title>
-          {extraBottom}
+          {extraBottom && <ExtraBottomArea>{extraBottom}</ExtraBottomArea>}
         </Body>
       </>
     );
@@ -137,14 +133,13 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const CoverImage = styled.div`
+const CoverImageArea = styled.div`
   overflow: hidden;
   border-radius: 3px;
+  margin-bottom: 8px;
 `;
 
-const RatioCoverImage = styled(CoverImage)<{ coverImageRatio: CoverRatio }>`
-  overflow: hidden;
-  border-radius: 3px;
+const RatioCoverImageArea = styled(CoverImageArea)<{ coverImageRatio: CoverRatio }>`
   ${props => {
     return css`
       position: relative;
@@ -161,21 +156,24 @@ const RatioCoverImage = styled(CoverImage)<{ coverImageRatio: CoverRatio }>`
   }}
 `;
 
-const Body = styled.div`
-  margin-top: 12px;
-  > div:not(:first-child) {
-    margin-top: 2px;
-  }
-`;
+const Body = styled.div``;
 
 const Title = styled.div`
   ${body2};
-  color: ${gray800};
+  color: ${gray900};
   overflow: hidden;
+  margin-bottom: 6px;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 `;
+
+const ExtraTopArea = styled.div`
+  margin-bottom: 4px;
+  margin-top: 4px;
+`;
+
+const ExtraBottomArea = styled.div``;
 
 const anchorCardStyle = css`
   img {

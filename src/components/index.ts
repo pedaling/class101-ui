@@ -19,3 +19,4 @@ export * from './Swiper/DefaultNavigation';
 export * from './Avatar';
 export * from './Comment';
 export * from './Skeleton';
+export * from './Prices';
