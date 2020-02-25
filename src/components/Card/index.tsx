@@ -2,8 +2,9 @@ import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-import { gray900 } from '../../core/Colors';
+import { gray100, gray900 } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
+import { ifDarkTheme } from '../../utils';
 
 export type CoverRatioType = 0.5625 | 0.625 | 0.75 | 1.333 | 1;
 
@@ -160,7 +161,7 @@ const Body = styled.div``;
 
 const Title = styled.div`
   ${body2};
-  color: ${gray900};
+  color: ${ifDarkTheme(gray100, gray900)};
   overflow: hidden;
   margin-bottom: 6px;
   display: -webkit-box;
