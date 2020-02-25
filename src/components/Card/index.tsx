@@ -81,7 +81,7 @@ export class Card extends PureComponent<CardProps> {
       if (typeof coverImage === 'string') {
         return (
           <RatioCoverImageArea coverImageRatio={coverImageRatio} onClick={onClick}>
-            <img src={coverImage} alt={coverImageAlt || ''} srcSet={coverImageSrcSet ?? undefined} />
+            <img src={coverImage} alt={coverImageAlt || ''} srcSet={coverImageSrcSet || undefined} />
           </RatioCoverImageArea>
         );
       }
