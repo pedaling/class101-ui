@@ -2,7 +2,7 @@ import React, { PureComponent, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 
 import { gray800, white } from '../../core/Colors';
-import { caption1, caption2 } from '../../core/TextStyles';
+import { caption2 } from '../../core/TextStyles';
 
 type Size = 'sm' | 'md' | 'lg';
 
@@ -81,6 +81,6 @@ const IconArea = styled.div`
 `;
 
 const TextArea = styled.div<Pick<BadgeProps, 'size' | 'color'>>`
-  ${props => (props.size === 'sm' ? caption2 : caption1)};
+  ${caption2};
   ${props => (props.color ? `color: ${props.color};` : '')};
 `;
