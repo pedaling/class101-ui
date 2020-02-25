@@ -26,6 +26,7 @@ const Container = styled.div<Pick<Props, 'width'>>`
 `;
 
 const Line = styled.hr<{ color?: string }>`
+  margin: 0 !important;
   box-shadow: inset 0px -1px 0px ${props => props.color ?? ifDarkTheme(gray800, gray000)};
   border: none;
   height: 1px;
