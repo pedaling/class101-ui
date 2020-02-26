@@ -17,7 +17,7 @@ export default class SvgSorting extends React.PureComponent<IconProps> {
         className={this.props.className}
         viewBox="0 0 24 24"
       >
-        <mask id="Sorting_svg__a" fill="#fff">
+        <mask id="sorting_svg__a" fill="#fff">
           <path
             fillRule="evenodd"
             clipRule="evenodd"
@@ -33,7 +33,7 @@ export default class SvgSorting extends React.PureComponent<IconProps> {
         <path
           d="M4 18a1 1 0 01-1 1v-4a3 3 0 00-3 3h4zm-1-1a1 1 0 011 1H0a3 3 0 003 3v-4zm9 0H3v4h9v-4zm-1 1a1 1 0 011-1v4a3 3 0 003-3h-4zm1 1a1 1 0 01-1-1h4a3 3 0 00-3-3v4zm-9 0h9v-4H3v4zm1-5a1 1 0 01-1 1v-4a3 3 0 00-3 3h4zm-1-1a1 1 0 011 1H0a3 3 0 003 3v-4zm12 0H3v4h12v-4zm-1 1a1 1 0 011-1v4a3 3 0 003-3h-4zm1 1a1 1 0 01-1-1h4a3 3 0 00-3-3v4zM3 15h12v-4H3v4zm1-9a1 1 0 01-1 1V3a3 3 0 00-3 3h4zM3 5a1 1 0 011 1H0a3 3 0 003 3V5zm18 0H3v4h18V5zm-1 1a1 1 0 011-1v4a3 3 0 003-3h-4zm1 1a1 1 0 01-1-1h4a3 3 0 00-3-3v4zM3 7h18V3H3v4zm1 3a1 1 0 01-1 1V7a3 3 0 00-3 3h4zM3 9a1 1 0 011 1H0a3 3 0 003 3V9zm15 0H3v4h15V9zm-1 1a1 1 0 011-1v4a3 3 0 003-3h-4zm1 1a1 1 0 01-1-1h4a3 3 0 00-3-3v4zM3 11h15V7H3v4z"
           fill={this.props.fillColor}
-          mask="url(#Sorting_svg__a)"
+          mask="url(#sorting_svg__a)"
         />
       </svg>
     );
