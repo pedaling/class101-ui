@@ -5,7 +5,7 @@ route: /components/card
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Colors, Button, Grid, Row, Caption1, Card, CoverRatio, Badge, Icon, Divider, DiscountPecent, OriginalPrice, InstallmentText, SellingPrice } from '@class101/ui';
+import { Colors, Button, Grid, Row, Caption1, Card, CoverRatio, Badge, Icon, Divider } from '@class101/ui';
 import { NoHiddenStyleCol } from './Col';
 import { imageSrc } from './interface';
 
@@ -40,12 +40,6 @@ import { imageSrc } from './interface';
         >
           <div style={{ marginTop: 10, marginBottom: 10}}>
             <Divider color="#F2F4F5"/>
-          </div>
-          <div style={{ lineHeight: '0' }}>
-            <OriginalPrice>275,000원</OriginalPrice> <DiscountPecent>28%</DiscountPecent>
-          </div>
-          <div style={{ lineHeight: '0' }}>
-            <SellingPrice>월 41,343원</SellingPrice> <InstallmentText>(5개월)</InstallmentText>
           </div>
           <Badge size="lg" color={Colors.gray600} backgroundColor={Colors.gray000} style={{ marginTop: '8px' }}>바로수강가능</Badge>
         </Card>
