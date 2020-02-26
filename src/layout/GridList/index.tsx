@@ -45,7 +45,7 @@ const GridListUl = styled.ul<{ smColumn?: Column }>`
   padding: 0;
   margin-right: -12px;
   margin-left: -12px;
-  margin-bottom: -24px;
+  margin-bottom: -32px;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -54,6 +54,7 @@ const GridListUl = styled.ul<{ smColumn?: Column }>`
   ${media.sm`
     margin-right: -4px;
     margin-left: -4px;
+    margin-bottom: -24px;
     ${props =>
       props.smColumn === 2 &&
       `
@@ -68,13 +69,14 @@ const GridListItem = styled.li<{ lgColumn?: Column; smColumn?: Column }>`
   min-height: 1px;
   padding-right: 12px;
   padding-left: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   box-sizing: border-box;
   width: ${props => sizeToPercent(props.smColumn)}%;
 
   ${media.sm`
     padding-right: 4px;
     padding-left: 4px;
+    margin-bottom: 24px;
     ${props =>
       props.smColumn === 2 &&
       `
