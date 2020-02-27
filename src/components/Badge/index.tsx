@@ -2,9 +2,9 @@ import React, { PureComponent, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 
 import { gray800, white } from '../../core/Colors';
-import { caption2 } from '../../core/TextStyles';
+import { caption1, caption2 } from '../../core/TextStyles';
 
-type Size = 'sm' | 'md' | 'lg';
+type Size = 'xs' | 'sm' | 'md';
 
 export interface BadgeProps {
   style?: React.CSSProperties;
@@ -46,17 +46,26 @@ export class Badge extends PureComponent<BadgeProps> {
 }
 
 const containerMinWidth: { [key in Size]: number } = {
-  sm: 16,
-  md: 20,
-  lg: 24,
+  xs: 16,
+  sm: 20,
+  md: 24,
+};
+
+const containerPaddingSize: { [key in Size]: number } = {
+  xs: 4,
+  sm: 6,
+  md: 6,
 };
 
 const containerStyle = (size: BadgeProps['size'] = 'md', pill: BadgeProps['pill'] = false) => {
   const minWidth = typeof size === 'number' ? size : containerMinWidth[size];
+  const padding = typeof size === 'number' ? Math.ceil(size / 4) : containerPaddingSize[size];
   return css`
     min-width: ${minWidth}px;
     height: ${minWidth}px;
     border-radius: ${pill ? minWidth / 2 : 3}px;
+    padding-left: ${padding}px;
+    padding-right: ${padding}px;
   `;
 };
 
@@ -67,8 +76,6 @@ const Container = styled.div<Pick<BadgeProps, 'size' | 'pill' | 'backgroundColor
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding-left: 6px;
-  padding-right: 6px;
   box-sizing: border-box;
   svg {
     width: 12px;
@@ -81,6 +88,7 @@ const IconArea = styled.div`
 `;
 
 const TextArea = styled.div<Pick<BadgeProps, 'size' | 'color'>>`
-  ${caption2};
+  ${props => (props.size === 'md' ? caption1 : caption2)};
   ${props => (props.color ? `color: ${props.color};` : '')};
+  font-weight: 600;
 `;
