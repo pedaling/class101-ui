@@ -84,6 +84,7 @@ const Container = styled.div<Pick<BadgeProps, 'size' | 'pill' | 'backgroundColor
 `;
 
 const IconArea = styled.div`
+  flex: none;
   margin-right: 3px;
 `;
 
@@ -91,4 +92,7 @@ const TextArea = styled.div<Pick<BadgeProps, 'size' | 'color'>>`
   ${props => (props.size === 'md' ? caption1 : caption2)};
   ${props => (props.color ? `color: ${props.color};` : '')};
   font-weight: 600;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 `;
