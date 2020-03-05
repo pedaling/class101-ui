@@ -41,7 +41,7 @@ const RadioIcon = styled.div<RadioIconProps>`
     props.checked
       ? css<RadioIconProps>`
           border-color: ${props => props.color || gray500};
-          border-width: 4px;
+          border-width: 6px;
         `
       : ''};
 `;
