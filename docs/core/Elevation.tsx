@@ -1,5 +1,4 @@
-import { Colors, ElevationStyles } from '@class101/ui';
-import { ElevationProps } from '@class101/ui/ElevationStyles';
+import { Colors, ElevationProps, ElevationStyles } from '@class101/ui';
 import { defaultTo } from 'lodash';
 import React from 'react';
 import styled from 'styled-components';
@@ -7,7 +6,7 @@ import styled from 'styled-components';
 export const Elevation = styled.div<ElevationProps>`
   flex: 1 1 20%;
   background-color: white;
-  margin: 4px;
+  margin: 8px;
   height: 48px;
   display: flex;
   justify-content: center;
@@ -18,5 +17,6 @@ export const Elevation = styled.div<ElevationProps>`
 export const Container = styled.div`
   padding: 32px;
   display: flex;
-  background: ${Colors.gray000};
+  background: white;
+  border: 1px solid ${Colors.gray100};
 `;
