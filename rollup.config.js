@@ -1,3 +1,4 @@
+import path from 'path';
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import external from 'rollup-plugin-peer-deps-external';
@@ -9,38 +10,51 @@ import visualizer from 'rollup-plugin-visualizer';
 
 import pkg from './package.json';
 
-export default {
-  input: 'src/index.ts',
-  output: [
-    {
-      file: pkg.main,
+const getPlugins = format => [
+  external(),
+  postcss({
+    modules: true,
+  }),
+  url(),
+  babel({
+    exclude: 'node_modules/**',
+  }),
+  resolve({
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  }),
+  typescript({
+    typescript: require('typescript'),
+    objectHashIgnoreUnknownHack: true,
+    ...(format === 'cjs' && { tsconfigOverride: { compilerOptions: { declaration: false } } }),
+  }),
+  commonjs({ extensions: ['.js', '.ts'] }),
+  visualizer({
+    sourcemap: false,
+    bundlesRelative: false,
+    template: 'treemap', // sunburst, treemap, circlepacking, network
+  }),
+];
+
+export default [
+  {
+    input: 'src/index.ts',
+    output: {
+      dir: path.dirname(pkg.module),
+      format: 'esm',
+      sourcemap: true,
+    },
+    external: ['classnames', 'react-popper', 'swiper/dist/js/swiper.esm.js', 'polished', 'path-to-regexp'],
+    plugins: getPlugins('esm'),
+    preserveModules: true,
+  },
+  {
+    input: 'src/index.ts',
+    output: {
+      dir: path.dirname(pkg.main),
       format: 'cjs',
       sourcemap: true,
     },
-    {
-      file: pkg.module,
-      format: 'es',
-      sourcemap: true,
-    },
-  ],
-  plugins: [
-    external(),
-    postcss({
-      modules: true,
-    }),
-    url(),
-    babel({
-      exclude: 'node_modules/**',
-    }),
-    resolve({
-      extensions: ['.js', '.jsx', '.ts', '.tsx'],
-    }),
-    typescript({ typescript: require('typescript'), objectHashIgnoreUnknownHack: true }),
-    commonjs({ extensions: ['.js', '.ts'] }),
-    visualizer({
-      sourcemap: false,
-      bundlesRelative: false,
-      template: 'treemap', // sunburst, treemap, circlepacking, network
-    }),
-  ],
-};
+    external: ['classnames', 'react-popper', 'swiper/dist/js/swiper.esm.js', 'polished', 'path-to-regexp'],
+    plugins: getPlugins('cjs'),
+  },
+];

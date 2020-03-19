@@ -1,6 +1,6 @@
 {
   "name": "@class101/ui",
-  "version": "8.5.1-rc0",
+  "version": "9.0.0-test2",
   "description": "A React-based UI Component Library, powered by Class101.",
   "author": "Class101 Co, LTD.",
   "license": "MIT",
@@ -9,9 +9,9 @@
     "url": "https://github.com/pedaling/class101-ui.git"
   },
   "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "jsnext:main": "dist/index.es.js",
-  "types": "dist/index.d.ts",
+  "module": "dist/esm/index.js",
+  "jsnext:main": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
   "sideEffects": false,
   "engines": {
     "node": ">=8",
