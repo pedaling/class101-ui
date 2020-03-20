@@ -22,6 +22,7 @@
     "test:watch": "react-scripts-ts test --env=jsdom",
     "build": "docz build && dist-size ./dist",
     "prebuild": "tsc -p . && rollup -c",
+    "analyze": "cross-env RUNNING_ENV=analyze yarn prebuild",
     "start": "rollup -c -w",
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build",

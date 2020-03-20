@@ -28,11 +28,15 @@ const getPlugins = format => [
     ...(format === 'cjs' && { tsconfigOverride: { compilerOptions: { declaration: false } } }),
   }),
   commonjs({ extensions: ['.js', '.ts'] }),
-  visualizer({
-    sourcemap: false,
-    bundlesRelative: false,
-    template: 'treemap', // sunburst, treemap, circlepacking, network
-  }),
+  process.env.RUNNING_ENV === 'analyze' && format === 'cjs'
+    ? visualizer({
+        sourcemap: false,
+        bundlesRelative: false,
+        open: true,
+        gzipSize: true,
+        template: 'treemap', // sunburst, treemap, circlepacking, network
+      })
+    : undefined,
 ];
 
 export default [
