@@ -20,7 +20,7 @@
   "scripts": {
     "test": "cross-env CI=1 react-scripts-ts test --env=jsdom",
     "test:watch": "react-scripts-ts test --env=jsdom",
-    "build": "docz build",
+    "build": "docz build && dist-size ./dist",
     "prebuild": "tsc -p . && rollup -c",
     "start": "rollup -c -w",
     "predeploy": "cd example && yarn install && yarn run build",
@@ -81,6 +81,7 @@
     "@types/styled-components": "^4.4.0",
     "@types/swiper": "^4.4.5",
     "cross-env": "^5.1.4",
+    "dist-size": "^0.4.0",
     "docz": "^0.13.7",
     "docz-theme-default": "^0.12.9",
     "eslint": "^6.5.1",
