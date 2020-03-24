@@ -12,20 +12,14 @@ export interface ProgressBarProps {
 
 export const ProgressBar = memo(
   ({ value = 0, height = 4, backgroundColor = gray200, barColor = orange600, ...restProps }: ProgressBarProps) => {
-    const barValue = Number(value);
-
-    let transform = barValue > 100 ? 100 : barValue;
-    if (barValue < 0) {
-      transform = 0;
-    }
-
-    const barStyle = {
-      transform: `translateX(${-(100 - transform)}%)`,
+    const percent = Math.max(0, Math.min(100, value));
+    const barInlineStyle = {
+      transform: `translateX(${-(100 - percent)}%)`,
     };
 
     return (
       <Container backgroundColor={backgroundColor} height={height} {...restProps}>
-        <Bar barColor={barColor} style={barStyle} />
+        <Bar barColor={barColor} style={barInlineStyle} />
       </Container>
     );
   }
