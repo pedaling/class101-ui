@@ -4,8 +4,9 @@ name: Progress Bar
 route: /components/progress-bar
 ---
 
+import { useState, useCallback } from 'react';
 import { Playground, PropsTable } from 'docz';
-import { Component as ProgressBar } from './ProgressBar';
+import { ProgressBar, Button, ButtonGroup } from '@class101/ui';
 
 # Progress Bar
 
@@ -19,6 +20,37 @@ import { Component as ProgressBar } from './ProgressBar';
 
 <Playground>
   <ProgressBar value={30} />
+</Playground>
+
+## Animation
+
+<Playground>
+  {() => {
+    const [value, setValue] = useState(10);
+
+    const handleClickToIncrease = useCallback(() => {
+      if(value < 100) {
+        setValue(value => value + 10);
+      }
+    }, [value])
+
+    const handleClickToDecrease = useCallback(() => {
+      if(value > 0) {
+        setValue(value => value - 10);
+      }
+    }, [value])
+
+    return (
+      <>
+        <ProgressBar value={value} />
+        <br/>
+        <ButtonGroup>
+          <Button onClick={handleClickToIncrease}>+ 10%</Button>
+          <Button onClick={handleClickToDecrease}>- 10%</Button>
+        </ButtonGroup>
+      </>
+    )
+  }}
 </Playground>
 
 ## Custom example

@@ -1,5 +1,5 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React, { memo } from 'react';
+import styled from 'styled-components';
 
 import { gray200, orange600 } from '../../core/Colors';
 
@@ -10,31 +10,40 @@ export interface ProgressBarProps {
   height?: number;
 }
 
-export const ProgressBar = ({ value = 0, height = 4, backgroundColor, barColor, ...restProps }: ProgressBarProps) => (
-  <Container backgroundColor={backgroundColor} height={height} {...restProps}>
-    <Bar barColor={barColor} value={Number(value) > 100 ? 100 : value} />
-  </Container>
+export const ProgressBar = memo(
+  ({ value = 0, height = 4, backgroundColor = gray200, barColor = orange600, ...restProps }: ProgressBarProps) => {
+    const barValue = Number(value);
+
+    let transform = barValue > 100 ? 100 : barValue;
+    if (barValue < 0) {
+      transform = 0;
+    }
+
+    const barStyle = {
+      transform: `translateX(${-(100 - transform)}%)`,
+    };
+
+    return (
+      <Container backgroundColor={backgroundColor} height={height} {...restProps}>
+        <Bar barColor={barColor} style={barStyle} />
+      </Container>
+    );
+  }
 );
 
-const Bar = styled.div<ProgressBarProps>`
+const Container = styled.div<{ backgroundColor: string; height: number }>`
+  display: flex;
+  overflow: hidden;
+  flex-grow: 1;
   border-radius: 2px;
-  background-color: ${props => props.barColor || orange600};
-  width: ${props => props.value || 0}%;
-  transition: width 0.3s ease-in-out;
+  background-color: ${props => props.backgroundColor};
+  height: ${props => props.height}px;
 `;
 
-const Container = styled.div<ProgressBarProps>`
+const Bar = styled.div<{ barColor: string }>`
+  width: 100%;
+  height: 100%;
   border-radius: 2px;
-  background-color: ${props => props.backgroundColor || gray200};
-  flex-grow: 1;
-
-  ${props =>
-    props.height &&
-    css`
-      height: ${props.height}px;
-
-      ${Bar} {
-        height: ${props.height}px;
-      }
-    `};
+  background-color: ${props => props.barColor};
+  transition: transform 0.3s ease-in-out;
 `;

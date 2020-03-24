@@ -1,3 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Grid 스냅샷과 일치한다.. 1`] = `[Function]`;
+exports[`Grid 스냅샷과 일치한다.. 1`] = `
+Object {
+  "$$typeof": Symbol(react.memo),
+  "compare": null,
+  "defaultProps": Object {
+    "backgroundColor": "#3e4042",
+    "color": "rgba(0, 0, 0, 0.07)",
+    "size": 24,
+  },
+  "type": [Function],
+}
+`;
