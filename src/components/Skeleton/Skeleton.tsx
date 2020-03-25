@@ -38,7 +38,26 @@ export interface SkeletonProps {
 }
 
 export const Skeleton: FC<SkeletonProps> = memo(
-  ({ style, className, circle, width, height, count, color, rounded, children }) => {
+  ({ style, className, color, circle, width, height, count = 0, rounded = true, children }) => {
+    const skeletonInlineStyle = useMemo(() => {
+      const inlineStyle = style || {};
+      if (width) {
+        inlineStyle.width = typeof width === 'number' ? `${width}px` : width;
+        inlineStyle.display = 'block';
+      }
+      if (height) {
+        inlineStyle.height = typeof height === 'number' ? `${height}px` : height;
+        inlineStyle.display = 'block';
+      }
+      if (rounded) {
+        inlineStyle.borderRadius = '3px';
+      }
+      if (circle) {
+        inlineStyle.borderRadius = '50%';
+      }
+      return inlineStyle;
+    }, [width, height, rounded, style, circle]);
+
     const content = useMemo(() => {
       if (!count) {
         return 'F';
@@ -51,27 +70,12 @@ export const Skeleton: FC<SkeletonProps> = memo(
     }, [count]);
 
     return (
-      <Container
-        style={style}
-        className={className}
-        circle={circle}
-        width={width}
-        height={height}
-        color={color}
-        rounded={rounded}
-      >
-        <Content>{children || content}</Content>
+      <Container style={skeletonInlineStyle} className={className} color={color}>
+        <Content aria-hidden="true">{children || content}</Content>
       </Container>
     );
   }
 );
-
-Skeleton.defaultProps = {
-  rounded: true,
-  count: 0,
-};
-
-type ContainerProps = Pick<SkeletonProps, 'circle' | 'width' | 'height' | 'rounded' | 'color' | 'rounded'>;
 
 const fadeOut = keyframes`
     from {
@@ -82,14 +86,8 @@ const fadeOut = keyframes`
     }
 `;
 
-const Container = styled.span<ContainerProps>`
-  ${props => props.width && `width: ${typeof props.width === 'number' ? `${props.width}px` : props.width}`};
-  ${props => props.height && `height: ${typeof props.height === 'number' ? `${props.height}px` : props.height}`};
-  ${props => props.rounded && `border-radius: 3px`};
-  ${props => props.circle && `border-radius: 50%`};
-  ${props => (props.width || props.height) && `display: block`};
-  background-color: ${gray100};
-  ${ifDarkTheme(`background-color: ${gray800};`)}
+const Container = styled.span<{ color?: string }>`
+  background-color: ${ifDarkTheme(gray800, gray100)};
   ${props => props.color && `background-color: ${props.color}`};
   animation: ${fadeOut} 1s infinite linear alternate;
 `;
