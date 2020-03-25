@@ -74,12 +74,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     this.setState({
       mounted: true,
       scrollbarWidth: this.getScrollbarWidth(),
-      viewPortHeight: this.getViewPortHeight(),
     });
-
-    if (isClient()) {
-      window.addEventListener('resize', this.setViewPortHeight);
-    }
   }
 
   public componentDidUpdate(prevProps: ModalBottomSheetProps, prevState: State) {
@@ -99,10 +94,6 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
   public componentWillUnmount() {
     if (this.unmountScrollTimeout) {
       clearTimeout(this.unmountScrollTimeout);
-    }
-
-    if (isClient()) {
-      window.removeEventListener('resize', this.setViewPortHeight);
     }
 
     this.enableBodyScroll();
@@ -145,13 +136,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
         {clonedOpener}
         <Portal container={document.body}>
           <Container zIndex={zIndex} visible={opened} onClick={closeable ? this.handleCloseModal : undefined}>
-            <Dialog
-              visible={opened}
-              onClick={this.blockPropagation}
-              style={modalStyle}
-              viewPortHeight={viewPortHeight}
-              className={className}
-            >
+            <Dialog visible={opened} onClick={this.blockPropagation} style={modalStyle} className={className}>
               <DialogHead>
                 <DialogTitle>{title}</DialogTitle>
                 {closeable && (
@@ -237,19 +222,6 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     return scrollbarWidth;
   };
 
-  private getViewPortHeight = () => {
-    if (isServer()) {
-      return 0;
-    }
-    return window.innerHeight;
-  };
-
-  private setViewPortHeight = () => {
-    this.setState({
-      viewPortHeight: this.getViewPortHeight(),
-    });
-  };
-
   private blockPropagation = (e: React.SyntheticEvent) => {
     e.stopPropagation();
   };
@@ -284,7 +256,7 @@ const Container = styled.div<{ zIndex: number; visible: boolean }>`
   right: 0;
   bottom: 0;
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.72);
+  background-color: rgba(0, 0, 0, 0.72);
   opacity: ${props => (props.visible ? '1' : '0')};
   visibility: ${props => (props.visible ? 'visible' : 'hidden')};
   transition: ${props => !props.visible && `visibility 0s linear 225ms,`} opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
@@ -292,10 +264,10 @@ const Container = styled.div<{ zIndex: number; visible: boolean }>`
   flex-direction: column;
   ${media.sm`
     justify-content: flex-end;
-  `}
+  `};
 `;
 
-const Dialog = styled.div<{ visible: boolean; viewPortHeight: number }>`
+const Dialog = styled.div<{ visible: boolean }>`
   display: flex;
   flex-direction: column;
   padding: 32px;
@@ -303,9 +275,9 @@ const Dialog = styled.div<{ visible: boolean; viewPortHeight: number }>`
   min-height: 360px;
   max-height: 800px;
   border-radius: 8px;
-  background: ${white};
+  background-color: ${white};
   box-sizing: border-box;
-  ${elevation5}
+  ${elevation5};
 
   ${media.sm`
     flex: none;
@@ -314,13 +286,13 @@ const Dialog = styled.div<{ visible: boolean; viewPortHeight: number }>`
     padding-bottom: calc(env(safe-area-inset-bottom) + 24px);
     width: 100%;
     min-height: 240px;
-    max-height: ${props => (props.viewPortHeight > 48 ? `${props.viewPortHeight - 48}px` : `calc(100vh - 48px)`)}
+    max-height: calc(100% - 48px);
     height: auto;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     ${props => !props.visible && `transform: translateY(100%);`}
     transition: all 225ms ease-out;
-  `}
+  `};
 `;
 
 const DialogHead = styled.div`
