@@ -49,14 +49,8 @@ export const Skeleton: FC<SkeletonProps> = memo(
         inlineStyle.height = typeof height === 'number' ? `${height}px` : height;
         inlineStyle.display = 'block';
       }
-      if (rounded) {
-        inlineStyle.borderRadius = '3px';
-      }
-      if (circle) {
-        inlineStyle.borderRadius = '50%';
-      }
       return inlineStyle;
-    }, [width, height, rounded, style, circle]);
+    }, [width, height, style]);
 
     const content = useMemo(() => {
       if (!count) {
@@ -70,7 +64,7 @@ export const Skeleton: FC<SkeletonProps> = memo(
     }, [count]);
 
     return (
-      <Container style={skeletonInlineStyle} className={className} color={color}>
+      <Container style={skeletonInlineStyle} className={className} color={color} rounded={rounded} circle={circle}>
         <Content aria-hidden="true">{children || content}</Content>
       </Container>
     );
@@ -86,9 +80,11 @@ const fadeOut = keyframes`
     }
 `;
 
-const Container = styled.span<{ color?: string }>`
+const Container = styled.span<{ color?: string; rounded?: boolean; circle?: boolean }>`
   background-color: ${ifDarkTheme(gray800, gray100)};
   ${props => props.color && `background-color: ${props.color}`};
+  ${props => props.rounded && `border-radius: 3px`};
+  ${props => props.circle && `border-radius: 50%`};
   animation: ${fadeOut} 1s infinite linear alternate;
 `;
 
