@@ -2,9 +2,11 @@ import * as React from 'react';
 import { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 
+import { isClient } from '../../utils';
 import { Portal } from '../Portal';
 
 export interface OverlayProps {
+  className?: string;
   children: React.ReactNode;
   opened: boolean;
   closeable?: boolean;
@@ -21,20 +23,20 @@ function useDefaultProps<T, DefaultProps extends Partial<T>>(props: T, defaultPr
 }
 
 export const Overlay = React.memo<OverlayProps>(originalProps => {
-  const { children, opened, closeable, onClose, zIndex } = useDefaultProps(originalProps, {
+  const { className, children, opened, closeable, onClose, zIndex } = useDefaultProps(originalProps, {
     closeable: true,
     zIndex: 3000,
   });
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    if (isClient()) {
+      document.body.style.overflow = opened ? 'hidden' : '';
+    }
     return () => {
-      document.body.style.overflow = '';
+      if (isClient()) {
+        document.body.style.overflow = '';
+      }
     };
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = opened ? 'hidden' : '';
   }, [opened]);
 
   const handleCloseModal = useCallback(() => {
@@ -45,7 +47,12 @@ export const Overlay = React.memo<OverlayProps>(originalProps => {
 
   return (
     <Portal container={document.body}>
-      <Container zIndex={zIndex} visible={opened} onClick={closeable ? handleCloseModal : undefined}>
+      <Container
+        className={className}
+        zIndex={zIndex}
+        visible={opened}
+        onClick={closeable ? handleCloseModal : undefined}
+      >
         {children}
       </Container>
     </Portal>
