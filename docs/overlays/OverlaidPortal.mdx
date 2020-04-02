@@ -1,18 +1,18 @@
 ---
 menu: Overlays
-name: Overlay
-route: /overlays/overlay
+name: OverlaidPortal
+route: /overlays/overlaid-portal
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { Button, Overlay } from '@class101/ui';
+import { Button, OverlaidPortal } from '@class101/ui';
 import styled from 'styled-components';
 
-# Overlay
+# OverlaidPortal
 
 ## Props
 
-<PropsTable of={Overlay} />
+<PropsTable of={OverlaidPortal} />
 
 ## Basic usage
 
@@ -28,9 +28,9 @@ import styled from 'styled-components';
         return (
           <>
             <Button onClick={openOverlay}>Open Overlay</Button>
-            <Overlay opened={opened} onClose={closeOverlay}>
+            <OverlaidPortal opened={opened} onClose={closeOverlay}>
               Overlay Children
-            </Overlay>
+            </OverlaidPortal>
           </>
         )
       }

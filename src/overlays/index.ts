@@ -1,4 +1,4 @@
-export * from './Overlay';
+export * from './OverlaidPortal';
 export * from './Toast';
 export * from './Toaster';
 export * from './BottomSheet';

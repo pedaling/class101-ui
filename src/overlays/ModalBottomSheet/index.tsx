@@ -7,8 +7,8 @@ import { gray600, gray800, white } from '../../core/Colors';
 import { elevation5 } from '../../core/ElevationStyles';
 import { Body2, Headline3 } from '../../core/Typography';
 import { Close } from '../../Icon';
-import { isClient, isServer } from '../../utils';
-import { Portal } from '../Portal';
+import { isServer } from '../../utils';
+import { OverlaidPortal } from '../OverlaidPortal';
 
 export interface ModalBottomSheetProps {
   opened: boolean;
@@ -68,35 +68,11 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     viewPortHeight: 0,
   };
 
-  private unmountScrollTimeout?: number;
-
   public componentDidMount() {
     this.setState({
       mounted: true,
       scrollbarWidth: this.getScrollbarWidth(),
     });
-  }
-
-  public componentDidUpdate(prevProps: ModalBottomSheetProps, prevState: State) {
-    const { opened } = this.state;
-
-    if (prevState.opened !== opened) {
-      if (opened) {
-        this.disableBodyScroll();
-      } else {
-        this.unmountScrollTimeout = setTimeout(() => {
-          this.enableBodyScroll();
-        }, 225);
-      }
-    }
-  }
-
-  public componentWillUnmount() {
-    if (this.unmountScrollTimeout) {
-      clearTimeout(this.unmountScrollTimeout);
-    }
-
-    this.enableBodyScroll();
   }
 
   public render() {
@@ -117,7 +93,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
       successAttributes,
       cancelAttributes,
     } = this.props;
-    const { mounted, opened, viewPortHeight } = this.state;
+    const { mounted, opened } = this.state;
 
     if (!mounted || isServer()) {
       return opener || <React.Fragment />;
@@ -134,57 +110,35 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     return (
       <>
         {clonedOpener}
-        <Portal container={document.body}>
-          <Container zIndex={zIndex} visible={opened} onClick={closeable ? this.handleCloseModal : undefined}>
-            <Dialog visible={opened} onClick={this.blockPropagation} style={modalStyle} className={className}>
-              <DialogHead>
-                <DialogTitle>{title}</DialogTitle>
-                {closeable && (
-                  <IconButton
-                    icon={<Close />}
-                    onClick={this.handleCloseModal}
-                    fillColor={gray800}
-                    color="transparent"
-                  />
-                )}
-              </DialogHead>
-              {subTitle && <DialogSubTitle>{subTitle}</DialogSubTitle>}
-              <DialogBody style={contentStyle} hideScroll={hideScroll} removeContentPadding={removeContentPadding}>
-                {children}
-              </DialogBody>
-              <DialogFooter>
-                {cancelText && (
-                  <DialogFooterButton onClick={this.handleCancelModal} {...cancelAttributes}>
-                    {cancelText}
-                  </DialogFooterButton>
-                )}
-                {successText && (
-                  <DialogFooterButton onClick={this.handleSuccessModal} {...successAttributes}>
-                    {successText}
-                  </DialogFooterButton>
-                )}
-              </DialogFooter>
-            </Dialog>
-          </Container>
-        </Portal>
+        <StyledOverlaidPortal zIndex={zIndex} opened={opened} closeable={closeable} onClose={this.handleCloseModal}>
+          <Dialog visible={opened} onClick={this.blockPropagation} style={modalStyle} className={className}>
+            <DialogHead>
+              <DialogTitle>{title}</DialogTitle>
+              {closeable && (
+                <IconButton icon={<Close />} onClick={this.handleCloseModal} fillColor={gray800} color="transparent" />
+              )}
+            </DialogHead>
+            {subTitle && <DialogSubTitle>{subTitle}</DialogSubTitle>}
+            <DialogBody style={contentStyle} hideScroll={hideScroll} removeContentPadding={removeContentPadding}>
+              {children}
+            </DialogBody>
+            <DialogFooter>
+              {cancelText && (
+                <DialogFooterButton onClick={this.handleCancelModal} {...cancelAttributes}>
+                  {cancelText}
+                </DialogFooterButton>
+              )}
+              {successText && (
+                <DialogFooterButton onClick={this.handleSuccessModal} {...successAttributes}>
+                  {successText}
+                </DialogFooterButton>
+              )}
+            </DialogFooter>
+          </Dialog>
+        </StyledOverlaidPortal>
       </>
     );
   }
-
-  private disableBodyScroll = () => {
-    const { scrollbarWidth } = this.state;
-    if (isClient()) {
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
-      document.body.style.overflow = 'hidden';
-    }
-  };
-
-  private enableBodyScroll = () => {
-    if (isClient()) {
-      document.body.style.paddingRight = '';
-      document.body.style.overflow = '';
-    }
-  };
 
   private showModal = () => {
     const { onOpen } = this.props;
@@ -245,23 +199,8 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
   };
 }
 
-const Container = styled.div<{ zIndex: number; visible: boolean }>`
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: ${props => props.zIndex};
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.72);
-  opacity: ${props => (props.visible ? '1' : '0')};
-  visibility: ${props => (props.visible ? 'visible' : 'hidden')};
-  transition: ${props => !props.visible && `visibility 0s linear 225ms,`} opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  overscroll-behavior: contain;
-  flex-direction: column;
+const StyledOverlaidPortal = styled(OverlaidPortal)<{ opened: boolean }>`
+  transition: ${props => !props.opened && `visibility 0s linear 225ms,`} opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   ${media.sm`
     justify-content: flex-end;
   `};
