@@ -1,0 +1,40 @@
+---
+menu: Overlays
+name: Overlay
+route: /overlays/overlay
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Button, Overlay } from '@class101/ui';
+import styled from 'styled-components';
+
+# Overlay
+
+## Props
+
+<PropsTable of={Overlay} />
+
+## Basic usage
+
+<Playground>
+  {
+    () => {
+      function Example() {
+        const [opened, setOpened] = React.useState(false);
+
+        const openOverlay = () => setOpened(true);
+        const closeOverlay = () => setOpened(false);
+
+        return (
+          <>
+            <Button onClick={openOverlay}>Open Overlay</Button>
+            <Overlay opened={opened} onClose={closeOverlay}>
+              Overlay Children
+            </Overlay>
+          </>
+        )
+      }
+      return <Example />
+    }
+  }
+</Playground>
