@@ -19,22 +19,17 @@ export interface OverlayProps {
   zIndex?: number;
 }
 
-function useDefaultProps<T, DefaultProps extends Partial<T>>(props: T, defaultProps: DefaultProps): DefaultProps & T {
-  return {
-    ...defaultProps,
-    ...props,
-  };
-}
-
-export const OverlaidPortal = React.memo<OverlayProps>(originalProps => {
-  const { className, children, dimmer, overlayColor, opened, closeable, onClose, zIndex } = useDefaultProps(
-    originalProps,
-    {
-      closeable: true,
-      dimmer: true,
-      overlayColor: 'rgba(0, 0, 0, 0.72)',
-    }
-  );
+export const OverlaidPortal = React.memo<OverlayProps>(props => {
+  const {
+    className,
+    children,
+    dimmer = true,
+    overlayColor = 'rgba(0, 0, 0, 0.72)',
+    opened,
+    closeable = true,
+    onClose,
+    zIndex = 3000,
+  } = props;
 
   useEffect(() => {
     if (isClient() && dimmer) {
@@ -79,7 +74,7 @@ export const Overlay = styled.div<{ zIndex?: number; overlayColor: string; dimme
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: ${props => props.zIndex ?? 3000};
+  z-index: ${props => props.zIndex};
   top: 0;
   left: 0;
   right: 0;
