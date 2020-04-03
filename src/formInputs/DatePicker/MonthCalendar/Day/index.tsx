@@ -39,7 +39,8 @@ const Component = (props: MonthCalendarDayProps) => {
 export const MonthCalendarDay = React.memo(Component);
 
 const Day = styled.div<Omit<MonthCalendarDayProps, 'onClick' | 'onHover' | 'date'>>`
-  ${body2}
+  ${body2};
+  box-sizing: content-box;
   display: flex;
   position: relative;
   justify-content: center;

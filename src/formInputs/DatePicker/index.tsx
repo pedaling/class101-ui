@@ -32,6 +32,7 @@ export interface DatePickerProps {
   readonly inputAttributes?: HTMLInputProps & InputProps;
   readonly highlightWeekEnd: boolean;
   readonly style?: React.CSSProperties;
+  className?: string;
 }
 
 export interface DatePickerState {
@@ -96,7 +97,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
   }
 
   public render() {
-    const { selectedDate, currentMonth, selectorType, modalVisible, secondDate, inputValue } = this.state;
+    const { selectedDate, currentMonth, selectorType, modalVisible, secondDate, inputValue, className } = this.state;
     const {
       locale,
       minDate: min,
@@ -110,7 +111,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     } = this.props;
 
     return (
-      <Container inline={inline} style={style}>
+      <Container inline={inline} style={style} className={className}>
         <PickerInput
           type="text"
           value={inputValue}
@@ -424,8 +425,8 @@ const DatePickerBody = styled.div`
 `;
 
 const NavText = styled(Button)`
+  ${body1};
   background-color: transparent;
-  ${body1}
   font-weight: bold;
 `;
 

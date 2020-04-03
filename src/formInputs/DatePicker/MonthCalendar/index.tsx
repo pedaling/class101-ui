@@ -154,7 +154,7 @@ const CalendarHead = styled.div`
 `;
 
 const DayName = styled.div`
-  ${body2}
+  ${body2};
   display: flex;
   color: ${gray500};
   margin: 0 4px;
