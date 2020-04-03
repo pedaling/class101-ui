@@ -20,7 +20,7 @@ export default class SvgHome extends React.PureComponent<IconProps> {
         <path
           fillRule="evenodd"
           clipRule="evenodd"
-          d="M5.957 9.71A1 1 0 016 10v9h3v-4a1 1 0 011-1h4a1 1 0 011 1v4h3v-9a1 1 0 01.043-.29l-2.207-1.963L12 4.338 5.957 9.709zM4 11.45l-.336.297a1 1 0 01-1.328-1.494l9-8a1 1 0 011.328 0l4.5 4 4.5 4a1 1 0 01-1.328 1.494L20 11.45V20a1 1 0 01-1 1h-5a1 1 0 01-1-1v-4h-2v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-8.55z"
+          d="M1 11.5L2.5 13l1-.947V21H11v-4h2v4h7.5v-8.947l1 .947 1.5-1.5L12 1 1 11.5zm17.5-1.342L12 4l-6.5 6.158V19H9v-3a1 1 0 011-1h4a1 1 0 011 1v3h3.5v-8.842z"
           fill={this.props.fillColor}
         />
       </svg>

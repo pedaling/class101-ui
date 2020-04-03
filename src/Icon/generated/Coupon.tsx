@@ -18,9 +18,7 @@ export default class SvgCoupon extends React.PureComponent<IconProps> {
         viewBox="0 0 24 24"
       >
         <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M1 5a1 1 0 011-1h11a1 1 0 011 1 1 1 0 102 0 1 1 0 011-1h5a1 1 0 011 1v14a1 1 0 01-1 1h-5a1 1 0 01-1-1 1 1 0 10-2 0 1 1 0 01-1 1H2a1 1 0 01-1-1V5zm2 1v12h9.17a3.001 3.001 0 015.66 0H21V6h-3.17a3.001 3.001 0 01-5.66 0H3z"
+          d="M17.5 4c-.276 0-.494.227-.562.495a2 2 0 01-3.876 0C12.994 4.227 12.776 4 12.5 4H2a1 1 0 00-1 1v14a1 1 0 001 1h10.5c.276 0 .494-.227.562-.495a2 2 0 013.876 0c.068.268.286.495.562.495H22a1 1 0 001-1V5a1 1 0 00-1-1h-4.5z"
           fill={this.props.fillColor}
         />
       </svg>

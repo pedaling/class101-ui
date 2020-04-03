@@ -12,14 +12,22 @@ export default class SvgCheckCircleOutline extends React.PureComponent<IconProps
       <svg
         width={this.props.size}
         height={this.props.size}
+        fill="none"
         style={this.props.style}
         className={this.props.className}
         viewBox="0 0 24 24"
       >
         <path
-          fill={this.props.fillColor}
           fillRule="evenodd"
-          d="M12 4a8 8 0 100 16 8 8 0 000-16zm0 18C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1.5-6L17 9.5 15.5 8l-5 5-2-2L7 12.5l3.5 3.5z"
+          clipRule="evenodd"
+          d="M10.334 16.795l7.5-7.5-1.175-1.184-6.325 6.326-2.992-2.984-1.175 1.175 4.167 4.167z"
+          fill={this.props.fillColor}
+        />
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M21 12c0-4.967-4.033-9-9-9s-9 4.033-9 9 4.033 9 9 9 9-4.033 9-9zM12 1c6.072 0 11 4.928 11 11s-4.928 11-11 11S1 18.072 1 12 5.928 1 12 1z"
+          fill={this.props.fillColor}
         />
       </svg>
     );

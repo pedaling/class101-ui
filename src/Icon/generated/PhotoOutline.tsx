@@ -20,13 +20,7 @@ export default class SvgPhotoOutline extends React.PureComponent<IconProps> {
         <path
           fillRule="evenodd"
           clipRule="evenodd"
-          d="M4 3h16a1 1 0 011 1v16a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1zm1 2v14h14V5H5z"
-          fill={this.props.fillColor}
-        />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M9 12.5l2 2.01L14.5 10l3.5 6H6l3-3.5z"
+          d="M3 2h18c.552 0 1 .423 1 .944v18.112c0 .521-.448.944-1 .944H3c-.552 0-1-.423-1-.944V2.944C2 2.423 2.448 2 3 2zm1 2v16h16V4H4zm5 9.5l2 2.5 3-4 4.5 6h-13L9 13.5z"
           fill={this.props.fillColor}
         />
       </svg>

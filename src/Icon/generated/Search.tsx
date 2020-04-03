@@ -20,7 +20,7 @@ export default class SvgSearch extends React.PureComponent<IconProps> {
         <path
           fillRule="evenodd"
           clipRule="evenodd"
-          d="M16.33 15.219L21 19.5l-1.5 1.501-4.281-4.671a7.5 7.5 0 111.111-1.111zM10.5 16a5.5 5.5 0 100-11 5.5 5.5 0 000 11z"
+          d="M15.907 17.059a8.5 8.5 0 111.151-1.151L23 21l-2 2-5.093-5.941zM17 10.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
           fill={this.props.fillColor}
         />
       </svg>

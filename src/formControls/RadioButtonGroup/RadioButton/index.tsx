@@ -21,6 +21,7 @@ export interface RadioButtonProps extends RadioButtonContainerProps {
 }
 
 export class RadioButton extends PureComponent<RadioButtonProps> {
+  public static displayName = 'RadioButton';
   public static defaultProps: Partial<RadioButtonProps> = {
     stackingDirection: 'vertical',
     showBorder: true,

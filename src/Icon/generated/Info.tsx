@@ -20,7 +20,7 @@ export default class SvgInfo extends React.PureComponent<IconProps> {
         <path
           fillRule="evenodd"
           clipRule="evenodd"
-          d="M19.071 19.071C17.118 21.024 14.761 22 12 22s-5.118-.976-7.071-2.929C2.976 17.118 2 14.761 2 12s.976-5.118 2.929-7.071C6.882 2.976 9.239 2 12 2s5.118.976 7.071 2.929C21.024 6.882 22 9.239 22 12s-.976 5.118-2.929 7.071zM11 11v6h2v-6h-2zm0-4v2h2V7h-2z"
+          d="M23 12c0 6.075-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1s11 4.925 11 11zm-12 5v-6h2v6h-2zm0-8V7h2v2h-2z"
           fill={this.props.fillColor}
         />
       </svg>

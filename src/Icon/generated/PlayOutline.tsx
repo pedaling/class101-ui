@@ -20,7 +20,7 @@ export default class SvgPlayOutline extends React.PureComponent<IconProps> {
         <path
           fillRule="evenodd"
           clipRule="evenodd"
-          d="M17.984 12L7 5.723v12.554L17.984 12zM6.496 3.132A1 1 0 005 4v16a1 1 0 001.496.868l14-8a1 1 0 000-1.736l-14-8z"
+          d="M18.984 12L8 5.723v12.554L18.984 12zM7.496 3.132A1 1 0 006 4v16a1 1 0 001.496.868l14-8a1 1 0 000-1.736l-14-8z"
           fill={this.props.fillColor}
         />
       </svg>

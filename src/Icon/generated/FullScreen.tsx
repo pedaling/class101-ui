@@ -20,7 +20,7 @@ export default class SvgFullScreen extends React.PureComponent<IconProps> {
         <path
           fillRule="evenodd"
           clipRule="evenodd"
-          d="M4 10V4h6v2H6v4H4zm0 4h2v2.5L8.5 14l1.5 1.5L7.5 18H10v2H4v-6zm16-4h-2V7.5L15.5 10 14 8.5 16.5 6H14V4h6v6zm0 4v6h-6v-2h4v-4h2z"
+          d="M1 11V3h12v2H3v6H1zm0 3h2v3.5L6.5 14 8 15.5 4.5 19H8v2H1v-7zm22-4h-2V6.5L17.5 10 16 8.5 19.5 5H16V3h7v7zm0 3v8H11v-2h10v-6h2z"
           fill={this.props.fillColor}
         />
       </svg>

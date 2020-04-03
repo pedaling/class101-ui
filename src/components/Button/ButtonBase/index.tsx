@@ -14,7 +14,7 @@ interface ButtonBaseProps<ColorValue, SizeValue> {
   size: SizeValue;
   leftIcon?: React.ReactElement<IconProps>;
   rightIcon?: React.ReactElement<IconProps>;
-  type: string;
+  type?: 'button' | 'submit' | 'reset';
   loading?: boolean;
   to?: string;
   href?: string;

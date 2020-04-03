@@ -12,14 +12,16 @@ export default class SvgCheckCircle extends React.PureComponent<IconProps> {
       <svg
         width={this.props.size}
         height={this.props.size}
+        fill="none"
         style={this.props.style}
         className={this.props.className}
         viewBox="0 0 24 24"
       >
         <path
-          fill={this.props.fillColor}
           fillRule="evenodd"
-          d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm-1.666 14.795l7.5-7.5-1.175-1.184-6.325 6.326-2.992-2.984-1.175 1.175 4.167 4.167z"
+          clipRule="evenodd"
+          d="M12 1c6.072 0 11 4.928 11 11s-4.928 11-11 11S1 18.072 1 12 5.928 1 12 1zm5.834 8.295l-7.5 7.5-4.167-4.167 1.175-1.175 2.992 2.984 6.325-6.326 1.175 1.184z"
+          fill={this.props.fillColor}
         />
       </svg>
     );
