@@ -20,9 +20,10 @@ export default class SvgBellOutline extends React.PureComponent<IconProps> {
         <path
           fillRule="evenodd"
           clipRule="evenodd"
-          d="M17 11a5 5 0 00-10 0v6h10v-6zm-6.5-6.839V3.5a1.5 1.5 0 013 0v.661A7.003 7.003 0 0119 11v5.5l1 .5v2H4v-2l1-.5V11a7.003 7.003 0 015.5-6.839zM10 20h4a2 2 0 11-4 0z"
+          d="M12 2a8 8 0 00-8 8v5.764l-1 2V20h18v-2.236l-1-2V10a8 8 0 00-8-8zm-6 8a6 6 0 1112 0v6.236L18.882 18H5.118L6 16.236V10z"
           fill={this.props.fillColor}
         />
+        <path d="M12 23a2 2 0 01-2-2h4a2 2 0 01-2 2z" fill={this.props.fillColor} />
       </svg>
     );
   }

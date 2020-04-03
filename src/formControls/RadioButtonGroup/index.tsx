@@ -1,5 +1,5 @@
 import { isEqual, pick } from 'lodash';
-import React, { PureComponent } from 'react';
+import React, { isValidElement, PureComponent } from 'react';
 import styled from 'styled-components';
 
 import { RadioButton, RadioButtonContainerProps, RadioButtonProps } from './RadioButton';
@@ -21,9 +21,11 @@ export class RadioButtonGroup extends PureComponent<RadioButtonGroupProps, State
     const { children, value } = props;
 
     if (value) {
-      const index = React.Children.toArray<React.ComponentElement<RadioButtonProps, RadioButton>>(
-        children
-      ).findIndex(c => isEqual(c.props.value, value));
+      const index = React.Children.toArray(children).findIndex(c => {
+        if (isValidElement(c)) {
+          return isEqual(c.props.value, value);
+        }
+      });
       if (state.checkedIndex !== index) {
         return { checkedIndex: index };
       }
@@ -43,7 +45,9 @@ export class RadioButtonGroup extends PureComponent<RadioButtonGroupProps, State
   }
 
   private get arrayOfChildren() {
-    return React.Children.toArray<React.ComponentElement<RadioButtonProps, RadioButton>>(this.props.children);
+    return React.Children.toArray(this.props.children).filter(children =>
+      isValidElement(children)
+    ) as React.ComponentElement<RadioButtonProps, RadioButton>[];
   }
 
   private handleClickItem = (index: number) => {

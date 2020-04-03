@@ -17,14 +17,11 @@ export default class SvgPaperLine extends React.PureComponent<IconProps> {
         className={this.props.className}
         viewBox="0 0 24 24"
       >
+        <path d="M7 7v2h10V7H7zM17 11H7v2h10v-2zM17 15v2H7v-2h10z" fill={this.props.fillColor} />
         <path
           fillRule="evenodd"
           clipRule="evenodd"
-          d="M6 3a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H6zm12 2H6v14h12V5z"
-          fill={this.props.fillColor}
-        />
-        <path
-          d="M9 7h6a1 1 0 110 2H9a1 1 0 010-2zm0 4h6a1 1 0 110 2H9a1 1 0 110-2zm0 4h6a1 1 0 110 2H9a1 1 0 110-2z"
+          d="M3 1a1 1 0 00-1 1v20a1 1 0 001 1h18a1 1 0 001-1V2a1 1 0 00-1-1H3zm17 2H4v18h16V3z"
           fill={this.props.fillColor}
         />
       </svg>

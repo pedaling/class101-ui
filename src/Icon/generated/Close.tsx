@@ -18,7 +18,7 @@ export default class SvgClose extends React.PureComponent<IconProps> {
         viewBox="0 0 24 24"
       >
         <path
-          d="M17.59 5L12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41 17.59 5z"
+          d="M18.5 4L12 10.5 5.5 4 4 5.5l6.5 6.5L4 18.5 5.5 20l6.5-6.5 6.5 6.5 1.5-1.5-6.5-6.5L20 5.5 18.5 4z"
           fill={this.props.fillColor}
         />
       </svg>

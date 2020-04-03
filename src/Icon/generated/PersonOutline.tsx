@@ -20,7 +20,7 @@ export default class SvgPersonOutline extends React.PureComponent<IconProps> {
         <path
           fillRule="evenodd"
           clipRule="evenodd"
-          d="M8.443 12.832a6 6 0 117.114 0A8 8 0 0120 20v1H4v-1a8 8 0 014.443-7.168zM6 21h12v-1a6 6 0 00-12 0v1zm6-9a4 4 0 100-8 4 4 0 000 8z"
+          d="M8.443 12.832a6 6 0 117.114 0A8 8 0 0120 20v1h-2v-1a6 6 0 00-12 0v1H4v-1a8 8 0 014.443-7.168zM16 8a4 4 0 11-8 0 4 4 0 018 0z"
           fill={this.props.fillColor}
         />
       </svg>

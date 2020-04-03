@@ -20,7 +20,7 @@ export default class SvgPlay extends React.PureComponent<IconProps> {
         <path
           fillRule="evenodd"
           clipRule="evenodd"
-          d="M5.498 3.135a1 1 0 01.998-.003l14 8a1 1 0 010 1.736l-14 8A1 1 0 015 20V4a1 1 0 01.498-.865z"
+          d="M6.498 3.135a1 1 0 01.998-.003l14 8a1 1 0 010 1.736l-14 8A1 1 0 016 20V4a1 1 0 01.498-.865z"
           fill={this.props.fillColor}
         />
       </svg>

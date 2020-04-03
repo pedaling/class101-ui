@@ -20,7 +20,7 @@ export default class SvgPhoto extends React.PureComponent<IconProps> {
         <path
           fillRule="evenodd"
           clipRule="evenodd"
-          d="M4 3h16a1 1 0 011 1v16a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1zm4.5 10.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"
+          d="M3 2h18a1 1 0 011 1v18a1 1 0 01-1 1H3a1 1 0 01-1-1V3a1 1 0 011-1zm5.5 11.5l2.5 3 3.5-4.5 4.5 6H5l3.5-4.5z"
           fill={this.props.fillColor}
         />
       </svg>

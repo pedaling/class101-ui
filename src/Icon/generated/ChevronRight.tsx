@@ -12,11 +12,17 @@ export default class SvgChevronRight extends React.PureComponent<IconProps> {
       <svg
         width={this.props.size}
         height={this.props.size}
+        fill="none"
         style={this.props.style}
         className={this.props.className}
         viewBox="0 0 24 24"
       >
-        <path fill={this.props.fillColor} fillRule="evenodd" d="M8.5 18.5l6-6.5-6-6.5L10 4l7.5 8-7.5 8z" />
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M8.5 18.5l6-6.5-6-6.5L10 4l7.5 8-7.5 8-1.5-1.5z"
+          fill={this.props.fillColor}
+        />
       </svg>
     );
   }
