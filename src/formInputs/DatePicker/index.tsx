@@ -97,7 +97,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
   }
 
   public render() {
-    const { selectedDate, currentMonth, selectorType, modalVisible, secondDate, inputValue, className } = this.state;
+    const { selectedDate, currentMonth, selectorType, modalVisible, secondDate, inputValue } = this.state;
     const {
       locale,
       minDate: min,
@@ -108,6 +108,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
       inline,
       highlightWeekEnd,
       style,
+      className,
     } = this.props;
 
     return (
