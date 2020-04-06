@@ -35,7 +35,7 @@ export const Tooltip: React.FC<Props> = React.memo(props => {
     ...restProps
   } = props;
 
-  const [isOpen, setIsOpen] = useState(props.isOpen || false);
+  const [isOpen, setIsOpen] = useState(props.isOpen ?? false);
 
   const handleMouseEnter = useCallback(() => {
     if (!isOpen) {
@@ -48,6 +48,12 @@ export const Tooltip: React.FC<Props> = React.memo(props => {
       setIsOpen(false);
     }
   }, [isOpen, setIsOpen]);
+
+  useEffect(() => {
+    if (props.isOpen !== undefined && props.isOpen !== null) {
+      setIsOpen(props.isOpen);
+    }
+  }, [setIsOpen, props.isOpen]);
 
   const renderChild = useCallback(
     (ref: React.Ref<any>) => {
