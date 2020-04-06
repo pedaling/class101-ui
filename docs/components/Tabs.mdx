@@ -4,7 +4,7 @@ name: Tabs
 route: /components/tabs
 ---
 
-import { Playground, PropsTable } from 'docz';
+import { Playground, Props } from 'docz';
 import { Tabs, Badge, Icon, Colors, Theme } from '@class101/ui';
 import { PlayGroundContainer } from '../docsComponents';
 
@@ -14,11 +14,11 @@ import { PlayGroundContainer } from '../docsComponents';
 
 ### Tabs
 
-<PropsTable of={Tabs} />
+<Props of={Tabs} />
 
 ### Tabs.Item
 
-<PropsTable of={Tabs.Item} />
+<Props of={Tabs.Item} />
 
 ## Basic usage
 
@@ -57,25 +57,17 @@ import { PlayGroundContainer } from '../docsComponents';
 
 <Playground>
   {() => {
-    class Example extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = { currentValue: 'PREVIEW' };
-      }
-      render() {
-        return (
-          <Tabs value={this.state.currentValue} onChange={(value) => {this.setState({currentValue: value})}} >
-            <Tabs.Item value='PREVIEW' title="알림신청" panel={<div>알림신청</div>}/>
-            <Tabs.Item value='KLASS' title="클래스 및 패키지" panel={<div>클래스 및 패키지</div>}/>
-            <Tabs.Item value='CURRICLUM' title="커리큘럼" panel={<div>커리큘럼</div>}/>
-          </Tabs>
-        );
-      }
+    const [currentValue, setCurrentValue] = React.useState('PREVIEW')
+    const handleChange = (value) => {
+      setCurrentValue(value);
     }
-    return <Example />
-
-}}
-
+    return (
+      <Tabs value={currentValue} onChange={handleChange}>
+        <Tabs.Item value='PREVIEW' title="알림신청" panel={<div>알림신청</div>}/>
+        <Tabs.Item value='KLASS' title="클래스 및 패키지" panel={<div>클래스 및 패키지</div>}/>
+        <Tabs.Item value='CURRICLUM' title="커리큘럼" panel={<div>커리큘럼</div>}/>
+      </Tabs>
+    )}}
 </Playground>
 
 ## Width caption

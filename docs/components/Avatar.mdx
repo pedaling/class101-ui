@@ -4,7 +4,7 @@ name: Avatar
 route: /components/avatar
 ---
 
-import { Playground, PropsTable } from 'docz';
+import { Playground, Props } from 'docz';
 import { Avatar, AvatarSize, Icon, Colors, Badge } from '@class101/ui';
 import { IMAGE_URL } from './Avatar';
 
@@ -15,7 +15,7 @@ It can be used with a badge, and can display a number of notifications or a spec
 
 ## Props
 
-<PropsTable of={Avatar} />
+<Props of={Avatar} />
 
 ## Basic usage
 
@@ -33,16 +33,22 @@ Avatar의 icon에 들어가는 컴포넌트는 자동적으로 size={number}를 
 
 `<Badge />`나 `<Icon />` 컴포넌트를 넣는 것을 추천합니다.
 
+### Badge
+
 <Playground>
-  <Avatar
-    size={AvatarSize.LARGE}
-    src={IMAGE_URL}
-    icon={
+  {() => {
+    const badgeWithIcon = (
       <Badge backgroundColor={Colors.orange600} pill>
         <Icon.Crown fillColor={Colors.white} />
       </Badge>
-    }
-  />
+    );
+    return <Avatar size={AvatarSize.LARGE} src={IMAGE_URL} icon={badgeWithIcon} />;
+  }}
+</Playground>
+
+### Icon
+
+<Playground>
   <Avatar size={AvatarSize.SMALL} src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} />
   <Avatar size={64} src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} />
   <Avatar src={IMAGE_URL} icon={<Icon.Heart fillColor={Colors.orange600} />} iconPosition="bottom-left" />
@@ -78,12 +84,14 @@ iconPosition으로 아이콘이 위치할 곳을 정할 수 있습니다.
     icon={<Icon.Heart fillColor={Colors.orange600} />}
     onClick={() => alert('click1')}
     onIconClick={() => alert('click2')}
-    />
-
+  />
   <Avatar
     src={IMAGE_URL}
     icon={<Icon.Heart fillColor={Colors.orange600} />}
     onClick={() => alert('click1')}
-    onIconClick={(e) => {alert('click2'); e.stopPropagation()}}
-    />
+    onIconClick={e => {
+      alert('click2');
+      e.stopPropagation();
+    }}
+  />
 </Playground>

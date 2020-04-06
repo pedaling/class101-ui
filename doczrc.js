@@ -1,4 +1,4 @@
-import path from 'path';
+const ORANGE = '#FD7E14';
 
 export default {
   title: 'Class101 UI',
@@ -7,35 +7,44 @@ export default {
   dest: './public',
   public: '/pub',
   port: '3003',
+  menu: ['Class101 UI', 'Core', 'Components', 'Form Controls', 'Form Inputs', 'Overlays'],
+  typescript: true,
   themeConfig: {
-    showPlaygroundEditor: true,
     colors: {
-      primary: '#fd7e14',
+      text: '#3E4042',
+      background: '#fff',
+      primary: ORANGE,
+      secondary: '#7ABDD3',
+      accent: ORANGE,
+      highlight: ORANGE,
+      muted: '#EDEFF0',
+      link: {
+        color: ORANGE,
+      },
+      sidebar: {
+        navLinkActive: ORANGE,
+      },
+      header: {
+        button: {
+          bg: ORANGE,
+        },
+      },
+      props: {
+        highlight: ORANGE,
+      },
+    },
+    fonts: {
+      body:
+        '-apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Icons16", sans-serif',
+      heading:
+        '-apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Icons16", sans-serif',
     },
     styles: {
-      body: {
-        fontFamily:
-          '-apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Icons16", sans-serif',
-      },
-      h1: {
-        fontFamily: 'inherit',
-        fontWeight: 600,
-        lineHeight: '60px',
-        fontSize: 40,
-      },
+      h1: { fontFamily: 'inherit' },
+      h2: { fontFamily: 'inherit' },
+      h3: { fontFamily: 'inherit' },
+      div: { fontFamily: 'inherit' },
+      p: { fontFamily: 'inherit' },
     },
   },
-  menu: ['Class101 UI', 'Core', 'Components', 'Form Controls', 'Form Inputs', 'Overlays'],
-  wrapper: 'docs/Wrapper',
-  typescript: true,
-  modifyBundlerConfig: config => ({
-    ...config,
-    resolve: {
-      ...config.resolve,
-      alias: {
-        ...config.resolve.alias,
-        '@class101/ui': path.resolve('./src'),
-      },
-    },
-  }),
 };

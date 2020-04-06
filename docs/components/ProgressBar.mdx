@@ -5,7 +5,7 @@ route: /components/progress-bar
 ---
 
 import { useState, useCallback } from 'react';
-import { Playground, PropsTable } from 'docz';
+import { Playground, Props } from 'docz';
 import { ProgressBar, Button, ButtonGroup } from '@class101/ui';
 
 # Progress Bar
@@ -14,7 +14,7 @@ import { ProgressBar, Button, ButtonGroup } from '@class101/ui';
 
 ## Props
 
-<PropsTable of={ProgressBar} />
+<Props of={ProgressBar} />
 
 ## Basic usage
 
@@ -27,29 +27,26 @@ import { ProgressBar, Button, ButtonGroup } from '@class101/ui';
 <Playground>
   {() => {
     const [value, setValue] = useState(10);
-
     const handleClickToIncrease = useCallback(() => {
-      if(value < 100) {
+      if (value < 100) {
         setValue(value => value + 10);
       }
-    }, [value])
-
+    }, [value]);
     const handleClickToDecrease = useCallback(() => {
-      if(value > 0) {
+      if (value > 0) {
         setValue(value => value - 10);
       }
-    }, [value])
-
+    }, [value]);
     return (
-      <>
+      <React.Fragment>
         <ProgressBar value={value} />
-        <br/>
+        <br />
         <ButtonGroup>
           <Button onClick={handleClickToIncrease}>+ 10%</Button>
           <Button onClick={handleClickToDecrease}>- 10%</Button>
         </ButtonGroup>
-      </>
-    )
+      </React.Fragment>
+    );
   }}
 </Playground>
 

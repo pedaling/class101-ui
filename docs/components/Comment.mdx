@@ -4,7 +4,7 @@ name: Comment
 route: /components/comment
 ---
 
-import { Playground, PropsTable } from 'docz';
+import { Playground, Props } from 'docz';
 import { Comment, Avatar, Icon, Colors, TextButton, ButtonSize, Body2, Badge, CommentSize } from '@class101/ui';
 import { IMAGE_URL } from './Avatar';
 import { LARGE_CONTENT } from './Comment';
@@ -15,18 +15,22 @@ import { LARGE_CONTENT } from './Comment';
 
 ## Comment Props
 
-<PropsTable of={Comment} />
+<Props of={Comment} />
 
-### Comment Action Props ([IconButton Props](/components/icon-button#props)를 일부 상속받습니다.)
+### Comment Action Props 
 
-<PropsTable of={Comment.Action} />
+([IconButton Props](/components/icon-button#props)를 일부 상속받습니다.)
+
+<Props of={Comment.Action} />
 
 ## Basic usage
 
 Comment 컴포넌트
 
 <Playground>
-  <Comment
+  {() => {
+    return (
+<Comment
     avatar={
       <Avatar
         src={IMAGE_URL}
@@ -85,7 +89,7 @@ Comment 컴포넌트
       ]}
       content="또다른 대댓글"
     >
-      <Comment
+    <Comment
         avatar={<Avatar src={IMAGE_URL} />}
         name="피터"
         timeText="방금 전"
@@ -99,6 +103,8 @@ Comment 컴포넌트
       />
     </Comment>
   </Comment>
+    );
+  }}
 </Playground>
 
 ## Size
@@ -166,7 +172,6 @@ width는 기본값으로 `100%`입니다.
     <Comment avatar={<Avatar src={IMAGE_URL} />} name="피터" content="대댓글1" />
     <Comment avatar={<Avatar src={IMAGE_URL} />} name="피터" content="대댓글2" />
   </Comment>
-
   <Comment avatar={<Avatar src={IMAGE_URL} />} name="Class101" content="댓글1" showChildren={false}>
     <Comment avatar={<Avatar src={IMAGE_URL} />} name="피터" content="대댓글1" />
     <Comment avatar={<Avatar src={IMAGE_URL} />} name="피터" content="대댓글2" />

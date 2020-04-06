@@ -4,8 +4,8 @@ name: Pagination
 route: /components/pagination
 ---
 
-import { useState } from 'react'
-import { Playground, PropsTable } from 'docz';
+import { useState } from 'react';
+import { Playground, Props } from 'docz';
 import { Pagination } from '@class101/ui';
 import { PlayGroundContainer, ThemeProvider } from '../docsComponents';
 
@@ -15,7 +15,7 @@ Pagination is a component used to display a long list divided by one page.
 
 ## Props
 
-<PropsTable of={Pagination} />
+<Props of={Pagination} />
 
 ## Basic usage
 
@@ -26,16 +26,22 @@ Pagination is a component used to display a long list divided by one page.
 </Playground>
 
 ## With Many Datas
+
 <Playground>
   {() => {
     const [currentPageIndex, setCurrentPageIndex] = useState(0);
     return (
-      <Pagination currentPageIndex={currentPageIndex} totalPageIndex={8} onChange={number => setCurrentPageIndex(number)} />
-    )
+      <Pagination
+        currentPageIndex={currentPageIndex}
+        totalPageIndex={8}
+        onChange={number => setCurrentPageIndex(number)}
+      />
+    );
   }}
 </Playground>
 
 ## Assigning how many numbered index buttons to be shown
+
 You can assign how many numbered index buttons to be showing by passing down
 `number` to the `pageCountPerView` prop. It should be an odd
 number since the focused button needs to be centered
@@ -50,6 +56,6 @@ number since the focused button needs to be centered
         pageCountPerView={9}
         onChange={number => setCurrentPageIndex(number)}
       />
-    )
+    );
   }}
 </Playground>
