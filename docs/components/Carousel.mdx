@@ -441,62 +441,40 @@ slidesPerView 값이 1일 경우 기본적으로 spaceBetween 값은 0입니다.
 
 <Playground>
   {() => {
-    class Example extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = { currentIndex: 0 };
-      }
-      render() {
-        return (
-          <div>
-            <Carousel onChangeSlide={(index) => this.setState({ currentIndex: index})} activeIndex={this.state.currentIndex}>
-              <Slide><PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner></Slide>
-              <Slide><PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner></Slide>
-              <Slide><PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner></Slide>
-            </Carousel>
-            <div>
-              <button onClick={() => this.setState({ currentIndex: 0 })}>1 {this.state.currentIndex === 0 && 'active!!'}</button>
-              <button onClick={() => this.setState({ currentIndex: 1 })}>2 {this.state.currentIndex === 1 && 'active!!'}</button>
-              <button onClick={() => this.setState({ currentIndex: 2 })}>3 {this.state.currentIndex === 2 && 'active!!'}</button>
-            </div>
-          </div>
-        )
-      }
-    }
-    return <Example/>;
-  }}
-
+    const [currentIndex, setCurrentIndex] = React.useState(0)
+    return (
+      <div>
+        <Carousel onChangeSlide={setCurrentIndex} activeIndex={currentIndex}>
+          <Slide><PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner></Slide>
+          <Slide><PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner></Slide>
+          <Slide><PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner></Slide>
+        </Carousel>
+        <div>
+          <button onClick={() => setCurrentIndex(0)}>1 {currentIndex === 0 && 'active!!'}</button>
+          <button onClick={() => setCurrentIndex(1)}>2 {currentIndex === 1 && 'active!!'}</button>
+          <button onClick={() => setCurrentIndex(2)}>3 {currentIndex === 2 && 'active!!'}</button>
+        </div>
+      </div>
+    )}}
 </Playground>
 
 loop 모드
 
 <Playground>
   {() => {
-    class Example extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = { 
-          currentIndex: 0, 
-        };
-      }
-      render() {
-        return (
-          <div>
-            <Carousel onChangeSlide={(index) => this.setState({ currentIndex: index })} activeIndex={this.state.currentIndex} swiperProps={{loop: true}}>
-              <Slide><PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner></Slide>
-              <Slide><PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner></Slide>
-              <Slide><PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner></Slide>
-            </Carousel>
-            <div>
-              <button onClick={() => this.setState({ currentIndex: 0 })}>1 {this.state.currentIndex === 0 && 'active!!'}</button>
-              <button onClick={() => this.setState({ currentIndex: 1 })}>2 {this.state.currentIndex === 1 && 'active!!'}</button>
-              <button onClick={() => this.setState({ currentIndex: 2 })}>3 {this.state.currentIndex === 2 && 'active!!'}</button>
-            </div>
-          </div>
-        )
-      }
-    }
-    return <Example/>;
-  }}
-
+    const [currentIndex, setCurrentIndex] = React.useState(0)
+    return (
+      <div>
+        <Carousel onChangeSlide={setCurrentIndex} activeIndex={currentIndex} swiperProps={{loop: true}}>
+          <Slide><PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner></Slide>
+          <Slide><PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner></Slide>
+          <Slide><PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner></Slide>
+        </Carousel>
+        <div>
+          <button onClick={() => setCurrentIndex(0)}>1 {currentIndex === 0 && 'active!!'}</button>
+          <button onClick={() => setCurrentIndex(1)}>2 {currentIndex === 1 && 'active!!'}</button>
+          <button onClick={() => setCurrentIndex(2)}>3 {currentIndex === 2 && 'active!!'}</button>
+        </div>
+      </div>
+    )}}
 </Playground>

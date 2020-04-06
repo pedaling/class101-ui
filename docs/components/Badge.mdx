@@ -48,20 +48,12 @@ Badges are useful components for displaying small numbers or icons.
 ## Pill Badge
 
 <Playground>
-  <Badge pill>
-    <Icon.StarFull fillColor={Colors.white} />
-  </Badge>
-  <br />
-  <Badge pill>무료 배송</Badge>
+  <Badge pill={true}>무료 배송</Badge>
 </Playground>
 
 ## With Icon
 
 <Playground>
-  <Badge>
-    <Icon.StarFull fillColor={Colors.white} />
-  </Badge>
-  <br />
   <Badge icon={<Icon.ShippingTruck fillColor={Colors.white} />} pill={false} backgroundColor={Colors.green500}>
     무료 배송
   </Badge>
