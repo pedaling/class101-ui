@@ -42,12 +42,6 @@ export const OverlaidPortal = React.memo<OverlayProps>(props => {
     };
   }, [opened, dimmer]);
 
-  const handleCloseModal = useCallback(() => {
-    if (onClose) {
-      onClose();
-    }
-  }, [onClose]);
-
   if (!dimmer) {
     return <Portal container={document.body}>{children}</Portal>;
   }
@@ -60,7 +54,7 @@ export const OverlaidPortal = React.memo<OverlayProps>(props => {
         overlayColor={overlayColor}
         dimmer={dimmer}
         visible={opened}
-        onClick={closeable ? handleCloseModal : undefined}
+        onClick={closeable ? onClose : undefined}
       >
         {children}
       </Overlay>
