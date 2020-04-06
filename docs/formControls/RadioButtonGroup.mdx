@@ -5,7 +5,7 @@ route: /form-controls/radioButtonGroup
 ---
 
 import { RadioButtonGroup, RadioButton } from '@class101/ui';
-import { Playground, PropsTable } from 'docz';
+import { Playground, Props } from 'docz';
 
 # RadioButtonGroup
 
@@ -15,8 +15,7 @@ RadioButtonGroup 입니다.
 
 ### RadioButtonGroup
 
-<PropsTable of={RadioButtonGroup} />
-
+<Props of={RadioButtonGroup} />
 <Playground>
   <RadioButtonGroup value="test" stackingDirection="vertical" onChange={window.alert}>
     <RadioButton value="test">Option1</RadioButton>
@@ -31,7 +30,6 @@ RadioButtonGroup 입니다.
     <RadioButton value="test2">Option2</RadioButton>
   </RadioButtonGroup>
 </Playground>
-
 <Playground>
   <RadioButtonGroup stackingDirection="horizontal" onChange={window.alert}>
     <RadioButton value="test">Option1</RadioButton>

@@ -4,7 +4,7 @@ name: OverlaidPortal
 route: /overlays/overlaid-portal
 ---
 
-import { Playground, PropsTable } from 'docz';
+import { Playground, Props } from 'docz';
 import { Button, OverlaidPortal } from '@class101/ui';
 import styled from 'styled-components';
 
@@ -12,29 +12,22 @@ import styled from 'styled-components';
 
 ## Props
 
-<PropsTable of={OverlaidPortal} />
+<Props of={OverlaidPortal} />
 
 ## Basic usage
 
 <Playground>
-  {
-    () => {
-      function Example() {
-        const [opened, setOpened] = React.useState(false);
-
-        const openOverlay = () => setOpened(true);
-        const closeOverlay = () => setOpened(false);
-
-        return (
-          <>
-            <Button onClick={openOverlay}>Open Overlay</Button>
-            <OverlaidPortal opened={opened} onClose={closeOverlay}>
-              Overlay Children
-            </OverlaidPortal>
-          </>
-        )
-      }
-      return <Example />
-    }
-  }
+  {() => {
+    const [opened, setOpened] = React.useState(false);
+    const openOverlay = () => setOpened(true);
+    const closeOverlay = () => setOpened(false);
+    return (
+      <React.Fragment>
+        <Button onClick={openOverlay}>Open Overlay</Button>
+        <OverlaidPortal opened={opened} onClose={closeOverlay}>
+          Overlay Children
+        </OverlaidPortal>
+      </React.Fragment>
+    );
+  }}
 </Playground>

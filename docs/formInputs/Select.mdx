@@ -4,14 +4,14 @@ name: Select
 route: /form-inputs/select
 ---
 
-import { Playground, PropsTable } from 'docz';
+import { Playground, Props } from 'docz';
 import { Select } from '@class101/ui';
 
 # Select
 
 ## Props
 
-<PropsTable of={Select} />
+<Props of={Select} />
 
 ## Basic usage
 
@@ -20,6 +20,14 @@ import { Select } from '@class101/ui';
   <Select value="" placeholder="Select one" options={['Apple', 'Banana', 'Candy']} fill />
 </Playground>
 
+## Example
+
 <Playground>
-  <Select value="Success" options={[{ label: 'Success', value: 'Success' }, { label: 'Fail', value: 'Fail' }]} />
+  <Select
+    value="Success"
+    options={[
+      { label: 'Success', value: 'Success' },
+      { label: 'Fail', value: 'Fail' },
+    ]}
+  />
 </Playground>

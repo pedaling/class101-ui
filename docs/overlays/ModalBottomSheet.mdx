@@ -4,7 +4,7 @@ name: ModalBottomSheet
 route: /overlays/modal-bottom-sheet
 ---
 
-import { Playground, PropsTable } from 'docz';
+import { Playground, Props } from 'docz';
 import { ModalBottomSheet, Button } from '@class101/ui';
 import { imageSrc } from '../components/interface';
 import { LongContent } from './ModalBottomSheet';
@@ -13,7 +13,7 @@ import { LongContent } from './ModalBottomSheet';
 
 ## Props
 
-<PropsTable of={ModalBottomSheet} />
+<Props of={ModalBottomSheet} />
 
 ## Basic usage
 
@@ -38,28 +38,18 @@ import { LongContent } from './ModalBottomSheet';
 > 설정을 하지 않을 시 Modal이 state값과는 다르게 동작할 수 있습니다.
 
 <Playground>
-  {
-    () => {
-      function Example() {
-        const [opened, setOpened] = React.useState(false);
-
-        const openModal = () => setOpened(true);
-        const closeModal = () => setOpened(false);
-
-        return (
-          <>
-            <Button onClick={openModal}>Open Modal</Button>
-            <ModalBottomSheet title="State Modal" subTitle="this is state modal" opened={opened} cancelText="취소" onCancel={closeModal} onClose={closeModal}>
-              Modal Children
-            </ModalBottomSheet>
-          </>
-        )
-      }
-      return <Example />
-    }
-
-}
-
+  {() => {
+    const [opened, setOpened] = React.useState(false);
+    const openModal = () => setOpened(true);
+    const closeModal = () => setOpened(false);
+    return (
+      <>
+        <Button onClick={openModal}>Open Modal</Button>
+        <ModalBottomSheet title="State Modal" subTitle="this is state modal" opened={opened} cancelText="취소" onCancel={closeModal} onClose={closeModal}>
+          Modal Children
+        </ModalBottomSheet>
+      </>
+    )}}
 </Playground>
 
 ## Button Action
