@@ -1,3 +1,5 @@
+const path = require('path');
+
 const ORANGE = '#FD7E14';
 
 export default {
