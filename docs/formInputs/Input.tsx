@@ -1,5 +1,5 @@
-import React from 'react';
 import { Input } from '@class101/ui';
+import React from 'react';
 
 interface Props {
   /** 사이즈 */
