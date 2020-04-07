@@ -1,12 +1,13 @@
-import React, { useCallback, useState, useEffect } from 'react';
-import { TooltipColor, tooltipColors, tooltipBackgroundColors } from './colors';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Manager, Popper, Reference } from 'react-popper';
 import styled from 'styled-components';
-import { Manager, Reference, Popper } from 'react-popper';
-import { adjustPositionWithTooltip } from './utils';
+
 import { Position } from '../../core';
-import { body2, caption1 } from '../../core/TextStyles';
 import { elevation2 } from '../../core/ElevationStyles';
+import { body2, caption1 } from '../../core/TextStyles';
 import { Portal } from '../Portal';
+import { tooltipBackgroundColors, TooltipColor, tooltipColors } from './colors';
+import { adjustPositionWithTooltip } from './utils';
 
 interface Props {
   position?: Position;
@@ -35,29 +36,29 @@ export const Tooltip: React.FC<Props> = React.memo(props => {
     ...restProps
   } = props;
 
-  const [isOpen, setIsOpen] = useState(props.isOpen ?? false);
+  const [opened, setOpened] = useState(props.isOpen ?? false);
 
   const handleMouseEnter = useCallback(() => {
-    if (!isOpen) {
-      setIsOpen(true);
+    if (!opened) {
+      setOpened(true);
     }
-  }, [isOpen, setIsOpen]);
+  }, [opened, setOpened]);
 
   const handleMouseLeave = useCallback(() => {
-    if (isOpen) {
-      setIsOpen(false);
+    if (opened) {
+      setOpened(false);
     }
-  }, [isOpen, setIsOpen]);
+  }, [opened, setOpened]);
 
   useEffect(() => {
     if (props.isOpen !== undefined && props.isOpen !== null) {
-      setIsOpen(props.isOpen);
+      setOpened(props.isOpen);
     }
-  }, [setIsOpen, props.isOpen]);
+  }, [setOpened, props.isOpen]);
 
   const renderChild = useCallback(
     (ref: React.Ref<any>) => {
-      const props = {
+      const childProps = {
         ref,
         style: { display: fill ? 'flex' : 'inline-flex', ...(wrapperStyle || {}) },
         onMouseEnter: handleMouseEnter,
@@ -65,14 +66,14 @@ export const Tooltip: React.FC<Props> = React.memo(props => {
         ...restProps,
       };
 
-      return React.createElement(wrapperTagName, props, children);
+      return React.createElement(wrapperTagName, childProps, children);
     },
     [children, wrapperTagName, handleMouseEnter, handleMouseLeave, wrapperStyle, fill, restProps]
   );
 
   return (
     <Manager>
-      <Reference>{({ ref }) => renderChild(ref)}</Reference>{' '}
+      <Reference>{({ ref }) => renderChild(ref)}</Reference>
       <Portal container={document.body}>
         <Popper
           placement={adjustPositionWithTooltip(position)}
@@ -83,7 +84,7 @@ export const Tooltip: React.FC<Props> = React.memo(props => {
           }}
         >
           {({ ref, style, placement }) => (
-            <PopoverTarget isVisible={isOpen} ref={ref} style={{ ...style, ...(targetStyle || {}) }}>
+            <PopoverTarget isVisible={opened} ref={ref} style={{ ...style, ...(targetStyle || {}) }}>
               <PopoverContent tooltipColor={color} data-placement={placement}>
                 {contentTitle && <PopoverTitle>{contentTitle}</PopoverTitle>}
                 {content}

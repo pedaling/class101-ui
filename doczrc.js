@@ -1,6 +1,6 @@
-const path = require('path');
-
 const ORANGE = '#FD7E14';
+const FONT_FAMILY =
+  '-apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Icons16", sans-serif';
 
 export default {
   title: 'Class101 UI',
@@ -36,17 +36,8 @@ export default {
       },
     },
     fonts: {
-      body:
-        '-apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Icons16", sans-serif',
-      heading:
-        '-apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Icons16", sans-serif',
-    },
-    styles: {
-      h1: { fontFamily: 'inherit' },
-      h2: { fontFamily: 'inherit' },
-      h3: { fontFamily: 'inherit' },
-      div: { fontFamily: 'inherit' },
-      p: { fontFamily: 'inherit' },
+      body: FONT_FAMILY,
+      heading: FONT_FAMILY,
     },
   },
 };
