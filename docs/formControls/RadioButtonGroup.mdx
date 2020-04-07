@@ -18,39 +18,61 @@ RadioButtonGroup 입니다.
 ### Vertical Stacking
 
 <Playground>
-  <RadioButtonGroup value="test" stackingDirection="vertical" onChange={window.alert}>
-    <RadioButton value="test">Option1</RadioButton>
-    <RadioButton value="test2">Option2</RadioButton>
-  </RadioButtonGroup>
-  <RadioButtonGroup stackingDirection="vertical" textAlign="center" onChange={window.alert}>
-    <RadioButton value="test">Option1</RadioButton>
-    <RadioButton value="test2">Option2</RadioButton>
-  </RadioButtonGroup>
-  <RadioButtonGroup stackingDirection="vertical" showBorder={false} showDivider onChange={window.alert}>
-    <RadioButton value="test">Option1</RadioButton>
-    <RadioButton value="test2">Option2</RadioButton>
-  </RadioButtonGroup>
+  {() => {
+    const handleAlert = e => {
+      if (window) {
+        window.alert(e);
+      }
+    };
+    return (
+      <React.Fragment>
+        <RadioButtonGroup value="test" stackingDirection="vertical" onChange={handleAlert}>
+          <RadioButton value="test">Option1</RadioButton>
+          <RadioButton value="test2">Option2</RadioButton>
+        </RadioButtonGroup>
+        <RadioButtonGroup stackingDirection="vertical" textAlign="center" onChange={handleAlert}>
+          <RadioButton value="test">Option1</RadioButton>
+          <RadioButton value="test2">Option2</RadioButton>
+        </RadioButtonGroup>
+        <RadioButtonGroup stackingDirection="vertical" showBorder={false} showDivider onChange={handleAlert}>
+          <RadioButton value="test">Option1</RadioButton>
+          <RadioButton value="test2">Option2</RadioButton>
+        </RadioButtonGroup>
+      </React.Fragment>
+    );
+  }}
 </Playground>
 
 ### Horizontal Stacking
 
 <Playground>
-  <RadioButtonGroup stackingDirection="horizontal" onChange={window.alert}>
-    <RadioButton value="test">Option1</RadioButton>
-    <RadioButton value="test2">Option2</RadioButton>
-  </RadioButtonGroup>
-  <RadioButtonGroup stackingDirection="horizontal" showBorder={false} showDivider onChange={window.alert}>
-    <RadioButton value="test">Option1</RadioButton>
-    <RadioButton value="test2">Option2</RadioButton>
-  </RadioButtonGroup>
-  <RadioButtonGroup
-    stackingDirection="horizontal"
-    showBorder={false}
-    showDivider
-    textAlign="center"
-    onChange={window.alert}
-  >
-    <RadioButton value="test">Option1</RadioButton>
-    <RadioButton value="test2">Option2</RadioButton>
-  </RadioButtonGroup>
+  {() => {
+    const handleAlert = e => {
+      if (window) {
+        window.alert(e);
+      }
+    };
+    return (
+      <React.Fragment>
+        <RadioButtonGroup stackingDirection="horizontal" onChange={handleAlert}>
+          <RadioButton value="test">Option1</RadioButton>
+          <RadioButton value="test2">Option2</RadioButton>
+        </RadioButtonGroup>
+        <RadioButtonGroup stackingDirection="horizontal" showBorder={false} showDivider onChange={handleAlert}>
+          <RadioButton value="test">Option1</RadioButton>
+          <RadioButton value="test2">Option2</RadioButton>
+        </RadioButtonGroup>
+        <RadioButtonGroup
+          stackingDirection="horizontal"
+          showBorder={false}
+          showDivider
+          textAlign="center"
+          onChange={handleAlert}
+        >
+          <RadioButton value="test">Option1</RadioButton>
+          <RadioButton value="test2">Option2</RadioButton>
+        </RadioButtonGroup>
+      </React.Fragment>
+    );
+  }}
 </Playground>

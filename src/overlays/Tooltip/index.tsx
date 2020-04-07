@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Position } from '../../core';
 import { elevation2 } from '../../core/ElevationStyles';
 import { body2, caption1 } from '../../core/TextStyles';
+import { isClient } from '../../utils';
 import { Portal } from '../Portal';
 import { tooltipBackgroundColors, TooltipColor, tooltipColors } from './colors';
 import { adjustPositionWithTooltip } from './utils';
@@ -70,6 +71,10 @@ export const Tooltip: React.FC<Props> = React.memo(props => {
     },
     [children, wrapperTagName, handleMouseEnter, handleMouseLeave, wrapperStyle, fill, restProps]
   );
+
+  if (!isClient()) {
+    return null;
+  }
 
   return (
     <Manager>
