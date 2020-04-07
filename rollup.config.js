@@ -1,33 +1,35 @@
 import path from 'path';
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
+import resolve from 'rollup-plugin-node-resolve';
 import external from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
-import resolve from 'rollup-plugin-node-resolve';
-import url from 'rollup-plugin-url';
 import typescript from 'rollup-plugin-typescript2';
+import url from 'rollup-plugin-url';
 import visualizer from 'rollup-plugin-visualizer';
 
 import pkg from './package.json';
 
+const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 const getPlugins = format => [
   external(),
   postcss({
     modules: true,
   }),
   url(),
-  babel({
-    exclude: 'node_modules/**',
-  }),
-  resolve({
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
-  }),
   typescript({
     typescript: require('typescript'),
     objectHashIgnoreUnknownHack: true,
     ...(format === 'cjs' && { tsconfigOverride: { compilerOptions: { declaration: false } } }),
   }),
+  resolve({
+    extensions,
+  }),
   commonjs({ extensions: ['.js', '.ts'] }),
+  babel({
+    exclude: 'node_modules/**',
+    extensions,
+  }),
   process.env.RUNNING_ENV === 'analyze' && format === 'cjs'
     ? visualizer({
         sourcemap: false,

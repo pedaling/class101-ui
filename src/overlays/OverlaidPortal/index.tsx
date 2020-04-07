@@ -42,6 +42,10 @@ export const OverlaidPortal = React.memo<OverlayProps>(props => {
     };
   }, [opened, dimmer]);
 
+  if (!isClient()) {
+    return null;
+  }
+
   if (!dimmer) {
     return <Portal container={document.body}>{children}</Portal>;
   }

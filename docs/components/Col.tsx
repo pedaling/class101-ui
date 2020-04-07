@@ -1,5 +1,5 @@
 // @flow
-import { Col, Colors } from '@class101/ui';
+import { Col, Colors, ColProps } from '@class101/ui';
 import React from 'react';
 
 const hiddenStyle = {
@@ -9,10 +9,10 @@ const hiddenStyle = {
   backgroundClip: 'content-box',
 };
 
-export const Component = ({ lg, sm, smOffset, lgOffset, style, ...restProps }: Props) => (
+export const Component: React.FC<ColProps> = ({ lg, sm, smOffset, lgOffset, style, ...restProps }) => (
   <Col lg={lg} sm={sm} smOffset={smOffset} lgOffset={lgOffset} style={{ ...style, ...hiddenStyle }} {...restProps} />
 );
 
-export const NoHiddenStyleCol = ({ lg, sm, smOffset, lgOffset, style, ...restProps }: Props) => (
-  <Col lg={lg} sm={sm} style={{ ...styleMedia }} {...restProps} />
+export const NoHiddenStyleCol: React.FC<ColProps> = ({ lg, sm, smOffset, lgOffset, style, ...restProps }) => (
+  <Col lg={lg} sm={sm} style={{ ...style }} {...restProps} />
 );
