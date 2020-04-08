@@ -24,7 +24,7 @@ export interface ModalBottomSheetProps {
   cancelAttributes: Partial<ButtonProps>;
   closeable: boolean;
   hideScroll: boolean;
-  noSsr: boolean;
+  noSSR: boolean;
   removeContentPadding: boolean;
   modalStyle?: React.CSSProperties;
   contentStyle?: React.CSSProperties;
@@ -37,8 +37,6 @@ export interface ModalBottomSheetProps {
 interface State {
   mounted: boolean;
   opened: boolean;
-  scrollbarWidth: number;
-  viewPortHeight: number;
 }
 
 export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State> {
@@ -46,7 +44,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     zIndex: 3000,
     closeable: true,
     hideScroll: false,
-    noSsr: false,
+    noSSR: false,
     cancelAttributes: {},
     successAttributes: {},
     removeContentPadding: false,
@@ -62,16 +60,13 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
   }
 
   public readonly state: State = {
-    mounted: this.props.noSsr,
+    mounted: this.props.noSSR,
     opened: false,
-    scrollbarWidth: 0,
-    viewPortHeight: 0,
   };
 
   public componentDidMount() {
     this.setState({
       mounted: true,
-      scrollbarWidth: this.getScrollbarWidth(),
     });
   }
 
@@ -154,26 +149,6 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     this.setState({
       opened: false,
     });
-  };
-
-  private getScrollbarWidth = () => {
-    if (isServer()) {
-      return 0;
-    }
-    const outer = document.createElement('div');
-    outer.style.visibility = 'hidden';
-    outer.style.overflow = 'scroll';
-    outer.style.msOverflowStyle = 'scrollbar';
-    document.body.appendChild(outer);
-
-    const inner = document.createElement('div');
-    outer.appendChild(inner);
-
-    const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
-
-    outer.parentNode && outer.parentNode.removeChild(outer);
-
-    return scrollbarWidth;
   };
 
   private blockPropagation = (e: React.SyntheticEvent) => {
