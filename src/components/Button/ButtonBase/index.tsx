@@ -17,12 +17,9 @@ interface ButtonBaseProps<ColorValue, SizeValue> {
   type?: 'button' | 'submit' | 'reset';
   loading?: boolean;
   to?: string;
-  href?: string;
   onClick?: (event: React.MouseEvent<HTMLElement>) => void;
   children?: React.ReactNode;
   disabled?: boolean;
-  // deprecated
-  target?: string;
   className?: string;
   external?: boolean;
 }
@@ -64,8 +61,6 @@ export default class ButtonBase<ColorValue extends string, SizeValue extends str
       loading,
       spinner,
       to,
-      href,
-      target,
       external,
       anchorAttributes,
       buttonAttributes,
@@ -95,16 +90,10 @@ export default class ButtonBase<ColorValue extends string, SizeValue extends str
       </>
     );
 
-    if (to || href) {
+    if (to) {
       return (
         <AnchorButtonWrapper className={classNames(className, { disabled })}>
-          <LinkButton
-            to={to || href}
-            external={target === '_blank' || external}
-            icon-position={iconPosition}
-            {...anchorAttributes}
-            {...restProps}
-          >
+          <LinkButton to={to} external={external} icon-position={iconPosition} {...anchorAttributes} {...restProps}>
             {innerElements}
           </LinkButton>
         </AnchorButtonWrapper>

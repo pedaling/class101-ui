@@ -1,0 +1,40 @@
+---
+menu: Components
+name: AppProvider
+route: /components/app-provider
+---
+
+import { Playground, Props } from 'docz';
+import { AppProvider, AnchorButton } from '@class101/ui';
+
+# AppProvider
+
+The AppProvider component is used to globally share settings to be used in Class101 UI.
+
+## Props
+
+<Props of={AppProvider} />
+
+## With LinkComponent
+
+<Playground>
+  {() => {
+    const handleAchoreClick = () => {
+      if (window !== undefined) {
+        window.alert('Custom Link');
+      }
+    };
+    const customLink = ({ to, children }) => {
+      return (
+        <a href={to} onClick={handleAchoreClick}>
+          {children}
+        </a>
+      );
+    };
+    return (
+      <AppProvider linkComponent={customLink}>
+        <AnchorButton to="/">Click me</AnchorButton>
+      </AppProvider>
+    );
+  }}
+</Playground>

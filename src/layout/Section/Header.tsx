@@ -1,5 +1,4 @@
 import React, { memo, ReactNode, useCallback, useMemo } from 'react';
-import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 import { TextButton } from '../../components';
@@ -7,6 +6,7 @@ import { media } from '../../core/BreakPoints';
 import { gray300, gray600 } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
 import { BaseTypography, HeadlineTypoProps, Typo } from '../../core/Typography/BaseTypography';
+import { UnstyledLink } from '../../core/UnstyledLink';
 import { ChevronRight } from '../../Icon';
 
 export type TypographyProps = { typography?: Typo } & Partial<HeadlineTypoProps>;
@@ -16,13 +16,12 @@ interface Props {
   description?: string;
   typographyProps?: TypographyProps;
   to?: string;
-  href?: string;
-  target?: string;
+  external?: boolean;
   linkText?: string;
   onClick?: () => void;
 }
 
-export const Header = memo(({ title, description, typographyProps, to, href, target, linkText, onClick }: Props) => {
+export const Header = memo(({ title, description, typographyProps, to, external, linkText, onClick }: Props) => {
   const hasLinkText = useMemo(() => Boolean(linkText), [linkText]);
 
   const renderTitle = useCallback(() => {
@@ -47,34 +46,14 @@ export const Header = memo(({ title, description, typographyProps, to, href, tar
   }, [description, renderTitle]);
 
   const renderActionHeader = useCallback(() => {
-    const options: { rel?: string } = {};
-
-    if (target === '_blank') {
-      options.rel = 'noopener noreferrer';
-    }
-
     if (to) {
       return (
         <>
-          <Link to={to} target={target} {...options}>
+          <UnstyledLink to={to} external={external} onClick={onClick}>
             {renderLinkHeaderTop()}
-          </Link>
+          </UnstyledLink>
           {hasLinkText && (
-            <TextLink to={to} {...options}>
-              {linkText}
-            </TextLink>
-          )}
-        </>
-      );
-    }
-    if (href) {
-      return (
-        <>
-          <a href={href} target={target} {...options}>
-            {renderLinkHeaderTop()}
-          </a>
-          {hasLinkText && (
-            <TextLink href={href} target={target} {...options}>
+            <TextLink to={to} external={external} onClick={onClick}>
               {linkText}
             </TextLink>
           )}
@@ -82,19 +61,17 @@ export const Header = memo(({ title, description, typographyProps, to, href, tar
       );
     }
 
-    if (onClick) {
-      return (
-        <>
-          <ActionContainer onClick={onClick}>{renderLinkHeaderTop()}</ActionContainer>
-          {hasLinkText && <TextLink onClick={onClick}>{linkText}</TextLink>}
-        </>
-      );
-    }
-  }, [target, to, href, onClick, renderLinkHeaderTop, hasLinkText, linkText]);
+    return (
+      <>
+        <ActionContainer onClick={onClick}>{renderLinkHeaderTop()}</ActionContainer>
+        {hasLinkText && <TextLink onClick={onClick}>{linkText}</TextLink>}
+      </>
+    );
+  }, [to, external, onClick, renderLinkHeaderTop, hasLinkText, linkText]);
 
   return (
     <Container hasLinkText={hasLinkText}>
-      {to || href || onClick ? (
+      {to || onClick ? (
         renderActionHeader()
       ) : (
         <>

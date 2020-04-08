@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
+import { LinkBlock } from '../../core';
 import { gray100, gray900 } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
 import { ifDarkTheme } from '../../utils';
@@ -38,15 +38,14 @@ export interface CardProps {
   /** 타이틀 아래에 들어갈 추가 노드 */
   extraBottom?: React.ReactNode;
 
-  /** Link(React Router Dom)에 쓸 URL */
+  /** Link에 쓸 URL */
   to?: string;
 
-  /** a(Dom Element)에 쓸 URL */
-  href?: string;
+  /** 새 탭 열기 여부 */
+  external?: boolean;
 
   className?: string;
   children?: React.ReactNode;
-  target?: string;
   onClick?: () => void;
 }
 
@@ -66,17 +65,10 @@ export class Card extends PureComponent<CardProps> {
       extraBottom,
       children,
       to,
-      href,
-      target,
+      external,
       className,
       onClick,
     } = this.props;
-
-    const options: { rel?: string } = {};
-
-    if (target === '_blank') {
-      options.rel = 'noopener noreferrer';
-    }
 
     const imgElements = () => {
       if (typeof coverImage === 'string') {
@@ -103,23 +95,14 @@ export class Card extends PureComponent<CardProps> {
     if (to) {
       return (
         <Container className={className}>
-          <LinkCardInner to={to} target={target} {...options}>
+          <LinkCardInner to={to} external={external}>
             {innerElements}
           </LinkCardInner>
           {children}
         </Container>
       );
     }
-    if (href) {
-      return (
-        <Container className={className}>
-          <AnchorCardInner href={href} target={target} {...options}>
-            {innerElements}
-          </AnchorCardInner>
-          {children}
-        </Container>
-      );
-    }
+
     return (
       <Container className={className}>
         {innerElements}
@@ -177,7 +160,7 @@ const ExtraTopArea = styled.div`
 
 const ExtraBottomArea = styled.div``;
 
-const anchorCardStyle = css`
+const LinkCardInner = styled(LinkBlock)`
   img {
     transition: transform 0.5s, opacity 0.5s;
     opacity: 1;
@@ -190,12 +173,4 @@ const anchorCardStyle = css`
       transform: scale(1.1);
     }
   }
-`;
-
-const LinkCardInner = styled(Link)`
-  ${anchorCardStyle};
-`;
-
-const AnchorCardInner = styled.a`
-  ${anchorCardStyle};
 `;

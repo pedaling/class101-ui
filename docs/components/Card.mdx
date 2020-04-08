@@ -103,12 +103,12 @@ export enum CoverRatio {
   <Grid>
     <Row>
       <NoHiddenStyleCol lg={6}>
-        <Card title="아이패드 드로잉" coverImage={imageSrc} to={'/'} target={'_blank'}>
+        <Card title="아이패드 드로잉" coverImage={imageSrc} to={'/'} external>
           <Button style={{ marginTop: '24px' }}>Native Anchor</Button>
         </Card>
       </NoHiddenStyleCol>
       <NoHiddenStyleCol lg={6}>
-        <Card title="아이패드 드로잉" coverImage={imageSrc} href={'/'} target={'_blank'}>
+        <Card title="아이패드 드로잉" coverImage={imageSrc} href={'/'} external>
           <Button style={{ marginTop: '24px' }}>Link of React Router DOM</Button>
         </Card>
       </NoHiddenStyleCol>
@@ -126,7 +126,7 @@ export enum CoverRatio {
           title="아이패드 드로잉"
           coverImage={imageSrc}
           to={'/'}
-          target={'_blank'}
+          exernal
           extraTop={
             <div style={{ lineHeight: '0' }}>
               <Caption1 style={{ display: 'inline-block' }} fontWeight={'Bold'}>
@@ -148,7 +148,7 @@ export enum CoverRatio {
           title="아이패드 드로잉"
           coverImage={imageSrc}
           to={'/'}
-          target={'_blank'}
+          exernal
           extraBottom={<Caption1 color={Colors.gray400}>10월 12일 ~ 10월 24일</Caption1>}
         />
       </NoHiddenStyleCol>
