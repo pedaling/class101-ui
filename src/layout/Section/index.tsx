@@ -10,8 +10,7 @@ interface Props {
   titleStyle?: SectionTitleStyleProps;
   description?: string;
   to?: string;
-  href?: string;
-  target?: string;
+  external?: boolean;
   linkText?: string;
   onClick?: () => void;
   children?: ReactNode;
@@ -26,8 +25,7 @@ export class Section extends PureComponent<Props> {
       titleStyle,
       description,
       to,
-      href,
-      target,
+      external,
       onClick,
       children,
       className,
@@ -39,8 +37,7 @@ export class Section extends PureComponent<Props> {
         <Header
           title={title}
           to={to}
-          href={href}
-          target={target}
+          external={external}
           onClick={onClick}
           description={description}
           linkText={linkText}

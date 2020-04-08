@@ -29,7 +29,7 @@ titleStyle은 Typography, buttonStyle은 Button 컴포넌트의 속성을 참고
 
 ## Anchor or Action to Title
 
-`to`, `href`, `onClick`을 지정할 경우 섹션 헤더는 액션이 가능한 요소가 됩니다.  
+`to`, `onClick`을 지정할 경우 섹션 헤더는 액션이 가능한 요소가 됩니다.  
 BreakPoint에 따라 'lg'에서는 오버시에 나오고 'sm'에서는 항상 보이는 요소입니다.
 
 <Playground>
@@ -191,8 +191,8 @@ BreakPoint에 따라 'sm'에서는 사라집니다.
   <Section
     title="가장 완강률이 높은 클래스"
     description="알림신청 하신 분들에게는 할인 및 이벤트 소식과 제작 과정을 전해드려요."
-    href="https://ui.class101.dev"
-    target="_blank"
+    to="https://ui.class101.dev"
+    external
     linkText="전체 클래스 보기"
   >
     <GridList

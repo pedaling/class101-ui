@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { AnchorHTMLAttributes, ButtonHTMLAttributes } from 'react';
+import React, { AnchorHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 
 import { LinkBlock } from '../../../core/LinkBlock';

@@ -56,7 +56,7 @@ import { PlayGroundContainer, ThemeProvider } from '../docsComponents';
   <PlayGroundContainer>
     <Navigation pathname="/components/navigation">
       <Navigation.Section
-        items={[{ url: 'https://class101.net', shouldOpenWindow: true, label: '클래스101 가기', icon: <Icon.Home /> }]}
+        items={[{ url: '/components/navigation', external: true, label: '새 창 열기', icon: <Icon.Home /> }]}
       />
       <Navigation.Divider />
       <Navigation.Section
@@ -69,7 +69,7 @@ import { PlayGroundContainer, ThemeProvider } from '../docsComponents';
           {
             label: '클래스101',
             icon: <Icon.Gift />,
-            subItems: [{ label: '가기', url: 'https://class101.net', shouldOpenWindow: true }],
+            subItems: [{ label: '가기', url: 'https://class101.net' }],
           },
         ]}
       />
