@@ -1,0 +1,31 @@
+---
+menu: Overlays
+name: Modal
+route: /overlays/modal
+---
+
+import { Playground, Props } from 'docz';
+import { Modal, Button } from '@class101/ui';
+
+# Modal
+
+어드민에서만 사용됩니다. 모바일 사이즈를 고려하지 않았습니다.
+
+## Props
+
+<Props of={Modal} />
+
+## Basic usage
+
+<Playground>
+  <Modal
+    opener={<Button>Open Modal</Button>}
+    title="수강권 주문 상세"
+    subTitle="수강권을 한번 더 확인해 주세요."
+    successText="확인"
+    cancelText="취소"
+  >
+    I am Modal.
+  </Modal>
+</Playground>
+
