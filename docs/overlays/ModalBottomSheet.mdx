@@ -120,10 +120,10 @@ Modal에 이미지를 꽉차게 설정하고 싶을 때 `removeContentPadding`�
 
 ModalBottomSheet는 React Portal을 Server Side Rendering에 사용하기 위해 `componentDidMount`때 렌더링 됩니다.
 
-하지만 SSR을 사용하지 않으면 `noSsr`속성을 사용하여 다른 컴포넌트와 동시에 랜더링되게 할 수 있습니다.
+하지만 SSR을 사용하지 않으면 `noSSR`속성을 사용하여 다른 컴포넌트와 동시에 랜더링되게 할 수 있습니다.
 
 <Playground>
-  <ModalBottomSheet opener={<Button>Show Modal</Button>} title="Mounted Modal" successText="확인" noSsr>
+  <ModalBottomSheet opener={<Button>Show Modal</Button>} title="Mounted Modal" successText="확인" noSSR>
     content
   </ModalBottomSheet>
 </Playground>
