@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { useLinkContext } from '../../contexts';
 
-export interface UnstyledLinkProps {
+export interface LinkProps {
   children: React.ReactNode;
   className?: string;
   external?: boolean;
@@ -13,16 +13,16 @@ export interface UnstyledLinkProps {
 
 const httpRegExp = /^(http|https):\/\//;
 
-export const UnstyledLink = React.memo(
-  React.forwardRef<HTMLAnchorElement, UnstyledLinkProps>((props, ref) => {
+export const Link = React.memo(
+  React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
     const LinkComponent = useLinkContext();
 
     const { to, external, ...restProps } = props;
 
-    const shouldNewTabOpen = external || props.to.search(httpRegExp) !== -1;
+    const shouldOpenNewTab = external || props.to.search(httpRegExp) !== -1;
 
     const externalAttributes = {
-      ...(shouldNewTabOpen && { target: '_blank', rel: 'noopener noreferrer' }),
+      ...(shouldOpenNewTab && { target: '_blank', rel: 'noopener noreferrer' }),
     };
 
     if (LinkComponent) {

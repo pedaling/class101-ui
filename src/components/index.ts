@@ -1,4 +1,4 @@
-export * from './AppProvider';
+export * from './Class101UIProvider';
 export * from './Avatar';
 export * from './Badge';
 export * from './Button';

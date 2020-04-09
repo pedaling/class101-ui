@@ -4,9 +4,9 @@ import styled, { css } from 'styled-components';
 import { TextButton } from '../../components';
 import { media } from '../../core/BreakPoints';
 import { gray300, gray600 } from '../../core/Colors';
+import { Link } from '../../core/Link';
 import { body2 } from '../../core/TextStyles';
 import { BaseTypography, HeadlineTypoProps, Typo } from '../../core/Typography/BaseTypography';
-import { UnstyledLink } from '../../core/UnstyledLink';
 import { ChevronRight } from '../../Icon';
 
 export type TypographyProps = { typography?: Typo } & Partial<HeadlineTypoProps>;
@@ -49,9 +49,9 @@ export const Header = memo(({ title, description, typographyProps, to, external,
     if (to) {
       return (
         <>
-          <UnstyledLink to={to} external={external} onClick={onClick}>
+          <Link to={to} external={external} onClick={onClick}>
             {renderLinkHeaderTop()}
-          </UnstyledLink>
+          </Link>
           {hasLinkText && (
             <TextLink to={to} external={external} onClick={onClick}>
               {linkText}
