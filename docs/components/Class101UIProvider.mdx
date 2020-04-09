@@ -1,19 +1,19 @@
 ---
 menu: Components
-name: AppProvider
+name: Class101UIProvider
 route: /components/app-provider
 ---
 
 import { Playground, Props } from 'docz';
-import { AppProvider, AnchorButton } from '@class101/ui';
+import { Class101UIProvider, AnchorButton } from '@class101/ui';
 
-# AppProvider
+# Class101UIProvider
 
-The AppProvider component is used to globally share settings to be used in Class101 UI.
+The Class101UIProvider component is used to globally share settings to be used in Class101 UI.
 
 ## Props
 
-<Props of={AppProvider} />
+<Props of={Class101UIProvider} />
 
 ## With LinkComponent
 
@@ -32,9 +32,9 @@ The AppProvider component is used to globally share settings to be used in Class
       );
     };
     return (
-      <AppProvider linkComponent={customLink}>
+      <Class101UIProvider linkComponent={customLink}>
         <AnchorButton to="/">Click me</AnchorButton>
-      </AppProvider>
+      </Class101UIProvider>
     );
   }}
 </Playground>

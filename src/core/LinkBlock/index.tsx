@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { UnstyledLink } from '../../core/UnstyledLink';
+import { Link } from '../Link';
 
 export interface LinkBlockProps {
   to: string;
@@ -11,6 +11,6 @@ export interface LinkBlockProps {
   onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 
-export const LinkBlock = styled(UnstyledLink)<LinkBlockProps>`
+export const LinkBlock = styled(Link)<LinkBlockProps>`
   display: block;
 `;

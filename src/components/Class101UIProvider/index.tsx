@@ -6,6 +6,6 @@ interface Props {
   children?: ReactNode;
   linkComponent?: LinkComponent;
 }
-export const AppProvider: FC<Props> = ({ children, linkComponent }) => {
+export const Class101UIProvider: FC<Props> = ({ children, linkComponent }) => {
   return <LinkContext.Provider value={linkComponent}>{children}</LinkContext.Provider>;
 };
