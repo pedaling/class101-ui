@@ -11,6 +11,8 @@ import visualizer from 'rollup-plugin-visualizer';
 import pkg from './package.json';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
+const dependencies = ['classnames', 'react-popper', 'swiper/dist/js/swiper.esm.js', 'polished', 'path-to-regexp'];
+
 const getPlugins = format => [
   external(),
   postcss({
@@ -19,7 +21,6 @@ const getPlugins = format => [
   url(),
   typescript({
     typescript: require('typescript'),
-    objectHashIgnoreUnknownHack: true,
     ...(format === 'cjs' && { tsconfigOverride: { compilerOptions: { declaration: false } } }),
   }),
   resolve({
@@ -49,7 +50,7 @@ export default [
       format: 'esm',
       sourcemap: true,
     },
-    external: ['classnames', 'react-popper', 'swiper/dist/js/swiper.esm.js', 'polished', 'path-to-regexp'],
+    external: dependencies,
     plugins: getPlugins('esm'),
     preserveModules: true,
   },
@@ -60,7 +61,7 @@ export default [
       format: 'cjs',
       sourcemap: true,
     },
-    external: ['classnames', 'react-popper', 'swiper/dist/js/swiper.esm.js', 'polished', 'path-to-regexp'],
+    external: dependencies,
     plugins: getPlugins('cjs'),
   },
 ];
