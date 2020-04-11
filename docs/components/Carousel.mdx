@@ -295,7 +295,7 @@ slidesPerView 값이 1일 경우 기본적으로 spaceBetween 값은 0입니다.
 
 <Playground>
   {() => {
-    const [currentIndex, setCurrentIndex] = React.useState(0)
+    const [currentIndex, setCurrentIndex] = React.useState(0);
     return (
       <div>
         <Carousel onChangeSlide={setCurrentIndex} activeIndex={currentIndex}>
@@ -311,17 +311,18 @@ slidesPerView 값이 1일 경우 기본적으로 spaceBetween 값은 0입니다.
           <button onClick={() => setCurrentIndex(2)}>3 {currentIndex === 2 && 'active!!'}</button>
         </div>
       </div>
-    )}}
+    );
+  }}
 </Playground>
 
 loop 모드
 
 <Playground>
   {() => {
-    const [currentIndex, setCurrentIndex] = React.useState(0)
+    const [currentIndex, setCurrentIndex] = React.useState(0);
     return (
       <div>
-        <Carousel onChangeSlide={setCurrentIndex} activeIndex={currentIndex} swiperProps={{loop: true}}>
+        <Carousel onChangeSlide={setCurrentIndex} activeIndex={currentIndex} swiperProps={{ loop: true }}>
           {[1, 2, 3].map((order) => (
             <Slide key={`ViewAllButton-${order}`}>
               <PlayGroundBanner backgroundColor={Colors[`red${order * 100}`]}>배너{order}</PlayGroundBanner>
@@ -334,5 +335,6 @@ loop 모드
           <button onClick={() => setCurrentIndex(2)}>3 {currentIndex === 2 && 'active!!'}</button>
         </div>
       </div>
-    )}}
+    );
+  }}
 </Playground>
