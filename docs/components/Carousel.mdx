@@ -21,21 +21,13 @@ Swiper를 캡슐화한 컴포넌트 입니다.
 
 <Playground>
   <Carousel swiperProps={{ freeMode: true }}>
-    <Slide>
-      <PlayGroundBanner fill backgroundColor={Colors.red100}>
-        배너1
-      </PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner fill backgroundColor={Colors.red200}>
-        배너2
-      </PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner fill backgroundColor={Colors.red300}>
-        배너3
-      </PlayGroundBanner>
-    </Slide>
+    {[1, 2, 3].map((order) => (
+      <Slide key={`ViewAllButton-${order}`}>
+        <PlayGroundBanner fill backgroundColor={Colors[`red${order * 100}`]}>
+          배너{order}
+        </PlayGroundBanner>
+      </Slide>
+    ))}
   </Carousel>
 </Playground>
 
@@ -63,42 +55,13 @@ enum CarouselNavigationPosition {
       smSlidesPerView={2}
       pagination
     >
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-      </Slide>
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-      </Slide>
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-      </Slide>
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
-      </Slide>
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
-      </Slide>
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
-      </Slide>
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.blue100}>배너7</PlayGroundBanner>
-      </Slide>
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.blue200}>배너8</PlayGroundBanner>
-      </Slide>
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.blue300}>배너9</PlayGroundBanner>
-      </Slide>
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.blue400}>배너10</PlayGroundBanner>
-      </Slide>
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.blue500}>배너11</PlayGroundBanner>
-      </Slide>
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.blue600}>배너12</PlayGroundBanner>
-      </Slide>
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((order) => (
+        <Slide key={`ViewAllButton-${order}`}>
+          <PlayGroundBanner backgroundColor={Colors[`blue${(((order - 1) % 6) + 1) * 100}`]}>
+            배너{order}
+          </PlayGroundBanner>
+        </Slide>
+      ))}
     </Carousel>
   </Section>
 </Playground>
@@ -112,24 +75,11 @@ enum CarouselNavigationPosition {
     smSlidesPerView={2}
     pagination
   >
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
-    </Slide>
+    {[1, 2, 3, 4, 5, 6].map((order) => (
+      <Slide key={`ViewAllButton-${order}`}>
+        <PlayGroundBanner backgroundColor={Colors[`blue${order * 100}`]}>배너{order}</PlayGroundBanner>
+      </Slide>
+    ))}
   </Carousel>
 </Playground>
 
@@ -141,24 +91,11 @@ enum CarouselNavigationPosition {
     paginationTheme={CarouselPaginationTheme.Light}
     pagination
   >
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
-    </Slide>
+    {[1, 2, 3, 4, 5, 6].map((order) => (
+      <Slide key={`ViewAllButton-${order}`}>
+        <PlayGroundBanner backgroundColor={Colors[`blue${order * 100}`]}>배너{order}</PlayGroundBanner>
+      </Slide>
+    ))}
   </Carousel>
 </Playground>
 
@@ -166,26 +103,16 @@ enum CarouselNavigationPosition {
 
 <Playground>
   <Carousel navigationPosition={CarouselNavigationPosition.BottomRightIn} containerContentMaxWidth={560}>
-    <Slide>
+    <Slide key={`ViewAllButton-1`}>
       <PlayGroundBanner backgroundColor={Colors.blue100} style={{ display: 'flex', justifyContent: 'center' }}>
         <div style={{ width: '100%', maxWidth: 560, backgroundColor: 'yellow', height: 100 }}>배너1</div>
       </PlayGroundBanner>
     </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
-    </Slide>
+    {[2, 3, 4, 5, 6].map((order) => (
+      <Slide key={`ViewAllButton-${order}`}>
+        <PlayGroundBanner backgroundColor={Colors[`blue${order * 100}`]}>배너{order}</PlayGroundBanner>
+      </Slide>
+    ))}
   </Carousel>
 </Playground>
 
@@ -205,21 +132,13 @@ enum CarouselPaginationTheme {
     swiperProps={{ freeMode: false }}
     pagination
   >
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.red100} onClick={() => alert('clicked')}>
-        배너1
-      </PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.red200} onClick={() => alert('clicked')}>
-        배너2
-      </PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.red300} onClick={() => alert('clicked')}>
-        배너3
-      </PlayGroundBanner>
-    </Slide>
+    {[1, 2, 3].map((order) => (
+      <Slide key={`ViewAllButton-${order}`}>
+        <PlayGroundBanner backgroundColor={Colors[`red${order * 100}`]} onClick={() => alert('clicked')}>
+          배너{order}
+        </PlayGroundBanner>
+      </Slide>
+    ))}
   </Carousel>
   <Carousel
     navigationPosition={CarouselNavigationPosition.BottomRightIn}
@@ -227,15 +146,11 @@ enum CarouselPaginationTheme {
     swiperProps={{ freeMode: false }}
     pagination
   >
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-    </Slide>
+    {[1, 2, 3].map((order) => (
+      <Slide key={`ViewAllButton-${order}`}>
+        <PlayGroundBanner backgroundColor={Colors[`blue${order * 100}`]}>배너{order}</PlayGroundBanner>
+      </Slide>
+    ))}
   </Carousel>
 </Playground>
 
@@ -248,15 +163,11 @@ enum CarouselPaginationTheme {
     swiperProps={{ freeMode: true, loop: true }}
     pagination
   >
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-    </Slide>
+    {[1, 2, 3].map((order) => (
+      <Slide key={`ViewAllButton-${order}`}>
+        <PlayGroundBanner backgroundColor={Colors[`blue${order * 100}`]}>배너{order}</PlayGroundBanner>
+      </Slide>
+    ))}
   </Carousel>
   <Carousel
     navigationPosition={CarouselNavigationPosition.BottomRightIn}
@@ -264,15 +175,11 @@ enum CarouselPaginationTheme {
     swiperProps={{ freeMode: false, loop: true }}
     pagination
   >
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-    </Slide>
+    {[1, 2, 3].map((order) => (
+      <Slide key={`ViewAllButton-${order}`}>
+        <PlayGroundBanner backgroundColor={Colors[`blue${order * 100}`]}>배너{order}</PlayGroundBanner>
+      </Slide>
+    ))}
   </Carousel>
 </Playground>
 
@@ -292,15 +199,11 @@ enum CarouselPaginationTheme {
     }}
     pagination
   >
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-    </Slide>
+    {[1, 2, 3].map((order) => (
+      <Slide key={`ViewAllButton-${order}`}>
+        <PlayGroundBanner backgroundColor={Colors[`blue${order * 100}`]}>배너{order}</PlayGroundBanner>
+      </Slide>
+    ))}
   </Carousel>
 </Playground>
 
@@ -319,30 +222,11 @@ enum CarouselPaginationTheme {
     slideToClickedSlide
     pagination
   >
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.blue700}>배너7</PlayGroundBanner>
-    </Slide>
+    {[1, 2, 3, 4, 5, 6, 7].map((order) => (
+      <Slide key={`ViewAllButton-${order}`}>
+        <PlayGroundBanner backgroundColor={Colors[`blue${order * 100}`]}>배너{order}</PlayGroundBanner>
+      </Slide>
+    ))}
   </Carousel>
 </Playground>
 
@@ -356,24 +240,11 @@ enum CarouselPaginationTheme {
       smSlidesPerView={2}
       pagination
     >
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-      </Slide>
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-      </Slide>
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-      </Slide>
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
-      </Slide>
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
-      </Slide>
-      <Slide>
-        <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
-      </Slide>
+      {[1, 2, 3, 4, 5, 6].map((order) => (
+        <Slide key={`ViewAllButton-${order}`}>
+          <PlayGroundBanner backgroundColor={Colors[`blue${order * 100}`]}>배너{order}</PlayGroundBanner>
+        </Slide>
+      ))}
       <Carousel.ViewAllButton />
     </Carousel>
   </Section>
@@ -394,24 +265,11 @@ enum CarouselPaginationTheme {
         smSlidesSideOffset={24}
         pagination
       >
-        <Slide>
-          <PlayGroundBanner backgroundColor={Colors.blue100}>배너1</PlayGroundBanner>
-        </Slide>
-        <Slide>
-          <PlayGroundBanner backgroundColor={Colors.blue200}>배너2</PlayGroundBanner>
-        </Slide>
-        <Slide>
-          <PlayGroundBanner backgroundColor={Colors.blue300}>배너3</PlayGroundBanner>
-        </Slide>
-        <Slide>
-          <PlayGroundBanner backgroundColor={Colors.blue400}>배너4</PlayGroundBanner>
-        </Slide>
-        <Slide>
-          <PlayGroundBanner backgroundColor={Colors.blue500}>배너5</PlayGroundBanner>
-        </Slide>
-        <Slide>
-          <PlayGroundBanner backgroundColor={Colors.blue600}>배너6</PlayGroundBanner>
-        </Slide>
+        {[1, 2, 3, 4, 5, 6].map((order) => (
+          <Slide key={`ViewAllButton-${order}`}>
+            <PlayGroundBanner backgroundColor={Colors[`blue${order * 100}`]}>배너{order}</PlayGroundBanner>
+          </Slide>
+        ))}
       </Carousel>
     </PlayGroundSectionCarouselContent>
   </Section>
@@ -423,15 +281,11 @@ slidesPerView 값이 1일 경우 기본적으로 spaceBetween 값은 0입니다.
 
 <Playground>
   <Carousel lgSpaceBetween lgSlidesSideOffset={32} smSpaceBetween smSlidesSideOffset={24}>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner>
-    </Slide>
-    <Slide>
-      <PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner>
-    </Slide>
+    {[1, 2, 3].map((order) => (
+      <Slide key={`ViewAllButton-${order}`}>
+        <PlayGroundBanner backgroundColor={Colors[`red${order * 100}`]}>배너{order}</PlayGroundBanner>
+      </Slide>
+    ))}
   </Carousel>
 </Playground>
 
@@ -445,9 +299,11 @@ slidesPerView 값이 1일 경우 기본적으로 spaceBetween 값은 0입니다.
     return (
       <div>
         <Carousel onChangeSlide={setCurrentIndex} activeIndex={currentIndex}>
-          <Slide><PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner></Slide>
-          <Slide><PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner></Slide>
-          <Slide><PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner></Slide>
+          {[1, 2, 3].map((order) => (
+            <Slide key={`ViewAllButton-${order}`}>
+              <PlayGroundBanner backgroundColor={Colors[`red${order * 100}`]}>배너{order}</PlayGroundBanner>
+            </Slide>
+          ))}
         </Carousel>
         <div>
           <button onClick={() => setCurrentIndex(0)}>1 {currentIndex === 0 && 'active!!'}</button>
@@ -466,9 +322,11 @@ loop 모드
     return (
       <div>
         <Carousel onChangeSlide={setCurrentIndex} activeIndex={currentIndex} swiperProps={{loop: true}}>
-          <Slide><PlayGroundBanner backgroundColor={Colors.red100}>배너1</PlayGroundBanner></Slide>
-          <Slide><PlayGroundBanner backgroundColor={Colors.red200}>배너2</PlayGroundBanner></Slide>
-          <Slide><PlayGroundBanner backgroundColor={Colors.red300}>배너3</PlayGroundBanner></Slide>
+          {[1, 2, 3].map((order) => (
+            <Slide key={`ViewAllButton-${order}`}>
+              <PlayGroundBanner backgroundColor={Colors[`red${order * 100}`]}>배너{order}</PlayGroundBanner>
+            </Slide>
+          ))}
         </Carousel>
         <div>
           <button onClick={() => setCurrentIndex(0)}>1 {currentIndex === 0 && 'active!!'}</button>
