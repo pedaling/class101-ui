@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useLinkContext } from '../../contexts';
 
 export interface LinkProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
   external?: boolean;
   to: string;

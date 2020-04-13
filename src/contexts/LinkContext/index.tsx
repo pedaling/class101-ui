@@ -3,7 +3,7 @@ import React from 'react';
 export interface LinkComponentProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   children?: React.ReactNode;
   /** link to */
-  to?: string;
+  to: string;
   external?: boolean;
   [key: string]: any;
 }
