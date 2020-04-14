@@ -1,6 +1,6 @@
 {
   "name": "@class101/ui",
-  "version": "v9.0.0-rc5",
+  "version": "v9.0.0-rc6",
   "description": "A React-based UI Component Library, powered by Class101.",
   "author": "Class101 Co, LTD.",
   "license": "MIT",
@@ -93,7 +93,6 @@
     "rollup-plugin-typescript2": "^0.27.0",
     "rollup-plugin-url": "^3.0.1",
     "rollup-plugin-visualizer": "^4.0.4",
-
     "styled-components": "4.4.1",
     "tslib": "^1.9.3",
     "tslint": "^6.1.1",
