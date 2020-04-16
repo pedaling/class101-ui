@@ -37,6 +37,8 @@ export interface ModalProps {
 interface State {
   mounted: boolean;
   opened: boolean;
+  scrollbarWidth: number;
+  viewPortHeight: number;
 }
 
 export class Modal extends PureComponent<ModalProps, State> {
@@ -53,6 +55,8 @@ export class Modal extends PureComponent<ModalProps, State> {
   public readonly state: State = {
     mounted: this.props.noSSR,
     opened: false,
+    scrollbarWidth: 0,
+    viewPortHeight: 0,
   };
 
   public static getDerivedStateFromProps(nextProps: ModalProps, prevState: State): Partial<State> | null {
@@ -67,6 +71,7 @@ export class Modal extends PureComponent<ModalProps, State> {
   public componentDidMount() {
     this.setState({
       mounted: true,
+      scrollbarWidth: this.addScrollbarWidth(),
     });
   }
 
@@ -143,6 +148,26 @@ export class Modal extends PureComponent<ModalProps, State> {
         opened: true,
       });
     }
+  };
+
+  private addScrollbarWidth = () => {
+    if (isServer()) {
+      return 0;
+    }
+    const outer = document.createElement('div');
+    outer.style.visibility = 'hidden';
+    outer.style.overflow = 'scroll';
+    outer.style.msOverflowStyle = 'scrollbar';
+    document.body.appendChild(outer);
+
+    const inner = document.createElement('div');
+    outer.appendChild(inner);
+
+    const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
+
+    outer.parentNode && outer.parentNode.removeChild(outer);
+
+    return scrollbarWidth;
   };
 
   private hideModal = () => {
