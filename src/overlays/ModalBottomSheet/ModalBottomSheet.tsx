@@ -7,7 +7,8 @@ import { gray600, gray800, white } from '../../core/Colors';
 import { elevation5 } from '../../core/ElevationStyles';
 import { Body2, Headline3 } from '../../core/Typography';
 import { Close } from '../../Icon';
-import { isServer } from '../../utils';
+import { isServer, isClient } from '../../utils';
+import { fixScrollbar } from '../../utils/fixScrollbar';
 import { OverlaidPortal } from '../OverlaidPortal';
 
 export interface ModalBottomSheetProps {
@@ -32,13 +33,12 @@ export interface ModalBottomSheetProps {
   onClose?: () => void;
   onSuccess?: (close: () => void) => void;
   onCancel?: (close: () => void) => void;
+  scrollbarWidth: number;
 }
 
 interface State {
   mounted: boolean;
   opened: boolean;
-  scrollbarWidth: number;
-  viewPortHeight: number;
 }
 
 export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State> {
@@ -50,6 +50,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     cancelAttributes: {},
     successAttributes: {},
     removeContentPadding: false,
+    scrollbarWidth: fixScrollbar(),
   };
 
   public static getDerivedStateFromProps(nextProps: ModalBottomSheetProps, prevState: State): Partial<State> | null {
@@ -64,15 +65,24 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
   public readonly state: State = {
     mounted: this.props.noSSR,
     opened: false,
-    scrollbarWidth: 0,
-    viewPortHeight: 0,
   };
 
   public componentDidMount() {
     this.setState({
       mounted: true,
-      scrollbarWidth: this.addScrollbarWidth(),
     });
+  }
+
+  public componentDidUpdate(prevProps: ModalBottomSheetProps, prevState: State) {
+    const { opened } = this.state;
+
+    if (prevState.opened !== opened) {
+      if (opened) {
+        this.disableBodyScroll();
+      } else {
+        this.enableBodyScroll();
+      }
+    }
   }
 
   public render() {
@@ -98,6 +108,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     if (!mounted || isServer()) {
       return opener || <React.Fragment />;
     }
+
     if (!successAttributes.color) {
       successAttributes.color = ButtonColor.ORANGE;
     }
@@ -140,24 +151,18 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     );
   }
 
-  private addScrollbarWidth = () => {
-    if (isServer()) {
-      return 0;
+  private disableBodyScroll = () => {
+    if (isClient()) {
+      document.body.style.paddingRight = `${this.props.scrollbarWidth}px`;
+      document.body.style.overflow = 'hidden';
     }
-    const outer = document.createElement('div');
-    outer.style.visibility = 'hidden';
-    outer.style.overflow = 'scroll';
-    outer.style.msOverflowStyle = 'scrollbar';
-    document.body.appendChild(outer);
+  };
 
-    const inner = document.createElement('div');
-    outer.appendChild(inner);
-
-    const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
-
-    outer.parentNode && outer.parentNode.removeChild(outer);
-
-    return scrollbarWidth;
+  private enableBodyScroll = () => {
+    if (isClient()) {
+      document.body.style.paddingRight = '';
+      document.body.style.overflow = '';
+    }
   };
 
   private showModal = () => {

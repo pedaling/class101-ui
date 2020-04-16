@@ -7,7 +7,7 @@ import { gray600, gray800, white } from '../../core/Colors';
 import { elevation5 } from '../../core/ElevationStyles';
 import { Body2, Headline3 } from '../../core/Typography';
 import { Close } from '../../Icon';
-import { isServer } from '../../utils';
+import { isServer, fixScrollbar, isClient } from '../../utils';
 import { OverlaidPortal } from '../OverlaidPortal';
 
 export interface ModalProps {
@@ -32,13 +32,12 @@ export interface ModalProps {
   onClose?: () => void;
   onSuccess?: (close: () => void) => void;
   onCancel?: (close: () => void) => void;
+  scrollbarWidth: number;
 }
 
 interface State {
   mounted: boolean;
   opened: boolean;
-  scrollbarWidth: number;
-  viewPortHeight: number;
 }
 
 export class Modal extends PureComponent<ModalProps, State> {
@@ -50,13 +49,12 @@ export class Modal extends PureComponent<ModalProps, State> {
     cancelAttributes: {},
     successAttributes: {},
     removeContentPadding: false,
+    scrollbarWidth: fixScrollbar(),
   };
 
   public readonly state: State = {
     mounted: this.props.noSSR,
     opened: false,
-    scrollbarWidth: 0,
-    viewPortHeight: 0,
   };
 
   public static getDerivedStateFromProps(nextProps: ModalProps, prevState: State): Partial<State> | null {
@@ -71,8 +69,19 @@ export class Modal extends PureComponent<ModalProps, State> {
   public componentDidMount() {
     this.setState({
       mounted: true,
-      scrollbarWidth: this.addScrollbarWidth(),
     });
+  }
+
+  public componentDidUpdate(prevProps: ModalProps, prevState: State) {
+    const { opened } = this.state;
+
+    if (prevState.opened !== opened) {
+      if (opened) {
+        this.disableBodyScroll();
+      } else {
+        this.enableBodyScroll();
+      }
+    }
   }
 
   public render() {
@@ -140,6 +149,20 @@ export class Modal extends PureComponent<ModalProps, State> {
     );
   }
 
+  private disableBodyScroll = () => {
+    if (isClient()) {
+      document.body.style.paddingRight = `${this.props.scrollbarWidth}px`;
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  private enableBodyScroll = () => {
+    if (isClient()) {
+      document.body.style.paddingRight = '';
+      document.body.style.overflow = '';
+    }
+  };
+
   private showModal = () => {
     const { onOpen } = this.props;
 
@@ -148,26 +171,6 @@ export class Modal extends PureComponent<ModalProps, State> {
         opened: true,
       });
     }
-  };
-
-  private addScrollbarWidth = () => {
-    if (isServer()) {
-      return 0;
-    }
-    const outer = document.createElement('div');
-    outer.style.visibility = 'hidden';
-    outer.style.overflow = 'scroll';
-    outer.style.msOverflowStyle = 'scrollbar';
-    document.body.appendChild(outer);
-
-    const inner = document.createElement('div');
-    outer.appendChild(inner);
-
-    const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
-
-    outer.parentNode && outer.parentNode.removeChild(outer);
-
-    return scrollbarWidth;
   };
 
   private hideModal = () => {
