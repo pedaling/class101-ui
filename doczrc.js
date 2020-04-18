@@ -8,6 +8,14 @@ export default {
   src: './docs/',
   dest: './public',
   public: '/pub',
+  docgenConfig: {
+    searchPatterns: [
+      'docs/**/*.{ts,tsx,js,jsx,mjs}',
+      'src/**/*.{ts,tsx,js,jsx,mjs}',
+      '!**/node_modules',
+      '!**/doczrc.js',
+    ],
+  },
   port: '3003',
   menu: ['Class101 UI', 'Core', 'Components', 'Form Controls', 'Form Inputs', 'Overlays'],
   typescript: true,
