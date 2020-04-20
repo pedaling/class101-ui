@@ -10,8 +10,8 @@ export default {
   public: '/pub',
   docgenConfig: {
     searchPatterns: [
-      'docs/**/*.{ts,tsx,js,jsx,mjs}',
       'src/**/*.{ts,tsx,js,jsx,mjs}',
+      'docs/**/*.{ts,tsx,js,jsx,mjs}',
       '!**/node_modules',
       '!**/doczrc.js',
     ],
