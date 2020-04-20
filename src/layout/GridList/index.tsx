@@ -1,16 +1,16 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, useRef } from 'react';
 import styled from 'styled-components';
 
 import { media } from '../../core/BreakPoints';
 import { HTMLDivProps } from '../../interfaces/props';
-import { createUniqIDGenerator } from '../../utils/createUniqIDGenerator';
 
+const memoComponent: <T>(c: T) => T = React.memo;
 const sizeToPercent = (column?: number) => 100 / (column || 1);
-const generateID = createUniqIDGenerator('grid-list-');
 
 type Column = 1 | 2 | 3 | 4 | 6 | 12;
-interface Props {
-  items: any[] | ReadonlyArray<any>;
+interface Props<T> {
+  items: T[] | ReadonlyArray<T>;
+  keyName: string;
   renderItem: any;
   smColumn: Column;
   lgColumn?: Column;
@@ -18,15 +18,21 @@ interface Props {
   divAttributes?: HTMLDivProps;
 }
 
-export class GridList extends PureComponent<Props> {
-  public render() {
-    const { items, renderItem, smColumn, lgColumn, className, divAttributes } = this.props;
-
+export const GridList = memoComponent(
+  <T extends { [key in string]: any }>({
+    items,
+    renderItem,
+    smColumn,
+    lgColumn,
+    className,
+    divAttributes,
+    keyName,
+  }: Props<T>) => {
     return (
       <Container className={className} {...divAttributes}>
         <GridListUl smColumn={smColumn}>
           {items.concat().map((item, index, arr) => (
-            <GridListItem key={generateID()} smColumn={smColumn} lgColumn={lgColumn}>
+            <GridListItem key={item[keyName]} smColumn={smColumn} lgColumn={lgColumn}>
               {renderItem(item, index, arr)}
             </GridListItem>
           ))}
@@ -34,9 +40,11 @@ export class GridList extends PureComponent<Props> {
       </Container>
     );
   }
-}
+);
 
-const Container = styled.div``;
+const Container = styled.div`
+  overflow: hidden;
+`;
 
 const GridListUl = styled.ul<{ smColumn?: Column }>`
   overflow: hidden;
@@ -50,6 +58,7 @@ const GridListUl = styled.ul<{ smColumn?: Column }>`
   flex-wrap: wrap;
   justify-content: flex-start;
   align-content: stretch;
+  -webkit-padding-start: 0;
 
   ${media.sm`
     margin-right: -4px;

@@ -123,13 +123,14 @@ const ActionContainer = styled.div`
 
 const Container = styled.div<{ hasLinkText?: boolean }>`
   margin-bottom: 16px;
+  display: flex;
   ${props =>
     props.hasLinkText
-      ? `display: flex;
+      ? `
         justify-content: space-between;
         align-items: flex-end;
       `
-      : `display: inline-flex;
+      : `
         flex-direction: column
   `};
   a {
