@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { media } from '../../core/BreakPoints';
 import { HTMLDivProps } from '../../interfaces/props';
-import { keyExtractor, memoComponent } from '../../utils';
+import { defaultKeyExtractor, memoComponent } from '../../utils';
 
 const sizeToPercent = (column?: number) => 100 / (column || 1);
 
@@ -12,18 +12,18 @@ export interface GridProps<T> {
   className?: string;
   divAttributes?: HTMLDivProps;
   items: T[] | ReadonlyArray<T>;
-  keyExtractor?: (item: T, index: number) => string;
+  keyExtractor?: (item: T, index: number) => string | number;
   lgColumn?: Column;
   renderItem: any;
   smColumn: Column;
 }
 
 export const GridList = memoComponent(
-  <T extends { [key in string]: any }>({
+  <T extends any>({
     className,
     divAttributes,
     items,
-    keyExtractor: extractor,
+    keyExtractor = defaultKeyExtractor,
     lgColumn,
     renderItem,
     smColumn,
@@ -32,7 +32,7 @@ export const GridList = memoComponent(
       <Container className={className} {...divAttributes}>
         <GridListUl smColumn={smColumn}>
           {items.concat().map((item, index, arr) => (
-            <GridListItem key={keyExtractor(item, index, extractor)} smColumn={smColumn} lgColumn={lgColumn}>
+            <GridListItem key={keyExtractor(item, index)} smColumn={smColumn} lgColumn={lgColumn}>
               {renderItem(item, index, arr)}
             </GridListItem>
           ))}
