@@ -1,5 +1,3 @@
-type Item = any;
-
-export function defaultKeyExtractor(item: Item, index: number) {
+export function defaultKeyExtractor(item: unknown, index: number) {
   return index;
 }
