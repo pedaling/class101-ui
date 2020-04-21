@@ -126,9 +126,20 @@ import ko from '@class101/ui/formInputs/DatePicker/locales/ko_KR';
 
 ## highlightWeekEnd
 
-`highlightWeekEnd`를 통해 주말을 표시할지 선택할 수 있습니다.
+`highlightWeekEnd`를 통해 주말을 하이라이트 색으로 표시할지 선택할 수 있습니다.
 
 <Playground>
   <DatePicker alwaysShow inline />
   <DatePicker highlightWeekEnd={false} alwaysShow inline />
+</Playground>
+
+## adjustInputWidth
+
+`adjustInputWidth`를 통해 input의 너비를 DatePicker와 똑같이 맞출지 정할 수 있습니다.
+
+기본값은 `true`입니다.
+
+<Playground>
+  <DatePicker adjustInputWidth={false} style={{ verticalAlign: 'top' }} inline />
+  <DatePicker alwaysShow inline />
 </Playground>
