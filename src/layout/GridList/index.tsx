@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 
 import { media } from '../../core/BreakPoints';
@@ -11,11 +11,11 @@ export type Column = 1 | 2 | 3 | 4 | 6 | 12;
 export interface GridProps<T> {
   className?: string;
   divAttributes?: HTMLDivProps;
-  items: T[] | ReadonlyArray<T>;
+  items: ReadonlyArray<T>;
   keyExtractor?: (item: T, index: number) => string | number;
   lgColumn?: Column;
-  renderItem: any;
   smColumn: Column;
+  renderItem: (item: T, index: number) => ReactElement;
 }
 
 export const GridList = memoComponent(
@@ -25,15 +25,15 @@ export const GridList = memoComponent(
     items,
     keyExtractor = defaultKeyExtractor,
     lgColumn,
-    renderItem,
     smColumn,
+    renderItem,
   }: GridProps<T>) => {
     return (
       <Container className={className} {...divAttributes}>
         <GridListUl smColumn={smColumn}>
-          {items.concat().map((item, index, arr) => (
+          {items.map((item, index) => (
             <GridListItem key={keyExtractor(item, index)} smColumn={smColumn} lgColumn={lgColumn}>
-              {renderItem(item, index, arr)}
+              {renderItem(item, index)}
             </GridListItem>
           ))}
         </GridListUl>
