@@ -58,7 +58,6 @@ const GridListUl = styled.ul<{ smColumn?: Column }>`
   flex-wrap: wrap;
   justify-content: flex-start;
   align-content: stretch;
-  -webkit-padding-start: 0;
 
   ${media.sm`
     margin-right: -4px;
