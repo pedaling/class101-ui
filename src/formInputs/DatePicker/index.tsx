@@ -1,17 +1,17 @@
+import { HTMLInputProps } from 'interfaces/props';
 import React, { PureComponent, createRef } from 'react';
-import { DatePickerLocale, DatePickerSelectorType } from './interface';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { IconButton, Button } from '../../components/Button';
 import { white, gray800 } from '../../core/Colors';
+import { elevation2 } from '../../core/ElevationStyles';
+import { body1 } from '../../core/TextStyles';
+import { ChevronLeft, ChevronRight } from '../../Icon';
+import { isClient } from '../../utils';
+import { Input, InputProps } from '../Input';
+import { DatePickerLocale, DatePickerSelectorType } from './interface';
 import ko_KR from './locales/ko_KR';
 import { MonthCalendar } from './MonthCalendar';
 import { MonthSelector } from './MonthSelector';
-import { Input, InputProps } from '../Input';
-import { ChevronLeft, ChevronRight } from '../../Icon';
-import { IconButton, Button } from '../../components/Button';
-import { elevation2 } from '../../core/ElevationStyles';
-import { body1 } from '../../core/TextStyles';
-import { HTMLInputProps } from 'interfaces/props';
-import { isClient } from '../../utils';
 
 interface DateRange {
   start?: Date;
@@ -32,6 +32,7 @@ export interface DatePickerProps {
   readonly inputAttributes?: HTMLInputProps & InputProps;
   readonly highlightWeekEnd: boolean;
   readonly style?: React.CSSProperties;
+  readonly adjustInputWidth: boolean;
   className?: string;
 }
 
@@ -56,6 +57,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     rangeValue: {},
     alwaysShow: false,
     highlightWeekEnd: true,
+    adjustInputWidth: true,
   };
 
   private readonly modalRef = createRef<HTMLDivElement>();
@@ -103,6 +105,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
       minDate: min,
       maxDate: max,
       inputAttributes,
+      adjustInputWidth,
       alwaysShow,
       useRange,
       inline,
@@ -115,6 +118,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
       <Container inline={inline} style={style} className={className}>
         <PickerInput
           type="text"
+          adjustInputWidth={adjustInputWidth}
           value={inputValue}
           onChange={this.handleChangeInput}
           onBlur={this.handleBlurInput}
@@ -255,7 +259,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
         this.setState(
           {
             selectedDate: firstDate,
-            secondDate: secondDate,
+            secondDate,
             currentMonth: this.getDateMonth(second),
           },
           this.calculateInputValue
@@ -339,6 +343,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
         return this.setState(
           {
             secondDate: date,
+            modalVisible: false,
           },
           this.calculateInputValue
         );
@@ -355,6 +360,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
       this.setState(
         {
           selectedDate: date,
+          modalVisible: false,
         },
         this.calculateInputValue
       );
@@ -431,6 +437,10 @@ const NavText = styled(Button)`
   font-weight: bold;
 `;
 
-const PickerInput = styled(Input)`
-  width: ${DatePickerWidth}px;
+const PickerInput = styled(Input)<{ adjustInputWidth: boolean }>`
+  ${props =>
+    props.adjustInputWidth &&
+    css`
+      width: ${DatePickerWidth}px;
+    `}
 `;
