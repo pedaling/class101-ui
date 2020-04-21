@@ -1,38 +1,38 @@
-import React, { PureComponent, useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import { media } from '../../core/BreakPoints';
 import { HTMLDivProps } from '../../interfaces/props';
+import { keyExtractor, memoComponent } from '../../utils';
 
-const memoComponent: <T>(c: T) => T = React.memo;
 const sizeToPercent = (column?: number) => 100 / (column || 1);
 
-type Column = 1 | 2 | 3 | 4 | 6 | 12;
-interface Props<T> {
-  items: T[] | ReadonlyArray<T>;
-  keyName: string;
-  renderItem: any;
-  smColumn: Column;
-  lgColumn?: Column;
+export type Column = 1 | 2 | 3 | 4 | 6 | 12;
+export interface GridProps<T> {
   className?: string;
   divAttributes?: HTMLDivProps;
+  items: T[] | ReadonlyArray<T>;
+  keyExtractor?: (item: T, index: number) => string;
+  lgColumn?: Column;
+  renderItem: any;
+  smColumn: Column;
 }
 
 export const GridList = memoComponent(
   <T extends { [key in string]: any }>({
-    items,
-    renderItem,
-    smColumn,
-    lgColumn,
     className,
     divAttributes,
-    keyName,
-  }: Props<T>) => {
+    items,
+    keyExtractor: extractor,
+    lgColumn,
+    renderItem,
+    smColumn,
+  }: GridProps<T>) => {
     return (
       <Container className={className} {...divAttributes}>
         <GridListUl smColumn={smColumn}>
           {items.concat().map((item, index, arr) => (
-            <GridListItem key={item[keyName]} smColumn={smColumn} lgColumn={lgColumn}>
+            <GridListItem key={keyExtractor(item, index, extractor)} smColumn={smColumn} lgColumn={lgColumn}>
               {renderItem(item, index, arr)}
             </GridListItem>
           ))}
