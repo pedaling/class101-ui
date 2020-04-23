@@ -7,7 +7,8 @@ import { gray600, gray800, white } from '../../core/Colors';
 import { elevation5 } from '../../core/ElevationStyles';
 import { Body2, Headline3 } from '../../core/Typography';
 import { Close } from '../../Icon';
-import { isServer } from '../../utils';
+import { isServer, isClient } from '../../utils';
+import { fixScrollbar } from '../../utils/fixScrollbar';
 import { OverlaidPortal } from '../OverlaidPortal';
 
 export interface ModalBottomSheetProps {
@@ -32,6 +33,7 @@ export interface ModalBottomSheetProps {
   onClose?: () => void;
   onSuccess?: (close: () => void) => void;
   onCancel?: (close: () => void) => void;
+  scrollbarWidth: number;
 }
 
 interface State {
@@ -48,6 +50,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     cancelAttributes: {},
     successAttributes: {},
     removeContentPadding: false,
+    scrollbarWidth: fixScrollbar(),
   };
 
   public static getDerivedStateFromProps(nextProps: ModalBottomSheetProps, prevState: State): Partial<State> | null {
@@ -68,6 +71,18 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     this.setState({
       mounted: true,
     });
+  }
+
+  public componentDidUpdate(prevProps: ModalBottomSheetProps, prevState: State) {
+    const { opened } = this.state;
+
+    if (prevState.opened !== opened) {
+      if (opened) {
+        this.disableBodyScroll();
+      } else {
+        this.enableBodyScroll();
+      }
+    }
   }
 
   public render() {
@@ -93,6 +108,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     if (!mounted || isServer()) {
       return opener || <React.Fragment />;
     }
+
     if (!successAttributes.color) {
       successAttributes.color = ButtonColor.ORANGE;
     }
@@ -134,6 +150,20 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
       </>
     );
   }
+
+  private disableBodyScroll = () => {
+    if (isClient()) {
+      document.body.style.paddingRight = `${this.props.scrollbarWidth}px`;
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  private enableBodyScroll = () => {
+    if (isClient()) {
+      document.body.style.paddingRight = '';
+      document.body.style.overflow = '';
+    }
+  };
 
   private showModal = () => {
     const { onOpen } = this.props;

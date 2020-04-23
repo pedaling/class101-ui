@@ -7,7 +7,7 @@ import { gray600, gray800, white } from '../../core/Colors';
 import { elevation5 } from '../../core/ElevationStyles';
 import { Body2, Headline3 } from '../../core/Typography';
 import { Close } from '../../Icon';
-import { isServer } from '../../utils';
+import { isServer, fixScrollbar, isClient } from '../../utils';
 import { OverlaidPortal } from '../OverlaidPortal';
 
 export interface ModalProps {
@@ -32,6 +32,7 @@ export interface ModalProps {
   onClose?: () => void;
   onSuccess?: (close: () => void) => void;
   onCancel?: (close: () => void) => void;
+  scrollbarWidth: number;
 }
 
 interface State {
@@ -48,6 +49,7 @@ export class Modal extends PureComponent<ModalProps, State> {
     cancelAttributes: {},
     successAttributes: {},
     removeContentPadding: false,
+    scrollbarWidth: fixScrollbar(),
   };
 
   public readonly state: State = {
@@ -68,6 +70,18 @@ export class Modal extends PureComponent<ModalProps, State> {
     this.setState({
       mounted: true,
     });
+  }
+
+  public componentDidUpdate(prevProps: ModalProps, prevState: State) {
+    const { opened } = this.state;
+
+    if (prevState.opened !== opened) {
+      if (opened) {
+        this.disableBodyScroll();
+      } else {
+        this.enableBodyScroll();
+      }
+    }
   }
 
   public render() {
@@ -134,6 +148,20 @@ export class Modal extends PureComponent<ModalProps, State> {
       </>
     );
   }
+
+  private disableBodyScroll = () => {
+    if (isClient()) {
+      document.body.style.paddingRight = `${this.props.scrollbarWidth}px`;
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  private enableBodyScroll = () => {
+    if (isClient()) {
+      document.body.style.paddingRight = '';
+      document.body.style.overflow = '';
+    }
+  };
 
   private showModal = () => {
     const { onOpen } = this.props;
