@@ -92,7 +92,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     this.calculateInputValue();
   }
 
-  componentDidUpdate(prevProps: Readonly<DatePickerProps>, prevState: Readonly<DatePickerState>) {
+  public componentDidUpdate(prevProps: Readonly<DatePickerProps>, prevState: Readonly<DatePickerState>) {
     if (
       prevProps.value?.getTime() !== this.props.value?.getTime() ||
       prevProps.rangeValue.start?.getTime() !== this.props.rangeValue.start?.getTime() ||
