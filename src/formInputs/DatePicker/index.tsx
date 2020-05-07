@@ -92,6 +92,16 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     this.calculateInputValue();
   }
 
+  componentDidUpdate(prevProps: Readonly<DatePickerProps>, prevState: Readonly<DatePickerState>) {
+    if (
+      prevProps.value?.getTime() !== this.props.value?.getTime() ||
+      prevProps.rangeValue.start?.getTime() !== this.props.rangeValue.start?.getTime() ||
+      prevProps.rangeValue.end?.getTime() !== this.props.rangeValue.end?.getTime()
+    ) {
+      this.calculateInputValue();
+    }
+  }
+
   public componentWillUnmount() {
     if (isClient()) {
       document.removeEventListener('mousedown', this.handleClickOutside);
