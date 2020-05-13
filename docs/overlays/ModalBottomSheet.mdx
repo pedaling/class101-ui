@@ -5,7 +5,7 @@ route: /overlays/modal-bottom-sheet
 ---
 
 import { Playground, Props } from 'docz';
-import { ModalBottomSheet, Button } from '@class101/ui';
+import { ModalBottomSheet, BottomButtonType, Button } from '@class101/ui';
 import { imageSrc } from '../components/interface';
 import { LongContent } from './ModalBottomSheet';
 
@@ -112,7 +112,33 @@ Modal에 이미지를 꽉차게 설정하고 싶을 때 `removeContentPadding`�
     successText="확인"
     successAttributes={{ loading: true }}
     >
+    This is Modal
+  </ModalBottomSheet>
+</Playground>
 
+## Bottom Button Type
+
+`bottomButtonType`으로 버튼의 정렬 방식을 정할 수 있습니다.
+
+<Playground>
+  <ModalBottomSheet
+    opener={<Button>Show Modal (Row)</Button>}
+    title="Modal"
+    bottomButtonType={BottomButtonType.Row}
+    successText="확인"
+    cancelText="취소"
+    >
+    This is Modal
+  </ModalBottomSheet>
+  {' '}
+  <ModalBottomSheet
+    opener={<Button>Show Modal (Column)</Button>}
+    title="Modal"
+    bottomButtonType={BottomButtonType.Column}
+    successText="확인"
+    cancelText="취소"
+    >
+    This is Modal
   </ModalBottomSheet>
 </Playground>
 
