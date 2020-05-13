@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { Button, ButtonColor, ButtonProps, IconButton } from '../../components/Button';
 import { media } from '../../core/BreakPoints';
@@ -7,9 +7,14 @@ import { gray600, gray800, white } from '../../core/Colors';
 import { elevation5 } from '../../core/ElevationStyles';
 import { Body2, Headline3 } from '../../core/Typography';
 import { Close } from '../../Icon';
-import { isServer, isClient } from '../../utils';
+import { isClient, isServer } from '../../utils';
 import { fixScrollbar } from '../../utils/fixScrollbar';
 import { OverlaidPortal } from '../OverlaidPortal';
+
+export enum BottomButtonType {
+  Row = 'row',
+  Column = 'column',
+}
 
 export interface ModalBottomSheetProps {
   opened: boolean;
@@ -23,6 +28,7 @@ export interface ModalBottomSheetProps {
   successAttributes: Partial<ButtonProps>;
   cancelText?: string;
   cancelAttributes: Partial<ButtonProps>;
+  bottomButtonType?: BottomButtonType;
   closeable: boolean;
   hideScroll: boolean;
   noSSR: boolean;
@@ -102,6 +108,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
       opener,
       successAttributes,
       cancelAttributes,
+      bottomButtonType = BottomButtonType.Row,
     } = this.props;
     const { mounted, opened } = this.state;
 
@@ -133,7 +140,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
             <DialogBody style={contentStyle} hideScroll={hideScroll} removeContentPadding={removeContentPadding}>
               {children}
             </DialogBody>
-            <DialogFooter>
+            <DialogFooter bottomButtonType={bottomButtonType}>
               {cancelText && (
                 <DialogFooterButton onClick={this.handleCancelModal} {...cancelAttributes}>
                   {cancelText}
@@ -287,14 +294,30 @@ const DialogBody = styled.div<{ hideScroll: boolean; removeContentPadding: boole
   overscroll-behavior: contain;
 `;
 
-const DialogFooter = styled.div`
-  flex: none;
-  display: flex;
-  flex-direction: row;
-  margin: 0 -8px;
-`;
-
 const DialogFooterButton = styled(Button)`
   flex: 1 0 auto;
   margin: 16px 8px 0;
+`;
+
+const DialogFooter = styled.div<{ bottomButtonType: BottomButtonType }>`
+  flex: none;
+  display: flex;
+  margin: 0 -8px;
+
+  ${props => {
+    switch (props.bottomButtonType) {
+      case BottomButtonType.Row:
+        return css`
+          flex-direction: row;
+        `;
+      case BottomButtonType.Column:
+        return css`
+          margin-top: 10px;
+          flex-direction: column-reverse;
+          ${DialogFooterButton} {
+            margin: 0 0 8px;
+          }
+        `;
+    }
+  }}
 `;
