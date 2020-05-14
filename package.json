@@ -1,6 +1,6 @@
 {
   "name": "@class101/ui",
-  "version": "v9.0.0-rc11",
+  "version": "v9.0.0-rc12",
   "description": "A React-based UI Component Library, powered by Class101.",
   "author": "Class101 Co, LTD.",
   "license": "MIT",
@@ -53,7 +53,7 @@
     "lodash": "^4.17.13",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "styled-components": "^5.1.0"
+    "styled-components": ">=4 <6"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
