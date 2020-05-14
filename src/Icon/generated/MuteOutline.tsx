@@ -2,7 +2,7 @@ import * as React from 'react';
 import { IconProps } from '../index';
 export default class SvgMuteOutline extends React.PureComponent<IconProps> {
   public static defaultProps: Partial<IconProps> = {
-    fillColor: '#3E4042',
+    fillColor: '#1B1C1D',
     accentColor: '#DDE0E2',
     size: 24,
   };
