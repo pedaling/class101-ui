@@ -3,7 +3,7 @@
   "prettier": false,
   "dimensions": true,
   "replaceAttrValues": {
-    "#3E4042": "{this.props.fillColor}",
+    "#1B1C1D": "{this.props.fillColor}",
     "#DDE0E2": "{this.props.accentColor}"
   },
   "svgProps": {

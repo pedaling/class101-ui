@@ -9,7 +9,7 @@ function template({ template }, opts, { imports, componentName, jsx }) {
 
     export default class ${componentName} extends React.PureComponent<IconProps> {
       public static defaultProps: Partial<IconProps> = {
-        fillColor: '#3E4042',
+        fillColor: '#1B1C1D',
         accentColor: '#DDE0E2',
         size: 24,
       };
