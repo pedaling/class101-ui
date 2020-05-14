@@ -1,7 +1,8 @@
+import { darken } from 'polished';
 import React from 'react';
 import styled from 'styled-components';
-import { white, gray800, orange500 } from '../../../../core/Colors';
-import { darken } from 'polished';
+
+import { gray900, orange500, white } from '../../../../core/Colors';
 
 export interface MonthSelectorMonthProps {
   readonly children: string;
@@ -27,7 +28,7 @@ const Month = styled.div<{ isSelected: boolean }>`
     if (props.isSelected) {
       return white;
     }
-    return gray800;
+    return gray900;
   }};
   ${props =>
     props.isSelected

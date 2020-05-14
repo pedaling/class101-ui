@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 
-import { gray800 } from '../../core/Colors';
+import { gray900 } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
 import { BaseProps } from '../../interfaces/props';
 
@@ -32,7 +32,7 @@ export class FormGroup extends PureComponent<FormGroupProps> {
 const Label = styled.label<{ labelColor?: string }>`
   ${body2};
   margin: 0 0 4px;
-  color: ${props => props.labelColor || gray800};
+  color: ${props => props.labelColor || gray900};
 `;
 
 const Container = styled.div<{ inline?: boolean }>`

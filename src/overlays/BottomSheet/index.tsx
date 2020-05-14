@@ -1,8 +1,8 @@
 import React, { PureComponent, ReactNode } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { Badge } from '../../components/Badge';
-import { gray800, white } from '../../core/Colors';
+import { gray900, white } from '../../core/Colors';
 import { body1, subtitle1 } from '../../core/TextStyles';
 import { ChevronRight } from '../../Icon';
 import { HTMLDivProps } from '../../interfaces/props';
@@ -134,7 +134,7 @@ const BORDER_SIZE = 1;
 
 const Title = styled.span`
   ${body1};
-  color: ${gray800};
+  color: ${gray900};
   font-weight: bold;
   transition: font-size 0.4s ease-in-out;
 `;
@@ -180,12 +180,12 @@ const Container = styled.div<ContainerProps & { isOpened?: boolean }>`
   zoom: 1;
   ${props =>
     props.isOpened
-      ? css`
+      ? `
           transform: translateY(calc(48px - 100% + ${BORDER_SIZE}px));
 
           ${Title} {
             ${subtitle1};
-            color: ${gray800};
+            color: ${gray900};
             font-weight: bold;
           }
 
@@ -197,8 +197,8 @@ const Container = styled.div<ContainerProps & { isOpened?: boolean }>`
             top: ${24 - BORDER_SIZE}px;
           }
         `
-      : css<{ fullScreen?: boolean }>`
-          transform: translateY(${props => (props.fullScreen ? `calc(-10% - ${BORDER_SIZE + 1}px)` : 0)});
+      : `
+          transform: translateY(${props.fullScreen ? `calc(-10% - ${BORDER_SIZE + 1}px)` : 0});
 
           ${ChevronBox} {
             top: ${12 - BORDER_SIZE}px;

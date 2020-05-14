@@ -1,7 +1,7 @@
 import React, { ChangeEvent, ChangeEventHandler, PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 
-import { gray100, gray300, gray500, gray800, orange500, orange700 } from '../../core/Colors';
+import { gray100, gray300, gray500, gray900, orange500, orange700 } from '../../core/Colors';
 import { elevation1 } from '../../core/ElevationStyles';
 import { body2 } from '../../core/TextStyles';
 import { Theme, ThemeConfig } from '../../core/Theme';
@@ -91,7 +91,7 @@ const Container = styled.label<{ inline?: boolean; disabled: boolean }>`
 
 const SwitchText = styled.span<{ disabled: boolean; inline?: boolean }>`
   ${body2};
-  color: ${props => (props.disabled ? gray300 : gray800)};
+  color: ${props => (props.disabled ? gray300 : gray900)};
   margin-right: 9px;
   ${props => !props.inline && `flex: 1 1 auto;`}
 `;

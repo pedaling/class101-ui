@@ -1,7 +1,7 @@
 import React, { ChangeEventHandler, PureComponent, SelectHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-import { gray500, gray800, redError } from '../../core/Colors';
+import { gray500, gray900, redError } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
 import { Omit } from '../../interfaces/props';
 import { FormInputFillStyle, FormInputStyle, FormInputStyleBySize, InputSize } from '../common';
@@ -37,7 +37,7 @@ export class Select extends PureComponent<SelectProps> {
       <StyledSelect
         inputSize={size}
         value={value}
-        color={value === '' ? gray500 : gray800}
+        color={value === '' ? gray500 : gray900}
         {...selectAttributes}
         {...restProps}
       >

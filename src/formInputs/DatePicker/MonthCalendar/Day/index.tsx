@@ -1,8 +1,9 @@
+import { darken } from 'polished';
 import React from 'react';
 import styled from 'styled-components';
-import { gray200, white, orange500, gray300, gray800, orange100, red500, blue500 } from '../../../../core/Colors';
+
+import { blue500, gray200, gray300, gray900, orange100, orange500, red500, white } from '../../../../core/Colors';
 import { body2 } from '../../../../core/TextStyles';
-import { darken } from 'polished';
 
 export interface MonthCalendarDayProps {
   readonly date: number;
@@ -62,7 +63,7 @@ const Day = styled.div<Omit<MonthCalendarDayProps, 'onClick' | 'onHover' | 'date
         return red500;
       }
     }
-    return gray800;
+    return gray900;
   }};
   width: 32px;
   height: 32px;

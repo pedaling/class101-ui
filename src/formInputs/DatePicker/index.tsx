@@ -1,8 +1,9 @@
 import { HTMLInputProps } from 'interfaces/props';
-import React, { PureComponent, createRef } from 'react';
+import React, { createRef, PureComponent } from 'react';
 import styled, { css } from 'styled-components';
-import { IconButton, Button } from '../../components/Button';
-import { white, gray800 } from '../../core/Colors';
+
+import { Button, IconButton } from '../../components/Button';
+import { gray900, white } from '../../core/Colors';
 import { elevation2 } from '../../core/ElevationStyles';
 import { body1 } from '../../core/TextStyles';
 import { ChevronLeft, ChevronRight } from '../../Icon';
@@ -415,7 +416,7 @@ const Picker = styled.div<{ modalVisible: boolean; alwaysShow: boolean }>`
   background: ${white};
   text-align: center;
   transform: none;
-  color: ${gray800};
+  color: ${gray900};
   width: ${DatePickerWidth}px;
   box-sizing: border-box;
   border-radius: 4px;

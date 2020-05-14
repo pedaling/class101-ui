@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
 import { ButtonColor, ButtonSize, IconButton } from '../../components/Button';
-import { gray300, gray800, orange500, redError, white } from '../../core/Colors';
+import { gray300, gray900, orange500, redError, white } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
 import { Close } from '../../Icon';
 import { InlineError, Intent } from '../InlineError';
@@ -208,7 +208,7 @@ const TagInputContainer = styled.div`
   }
   &.focused {
     outline: none;
-    border-color: ${gray800};
+    border-color: ${gray900};
   }
 `;
 
@@ -230,7 +230,7 @@ const InnerContainer = styled.div`
 
 const StyledInput = styled.input`
   ${body2};
-  color: ${gray800};
+  color: ${gray900};
   flex: 1 1 auto;
   background: transparent;
   border: none;
