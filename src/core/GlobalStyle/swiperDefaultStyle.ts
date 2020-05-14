@@ -310,6 +310,95 @@ const swiperStyle = css`
     /* Windows 8 IE 10 fix */
     -ms-perspective: 1200px;
   }
+  /* 3D Effects */
+  .swiper-container-3d {
+    perspective: 1200px;
+  }
+  .swiper-container-3d .swiper-wrapper,
+  .swiper-container-3d .swiper-slide,
+  .swiper-container-3d .swiper-slide-shadow-left,
+  .swiper-container-3d .swiper-slide-shadow-right,
+  .swiper-container-3d .swiper-slide-shadow-top,
+  .swiper-container-3d .swiper-slide-shadow-bottom,
+  .swiper-container-3d .swiper-cube-shadow {
+    transform-style: preserve-3d;
+  }
+  .swiper-container-3d .swiper-slide-shadow-left,
+  .swiper-container-3d .swiper-slide-shadow-right,
+  .swiper-container-3d .swiper-slide-shadow-top,
+  .swiper-container-3d .swiper-slide-shadow-bottom {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .swiper-container-3d .swiper-slide-shadow-left {
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  }
+  .swiper-container-3d .swiper-slide-shadow-right {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  }
+  .swiper-container-3d .swiper-slide-shadow-top {
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  }
+  .swiper-container-3d .swiper-slide-shadow-bottom {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  }
+
+  /* cube effect */
+  .swiper-container-cube {
+    overflow: visible;
+  }
+  .swiper-container-cube .swiper-slide {
+    pointer-events: none;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    z-index: 1;
+    visibility: hidden;
+    transform-origin: 0 0;
+    width: 100%;
+    height: 100%;
+  }
+  .swiper-container-cube .swiper-slide .swiper-slide {
+    pointer-events: none;
+  }
+  .swiper-container-cube.swiper-container-rtl .swiper-slide {
+    transform-origin: 100% 0;
+  }
+  .swiper-container-cube .swiper-slide-active,
+  .swiper-container-cube .swiper-slide-active .swiper-slide-active {
+    pointer-events: auto;
+  }
+  .swiper-container-cube .swiper-slide-active,
+  .swiper-container-cube .swiper-slide-next,
+  .swiper-container-cube .swiper-slide-prev,
+  .swiper-container-cube .swiper-slide-next + .swiper-slide {
+    pointer-events: auto;
+    visibility: visible;
+  }
+  .swiper-container-cube .swiper-slide-shadow-top,
+  .swiper-container-cube .swiper-slide-shadow-bottom,
+  .swiper-container-cube .swiper-slide-shadow-left,
+  .swiper-container-cube .swiper-slide-shadow-right {
+    z-index: 0;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  .swiper-container-cube .swiper-cube-shadow {
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.6;
+    -webkit-filter: blur(50px);
+    filter: blur(50px);
+    z-index: 0;
+  }
 `;
 
 export default swiperStyle;
