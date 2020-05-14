@@ -54,3 +54,37 @@ import { PlayGroundBanner } from '../docsComponents';
     </Slide>
   </Swiper>
 </Playground>
+
+
+## Cube Swiper
+
+<Playground>
+  <Swiper
+    effect='cube'
+    grabCursor
+    cubeEffect={ {
+      shadow: true,
+      slideShadows: true,
+      shadowOffset: 20,
+      shadowScale: 0.94,
+    }}
+    paginationChildren={null}
+    navigationChildren={null}
+  >
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red100} fill>
+        배너1
+      </PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red200} fill>
+        배너2
+      </PlayGroundBanner>
+    </Slide>
+    <Slide>
+      <PlayGroundBanner backgroundColor={Colors.red300} fill>
+        배너3
+      </PlayGroundBanner>
+    </Slide>
+  </Swiper>
+</Playground>
