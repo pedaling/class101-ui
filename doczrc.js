@@ -21,7 +21,7 @@ export default {
   typescript: true,
   themeConfig: {
     colors: {
-      text: '#3E4042',
+      text: '#1b1c1d',
       background: '#fff',
       primary: ORANGE,
       secondary: '#7ABDD3',
