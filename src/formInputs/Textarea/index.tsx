@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { gray300, gray800, orange500, redError } from '../../core/Colors';
+import { gray300, gray900, orange500, redError } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
 import { HTMLTextareaProps } from '../../interfaces/props';
 import { FormInputStyle } from '../common';
@@ -43,7 +43,7 @@ export class Textarea extends React.PureComponent<HTMLTextareaProps & TextareaPr
 const StyledTextarea = styled.textarea`
   ${FormInputStyle}
   ${body2};
-  color: ${gray800};
+  color: ${gray900};
   border-radius: 1px;
   background-color: white;
   border: solid 1px ${gray300};

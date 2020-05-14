@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 import { Button, ButtonColor, ButtonProps, IconButton } from '../../components/Button';
 import { media } from '../../core/BreakPoints';
-import { gray600, gray800, white } from '../../core/Colors';
+import { gray600, gray900, white } from '../../core/Colors';
 import { elevation5 } from '../../core/ElevationStyles';
 import { Body2, Headline3 } from '../../core/Typography';
 import { Close } from '../../Icon';
@@ -133,7 +133,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
             <DialogHead>
               <DialogTitle>{title}</DialogTitle>
               {closeable && (
-                <IconButton icon={<Close />} onClick={this.handleCloseModal} fillColor={gray800} color="transparent" />
+                <IconButton icon={<Close />} onClick={this.handleCloseModal} fillColor={gray900} color="transparent" />
               )}
             </DialogHead>
             {subTitle && <DialogSubTitle>{subTitle}</DialogSubTitle>}

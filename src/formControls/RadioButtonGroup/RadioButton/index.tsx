@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 
-import { gray300, gray500, gray800 } from '../../../core/Colors';
+import { gray300, gray500, gray900 } from '../../../core/Colors';
 import { body1 } from '../../../core/TextStyles';
 import RadioIcon from './RadioIcon';
 
@@ -25,7 +25,7 @@ export class RadioButton extends PureComponent<RadioButtonProps> {
   public static defaultProps: Partial<RadioButtonProps> = {
     stackingDirection: 'vertical',
     showBorder: true,
-    color: gray800,
+    color: gray900,
     showDivider: false,
     textAlign: 'left',
   };
@@ -112,7 +112,7 @@ const optionStyles = ({
   if (checked) {
     style = css`
       ${style};
-      border-color: ${gray800};
+      border-color: ${gray900};
     `;
   }
 
@@ -137,6 +137,6 @@ export const RadioButtonText = styled.div<{ checked?: boolean; color?: string }>
   ${props =>
     props.checked &&
     css`
-      color: ${props.color || gray800};
+      color: ${props.color || gray900};
     `};
 `;

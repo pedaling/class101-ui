@@ -1,6 +1,6 @@
 import { css, FlattenSimpleInterpolation } from 'styled-components';
 
-import { gray200, gray400, gray50, gray500, gray800 } from '../core/Colors';
+import { gray200, gray400, gray50, gray500, gray900 } from '../core/Colors';
 
 export enum InputSize {
   sm = 'sm',
@@ -16,7 +16,7 @@ export const FormInputStyle = css`
   }
   &:focus {
     outline: none;
-    border-color: ${gray800};
+    border-color: ${gray900};
   }
   &:disabled {
     background-color: ${gray50};

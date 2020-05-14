@@ -2,7 +2,7 @@ import { HTMLInputProps } from 'interfaces/props';
 import React from 'react';
 import styled from 'styled-components';
 
-import { gray800, orange500, redError } from '../../core/Colors';
+import { gray900, orange500, redError } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
 import { FormInputFillStyle, FormInputStyle, FormInputStyleBySize, InputSize } from '../common';
 import { InlineError, Intent } from '../InlineError';
@@ -77,7 +77,7 @@ const StyledInput = styled.input<InputProps>`
   ${FormInputStyle};
   ${props => FormInputStyleBySize[props.size]};
   ${props => (props.fill ? FormInputFillStyle : null)};
-  color: ${gray800};
+  color: ${gray900};
   box-sizing: border-box;
   padding: 0 16px;
   border-radius: 3px;

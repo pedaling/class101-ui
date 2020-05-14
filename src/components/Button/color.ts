@@ -11,6 +11,7 @@ import {
   gray500,
   gray700,
   gray800,
+  gray900,
   orange000,
   orange100,
   orange200,
@@ -24,12 +25,12 @@ import { ThemeMode } from '../../core/Theme';
 import { ButtonColor } from './interface';
 
 export const defaultTextColors = {
-  [ThemeMode.LIGHT]: gray800,
+  [ThemeMode.LIGHT]: gray900,
   [ThemeMode.DARK]: gray100,
 };
 
 export const transparentTextColors = {
-  [ThemeMode.LIGHT]: gray800,
+  [ThemeMode.LIGHT]: gray900,
   [ThemeMode.DARK]: white,
 };
 
