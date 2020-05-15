@@ -312,10 +312,9 @@ const DialogFooter = styled.div<{ bottomButtonType: BottomButtonType }>`
         `;
       case BottomButtonType.Column:
         return css`
-          margin-top: 10px;
           flex-direction: column-reverse;
           ${DialogFooterButton} {
-            margin: 0 0 8px;
+            margin-top: 8px;
           }
         `;
     }
