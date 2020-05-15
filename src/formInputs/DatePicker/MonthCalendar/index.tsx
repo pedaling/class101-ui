@@ -1,10 +1,10 @@
-import React from 'react';
 import { range } from 'lodash';
-import { MonthCalendarDay, MonthCalendarDayProps } from './Day';
+import React from 'react';
 import styled from 'styled-components';
-import { DatePickerLocale } from '../interface';
 import { gray500 } from '../../../core/Colors';
 import { body2 } from '../../../core/TextStyles';
+import { DatePickerLocale } from '../interface';
+import { MonthCalendarDay, MonthCalendarDayProps } from './Day';
 
 interface Props {
   readonly locale: DatePickerLocale;
@@ -88,7 +88,11 @@ export class MonthCalendar extends React.PureComponent<Props, State> {
     const maxTimeNumber = max ? max.getTime() : null;
     const selectedTimeNumber = selectedDate && new Date(selectedDate).setHours(0, 0, 0, 0);
     const hoverTimeNumber = hoverDate && hoverDate.getTime();
-    const secondTimeNumber = secondDate && secondDate.getTime();
+    const dayFirstSecondDate = secondDate ? new Date(secondDate) : undefined;
+    if (dayFirstSecondDate) {
+      dayFirstSecondDate.setHours(0, 0, 0, 0);
+    }
+    const secondTimeNumber = dayFirstSecondDate && dayFirstSecondDate.getTime();
 
     const firstTimeNumber = isRange
       ? (selectedTimeNumber !== null && (hoverTimeNumber !== null || secondTimeNumber !== null) && secondTimeNumber) ||
