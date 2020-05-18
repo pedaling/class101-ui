@@ -11,27 +11,21 @@ export type NavigationDirection = 'right' | 'left';
 
 export const DefaultNavigation = () => {
   return (
-    <div className="swiper-default-navigation">
+    <Container className="swiper-default-navigation">
       <Button color={ButtonColor.WHITE} className="swiper-button-prev" direction="left" icon={<ChevronRight />} />
       <Button color={ButtonColor.WHITE} className="swiper-button-next" direction="right" icon={<ChevronRight />} />
-    </div>
+    </Container>
   );
 };
 
 const Button = styled(IconButton)<{ direction: 'right' | 'left' }>`
-  background-image: none;
-  margin: 0;
-  ${elevation1};
-  position: absolute;
-  top: 0;
-  left: auto;
   ${props =>
     props.direction === 'right'
       ? `
       right: 0;
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
-      `
+    `
       : `
       right: ${NAVIGATION_BUTTON_SIZE}px;
       border-top-right-radius: 0;
@@ -39,13 +33,26 @@ const Button = styled(IconButton)<{ direction: 'right' | 'left' }>`
       svg {
         transform: rotate(180deg);
       }
-  `};
-  &:focus {
-    outline: none;
-  }
-  &:active,
-  &:disabled {
-    opacity: 1;
-    pointer-events: auto;
+`};
+`;
+
+const Container = styled.div`
+  > ${Button} {
+    ${elevation1};
+    width: 32px;
+    height: 32px;
+    background-image: none;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: auto;
+    &:focus {
+      outline: none;
+    }
+    &:active,
+    &:disabled {
+      opacity: 1;
+      pointer-events: auto;
+    }
   }
 `;

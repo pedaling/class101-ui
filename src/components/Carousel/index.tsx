@@ -303,7 +303,7 @@ const StyledSwiper = styled(Swiper)<StyledSwiperProps>`
           }
         `
       : ''}
-  .swiper-pagination {
+  &.swiper-container .swiper-pagination {
     ${props => props.navigationPosition && paginationPositionStyle[props.navigationPosition]};
     display: flex;
     justify-content: center;
