@@ -18,7 +18,6 @@ export { default as ArrowDown } from './generated/ArrowDown';
 export { default as ArrowLeft } from './generated/ArrowLeft';
 export { default as ArrowRight } from './generated/ArrowRight';
 export { default as ArrowUp } from './generated/ArrowUp';
-export { default as Badge } from './generated/Badge';
 export { default as Bell } from './generated/Bell';
 export { default as BellOff } from './generated/BellOff';
 export { default as BellOutline } from './generated/BellOutline';
