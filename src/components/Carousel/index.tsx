@@ -216,22 +216,37 @@ const navigationPositionStyle: { [key in CarouselNavigationPosition]: FlattenSim
 };
 
 const StyledSwiper = styled(Swiper)<StyledSwiperProps>`
-  ${props =>
-    props.lgSlidesSideOffset
-      ? css`
-          padding-left: ${props.lgSlidesSideOffset}px;
-          padding-right: ${props.lgSlidesSideOffset}px;
-        `
-      : ''};
-  ${props =>
-    props.smSlidesSideOffset
-      ? css`
-          ${media.sm`
+  &.swiper-container {
+    ${props =>
+      props.lgSlidesSideOffset
+        ? `
+            padding-left: ${props.lgSlidesSideOffset}px;
+            padding-right: ${props.lgSlidesSideOffset}px;
+          `
+        : ''};
+    ${props =>
+      props.smSlidesSideOffset
+        ? `
+            ${media.sm`
             padding-left: ${props.smSlidesSideOffset}px;
             padding-right: ${props.smSlidesSideOffset}px;
           `};
-        `
-      : ''};
+          `
+        : ''};
+
+    ${props =>
+      (props.hasNavigation && props.navigationPosition === CarouselNavigationPosition.BottomRightOut) ||
+      (props.hasNavigation &&
+        props.hasPagination &&
+        props.navigationPosition === CarouselNavigationPosition.TopRightOut)
+        ? 'padding-bottom: 48px;'
+        : ''};
+
+    ${props =>
+      props.hasNavigation && props.navigationPosition === CarouselNavigationPosition.TopRightOut
+        ? 'padding-top: 48px; margin-top: -48px;'
+        : ''};
+  }
 
   .swiper-default-navigation {
     position: absolute;
@@ -262,22 +277,6 @@ const StyledSwiper = styled(Swiper)<StyledSwiperProps>`
           .swiper-button-prev {
             display: none !important;
           }
-        `
-      : ''};
-
-  ${props =>
-    (props.hasNavigation && props.navigationPosition === CarouselNavigationPosition.BottomRightOut) ||
-    (props.hasNavigation && props.hasPagination && props.navigationPosition === CarouselNavigationPosition.TopRightOut)
-      ? css`
-          padding-bottom: 48px;
-        `
-      : ''};
-
-  ${props =>
-    props.hasNavigation && props.navigationPosition === CarouselNavigationPosition.TopRightOut
-      ? css`
-          padding-top: 48px;
-          margin-top: -48px;
         `
       : ''};
 
