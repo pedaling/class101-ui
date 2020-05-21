@@ -106,7 +106,7 @@ const StyledNumericInputInput = styled(Input)<{ align: 'left' | 'center' }>`
 
 const StyledNumericInputButton = styled(IconButton)<{ top?: number; right?: number; left?: number }>`
   position: absolute;
-  ${props => props.top && `top: ${props.top}px`}
-  ${props => props.right && `right: ${props.right}px`}
-  ${props => props.left && `left: ${props.left}px`}
+  ${props => props.top && `top: ${props.top}px;`}
+  ${props => props.right && `right: ${props.right}px;`}
+  ${props => props.left && `left: ${props.left}px;`}
 `;
