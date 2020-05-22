@@ -223,7 +223,6 @@ const Dialog = styled.div<{ visible: boolean }>`
   flex-direction: column;
   padding: 32px;
   width: 480px;
-  min-height: 360px;
   max-height: 800px;
   border-radius: 8px;
   background-color: ${white};
@@ -236,7 +235,6 @@ const Dialog = styled.div<{ visible: boolean }>`
     padding-bottom: calc(constant(safe-area-inset-bottom) + 24px);
     padding-bottom: calc(env(safe-area-inset-bottom) + 24px);
     width: 100%;
-    min-height: 240px;
     max-height: calc(100% - 48px);
     height: auto;
     border-bottom-left-radius: 0;
