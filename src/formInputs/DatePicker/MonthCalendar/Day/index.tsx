@@ -1,5 +1,5 @@
 import { darken } from 'polished';
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 
 import { blue500, gray200, gray300, gray900, orange100, orange500, red500, white } from '../../../../core/Colors';
@@ -17,15 +17,15 @@ export interface MonthCalendarDayProps {
   readonly onHover?: (date: Date | null) => void;
 }
 
-const Component = (props: MonthCalendarDayProps) => {
+export const MonthCalendarDay = React.memo<MonthCalendarDayProps>(props => {
   const { date, onClick, onHover, ...otherProps } = props;
   const dateObject = new Date(date);
-  const onClickDate = React.useCallback(() => {
+  const onClickDate = useCallback(() => {
     if (!otherProps.disabled) {
       onClick(dateObject);
     }
   }, [otherProps.disabled, onClick, dateObject]);
-  const onHoverDate = React.useCallback(() => {
+  const onHoverDate = useCallback(() => {
     if (onHover) {
       onHover(dateObject);
     }
@@ -35,9 +35,7 @@ const Component = (props: MonthCalendarDayProps) => {
       {dateObject.getDate()}
     </Day>
   );
-};
-
-export const MonthCalendarDay = React.memo(Component);
+});
 
 const Day = styled.div<Omit<MonthCalendarDayProps, 'onClick' | 'onHover' | 'date'>>`
   ${body2};
