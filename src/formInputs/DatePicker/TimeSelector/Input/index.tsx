@@ -9,7 +9,7 @@ interface Props {
   onChange?: (value: Date) => void;
 }
 
-const TimeSelectorInput: React.FC<Props> = props => {
+export const TimeSelectorInput = React.memo<Props>(props => {
   const { value, onChange } = props;
 
   const handleChange = useCallback(
@@ -41,9 +41,7 @@ const TimeSelectorInput: React.FC<Props> = props => {
       <TimeInput min={0} max={59} name="seconds" value={padNumber(value.getSeconds(), 2)} />
     </Container>
   );
-};
-
-export default React.memo(TimeSelectorInput);
+});
 
 const Container = styled.form`
   padding: 8px 16px;

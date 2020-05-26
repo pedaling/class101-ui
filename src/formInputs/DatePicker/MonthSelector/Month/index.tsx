@@ -10,16 +10,14 @@ export interface MonthSelectorMonthProps {
   readonly onClick: () => void;
 }
 
-const MonthSelectorMonth = (props: MonthSelectorMonthProps) => {
+export const MonthSelectorMonth = React.memo<MonthSelectorMonthProps>(props => {
   const { children, isSelected, onClick } = props;
   return (
     <Month isSelected={isSelected} onClick={onClick}>
       {children}
     </Month>
   );
-};
-
-export default React.memo(MonthSelectorMonth);
+});
 
 const Month = styled.div<{ isSelected: boolean }>`
   display: flex;
@@ -34,7 +32,7 @@ const Month = styled.div<{ isSelected: boolean }>`
           &:hover {
             background-color: ${darken(0.1, white)};
           }
-        `}
+        `};
 
   align-items: center;
   cursor: pointer;

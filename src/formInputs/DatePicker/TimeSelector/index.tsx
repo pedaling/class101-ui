@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { gray000, gray900 } from '../../../core/Colors';
 import { body2 } from '../../../core/TextStyles';
 import { DatePickerLocale } from '../interface';
-import TimeSelectorInput from './Input';
+import { TimeSelectorInput } from './Input';
 
 interface Props {
   readonly locale: DatePickerLocale;
@@ -13,7 +13,7 @@ interface Props {
   readonly onChangeTime: (date: Date, isSecond: boolean) => void;
 }
 
-const TimeSelector: React.FC<Props> = props => {
+export const TimeSelector = React.memo<Props>(props => {
   const { locale, isRange, secondDate, selectedDate, onChangeTime } = props;
 
   const handleChangeStartTime = useCallback(
@@ -60,9 +60,7 @@ const TimeSelector: React.FC<Props> = props => {
       )}
     </Container>
   );
-};
-
-export default React.memo(TimeSelector);
+});
 
 const Container = styled.div`
   display: flex;

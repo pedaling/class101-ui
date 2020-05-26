@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { DatePickerLocale } from '../interface';
-import MonthSelectorMonth from './Month';
+import { MonthSelectorMonth } from './Month';
 
 interface Props {
   readonly locale: DatePickerLocale;
@@ -11,7 +11,7 @@ interface Props {
   readonly onChange: (date: Date) => boolean | void;
 }
 
-const MonthSelector: React.FC<Props> = props => {
+export const MonthSelector = React.memo<Props>(props => {
   const { locale, selectedDate, currentYear, onChange, secondDate } = props;
 
   const selectedMonth = useMemo(
@@ -39,9 +39,7 @@ const MonthSelector: React.FC<Props> = props => {
       })}
     </StyledMonthSelector>
   );
-};
-
-export default React.memo(MonthSelector);
+});
 
 const StyledMonthSelector = styled.div`
   display: flex;
