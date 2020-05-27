@@ -33,17 +33,6 @@
     "generated-svgr": "cd src/Icon/svgs && npx @svgr/cli --template ../svgr-cli.template.js --config-file ../.svgrrc  *.svg --out-dir ../generated --ext tsx",
     "svgr": "yarn generated-svgr && yarn generated-icon-export"
   },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,css,scss,md}": [
-      "prettier --write --loglevel warn",
-      "git add"
-    ],
-    "*.{ts,tsx}": [
-      "tslint --fix",
-      "eslint --fix",
-      "git add"
-    ]
-  },
   "peerDependencies": {
     "lodash": "^4.17.13",
     "react": "^16.8.6",
