@@ -1,0 +1,11 @@
+{
+    "*.{js,jsx,ts,tsx,css,scss,md}": [
+      "prettier --write --loglevel warn",
+      "git add"
+    ],
+    "*.{ts,tsx}": [
+      "tslint --fix",
+      "eslint --fix",
+      "git add"
+    ]
+}
