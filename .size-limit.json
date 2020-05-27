@@ -1,0 +1,8 @@
+[
+  {
+    "path": "dist/index.js"
+  },
+  {
+    "path": "dist/**/*.js"
+  }
+]
