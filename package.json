@@ -33,6 +33,14 @@
     "generated-svgr": "cd src/Icon/svgs && npx @svgr/cli --template ../svgr-cli.template.js --config-file ../.svgrrc  *.svg --out-dir ../generated --ext tsx",
     "svgr": "yarn generated-svgr && yarn generated-icon-export"
   },
+  "size-limit": [
+    {
+      "path": "dist/index.js"
+    },
+    {
+      "path": "dist/**/*.js"
+    }
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -65,6 +73,7 @@
     "@class101/eslint-config": "^2.2.1",
     "@class101/tslint-config": "^1.5.0",
     "@emotion/core": "^10.0.6",
+    "@size-limit/preset-big-lib": "^4.5.0",
     "@types/classnames": "^2.2.9",
     "@types/jest": "^23.3.12",
     "@types/lodash": "^4.14.136",
@@ -94,6 +103,7 @@
     "rollup-plugin-typescript2": "^0.27.0",
     "rollup-plugin-url": "^3.0.1",
     "rollup-plugin-visualizer": "^4.0.4",
+    "size-limit": "^4.5.0",
     "styled-components": "5.1.0",
     "tslib": "^1.9.3",
     "tslint": "^6.1.1",
