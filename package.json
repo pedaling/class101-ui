@@ -33,14 +33,6 @@
     "generated-svgr": "cd src/Icon/svgs && npx @svgr/cli --template ../svgr-cli.template.js --config-file ../.svgrrc  *.svg --out-dir ../generated --ext tsx",
     "svgr": "yarn generated-svgr && yarn generated-icon-export"
   },
-  "size-limit": [
-    {
-      "path": "dist/index.js"
-    },
-    {
-      "path": "dist/**/*.js"
-    }
-  ],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
