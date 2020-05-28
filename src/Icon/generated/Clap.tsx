@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { IconProps } from '../index';
+
+import { IconProps } from '..';
+
 export default class SvgClap extends React.PureComponent<IconProps> {
   public static defaultProps: Partial<IconProps> = {
     fillColor: '#1B1C1D',
@@ -18,13 +20,13 @@ export default class SvgClap extends React.PureComponent<IconProps> {
         viewBox="0 0 24 24"
       >
         <path
-          d="M20 5.5V4h-2.797a1 1 0 00-.94.662l-.556 1.545 1.418 1.418L18 5.5h2zM9.33 2.506a2 2 0 00-2.994.385l-4 6a2 2 0 00.25 2.523l.483.483 6.26-9.391z"
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M10.126 5.855a.986.986 0 011.466-.09c.315.31.647.636.832.82l5.585 5.587 1.263-3.51a1 1 0 01.94-.662h1.797v7a2 2 0 01-.585 1.414l-6 6a2 2 0 01-2.829 0l-7-7a2 2 0 01-.25-2.523l4-6c.154-.23.477-.65.78-1.036z"
           fill={this.props.fillColor}
         />
         <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M10.116 4.855a.986.986 0 011.467-.09c.314.31.646.636.831.82L18 11.173l1.262-3.51A1 1 0 0120.203 7H22v9a2 2 0 01-.586 1.414l-5 5a2 2 0 01-2.828 0l-8-8a2 2 0 01-.25-2.523l4-6c.153-.23.476-.65.78-1.036z"
+          d="M20.033 6.996V6h-2.306a1 1 0 00-.941.662l-.777 1.725 1.419 1.418.835-2.167a1 1 0 01.93-.64l.84-.002zM7.37 5.492L7.81 6l-4.146 6.256a3 3 0 00.38 3.778L9.509 21.5a2.121 2.121 0 01-3 0L2.32 17.31a4.5 4.5 0 01-.563-5.678L5.78 5.592a1 1 0 011.588-.1zM8 .5L8.5 4 6 2 8 .5zM10 .5V4l2-3-2-.5zM13.5 2l-2 2.5 3-.5-1-2z"
           fill={this.props.fillColor}
         />
       </svg>
