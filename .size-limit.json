@@ -3,6 +3,12 @@
     "path": "dist/index.js"
   },
   {
-    "path": "dist/**/*.js"
+    "path": "dist/esm/index.js"
+  },
+  {
+    "path": "dist/esm/core/index.js"
+  },
+  {
+    "path": "dist/esm/Icon/index.js"
   }
 ]
