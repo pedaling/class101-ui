@@ -429,9 +429,8 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     if (useRange) {
       if (selectedDate && !secondDate) {
         const [startDate, endDate] = this.sortDate(selectedDate, date);
-        const dayLastEndDate = new Date(endDate);
-        dayLastEndDate.setHours(23, 59, 59, 999);
-        if (onChangeRange && onChangeRange({ start: startDate, end: dayLastEndDate }) === false) {
+        endDate.setHours(23, 59, 59, 999);
+        if (onChangeRange && onChangeRange({ start: startDate, end: endDate }) === false) {
           return this.setState(
             {
               selectedDate: null,
@@ -440,7 +439,6 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
             this.calculateInputValue
           );
         }
-        date.setHours(23, 59, 59, 999);
         return this.setState(
           {
             secondDate: date,
