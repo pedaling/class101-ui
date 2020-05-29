@@ -22,13 +22,14 @@ export const MonthSelectorMonth = React.memo<MonthSelectorMonthProps>(props => {
 const Month = styled.div<{ isSelected: boolean }>`
   display: flex;
   justify-content: center;
-  color: ${props => (props.isSelected ? white : gray900)};
   ${props =>
     props.isSelected
       ? css`
+          color: ${white};
           background-color: ${orange500};
         `
       : css`
+          color: ${gray900};
           &:hover {
             background-color: ${darken(0.1, white)};
           }
