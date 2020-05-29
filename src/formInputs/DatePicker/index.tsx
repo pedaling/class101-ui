@@ -8,11 +8,13 @@ import { elevation2 } from '../../core/ElevationStyles';
 import { body1 } from '../../core/TextStyles';
 import { ChevronLeft, ChevronRight } from '../../Icon';
 import { isClient } from '../../utils';
+import padNumber from '../../utils/padNumber';
 import { Input, InputProps } from '../Input';
 import { DatePickerLocale, DatePickerSelectorType } from './interface';
 import ko_KR from './locales/ko_KR';
 import { MonthCalendar } from './MonthCalendar';
 import { MonthSelector } from './MonthSelector';
+import { TimeSelector } from './TimeSelector';
 
 interface DateRange {
   start?: Date;
@@ -28,6 +30,7 @@ export interface DatePickerProps {
   readonly minDate?: Date;
   readonly maxDate?: Date;
   readonly useRange: boolean;
+  readonly useTime: boolean;
   readonly alwaysShow: boolean;
   readonly inline?: boolean;
   readonly inputAttributes?: HTMLInputProps & InputProps;
@@ -59,6 +62,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     alwaysShow: false,
     highlightWeekEnd: true,
     adjustInputWidth: true,
+    useTime: false,
   };
 
   private readonly modalRef = createRef<HTMLDivElement>();
@@ -113,6 +117,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     const { selectedDate, currentMonth, selectorType, modalVisible, secondDate, inputValue } = this.state;
     const {
       locale,
+      useTime,
       minDate: min,
       maxDate: max,
       inputAttributes,
@@ -177,6 +182,15 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
                 onChange={this.onSelectMonth}
               />
             )}
+            {useTime && (
+              <TimeSelector
+                locale={locale}
+                selectedDate={selectedDate}
+                secondDate={secondDate}
+                isRange={useRange}
+                onChangeTime={this.handleChangeTime}
+              />
+            )}
           </DatePickerBody>
         </Picker>
       </Container>
@@ -188,8 +202,13 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
   };
 
   private getDateLocaleString = (date: Date | null) => {
+    const { useTime } = this.props;
     if (date) {
-      return `${date.getFullYear()}. ${date.getMonth() + 1}. ${date.getDate()}.`;
+      return `${date.getFullYear()}. ${date.getMonth() + 1}. ${date.getDate()}. ${
+        useTime
+          ? ` ${padNumber(date.getHours(), 2)}:${padNumber(date.getMinutes(), 2)}:${padNumber(date.getSeconds(), 2)}`
+          : ''
+      }`;
     }
     return '';
   };
@@ -238,7 +257,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
   };
 
   private handleBlurInput = () => {
-    const { useRange, minDate, maxDate } = this.props;
+    const { useRange, minDate, maxDate, onChange, onChangeRange } = this.props;
     const { inputValue } = this.state;
     const dateText = inputValue;
 
@@ -262,7 +281,8 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
       } else if (!isNaN(firstDate.getTime()) && !isNaN(secondDate.getTime())) {
         if (
           (minDate && minDate.getTime() > firstDate.getTime()) ||
-          (maxDate && maxDate.getTime() < secondDate.getTime())
+          (maxDate && maxDate.getTime() < secondDate.getTime()) ||
+          (onChangeRange && onChangeRange({ start: minDate, end: maxDate }) === false)
         ) {
           return this.calculateInputValue();
         }
@@ -285,7 +305,8 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     if (
       isNaN(currentDate.getTime()) ||
       (minDate && minDate.getTime() > currentDate.getTime()) ||
-      (maxDate && maxDate.getTime() < currentDate.getTime())
+      (maxDate && maxDate.getTime() < currentDate.getTime()) ||
+      (onChange && onChange(currentDate) === false)
     ) {
       return this.calculateInputValue();
     }
@@ -335,6 +356,72 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     });
   };
 
+  private handleChangeTime = (date: Date, isSecond: boolean) => {
+    const { useRange, onChange, onChangeRange, minDate, maxDate } = this.props;
+    const { selectedDate, secondDate } = this.state;
+    if (!useRange) {
+      if (
+        (minDate && minDate.getTime() > date.getTime()) ||
+        (maxDate && maxDate.getTime() < date.getTime()) ||
+        (onChange && onChange(date) === false)
+      ) {
+        return;
+      }
+      this.setState(
+        {
+          selectedDate: date,
+        },
+        this.calculateInputValue
+      );
+      return;
+    }
+    const startTime = isSecond ? selectedDate : date;
+    const endTime = isSecond ? date : secondDate;
+
+    if (!startTime || !endTime) {
+      if (isSecond) {
+        if (maxDate && maxDate.getTime() < date.getTime()) {
+          return;
+        }
+        this.setState(
+          {
+            secondDate: date,
+          },
+          this.calculateInputValue
+        );
+        return;
+      }
+      if (minDate && minDate.getTime() > date.getTime()) {
+        return;
+      }
+      this.setState(
+        {
+          selectedDate: date,
+        },
+        this.calculateInputValue
+      );
+      return;
+    }
+    const [start, end] = this.sortDate(startTime, endTime);
+    if (minDate && minDate.getTime() > start.getTime()) {
+      return;
+    }
+    if (maxDate && maxDate.getTime() < start.getTime()) {
+      return;
+    }
+
+    if (onChangeRange && onChangeRange({ start, end }) === false) {
+      return;
+    }
+    this.setState(
+      {
+        selectedDate: start,
+        secondDate: end,
+      },
+      this.calculateInputValue
+    );
+  };
+
   private handleChangeDate = (date: Date) => {
     const { onChange, onChangeRange, useRange } = this.props;
     const { selectedDate, secondDate } = this.state;
@@ -353,6 +440,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
             this.calculateInputValue
           );
         }
+        date.setHours(23, 59, 59, 999);
         return this.setState(
           {
             secondDate: date,
