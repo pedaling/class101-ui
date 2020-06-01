@@ -218,21 +218,19 @@ const navigationPositionStyle: { [key in CarouselNavigationPosition]: FlattenSim
 const StyledSwiper = styled(Swiper)<StyledSwiperProps>`
   &.swiper-container {
     ${props =>
-      props.lgSlidesSideOffset
-        ? `
-            padding-left: ${props.lgSlidesSideOffset}px;
-            padding-right: ${props.lgSlidesSideOffset}px;
-          `
-        : ''};
+      `
+        padding-left: ${props.lgSlidesSideOffset}px;
+        padding-right: ${props.lgSlidesSideOffset}px;
+      `};
+
     ${props =>
-      props.smSlidesSideOffset
-        ? `
-            ${media.sm`
-            padding-left: ${props.smSlidesSideOffset}px;
-            padding-right: ${props.smSlidesSideOffset}px;
-          `};
-          `
-        : ''};
+      props.smSlidesSideOffset !== undefined &&
+      css`
+        ${media.sm`
+          padding-left: ${props.smSlidesSideOffset}px;
+          padding-right: ${props.smSlidesSideOffset}px;
+        `};
+      `};
 
     ${props =>
       (props.hasNavigation && props.navigationPosition === CarouselNavigationPosition.BottomRightOut) ||
@@ -243,9 +241,9 @@ const StyledSwiper = styled(Swiper)<StyledSwiperProps>`
         : ''};
 
     ${props =>
-      props.hasNavigation && props.navigationPosition === CarouselNavigationPosition.TopRightOut
-        ? 'padding-top: 48px; margin-top: -48px;'
-        : ''};
+      props.hasNavigation &&
+      props.navigationPosition === CarouselNavigationPosition.TopRightOut &&
+      'padding-top: 48px; margin-top: -48px;'};
   }
 
   .swiper-default-navigation {
