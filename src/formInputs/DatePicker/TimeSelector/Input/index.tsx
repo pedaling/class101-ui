@@ -13,10 +13,10 @@ export const TimeSelectorInput = React.memo<Props>(props => {
   const { value, onChange } = props;
 
   const handleChange = useCallback(
-    (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = new Date(value);
       if (event.target instanceof HTMLInputElement) {
-        switch (name) {
+        switch (event.target.name) {
           case 'hours':
             newValue.setHours(Number(event.target.value));
             break;
@@ -34,11 +34,11 @@ export const TimeSelectorInput = React.memo<Props>(props => {
 
   return (
     <Container>
-      <TimeInput min={0} max={23} onChange={handleChange('hours')} value={padNumber(value.getHours(), 2)} />
+      <TimeInput min={0} max={23} name="hours" onChange={handleChange} value={padNumber(value.getHours(), 2)} />
       <TimeDivider />
-      <TimeInput min={0} max={59} onChange={handleChange('minutes')} value={padNumber(value.getMinutes(), 2)} />
+      <TimeInput min={0} max={59} name="minutes" onChange={handleChange} value={padNumber(value.getMinutes(), 2)} />
       <TimeDivider />
-      <TimeInput min={0} max={59} onChange={handleChange('seconds')} value={padNumber(value.getSeconds(), 2)} />
+      <TimeInput min={0} max={59} name="seconds" onChange={handleChange} value={padNumber(value.getSeconds(), 2)} />
     </Container>
   );
 });
