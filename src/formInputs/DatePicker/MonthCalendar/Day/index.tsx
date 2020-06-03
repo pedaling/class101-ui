@@ -10,6 +10,7 @@ export interface MonthCalendarDayProps {
   readonly isOtherMonth: boolean;
   readonly isSelected: boolean;
   readonly isInRange: boolean;
+  readonly useRange: boolean;
   readonly dayIndex: number;
   readonly highlightWeekEnd: boolean;
   readonly onClick: (date: Date) => void;
@@ -17,7 +18,7 @@ export interface MonthCalendarDayProps {
 }
 
 export const MonthCalendarDay = React.memo<MonthCalendarDayProps>(props => {
-  const { date, onClick, onHover, ...otherProps } = props;
+  const { date, useRange, onClick, onHover, ...otherProps } = props;
   const dateObject = new Date(date);
   const onClickDate = useCallback(() => {
     if (!otherProps.disabled) {
@@ -30,7 +31,7 @@ export const MonthCalendarDay = React.memo<MonthCalendarDayProps>(props => {
     }
   }, [dateObject, onHover]);
 
-  if (!onHover && otherProps.isSelected) {
+  if (useRange && !onHover && otherProps.isSelected) {
     return (
       <SelectedDay {...otherProps} onClick={onClickDate} onMouseOver={onHoverDate}>
         {dateObject.getDate()}
@@ -45,7 +46,7 @@ export const MonthCalendarDay = React.memo<MonthCalendarDayProps>(props => {
   );
 });
 
-const dayCss = (props: Omit<MonthCalendarDayProps, 'onClick' | 'onHover' | 'date'>) => css`
+const dayCss = (props: Omit<MonthCalendarDayProps, 'onClick' | 'onHover' | 'date' | 'useRange'>) => css`
   ${body2};
   box-sizing: content-box;
   display: flex;
@@ -95,11 +96,11 @@ const dayCss = (props: Omit<MonthCalendarDayProps, 'onClick' | 'onHover' | 'date
   }}
 `;
 
-const Day = styled.div<Omit<MonthCalendarDayProps, 'onClick' | 'onHover' | 'date'>>`
+const Day = styled.div<Omit<MonthCalendarDayProps, 'onClick' | 'onHover' | 'date' | 'useRange'>>`
   ${props => dayCss(props)}
 `;
 
-const SelectedDay = styled.p<Omit<MonthCalendarDayProps, 'onClick' | 'onHover' | 'date'>>`
+const SelectedDay = styled.p<Omit<MonthCalendarDayProps, 'onClick' | 'onHover' | 'date' | 'useRange'>>`
   ${props => dayCss(props)}
   &:last-of-type::before {
     position: absolute;

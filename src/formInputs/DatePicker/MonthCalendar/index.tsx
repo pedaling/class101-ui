@@ -45,6 +45,7 @@ export class MonthCalendar extends React.PureComponent<Props, State> {
               key={day.date}
               onClick={this.onClickDate}
               onHover={useHover ? this.onChangeHover : undefined}
+              useRange={isRange}
               {...day}
             />
           ))}
