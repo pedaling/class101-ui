@@ -22,7 +22,7 @@ interface State {
   hoverDate: Date | null;
 }
 
-type DayType = Omit<MonthCalendarDayProps, 'onClick' | 'onHover'>;
+type DayType = Omit<MonthCalendarDayProps, 'useRange' | 'onClick' | 'onHover'>;
 
 export class MonthCalendar extends React.PureComponent<Props, State> {
   public readonly state: State = {
