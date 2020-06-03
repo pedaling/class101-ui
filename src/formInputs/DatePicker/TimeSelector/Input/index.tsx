@@ -13,7 +13,7 @@ export const TimeSelectorInput = React.memo<Props>(props => {
   const { value, onChange } = props;
 
   const handleChange = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = new Date(value);
       if (event.target instanceof HTMLInputElement) {
         switch (event.target.name) {
@@ -33,17 +33,17 @@ export const TimeSelectorInput = React.memo<Props>(props => {
   );
 
   return (
-    <Container onChange={handleChange}>
-      <TimeInput min={0} max={23} name="hours" value={padNumber(value.getHours(), 2)} />
+    <Container>
+      <TimeInput min={0} max={23} name="hours" onChange={handleChange} value={padNumber(value.getHours(), 2)} />
       <TimeDivider />
-      <TimeInput min={0} max={59} name="minutes" value={padNumber(value.getMinutes(), 2)} />
+      <TimeInput min={0} max={59} name="minutes" onChange={handleChange} value={padNumber(value.getMinutes(), 2)} />
       <TimeDivider />
-      <TimeInput min={0} max={59} name="seconds" value={padNumber(value.getSeconds(), 2)} />
+      <TimeInput min={0} max={59} name="seconds" onChange={handleChange} value={padNumber(value.getSeconds(), 2)} />
     </Container>
   );
 });
 
-const Container = styled.form`
+const Container = styled.div`
   padding: 8px 16px;
   background: ${white};
   border: 1px solid ${gray200};
