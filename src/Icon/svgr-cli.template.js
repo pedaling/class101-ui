@@ -1,26 +1,12 @@
-function template({ template }, opts, { imports, componentName, jsx }) {
-  const typeScriptTpl = template.smart({
-    plugins: ['typescript', 'classProperties'],
-  });
+function defaultTemplate({ template }, _, { componentName, jsx }) {
+  const typeScriptTpl = template.smart({ plugins: ['jsx', 'typescript'] });
+  const IconComponentName = componentName.name.slice(3);
 
   return typeScriptTpl.ast`
-    ${imports}
+    import React from 'react';
     import { IconProps } from '../index';
-
-    export default class ${componentName} extends React.PureComponent<IconProps> {
-      public static defaultProps: Partial<IconProps> = {
-        fillColor: '#1B1C1D',
-        accentColor: '#DDE0E2',
-        size: 24,
-      };
-
-      public render() {
-        return (
-          ${jsx}
-        );
-      }
-    }
+    
+    export const ${IconComponentName} = React.memo<IconProps>(({size = 24, fillColor = '#1B1C1D', accentColor = '#DDE0E2', className, style}) => ${jsx})
   `;
 }
-
-module.exports = template;
+module.exports = defaultTemplate;

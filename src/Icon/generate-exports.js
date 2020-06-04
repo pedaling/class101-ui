@@ -19,7 +19,7 @@ const generatedForExportIconCode = files
   .filter(f => f.includes('tsx'))
   .map(f => {
     const fileName = f.split('.')[0];
-    return `export { default as ${fileName} } from './generated/${fileName}';`;
+    return `export * from './generated/${fileName}';`;
   })
   .join('\n');
 

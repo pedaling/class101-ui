@@ -20,6 +20,6 @@ export interface IconProps {
   style?: React.CSSProperties;
 }
 
-export { default as Add } from './generated/Add';
-export { default as AddCircleOutline } from './generated/AddCircleOutline';
+export * from './generated/Add';
+export * from './generated/AddCircleOutline';
 ```
