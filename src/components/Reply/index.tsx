@@ -183,6 +183,8 @@ const AvatarWrapper = styled.div`
 `;
 
 const ContentWrapper = styled.div<{ size: ReplySize; marginLeft: number }>`
+  display: flex;
+  flex-direction: column;
   margin-top: ${props => (props.size === ReplySize.SMALL ? '4px' : '12px')};
   margin-left: ${props => (props.size === ReplySize.SMALL ? `${props.marginLeft}px` : '0')};
 `;
