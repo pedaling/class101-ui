@@ -1,8 +1,9 @@
-import { TextButton } from 'components/Button';
-import { gray500, gray800 } from 'core/Colors';
-import { body2 } from 'core/TextStyles';
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
+
+import { gray500, gray800 } from '../../../core/Colors';
+import { body2 } from '../../../core/TextStyles';
+import { TextButton } from '../../Button';
 
 interface Props {
   useLineClamp: boolean;
@@ -27,7 +28,7 @@ export const ReplyContent: FC<Props> = React.memo(props => {
       return current.scrollHeight > current.clientHeight;
     }
     return false;
-  }, [contentRef, children]);
+  }, [children]);
 
   const calculateClamped = useCallback(() => {
     const initialLineClampable = useLineClamp && getContentClamped();

@@ -1,9 +1,9 @@
-import { Avatar, AvatarProps, AvatarSize } from 'components/Avatar';
-import { BreakPoints, Caption1, Caption2 } from 'core';
-import { gray500, gray800, orange500 } from 'core/Colors';
 import React, { ReactElement, ReactNode, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
+import { BreakPoints, Caption1, Caption2 } from '../../core';
+import { gray500, gray800, orange500 } from '../../core/Colors';
+import { Avatar, AvatarProps, AvatarSize } from '.././Avatar';
 import { ButtonIconPosition } from '../Button/ButtonIcon';
 import { ReplyAction, ReplyActionProps } from './Action';
 import { ReplyContent } from './Content';
@@ -55,7 +55,7 @@ export const Reply = Object.assign(
   React.memo<ReplyProps>(props => {
     const {
       avatar,
-      name = '서지',
+      name,
       nameDescription,
       nameDescriptionColor = orange500,
       timeText,
@@ -202,10 +202,9 @@ const TitleContainer = styled.div`
   margin-left: 12px;
 `;
 
-const NameDescription = styled(Caption2)<{ color: string; size: ReplySize }>`
+const NameDescription = styled(Caption2)<{ size: ReplySize }>`
   display: flex;
   margin-left: ${props => (props.size === ReplySize.SMALL ? 'auto' : '4px')};
-  color: ${props => props.color};
 `;
 
 const TimeText = styled(Caption2)<{ size: ReplySize }>`

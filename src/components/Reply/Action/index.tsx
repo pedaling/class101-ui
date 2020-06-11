@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, ReactNode } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-import { BreakPoints, Caption1 } from '../../../core';
+import { Caption1 } from '../../../core';
 import { gray500 } from '../../../core/Colors';
 import { IconButton, IconButtonProps } from '../../Button';
 import { ButtonIconPosition } from '../../Button/ButtonIcon';
@@ -40,21 +40,13 @@ const Container = styled.div<Pick<ReplyActionProps, 'position' | 'onClick'>>`
   display: flex;
   align-items: center;
 
-  ${props =>
-    props.onClick &&
-    css`
-      cursor: pointer;
-    `};
+  ${props => props.onClick && 'cursor: pointer'};
   ${({ position }) => {
     if (position === ButtonIconPosition.RIGHT) {
-      return css`
-        margin-left: 12px;
-      `;
+      return 'margin-left: 12px;';
     }
     if (position === ButtonIconPosition.LEFT) {
-      return css`
-        margin-right: 12px;
-      `;
+      return 'margin-right: 12px;';
     }
   }};
 `;
@@ -62,15 +54,10 @@ const Container = styled.div<Pick<ReplyActionProps, 'position' | 'onClick'>>`
 const TextWrapper = styled(Caption1)`
   margin-left: 5px;
   color: ${gray500};
-  ${BreakPoints.media.sm``}
 `;
 
 const FilledIconButton = styled(IconButton)<{ hasCursor: boolean }>`
   width: auto;
   height: auto;
-  ${props =>
-    !props.hasCursor &&
-    css`
-      cursor: default !important;
-    `};
+  ${props => !props.hasCursor && 'cursor: default !important'};
 `;
