@@ -51,12 +51,21 @@ const containerMinWidth: { [key in Size]: number } = {
   md: 24,
 };
 
+const containerPaddingSize: { [key in Size]: number } = {
+  xs: 4,
+  sm: 6,
+  md: 6,
+};
+
 const containerStyle = (size: BadgeProps['size'] = 'md', pill: BadgeProps['pill'] = false) => {
   const minWidth = typeof size === 'number' ? size : containerMinWidth[size];
+  const padding = typeof size === 'number' ? 0 : containerPaddingSize[size];
   return css`
     min-width: ${minWidth}px;
     height: ${minWidth}px;
     border-radius: ${pill ? minWidth / 2 : 3}px;
+    padding-left: ${padding}px;
+    padding-right: ${padding}px;
   `;
 };
 
