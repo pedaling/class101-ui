@@ -143,12 +143,10 @@ export const Reply = Object.assign(
           size={size}
         >
           <LeftActionContainer onClick={preventPropagation}>
-            {leftAction &&
-              leftAction.map((action, key) => React.cloneElement(action, { position: ButtonIconPosition.LEFT, key }))}
+            {leftAction?.map((action, key) => React.cloneElement(action, { position: ButtonIconPosition.LEFT, key }))}
           </LeftActionContainer>
           <RightActionContainer onClick={preventPropagation}>
-            {rightAction &&
-              rightAction.map((action, key) => React.cloneElement(action, { position: ButtonIconPosition.RIGHT, key }))}
+            {rightAction?.map((action, key) => React.cloneElement(action, { position: ButtonIconPosition.RIGHT, key }))}
           </RightActionContainer>
         </ActionWrapper>
         <CommentContainer marginLeft={contentMargin}>

@@ -28,7 +28,7 @@ export const ReplyAction: FC<ReplyActionProps> = React.memo(
     }
     return (
       <Container position={position} onClick={onClick}>
-        <FilledIconButton size="xs" color="transparent" fillColor={fillColor} hasCursor={!!onClick} {...restProps} />
+        <IconButton size="xs" color="transparent" fillColor={fillColor} {...restProps} />
         {text !== undefined && <TextWrapper color={textColor}>{text}</TextWrapper>}
         {children}
       </Container>
@@ -54,10 +54,4 @@ const Container = styled.div<Pick<ReplyActionProps, 'position' | 'onClick'>>`
 const TextWrapper = styled(Caption1)`
   margin-left: 5px;
   color: ${gray500};
-`;
-
-const FilledIconButton = styled(IconButton)<{ hasCursor: boolean }>`
-  width: auto;
-  height: auto;
-  ${props => !props.hasCursor && 'cursor: default !important'};
 `;
