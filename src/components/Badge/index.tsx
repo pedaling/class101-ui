@@ -59,7 +59,7 @@ const containerPaddingSize: { [key in Size]: number } = {
 
 const containerStyle = (size: BadgeProps['size'] = 'md', pill: BadgeProps['pill'] = false) => {
   const minWidth = typeof size === 'number' ? size : containerMinWidth[size];
-  const padding = typeof size === 'number' ? Math.ceil(size / 4) : containerPaddingSize[size];
+  const padding = typeof size === 'number' ? 0 : containerPaddingSize[size];
   return css`
     min-width: ${minWidth}px;
     height: ${minWidth}px;

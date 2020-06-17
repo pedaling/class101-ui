@@ -20,3 +20,4 @@ export * from './Swiper/DefaultNavigation';
 export * from './Swiper/Slide';
 export * from './Tabs';
 export * from './Tag';
+export * from './Reply';
