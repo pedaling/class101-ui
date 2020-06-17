@@ -1,7 +1,6 @@
 import { HTMLInputProps } from 'interfaces/props';
 import React from 'react';
 import styled from 'styled-components';
-
 import { gray900, orange500, redError } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
 import { FormInputFillStyle, FormInputStyle, FormInputStyleBySize, InputSize } from '../common';
@@ -72,7 +71,7 @@ export class Input extends React.PureComponent<HTMLInputProps & InputProps> {
   }
 }
 
-const StyledInput = styled.input<InputProps>`
+const StyledInput = styled(({ fill, size, ...restProps }: HTMLInputProps & InputProps) => <input {...restProps} />)`
   ${body2};
   ${FormInputStyle};
   ${props => FormInputStyleBySize[props.size]};
