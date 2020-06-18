@@ -4,7 +4,7 @@ name: DatePicker
 route: /form-inputs/datePicker
 ---
 
-import { DatePicker } from '@class101/ui';
+import { DatePicker, Button } from '@class101/ui';
 import en from '@class101/ui/formInputs/DatePicker/locales/en_US';
 import { Playground, Props } from 'docz';
 
@@ -75,14 +75,14 @@ onChange 이벤트 내에서 `return false`를 하면 날짜 선택이 막힙니
     alwaysShow
     inline
   />
-    <DatePicker
-      onChange={date => {
-        if (date.getHours() > 20) return false;
-      }}
-      alwaysShow
-      useTime
-      inline
-    />
+  <DatePicker
+    onChange={date => {
+      if (date.getHours() > 20) return false;
+    }}
+    alwaysShow
+    useTime
+    inline
+  />
   <DatePicker
     onChangeRange={({ start, end }) => {
       if (start.getDate() < 5) return false;
@@ -153,4 +153,34 @@ import ko from '@class101/ui/formInputs/DatePicker/locales/ko_KR';
 <Playground>
   <DatePicker adjustInputWidth={false} style={{ verticalAlign: 'top' }} inline />
   <DatePicker alwaysShow inline />
+</Playground>
+
+## 외부에서 state로 관리하기
+
+<Playground>
+  {() => {
+    const [range, setRange] = React.useState({
+      start: new Date(2020, 0, 1),
+      end: new Date(2020, 0, 15),
+    });
+    return (
+      <div>
+        <Button onClick={() => {
+          setRange({
+            start: new Date(2020, 3, 1),
+            end: new Date(2020, 3, 30),
+          });
+        }}>4월</Button>
+        <DatePicker
+          rangeValue={range}
+          onChangeRange={dateRange => {
+            alert('Changed ' + dateRange.start.toLocaleString() + ' > ' + dateRange.end.toLocaleString());
+          }}
+          alwaysShow
+          useRange
+          inline
+        />
+      </div>
+    );
+  }}
 </Playground>
