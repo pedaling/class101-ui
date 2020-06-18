@@ -103,7 +103,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
       prevProps.rangeValue.start?.getTime() !== this.props.rangeValue.start?.getTime() ||
       prevProps.rangeValue.end?.getTime() !== this.props.rangeValue.end?.getTime()
     ) {
-      this.calculateInputValue();
+      this.updateDateStateByPropsChange();
     }
   }
 
@@ -213,25 +213,48 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     return '';
   };
 
+  private updateDateStateByPropsChange = () => {
+    const { rangeValue, value, minDate: min } = this.props;
+
+    const selectedDate = value || rangeValue.start || rangeValue.end || null;
+    const secondDate = (rangeValue.start && rangeValue.end) || null;
+
+    this.setState({
+      selectedDate,
+      secondDate,
+      currentMonth: value
+        ? this.getDateMonth(value)
+        : rangeValue.start
+        ? this.getDateMonth(rangeValue.start)
+        : rangeValue.end
+        ? this.getDateMonth(rangeValue.end)
+        : min
+        ? this.getDateMonth(min)
+        : this.getDateMonth(new Date()),
+      inputValue: this.calculateInputValueByDates(selectedDate, secondDate),
+    });
+  };
+
+  private calculateInputValueByDates = (selectedDate: Date | null, secondDate: Date | null) => {
+    if (selectedDate && secondDate && selectedDate.getTime() > secondDate.getTime()) {
+      return `${this.getDateLocaleString(secondDate)} ${DatePickerRangeText} ${this.getDateLocaleString(selectedDate)}`;
+    }
+
+    return `${this.getDateLocaleString(selectedDate)} ${DatePickerRangeText} ${this.getDateLocaleString(secondDate)}`;
+  };
+
   private calculateInputValue = () => {
     const { useRange } = this.props;
     const { selectedDate, secondDate } = this.state;
 
     if (useRange) {
       if (!selectedDate && !secondDate) {
-        return this.setState({ inputValue: '' });
-      }
-      if (selectedDate && secondDate && selectedDate.getTime() > secondDate.getTime()) {
         return this.setState({
-          inputValue: `${this.getDateLocaleString(secondDate)} ${DatePickerRangeText} ${this.getDateLocaleString(
-            selectedDate
-          )}`,
+          inputValue: '',
         });
       }
       return this.setState({
-        inputValue: `${this.getDateLocaleString(selectedDate)} ${DatePickerRangeText} ${this.getDateLocaleString(
-          secondDate
-        )}`,
+        inputValue: this.calculateInputValueByDates(selectedDate, secondDate),
       });
     }
     return this.setState({ inputValue: this.getDateLocaleString(selectedDate) });
