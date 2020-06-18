@@ -171,11 +171,21 @@ import ko from '@class101/ui/formInputs/DatePicker/locales/ko_KR';
             end: new Date(2020, 3, 30),
           });
         }}>4월</Button>
+        <Button onClick={() => {
+          setRange({
+            start: new Date(2020, 4, 1),
+            end: new Date(2020, 4, 31),
+          });
+        }}>5월</Button>
+        <Button onClick={() => {
+          setRange({
+            start: new Date(2020, 5, 1),
+            end: new Date(2020, 5, 30),
+          });
+        }}>6월</Button>
         <DatePicker
           rangeValue={range}
-          onChangeRange={dateRange => {
-            alert('Changed ' + dateRange.start.toLocaleString() + ' > ' + dateRange.end.toLocaleString());
-          }}
+          onChangeRange={() => setRange(range)}
           alwaysShow
           useRange
           inline
