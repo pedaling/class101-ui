@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
-
 import { gray500 } from '../../../core/Colors';
 import { body2 } from '../../../core/TextStyles';
 import { ButtonSize, TextButton } from '../../Button';
@@ -10,6 +9,7 @@ interface Props {
   maxLine: number;
   readMoreText: string;
   hideText: string;
+  hideReadMore?: boolean;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
@@ -31,14 +31,14 @@ export class CommentContent extends PureComponent<Props, State> {
   }
 
   public render() {
-    const { children, maxLine, onClick, readMoreText, hideText } = this.props;
+    const { children, maxLine, onClick, hideReadMore, readMoreText, hideText } = this.props;
     const { lineClampable, lineClamped } = this.state;
     return (
       <Container>
         <Content useLineClamp={lineClamped} maxLine={maxLine} ref={this.contentRef} onClick={onClick}>
           {children}
         </Content>
-        {lineClampable && (
+        {!hideReadMore && lineClampable && (
           <ClampToggleButton size={ButtonSize.SMALL} onClick={this.handleToggleClampButton}>
             {lineClamped ? readMoreText : hideText}
           </ClampToggleButton>

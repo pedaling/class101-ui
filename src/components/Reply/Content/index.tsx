@@ -1,6 +1,5 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-
 import { gray500, gray800 } from '../../../core/Colors';
 import { body2 } from '../../../core/TextStyles';
 import { TextButton } from '../../Button';
@@ -10,11 +9,12 @@ interface Props {
   maxLine: number;
   readMoreText: string;
   hideText: string;
+  hideReadMore?: boolean;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
 export const ReplyContent: FC<Props> = React.memo(props => {
-  const { children, useLineClamp, maxLine, readMoreText, hideText, onClick } = props;
+  const { children, useLineClamp, maxLine, readMoreText, hideText, hideReadMore, onClick } = props;
 
   const [lineClamped, setLineClamped] = useState(true);
   const [lineClampable, setLineClampable] = useState(false);
@@ -54,7 +54,7 @@ export const ReplyContent: FC<Props> = React.memo(props => {
       <Content useLineClamp={lineClamped} maxLine={maxLine} ref={contentRef} onClick={onClick}>
         {children}
       </Content>
-      {lineClampable && (
+      {!hideReadMore && lineClampable && (
         <ClampToggleButton onClick={handleToggleClampButton}>{lineClamped ? readMoreText : hideText}</ClampToggleButton>
       )}
     </>

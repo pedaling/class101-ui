@@ -1,6 +1,5 @@
 import React, { ReactElement, ReactNode, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
-
 import { BreakPoints, Caption1, Caption2 } from '../../core';
 import { gray500, gray800, orange500 } from '../../core/Colors';
 import { Avatar, AvatarProps, AvatarSize } from '.././Avatar';
@@ -21,6 +20,7 @@ export interface ReplyProps {
 
   readMoreText: string;
   hideText: string;
+  hideReadMore: boolean;
 
   /** 대 댓글이 표시 되는 여부. */
   showChildren: boolean;
@@ -74,6 +74,7 @@ export const Reply = Object.assign(
       onContentClick,
       readMoreText = '전체보기',
       hideText = '숨기기',
+      hideReadMore = false,
     } = props;
 
     const avatarSize = useMemo(() => {
@@ -130,6 +131,7 @@ export const Reply = Object.assign(
           <ReplyContent
             readMoreText={readMoreText}
             hideText={hideText}
+            hideReadMore={hideReadMore}
             useLineClamp={!disableLineClamp}
             maxLine={maxLine}
             onClick={onContentClick}
