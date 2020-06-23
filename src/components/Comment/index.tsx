@@ -1,6 +1,5 @@
 import React, { PureComponent, ReactElement, ReactNode } from 'react';
 import styled from 'styled-components';
-
 import { Caption1, Caption2 } from '../../core';
 import { gray500, orange600 } from '../../core/Colors';
 import { Avatar, AvatarProps, AvatarSize } from '../Avatar';
@@ -21,6 +20,7 @@ export interface CommentProps {
 
   readMoreText: string;
   hideText: string;
+  hideReadMore?: boolean;
 
   /** 대댓글이 표시되는 여부. */
   showChildren: boolean;
@@ -78,6 +78,7 @@ export class Comment extends PureComponent<CommentProps> {
       className,
       onClick,
       onContentClick,
+      hideReadMore = false,
       readMoreText,
       hideText,
     } = this.props;
@@ -104,6 +105,7 @@ export class Comment extends PureComponent<CommentProps> {
           <CommentContent
             readMoreText={readMoreText}
             hideText={hideText}
+            hideReadMore={hideReadMore}
             useLineClamp={!disableLineClamp}
             maxLine={maxLine}
             onClick={onContentClick}
