@@ -269,6 +269,8 @@ const DialogBody = styled.div<{ hideScroll: boolean; removeContentPadding: boole
   overflow-y: auto;
   overflow-x: hidden;
   word-break: break-all;
+  overscroll-behavior: contain;
+
   ${props =>
     props.hideScroll &&
     `
@@ -279,17 +281,15 @@ const DialogBody = styled.div<{ hideScroll: boolean; removeContentPadding: boole
 
   ${props =>
     props.removeContentPadding &&
-    `
-    margin-left: -32px;
-    margin-right: -32px;
+    css`
+      margin-left: -32px;
+      margin-right: -32px;
 
-    ${media.sm`
-      margin-left: -24px;
-      margin-right: -24px;
+      ${media.sm`
+        margin-left: -24px;
+        margin-right: -24px;
+      `}
     `}
-  `}
-
-  overscroll-behavior: contain;
 `;
 
 const DialogFooterButton = styled(Button)`
