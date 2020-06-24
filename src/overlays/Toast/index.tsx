@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
-
 import { gray900 } from '../../core/Colors';
 import { elevation1 } from '../../core/ElevationStyles';
 import { Position } from '../../core/Position';
@@ -153,6 +152,7 @@ const Icon = styled.span`
 
 const Message = styled.span`
   margin-right: 12px;
+  white-space: pre-wrap;
   word-break: break-all;
 `;
 
