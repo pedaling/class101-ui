@@ -1,12 +1,20 @@
 import classNames from 'classnames';
-import React, { FC, MutableRefObject, ReactNode, useEffect, useMemo, useRef, useState } from 'react';
+import React, { FC, MutableRefObject, ReactNode, useEffect, useRef, useState } from 'react';
 import { SwiperOptions } from 'swiper';
-import { Autoplay, Navigation, Pagination, Swiper as OriginalSwiper } from 'swiper/dist/js/swiper.esm.js';
+import {
+  Autoplay,
+  Navigation,
+  Pagination,
+  Swiper as OriginalSwiper,
+  Virtual,
+  Lazy,
+  Keyboard,
+} from 'swiper/dist/js/swiper.esm.js';
 
 import { createUniqIDGenerator } from '../../utils/createUniqIDGenerator';
 import { DefaultNavigation } from './DefaultNavigation';
 
-OriginalSwiper.use([Navigation, Pagination, Autoplay]);
+OriginalSwiper.use([Navigation, Pagination, Autoplay, Virtual, Lazy, Keyboard]);
 
 export type SwiperInstance = OriginalSwiper;
 
