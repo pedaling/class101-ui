@@ -71,7 +71,11 @@ export class Input extends React.PureComponent<HTMLInputProps & InputProps> {
   }
 }
 
-const StyledInput = styled(({ fill, size, ...restProps }: HTMLInputProps & InputProps) => <input {...restProps} />)`
+const StyledInput = styled(
+  React.forwardRef<HTMLInputElement, HTMLInputProps & InputProps>(({ fill, size, ...restProps }, ref) => (
+    <input ref={ref} {...restProps} />
+  ))
+)`
   ${body2};
   ${FormInputStyle};
   ${props => FormInputStyleBySize[props.size]};
