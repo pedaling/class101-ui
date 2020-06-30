@@ -1,5 +1,6 @@
 import React, { PureComponent, ReactElement, ReactNode } from 'react';
 import styled from 'styled-components';
+
 import { Caption1, Caption2 } from '../../core';
 import { gray500, orange600 } from '../../core/Colors';
 import { Avatar, AvatarProps, AvatarSize } from '../Avatar';
@@ -141,6 +142,7 @@ export class Comment extends PureComponent<CommentProps> {
   }
 
   private preventPropagation: React.MouseEventHandler<HTMLDivElement> = event => {
+    event.preventDefault();
     event.stopPropagation();
   };
 }

@@ -1,5 +1,6 @@
 import React, { ReactElement, ReactNode, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
+
 import { BreakPoints, Caption1, Caption2 } from '../../core';
 import { gray500, gray800, orange500 } from '../../core/Colors';
 import { Avatar, AvatarProps, AvatarSize } from '.././Avatar';
@@ -92,6 +93,7 @@ export const Reply = Object.assign(
     }, [avatar, avatarSize, name]);
 
     const preventPropagation = useCallback((event: React.MouseEvent<Element, MouseEvent>) => {
+      event.preventDefault();
       event.stopPropagation();
     }, []);
 
