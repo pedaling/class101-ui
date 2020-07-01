@@ -3,18 +3,18 @@ import React, { FC, MutableRefObject, ReactNode, useEffect, useRef, useState } f
 import { SwiperOptions } from 'swiper';
 import {
   Autoplay,
+  EffectFade,
+  Keyboard,
+  Lazy,
   Navigation,
   Pagination,
   Swiper as OriginalSwiper,
   Virtual,
-  Lazy,
-  Keyboard,
 } from 'swiper/dist/js/swiper.esm.js';
-
 import { createUniqIDGenerator } from '../../utils/createUniqIDGenerator';
 import { DefaultNavigation } from './DefaultNavigation';
 
-OriginalSwiper.use([Navigation, Pagination, Autoplay, Virtual, Lazy, Keyboard]);
+OriginalSwiper.use([Navigation, Pagination, Autoplay, Virtual, Lazy, Keyboard, EffectFade]);
 
 export type SwiperInstance = OriginalSwiper;
 
