@@ -21,8 +21,12 @@ export const Link = React.memo(
 
     const shouldOpenNewTab = external || props.to.search(httpRegExp) !== -1;
 
+    // NOTE: noreferrer의 사용은 noreferrer noopener을 함께 사용하는 것과 같은 동작을 하며
+    // https://html.spec.whatwg.org/multipage/links.html#link-type-noreferrer
+    // noreferrer만 사용하는 것이 window.opener 값을 null로 바꾸는 브라우저 테스트에서 더 많이 성공합니다.
+    // https://github.com/yannickcr/eslint-plugin-react/issues/2022#issuecomment-526320768
     const externalAttributes = {
-      ...(shouldOpenNewTab && { target: '_blank', rel: 'noopener noreferrer' }),
+      ...(shouldOpenNewTab && { target: '_blank', rel: 'noreferrer' }),
     };
 
     if (LinkComponent) {
