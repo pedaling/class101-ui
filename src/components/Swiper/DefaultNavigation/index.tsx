@@ -32,10 +32,13 @@ const Button = styled(IconButton)`
     &:focus {
       outline: none;
     }
-    &:active,
-    &:disabled {
+    &:not(.swiper-button-disabled):active {
       opacity: 1;
       pointer-events: auto;
+    }
+    &.swiper-button-disabled {
+      pointer-events: auto;
+      cursor: not-allowed;
     }
   }
 
