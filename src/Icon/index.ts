@@ -118,6 +118,7 @@ export * from './generated/Notice';
 export * from './generated/NoticeOutline';
 export * from './generated/Paper';
 export * from './generated/Paper2';
+export * from './generated/Paper3';
 export * from './generated/PaperLine';
 export * from './generated/PaperOutline';
 export * from './generated/Person';
