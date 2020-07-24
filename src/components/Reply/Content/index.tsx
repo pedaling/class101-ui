@@ -40,14 +40,11 @@ export const ReplyContent: FC<Props> = React.memo(props => {
     calculateClamped();
   }, [calculateClamped]);
 
-  const handleToggleClampButton = useCallback(
-    (event: React.MouseEvent<Element, MouseEvent>) => {
-      setLineClamped(!lineClamped);
-      event.preventDefault();
-      event.stopPropagation();
-    },
-    [lineClamped]
-  );
+  const handleToggleClampButton = useCallback((event: React.MouseEvent<Element, MouseEvent>) => {
+    setLineClamped(value => !value);
+    event.preventDefault();
+    event.stopPropagation();
+  }, []);
 
   return (
     <>
