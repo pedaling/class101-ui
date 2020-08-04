@@ -305,7 +305,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
         if (
           (minDate && minDate.getTime() > firstDate.getTime()) ||
           (maxDate && maxDate.getTime() < secondDate.getTime()) ||
-          (onChangeRange && onChangeRange({ start: minDate, end: maxDate }) === false)
+          (onChangeRange && onChangeRange({ start: firstDate, end: secondDate }) === false)
         ) {
           return this.calculateInputValue();
         }
