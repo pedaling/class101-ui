@@ -302,9 +302,13 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
           this.calculateInputValue
         );
       } else if (!isNaN(firstDate.getTime()) && !isNaN(secondDate.getTime())) {
-        if (
-          (minDate && minDate.getTime() > firstDate.getTime()) ||
-          (maxDate && maxDate.getTime() < secondDate.getTime()) ||
+     if (minDate && minDate.getTime() > firstDate.getTime()) {
+       firstDate = minDate;
+     }
+     if (maxDate && maxDate.getTime() < secondDate.getTime()) {
+       secondDate = maxDate;
+     }
+     if (
           (onChangeRange && onChangeRange({ start: firstDate, end: secondDate }) === false)
         ) {
           return this.calculateInputValue();
