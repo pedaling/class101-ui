@@ -286,8 +286,8 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
 
     if (useRange) {
       const [firstDateText, secondDateText] = dateText.split(DatePickerRangeText);
-      const firstDate = new Date(firstDateText);
-      const secondDate = new Date(secondDateText);
+      let firstDate = new Date(firstDateText);
+      let secondDate = new Date(secondDateText);
 
       if (!isNaN(firstDate.getTime()) && isNaN(secondDate.getTime())) {
         if (minDate && minDate.getTime() > firstDate.getTime()) {
@@ -302,15 +302,13 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
           this.calculateInputValue
         );
       } else if (!isNaN(firstDate.getTime()) && !isNaN(secondDate.getTime())) {
-     if (minDate && minDate.getTime() > firstDate.getTime()) {
-       firstDate = minDate;
-     }
-     if (maxDate && maxDate.getTime() < secondDate.getTime()) {
-       secondDate = maxDate;
-     }
-     if (
-          (onChangeRange && onChangeRange({ start: firstDate, end: secondDate }) === false)
-        ) {
+        if (minDate && minDate.getTime() > firstDate.getTime()) {
+          firstDate = minDate;
+        }
+        if (maxDate && maxDate.getTime() < secondDate.getTime()) {
+          secondDate = maxDate;
+        }
+        if (onChangeRange && onChangeRange({ start: firstDate, end: secondDate }) === false) {
           return this.calculateInputValue();
         }
         const [, second] = this.sortDate(firstDate, secondDate);
