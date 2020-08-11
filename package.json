@@ -57,6 +57,7 @@
     "@types/react-dom": "^16.8.3",
     "@types/styled-components": "5.1.0",
     "@types/swiper": "^4.4.5",
+    "babel-plugin-styled-components": "^1.11.1",
     "cross-env": "^5.1.4",
     "dist-size": "^0.4.0",
     "docz": "^2.3.1",
