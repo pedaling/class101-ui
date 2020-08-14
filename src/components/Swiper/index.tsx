@@ -24,6 +24,7 @@ export interface SwiperProps extends SwiperOptions {
   paginationChildren?: ReactNode;
   getSwiperInstance?: (swiperInstance: OriginalSwiper) => void;
   className?: string;
+  'data-element-name'?: string;
 }
 
 const generateId = createUniqIDGenerator('swiper-');

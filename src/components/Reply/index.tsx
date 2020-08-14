@@ -41,6 +41,7 @@ export interface ReplyProps {
   rightAction?: ReactElement<ReplyActionProps>[];
   content?: ReactNode;
   className?: string;
+  'data-element-name'?: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   onContentClick?: React.MouseEventHandler<HTMLDivElement>;
   passingClickEventClampButton?: boolean;
@@ -73,6 +74,7 @@ export const Reply = Object.assign(
       className,
       onClick,
       onContentClick,
+      'data-element-name': dataElementName,
       readMoreText = '전체보기',
       hideText = '숨기기',
       hideReadMore = false,
@@ -111,7 +113,7 @@ export const Reply = Object.assign(
     );
 
     return (
-      <Container width={width} className={className} onClick={onClick}>
+      <Container width={width} className={className} onClick={onClick} data-element-name={dataElementName}>
         <DescriptionContainer>
           <AvatarWrapper ref={handleSetContentMargin}>{clonedAvatar}</AvatarWrapper>
           <TitleContainer>

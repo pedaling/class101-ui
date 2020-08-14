@@ -44,6 +44,7 @@ export interface CarouselProps {
   containerContentMaxWidth?: number;
   pagination?: boolean;
   navigation?: boolean;
+  'data-element-name'?: string;
 }
 
 export enum CarouselNavigationPosition {
@@ -94,6 +95,7 @@ export class Carousel extends PureComponent<CarouselProps> {
       paginationTheme,
       lgSlidesSideOffset,
       smSlidesSideOffset,
+      'data-element-name': dataElementName,
     } = this.props;
 
     const swiperParams = this.getSwiperParams();
@@ -109,6 +111,7 @@ export class Carousel extends PureComponent<CarouselProps> {
         paginationTheme={paginationTheme}
         lgSlidesSideOffset={lgSlidesSideOffset}
         smSlidesSideOffset={smSlidesSideOffset}
+        data-element-name={dataElementName}
         {...swiperParams}
       >
         {children}

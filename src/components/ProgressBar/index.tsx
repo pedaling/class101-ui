@@ -8,6 +8,7 @@ export interface ProgressBarProps {
   backgroundColor?: string;
   barColor?: string;
   height?: number;
+  'data-element-name'?: string;
 }
 
 export const ProgressBar = memo(

@@ -22,9 +22,9 @@ export class Callout extends PureComponent<Readonly<CalloutProps>> {
   };
 
   public render() {
-    const { title, icon, status, className, children, action } = this.props;
+    const { title, icon, status, className, children, action, 'data-element-name': dataElementName } = this.props;
     return (
-      <Container status={status} className={className}>
+      <Container status={status} className={className} data-element-name={dataElementName}>
         <Title>
           <Icon>{icon && status === CalloutStatus.DEFAULT ? icon : iconByStatus[status]}</Icon>
           {title}

@@ -7,6 +7,7 @@ interface SpinnerProps {
   size?: number;
   backgroundColor?: string;
   color?: string;
+  'data-element-name'?: string;
 }
 
 export const Spinner: FC<SpinnerProps> = React.memo(({ size, backgroundColor, color, ...restProps }) => {

@@ -29,4 +29,5 @@ export interface CalloutProps {
   icon?: React.ReactNode;
   action?: ActionProps;
   className?: string;
+  'data-element-name'?: string;
 }

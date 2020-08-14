@@ -22,6 +22,7 @@ interface ButtonBaseProps<ColorValue, SizeValue> {
   disabled?: boolean;
   className?: string;
   external?: boolean;
+  'data-element-name'?: string;
 }
 
 type OmittedAnchorAttributes<ColorValue, SizeValue> = Omit<

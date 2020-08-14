@@ -11,12 +11,13 @@ export interface PaginationProps {
   currentPageIndex: number;
   pageCountPerView?: number;
   className?: string;
+  'data-element-name'?: string;
   onChange?: (pageIndex: number) => void;
 }
 
 export class Pagination extends PureComponent<PaginationProps> {
   public render() {
-    const { totalPageIndex, currentPageIndex, className } = this.props;
+    const { totalPageIndex, currentPageIndex, className, 'data-element-name': dataElementName } = this.props;
     const handleIncrease = this.handleChange(currentPageIndex + 1);
     const handleDecrease = this.handleChange(currentPageIndex - 1);
 
@@ -24,7 +25,7 @@ export class Pagination extends PureComponent<PaginationProps> {
     const indexListToDisplay = this.getIndexListToDisplay(currentPageIndex, totalPageIndex, pageCountPerView);
 
     return (
-      <PageWrapper className={className}>
+      <PageWrapper className={className} data-element-name={dataElementName}>
         <PageIconBtn icon={<ChevronLeft />} onClick={handleDecrease} disabled={currentPageIndex <= 0} />
         {indexListToDisplay.map(index => (
           <PageBtn

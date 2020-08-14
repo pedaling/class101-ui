@@ -7,6 +7,7 @@ import { ifDarkTheme } from '../../utils';
 export interface SkeletonProps {
   style?: React.CSSProperties;
   className?: string;
+  'data-element-name'?: string;
   /**
    * radius 50%
    */
@@ -38,7 +39,18 @@ export interface SkeletonProps {
 }
 
 export const Skeleton: FC<SkeletonProps> = memo(
-  ({ style, className, color, circle, width, height, count = 0, rounded = true, children }) => {
+  ({
+    style,
+    className,
+    color,
+    circle,
+    width,
+    height,
+    count = 0,
+    rounded = true,
+    children,
+    'data-element-name': dataElementName,
+  }) => {
     const skeletonInlineStyle = useMemo(() => {
       const inlineStyle = style || {};
       if (width) {
@@ -64,7 +76,14 @@ export const Skeleton: FC<SkeletonProps> = memo(
     }, [count]);
 
     return (
-      <Container style={skeletonInlineStyle} className={className} color={color} rounded={rounded} circle={circle}>
+      <Container
+        style={skeletonInlineStyle}
+        className={className}
+        data-element-name={dataElementName}
+        color={color}
+        rounded={rounded}
+        circle={circle}
+      >
         <Content aria-hidden="true">{children || content}</Content>
       </Container>
     );

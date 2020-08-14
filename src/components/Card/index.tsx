@@ -46,6 +46,7 @@ export interface CardProps {
 
   className?: string;
   children?: React.ReactNode;
+  'data-element-name'?: string;
   onClick?: () => void;
 }
 
@@ -68,6 +69,7 @@ export class Card extends PureComponent<CardProps> {
       external,
       className,
       onClick,
+      'data-element-name': dataElementName,
     } = this.props;
 
     const imgElements = () => {
@@ -94,7 +96,7 @@ export class Card extends PureComponent<CardProps> {
 
     if (to) {
       return (
-        <Container className={className}>
+        <Container data-element-name={dataElementName} className={className}>
           <LinkCardInner to={to} external={external}>
             {innerElements}
           </LinkCardInner>
@@ -104,7 +106,7 @@ export class Card extends PureComponent<CardProps> {
     }
 
     return (
-      <Container className={className}>
+      <Container data-element-name={dataElementName} className={className}>
         {innerElements}
         {children}
       </Container>
