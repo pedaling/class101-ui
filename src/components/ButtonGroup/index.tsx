@@ -10,13 +10,14 @@ export interface ButtonGroupProps {
   vertical?: boolean;
   fill?: boolean;
   theme?: ThemeConfig;
+  'data-element-name'?: string;
 }
 
 export class ButtonGroup extends PureComponent<ButtonGroupProps> {
   public render() {
-    const { children, vertical, fill, theme } = this.props;
+    const { children, vertical, fill, theme, 'data-element-name': dataElementName } = this.props;
     return (
-      <ButtonGroupContainer vertical={vertical} fill={fill} theme={theme}>
+      <ButtonGroupContainer vertical={vertical} fill={fill} theme={theme} data-element-name={dataElementName}>
         {React.Children.map(
           children,
           child =>

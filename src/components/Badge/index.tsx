@@ -15,6 +15,7 @@ export interface BadgeProps {
   icon?: ReactNode;
   pill?: boolean;
   size?: Size | number;
+  'data-element-name'?: string;
 }
 
 export class Badge extends PureComponent<BadgeProps> {
@@ -26,7 +27,17 @@ export class Badge extends PureComponent<BadgeProps> {
   };
 
   public render() {
-    const { className, color, backgroundColor, pill, size, icon, children, style } = this.props;
+    const {
+      className,
+      color,
+      backgroundColor,
+      pill,
+      size,
+      icon,
+      children,
+      style,
+      'data-element-name': dataElementName,
+    } = this.props;
     return (
       <Container
         className={className}
@@ -35,6 +46,7 @@ export class Badge extends PureComponent<BadgeProps> {
         pill={pill}
         size={size}
         style={style}
+        data-element-name={dataElementName}
       >
         {icon && <IconArea>{icon}</IconArea>}
         <TextArea size={size} color={color}>

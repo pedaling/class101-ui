@@ -30,6 +30,7 @@ export interface AvatarProps {
   className?: string;
   text?: string;
   icon?: React.ReactElement<{ size: number }>;
+  'data-element-name'?: string;
   onClick?: React.MouseEventHandler<HTMLSpanElement>;
   onIconClick?: React.MouseEventHandler<HTMLDivElement>;
   onError?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
@@ -51,7 +52,20 @@ export class Avatar extends PureComponent<AvatarProps, AvatarState> {
   };
 
   public render() {
-    const { size, src, text, className, icon, iconRatio, iconPosition, srcSet, alt, onClick, onIconClick } = this.props;
+    const {
+      size,
+      src,
+      text,
+      className,
+      icon,
+      iconRatio,
+      iconPosition,
+      srcSet,
+      alt,
+      onClick,
+      onIconClick,
+      'data-element-name': dataElementName,
+    } = this.props;
     const { isError } = this.state;
 
     const avatarSize = typeof size === 'number' ? size : avatarSizeBySize[size];
@@ -59,7 +73,7 @@ export class Avatar extends PureComponent<AvatarProps, AvatarState> {
     const sizedIcon = icon && React.cloneElement(icon, { size: iconSize });
 
     return (
-      <Container onClick={onClick} size={avatarSize} className={className}>
+      <Container onClick={onClick} size={avatarSize} className={className} data-element-name={dataElementName}>
         {src && !isError ? (
           <AvatarImage src={src} srcSet={srcSet} alt={alt} onError={this.handleImageError} />
         ) : (

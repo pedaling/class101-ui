@@ -14,6 +14,7 @@ export interface ProgressStateProps {
   backgroundColor?: string;
   activeColor?: string;
   activeBackgroundColor?: string;
+  'data-element-name'?: string;
 }
 
 export const ProgressState = ({

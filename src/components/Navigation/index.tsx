@@ -34,6 +34,7 @@ interface Props {
   pathname?: string;
   className?: string;
   divAttributes?: HTMLDivProps;
+  'data-element-name'?: string;
   onClickLink?: (url: string) => any;
 }
 
@@ -51,10 +52,17 @@ export class Navigation extends React.PureComponent<Props> {
   };
 
   public render() {
-    const { children, pathname, divAttributes, className, onClickLink } = this.props;
+    const {
+      children,
+      pathname,
+      divAttributes,
+      className,
+      onClickLink,
+      'data-element-name': dataElementName,
+    } = this.props;
 
     return (
-      <Container {...divAttributes} className={className}>
+      <Container {...divAttributes} className={className} data-element-name={dataElementName}>
         {React.Children.map(
           children,
           child => child && React.cloneElement(child as React.ReactElement<any>, { pathname, onClickLink })

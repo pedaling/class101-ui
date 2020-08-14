@@ -41,6 +41,7 @@ export interface CommentProps {
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   onContentClick?: React.MouseEventHandler<HTMLDivElement>;
   passingClickEventClampButton?: boolean;
+  'data-element-name'?: string;
 }
 
 const CommentImage = styled.img`
@@ -82,6 +83,7 @@ export class Comment extends PureComponent<CommentProps> {
       hideReadMore = false,
       readMoreText,
       hideText,
+      'data-element-name': dataElementName,
     } = this.props;
     const avatarSize = size === CommentSize.LARGE ? AvatarSize.LARGE : AvatarSize.MEDIUM;
     const clonedAvatar = avatar ? (
@@ -93,7 +95,7 @@ export class Comment extends PureComponent<CommentProps> {
     );
 
     return (
-      <Container width={width} className={className} onClick={onClick}>
+      <Container width={width} className={className} onClick={onClick} data-element-name={dataElementName}>
         <AvatarWrapper>{clonedAvatar}</AvatarWrapper>
         <ContentContainer>
           <TitleContainer>
