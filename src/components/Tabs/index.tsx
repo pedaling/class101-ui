@@ -11,6 +11,7 @@ export interface Props<T> extends TabStyleProps {
   value: T;
   fluid: boolean;
   className?: string;
+  'data-element-name'?: string;
 }
 
 // TODO(chiabi): ThemeProvider 아래에서 모두 같은 테마가 적용되게 만들기

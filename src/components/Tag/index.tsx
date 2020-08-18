@@ -10,13 +10,14 @@ export interface TagProps {
   label?: string;
   disabled?: boolean;
   className?: string;
+  'data-element-name'?: string;
 }
 
 export class Tag extends PureComponent<TagProps> {
   public render() {
-    const { value, label, className } = this.props;
+    const { value, label, className, 'data-element-name': dataElementName } = this.props;
     return (
-      <Container className={className}>
+      <Container data-element-name={dataElementName} className={className}>
         <Text>{label || value}</Text>
         <CloseButton onClick={this.handleRemoveButton}>
           <Close size={16} />

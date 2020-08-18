@@ -8,13 +8,14 @@ interface Props {
   className?: string;
   color?: string;
   width?: string;
+  'data-element-name'?: string;
 }
 
 export class Divider extends PureComponent<Props> {
   public render() {
-    const { className, width, color } = this.props;
+    const { className, width, color, 'data-element-name': dataElementName } = this.props;
     return (
-      <Container className={className} width={width}>
+      <Container className={className} width={width} data-element-name={dataElementName}>
         <Line color={color} />
       </Container>
     );

@@ -32,6 +32,7 @@ export interface TypoProps {
   className?: string;
   children?: React.ReactNode;
   element?: TypoElement;
+  'data-element-name'?: string;
 }
 
 interface HeadlinProps {
