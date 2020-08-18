@@ -8,6 +8,7 @@ export interface LinkProps {
   className?: string;
   external?: boolean;
   to: string;
+  'data-element-name'?: string;
   onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 

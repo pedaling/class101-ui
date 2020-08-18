@@ -35,6 +35,7 @@ export const Swiper: FC<SwiperProps> = ({
   children,
   navigationChildren,
   paginationChildren,
+  'data-element-name': dataElementName,
   ...swiperOptions
 }) => {
   const swiperRef: MutableRefObject<OriginalSwiper | null> = useRef(null);
@@ -63,7 +64,7 @@ export const Swiper: FC<SwiperProps> = ({
   }, [containerId, getSwiperInstance, swiperRef]);
 
   return (
-    <div id={containerId} className={classNames('swiper-container', className)}>
+    <div id={containerId} data-element-name={dataElementName} className={classNames('swiper-container', className)}>
       <div className="swiper-wrapper">{children}</div>
       {navigationChildren}
       {paginationChildren}
