@@ -29,7 +29,7 @@ export class Callout extends PureComponent<Readonly<CalloutProps>> {
           <Icon>{icon && status === CalloutStatus.DEFAULT ? icon : iconByStatus[status]}</Icon>
           {title}
         </Title>
-        <Content>{children}</Content>
+        {children && <Content>{children}</Content>}
         {action && (
           <StyledButton size={ButtonSize.SMALL} color={ButtonColor.WHITE} {...action}>
             {action.content}
@@ -43,6 +43,9 @@ export class Callout extends PureComponent<Readonly<CalloutProps>> {
 const Container = styled.div<{
   status: CalloutStatusValue;
 }>`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   padding: 16px;
   border-radius: 3px;
   background-color: ${props => backgroundColorByStatus[props.status]};
@@ -50,7 +53,6 @@ const Container = styled.div<{
 
 const Title = styled.div`
   ${body2};
-  margin-bottom: 8px;
   font-weight: bold;
   display: inline-flex;
   align-items: center;
@@ -69,6 +71,7 @@ const Icon = styled.span`
 
 const Content = styled.div`
   ${caption1};
+  margin-top: 8px;
   > * + * {
     margin-top: 8px;
   }
