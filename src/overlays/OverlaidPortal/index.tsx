@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useCallback, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { isClient } from '../../utils';
@@ -30,6 +29,7 @@ export const OverlaidPortal = React.memo<OverlayProps>(props => {
     onClose,
     zIndex = 3000,
   } = props;
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     if (isClient() && dimmer) {
@@ -42,8 +42,12 @@ export const OverlaidPortal = React.memo<OverlayProps>(props => {
     };
   }, [opened, dimmer]);
 
-  if (!isClient()) {
-    return null;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <></>;
   }
 
   if (!dimmer) {
