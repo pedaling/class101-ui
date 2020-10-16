@@ -26,7 +26,7 @@ export * from './generated/BellOutlineOff';
 export * from './generated/Bold';
 export * from './generated/Bookmark';
 export * from './generated/Camera';
-export * from './generated/Canlendar';
+export * from './generated/Calendar';
 export * from './generated/Caption';
 export * from './generated/Check';
 export * from './generated/CheckCircle';
