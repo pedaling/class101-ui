@@ -17,6 +17,7 @@ export interface TabItemProps extends TabStyleProps {
   title?: string;
   active?: boolean;
   caption?: ReactNode;
+  className?: string;
 
   /** 해당 탭이 활성화 될 때 렌더링되는 콘텐츠 */
   panel?: ReactNode;
@@ -34,10 +35,11 @@ export class TabItem extends PureComponent<TabItemProps> {
     theme: Theme.light,
   };
   public render() {
-    const { active, indicatorCount, fluid, theme, type } = this.props;
+    const { active, className, indicatorCount, fluid, theme, type } = this.props;
 
     return (
       <TabBox
+        className={className}
         onClick={this.handleClick}
         active={active}
         theme={theme}
