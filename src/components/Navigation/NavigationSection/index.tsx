@@ -40,7 +40,7 @@ export class NavigationSection extends React.PureComponent<InjectedProps, State>
         if (!item.subItems) {
           return;
         }
-        if (item.subItems.find(item => NavigationSection.isActiveLocation(prevProps.pathname, item))) {
+        if (item.subItems.find(subItem => NavigationSection.isActiveLocation(prevProps.pathname, subItem))) {
           openedSectionIndices.push(index);
         }
       });
@@ -66,7 +66,7 @@ export class NavigationSection extends React.PureComponent<InjectedProps, State>
             {action && React.cloneElement(action.icon, { size: 16 })}
           </SectionTitleContainer>
         ) : null}
-        {items.map(this.renderSectionItem)}
+        <SectionMenu>{items.map(this.renderSectionItem)}</SectionMenu>
       </Container>
     );
   }
@@ -124,16 +124,17 @@ export class NavigationSection extends React.PureComponent<InjectedProps, State>
     const { pathname } = this.props;
 
     return (
-      <SectionLink
-        key={index}
-        to={item.url}
-        external={item.external}
-        onClick={this.handleOnClickLink(item.url)}
-        active={NavigationSection.isActiveLocation(pathname, item)}
-      >
-        <SectionText>{item.label}</SectionText>
-        {this.renderAddonComponent(item.badge)}
-      </SectionLink>
+      <SubItem key={index}>
+        <SectionLink
+          to={item.url}
+          external={item.external}
+          onClick={this.handleOnClickLink(item.url)}
+          active={NavigationSection.isActiveLocation(pathname, item)}
+        >
+          <SectionText>{item.label}</SectionText>
+          {this.renderAddonComponent(item.badge)}
+        </SectionLink>
+      </SubItem>
     );
   };
 
@@ -161,8 +162,14 @@ export class NavigationSection extends React.PureComponent<InjectedProps, State>
 
 export default (NavigationSection as any) as React.ComponentClass<NavigationSectionProps>;
 
-const Container = styled.ul`
-  margin: 12px 0;
+const Container = styled.div`
+  margin-top: 12px;
+  border-radius: 4px;
+`;
+
+const SectionMenu = styled.ul`
+  list-style: none;
+  margin-bottom: 12px;
   border-radius: 4px;
 `;
 
@@ -205,22 +212,21 @@ const SectionItemStyle = css`
 
 const SectionLink = styled(LinkBlock)<{ active: boolean }>`
   ${SectionItemStyle};
-  ${props =>
-    props.active
-      ? css`
-    font-weight: bold;
-    color: ${gray900};
-    background-color: ${gray50};
+  ${({ active }) =>
+    active &&
+    css`
+      font-weight: bold;
+      color: ${gray900};
+      background-color: ${gray50};
 
-    path {
-      fill: ${gray900};
-    }
-  }`
-      : ''};
+      path {
+        fill: ${gray900};
+      }
+    `};
 `;
 
 const SectionItem = styled.div`
-  ${SectionItemStyle}
+  ${SectionItemStyle};
 `;
 
 const SectionText = styled.span`
@@ -232,18 +238,32 @@ const SectionText = styled.span`
 `;
 
 const SubItemContainer = styled.ul<{ isOpened: boolean }>`
+  list-style: none;
   margin: 0;
   padding: 0;
   padding-left: 28px;
-  transform: translateY(${props => (props.isOpened ? 0 : -40)}px);
-  height: ${props => (props.isOpened ? 'auto' : 0)};
-  transform-origin: top;
-  transition: transform 0.26s ease;
   overflow: hidden;
+  transform-origin: top;
+  transition: opacity 0.1s ease, transform 0.26s ease;
+
+  ${({ isOpened }) =>
+    isOpened
+      ? `
+    transform: translateY(0);
+    opacity: 1;
+    height: auto;
+  `
+      : `
+    transform: translateY(-40px);
+    opacity: 0;
+    height: 0;
+  `}
 `;
+
+const SubItem = styled.li``;
 
 const ChevronContainer = styled.span<{ isOpened: boolean }>`
   display: flex;
-  transform: rotate(${props => (props.isOpened ? 180 : 0)}deg);
+  transform: rotate(${({ isOpened }) => (isOpened ? 180 : 0)}deg);
   transition: transform 0.26s ease;
 `;
