@@ -73,7 +73,7 @@ class Example extends Component {
 - DatePicker
 - Dialog
 
-These are at [Class101 UI Documents Site](https://class101-ui.netlify.com).
+These are at [Class101 UI Documents Site](https://ui.class101.dev).
 
 ## 🚀 Roadmap
 
@@ -84,6 +84,6 @@ These are at [Class101 UI Documents Site](https://class101-ui.netlify.com).
 
 ## 📝 License
 
-Licensed under the MIT License, Copyright (c) 2018 Class101, Co. LTD.
+Licensed under the MIT License, Copyright (c) 2020 Class101, Co. LTD.
 
 See [LICENSE](https://github.com/pedaling/class101-ui/blob/master/LICENSE) for more information.
