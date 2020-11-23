@@ -15,13 +15,15 @@ export interface TagProps {
 
 export class Tag extends PureComponent<TagProps> {
   public render() {
-    const { value, label, className, 'data-element-name': dataElementName } = this.props;
+    const { value, label, className, 'data-element-name': dataElementName, disabled } = this.props;
     return (
       <Container data-element-name={dataElementName} className={className}>
         <Text>{label || value}</Text>
-        <CloseButton onClick={this.handleRemoveButton}>
-          <Close size={16} />
-        </CloseButton>
+        {disabled !== false && (
+          <CloseButton onClick={this.handleRemoveButton}>
+            <Close size={16} />
+          </CloseButton>
+        )}
       </Container>
     );
   }
