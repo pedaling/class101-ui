@@ -1,6 +1,0 @@
-{
-  "extends": "@class101/tslint-config",
-  "rules": {
-    "max-classes-per-file": false
-  }
-}
