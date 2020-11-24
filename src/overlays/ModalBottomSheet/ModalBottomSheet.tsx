@@ -254,7 +254,6 @@ const DialogHead = styled.div`
 const DialogTitle = styled(Headline3)`
   flex: auto;
   white-space: pre-line;
-  word-break: break-all;
 `;
 
 const DialogSubTitle = styled(Body2)`
