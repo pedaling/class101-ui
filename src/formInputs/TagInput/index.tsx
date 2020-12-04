@@ -84,7 +84,7 @@ export class TagInput extends PureComponent<TagInputProps, State> {
               {...inputProps}
             />
           </InnerContainer>
-          {value.length > 0 && disabled !== true && (
+          {value.length > 0 && !disabled && (
             <IconButton
               icon={<Close />}
               size={ButtonSize.XSMALL}

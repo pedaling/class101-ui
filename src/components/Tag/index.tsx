@@ -19,7 +19,7 @@ export class Tag extends PureComponent<TagProps> {
     return (
       <Container data-element-name={dataElementName} className={className}>
         <Text>{label || value}</Text>
-        {disabled !== true && (
+        {!disabled && (
           <CloseButton onClick={this.handleRemoveButton}>
             <Close size={16} />
           </CloseButton>
