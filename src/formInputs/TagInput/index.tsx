@@ -84,7 +84,7 @@ export class TagInput extends PureComponent<TagInputProps, State> {
               {...inputProps}
             />
           </InnerContainer>
-          {value.length > 0 && disabled !== false && (
+          {value.length > 0 && !disabled && (
             <IconButton
               icon={<Close />}
               size={ButtonSize.XSMALL}
@@ -155,10 +155,10 @@ export class TagInput extends PureComponent<TagInputProps, State> {
       }
     }
 
-    this.setState({
+    this.setState(prevState => ({
       focused: false,
-      tempValue: addOnBlur ? '' : this.state.tempValue,
-    });
+      tempValue: addOnBlur ? '' : prevState.tempValue,
+    }));
   };
 
   private handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
