@@ -148,7 +148,6 @@ export class TagInput extends PureComponent<TagInputProps, State> {
 
   private handleInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     const { addOnBlur, onChange } = this.props;
-    const { tempValue } = this.state;
     if (addOnBlur) {
       if (onChange) {
         onChange(this.getNextValue());
@@ -156,10 +155,10 @@ export class TagInput extends PureComponent<TagInputProps, State> {
       }
     }
 
-    this.setState({
+    this.setState(prevState => ({
       focused: false,
-      tempValue: addOnBlur ? '' : tempValue,
-    });
+      tempValue: addOnBlur ? '' : prevState.tempValue,
+    }));
   };
 
   private handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
