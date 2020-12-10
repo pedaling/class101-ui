@@ -68,10 +68,16 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     return null;
   }
 
-  public readonly state: State = {
-    mounted: this.props.noSSR,
-    opened: false,
-  };
+  constructor(props: ModalBottomSheetProps) {
+    super(props);
+
+    const { noSSR } = props;
+
+    this.state = {
+      mounted: noSSR,
+      opened: false,
+    };
+  }
 
   public componentDidMount() {
     this.setState({
@@ -113,7 +119,7 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     const { mounted, opened } = this.state;
 
     if (!mounted || isServer()) {
-      return opener || <React.Fragment />;
+      return opener || <></>;
     }
 
     if (!successAttributes.color) {
@@ -159,8 +165,10 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
   }
 
   private disableBodyScroll = () => {
+    const { scrollbarWidth } = this.props;
+
     if (isClient()) {
-      document.body.style.paddingRight = `${this.props.scrollbarWidth}px`;
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
       document.body.style.overflow = 'hidden';
     }
   };
@@ -197,22 +205,37 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     if (opener) {
       this.hideModal();
     }
-    onClose ? onClose() : this.hideModal();
+
+    if (onClose) {
+      onClose();
+    } else {
+      this.hideModal();
+    }
   };
 
   private handleCancelModal = () => {
     const { onCancel } = this.props;
-    onCancel ? onCancel(this.hideModal) : this.hideModal();
+
+    if (onCancel) {
+      onCancel(this.hideModal);
+    } else {
+      this.hideModal();
+    }
   };
 
   private handleSuccessModal = () => {
     const { onSuccess } = this.props;
-    onSuccess ? onSuccess(this.hideModal) : this.hideModal();
+
+    if (onSuccess) {
+      onSuccess(this.hideModal);
+    } else {
+      this.hideModal();
+    }
   };
 }
 
 const StyledOverlaidPortal = styled(OverlaidPortal)<{ opened: boolean }>`
-  transition: ${props => !props.opened && `visibility 0s linear 225ms,`} opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: ${props => !props.opened && 'visibility 0s linear 225ms,'} opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   ${media.sm`
     justify-content: flex-end;
   `};
@@ -239,7 +262,7 @@ const Dialog = styled.div<{ visible: boolean }>`
     height: auto;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    ${props => !props.visible && `transform: translateY(100%);`}
+    ${props => !props.visible && 'transform: translateY(100%);'}
     transition: all 225ms ease-out;
   `};
 `;
@@ -259,7 +282,6 @@ const DialogTitle = styled(Headline3)`
 const DialogSubTitle = styled(Body2)`
   flex: none;
   margin-bottom: 16px;
-  word-break: break-all;
   color: ${gray600};
 `;
 
@@ -267,7 +289,6 @@ const DialogBody = styled.div<{ hideScroll: boolean; removeContentPadding: boole
   flex: auto;
   overflow-y: auto;
   overflow-x: hidden;
-  word-break: break-all;
   overscroll-behavior: contain;
 
   ${props =>
@@ -314,6 +335,8 @@ const DialogFooter = styled.div<{ bottomButtonType: BottomButtonType }>`
             margin-top: 8px;
           }
         `;
+      default:
+        return css``;
     }
   }}
 `;
