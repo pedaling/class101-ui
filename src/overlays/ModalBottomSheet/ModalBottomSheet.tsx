@@ -271,7 +271,7 @@ const DialogHead = styled.div`
   flex: none;
   display: flex;
   flex-direction: row;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 `;
 
 const DialogTitle = styled(Headline3)`
