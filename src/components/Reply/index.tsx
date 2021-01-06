@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { BreakPoints, Caption1, Caption2 } from '../../core';
 import { gray500, gray800, orange500 } from '../../core/Colors';
-import { Avatar, AvatarProps, AvatarSize } from '.././Avatar';
+import { Avatar, AvatarProps, AvatarSize } from '../Avatar';
 import { ButtonIconPosition } from '../Button/ButtonIcon';
 import { ReplyAction, ReplyActionProps } from './Action';
 import { ReplyContent } from './Content';
@@ -45,6 +45,7 @@ export interface ReplyProps {
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   onContentClick?: React.MouseEventHandler<HTMLDivElement>;
   passingClickEventClampButton?: boolean;
+  children?: ReactElement<ReplyProps>[];
 }
 
 const ReplyImage = styled.img`
@@ -105,8 +106,6 @@ export const Reply = Object.assign(
       (ref: HTMLDivElement | null) => {
         if (ref && size === ReplySize.SMALL) {
           setContentMargin(ref.clientWidth + 12);
-        } else {
-          return;
         }
       },
       [setContentMargin, size]
