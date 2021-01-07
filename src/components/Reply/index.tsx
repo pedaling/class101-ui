@@ -2,7 +2,7 @@ import React, { ReactElement, ReactNode, useCallback, useMemo, useState } from '
 import styled from 'styled-components';
 
 import { BreakPoints, Caption1, Caption2 } from '../../core';
-import { gray500, gray800, orange500 } from '../../core/Colors';
+import { gray500, gray800 } from '../../core/Colors';
 import { Avatar, AvatarProps, AvatarSize } from '../Avatar';
 import { ButtonIconPosition } from '../Button/ButtonIcon';
 import { ReplyAction, ReplyActionProps } from './Action';
@@ -29,11 +29,10 @@ export interface ReplyProps {
   /** 보여질 라인의 개수. */
   maxLine?: number;
 
-  nameDescriptionColor?: string;
-
   size: ReplySize;
   width: string;
-  nameDescription?: string;
+  nameDescription?: ReactNode;
+  extraBottom?: ReactNode;
   avatar?: ReactElement<AvatarProps>;
   footer?: ReactNode;
   timeText?: ReactNode;
@@ -60,7 +59,7 @@ export const Reply = Object.assign(
       avatar,
       name,
       nameDescription,
-      nameDescriptionColor = orange500,
+      extraBottom,
       timeText,
       width = '100%',
       size = ReplySize.LARGE,
@@ -120,12 +119,8 @@ export const Reply = Object.assign(
               <Caption1 fontWeight="600" color={gray800}>
                 {name}
               </Caption1>
+              {nameDescription && <NameDescriptionContainer>{nameDescription}</NameDescriptionContainer>}
               {size === ReplySize.SMALL && <TimeText size={size}>{timeText}</TimeText>}
-              {nameDescription && (
-                <NameDescription color={nameDescriptionColor} size={size}>
-                  {nameDescription}
-                </NameDescription>
-              )}
             </NameContainer>
             {size !== ReplySize.SMALL && <TimeText size={size}>{timeText}</TimeText>}
           </TitleContainer>
@@ -154,6 +149,7 @@ export const Reply = Object.assign(
             {rightAction?.map((action, key) => React.cloneElement(action, { position: ButtonIconPosition.RIGHT, key }))}
           </RightActionContainer>
         </ActionWrapper>
+        {extraBottom}
         <CommentContainer marginLeft={contentMargin}>
           {showChildren &&
             children &&
@@ -205,9 +201,8 @@ const TitleContainer = styled.div`
   margin-left: 12px;
 `;
 
-const NameDescription = styled(Caption2)<{ size: ReplySize }>`
-  display: flex;
-  margin-left: ${props => (props.size === ReplySize.SMALL ? 'auto' : '4px')};
+const NameDescriptionContainer = styled.div`
+  margin-left: 4px;
 `;
 
 const TimeText = styled(Caption2)<{ size: ReplySize }>`
