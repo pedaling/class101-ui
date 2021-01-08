@@ -1,6 +1,5 @@
 import React, { ReactElement, ReactNode, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
-
 import { BreakPoints, Caption1, Caption2 } from '../../core';
 import { gray500, gray800 } from '../../core/Colors';
 import { Avatar, AvatarProps, AvatarSize } from '../Avatar';
@@ -207,7 +206,7 @@ const NameDescriptionContainer = styled.div`
 
 const TimeText = styled(Caption2)<{ size: ReplySize }>`
   margin-top: ${props => (props.size === ReplySize.SMALL ? '0' : '2px')};
-  margin-left: ${props => (props.size === ReplySize.SMALL ? '8px' : '0')};
+  margin-left: ${props => (props.size === ReplySize.SMALL ? '6px' : '0')};
   color: ${gray500};
 `;
 
