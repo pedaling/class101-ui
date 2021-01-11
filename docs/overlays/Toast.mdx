@@ -4,9 +4,11 @@ name: Toast
 route: /overlays/toast
 ---
 
-import { Colors, Icon, Button } from '@class101/ui';
+
+
+import { Button, Colors, Icon } from '@class101/ui';
 import { Playground, Props } from 'docz';
-import { Position, Component as Toast, showToast } from './Toast';
+import { Component as Toast, Position, showToast } from './Toast';
 
 # Toast
 
@@ -20,6 +22,7 @@ import { Position, Component as Toast, showToast } from './Toast';
 
 ```tsx
 let AppToaster;
+export let count = 0;
 
 export async function showToast(props: ToastProps) {
   if (!AppToaster) {
@@ -91,6 +94,23 @@ export async function showToast(props: ToastProps) {
         message: '오류입니다.',
         icon: <Icon.Alert fillColor={Colors.white} />,
         timeout: 0,
+      })
+    }
+  >
+    Show Toast!
+  </Button>
+</Playground>
+
+## Update Toast
+
+<Playground>
+  <Button
+    onClick={() =>
+      showToast({
+        message: `${count}%`,
+        icon: <Icon.CheckCircle fillColor={Colors.white} />,
+        timeout: 3000,
+        id: 'toast-percent'
       })
     }
   >
