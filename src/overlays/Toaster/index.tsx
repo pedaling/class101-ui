@@ -79,7 +79,7 @@ export class Toaster extends React.Component<Props, State> implements ToasterInt
   public show(props: ToastProps): string {
     if (props.key) {
       this.setState(prevState => {
-        const toastIndex = prevState.toasts.findIndex(toast => toast.key === props.key)
+        const toastIndex = prevState.toasts.findIndex(toast => toast.key === props.key);
         prevState.toasts[toastIndex] = { ...prevState.toasts[toastIndex], ...props}
         return prevState;
       })

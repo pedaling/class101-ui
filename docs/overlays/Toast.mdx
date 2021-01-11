@@ -8,6 +8,7 @@ route: /overlays/toast
 
 import { Button, Colors, Icon } from '@class101/ui';
 import { Playground, Props } from 'docz';
+import { useState } from 'react';
 import { Component as Toast, Position, showToast } from './Toast';
 
 # Toast
@@ -104,16 +105,19 @@ export async function showToast(props: ToastProps) {
 ## Update Toast
 
 <Playground>
-  <Button
-    onClick={() =>
-      showToast({
-        message: `${count}%`,
-        icon: <Icon.CheckCircle fillColor={Colors.white} />,
-        timeout: 3000,
-        id: 'toast-percent'
-      })
-    }
-  >
-    Show Toast!
-  </Button>
+  {(() => {
+    const [key, setKey] = useState(null);
+    return (
+      <Button
+        onClick={() =>
+          setKey(showToast({
+            key,
+            message: new Date(),
+            timeout: 3000,
+          }))
+        }
+      >
+        Show Toast!
+      </Button>)
+  })()}
 </Playground>
