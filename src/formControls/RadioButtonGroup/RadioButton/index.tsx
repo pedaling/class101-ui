@@ -14,6 +14,7 @@ export interface RadioButtonContainerProps {
 }
 
 export interface RadioButtonProps extends RadioButtonContainerProps {
+  className?: string;
   index?: number;
   color?: string;
   value: string;
@@ -31,10 +32,11 @@ export class RadioButton extends PureComponent<RadioButtonProps> {
   };
 
   public render() {
-    const { stackingDirection, textAlign, checked, children, color, showBorder, showDivider } = this.props;
+    const { className, stackingDirection, textAlign, checked, children, color, showBorder, showDivider } = this.props;
 
     return (
       <RadioButtonContainer
+        className={className}
         showBorder={showBorder}
         stackingDirection={stackingDirection}
         textAlign={textAlign}
