@@ -61,7 +61,6 @@ export const ReplyContent: FC<Props> = React.memo(props => {
 const Content = styled.div<{ useLineClamp: boolean; maxLine: number }>`
   ${body2};
   display: -webkit-box;
-  -webkit-box-align: baseline;
   word-wrap: break-word;
   overflow: hidden;
   -webkit-box-orient: vertical;
