@@ -1,7 +1,9 @@
 export const black = '#000000';
 export const white = '#ffffff';
 
-export const gray100 = '#080808';
+export const gray000 = '#080808';
+export const gray50 = gray000;
+export const gray100 = gray000;
 export const gray200 = '#141414';
 export const gray300 = '#191919';
 export const gray400 = '#2a2a2a';
@@ -11,7 +13,9 @@ export const gray700 = '#858585';
 export const gray800 = '#bbbbbb';
 export const gray900 = '#f6f6f6';
 
-export const orange100 = '#6f1400';
+export const orange000 = '#6f1400';
+export const orange50 = orange000;
+export const orange100 = orange000;
 export const orange200 = '#ae1f00';
 export const orange300 = '#ec2a00';
 export const orange400 = '#ff3d00';
@@ -21,15 +25,29 @@ export const orange700 = '#ff722a';
 export const orange800 = '#ffb894';
 export const orange900 = '#ffe5d1';
 
-export const pinkRed100 = '#660012';
-export const pinkRed200 = '#a80f2b';
-export const pinkRed300 = '#d4092d';
-export const pinkRed400 = '#f51631';
-export const pinkRed500 = '#fd3049';
-export const pinkRed600 = '#ff3e55';
-export const pinkRed700 = '#ff525b';
-export const pinkRed800 = '#ffa5a9';
-export const pinkRed900 = '#ffd4d7';
+export const red000 = '#660012';
+export const red50 = red000;
+export const red100 = red000;
+export const red200 = '#a80f2b';
+export const red300 = '#d4092d';
+export const red400 = '#f51631';
+export const red500 = '#fd3049';
+export const red600 = '#ff3e55';
+export const red700 = '#ff525b';
+export const red800 = '#ffa5a9';
+export const red900 = '#ffd4d7';
+
+export const pinkRed000 = red000;
+export const pinkRed50 = red50;
+export const pinkRed100 = red100;
+export const pinkRed200 = red200;
+export const pinkRed300 = red300;
+export const pinkRed400 = red400;
+export const pinkRed500 = red500;
+export const pinkRed600 = red600;
+export const pinkRed700 = red700;
+export const pinkRed800 = red800;
+export const pinkRed900 = red900;
 
 export const magenta100 = '#53002d';
 export const magenta200 = '#a8005b';
@@ -61,7 +79,8 @@ export const violetBlue700 = '#bccbff';
 export const violetBlue800 = '#dae2ff';
 export const violetBlue900 = '#e9edff';
 
-export const blue100 = '#003e78';
+export const blue000 = '#003e78';
+export const blue100 = blue000;
 export const blue200 = '#0065c0';
 export const blue300 = '#0074dd';
 export const blue400 = '#1a88eb';
