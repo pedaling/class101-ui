@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 
 import { media } from '../../BreakPoints';
+import * as OUITextStyles from '../../OUITextStyles';
 import {
   body1,
   body2,
@@ -72,6 +73,15 @@ const defaultElement = {
   Body2: 'div',
   Caption1: 'div',
   Caption2: 'div',
+  OUIHeadline1: 'h1',
+  OUIHeadline2: 'h2',
+  OUIHeadline3: 'h3',
+  OUISubtitle1: 'h4',
+  OUISubtitle2: 'h4',
+  OUIBody1: 'div',
+  OUIBody2: 'div',
+  OUICaption1: 'div',
+  OUICaption2: 'div',
 };
 
 const typographyList = {
@@ -84,6 +94,17 @@ const typographyList = {
   Body2: body2,
   Caption1: caption1,
   Caption2: caption2,
+  OUIHeadline1: OUITextStyles.headline1,
+  OUIHeadline2: OUITextStyles.headline2,
+  OUIHeadline3: OUITextStyles.headline3,
+  OUISubtitle1: OUITextStyles.subtitle1,
+  OUISubtitle2: OUITextStyles.subtitle2,
+  OUIBody1: OUITextStyles.body1,
+  OUIBody2: OUITextStyles.body2,
+  OUIBody3: OUITextStyles.body3,
+  OUICaption1: OUITextStyles.caption1,
+  OUICaption2: OUITextStyles.caption2,
+  OUICaption3: OUITextStyles.caption3,
 };
 
 const TextElement = styled.div<Props>`
