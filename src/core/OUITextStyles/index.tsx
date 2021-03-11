@@ -1,5 +1,5 @@
-import React from 'react';
 import { css } from 'styled-components';
+
 import { TextStyleProperties } from '../TextStyles';
 
 import { gray900 } from '../Colors';
