@@ -80,8 +80,10 @@ const defaultElement = {
   OUISubtitle2: 'h4',
   OUIBody1: 'div',
   OUIBody2: 'div',
+  OUIBody3: 'div',
   OUICaption1: 'div',
   OUICaption2: 'div',
+  OUICaption3: 'div',
 };
 
 const typographyList = {
