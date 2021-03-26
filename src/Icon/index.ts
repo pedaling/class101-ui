@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 export interface IconProps {
@@ -25,8 +26,8 @@ export * from './generated/BellOutline';
 export * from './generated/BellOutlineOff';
 export * from './generated/Bold';
 export * from './generated/Bookmark';
-export * from './generated/Camera';
 export * from './generated/Calendar';
+export * from './generated/Camera';
 export * from './generated/Caption';
 export * from './generated/Check';
 export * from './generated/CheckCircle';
