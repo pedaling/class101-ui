@@ -1,26 +1,9 @@
 import React from 'react';
 import { IconProps } from '../index';
-export const Sorting = React.memo<IconProps>(
-  ({ size = 24, fillColor = '#1B1C1D', accentColor = '#DDE0E2', className, style }) => (
-    <svg width={size} height={size} fill="none" style={style} className={className} viewBox="0 0 24 24">
-      <mask id="sorting_svg__a" fill="#fff">
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M3 17a1 1 0 100 2h9a1 1 0 100-2H3zM3 13a1 1 0 100 2h12a1 1 0 100-2H3zM3 5a1 1 0 100 2h18a1 1 0 100-2H3zM3 9a1 1 0 000 2h15a1 1 0 100-2H3z"
-        />
-      </mask>
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M3 17a1 1 0 100 2h9a1 1 0 100-2H3zM3 13a1 1 0 100 2h12a1 1 0 100-2H3zM3 5a1 1 0 100 2h18a1 1 0 100-2H3zM3 9a1 1 0 000 2h15a1 1 0 100-2H3z"
-        fill={fillColor}
-      />
-      <path
-        d="M4 18a1 1 0 01-1 1v-4a3 3 0 00-3 3h4zm-1-1a1 1 0 011 1H0a3 3 0 003 3v-4zm9 0H3v4h9v-4zm-1 1a1 1 0 011-1v4a3 3 0 003-3h-4zm1 1a1 1 0 01-1-1h4a3 3 0 00-3-3v4zm-9 0h9v-4H3v4zm1-5a1 1 0 01-1 1v-4a3 3 0 00-3 3h4zm-1-1a1 1 0 011 1H0a3 3 0 003 3v-4zm12 0H3v4h12v-4zm-1 1a1 1 0 011-1v4a3 3 0 003-3h-4zm1 1a1 1 0 01-1-1h4a3 3 0 00-3-3v4zM3 15h12v-4H3v4zm1-9a1 1 0 01-1 1V3a3 3 0 00-3 3h4zM3 5a1 1 0 011 1H0a3 3 0 003 3V5zm18 0H3v4h18V5zm-1 1a1 1 0 011-1v4a3 3 0 003-3h-4zm1 1a1 1 0 01-1-1h4a3 3 0 00-3-3v4zM3 7h18V3H3v4zm1 3a1 1 0 01-1 1V7a3 3 0 00-3 3h4zM3 9a1 1 0 011 1H0a3 3 0 003 3V9zm15 0H3v4h15V9zm-1 1a1 1 0 011-1v4a3 3 0 003-3h-4zm1 1a1 1 0 01-1-1h4a3 3 0 00-3-3v4zM3 11h15V7H3v4z"
-        fill={fillColor}
-        mask="url(#sorting_svg__a)"
-      />
-    </svg>
-  )
-);
+export const Sorting = React.memo<IconProps>(({
+  size = 24,
+  fillColor = '#1B1C1D',
+  accentColor = '#DDE0E2',
+  className,
+  style
+}) => <svg width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg" style={style} className={className} viewBox="0 0 24 24"><path d="M11.928 15.813l-1.45-1.4c-.1-.1-.25-.1-.35 0l-2.4 2.4V2.762c0-.15-.1-.25-.25-.25h-2c-.15 0-.25.1-.25.25v14.05l-2.4-2.4c-.1-.1-.25-.1-.35 0l-1.4 1.4c-.1.1-.1.25 0 .35l5.25 5.25c.1.1.25.1.35 0l5.25-5.25c.05-.05.05-.25 0-.35zM22.928 8.213l-1.45 1.4c-.1.1-.25.1-.35 0l-2.4-2.4v14.05c0 .15-.1.25-.25.25h-2c-.15 0-.25-.1-.25-.25V7.212l-2.4 2.4c-.1.1-.25.1-.35 0l-1.4-1.4c-.1-.1-.1-.25 0-.35l5.2-5.3c.1-.1.25-.1.35 0l5.25 5.25c.15.1.15.3.05.4z" fill="#000" /></svg>);
