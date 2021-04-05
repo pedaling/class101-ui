@@ -4,9 +4,12 @@ name: Toast
 route: /overlays/toast
 ---
 
-import { Colors, Icon, Button } from '@class101/ui';
+
+
+import { Button, Colors, Icon } from '@class101/ui';
 import { Playground, Props } from 'docz';
-import { Position, Component as Toast, showToast } from './Toast';
+import { useState } from 'react';
+import { Component as Toast, Position, showToast } from './Toast';
 
 # Toast
 
@@ -20,6 +23,7 @@ import { Position, Component as Toast, showToast } from './Toast';
 
 ```tsx
 let AppToaster;
+export let count = 0;
 
 export async function showToast(props: ToastProps) {
   if (!AppToaster) {
@@ -96,4 +100,24 @@ export async function showToast(props: ToastProps) {
   >
     Show Toast!
   </Button>
+</Playground>
+
+## Update Toast
+
+<Playground>
+  {(() => {
+    const [key, setKey] = useState(null);
+    return (
+      <Button
+        onClick={() =>
+          setKey(showToast({
+            key,
+            message: new Date(),
+            timeout: 3000,
+          }))
+        }
+      >
+        Show Toast!
+      </Button>)
+  })()}
 </Playground>

@@ -19,6 +19,7 @@ export interface ToastProps {
   position?: ToasterPosition;
   timeout?: number;
   onButtonClicked?: () => void;
+  key?: string;
   onClose?: () => void;
   dismiss?: () => void;
 }
@@ -57,6 +58,20 @@ export class Toast extends React.Component<ToastProps, State> {
       } else {
         throw Error('No dismiss prop!');
       }
+    }
+  }
+
+  public componentDidUpdate(prevProps: Readonly<ToastProps>, prevState: Readonly<State>) {
+    if (prevProps.timeout !== this.props.timeout && this.props.timeout !== undefined) {
+      if (this.unmountAnimationTimeout) {
+        clearTimeout(this.unmountAnimationTimeout);
+      }
+      this.unmountAnimationTimeout = setTimeout(() => {
+        this.setState({
+          unmount: true,
+        });
+      }, this.props.timeout - UNMOUNT_ANIMATION_SECONDS * 1000);
+
     }
   }
 
