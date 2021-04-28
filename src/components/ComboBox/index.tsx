@@ -24,7 +24,7 @@ type Props = {
   position?: ComboBoxPosition;
   opened?: boolean;
   opener?: React.ReactElement<{ onClick: () => void }>;
-  children: React.ReactElement;
+  children?: React.ReactElement<{ onClick: () => void }>;
   onOpen?: () => void;
   onClose?: () => void;
 };
@@ -48,9 +48,13 @@ export const ComboBox = React.memo<Props>(({ items, position, opened, opener, ch
       });
     }
 
-    return React.cloneElement(children, {
-      onClick: handleClickOpener,
-    });
+    if (children) {
+      return React.cloneElement(children, {
+        onClick: handleClickOpener,
+      });
+    }
+
+    return null;
   }, [children, handleClickOpener, isOpened, opener]);
 
   const visible = opener ? isOpened : opened;
@@ -109,11 +113,11 @@ const ActionItemList = styled.div<{ visible?: boolean; position?: ComboBoxPositi
   width: 216px;
   padding: 14px;
   background-color: ${Colors.white};
-  box-shadow: ${elevation4};
   border-radius: 3px;
   position: absolute;
   z-index: 2000;
 
+  ${elevation4};
   display: ${({ visible }) => (visible ? 'block' : 'none')};
   ${({ position }) => (position === ComboBoxPosition.LEFT ? 'right: 0' : 'left: 0')};
 `;
