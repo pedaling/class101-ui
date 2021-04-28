@@ -16,7 +16,8 @@ export type ComboBoxProps = {
   textColor?: string;
   icon?: React.ReactElement<IconProps>;
   description?: string;
-  onClick?: () => void;
+  closeable?: boolean;
+  onClick?: () => void | Promise<void>;
 };
 
 type Props = {
@@ -57,15 +58,34 @@ export const ComboBox = React.memo<Props>(({ items, position, opened, opener, ch
     return null;
   }, [children, handleClickOpener, isOpened, opener]);
 
+  const itemList = useMemo(() => {
+    return items.map(item => {
+      const handleItemClick = async () => {
+        if (!item.closeable) {
+          await item?.onClick?.();
+          return;
+        }
+
+        await item?.onClick?.();
+
+        if (opener) {
+          setOpened(false);
+        }
+
+        onClose?.();
+      };
+
+      return <ComboBoxItem key={item.label} {...item} onClick={handleItemClick} />;
+    });
+  }, [items, onClose, opener]);
+
   const visible = opener ? isOpened : opened;
 
   return (
     <Container>
       {clonedOpener}
       <ActionItemList visible={visible} position={position}>
-        {items.map(item => (
-          <ComboBoxItem key={item.label} {...item} />
-        ))}
+        {itemList}
       </ActionItemList>
     </Container>
   );
