@@ -1,6 +1,8 @@
+import { ComboBox, ComboBoxPosition, ComboBoxProps } from 'components/ComboBox';
+import { Icon } from 'index';
 import React, { ReactElement, ReactNode, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
-import { BreakPoints, Caption1, Caption2 } from '../../core';
+import { BreakPoints, Caption1, Caption2, Colors } from '../../core';
 import { gray500, gray800 } from '../../core/Colors';
 import { Avatar, AvatarProps, AvatarSize } from '../Avatar';
 import { ButtonIconPosition } from '../Button/ButtonIcon';
@@ -37,6 +39,7 @@ export interface ReplyProps {
   timeText?: ReactNode;
   leftAction?: ReactElement<ReplyActionProps>[];
   rightAction?: ReactElement<ReplyActionProps>[];
+  headerAction?: ComboBoxProps[];
   content?: ReactNode;
   className?: string;
   'data-element-name'?: string;
@@ -65,6 +68,7 @@ export const Reply = Object.assign(
       content,
       leftAction,
       rightAction,
+      headerAction,
       children,
       disableLineClamp = false,
       showChildren = true,
@@ -123,6 +127,19 @@ export const Reply = Object.assign(
             </NameContainer>
             {size !== ReplySize.SMALL && <TimeText size={size}>{timeText}</TimeText>}
           </TitleContainer>
+          {headerAction && (
+            <HeaderActionContainer>
+              <ComboBox
+                items={headerAction}
+                opener={
+                  <HeaderActionIconWrapper>
+                    <Icon.MoreHorizontal fillColor={Colors.gray600} />
+                  </HeaderActionIconWrapper>
+                }
+                position={ComboBoxPosition.LEFT}
+              />
+            </HeaderActionContainer>
+          )}
         </DescriptionContainer>
         <ContentWrapper marginLeft={contentMargin} size={size}>
           <ReplyContent
@@ -198,6 +215,12 @@ const TitleContainer = styled.div`
   flex: 1;
   flex-direction: column;
   margin-left: 12px;
+`;
+
+const HeaderActionContainer = styled.div``;
+
+const HeaderActionIconWrapper = styled.div`
+  cursor: pointer;
 `;
 
 const NameDescriptionContainer = styled.div`
