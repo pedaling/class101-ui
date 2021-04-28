@@ -1,7 +1,7 @@
 import { Caption1, Colors, LinkBlock, TextStyles } from 'core';
 import { elevation4 } from 'core/ElevationStyles';
 import { IconProps } from 'Icon';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 export enum ComboBoxPosition {
@@ -23,12 +23,15 @@ type Props = {
   items: ComboBoxProps[];
   position?: ComboBoxPosition;
   opened?: boolean;
+  opener?: React.ReactElement<{ onClick: () => void }>;
   children: React.ReactElement;
   onOpen?: () => void;
   onClose?: () => void;
 };
 
-export const ComboBox = React.memo<Props>(({ items, position, opened, children, onOpen, onClose }) => {
+export const ComboBox = React.memo<Props>(({ items, position, opened, opener, children, onOpen, onClose }) => {
+  const [isOpened, setOpened] = useState(false);
+
   const handleClickOpener = useCallback(() => {
     if (opened) {
       onClose?.();
@@ -38,14 +41,24 @@ export const ComboBox = React.memo<Props>(({ items, position, opened, children, 
     onOpen?.();
   }, [onClose, onOpen, opened]);
 
-  const clonedOpener = React.cloneElement(children, {
-    onClick: handleClickOpener,
-  });
+  const clonedOpener = useMemo(() => {
+    if (opener) {
+      return React.cloneElement(opener, {
+        onClick: () => setOpened(!isOpened),
+      });
+    }
+
+    return React.cloneElement(children, {
+      onClick: handleClickOpener,
+    });
+  }, [children, handleClickOpener, isOpened, opener]);
+
+  const visible = opener ? isOpened : opened;
 
   return (
     <Container>
       {clonedOpener}
-      <ActionItemList visible={opened} position={position}>
+      <ActionItemList visible={visible} position={position}>
         {items.map(item => (
           <ComboBoxItem key={item.label} {...item} />
         ))}
