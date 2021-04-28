@@ -44,6 +44,11 @@ Reply 컴포넌트
     timeText="2시간 전"
     width="312px"
     nameDescription="크리에이터"
+    headerAction={[
+      { label: '수정하기', icon: <Icon.EditOutline /> },
+      { label: '알림 끄기', description: '해당 게시물의 메일과 푸시알림을 받지 않습니다.', icon: <Icon.BellOff /> },
+      { label: '삭제하기', textColor: Colors.red500 },
+    ]}
     leftAction={[
       <Reply.Action icon={<Icon.HeartOutline />} text="2" fillColor={Colors.gray500} />,
       <Reply.Action icon={<Icon.Reply />} text="답글 달기" fillColor={Colors.gray500} />,
@@ -170,6 +175,29 @@ width는 기본값으로 `100%`입니다.
         댓글 내용입니다.
       </div>
     }
+  />
+</Playground>
+
+## Header Action
+
+`headerAction`을 통해 헤더에 콤보박스를 추가할 수 있습니다. 자세한 내용은 [여기](/components/combo-box#comboboxprops) 를 확인해주세요.
+
+<Playground>
+  <Reply
+    avatar={<Avatar src={IMAGE_URL} />}
+    name="Class101"
+    content="댓글 1"
+    headerAction={[
+      { label: '수정하기', icon: <Icon.EditOutline /> },
+      { label: '알림 끄기', description: '해당 게시물의 메일과 푸시알림을 받지 않습니다.', icon: <Icon.BellOff /> },
+      { label: '삭제하기', textColor: Colors.red500 },
+    ]}
+    leftAction={[
+      <Reply.Action icon={<Icon.HeartOutline />} text="3" />,
+      <Reply.Action icon={<Icon.Trash />} onClick={() => alert('clicked!')} />,
+      <Reply.Action icon={<Icon.CheckboxOff />} hidden={true} />,
+      <Reply.Action icon={<Icon.CheckboxOn />} disabled />,
+    ]}
   />
 </Playground>
 
