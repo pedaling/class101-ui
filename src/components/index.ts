@@ -3,6 +3,7 @@ export * from './Avatar';
 export * from './Badge';
 export * from './Button';
 export * from './ButtonGroup';
+export * from './ComboBox';
 export * from './Callout';
 export * from './Card';
 export * from './Carousel';
