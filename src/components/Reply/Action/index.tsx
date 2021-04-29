@@ -39,6 +39,7 @@ export const ReplyAction: FC<ReplyActionProps> = React.memo(
 const Container = styled.div<Pick<ReplyActionProps, 'position' | 'onClick'>>`
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   ${props => props.onClick && 'cursor: pointer'};
   ${({ position }) => {
@@ -48,10 +49,11 @@ const Container = styled.div<Pick<ReplyActionProps, 'position' | 'onClick'>>`
     if (position === ButtonIconPosition.LEFT) {
       return 'margin-right: 12px;';
     }
+
+    return '';
   }};
 `;
 
 const TextWrapper = styled(Caption1)`
-  margin-left: 5px;
   color: ${gray500};
 `;
