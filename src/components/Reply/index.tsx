@@ -1,5 +1,5 @@
 import { ComboBox, ComboBoxPosition, ComboBoxProps } from 'components/ComboBox';
-import { Icon } from 'index';
+import { MoreHorizontal } from 'Icon/generated/MoreHorizontal';
 import React, { ReactElement, ReactNode, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { BreakPoints, Caption1, Caption2, Colors } from '../../core';
@@ -143,7 +143,7 @@ export const Reply = Object.assign(
                 items={headerAction}
                 opener={
                   <HeaderActionIconWrapper>
-                    <Icon.MoreHorizontal fillColor={Colors.gray600} />
+                    <MoreHorizontal fillColor={Colors.gray600} />
                   </HeaderActionIconWrapper>
                 }
                 position={ComboBoxPosition.LEFT}
