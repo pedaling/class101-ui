@@ -101,7 +101,7 @@ export const ComboBoxItem = ({ icon, label, description, to, textColor, onClick 
 
   const innerElements = (
     <InnerElementWrapper>
-      {icon}
+      <IconWrapper>{icon}</IconWrapper>
       <TextWrapper>
         <Label>{label}</Label>
         {description && <Description>{description}</Description>}
@@ -145,6 +145,14 @@ const ActionItemList = styled.div<{ visible?: boolean; position?: ComboBoxPositi
 const InnerElementWrapper = styled.div`
   display: flex;
   flex-direction: row;
+`;
+
+const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
 `;
 
 const TextWrapper = styled.div`

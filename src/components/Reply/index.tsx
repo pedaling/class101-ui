@@ -3,7 +3,7 @@ import { Icon } from 'index';
 import React, { ReactElement, ReactNode, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { BreakPoints, Caption1, Caption2, Colors } from '../../core';
-import { gray500, gray800 } from '../../core/Colors';
+import { gray500, gray800, orange500 } from '../../core/Colors';
 import { Avatar, AvatarProps, AvatarSize } from '../Avatar';
 import { ButtonIconPosition } from '../Button/ButtonIcon';
 import { ReplyAction, ReplyActionProps } from './Action';
@@ -33,6 +33,7 @@ export interface ReplyProps {
   size: ReplySize;
   width: string;
   nameDescription?: ReactNode;
+  nameDescriptionColor?: string;
   extraBottom?: ReactNode;
   avatar?: ReactElement<AvatarProps>;
   footer?: ReactNode;
@@ -61,6 +62,7 @@ export const Reply = Object.assign(
       avatar,
       name,
       nameDescription,
+      nameDescriptionColor = orange500,
       extraBottom,
       timeText,
       width = '100%',
@@ -122,7 +124,15 @@ export const Reply = Object.assign(
               <Caption1 fontWeight="600" color={gray800}>
                 {name}
               </Caption1>
-              {nameDescription && <NameDescriptionContainer>{nameDescription}</NameDescriptionContainer>}
+              {nameDescription && (
+                <NameDescriptionContainer size={size}>
+                  {typeof nameDescription === 'string' ? (
+                    <NameDescription color={nameDescriptionColor}>{nameDescription}</NameDescription>
+                  ) : (
+                    nameDescription
+                  )}
+                </NameDescriptionContainer>
+              )}
               {size === ReplySize.SMALL && <TimeText size={size}>{timeText}</TimeText>}
             </NameContainer>
             {size !== ReplySize.SMALL && <TimeText size={size}>{timeText}</TimeText>}
@@ -223,9 +233,11 @@ const HeaderActionIconWrapper = styled.div`
   cursor: pointer;
 `;
 
-const NameDescriptionContainer = styled.div`
+const NameDescriptionContainer = styled.div<{ size: ReplySize }>`
   margin-left: 4px;
 `;
+
+const NameDescription = styled(Caption2)``;
 
 const TimeText = styled(Caption2)<{ size: ReplySize }>`
   margin-top: ${props => (props.size === ReplySize.SMALL ? '0' : '2px')};
