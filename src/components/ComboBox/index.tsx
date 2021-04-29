@@ -101,7 +101,7 @@ export const ComboBoxItem = ({ icon, label, description, to, textColor, onClick 
 
   const innerElements = (
     <InnerElementWrapper>
-      <IconWrapper>{icon}</IconWrapper>
+      {icon && <IconWrapper>{icon}</IconWrapper>}
       <TextWrapper>
         <Label>{label}</Label>
         {description && <Description>{description}</Description>}
