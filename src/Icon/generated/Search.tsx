@@ -6,4 +6,4 @@ export const Search = React.memo<IconProps>(({
   accentColor = '#DDE0E2',
   className,
   style
-}) => <svg width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg" style={style} className={className} viewBox="0 0 24 24"><path fillRule="evenodd" clipRule="evenodd" d="M15.907 17.059a8.5 8.5 0 111.151-1.151L23 21l-2 2-5.093-5.941zM17 10.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" fill={fillColor} /></svg>);
+}) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" style={style} className={className} viewBox="0 0 24 24"><path fillRule="evenodd" d="M15.907 17.059A8.468 8.468 0 0110.5 19a8.5 8.5 0 110-17 8.5 8.5 0 018.5 8.5 8.468 8.468 0 01-1.941 5.407L23 21l-2 2-5.093-5.941zM17 10.5a6.5 6.5 0 11-13 0 6.5 6.5 0 1113 0z" fill="#1b1c1d" /></svg>);

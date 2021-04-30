@@ -6,4 +6,4 @@ export const Crop = React.memo<IconProps>(({
   accentColor = '#DDE0E2',
   className,
   style
-}) => <svg width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg" style={style} className={className} viewBox="0 0 24 24"><path d="M8 3a1 1 0 00-2 0v3H3a1 1 0 000 2h3v9a1 1 0 001 1h14a1 1 0 100-2h-3V7a1 1 0 00-1-1H9v2h7v8H8V3zM17 22a1 1 0 001-1v-2h-2v2a1 1 0 001 1z" fill={fillColor} /></svg>);
+}) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="#1b1c1d" style={style} className={className} viewBox="0 0 24 24"><path d="M8 3a1 1 0 10-2 0v3H3a1 1 0 100 2h3v9a1 1 0 001 1h14a1 1 0 100-2h-3V7a1 1 0 00-1-1H9v2h7v8H8V3zm9 19a1 1 0 001-1v-2h-2v2a1 1 0 001 1z" /></svg>);

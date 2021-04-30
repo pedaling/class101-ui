@@ -6,4 +6,4 @@ export const PlayFast = React.memo<IconProps>(({
   accentColor = '#DDE0E2',
   className,
   style
-}) => <svg width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg" style={style} className={className} viewBox="0 0 24 24"><path fillRule="evenodd" clipRule="evenodd" d="M11 14.667l-6.445 4.297A1 1 0 013 18.132V5.868a1 1 0 011.555-.833L11 9.333V5.87a1 1 0 011.555-.833l9.197 6.132a1 1 0 010 1.664l-9.197 6.132A1 1 0 0111 18.132v-3.465z" fill={fillColor} /></svg>);
+}) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" style={style} className={className} viewBox="0 0 24 24"><path fillRule="evenodd" d="M11 14.667l-6.445 4.297A1 1 0 013 18.132V5.869a1 1 0 011.555-.832L11 9.333V5.869a1 1 0 011.555-.832l9.197 6.132a1 1 0 010 1.664l-9.197 6.131A1 1 0 0111 18.132v-3.465z" fill="#1b1c1d" /></svg>);

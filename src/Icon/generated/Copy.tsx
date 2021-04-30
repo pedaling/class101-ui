@@ -6,4 +6,4 @@ export const Copy = React.memo<IconProps>(({
   accentColor = '#DDE0E2',
   className,
   style
-}) => <svg width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg" style={style} className={className} viewBox="0 0 24 24"><path fillRule="evenodd" clipRule="evenodd" d="M10 4v10h10V4H10zM9 2a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1V3a1 1 0 00-1-1H9z" fill={fillColor} /><path fillRule="evenodd" clipRule="evenodd" d="M6 8H3a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1v-3h-2v2H4V10h2V8z" fill={fillColor} /></svg>);
+}) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="#1b1c1d" fillRule="evenodd" style={style} className={className} viewBox="0 0 24 24"><path d="M10 4v10h10V4H10zM9 2a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1V3a1 1 0 00-1-1H9zM6 8H3a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1v-3h-2v2H4V10h2V8z" /></svg>);

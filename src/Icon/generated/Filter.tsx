@@ -6,4 +6,4 @@ export const Filter = React.memo<IconProps>(({
   accentColor = '#DDE0E2',
   className,
   style
-}) => <svg width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg" style={style} className={className} viewBox="0 0 24 24"><path fillRule="evenodd" clipRule="evenodd" d="M3 19h18v-2H3v2zm0-6h18v-2H3v2zm0-8v2h18V5H3z" fill={fillColor} /><circle cx={8} cy={18} r={2} fill={fillColor} /><circle cx={8} cy={6} r={2} fill={fillColor} /><circle cx={16} cy={12} r={2} fill={fillColor} /></svg>);
+}) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="#1b1c1d" style={style} className={className} viewBox="0 0 24 24"><path fillRule="evenodd" d="M3 19h18v-2H3v2zm0-6h18v-2H3v2zm0-8v2h18V5H3z" /><circle cx={8} cy={18} r={2} /><circle cx={8} cy={6} r={2} /><circle cx={16} cy={12} r={2} /></svg>);
