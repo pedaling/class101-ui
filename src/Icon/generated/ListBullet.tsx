@@ -3,7 +3,6 @@ import { IconProps } from '../index';
 export const ListBullet = React.memo<IconProps>(({
   size = 24,
   fillColor = '#1B1C1D',
-  accentColor = '#DDE0E2',
   className,
   style
-}) => <svg width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg" style={style} className={className} viewBox="0 0 24 24"><path fillRule="evenodd" clipRule="evenodd" d="M3 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S2.17 7.5 3 7.5 4.5 6.83 4.5 6 3.83 4.5 3 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5 1.5-.68 1.5-1.5-.67-1.5-1.5-1.5zM6 19h16v-2H6v2zm0-6h16v-2H6v2zm0-8v2h16V5H6z" fill={fillColor} /></svg>);
+}) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" style={style} className={className} viewBox="0 0 24 24"><path fillRule="evenodd" d="M3 10.5a1.5 1.5 0 100 3 1.5 1.5 0 100-3zm0-6a1.5 1.5 0 100 3 1.5 1.5 0 100-3zm0 12c-.83 0-1.5.68-1.5 1.5A1.51 1.51 0 003 19.5 1.51 1.51 0 004.5 18c0-.82-.67-1.5-1.5-1.5zM6 19h16v-2H6v2zm0-6h16v-2H6v2zm0-8v2h16V5H6z" fill={fillColor} /></svg>);

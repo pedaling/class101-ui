@@ -6,7 +6,7 @@ function defaultTemplate({ template }, _, { componentName, jsx }) {
     import React from 'react';
     import { IconProps } from '../index';
     
-    export const ${IconComponentName} = React.memo<IconProps>(({size = 24, fillColor = '#1B1C1D', accentColor = '#DDE0E2', className, style}) => ${jsx})
+    export const ${IconComponentName} = React.memo<IconProps>(({size = 24, fillColor = '#1B1C1D', className, style}) => ${jsx})
   `;
 }
 module.exports = defaultTemplate;
