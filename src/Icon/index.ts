@@ -1,3 +1,6 @@
+// Memo(neroli): Icon을 사용하는 방식이 treeshaking이 안되는 방식이기 때문에 web과 admin-web에서 현 시간에서 사용하지 않는 아이콘들은 주석처리를 하였습니다.
+// https://ko.wikipedia.org/wiki/YAGNI
+// https://github.com/pedaling/class101-ui/pull/333
 import React from 'react';
 
 export interface IconProps {
