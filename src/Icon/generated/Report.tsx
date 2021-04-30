@@ -3,7 +3,6 @@ import { IconProps } from '../index';
 export const Report = React.memo<IconProps>(({
   size = 24,
   fillColor = '#1B1C1D',
-  accentColor = '#DDE0E2',
   className,
   style
-}) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" style={style} className={className} viewBox="0 0 24 24"><path fillRule="evenodd" d="M7 16h8v2H6v2h12v-2h-1v-4a5 5 0 10-10 0v2zm12 0h1v6H4v-6h1v-2a7 7 0 1114 0v2zM12 1a1 1 0 011 1v2a1 1 0 11-2 0V2a1 1 0 011-1zm9.192 3.808a1 1 0 010 1.414l-1.414 1.414a1 1 0 01-1.414-1.414l1.414-1.414a1 1 0 011.414 0zm-18.385 0a1 1 0 011.414 0l1.414 1.414a1 1 0 01-1.414 1.414L2.808 6.222a1 1 0 010-1.414z" fill="#1b1c1d" /></svg>);
+}) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" style={style} className={className} viewBox="0 0 24 24"><path fillRule="evenodd" d="M7 16h8v2H6v2h12v-2h-1v-4a5 5 0 10-10 0v2zm12 0h1v6H4v-6h1v-2a7 7 0 1114 0v2zM12 1a1 1 0 011 1v2a1 1 0 11-2 0V2a1 1 0 011-1zm9.192 3.808a1 1 0 010 1.414l-1.414 1.414a1 1 0 01-1.414-1.414l1.414-1.414a1 1 0 011.414 0zm-18.385 0a1 1 0 011.414 0l1.414 1.414a1 1 0 01-1.414 1.414L2.808 6.222a1 1 0 010-1.414z" fill={fillColor} /></svg>);
