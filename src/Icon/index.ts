@@ -17,7 +17,7 @@ export * from './generated/Alert';
 export * from './generated/AlertCircleOutline';
 export * from './generated/Analysis';
 export * from './generated/Apple';
-// export * from './generated/ArrowDown';
+export * from './generated/ArrowDown';
 export * from './generated/ArrowLeft';
 export * from './generated/ArrowRight';
 export * from './generated/ArrowUp';
