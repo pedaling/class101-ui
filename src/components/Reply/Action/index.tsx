@@ -3,14 +3,15 @@ import styled from 'styled-components';
 
 import { Caption1 } from '../../../core';
 import { gray500 } from '../../../core/Colors';
-import { IconButton, IconButtonProps } from '../../Button';
+import { IconButton, TextButton, TextButtonProps } from '../../Button';
 import { ButtonIconPosition } from '../../Button/ButtonIcon';
 
-export type ButtonPropsForReply = Omit<IconButtonProps, 'leftIcon' | 'rightIcon' | 'color' | 'size' | 'theme'>;
+export type ButtonPropsForReply = Omit<TextButtonProps, 'leftIcon' | 'rightIcon' | 'color' | 'size' | 'theme'>;
 
 export interface ReplyActionProps extends ButtonPropsForReply {
   /** 사용할 icon. */
-  icon: ReactElement<{ size: number }>;
+  icon?: ReactElement<{ size: number }>;
+  fillColor?: string;
 
   position: ButtonIconPosition;
 
@@ -22,13 +23,17 @@ export interface ReplyActionProps extends ButtonPropsForReply {
 }
 
 export const ReplyAction: FC<ReplyActionProps> = React.memo(
-  ({ position, text, textColor = gray500, fillColor, children, onClick, hidden, ...restProps }) => {
+  ({ position, text, textColor = gray500, fillColor, icon, children, onClick, hidden, ...restProps }) => {
     if (hidden) {
       return <></>;
     }
     return (
       <Container position={position} onClick={onClick}>
-        <IconButton size="xs" color="transparent" fillColor={fillColor} {...restProps} />
+        {icon ? (
+          <IconButton size="xs" color="transparent" icon={icon} fillColor={fillColor} {...restProps} />
+        ) : (
+          <TextButton size="xs" {...restProps} />
+        )}
         {text !== undefined && <TextWrapper color={textColor}>{text}</TextWrapper>}
         {children}
       </Container>
