@@ -2,7 +2,7 @@ import { range } from 'lodash';
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 
-import { ChevronLeft, ChevronRight } from '../../Icon';
+import { ChevronLeftIcon, ChevronRightIcon } from '../../Icon';
 import { Button, ButtonColor, IconButton } from '../Button';
 
 const DEFAULT_PAGE_COUNT_PER_VIEW = 5;
@@ -26,7 +26,7 @@ export class Pagination extends PureComponent<PaginationProps> {
 
     return (
       <PageWrapper className={className} data-element-name={dataElementName}>
-        <PageIconBtn icon={<ChevronLeft />} onClick={handleDecrease} disabled={currentPageIndex <= 0} />
+        <PageIconBtn icon={<ChevronLeftIcon />} onClick={handleDecrease} disabled={currentPageIndex <= 0} />
         {indexListToDisplay.map(index => (
           <PageBtn
             color={index === currentPageIndex ? ButtonColor.ORANGE : ButtonColor.WHITE}
@@ -37,7 +37,11 @@ export class Pagination extends PureComponent<PaginationProps> {
             {index + 1}
           </PageBtn>
         ))}
-        <PageIconBtn icon={<ChevronRight />} onClick={handleIncrease} disabled={currentPageIndex >= totalPageIndex} />
+        <PageIconBtn
+          icon={<ChevronRightIcon />}
+          onClick={handleIncrease}
+          disabled={currentPageIndex >= totalPageIndex}
+        />
       </PageWrapper>
     );
   }

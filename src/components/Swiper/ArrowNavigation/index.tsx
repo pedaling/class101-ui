@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { ChevronLeft, ChevronRight } from '../../../Icon';
+import { ChevronLeftIcon, ChevronRightIcon } from '../../../Icon';
 
 export const ArrowNavigation = () => {
   return (
     <>
       <Button className="swiper-button-prev">
-        <ChevronLeft fillColor="white" />
+        <ChevronLeftIcon fillColor="white" />
       </Button>
       <Button className="swiper-button-next">
-        <ChevronRight fillColor="white" />
+        <ChevronRightIcon fillColor="white" />
       </Button>
     </>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconProps } from '../index';
+import type { IconProps } from '../types';
 export const CheckCircleOutline = React.memo<IconProps>(({
   size = 24,
   fillColor = '#1B1C1D',

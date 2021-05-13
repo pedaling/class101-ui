@@ -6,7 +6,7 @@ import { Button, IconButton } from '../../components/Button';
 import { gray900, white } from '../../core/Colors';
 import { elevation2 } from '../../core/ElevationStyles';
 import { body1 } from '../../core/TextStyles';
-import { ChevronLeft, ChevronRight } from '../../Icon';
+import { ChevronLeftIcon, ChevronRightIcon } from '../../Icon';
 import { isClient } from '../../utils';
 import padNumber from '../../utils/padNumber';
 import { Input, InputProps } from '../Input';
@@ -146,7 +146,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
         />
         <Picker alwaysShow={alwaysShow} modalVisible={alwaysShow || modalVisible} ref={this.modalRef}>
           <DatePickerNav>
-            <IconButton onClick={this.handleClickDecreaseBtn} icon={<ChevronLeft />} color="white" />
+            <IconButton onClick={this.handleClickDecreaseBtn} icon={<ChevronLeftIcon />} color="white" />
             {selectorType === 'day' && (
               <NavText onClick={() => this.changeSelectorType('month')} size="sm">
                 {currentMonth.toLocaleDateString(locale.name, { year: 'numeric', month: 'short' })}
@@ -157,7 +157,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
                 {currentMonth.toLocaleDateString(locale.name, { year: 'numeric' })}
               </NavText>
             )}
-            <IconButton onClick={this.handleClickIncreaseBtn} icon={<ChevronRight />} color="white" />
+            <IconButton onClick={this.handleClickIncreaseBtn} icon={<ChevronRightIcon />} color="white" />
           </DatePickerNav>
           <DatePickerBody>
             {selectorType === 'day' && (
