@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { gray600, orange500, redError } from '../../core/Colors';
-import { AlertIcon, IconProps } from '../../Icon';
+import { Alert, IconProps } from '../../Icon';
 
 export enum Intent {
   DANGER = 'DANGER',
@@ -25,9 +25,8 @@ export interface InlineErrorProps {
 export class InlineError extends React.PureComponent<InlineErrorProps> {
   public static defaultProps: Partial<InlineErrorProps> = {
     intent: Intent.DEFAULT,
-    icon: <AlertIcon size={16} />,
+    icon: <Alert size={16} />,
   };
-
   public render() {
     const { icon, children, intent = Intent.DEFAULT } = this.props;
 

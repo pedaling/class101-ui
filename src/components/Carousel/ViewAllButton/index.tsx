@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { orange000, orange600 } from '../../../core/Colors';
-import { AddIcon } from '../../../Icon';
+import { Add } from '../../../Icon';
 import { Button, ButtonProps } from '../../Button/ContainButton';
 import { ButtonColor } from '../../Button/interface';
 
@@ -14,7 +14,7 @@ export default class ViewAllButton extends React.PureComponent<Partial<ButtonPro
     return (
       <AllButton color={ButtonColor.ORANGE_LIGHT} className={classNames('swiper-slide', className)} {...props}>
         <Inner>
-          <AddIcon size={18} fillColor={orange600} />
+          <Add size={18} fillColor={orange600} />
           <Text>전체보기</Text>
         </Inner>
       </AllButton>

@@ -1,5 +1,5 @@
 import React from 'react';
-import type { IconProps } from '../types';
+import { IconProps } from '../index';
 export const PersonOutline = React.memo<IconProps>(({
   size = 24,
   fillColor = '#1B1C1D',

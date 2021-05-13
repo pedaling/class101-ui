@@ -29,8 +29,8 @@
     "docz:dev": "docz dev",
     "docz:build": "docz build",
     "prettier": "prettier --write src/**/*.{ts,tsx}",
-    "generated-icon-export": "node src/Icon/tools/generate-export.js",
-    "generated-svgr": "cd src/Icon/svgs && npx @svgr/cli --template ../tools/svgr-cli.template.js --config-file ../tools/.svgrrc *.svg --out-dir ../generated --ext tsx",
+    "generated-icon-export": "cd src/Icon && node generate-exports.js",
+    "generated-svgr": "cd src/Icon/svgs && npx @svgr/cli --template ../svgr-cli.template.js --config-file ../.svgrrc  *.svg --out-dir ../generated --ext tsx",
     "svgr": "yarn generated-svgr && yarn generated-icon-export"
   },
   "peerDependencies": {

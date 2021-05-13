@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { elevation1 } from '../../../core/ElevationStyles';
-import { ChevronLeftIcon, ChevronRightIcon } from '../../../Icon';
+import { ChevronLeft, ChevronRight } from '../../../Icon';
 import { ButtonColor, IconButton } from '../../Button';
 
 const NAVIGATION_BUTTON_SIZE = 32;
@@ -12,8 +12,8 @@ export type NavigationDirection = 'right' | 'left';
 export const DefaultNavigation = () => {
   return (
     <div className="swiper-default-navigation">
-      <Button color={ButtonColor.WHITE} className="swiper-button-prev" icon={<ChevronLeftIcon />} />
-      <Button color={ButtonColor.WHITE} className="swiper-button-next" icon={<ChevronRightIcon />} />
+      <Button color={ButtonColor.WHITE} className="swiper-button-prev" icon={<ChevronLeft />} />
+      <Button color={ButtonColor.WHITE} className="swiper-button-next" icon={<ChevronRight />} />
     </div>
   );
 };
