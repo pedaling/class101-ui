@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Badge } from '../../components/Badge';
 import { gray900, white } from '../../core/Colors';
 import { body1, subtitle1 } from '../../core/TextStyles';
-import { ChevronRight } from '../../Icon';
+import { ChevronRightIcon } from '../../Icon';
 import { HTMLDivProps } from '../../interfaces/props';
 
 interface ContainerProps {
@@ -94,7 +94,7 @@ export class BottomSheet extends PureComponent<BottomSheetProps, State> {
             <Title>{title || ''}</Title>
             {badgeCount && <BadgeCounter pill>{badgeCount}</BadgeCounter>}
             <ChevronBox rotate={isOpened ? 90 : 270}>
-              <ChevronRight />
+              <ChevronRightIcon />
             </ChevronBox>
           </InnerHeader>
           {renderFixedContent && <FixedContent>{renderFixedContent()}</FixedContent>}

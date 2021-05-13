@@ -4,9 +4,10 @@ function defaultTemplate({ template }, _, { componentName, jsx }) {
 
   return typeScriptTpl.ast`
     import React from 'react';
-    import { IconProps } from '../index';
+    import type { IconProps } from '../types';
     
     export const ${IconComponentName} = React.memo<IconProps>(({size = 24, fillColor = '#1B1C1D', className, style}) => ${jsx})
   `;
 }
+
 module.exports = defaultTemplate;

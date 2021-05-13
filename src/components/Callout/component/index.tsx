@@ -3,17 +3,17 @@ import styled from 'styled-components';
 
 import { green500, orange600, red600 } from '../../../core/Colors';
 import { body2, caption1 } from '../../../core/TextStyles';
-import { Alert, CheckCircle, Info } from '../../../Icon';
+import { AlertIcon, CheckCircleIcon, InfoIcon } from '../../../Icon';
 import { Button } from '../../Button/ContainButton';
 import { ButtonColor, ButtonSize } from '../../Button/interface';
 import { backgroundColorByStatus } from '../color';
 import { CalloutProps, CalloutStatus, CalloutStatusValue } from '../interface';
 
 const iconByStatus = {
-  [CalloutStatus.DEFAULT]: <Info />,
-  [CalloutStatus.SUGGEST]: <CheckCircle fillColor={green500} />,
-  [CalloutStatus.WARNING]: <Alert fillColor={orange600} />,
-  [CalloutStatus.DANGER]: <Alert fillColor={red600} />,
+  [CalloutStatus.DEFAULT]: <InfoIcon />,
+  [CalloutStatus.SUGGEST]: <CheckCircleIcon fillColor={green500} />,
+  [CalloutStatus.WARNING]: <AlertIcon fillColor={orange600} />,
+  [CalloutStatus.DANGER]: <AlertIcon fillColor={red600} />,
 };
 
 export class Callout extends PureComponent<Readonly<CalloutProps>> {

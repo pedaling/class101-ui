@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { ButtonColor, ButtonSize, IconButton } from '../../components/Button';
 import { gray300, gray900, orange500, redError, white } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
-import { Close } from '../../Icon';
+import { CloseIcon } from '../../Icon';
 import { InlineError, Intent } from '../InlineError';
 import InnerTags from './InnerTags';
 
@@ -86,7 +86,7 @@ export class TagInput extends PureComponent<TagInputProps, State> {
           </InnerContainer>
           {value.length > 0 && !disabled && (
             <IconButton
-              icon={<Close />}
+              icon={<CloseIcon />}
               size={ButtonSize.XSMALL}
               color={ButtonColor.TRANSPARENT}
               onClick={this.handleTagRemoveAll}
