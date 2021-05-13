@@ -2,7 +2,7 @@ import React, { createRef, PureComponent } from 'react';
 import styled from 'styled-components';
 
 import { IconButton } from '../../components/Button/IconButton';
-import { Add, Minus } from '../../Icon';
+import { AddIcon, MinusIcon } from '../../Icon';
 import { HTMLInputProps, Omit } from '../../interfaces/props';
 import { Input, InputProps } from '../Input';
 
@@ -44,13 +44,13 @@ export class NumericInput extends PureComponent<Props> {
           {...inputProps}
         />
         <StyledNumericInputButton
-          icon={<Minus />}
+          icon={<MinusIcon />}
           onClick={this.handleStepDownClick}
           disabled={Number(value) === minValue || disabled}
           {...this.stepDownButtonPosition()}
         />
         <StyledNumericInputButton
-          icon={<Add />}
+          icon={<AddIcon />}
           onClick={this.handleStepUpClick}
           disabled={Number(value) === maxValue || disabled}
           {...this.stepUpButtonPosition()}

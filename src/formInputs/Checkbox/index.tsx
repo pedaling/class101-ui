@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { gray300 } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
-import { CheckboxOff, CheckboxOn } from '../../Icon';
+import { CheckboxOffIcon, CheckboxOnIcon } from '../../Icon';
 import { HTMLInputProps, Omit } from '../../interfaces/props';
 import { InlineError, Intent } from '../InlineError';
 
@@ -32,6 +32,7 @@ export class Checkbox extends React.PureComponent<CheckboxProps> {
   public static defaultProps: Partial<CheckboxProps> = {
     size: 24,
   };
+
   public render() {
     const {
       className,
@@ -52,9 +53,9 @@ export class Checkbox extends React.PureComponent<CheckboxProps> {
       <div style={style} className={className} {...restProps}>
         <Container inline={inline}>
           {checked ? (
-            <CheckboxOn fillColor={disabled ? gray300 : undefined} size={size} />
+            <CheckboxOnIcon fillColor={disabled ? gray300 : undefined} size={size} />
           ) : (
-            <CheckboxOff size={size} fillColor={disabled ? gray300 : undefined} />
+            <CheckboxOffIcon size={size} fillColor={disabled ? gray300 : undefined} />
           )}
           <HiddenCheckboxInput
             onChange={this.handleChange}

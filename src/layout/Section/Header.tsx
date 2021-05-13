@@ -7,7 +7,7 @@ import { gray300, gray600 } from '../../core/Colors';
 import { Link } from '../../core/Link';
 import { body2 } from '../../core/TextStyles';
 import { BaseTypography, HeadlineTypoProps, Typo } from '../../core/Typography/BaseTypography';
-import { ChevronRight } from '../../Icon';
+import { ChevronRightIcon } from '../../Icon';
 
 export type TypographyProps = { typography?: Typo } & Partial<HeadlineTypoProps>;
 
@@ -95,7 +95,7 @@ const TextLink = styled(TextButton)`
   `}
 `;
 
-const LinkButton = styled(ChevronRight)`
+const LinkButton = styled(ChevronRightIcon)`
   transition: opacity 150ms ease-in-out;
   opacity: 0;
   ${media.sm`

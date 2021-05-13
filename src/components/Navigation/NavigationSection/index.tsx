@@ -6,7 +6,7 @@ import { NavigationSectionAction, NavigationSectionItem, NavigationSectionSubIte
 import { gray50, gray700, gray900 } from '../../../core/Colors';
 import { LinkBlock } from '../../../core/LinkBlock';
 import { body2, caption1 } from '../../../core/TextStyles';
-import { ChevronDown } from '../../../Icon';
+import { ChevronDownIcon } from '../../../Icon';
 import { Badge } from '../../Badge';
 
 export interface NavigationSectionProps {
@@ -93,7 +93,7 @@ export class NavigationSection extends React.PureComponent<InjectedProps, State>
           this.renderAddonComponent(item.badge)
         ) : (
           <ChevronContainer isOpened={isOpened}>
-            <ChevronDown size={16} />
+            <ChevronDownIcon size={16} />
           </ChevronContainer>
         )}
       </>

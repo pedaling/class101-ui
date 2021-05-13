@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
 import { gray100, gray200 } from '../../core/Colors';
-import { Close } from '../../Icon';
+import { CloseIcon } from '../../Icon';
 
 export interface TagProps {
   onRemove?: () => any;
@@ -21,7 +21,7 @@ export class Tag extends PureComponent<TagProps> {
         <Text>{label || value}</Text>
         {!disabled && (
           <CloseButton onClick={this.handleRemoveButton}>
-            <Close size={16} />
+            <CloseIcon size={16} />
           </CloseButton>
         )}
       </Container>
