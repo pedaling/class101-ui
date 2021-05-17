@@ -17,6 +17,5 @@ export * from './types';
  *   // After
  *   import { AddIcon } from '@class101/ui';
  *   const IconComponent = () => <AddIcon />;
- *
  */
 export const Icon = LegacyIcon;
