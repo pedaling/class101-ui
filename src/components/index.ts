@@ -7,6 +7,7 @@ export * from './ComboBox';
 export * from './Callout';
 export * from './Card';
 export * from './Carousel';
+export { default as ViewAllButton } from './Carousel/ViewAllButton';
 export * from './Comment';
 export * from './FilterList';
 export * from './Navigation';

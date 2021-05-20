@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import { ChevronLeftIcon, ChevronRightIcon } from '../../../Icon';
 
-export const ArrowNavigation = () => {
+export const ArrowNavigation = React.memo(() => {
   return (
     <>
       <Button className="swiper-button-prev">
@@ -14,7 +13,7 @@ export const ArrowNavigation = () => {
       </Button>
     </>
   );
-};
+});
 
 const Button = styled.button`
   &.swiper-button-prev,

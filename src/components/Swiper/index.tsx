@@ -1,6 +1,7 @@
 // eslint-disable-next-line prettier/prettier
 import classNames from 'classnames';
 import React, { FC, MutableRefObject, ReactNode, useEffect, useRef, useState } from 'react';
+import { SwiperOptions } from 'swiper';
 import {
   Autoplay,
   EffectFade,
@@ -11,7 +12,6 @@ import {
   Swiper as OriginalSwiper,
   Virtual,
 } from 'swiper/dist/js/swiper.esm.js';
-import type { SwiperOptions } from 'swiper';
 import { createUniqIDGenerator } from '../../utils/createUniqIDGenerator';
 import { DefaultNavigation } from './DefaultNavigation';
 
@@ -32,15 +32,34 @@ const generateId = createUniqIDGenerator('swiper-');
 
 export const Swiper: FC<SwiperProps> = ({
   getSwiperInstance,
-  className,
+  className = '',
   children,
-  navigationChildren,
-  paginationChildren,
+  navigationChildren = <DefaultNavigation />,
+  paginationChildren = <div className="swiper-pagination" />,
   'data-element-name': dataElementName,
+  pagination = {
+    el: '.swiper-pagination',
+    type: 'bullets',
+    clickable: true,
+  },
+  navigation = {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  speed = 400,
+  threshold = 10,
+  observer = true,
   ...swiperOptions
 }) => {
   const swiperRef: MutableRefObject<OriginalSwiper | null> = useRef(null);
-  const swiperOptionsRef: MutableRefObject<SwiperOptions> = useRef(swiperOptions);
+  const swiperOptionsRef: MutableRefObject<SwiperOptions> = useRef({
+    ...swiperOptions,
+    pagination,
+    navigation,
+    speed,
+    threshold,
+    observer,
+  });
   const [containerId, setContainerId] = useState<string | undefined>(undefined);
 
   useEffect(() => {
@@ -72,22 +91,3 @@ export const Swiper: FC<SwiperProps> = ({
     </div>
   );
 };
-
-Swiper.defaultProps = {
-  paginationChildren: <div className="swiper-pagination" />,
-  navigationChildren: <DefaultNavigation />,
-  freeMode: false,
-  observer: true,
-  pagination: {
-    el: '.swiper-pagination',
-    type: 'bullets',
-    clickable: true,
-  },
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-  threshold: 10,
-  speed: 400,
-  className: '',
-} as Partial<SwiperProps>;

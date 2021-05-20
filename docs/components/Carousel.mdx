@@ -5,7 +5,7 @@ route: /components/carousel
 ---
 
 import { Playground, Props } from 'docz';
-import { Carousel, Slide, CarouselNavigationPosition, CarouselPaginationTheme, Section, Colors } from '@class101/ui';
+import { Carousel, Slide, CarouselNavigationPosition, CarouselPaginationTheme, Section, Colors, ViewAllButton } from '@class101/ui';
 import { imageSrc } from './interface';
 import { PlayGroundBanner, PlayGroundSectionCarouselContent, SwiperCard, PreloadImage } from '../docsComponents';
 
@@ -245,7 +245,7 @@ enum CarouselPaginationTheme {
           <PlayGroundBanner backgroundColor={Colors[`blue${order * 100}`]}>배너{order}</PlayGroundBanner>
         </Slide>
       ))}
-      <Carousel.ViewAllButton />
+      <ViewAllButton />
     </Carousel>
   </Section>
 </Playground>
