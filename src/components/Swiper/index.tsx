@@ -1,7 +1,7 @@
 // eslint-disable-next-line prettier/prettier
 import classNames from 'classnames';
 import React, { FC, MutableRefObject, ReactNode, useEffect, useRef, useState } from 'react';
-import { SwiperOptions } from 'swiper';
+import type { SwiperOptions } from 'swiper';
 import {
   Autoplay,
   EffectFade,
