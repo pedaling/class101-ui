@@ -23,7 +23,7 @@ type SwiperPropsForCaorusel = Partial<
   >
 >;
 
-export interface CarouselProps {
+export type CarouselProps = React.PropsWithChildren<{
   swiperProps?: SwiperPropsForCaorusel;
   className?: string;
   lgSlidesPerView: SlidesPerView;
@@ -43,7 +43,7 @@ export interface CarouselProps {
   pagination?: boolean;
   navigation?: boolean;
   'data-element-name'?: string;
-}
+}>;
 
 export enum CarouselNavigationPosition {
   TopRightOut = 'TopRightOut',
