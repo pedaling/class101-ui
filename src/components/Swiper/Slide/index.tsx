@@ -6,6 +6,6 @@ export interface SlideProps {
   children?: React.ReactNode;
 }
 
-export const Slide = (props: SlideProps) => {
+export const Slide = React.memo<SlideProps>(props => {
   return <div className={classNames('swiper-slide', props.className)}>{props.children}</div>;
-};
+});

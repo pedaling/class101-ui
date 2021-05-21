@@ -1,10 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
-
 import { media, SIZES } from '../../core/BreakPoints';
 import { gray700, white } from '../../core/Colors';
 import { Swiper, SwiperInstance, SwiperProps } from '../Swiper';
-import ViewAllButton from './ViewAllButton';
 
 type SlidesPerView = 'auto' | 1 | 2 | 3 | 4 | 6;
 
@@ -57,111 +55,96 @@ export enum CarouselPaginationTheme {
   Dark = 'Dark',
   Light = 'Light',
 }
-export class Carousel extends PureComponent<CarouselProps> {
-  public static ViewAllButton = ViewAllButton;
-  public static defaultProps = {
-    lgSlidesPerView: 1,
-    smSlidesPerView: 1,
-    lgSlidesSideOffset: 0,
-    smSlidesSideOffset: 0,
-    navigation: true,
-    navigationPosition: CarouselNavigationPosition.TopRightOut,
-    pagination: false,
-    paginationTheme: CarouselPaginationTheme.Dark,
-  };
 
-  private swiper?: SwiperInstance;
+export const Carousel = React.memo<CarouselProps>(props => {
+  const {
+    className,
+    children,
+    navigation = true,
+    pagination = false,
+    navigationPosition = CarouselNavigationPosition.TopRightOut,
+    transparentPagination,
+    containerContentMaxWidth,
+    paginationTheme = CarouselPaginationTheme.Dark,
+    lgSlidesSideOffset = 0,
+    smSlidesSideOffset = 0,
+    'data-element-name': dataElementName,
+    swiperProps,
+    onChangeSlide,
+    onTransitionEnd,
+    onInit,
+    lgSlidesPerView = 1,
+    smSlidesPerView = 1,
+    lgSpaceBetween,
+    smSpaceBetween,
+    activeIndex,
+  } = props;
 
-  public componentDidUpdate(prevProps: CarouselProps) {
-    const { activeIndex } = this.props;
-    if (
-      activeIndex !== undefined &&
-      activeIndex !== prevProps.activeIndex &&
-      this.swiper &&
-      activeIndex !== this.swiper.realIndex
-    ) {
-      this.goToSlides(activeIndex);
-    }
-  }
-  public render() {
-    const {
-      className,
-      children,
-      navigation,
-      pagination,
-      navigationPosition,
-      transparentPagination,
-      containerContentMaxWidth,
-      paginationTheme,
-      lgSlidesSideOffset,
-      smSlidesSideOffset,
-      'data-element-name': dataElementName,
-    } = this.props;
+  const swiperRef = useRef<SwiperInstance>();
 
-    const swiperParams = this.getSwiperParams();
+  const handleGetSwiperInstance = useCallback((swiper: SwiperInstance) => {
+    swiperRef.current = swiper;
+  }, []);
 
-    return (
-      <StyledSwiper
-        className={className}
-        hasNavigation={navigation}
-        hasPagination={pagination}
-        navigationPosition={navigationPosition}
-        transparentPagination={transparentPagination}
-        containerContentMaxWidth={containerContentMaxWidth}
-        paginationTheme={paginationTheme}
-        lgSlidesSideOffset={lgSlidesSideOffset}
-        smSlidesSideOffset={smSlidesSideOffset}
-        data-element-name={dataElementName}
-        {...swiperParams}
-      >
-        {children}
-      </StyledSwiper>
-    );
-  }
-
-  private handleGetSwiperInstance = (swiper: SwiperInstance) => {
-    this.swiper = swiper;
-  };
-
-  private goToSlides = (index: number) => {
-    if (this.swiper) {
-      if (this.props.swiperProps && this.props.swiperProps.loop) {
-        return this.swiper.slideToLoop(index);
+  const goToSlides = useCallback(
+    (index: number) => {
+      if (!swiperRef.current) {
+        return;
       }
-      this.swiper.slideTo(index);
+
+      if (swiperProps?.loop) {
+        swiperRef.current.slideToLoop(index);
+        return;
+      }
+
+      swiperRef.current.slideTo(index);
+    },
+    [swiperProps?.loop]
+  );
+
+  const handelChangeSlide = useCallback(() => {
+    if (!swiperRef.current) {
+      return;
     }
-  };
 
-  private handelChangeSlide = () => {
-    const { onChangeSlide } = this.props;
-    if (this.swiper && onChangeSlide) {
-      onChangeSlide(this.swiper.realIndex);
+    onChangeSlide?.(swiperRef.current.realIndex);
+  }, [onChangeSlide]);
+
+  const handleTransitionEnd = useCallback(() => {
+    if (!swiperRef.current) {
+      return;
     }
-  };
 
-  private handleTransitionEnd = () => {
-    const { onTransitionEnd } = this.props;
-    if (this.swiper && onTransitionEnd) {
-      onTransitionEnd();
+    onTransitionEnd?.();
+  }, [onTransitionEnd]);
+
+  const handleInit = useCallback(() => {
+    if (!swiperRef.current) {
+      return;
     }
-  };
 
-  private handleInit = () => {
-    const { onInit } = this.props;
-    if (this.swiper && onInit) {
-      onInit();
+    onInit?.();
+  }, [onInit]);
+
+  useEffect(() => {
+    if (!swiperRef.current) {
+      return;
     }
-  };
 
-  private getSwiperParams = (): Partial<SwiperProps> => {
-    const { swiperProps, lgSlidesPerView, smSlidesPerView, lgSpaceBetween, smSpaceBetween, activeIndex } = this.props;
+    if (activeIndex === undefined || activeIndex === swiperRef.current.realIndex) {
+      return;
+    }
 
-    const params: Partial<SwiperProps> = {
+    goToSlides(activeIndex);
+  }, [activeIndex, goToSlides]);
+
+  const swiperParams = useMemo<Partial<SwiperProps>>(
+    () => ({
       ...swiperProps,
       on: {
-        init: this.handleInit,
-        slideChange: this.handelChangeSlide,
-        transitionEnd: this.handleTransitionEnd,
+        init: handleInit,
+        slideChange: handelChangeSlide,
+        transitionEnd: handleTransitionEnd,
       },
       slidesPerView: lgSlidesPerView,
       spaceBetween: lgSpaceBetween || typeof lgSlidesPerView !== 'number' || lgSlidesPerView !== 1 ? 24 : 0,
@@ -171,11 +154,39 @@ export class Carousel extends PureComponent<CarouselProps> {
           spaceBetween: smSpaceBetween || typeof smSlidesPerView !== 'number' || smSlidesPerView !== 1 ? 16 : 0,
         },
       },
-      getSwiperInstance: this.handleGetSwiperInstance,
-    };
-    return params;
-  };
-}
+      getSwiperInstance: handleGetSwiperInstance,
+    }),
+    [
+      handleInit,
+      handelChangeSlide,
+      handleTransitionEnd,
+      handleGetSwiperInstance,
+      swiperProps,
+      lgSlidesPerView,
+      smSlidesPerView,
+      lgSpaceBetween,
+      smSpaceBetween,
+    ]
+  );
+
+  return (
+    <StyledSwiper
+      className={className}
+      hasNavigation={navigation}
+      hasPagination={pagination}
+      navigationPosition={navigationPosition}
+      transparentPagination={transparentPagination}
+      containerContentMaxWidth={containerContentMaxWidth}
+      paginationTheme={paginationTheme}
+      lgSlidesSideOffset={lgSlidesSideOffset}
+      smSlidesSideOffset={smSlidesSideOffset}
+      data-element-name={dataElementName}
+      {...swiperParams}
+    >
+      {children}
+    </StyledSwiper>
+  );
+});
 
 type StyledSwiperProps = Partial<
   Pick<
