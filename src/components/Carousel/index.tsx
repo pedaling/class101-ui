@@ -26,12 +26,12 @@ type SwiperPropsForCaorusel = Partial<
 export type CarouselProps = React.PropsWithChildren<{
   swiperProps?: SwiperPropsForCaorusel;
   className?: string;
-  lgSlidesPerView: SlidesPerView;
-  smSlidesPerView: SlidesPerView;
+  lgSlidesPerView?: SlidesPerView;
+  smSlidesPerView?: SlidesPerView;
   lgSpaceBetween?: boolean;
   smSpaceBetween?: boolean;
-  lgSlidesSideOffset: number;
-  smSlidesSideOffset: number;
+  lgSlidesSideOffset?: number;
+  smSlidesSideOffset?: number;
   activeIndex?: number;
   onChangeSlide?: (index: number) => void;
   onTransitionEnd?: () => void;
