@@ -1,13 +1,13 @@
 import { IconProps } from 'Icon';
 import { darken, rgba } from 'polished';
-import React, { PureComponent } from 'react';
+import React, { forwardRef } from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
 import { Theme } from '../../../core/Theme';
 import ButtonBase, { ButtonCommonProps } from '../ButtonBase';
 import { ButtonIconPosition } from '../ButtonIcon';
 import ButtonSpinner from '../ButtonSpinner';
-import { ButtonColor, ButtonSize, IconButtonColorValue, IconButtonSize, IconButtonSizeValue } from '../interface';
+import { ButtonColor, IconButtonColorValue, IconButtonSize, IconButtonSizeValue } from '../interface';
 import { getButtonColors } from '../utils';
 
 const buttonIconSizeByIconButtonSize: { [key in IconButtonSize]: number } = {
@@ -20,16 +20,8 @@ export interface IconButtonProps extends ButtonCommonProps<IconButtonColorValue,
   fillColor?: string;
 }
 
-export class IconButton extends PureComponent<IconButtonProps> {
-  public static defaultProps: Partial<IconButtonProps> = {
-    theme: Theme.light,
-    size: ButtonSize.SMALL,
-    color: ButtonColor.DEFAULT,
-  };
-
-  public render() {
-    const { color, fillColor, size, theme, icon, disabled, children, ...restProps } = this.props;
-
+export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
+  ({ color = 'default', fillColor, size = 'sm', theme = Theme.light, icon, disabled, ...restProps }, ref) => {
     let iconColor;
     if (fillColor) {
       iconColor = disabled ? rgba(fillColor, 0.4) : fillColor;
@@ -38,6 +30,7 @@ export class IconButton extends PureComponent<IconButtonProps> {
         ? getButtonColors(color, theme.mode).disabledTextColor
         : getButtonColors(color, theme.mode).textColor;
     }
+
     return (
       <StyledButtonBase
         color={color}
@@ -46,6 +39,7 @@ export class IconButton extends PureComponent<IconButtonProps> {
         disabled={disabled}
         iconPosition={ButtonIconPosition.NONE}
         spinner={<ButtonSpinner buttonSize={size} color={getButtonColors(color, theme.mode).textColor} />}
+        ref={ref}
         {...restProps}
       >
         {icon &&
@@ -56,7 +50,7 @@ export class IconButton extends PureComponent<IconButtonProps> {
       </StyledButtonBase>
     );
   }
-}
+);
 
 const buttonStyleBySize: { [key in IconButtonSize]: FlattenSimpleInterpolation } = {
   [IconButtonSize.SMALL]: css`
