@@ -1,4 +1,3 @@
-import { InputSize } from 'formInputs/common';
 import React, { createRef, PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -151,7 +150,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
           placeholder={this.getInputPlaceHolder()}
           onClick={this.showModal}
           inline={inline}
-          size={InputSize.md}
+          size="md"
           {...inputAttributes}
         />
         <Picker alwaysShow={alwaysShow} modalVisible={alwaysShow || modalVisible} ref={this.modalRef}>

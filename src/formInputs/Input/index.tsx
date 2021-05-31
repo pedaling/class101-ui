@@ -37,7 +37,7 @@ export const Input = React.memo<InputProps>(
     warnMessage,
     errorMessage,
     label,
-    size = InputSize.md,
+    size = 'md',
     id,
     fill = true,
     inputRef,
