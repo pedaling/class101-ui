@@ -21,44 +21,46 @@ export type InputProps = Omit<HTMLInputProps, 'size'> & {
   className?: string;
 };
 
-export const Input = ({
-  type,
-  className,
-  style,
-  inputStyle,
-  inline,
-  allowMessage,
-  warnMessage,
-  errorMessage,
-  label,
-  size,
-  id,
-  inputRef,
-  ...restProps
-}: InputProps) => {
-  const inputId = id && label && `input-${label}`;
-  return (
-    <Container style={style} inline={inline} className={className}>
-      {label && <InlineLabel htmlFor={inputId}>{label}</InlineLabel>}
-      <StyledInputWrapper
-        className={`${className || ''} ${errorMessage ? ' error' : ''} ${warnMessage ? ' warn' : ''}`}
-        type={type}
-        id={inputId}
-        size={size}
-        style={inputStyle}
-        ref={inputRef}
-        {...restProps}
-      />
-      {allowMessage && !errorMessage && (
-        <InlineError icon={null} intent={Intent.DEFAULT}>
-          {allowMessage}
-        </InlineError>
-      )}
-      {errorMessage && <InlineError intent={Intent.DANGER}>{errorMessage}</InlineError>}
-      {warnMessage && <InlineError intent={Intent.WARNING}>{warnMessage}</InlineError>}
-    </Container>
-  );
-};
+export const Input = React.memo(
+  ({
+    type,
+    className,
+    style,
+    inputStyle,
+    inline,
+    allowMessage,
+    warnMessage,
+    errorMessage,
+    label,
+    size,
+    id,
+    inputRef,
+    ...restProps
+  }: InputProps) => {
+    const inputId = id && label && `input-${label}`;
+    return (
+      <Container style={style} inline={inline} className={className}>
+        {label && <InlineLabel htmlFor={inputId}>{label}</InlineLabel>}
+        <StyledInputWrapper
+          className={`${className || ''} ${errorMessage ? ' error' : ''} ${warnMessage ? ' warn' : ''}`}
+          type={type}
+          id={inputId}
+          size={size}
+          style={inputStyle}
+          ref={inputRef}
+          {...restProps}
+        />
+        {allowMessage && !errorMessage && (
+          <InlineError icon={null} intent={Intent.DEFAULT}>
+            {allowMessage}
+          </InlineError>
+        )}
+        {errorMessage && <InlineError intent={Intent.DANGER}>{errorMessage}</InlineError>}
+        {warnMessage && <InlineError intent={Intent.WARNING}>{warnMessage}</InlineError>}
+      </Container>
+    );
+  }
+);
 
 const StyledInputWrapper = React.forwardRef<HTMLInputElement, InputProps>(({ fill, size, ...restProps }, ref) => (
   <StyledInput ref={ref} inputSize={size} fill={fill} {...restProps} />
