@@ -70,9 +70,9 @@ type StyledInputProps = {
 };
 
 const StyledInput = styled.input<StyledInputProps>`
-  ${props => FormInputStyleBySize[props.inputSize]};
   ${body2};
   ${FormInputStyle};
+  ${props => FormInputStyleBySize[props.inputSize]};
   ${props => (props.fill ? FormInputFillStyle : null)};
   color: ${gray900};
   box-sizing: border-box;
