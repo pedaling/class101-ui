@@ -1,29 +1,34 @@
 import { IconProps } from 'Icon';
 import { darken } from 'polished';
-import React, { PureComponent } from 'react';
+import React, { forwardRef } from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
 import { Theme } from '../../../core/Theme';
 import ButtonBase, { ButtonCommonProps } from '../ButtonBase';
 import { ButtonIcon, ButtonIconPosition, buttonIconSizeByButtonSize } from '../ButtonIcon';
 import ButtonSpinner from '../ButtonSpinner';
-import { ButtonColor, ButtonSize, ContainButtonColorValue, ContainButtonSizeValue } from '../interface';
+import { ButtonSize, ContainButtonColorValue, ContainButtonSizeValue } from '../interface';
 import { getButtonColors } from '../utils';
 
 export interface ButtonProps extends ButtonCommonProps<ContainButtonColorValue, ContainButtonSizeValue> {
   fill: boolean;
 }
 
-export class Button extends PureComponent<ButtonProps> {
-  public static defaultProps: Partial<ButtonProps> = {
-    theme: Theme.light,
-    size: ButtonSize.MEDIUM,
-    color: ButtonColor.DEFAULT,
-    fill: false,
-  };
-
-  public render() {
-    const { color, size, theme, leftIcon, rightIcon, fill, disabled, children, ...restProps } = this.props;
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      color = 'default',
+      size = 'md',
+      theme = Theme.light,
+      leftIcon,
+      rightIcon,
+      fill = false,
+      disabled,
+      children,
+      ...restProps
+    },
+    ref
+  ) => {
     const icon = leftIcon || rightIcon;
     const iconPosition = rightIcon ? ButtonIconPosition.RIGHT : ButtonIconPosition.LEFT;
     return (
@@ -50,12 +55,13 @@ export class Button extends PureComponent<ButtonProps> {
         iconPosition={iconPosition}
         spinner={<ButtonSpinner buttonSize={size} color={getButtonColors(color, theme.mode).textColor} isLeftMargin />}
         {...restProps}
+        ref={ref}
       >
         {children}
       </StyledButtonBase>
     );
   }
-}
+);
 
 interface StyledContainerProps extends ButtonCommonProps<ContainButtonColorValue, ContainButtonSizeValue> {
   fill?: string;
