@@ -13,7 +13,7 @@ type Props = Omit<InputProps, 'type'> & {
   maxValue?: number;
 };
 
-export const NumbericInput = React.memo<Props>(
+export const NumericInput = React.memo<Props>(
   ({
     buttonPosition = 'right',
     step = 1,
