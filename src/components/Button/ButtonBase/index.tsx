@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { AnchorHTMLAttributes, ButtonHTMLAttributes } from 'react';
+import React, { AnchorHTMLAttributes, ButtonHTMLAttributes, forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 
 import { LinkBlock } from '../../../core/LinkBlock';
@@ -9,9 +9,9 @@ import { Omit } from '../../../interfaces/props';
 import { ButtonIconPosition } from '../ButtonIcon';
 
 interface ButtonBaseProps<ColorValue, SizeValue> {
-  color: ColorValue;
-  theme: ThemeConfig;
-  size: SizeValue;
+  color?: ColorValue;
+  theme?: ThemeConfig;
+  size?: SizeValue;
   leftIcon?: React.ReactElement<IconProps>;
   rightIcon?: React.ReactElement<IconProps>;
   type?: 'button' | 'submit' | 'reset';
@@ -39,22 +39,16 @@ export interface ButtonCommonProps<ColorValue, SizeValue> extends ButtonBaseProp
   buttonAttributes?: OmittedButtonAttributes<ColorValue, SizeValue>;
 }
 
-interface Props<ColorValue, SizeValue> extends ButtonCommonProps<ColorValue, SizeValue> {
+interface Props<ColorValue = string, SizeValue = string> extends ButtonCommonProps<ColorValue, SizeValue> {
   spinner: React.ReactNode;
   iconPosition: ButtonIconPosition;
   icon?: React.ReactNode;
 }
 
-export default class ButtonBase<ColorValue extends string, SizeValue extends string> extends React.PureComponent<
-  Props<ColorValue, SizeValue>
-> {
-  public static defaultProps: Partial<Props<{}, {}>> = {
-    type: 'button',
-  };
-
-  public render() {
-    const {
-      type,
+const ButtonBase = forwardRef<HTMLButtonElement, Props>(
+  (
+    {
+      type = 'button',
       icon,
       iconPosition,
       children,
@@ -67,11 +61,12 @@ export default class ButtonBase<ColorValue extends string, SizeValue extends str
       buttonAttributes,
       className,
       ...restProps
-    } = this.props;
-
+    }: Props,
+    ref
+  ) => {
     if (loading) {
       return (
-        <ButtonContainer type={type} disabled className={className} {...buttonAttributes} {...restProps}>
+        <ButtonContainer type={type} disabled className={className} {...buttonAttributes} {...restProps} ref={ref}>
           {!icon && iconPosition === ButtonIconPosition.NONE ? (
             spinner
           ) : (
@@ -93,7 +88,7 @@ export default class ButtonBase<ColorValue extends string, SizeValue extends str
 
     if (to) {
       return (
-        <AnchorButtonWrapper className={classNames(className, { disabled })}>
+        <AnchorButtonWrapper className={classNames(className, { disabled })} ref={ref}>
           <LinkButton to={to} external={external} icon-position={iconPosition} {...anchorAttributes} {...restProps}>
             {innerElements}
           </LinkButton>
@@ -109,12 +104,15 @@ export default class ButtonBase<ColorValue extends string, SizeValue extends str
         className={classNames(className, { disabled })}
         {...buttonAttributes}
         {...restProps}
+        ref={ref}
       >
         {innerElements}
       </ButtonContainer>
     );
   }
-}
+);
+
+export default ButtonBase;
 
 export const buttonCommonStyle = css`
   margin: 0;
@@ -152,7 +150,7 @@ const Text = styled.span`
   align-items: center;
 `;
 
-const AnchorButtonWrapper = styled.span`
+const AnchorButtonWrapper = styled.button`
   ${buttonCommonStyle};
   &.disabled {
     cursor: not-allowed;
