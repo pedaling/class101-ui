@@ -25,17 +25,19 @@ export class RadioButtonGroup extends PureComponent<RadioButtonGroupProps, State
         if (isValidElement(c)) {
           return isEqual(c.props.value, value);
         }
+        return false;
       });
       if (state.checkedIndex !== index) {
         return { checkedIndex: index };
       }
     }
+    return { checkedIndex: 0 };
   }
 
   public state: State = { checkedIndex: 0 };
 
   public render() {
-    const { stackingDirection, children, className, onChange, ...props } = this.props;
+    const { stackingDirection, onChange, ...props } = this.props;
 
     return (
       <Container stackingDirection={stackingDirection} {...props}>
@@ -61,7 +63,7 @@ export class RadioButtonGroup extends PureComponent<RadioButtonGroupProps, State
   };
 
   private renderChild = (child: React.ComponentElement<RadioButtonProps, RadioButton>, index: number) => {
-    const { stackingDirection, children, onChange, ...restProps } = this.props;
+    const { stackingDirection, ...restProps } = this.props;
     const { checkedIndex } = this.state;
 
     const checked = index === checkedIndex;
