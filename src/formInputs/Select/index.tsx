@@ -26,7 +26,7 @@ export interface SelectProps extends SelectOwnProps {
 
 export class Select extends PureComponent<SelectProps> {
   public static defaultProps = {
-    size: InputSize.md,
+    size: 'md',
     fill: true,
   };
 

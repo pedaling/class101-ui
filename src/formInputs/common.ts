@@ -2,10 +2,7 @@ import { css, FlattenSimpleInterpolation } from 'styled-components';
 
 import { gray200, gray400, gray50, gray500, gray900 } from '../core/Colors';
 
-export enum InputSize {
-  sm = 'sm',
-  md = 'md',
-}
+export type InputSize = 'sm' | 'md';
 
 export const FormInputStyle = css`
   border: solid 1px ${gray200};
@@ -44,10 +41,10 @@ export const FormInputFillStyle = css`
 `;
 
 export const FormInputStyleBySize: { [key in InputSize]: FlattenSimpleInterpolation } = {
-  [InputSize.sm]: css`
+  sm: css`
     height: 40px;
   `,
-  [InputSize.md]: css`
+  md: css`
     height: 48px;
   `,
 };
