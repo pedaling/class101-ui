@@ -6,7 +6,7 @@ import { body2 } from '../../core/TextStyles';
 import { FormInputFillStyle, FormInputStyle, FormInputStyleBySize, InputSize } from '../common';
 import { InlineError, Intent } from '../InlineError';
 
-export interface InputProps {
+export type InputProps = Omit<HTMLInputProps, 'size'> & {
   inputRef?: React.RefObject<HTMLInputElement>;
   label?: string;
   size: InputSize;
@@ -19,66 +19,60 @@ export interface InputProps {
   style?: React.CSSProperties;
   inputStyle?: React.CSSProperties;
   className?: string;
-}
+};
 
-export class Input extends React.PureComponent<HTMLInputProps & InputProps> {
-  public static defaultProps: Partial<InputProps> = {
-    size: InputSize.md,
-    fill: true,
-    type: 'text',
-  };
+export const Input = ({
+  type,
+  className,
+  style,
+  inputStyle,
+  inline,
+  allowMessage,
+  warnMessage,
+  errorMessage,
+  label,
+  size,
+  id,
+  inputRef,
+  ...restProps
+}: InputProps) => {
+  const inputId = id && label && `input-${label}`;
+  return (
+    <Container style={style} inline={inline} className={className}>
+      {label && <InlineLabel htmlFor={inputId}>{label}</InlineLabel>}
+      <StyledInputWrapper
+        className={`${className || ''} ${errorMessage ? ' error' : ''} ${warnMessage ? ' warn' : ''}`}
+        type={type}
+        id={inputId}
+        size={size}
+        style={inputStyle}
+        ref={inputRef}
+        {...restProps}
+      />
+      {allowMessage && !errorMessage && (
+        <InlineError icon={null} intent={Intent.DEFAULT}>
+          {allowMessage}
+        </InlineError>
+      )}
+      {errorMessage && <InlineError intent={Intent.DANGER}>{errorMessage}</InlineError>}
+      {warnMessage && <InlineError intent={Intent.WARNING}>{warnMessage}</InlineError>}
+    </Container>
+  );
+};
 
-  public render() {
-    const {
-      type,
-      className,
-      style,
-      inputStyle,
-      inline,
-      allowMessage,
-      warnMessage,
-      errorMessage,
-      label,
-      size,
-      id,
-      inputRef,
-      ...restProps
-    } = this.props;
-    const inputId = id && label && `input-${label}`;
-    return (
-      <Container style={style} inline={inline} className={className}>
-        {label && <InlineLabel htmlFor={inputId}>{label}</InlineLabel>}
-        <StyledInput
-          className={`${className || ''} ${errorMessage ? ' error' : ''} ${warnMessage ? ' warn' : ''}`}
-          type={type}
-          id={inputId}
-          size={size}
-          style={inputStyle}
-          {...(inputRef && {
-            ref: inputRef,
-          })}
-          {...restProps}
-        />
-        {allowMessage && !errorMessage && (
-          <InlineError icon={null} intent={Intent.DEFAULT}>
-            {allowMessage}
-          </InlineError>
-        )}
-        {errorMessage && <InlineError intent={Intent.DANGER}>{errorMessage}</InlineError>}
-        {warnMessage && <InlineError intent={Intent.WARNING}>{warnMessage}</InlineError>}
-      </Container>
-    );
-  }
-}
+const StyledInputWrapper = React.forwardRef<HTMLInputElement, InputProps>(({ fill, size, ...restProps }, ref) => (
+  <StyledInput ref={ref} inputSize={size} fill={fill} {...restProps} />
+));
 
-const StyledInput = styled(
-  React.forwardRef<HTMLInputElement, HTMLInputProps & InputProps>(({ fill, size, ...restProps }, ref) => (
-    <input ref={ref} {...restProps} />
-  ))
-)`
+type StyledInputProps = {
+  inputSize: InputSize;
+  fill?: boolean;
+};
+
+const StyledInput = styled.input<StyledInputProps>`
+  ${props => FormInputStyleBySize[props.inputSize]};
   ${body2};
   ${FormInputStyle};
-  ${props => FormInputStyleBySize[props.size]};
   ${props => (props.fill ? FormInputFillStyle : null)};
   color: ${gray900};
   box-sizing: border-box;

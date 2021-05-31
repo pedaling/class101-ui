@@ -3,18 +3,15 @@ import styled from 'styled-components';
 
 import { IconButton } from '../../components/Button/IconButton';
 import { AddIcon, MinusIcon } from '../../Icon';
-import { HTMLInputProps, Omit } from '../../interfaces/props';
 import { Input, InputProps } from '../Input';
 
-type InputComponentProps = Omit<InputProps & HTMLInputProps, 'size'>;
-
-interface Props extends InputComponentProps {
+type Props = InputProps & {
   buttonPosition: 'right' | 'side';
   step: number;
   inline: boolean;
   minValue?: number;
   maxValue?: number;
-}
+};
 
 export class NumericInput extends PureComponent<Props> {
   public static defaultProps: Partial<Props> = {
@@ -37,7 +34,6 @@ export class NumericInput extends PureComponent<Props> {
           inputRef={this.inputRef}
           align={buttonPosition === 'right' ? 'left' : 'center'}
           value={value}
-          type="number"
           min={minValue}
           max={maxValue}
           disabled={disabled}
