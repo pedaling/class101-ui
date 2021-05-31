@@ -1,4 +1,4 @@
-import React, { createRef, PureComponent } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 
 import { IconButton } from '../../components/Button/IconButton';
@@ -6,86 +6,83 @@ import { AddIcon, MinusIcon } from '../../Icon';
 import { Input, InputProps } from '../Input';
 
 type Props = Omit<InputProps, 'type'> & {
-  buttonPosition: 'right' | 'side';
-  step: number;
-  inline: boolean;
+  buttonPosition?: 'right' | 'side';
+  step?: number;
+  inline?: boolean;
   minValue?: number;
   maxValue?: number;
 };
 
-export class NumericInput extends PureComponent<Props> {
-  public static defaultProps: Partial<Props> = {
-    buttonPosition: 'right',
-    inline: false,
-    step: 1,
-  };
+export const NumbericInput = React.memo<Props>(
+  ({
+    buttonPosition = 'right',
+    step = 1,
+    inline = false,
+    minValue,
+    maxValue,
+    value,
+    disabled,
+    label,
+    ...inputProps
+  }) => {
+    const inputRef = useRef<HTMLInputElement>(null);
+    const triggerChangeEvent = () => {
+      inputRef.current?.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));
+    };
 
-  private get inputElement() {
-    return this.inputRef.current!;
-  }
+    const calculateButtonTop = () => {
+      return label ? 32 : 8;
+    };
 
-  private inputRef = createRef<HTMLInputElement>();
+    const handleStepUpClick = () => {
+      inputRef.current?.stepUp();
+      triggerChangeEvent();
+    };
 
-  public render() {
-    const { buttonPosition, minValue, maxValue, disabled, value, ...inputProps } = this.props;
+    const handleStepDownClick = () => {
+      inputRef.current?.stepDown();
+      triggerChangeEvent();
+    };
+
+    const stepDownButtonPosition = () => {
+      const top = calculateButtonTop();
+      return buttonPosition === 'side' ? { top, left: 8 } : { top, right: 48 };
+    };
+
+    const stepUpButtonPosition = () => {
+      const top = calculateButtonTop();
+      return { top, right: 8 };
+    };
+
     return (
-      <StyledNumericInputContainer inline={inputProps.inline}>
+      <StyledNumericInputContainer inline={inline}>
         <StyledNumericInputInput
-          inputRef={this.inputRef}
+          inputRef={inputRef}
           align={buttonPosition === 'right' ? 'left' : 'center'}
           value={value}
           min={minValue}
           max={maxValue}
           disabled={disabled}
           type="number"
+          step={step}
           {...inputProps}
         />
         <StyledNumericInputButton
           icon={<MinusIcon />}
-          onClick={this.handleStepDownClick}
+          onClick={handleStepDownClick}
           disabled={Number(value) === minValue || disabled}
-          {...this.stepDownButtonPosition()}
+          {...stepDownButtonPosition()}
         />
         <StyledNumericInputButton
           icon={<AddIcon />}
-          onClick={this.handleStepUpClick}
+          onClick={handleStepUpClick}
           disabled={Number(value) === maxValue || disabled}
-          {...this.stepUpButtonPosition()}
+          {...stepUpButtonPosition()}
         />
       </StyledNumericInputContainer>
     );
   }
-
-  private triggerChangeEvent = () => {
-    this.inputElement.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));
-  };
-
-  private handleStepUpClick = () => {
-    this.inputElement.stepUp();
-    this.triggerChangeEvent();
-  };
-
-  private handleStepDownClick = () => {
-    this.inputElement.stepDown();
-    this.triggerChangeEvent();
-  };
-
-  private stepDownButtonPosition = () => {
-    const { buttonPosition, label } = this.props;
-    const top = this.calculateButtonTop(label);
-    return buttonPosition === 'side' ? { top, left: 8 } : { top, right: 48 };
-  };
-
-  private stepUpButtonPosition = () => {
-    const { label } = this.props;
-    const top = this.calculateButtonTop(label);
-    return { top, right: 8 };
-  };
-
-  private calculateButtonTop = (label?: string) => {
-    return label ? 32 : 8;
-  };
-}
+);
 
 const StyledNumericInputContainer = styled.div<{ inline: boolean }>`
   position: relative;
