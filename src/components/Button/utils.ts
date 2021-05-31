@@ -15,7 +15,7 @@ import {
 } from './color';
 import { ButtonColor, ButtonColorValue, ExcludedThemeColor, TextButtonColor, TextButtonColorValue } from './interface';
 
-export function getButtonColors(color: ButtonColorValue | undefined, theme: ThemeMode) {
+export function getButtonColors(color: ButtonColorValue, theme: ThemeMode) {
   if (color === ButtonColor.TRANSPARENT) {
     return {
       textColor: transparentTextColors[theme],
@@ -41,7 +41,7 @@ export function getButtonColors(color: ButtonColorValue | undefined, theme: Them
   };
 }
 
-export const getTextButtonColors = (color: TextButtonColorValue | undefined, theme: ThemeMode) => {
+export const getTextButtonColors = (color: TextButtonColorValue, theme: ThemeMode) => {
   if (color === ButtonColor.DEFAULT) {
     return {
       textColor: defaultTextButtonColors[theme],

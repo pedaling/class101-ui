@@ -9,9 +9,9 @@ import { Omit } from '../../../interfaces/props';
 import { ButtonIconPosition } from '../ButtonIcon';
 
 interface ButtonBaseProps<ColorValue, SizeValue> {
-  color?: ColorValue;
+  color: ColorValue;
   theme?: ThemeConfig;
-  size?: SizeValue;
+  size: SizeValue;
   leftIcon?: React.ReactElement<IconProps>;
   rightIcon?: React.ReactElement<IconProps>;
   type?: 'button' | 'submit' | 'reset';

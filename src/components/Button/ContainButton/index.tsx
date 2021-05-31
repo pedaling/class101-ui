@@ -11,7 +11,7 @@ import { ButtonSize, ContainButtonColorValue, ContainButtonSizeValue } from '../
 import { getButtonColors } from '../utils';
 
 export interface ButtonProps extends ButtonCommonProps<ContainButtonColorValue, ContainButtonSizeValue> {
-  fill?: boolean;
+  fill: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
