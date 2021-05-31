@@ -5,7 +5,7 @@ import { IconButton } from '../../components/Button/IconButton';
 import { AddIcon, MinusIcon } from '../../Icon';
 import { Input, InputProps } from '../Input';
 
-type Props = InputProps & {
+type Props = Omit<InputProps, 'type'> & {
   buttonPosition: 'right' | 'side';
   step: number;
   inline: boolean;
@@ -37,6 +37,7 @@ export class NumericInput extends PureComponent<Props> {
           min={minValue}
           max={maxValue}
           disabled={disabled}
+          type="number"
           {...inputProps}
         />
         <StyledNumericInputButton
