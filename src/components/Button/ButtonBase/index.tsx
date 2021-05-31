@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { AnchorHTMLAttributes, ButtonHTMLAttributes, forwardRef } from 'react';
+import React, { AnchorHTMLAttributes, ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 
 import { LinkBlock } from '../../../core/LinkBlock';
@@ -10,7 +10,7 @@ import { ButtonIconPosition } from '../ButtonIcon';
 
 interface ButtonBaseProps<ColorValue, SizeValue> {
   color: ColorValue;
-  theme?: ThemeConfig;
+  theme: ThemeConfig;
   size: SizeValue;
   leftIcon?: React.ReactElement<IconProps>;
   rightIcon?: React.ReactElement<IconProps>;
@@ -39,16 +39,22 @@ export interface ButtonCommonProps<ColorValue, SizeValue> extends ButtonBaseProp
   buttonAttributes?: OmittedButtonAttributes<ColorValue, SizeValue>;
 }
 
-interface Props<ColorValue = string, SizeValue = string> extends ButtonCommonProps<ColorValue, SizeValue> {
+interface Props<ColorValue, SizeValue> extends ButtonCommonProps<ColorValue, SizeValue> {
   spinner: React.ReactNode;
   iconPosition: ButtonIconPosition;
   icon?: React.ReactNode;
 }
 
-const ButtonBase = forwardRef<HTMLButtonElement, Props>(
-  (
-    {
-      type = 'button',
+export default class ButtonBase<ColorValue extends string, SizeValue extends string> extends React.PureComponent<
+  Props<ColorValue, SizeValue>
+> {
+  public static defaultProps: Partial<Props<{}, {}>> = {
+    type: 'button',
+  };
+
+  public render() {
+    const {
+      type,
       icon,
       iconPosition,
       children,
@@ -61,12 +67,11 @@ const ButtonBase = forwardRef<HTMLButtonElement, Props>(
       buttonAttributes,
       className,
       ...restProps
-    }: Props,
-    ref
-  ) => {
+    } = this.props;
+
     if (loading) {
       return (
-        <ButtonContainer type={type} disabled className={className} {...buttonAttributes} {...restProps} ref={ref}>
+        <ButtonContainer type={type} disabled className={className} {...buttonAttributes} {...restProps}>
           {!icon && iconPosition === ButtonIconPosition.NONE ? (
             spinner
           ) : (
@@ -88,7 +93,7 @@ const ButtonBase = forwardRef<HTMLButtonElement, Props>(
 
     if (to) {
       return (
-        <AnchorButtonWrapper className={classNames(className, { disabled })} ref={ref}>
+        <AnchorButtonWrapper className={classNames(className, { disabled })}>
           <LinkButton to={to} external={external} icon-position={iconPosition} {...anchorAttributes} {...restProps}>
             {innerElements}
           </LinkButton>
@@ -104,15 +109,12 @@ const ButtonBase = forwardRef<HTMLButtonElement, Props>(
         className={classNames(className, { disabled })}
         {...buttonAttributes}
         {...restProps}
-        ref={ref}
       >
         {innerElements}
       </ButtonContainer>
     );
   }
-);
-
-export default ButtonBase;
+}
 
 export const buttonCommonStyle = css`
   margin: 0;
@@ -150,7 +152,7 @@ const Text = styled.span`
   align-items: center;
 `;
 
-const AnchorButtonWrapper = styled.button`
+const AnchorButtonWrapper = styled.span`
   ${buttonCommonStyle};
   &.disabled {
     cursor: not-allowed;

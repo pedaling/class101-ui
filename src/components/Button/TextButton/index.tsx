@@ -1,22 +1,26 @@
 import { IconProps } from 'Icon';
 import { darken } from 'polished';
-import React, { forwardRef } from 'react';
+import React, { PureComponent } from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
 import { Theme } from '../../../core/Theme';
 import ButtonBase, { ButtonCommonProps } from '../ButtonBase';
 import { ButtonIcon, ButtonIconPosition, buttonIconSizeByButtonSize } from '../ButtonIcon';
 import ButtonSpinner from '../ButtonSpinner';
-import { ButtonSize, TextButtonColorValue, TextButtonSize, TextButtonSizeValue } from '../interface';
+import { ButtonColor, ButtonSize, TextButtonColorValue, TextButtonSize, TextButtonSizeValue } from '../interface';
 import { getTextButtonColors } from '../utils';
 
 export type TextButtonProps = ButtonCommonProps<TextButtonColorValue, TextButtonSizeValue>;
 
-export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
-  (
-    { color = 'default', size = 'md', theme = Theme.light, leftIcon, rightIcon, disabled, children, ...restProps },
-    ref
-  ) => {
+export class TextButton extends PureComponent<TextButtonProps> {
+  public static defaultProps: Partial<TextButtonProps> = {
+    theme: Theme.light,
+    size: ButtonSize.MEDIUM,
+    color: ButtonColor.DEFAULT,
+  };
+
+  public render() {
+    const { color, size, theme, leftIcon, rightIcon, disabled, children, ...restProps } = this.props;
     const icon = leftIcon || rightIcon;
     const iconPosition = rightIcon ? ButtonIconPosition.RIGHT : ButtonIconPosition.LEFT;
     return (
@@ -43,14 +47,13 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
         spinner={
           <ButtonSpinner buttonSize={size} color={getTextButtonColors(color, theme.mode).textColor} isLeftMargin />
         }
-        ref={ref}
         {...restProps}
       >
         {children}
       </StyledButtonBase>
     );
   }
-);
+}
 
 const buttonStyleBySize: { [key in TextButtonSize]: FlattenSimpleInterpolation } = {
   [ButtonSize.LARGE]: css`
