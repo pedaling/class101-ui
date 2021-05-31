@@ -1,4 +1,4 @@
-import { HTMLInputProps } from 'interfaces/props';
+import { InputSize } from 'formInputs/common';
 import React, { createRef, PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -33,7 +33,7 @@ export interface DatePickerProps {
   readonly useTime: boolean;
   readonly alwaysShow: boolean;
   readonly inline?: boolean;
-  readonly inputAttributes?: HTMLInputProps & InputProps;
+  readonly inputAttributes?: InputProps;
   readonly highlightWeekEnd: boolean;
   readonly style?: React.CSSProperties;
   readonly adjustInputWidth: boolean;
@@ -65,6 +65,22 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     useTime: false,
   };
 
+  private getCurrentMonth = (value: Date | undefined, rangeValue: DateRange, min: Date | undefined) => {
+    if (value) {
+      return this.getDateMonth(value);
+    }
+    if (rangeValue.start) {
+      return this.getDateMonth(rangeValue.start);
+    }
+    if (rangeValue.end) {
+      this.getDateMonth(rangeValue.end);
+    }
+    if (min) {
+      this.getDateMonth(min);
+    }
+    return this.getDateMonth(new Date());
+  };
+
   private readonly modalRef = createRef<HTMLDivElement>();
 
   public constructor(props: DatePickerProps) {
@@ -76,15 +92,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
       selectorType: 'day',
       selectedDate: value || rangeValue.start || rangeValue.end || null,
       secondDate: (rangeValue.start && rangeValue.end) || null,
-      currentMonth: value
-        ? this.getDateMonth(value)
-        : rangeValue.start
-        ? this.getDateMonth(rangeValue.start)
-        : rangeValue.end
-        ? this.getDateMonth(rangeValue.end)
-        : min
-        ? this.getDateMonth(min)
-        : this.getDateMonth(new Date()),
+      currentMonth: this.getCurrentMonth(value, rangeValue, min),
       modalVisible: false,
       inputValue: '',
     };
@@ -97,11 +105,12 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     this.calculateInputValue();
   }
 
-  public componentDidUpdate(prevProps: Readonly<DatePickerProps>, prevState: Readonly<DatePickerState>) {
+  public componentDidUpdate(prevProps: Readonly<DatePickerProps>) {
+    const { value, rangeValue } = this.props;
     if (
-      prevProps.value?.getTime() !== this.props.value?.getTime() ||
-      prevProps.rangeValue.start?.getTime() !== this.props.rangeValue.start?.getTime() ||
-      prevProps.rangeValue.end?.getTime() !== this.props.rangeValue.end?.getTime()
+      prevProps.value?.getTime() !== value?.getTime() ||
+      prevProps.rangeValue.start?.getTime() !== rangeValue.start?.getTime() ||
+      prevProps.rangeValue.end?.getTime() !== rangeValue.end?.getTime()
     ) {
       this.updateDateStateByPropsChange();
     }
@@ -142,6 +151,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
           placeholder={this.getInputPlaceHolder()}
           onClick={this.showModal}
           inline={inline}
+          size={InputSize.md}
           {...inputAttributes}
         />
         <Picker alwaysShow={alwaysShow} modalVisible={alwaysShow || modalVisible} ref={this.modalRef}>
@@ -222,15 +232,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     this.setState({
       selectedDate,
       secondDate,
-      currentMonth: value
-        ? this.getDateMonth(value)
-        : rangeValue.start
-        ? this.getDateMonth(rangeValue.start)
-        : rangeValue.end
-        ? this.getDateMonth(rangeValue.end)
-        : min
-        ? this.getDateMonth(min)
-        : this.getDateMonth(new Date()),
+      currentMonth: this.getCurrentMonth(value, rangeValue, min),
       inputValue: this.calculateInputValueByDates(selectedDate, secondDate),
     });
   };
@@ -289,7 +291,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
       let firstDate = new Date(firstDateText);
       let secondDate = new Date(secondDateText);
 
-      if (!isNaN(firstDate.getTime()) && isNaN(secondDate.getTime())) {
+      if (!Number.isNaN(firstDate.getTime()) && Number.isNaN(secondDate.getTime())) {
         if (minDate && minDate.getTime() > firstDate.getTime()) {
           return this.calculateInputValue();
         }
@@ -301,7 +303,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
           },
           this.calculateInputValue
         );
-      } else if (!isNaN(firstDate.getTime()) && !isNaN(secondDate.getTime())) {
+      } else if (!Number.isNaN(firstDate.getTime()) && !Number.isNaN(secondDate.getTime())) {
         if (minDate && minDate.getTime() > firstDate.getTime()) {
           firstDate = minDate;
         }
@@ -328,7 +330,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     const currentDate = new Date(dateText);
 
     if (
-      isNaN(currentDate.getTime()) ||
+      Number.isNaN(currentDate.getTime()) ||
       (minDate && minDate.getTime() > currentDate.getTime()) ||
       (maxDate && maxDate.getTime() < currentDate.getTime()) ||
       (onChange && onChange(currentDate) === false)
@@ -343,6 +345,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
       },
       this.calculateInputValue
     );
+    return undefined;
   };
 
   private getInputPlaceHolder = () => {
@@ -489,6 +492,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
         this.calculateInputValue
       );
     }
+    return undefined;
   };
 
   private onSelectMonth = (date: Date) => {
