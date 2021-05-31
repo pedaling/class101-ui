@@ -6,12 +6,15 @@ import { body2 } from '../../core/TextStyles';
 import { FormInputFillStyle, FormInputStyle, FormInputStyleBySize, InputSize } from '../common';
 import { InlineError, Intent } from '../InlineError';
 
-export type InputProps = Omit<HTMLInputProps, 'size'> & {
+type FillAndSize = {
+  fill: boolean;
+  size: InputSize;
+};
+
+type InputPropsWithoutFillAndSize = Omit<HTMLInputProps, 'size'> & {
   inputRef?: React.RefObject<HTMLInputElement>;
   label?: string;
-  size: InputSize;
-  type: string;
-  fill?: boolean;
+  type?: string;
   inline?: boolean;
   allowMessage?: string;
   warnMessage?: string;
@@ -21,9 +24,11 @@ export type InputProps = Omit<HTMLInputProps, 'size'> & {
   className?: string;
 };
 
-export const Input = React.memo(
+export type InputProps = InputPropsWithoutFillAndSize & Partial<FillAndSize>;
+
+export const Input = React.memo<InputProps>(
   ({
-    type,
+    type = 'text',
     className,
     style,
     inputStyle,
@@ -32,11 +37,12 @@ export const Input = React.memo(
     warnMessage,
     errorMessage,
     label,
-    size,
+    size = InputSize.md,
     id,
+    fill = true,
     inputRef,
     ...restProps
-  }: InputProps) => {
+  }) => {
     const inputId = id && label && `input-${label}`;
     return (
       <Container style={style} inline={inline} className={className}>
@@ -48,6 +54,7 @@ export const Input = React.memo(
           size={size}
           style={inputStyle}
           ref={inputRef}
+          fill={fill}
           {...restProps}
         />
         {allowMessage && !errorMessage && (
@@ -62,9 +69,11 @@ export const Input = React.memo(
   }
 );
 
-const StyledInputWrapper = React.forwardRef<HTMLInputElement, InputProps>(({ fill, size, ...restProps }, ref) => (
-  <StyledInput ref={ref} inputSize={size} fill={fill} {...restProps} />
-));
+type StyledInputWrapperProps = InputPropsWithoutFillAndSize & FillAndSize;
+
+const StyledInputWrapper = React.forwardRef<HTMLInputElement, StyledInputWrapperProps>(
+  ({ fill, size, ...restProps }, ref) => <StyledInput ref={ref} inputSize={size} fill={fill} {...restProps} />
+);
 
 type StyledInputProps = {
   inputSize: InputSize;
