@@ -1,5 +1,4 @@
 import { InputSize } from 'formInputs/common';
-import { HTMLInputProps } from 'interfaces/props';
 import React, { createRef, PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 
