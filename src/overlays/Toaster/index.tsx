@@ -117,7 +117,7 @@ export class Toaster extends React.Component<Props, State> implements ToasterInt
         const dismiss = () => {
           this.dismiss(toast.key);
         };
-        return <Toast key={toast.key} {...toast} dismiss={dismiss} />;
+        return <Toast {...toast} dismiss={dismiss} />;
       })
       .reverse();
   }

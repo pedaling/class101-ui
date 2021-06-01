@@ -10,6 +10,7 @@ export interface BaseProps {
 }
 
 // alias
+export interface HTMLElementProps extends React.HTMLAttributes<HTMLElement> {}
 export interface HTMLDivProps extends React.HTMLAttributes<HTMLDivElement> {}
 export interface HTMLInputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 export interface HTMLTextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}

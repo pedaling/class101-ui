@@ -1,23 +1,23 @@
-<p><a href="https://class101-ui.netlify.com" target="_blank" rel="noopener noreferrer"><img width="128" src="https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/logo-class101.png" alt="C"></a></p>
+<p><a href="https://class101-ui.netlify.com" target="_blank" rel="noopener noreferrer"><img width="128" src="https://s3.ap-northeast-2.amazonaws.com/class101-ui/images/logo-class101.png" alt="C"/></a></p>
 
 <p>
   <a href="https://www.npmjs.com/package/@class101/ui">
     <img
       src="https://img.shields.io/npm/v/@class101/ui.svg"
       alt="npm"
-    >
+    />
   </a>
   <a href="https://github.com/pedaling/class101-ui/blob/master/LICENSE">
     <img
       src="https://img.shields.io/github/license/mashape/apistatus.svg"
       alt="MIT"
-    >
+    />
   </a>
   <a href="https://class101-ui.netlify.com">
     <img
       src="https://img.shields.io/readthedocs/pip.svg"
       alt="docs"
-    >
+    />
   </a>
 </p>
 

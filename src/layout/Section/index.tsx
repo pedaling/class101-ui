@@ -1,6 +1,6 @@
 import React, { PureComponent, ReactNode } from 'react';
 
-import { HTMLDivProps } from '../../interfaces/props';
+import { HTMLElementProps } from '../../interfaces/props';
 import { Header, TypographyProps } from './Header';
 
 export type SectionTitleStyleProps = TypographyProps;
@@ -15,7 +15,7 @@ interface Props {
   onClick?: () => void;
   children?: ReactNode;
   className?: string;
-  divAttributes?: HTMLDivProps;
+  divAttributes?: HTMLElementProps;
 }
 
 export class Section extends PureComponent<Props> {
