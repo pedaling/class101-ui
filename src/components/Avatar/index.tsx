@@ -1,5 +1,3 @@
-import { Badge } from 'components';
-import { Icon } from 'Icon';
 import React, { useState } from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
