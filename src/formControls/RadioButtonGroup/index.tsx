@@ -1,7 +1,7 @@
 import React, { isValidElement, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { RadioButton, RadioButtonContainerProps } from './RadioButton';
+import { RadioButtonContainerProps } from './RadioButton';
 
 export type RadioButtonGroupProps = RadioButtonContainerProps & {
   children: JSX.Element[];
@@ -72,28 +72,3 @@ const Container = styled.div<{ stackingDirection: 'horizontal' | 'vertical' }>`
   display: flex;
   flex-direction: ${props => (props.stackingDirection === 'horizontal' ? 'row' : 'column')};
 `;
-
-const a = () => {
-  return (
-    <React.Fragment>
-      <RadioButtonGroup stackingDirection="horizontal" onChange={handleAlert}>
-        <RadioButton value="test">Option1</RadioButton>
-        <RadioButton value="test2">Option2</RadioButton>
-      </RadioButtonGroup>
-      <RadioButtonGroup stackingDirection="horizontal" showBorder={false} showDivider onChange={handleAlert}>
-        <RadioButton value="test">Option1</RadioButton>
-        <RadioButton value="test2">Option2</RadioButton>
-      </RadioButtonGroup>
-      <RadioButtonGroup
-        stackingDirection="horizontal"
-        showBorder={false}
-        showDivider
-        textAlign="center"
-        onChange={handleAlert}
-      >
-        <RadioButton value="test">Option1</RadioButton>
-        <RadioButton value="test2">Option2</RadioButton>
-      </RadioButtonGroup>
-    </React.Fragment>
-  );
-};
