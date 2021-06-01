@@ -29,7 +29,7 @@ export const RadioButtonGroup = React.memo<RadioButtonGroupProps>(
       setCheckedIndex(0);
     }, [checkedIndex, children, value]);
 
-    const arrayOfChildren = React.Children.toArray(children).filter(c => isValidElement(c)) as JSX.Element[];
+    const arrayOfChildren = children.filter(c => isValidElement(c));
 
     const handleClickItem = (index: number) => {
       const child = arrayOfChildren[index];

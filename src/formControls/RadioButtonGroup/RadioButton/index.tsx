@@ -18,6 +18,7 @@ export type RadioButtonProps = RadioButtonContainerProps & {
   className?: string;
   index?: number;
   value: string;
+  children: string | JSX.Element;
   onClick?: (index: number) => any;
 };
 
