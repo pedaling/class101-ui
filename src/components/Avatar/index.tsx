@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
-import { Colors, Position } from '../../core';
+import { Position } from '../../core';
 import { gray100 } from '../../core/Colors';
 
 export enum AvatarSize {
