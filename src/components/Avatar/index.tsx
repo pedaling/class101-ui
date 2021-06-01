@@ -169,33 +169,3 @@ const IconWrapper = styled.div<{ position: Position }>`
   z-index: 100;
   ${(props) => iconPositionByPosition[props.position]}
 `;
-
-const a = () => {
-  return (
-    <>
-        <Badge>1</Badge>
-        <br />
-        <Badge>10</Badge>
-
-        <Badge size="xs">101</Badge>
-        <br />
-        <Badge size="sm">101</Badge>
-        <br />
-        <Badge size="md">101</Badge>
-
-        <Badge color="black" backgroundColor="pink">
-          101
-        </Badge>
-        <br />
-        <Badge color="pink" backgroundColor="black">
-          101
-        </Badge>
-
-        <Badge pill={true}>무료 배송</Badge>
-
-        <Badge icon={<Icon.ShippingTruck fillColor={Colors.white} />} pill={false} backgroundColor={Colors.green500}>
-          무료 배송
-        </Badge>
-    </>
-  );
-};
