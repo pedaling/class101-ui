@@ -20,6 +20,7 @@
   "scripts": {
     "test": "cross-env CI=1 react-scripts-ts test --env=jsdom",
     "test:watch": "react-scripts-ts test --env=jsdom",
+    "npm-publish": "yarn prebuild && yarn build && npm publish",
     "build": "docz build && dist-size ./dist",
     "prebuild": "tsc -p . && rollup -c",
     "analyze": "cross-env RUNNING_ENV=analyze yarn prebuild",
