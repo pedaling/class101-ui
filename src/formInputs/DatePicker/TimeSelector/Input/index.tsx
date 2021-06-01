@@ -25,6 +25,8 @@ export const TimeSelectorInput = React.memo<Props>(props => {
             break;
           case 'seconds':
             newValue.setSeconds(Number(event.target.value));
+            break;
+          default:
         }
       }
       onChange?.(newValue);
