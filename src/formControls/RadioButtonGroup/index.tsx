@@ -5,7 +5,7 @@ import { RadioButtonContainerProps } from './RadioButton';
 
 export type RadioButtonGroupProps = RadioButtonContainerProps & {
   children: JSX.Element[];
-  onChange: (value: string) => any;
+  onChange: (value: string) => void;
   className?: string;
   value?: string;
   stackingDirection: 'horizontal' | 'vertical';

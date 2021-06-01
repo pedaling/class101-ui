@@ -19,7 +19,7 @@ export type RadioButtonProps = RadioButtonContainerProps & {
   index?: number;
   value: string;
   children: string | JSX.Element;
-  onClick?: (index: number) => any;
+  onClick?: (index: number) => void;
 };
 
 export const RadioButton = React.memo<RadioButtonProps>(

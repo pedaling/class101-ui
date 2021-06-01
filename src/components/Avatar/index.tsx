@@ -1,7 +1,9 @@
-import React, { PureComponent } from 'react';
+import { Badge } from 'components';
+import { Icon } from 'Icon';
+import React, { useState } from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 
-import { Position } from '../../core';
+import { Colors, Position } from '../../core';
 import { gray100 } from '../../core/Colors';
 
 export enum AvatarSize {
@@ -21,9 +23,9 @@ export type AvatarIconPosition =
   | typeof Position.RIGHT;
 
 export interface AvatarProps {
-  size: AvatarSize | number;
-  iconRatio: number;
-  iconPosition: AvatarIconPosition;
+  size?: AvatarSize | number;
+  iconRatio?: number;
+  iconPosition?: AvatarIconPosition;
   src?: string;
   srcSet?: string;
   alt?: string;
@@ -40,34 +42,29 @@ interface AvatarState {
   isError: boolean;
 }
 
-export class Avatar extends PureComponent<AvatarProps, AvatarState> {
-  public static defaultProps: Partial<AvatarProps> = {
-    size: AvatarSize.MEDIUM,
-    iconRatio: 0.55,
-    iconPosition: Position.BOTTOM_RIGHT,
-  };
-
-  public readonly state: AvatarState = {
-    isError: false,
-  };
-
-  public render() {
-    const {
-      size,
-      src,
-      text,
-      className,
-      icon,
-      iconRatio,
-      iconPosition,
-      srcSet,
-      alt,
-      onClick,
-      onIconClick,
-      'data-element-name': dataElementName,
-    } = this.props;
-    const { isError } = this.state;
-
+export const Avatar = React.memo<AvatarProps>(
+  ({
+    size = AvatarSize.MEDIUM,
+    src,
+    text,
+    className,
+    icon,
+    iconRatio = 0.55,
+    iconPosition = Position.BOTTOM_RIGHT,
+    srcSet,
+    alt,
+    onClick,
+    onIconClick,
+    onError,
+    'data-element-name': dataElementName,
+  }) => {
+    const [isError, setIsError] = useState(false);
+    const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+      setIsError(true);
+      if (onError) {
+        onError(e);
+      }
+    };
     const avatarSize = typeof size === 'number' ? size : avatarSizeBySize[size];
     const iconSize = typeof size === 'number' ? avatarSize * iconRatio : iconSizeBySize[size];
     const sizedIcon = icon && React.cloneElement(icon, { size: iconSize });
@@ -75,7 +72,7 @@ export class Avatar extends PureComponent<AvatarProps, AvatarState> {
     return (
       <Container onClick={onClick} size={avatarSize} className={className} data-element-name={dataElementName}>
         {src && !isError ? (
-          <AvatarImage src={src} srcSet={srcSet} alt={alt} onError={this.handleImageError} />
+          <AvatarImage src={src} srcSet={srcSet} alt={alt} onError={handleImageError} />
         ) : (
           text && <TextWrapper>{text.substr(0, 2).toUpperCase()}</TextWrapper>
         )}
@@ -87,17 +84,7 @@ export class Avatar extends PureComponent<AvatarProps, AvatarState> {
       </Container>
     );
   }
-
-  private handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    const { onError } = this.props;
-    this.setState({
-      isError: true,
-    });
-    if (onError) {
-      onError(e);
-    }
-  };
-}
+);
 
 const iconPositionByPosition: { [key in AvatarIconPosition]: FlattenSimpleInterpolation } = {
   [Position.BOTTOM]: css`
@@ -153,7 +140,7 @@ const iconSizeBySize: { [key in AvatarSize]: number } = {
 const Container = styled.span<{ size: number }>`
   display: inline-block;
   position: relative;
-  ${props => css`
+  ${(props) => css`
     width: ${props.size}px;
     height: ${props.size}px;
   `};
@@ -180,5 +167,35 @@ const IconWrapper = styled.div<{ position: Position }>`
   display: flex;
   position: absolute;
   z-index: 100;
-  ${props => iconPositionByPosition[props.position]}
+  ${(props) => iconPositionByPosition[props.position]}
 `;
+
+const a = () => {
+  return (
+    <>
+        <Badge>1</Badge>
+        <br />
+        <Badge>10</Badge>
+
+        <Badge size="xs">101</Badge>
+        <br />
+        <Badge size="sm">101</Badge>
+        <br />
+        <Badge size="md">101</Badge>
+
+        <Badge color="black" backgroundColor="pink">
+          101
+        </Badge>
+        <br />
+        <Badge color="pink" backgroundColor="black">
+          101
+        </Badge>
+
+        <Badge pill={true}>무료 배송</Badge>
+
+        <Badge icon={<Icon.ShippingTruck fillColor={Colors.white} />} pill={false} backgroundColor={Colors.green500}>
+          무료 배송
+        </Badge>
+    </>
+  );
+};

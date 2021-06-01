@@ -47,14 +47,14 @@ export class Toast extends React.Component<ToastProps, State> {
     }
 
     if (timeout > 0) {
-      this.unmountAnimationTimeout = setTimeout(() => {
+      this.unmountAnimationTimeout = window.setTimeout(() => {
         this.setState({
           unmount: true,
         });
       }, timeout - UNMOUNT_ANIMATION_SECONDS * 1000);
 
       if (dismiss) {
-        setTimeout(dismiss, timeout);
+        window.setTimeout(dismiss, timeout);
       } else {
         throw Error('No dismiss prop!');
       }
@@ -66,7 +66,7 @@ export class Toast extends React.Component<ToastProps, State> {
       if (this.unmountAnimationTimeout) {
         clearTimeout(this.unmountAnimationTimeout);
       }
-      this.unmountAnimationTimeout = setTimeout(() => {
+      this.unmountAnimationTimeout = window.setTimeout(() => {
         this.setState({
           unmount: true,
         });
