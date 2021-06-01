@@ -1,39 +1,44 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 
 import { gray300, gray500, gray900 } from '../../../core/Colors';
 import { body1 } from '../../../core/TextStyles';
 import RadioIcon from './RadioIcon';
 
-export interface RadioButtonContainerProps {
+export type RadioButtonContainerProps = {
   stackingDirection?: 'horizontal' | 'vertical';
   showBorder?: boolean;
   showDivider?: boolean;
   checked?: boolean;
   textAlign?: 'left' | 'center';
-}
+  color?: string;
+};
 
-export interface RadioButtonProps extends RadioButtonContainerProps {
+export type RadioButtonProps = RadioButtonContainerProps & {
   className?: string;
   index?: number;
-  color?: string;
   value: string;
   onClick?: (index: number) => any;
-}
+};
 
-export class RadioButton extends PureComponent<RadioButtonProps> {
-  public static displayName = 'RadioButton';
-  public static defaultProps: Partial<RadioButtonProps> = {
-    stackingDirection: 'vertical',
-    showBorder: true,
-    color: gray900,
-    showDivider: false,
-    textAlign: 'left',
-  };
-
-  public render() {
-    const { className, stackingDirection, textAlign, checked, children, color, showBorder, showDivider } = this.props;
-
+export const RadioButton = React.memo<RadioButtonProps>(
+  ({
+    className,
+    stackingDirection = 'vertical',
+    textAlign = 'left',
+    checked,
+    children,
+    onClick,
+    index,
+    color = gray900,
+    showBorder = true,
+    showDivider = false,
+  }) => {
+    const handleClick = () => {
+      if (onClick && index) {
+        onClick(index);
+      }
+    };
     return (
       <RadioButtonContainer
         className={className}
@@ -42,7 +47,7 @@ export class RadioButton extends PureComponent<RadioButtonProps> {
         textAlign={textAlign}
         showDivider={showDivider}
         checked={checked}
-        onClick={this.handleClick}
+        onClick={handleClick}
       >
         <RadioIcon size="lg" checked={checked} color={color} />
         <RadioButtonText checked={checked} color={color}>
@@ -51,14 +56,7 @@ export class RadioButton extends PureComponent<RadioButtonProps> {
       </RadioButtonContainer>
     );
   }
-
-  private handleClick = () => {
-    const { onClick, index } = this.props;
-    if (onClick) {
-      onClick(index!);
-    }
-  };
-}
+);
 
 const optionStyles = ({
   checked,
@@ -121,7 +119,7 @@ const optionStyles = ({
   return style;
 };
 
-export const RadioButtonContainer = styled.div<RadioButtonContainerProps>`
+const RadioButtonContainer = styled.div<RadioButtonContainerProps>`
   display: flex;
   align-items: center;
   border-radius: 1px;
@@ -130,7 +128,7 @@ export const RadioButtonContainer = styled.div<RadioButtonContainerProps>`
   ${props => optionStyles(props)};
 `;
 
-export const RadioButtonText = styled.div<{ checked?: boolean; color?: string }>`
+const RadioButtonText = styled.div<{ checked?: boolean; color?: string }>`
   ${body1};
   flex: 1;
   color: ${gray500};
