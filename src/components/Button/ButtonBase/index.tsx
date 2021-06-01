@@ -133,11 +133,14 @@ export const buttonCommonStyle = css`
   }
 `;
 
-const ButtonContainer = styled.button<{ 'icon-position'?: ButtonIconPosition }>`
+const buttonResetStyle = css`
   border: 0;
   outline: none;
   box-sizing: border-box;
+`;
 
+const ButtonContainer = styled.button<{ 'icon-position'?: ButtonIconPosition }>`
+  ${buttonResetStyle}
   ${buttonCommonStyle};
 
   flex-direction: ${props => (props['icon-position'] === ButtonIconPosition.RIGHT ? 'row-reverse' : 'row')};
@@ -151,6 +154,7 @@ const Text = styled.span`
 `;
 
 const AnchorButtonWrapper = styled.button`
+  ${buttonResetStyle}
   ${buttonCommonStyle};
   &.disabled {
     cursor: not-allowed;
