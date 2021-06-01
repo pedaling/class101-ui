@@ -7,13 +7,12 @@ import postcss from 'rollup-plugin-postcss';
 import typescript from 'rollup-plugin-typescript2';
 import url from 'rollup-plugin-url';
 import visualizer from 'rollup-plugin-visualizer';
-
 import pkg from './package.json';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 const dependencies = ['classnames', 'react-popper', 'swiper/dist/js/swiper.esm.js', 'polished', 'path-to-regexp'];
 
-const getPlugins = format => [
+const getPlugins = (format) => [
   external(),
   postcss({
     modules: true,
@@ -49,6 +48,7 @@ export default [
       dir: path.dirname(pkg.module),
       format: 'esm',
       sourcemap: true,
+      preserveModulesRoot: 'src',
     },
     external: dependencies,
     plugins: getPlugins('esm'),
