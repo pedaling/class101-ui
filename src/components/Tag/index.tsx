@@ -1,41 +1,42 @@
-import React, { PureComponent } from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 
 import { gray100, gray200 } from '../../core/Colors';
 import { CloseIcon } from '../../Icon';
 
-export interface TagProps {
-  onRemove?: () => any;
+type TagProps = {
+  onRemove?: () => void;
   value: string;
   label?: string;
   disabled?: boolean;
   className?: string;
   'data-element-name'?: string;
-}
+};
 
-export class Tag extends PureComponent<TagProps> {
-  public render() {
-    const { value, label, className, 'data-element-name': dataElementName, disabled } = this.props;
+export const Tag = React.memo<TagProps>(
+  ({ value, label, className, 'data-element-name': dataElementName, disabled, onRemove }) => {
+    const handleRemoveButton = useCallback(
+      (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        if (onRemove && !disabled) {
+          onRemove();
+        }
+        e.preventDefault();
+      },
+      [disabled, onRemove]
+    );
+
     return (
       <Container data-element-name={dataElementName} className={className}>
         <Text>{label || value}</Text>
         {!disabled && (
-          <CloseButton onClick={this.handleRemoveButton}>
+          <CloseButton onClick={handleRemoveButton}>
             <CloseIcon size={16} />
           </CloseButton>
         )}
       </Container>
     );
   }
-
-  private handleRemoveButton = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const { onRemove, disabled } = this.props;
-    if (onRemove && disabled === false) {
-      onRemove();
-    }
-    e.preventDefault();
-  };
-}
+);
 
 const Container = styled.div`
   display: inline-flex;
