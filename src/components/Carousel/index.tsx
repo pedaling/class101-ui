@@ -143,22 +143,20 @@ export const Carousel = React.memo<CarouselProps>(props => {
       ...swiperProps,
       on: {
         init: handleInit,
-        slideChange: handelChangeSlide,
         transitionEnd: handleTransitionEnd,
       },
-      slidesPerView: lgSlidesPerView,
-      spaceBetween: lgSpaceBetween || typeof lgSlidesPerView !== 'number' || lgSlidesPerView !== 1 ? 24 : 0,
+      slidesPerView: smSlidesPerView,
+      spaceBetween: smSpaceBetween || typeof smSlidesPerView !== 'number' || smSlidesPerView !== 1 ? 16 : 0,
       breakpoints: {
         [SIZES.sm.maxWidth]: {
-          slidesPerView: smSlidesPerView,
-          spaceBetween: smSpaceBetween || typeof smSlidesPerView !== 'number' || smSlidesPerView !== 1 ? 16 : 0,
+          slidesPerView: lgSlidesPerView,
+          spaceBetween: lgSpaceBetween || typeof lgSlidesPerView !== 'number' || lgSlidesPerView !== 1 ? 24 : 0,
         },
       },
       getSwiperInstance: handleGetSwiperInstance,
     }),
     [
       handleInit,
-      handelChangeSlide,
       handleTransitionEnd,
       handleGetSwiperInstance,
       swiperProps,
@@ -181,6 +179,7 @@ export const Carousel = React.memo<CarouselProps>(props => {
       lgSlidesSideOffset={lgSlidesSideOffset}
       smSlidesSideOffset={smSlidesSideOffset}
       data-element-name={dataElementName}
+      onSlideChange={handelChangeSlide}
       {...swiperParams}
     >
       {children}

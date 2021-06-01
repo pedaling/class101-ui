@@ -1,93 +1,55 @@
-// eslint-disable-next-line prettier/prettier
-import classNames from 'classnames';
-import React, { FC, MutableRefObject, ReactNode, useEffect, useRef, useState } from 'react';
-import type { SwiperOptions } from 'swiper';
-import {
+import React from 'react';
+import SwiperCore, {
   Autoplay,
   EffectFade,
   Keyboard,
   Lazy,
   Navigation,
   Pagination,
-  Swiper as OriginalSwiper,
   Virtual,
-} from 'swiper/dist/js/swiper.esm.js';
-import { createUniqIDGenerator } from '../../utils/createUniqIDGenerator';
+} from 'swiper';
+import { Swiper as OriginalSwiper } from 'swiper/react';
 import { DefaultNavigation } from './DefaultNavigation';
 
-OriginalSwiper.use([Navigation, Pagination, Autoplay, Virtual, Lazy, Keyboard, EffectFade]);
+SwiperCore.use([Autoplay, EffectFade, Keyboard, Lazy, Navigation, Pagination, Virtual]);
 
-export type SwiperInstance = OriginalSwiper;
+export type SwiperInstance = SwiperCore;
 
-export interface SwiperProps extends SwiperOptions {
-  children?: ReactNode;
-  navigationChildren?: ReactNode;
-  paginationChildren?: ReactNode;
-  getSwiperInstance?: (swiperInstance: OriginalSwiper) => void;
-  className?: string;
-  'data-element-name'?: string;
-}
+export type SwiperProps = OriginalSwiper &
+  React.PropsWithChildren<{
+    className?: string;
+    navigationChildren?: React.ReactNode;
+    paginationChildren?: React.ReactNode;
+    getSwiperInstance?: (swiperInstance: SwiperInstance) => void;
+  }>;
 
-const generateId = createUniqIDGenerator('swiper-');
-
-export const Swiper: FC<SwiperProps> = ({
-  getSwiperInstance,
-  className = '',
-  children,
-  navigationChildren = <DefaultNavigation />,
-  paginationChildren = <div className="swiper-pagination" />,
-  'data-element-name': dataElementName,
-  pagination = {
-    el: '.swiper-pagination',
-    type: 'bullets',
-    clickable: true,
-  },
-  navigation = {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-  speed = 400,
-  threshold = 10,
-  observer = true,
-  ...swiperOptions
-}) => {
-  const swiperRef: MutableRefObject<OriginalSwiper | null> = useRef(null);
-  const swiperOptionsRef: MutableRefObject<SwiperOptions> = useRef({
-    ...swiperOptions,
-    pagination,
-    navigation,
-    speed,
-    threshold,
-    observer,
-  });
-  const [containerId, setContainerId] = useState<string | undefined>(undefined);
-
-  useEffect(() => {
-    setContainerId(generateId());
-    return () => {
-      if (swiperRef.current) {
-        swiperRef.current.destroy(true, true);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (containerId) {
-      swiperRef.current = new OriginalSwiper(`#${containerId}`, swiperOptionsRef.current);
-    }
-  }, [containerId, swiperRef, swiperOptionsRef]);
-
-  useEffect(() => {
-    if (containerId && getSwiperInstance && swiperRef.current) {
-      getSwiperInstance(swiperRef.current);
-    }
-  }, [containerId, getSwiperInstance, swiperRef]);
+export const Swiper = React.memo<SwiperProps>((props) => {
+  const {
+    children,
+    navigation = { prevEl: '.swiper-button-prev', nextEl: '.swiper-button-next' },
+    navigationChildren = <DefaultNavigation />,
+    pagination = { el: '.swiper-pagination', type: 'bullets', clickable: true },
+    paginationChildren = <div className="swiper-pagination" />,
+    speed = 400,
+    threshold = 10,
+    observer = true,
+    getSwiperInstance,
+    ...restProps
+  } = props;
 
   return (
-    <div id={containerId} data-element-name={dataElementName} className={classNames('swiper-container', className)}>
-      <div className="swiper-wrapper">{children}</div>
+    <OriginalSwiper
+      navigation={navigation}
+      pagination={pagination}
+      speed={speed}
+      threshold={threshold}
+      observer={observer}
+      onSwiper={getSwiperInstance}
+      {...restProps}
+    >
+      {children}
       {navigationChildren}
       {paginationChildren}
-    </div>
+    </OriginalSwiper>
   );
-};
+});

@@ -245,7 +245,9 @@ enum CarouselPaginationTheme {
           <PlayGroundBanner backgroundColor={Colors[`blue${order * 100}`]}>배너{order}</PlayGroundBanner>
         </Slide>
       ))}
-      <ViewAllButton />
+      <Slide>
+        <ViewAllButton />
+      </Slide>
     </Carousel>
   </Section>
 </Playground>
