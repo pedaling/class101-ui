@@ -1,3 +1,7 @@
 {
-  "extends": "@class101/eslint-config"
+  "extends": "@class101/eslint-config",
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
+  "parser": "@typescript-eslint/parser"
 }

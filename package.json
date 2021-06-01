@@ -27,6 +27,7 @@
     "start": "rollup -c -w",
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build",
+    "lint": "eslint ./src/**/*.ts{,x} --fix",
     "docz:dev": "docz dev",
     "docz:build": "docz build",
     "prettier": "prettier --write src/**/*.{ts,tsx}",
