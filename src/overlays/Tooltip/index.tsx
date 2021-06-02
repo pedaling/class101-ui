@@ -81,7 +81,7 @@ export const Tooltip = memo(
     );
 
     if (!isClient()) {
-      return <></>;
+      return null;
     }
 
     return (

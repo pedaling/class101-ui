@@ -1,4 +1,4 @@
-const enum Position {
+enum Position {
   BOTTOM = 'bottom',
   BOTTOM_LEFT = 'bottom-left',
   BOTTOM_RIGHT = 'bottom-right',
