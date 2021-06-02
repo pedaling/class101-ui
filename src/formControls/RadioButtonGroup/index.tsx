@@ -1,4 +1,6 @@
-import React, { isValidElement, useEffect, useState } from 'react';
+import {
+  Children, cloneElement, isValidElement, memo, useEffect, useState,
+} from 'react';
 import styled from 'styled-components';
 
 import { RadioButtonContainerProps } from './RadioButton';
@@ -11,14 +13,14 @@ export type RadioButtonGroupProps = RadioButtonContainerProps & {
   stackingDirection: 'horizontal' | 'vertical';
 };
 
-export const RadioButtonGroup = React.memo<RadioButtonGroupProps>(
+export const RadioButtonGroup = memo<RadioButtonGroupProps>(
   ({
     children, value, stackingDirection, onChange, ...restProps
-  }) => {
+  }: RadioButtonGroupProps) => {
     const [checkedIndex, setCheckedIndex] = useState(0);
     useEffect(() => {
       if (value) {
-        const index = React.Children.toArray(children).findIndex((c) => {
+        const index = Children.toArray(children).findIndex((c) => {
           if (isValidElement(c)) {
             return c.props.value === value;
           }
@@ -54,7 +56,7 @@ export const RadioButtonGroup = React.memo<RadioButtonGroupProps>(
         color,
       };
 
-      return React.cloneElement(child, {
+      return cloneElement(child, {
         ...child.props,
         index,
         checked,

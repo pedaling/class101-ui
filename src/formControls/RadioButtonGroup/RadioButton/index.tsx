@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import styled, { css } from 'styled-components';
 
 import { gray300, gray500, gray900 } from '../../../core/Colors';
@@ -22,7 +22,7 @@ export type RadioButtonProps = RadioButtonContainerProps & {
   onClick?: (index: number) => void;
 };
 
-export const RadioButton = React.memo<RadioButtonProps>(
+export const RadioButton = memo<RadioButtonProps>(
   ({
     className,
     stackingDirection = 'vertical',
@@ -34,7 +34,7 @@ export const RadioButton = React.memo<RadioButtonProps>(
     color = gray900,
     showBorder = true,
     showDivider = false,
-  }) => {
+  }: RadioButtonProps) => {
     const handleClick = () => {
       if (onClick && index) {
         onClick(index);
