@@ -30,7 +30,6 @@ export const RadioButtonGroup = memo<RadioButtonGroupProps>(
           setCheckedIndex(index);
         }
       }
-      setCheckedIndex(0);
     }, [checkedIndex, children, value]);
 
     const handleClickItem = (index: number) => () => {
