@@ -102,5 +102,5 @@ const getAnchorButtonStyle = (iconPosition?: ButtonIconPosition) => css`
 `;
 
 const LinkButton = styled(LinkBlock)<{ 'icon-position'?: ButtonIconPosition }>`
-  ${props => getAnchorButtonStyle(props['icon-position'])};
+  ${(props) => getAnchorButtonStyle(props['icon-position'])};
 `;

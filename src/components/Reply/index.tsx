@@ -1,8 +1,12 @@
 import { ComboBox, ComboBoxPosition, ComboBoxProps } from 'components/ComboBox';
 import { MoreHorizontal } from 'Icon/generated/MoreHorizontal';
-import React, { ReactElement, ReactNode, useCallback, useMemo, useState } from 'react';
+import React, {
+  ReactElement, ReactNode, useCallback, useMemo, useState,
+} from 'react';
 import styled from 'styled-components';
-import { BreakPoints, Caption1, Caption2, Colors } from '../../core';
+import {
+  BreakPoints, Caption1, Caption2, Colors,
+} from '../../core';
 import { gray500, gray800, orange500 } from '../../core/Colors';
 import { Avatar, AvatarProps, AvatarSize } from '../Avatar';
 import { ButtonIconPosition } from '../Button/ButtonIcon';
@@ -57,7 +61,7 @@ const ReplyImage = styled.img`
 `;
 
 export const Reply = Object.assign(
-  React.memo<ReplyProps>(props => {
+  React.memo<ReplyProps>((props) => {
     const {
       avatar,
       name,
@@ -85,19 +89,15 @@ export const Reply = Object.assign(
       hideReadMore = false,
     } = props;
 
-    const avatarSize = useMemo(() => {
-      return size === ReplySize.LARGE ? AvatarSize.LARGE : AvatarSize.MEDIUM;
-    }, [size]);
+    const avatarSize = useMemo(() => (size === ReplySize.LARGE ? AvatarSize.LARGE : AvatarSize.MEDIUM), [size]);
 
-    const clonedAvatar = useMemo(() => {
-      return avatar ? (
-        React.cloneElement(avatar, {
-          size: avatarSize,
-        })
-      ) : (
-        <Avatar size={avatarSize} text={name} />
-      );
-    }, [avatar, avatarSize, name]);
+    const clonedAvatar = useMemo(() => (avatar ? (
+      React.cloneElement(avatar, {
+        size: avatarSize,
+      })
+    ) : (
+      <Avatar size={avatarSize} text={name} />
+    )), [avatar, avatarSize, name]);
 
     const preventPropagation = useCallback((event: React.MouseEvent<Element, MouseEvent>) => {
       event.preventDefault();
@@ -112,7 +112,7 @@ export const Reply = Object.assign(
           setContentMargin(ref.clientWidth + 12);
         }
       },
-      [setContentMargin, size]
+      [setContentMargin, size],
     );
 
     return (
@@ -141,11 +141,11 @@ export const Reply = Object.assign(
             <HeaderActionContainer>
               <ComboBox
                 items={headerAction}
-                opener={
+                opener={(
                   <HeaderActionIconWrapper>
                     <MoreHorizontal fillColor={Colors.gray600} />
                   </HeaderActionIconWrapper>
-                }
+                )}
                 position={ComboBoxPosition.LEFT}
               />
             </HeaderActionContainer>
@@ -177,29 +177,28 @@ export const Reply = Object.assign(
         </ActionWrapper>
         {extraBottom}
         <CommentContainer marginLeft={contentMargin}>
-          {showChildren &&
-            children &&
-            React.Children.map(
+          {showChildren
+            && children
+            && React.Children.map(
               children,
-              element =>
-                element &&
-                React.cloneElement(element as React.ReactElement<ReplyProps>, {
+              (element) => element
+                && React.cloneElement(element as React.ReactElement<ReplyProps>, {
                   width: '100%',
                   size: ReplySize.SMALL,
-                })
+                }),
             )}
         </CommentContainer>
         <FooterContainer marginLeft={contentMargin}>{footer}</FooterContainer>
       </Container>
     );
   }),
-  { Action: ReplyAction, Image: ReplyImage }
+  { Action: ReplyAction, Image: ReplyImage },
 );
 
 const Container = styled.div<{ width: string }>`
   display: flex;
   flex-direction: column;
-  max-width: ${props => props.width};
+  max-width: ${(props) => props.width};
 `;
 
 const AvatarWrapper = styled.div`
@@ -210,8 +209,8 @@ const AvatarWrapper = styled.div`
 const ContentWrapper = styled.div<{ size: ReplySize; marginLeft: number }>`
   display: flex;
   flex-direction: column;
-  margin-top: ${props => (props.size === ReplySize.SMALL ? '4px' : '12px')};
-  margin-left: ${props => (props.size === ReplySize.SMALL ? `${props.marginLeft}px` : '0')};
+  margin-top: ${(props) => (props.size === ReplySize.SMALL ? '4px' : '12px')};
+  margin-left: ${(props) => (props.size === ReplySize.SMALL ? `${props.marginLeft}px` : '0')};
 `;
 
 const DescriptionContainer = styled.div`
@@ -240,8 +239,8 @@ const NameDescriptionContainer = styled.div<{ size: ReplySize }>`
 const NameDescription = styled(Caption2)``;
 
 const TimeText = styled(Caption2)<{ size: ReplySize }>`
-  margin-top: ${props => (props.size === ReplySize.SMALL ? '0' : '2px')};
-  margin-left: ${props => (props.size === ReplySize.SMALL ? '6px' : '0')};
+  margin-top: ${(props) => (props.size === ReplySize.SMALL ? '0' : '2px')};
+  margin-left: ${(props) => (props.size === ReplySize.SMALL ? '6px' : '0')};
   color: ${gray500};
 `;
 
@@ -254,11 +253,11 @@ const NameContainer = styled.div`
 
 const ActionWrapper = styled.div<{ hasAction: boolean; marginLeft: number; size: ReplySize }>`
   display: flex;
-  margin-left: ${props => `${props.marginLeft}px`};
-  margin-top: ${props => (props.hasAction ? '9px' : '0')};
+  margin-left: ${(props) => `${props.marginLeft}px`};
+  margin-top: ${(props) => (props.hasAction ? '9px' : '0')};
   margin-bottom: 24px;
   ${BreakPoints.media.sm`
-    margin-bottom: ${props => (props.size === ReplySize.SMALL ? '14px' : '24px')}
+    margin-bottom: ${(props) => (props.size === ReplySize.SMALL ? '14px' : '24px')}
   `};
   justify-content: space-between;
 `;
@@ -276,9 +275,9 @@ const RightActionContainer = styled.div`
 `;
 
 const CommentContainer = styled.div<{ marginLeft: number }>`
-  margin-left: ${props => (props.marginLeft === 0 ? '24px' : `${props.marginLeft}px`)};
+  margin-left: ${(props) => (props.marginLeft === 0 ? '24px' : `${props.marginLeft}px`)};
 `;
 
 const FooterContainer = styled.div<{ marginLeft: number }>`
-  margin-left: ${props => `${props.marginLeft}px`};
+  margin-left: ${(props) => `${props.marginLeft}px`};
 `;

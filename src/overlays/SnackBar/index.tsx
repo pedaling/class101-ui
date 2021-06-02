@@ -1,25 +1,20 @@
-import React, { PureComponent } from 'react';
+import { blue800 } from 'core/Colors';
+import { memo, ReactNode } from 'react';
 import styled from 'styled-components';
 
-import { blue800 } from '../../core/Colors';
-
-interface SnackBarProps {
+type SnackBarProps = {
   message: string;
-  actionElement?: React.ReactNode;
-}
+  actionElement?: ReactNode;
+};
 
-export class SnackBar extends PureComponent<SnackBarProps> {
-  public render() {
-    const { message, actionElement } = this.props;
+const SnackBar = memo(({ message, actionElement }: SnackBarProps) => (
+  <Container>
+    <MessageContainer>{message}</MessageContainer>
+    {actionElement && <ActionContainer>{actionElement}</ActionContainer>}
+  </Container>
+));
 
-    return (
-      <Container>
-        <MessageContainer>{message}</MessageContainer>
-        <ActionContainer>{actionElement}</ActionContainer>
-      </Container>
-    );
-  }
-}
+export default SnackBar;
 
 const Container = styled.div`
   display: flex;

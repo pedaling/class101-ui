@@ -24,10 +24,10 @@ export default (props: Props) => {
 };
 
 const StyledSpinner = styled(Spinner)<Props>`
-  ${props => props.isLeftMargin && `margin-left: ${iconMarginByButtonSize[props.buttonSize]}px;`}
+  ${(props) => props.isLeftMargin && `margin-left: ${iconMarginByButtonSize[props.buttonSize]}px;`}
 
   span,
   span > svg {
-    ${props => getButtonIconSize(props.buttonSize)};
+    ${(props) => getButtonIconSize(props.buttonSize)};
   }
 `;

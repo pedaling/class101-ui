@@ -83,7 +83,7 @@ export class Checkbox extends React.PureComponent<CheckboxProps> {
 }
 
 const Container = styled.label<{ inline?: boolean }>`
-  display: ${props => (props.inline ? 'inline-flex' : 'flex')};
+  display: ${(props) => (props.inline ? 'inline-flex' : 'flex')};
   align-items: center;
   position: relative;
 `;

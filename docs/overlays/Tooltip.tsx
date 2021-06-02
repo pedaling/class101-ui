@@ -1,3 +1,4 @@
+import React from 'react';
 import { Position, TooltipColor, Tooltip } from '@class101/ui';
 
 export interface Props {

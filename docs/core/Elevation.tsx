@@ -1,5 +1,4 @@
 import { Colors, ElevationProps, ElevationStyles } from '@class101/ui';
-import { defaultTo } from 'lodash';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -11,7 +10,7 @@ export const Elevation = styled.div<ElevationProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  ${props => ElevationStyles[`elevation${defaultTo(props.elevation, 1)}`]}
+  ${props => ElevationStyles[`elevation${props.elevation ?? 1}`]}
 `;
 
 export const Container = styled.div`

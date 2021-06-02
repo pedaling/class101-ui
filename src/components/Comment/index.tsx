@@ -51,6 +51,7 @@ const CommentImage = styled.img`
 
 export class Comment extends PureComponent<CommentProps> {
   public static Action = CommentAction;
+
   public static Image = CommentImage;
 
   public static defaultProps: Partial<CommentProps> = {
@@ -117,33 +118,30 @@ export class Comment extends PureComponent<CommentProps> {
           </CommentContent>
           <ActionWrapper>
             <LeftActionContainer onClick={this.preventPropagation}>
-              {leftAction &&
-                leftAction.map((action, key) => React.cloneElement(action, { position: ButtonIconPosition.LEFT, key }))}
+              {leftAction
+                && leftAction.map((action, key) => React.cloneElement(action, { position: ButtonIconPosition.LEFT, key }))}
             </LeftActionContainer>
             <RightActionContainer onClick={this.preventPropagation}>
-              {rightAction &&
-                rightAction.map((action, key) =>
-                  React.cloneElement(action, { position: ButtonIconPosition.RIGHT, key })
-                )}
+              {rightAction
+                && rightAction.map((action, key) => React.cloneElement(action, { position: ButtonIconPosition.RIGHT, key }))}
             </RightActionContainer>
           </ActionWrapper>
-          {showChildren &&
-            children &&
-            React.Children.map(
+          {showChildren
+            && children
+            && React.Children.map(
               children,
-              element =>
-                element &&
-                React.cloneElement(element as React.ReactElement<CommentProps>, {
+              (element) => element
+                && React.cloneElement(element as React.ReactElement<CommentProps>, {
                   width: '100%',
                   size: CommentSize.SMALL,
-                })
+                }),
             )}
         </ContentContainer>
       </Container>
     );
   }
 
-  private preventPropagation: React.MouseEventHandler<HTMLDivElement> = event => {
+  private preventPropagation: React.MouseEventHandler<HTMLDivElement> = (event) => {
     event.preventDefault();
     event.stopPropagation();
   };
@@ -152,7 +150,7 @@ export class Comment extends PureComponent<CommentProps> {
 const Container = styled.div<{ width: string }>`
   display: flex;
   flex-direction: row;
-  max-width: ${props => props.width};
+  max-width: ${(props) => props.width};
 `;
 
 const AvatarWrapper = styled.div`

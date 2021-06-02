@@ -17,16 +17,19 @@ export interface Props<T> extends TabStyleProps {
 // TODO(chiabi): ThemeProvider 아래에서 모두 같은 테마가 적용되게 만들기
 export class Tabs<T extends string = string> extends PureComponent<Props<T>> {
   public static Item = TabItem;
+
   public static defaultProps = TabItem.defaultProps;
 
   public render() {
-    const { value, fluid, theme, type, onChange, children, ...restProps } = this.props;
+    const {
+      value, fluid, theme, type, onChange, children, ...restProps
+    } = this.props;
 
     const indicatorCount = React.Children.count(children);
     const tabIndicators: TabElement[] = [];
     let activePanel: ReactNode;
 
-    React.Children.forEach(this.props.children, child => {
+    React.Children.forEach(this.props.children, (child) => {
       const tab = child as TabElement;
       tabIndicators.push(
         cloneElement(tab, {
@@ -37,7 +40,7 @@ export class Tabs<T extends string = string> extends PureComponent<Props<T>> {
           key: tab.props.value,
           active: value === tab.props.value,
           onClickItem: this.handleClickTabItem,
-        }) as TabElement
+        }) as TabElement,
       );
 
       if (value === tab.props.value) {
@@ -68,5 +71,5 @@ const TabList = styled.div<TabStyleProps>`
   display: flex;
   white-space: nowrap;
   overflow-x: auto;
-  box-shadow: inset 0 -1px 0 0 ${props => getTabBorderColor(props.theme)};
+  box-shadow: inset 0 -1px 0 0 ${(props) => getTabBorderColor(props.theme)};
 `;

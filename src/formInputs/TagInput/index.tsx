@@ -3,7 +3,9 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { ButtonColor, ButtonSize, IconButton } from '../../components/Button';
-import { gray300, gray900, orange500, redError, white } from '../../core/Colors';
+import {
+  gray300, gray900, orange500, redError, white,
+} from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
 import { CloseIcon } from '../../Icon';
 import { InlineError, Intent } from '../InlineError';
@@ -50,9 +52,9 @@ export const TagInput = React.memo<TagInputProps>(
     const getNextValue = () => {
       const newValue = tempValue
         ? tempValue
-            .split(separator)
-            .map(v => v.trim())
-            .filter(e => Boolean(e))
+          .split(separator)
+          .map((v) => v.trim())
+          .filter((e) => Boolean(e))
         : [];
 
       return new Array(...new Set(...[...value, ...newValue]));
@@ -162,7 +164,7 @@ export const TagInput = React.memo<TagInputProps>(
         {warnMessage && <InlineError intent={Intent.WARNING}>{warnMessage}</InlineError>}
       </>
     );
-  }
+  },
 );
 
 const TagInputContainer = styled.div`

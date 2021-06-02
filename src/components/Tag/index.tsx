@@ -14,7 +14,9 @@ type TagProps = {
 };
 
 export const Tag = React.memo<TagProps>(
-  ({ value, label, className, 'data-element-name': dataElementName, disabled, onRemove }) => {
+  ({
+    value, label, className, 'data-element-name': dataElementName, disabled, onRemove,
+  }) => {
     const handleRemoveButton = useCallback(
       (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         if (onRemove && !disabled) {
@@ -22,7 +24,7 @@ export const Tag = React.memo<TagProps>(
         }
         e.preventDefault();
       },
-      [disabled, onRemove]
+      [disabled, onRemove],
     );
 
     return (
@@ -35,7 +37,7 @@ export const Tag = React.memo<TagProps>(
         )}
       </Container>
     );
-  }
+  },
 );
 
 const Container = styled.div`

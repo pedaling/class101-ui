@@ -9,7 +9,7 @@ interface Props {
   onChange?: (value: Date) => void;
 }
 
-export const TimeSelectorInput = React.memo<Props>(props => {
+export const TimeSelectorInput = React.memo<Props>((props) => {
   const { value, onChange } = props;
 
   const handleChange = useCallback(
@@ -25,11 +25,13 @@ export const TimeSelectorInput = React.memo<Props>(props => {
             break;
           case 'seconds':
             newValue.setSeconds(Number(event.target.value));
+            break;
+          default:
         }
       }
       onChange?.(newValue);
     },
-    [onChange, value]
+    [onChange, value],
   );
 
   return (

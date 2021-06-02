@@ -12,7 +12,9 @@ interface Props {
 
 export class Grid extends PureComponent<Props> {
   public render() {
-    const { children, className, divAttributes, maxWidthNone } = this.props;
+    const {
+      children, className, divAttributes, maxWidthNone,
+    } = this.props;
 
     return (
       <StyledDiv maxWidthNone={maxWidthNone} className={className} {...divAttributes}>
@@ -31,6 +33,6 @@ const StyledDiv = styled.div<Props>`
     margin-right: 24px;
   `};
   ${media.lg`
-    max-width: ${props => (props.maxWidthNone ? 'none' : '960px')};
+    max-width: ${(props) => (props.maxWidthNone ? 'none' : '960px')};
   `};
 `;

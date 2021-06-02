@@ -1,61 +1,51 @@
-import React, { PureComponent, ReactNode } from 'react';
+import { gray800, white } from 'core/Colors';
+import { ReactNode, CSSProperties, memo } from 'react';
 import styled, { css } from 'styled-components';
 
-import { gray800, white } from '../../core/Colors';
 import { caption1, caption2 } from '../../core/TextStyles';
 
 type Size = 'xs' | 'sm' | 'md';
 
 export interface BadgeProps {
-  style?: React.CSSProperties;
-  children?: ReactNode;
-  className?: string;
   color?: string;
   backgroundColor?: string;
-  icon?: ReactNode;
   pill?: boolean;
   size?: Size | number;
+  style?: CSSProperties;
+  children?: ReactNode;
+  className?: string;
+  icon?: ReactNode;
   'data-element-name'?: string;
 }
 
-export class Badge extends PureComponent<BadgeProps> {
-  public static defaultProps: Partial<BadgeProps> = {
-    color: white,
-    backgroundColor: gray800,
-    pill: false,
-    size: 'md',
-  };
-
-  public render() {
-    const {
-      className,
-      color,
-      backgroundColor,
-      pill,
-      size,
-      icon,
-      children,
-      style,
-      'data-element-name': dataElementName,
-    } = this.props;
-    return (
-      <Container
-        className={className}
-        color={color}
-        backgroundColor={backgroundColor}
-        pill={pill}
-        size={size}
-        style={style}
-        data-element-name={dataElementName}
-      >
-        {icon && <IconArea>{icon}</IconArea>}
-        <TextArea size={size} color={color}>
-          {children}
-        </TextArea>
-      </Container>
-    );
-  }
-}
+export const Badge = memo<BadgeProps>(
+  ({
+    color = white,
+    backgroundColor = gray800,
+    pill = false,
+    size = 'md',
+    className,
+    icon,
+    children,
+    style,
+    'data-element-name': dataElementName,
+  }: BadgeProps) => (
+    <Container
+      className={className}
+      color={color}
+      backgroundColor={backgroundColor}
+      pill={pill}
+      size={size}
+      style={style}
+      data-element-name={dataElementName}
+    >
+      {icon && <IconArea>{icon}</IconArea>}
+      <TextArea size={size} color={color}>
+        {children}
+      </TextArea>
+    </Container>
+  ),
+);
 
 const containerMinWidth: { [key in Size]: number } = {
   xs: 16,
@@ -69,7 +59,10 @@ const containerPaddingSize: { [key in Size]: number } = {
   md: 6,
 };
 
-const containerStyle = (size: BadgeProps['size'] = 'md', pill: BadgeProps['pill'] = false) => {
+const containerStyle = (
+  size: BadgeProps['size'] = 'md',
+  pill: BadgeProps['pill'] = false,
+) => {
   const minWidth = typeof size === 'number' ? size : containerMinWidth[size];
   const padding = typeof size === 'number' ? 0 : containerPaddingSize[size];
   return css`
@@ -81,9 +74,11 @@ const containerStyle = (size: BadgeProps['size'] = 'md', pill: BadgeProps['pill'
   `;
 };
 
-const Container = styled.div<Pick<BadgeProps, 'size' | 'pill' | 'backgroundColor'>>`
-  ${props => containerStyle(props.size, props.pill)};
-  background-color: ${props => props.backgroundColor};
+const Container = styled.div<
+  Pick<BadgeProps, 'size' | 'pill' | 'backgroundColor'>
+>`
+  ${(props) => containerStyle(props.size, props.pill)};
+  background-color: ${(props) => props.backgroundColor};
   flex: none;
   display: inline-flex;
   justify-content: center;
@@ -101,8 +96,8 @@ const IconArea = styled.div`
 `;
 
 const TextArea = styled.div<Pick<BadgeProps, 'size' | 'color'>>`
-  ${props => (props.size === 'md' ? caption1 : caption2)};
-  ${props => (props.color ? `color: ${props.color};` : '')};
+  ${(props) => (props.size === 'md' ? caption1 : caption2)};
+  ${(props) => (props.color ? `color: ${props.color};` : '')};
   font-weight: 600;
   display: inline-flex;
   justify-content: center;

@@ -1,4 +1,6 @@
-import React, { PureComponent, ReactNode } from 'react';
+import {
+  memo, ReactNode, useEffect, useRef, useState, TouchEvent,
+} from 'react';
 import styled from 'styled-components';
 
 import { Badge } from '../../components/Badge';
@@ -37,37 +39,34 @@ export interface BottomSheetProps extends ContainerProps {
   renderFixedContent: () => ReactNode;
 }
 
-interface State {
-  readonly isOpened: boolean;
-}
+export const BottomSheet = memo(
+  ({
+    title,
+    renderFixedContent,
+    badgeCount,
+    renderContent,
+    fullScreen,
+    zIndex,
+    openedZIndex,
+    className,
+    divAttributes,
+    isOpened: isOpenedProp = false,
+  }: BottomSheetProps) => {
+    const [isOpened, setIsOpened] = useState(isOpenedProp);
+    const headerElement = useRef<HTMLDivElement>(null);
+    const onChangeToggle = () => {
+      setIsOpened(!isOpened);
+    };
+    const preventDefault = (e: TouchEvent<HTMLDivElement>) => {
+      e.preventDefault();
+    };
+    useEffect(() => {
+      if (isOpened !== undefined) {
+        setIsOpened(isOpened);
+      }
+    }, [isOpened]);
 
-export class BottomSheet extends PureComponent<BottomSheetProps, State> {
-  public static defaultProps = {
-    fullScreen: true,
-  };
-
-  public readonly state = {
-    isOpened: false,
-  };
-
-  private headerElement: HTMLDivElement | null = null;
-
-  public render() {
-    const {
-      title,
-      renderFixedContent,
-      badgeCount,
-      renderContent,
-      fullScreen,
-      zIndex,
-      openedZIndex,
-      className,
-      divAttributes,
-    } = this.props;
-
-    const isOpened = this.props.isOpened || this.state.isOpened;
-
-    const element = (
+    const Element = () => (
       <Container
         {...divAttributes}
         isOpened={isOpened}
@@ -76,20 +75,16 @@ export class BottomSheet extends PureComponent<BottomSheetProps, State> {
         openedZIndex={openedZIndex}
         className={className}
       >
-        {this.headerElement && this.headerElement.clientHeight && renderContent && (
-          <Content fullScreen={fullScreen} marginTop={this.headerElement.clientHeight + 17}>
+        {headerElement.current && headerElement.current.clientHeight && renderContent && (
+          <Content fullScreen={fullScreen} marginTop={headerElement.current.clientHeight + 17}>
             {renderContent()}
           </Content>
         )}
-        <Header
-          ref={ref => {
-            if (!this.headerElement) this.headerElement = ref;
-          }}
-        >
+        <Header ref={headerElement}>
           <InnerHeader
-            onMouseDown={this.onChangeToggle}
-            onTouchStart={this.onChangeToggle}
-            onTouchEnd={this.preventDefault}
+            onMouseDown={onChangeToggle}
+            onTouchStart={onChangeToggle}
+            onTouchEnd={preventDefault}
           >
             <Title>{title || ''}</Title>
             {badgeCount && <BadgeCounter pill>{badgeCount}</BadgeCounter>}
@@ -108,27 +103,18 @@ export class BottomSheet extends PureComponent<BottomSheetProps, State> {
           {isOpened && (
             <BackgroundWindow
               zIndex={openedZIndex || zIndex}
-              onMouseDown={this.onChangeToggle}
-              onTouchStart={this.onChangeToggle}
-              onTouchEnd={this.preventDefault}
+              onMouseDown={onChangeToggle}
+              onTouchStart={onChangeToggle}
+              onTouchEnd={preventDefault}
             />
           )}
-          {element}
+          <Element />
         </div>
       );
     }
-
-    return element;
-  }
-  private onChangeToggle = () => {
-    const { isOpened } = this.state;
-    this.setState({ isOpened: !isOpened });
-  };
-
-  private preventDefault = (e: React.TouchEvent<HTMLDivElement>) => {
-    e.preventDefault();
-  };
-}
+    return <Element />;
+  },
+);
 
 const BORDER_SIZE = 1;
 
@@ -160,17 +146,17 @@ const ChevronBox = styled.div<ChevronBoxProps>`
   position: absolute;
   right: 24px;
   transition: transform 0.4s ease-in-out, top 0.4s ease-in-out;
-  transform: rotate(${props => props.rotate || 270}deg);
+  transform: rotate(${(props) => props.rotate || 270}deg);
 `;
 
 const Container = styled.div<ContainerProps & { isOpened?: boolean }>`
-  z-index: ${props => (props.isOpened ? props.openedZIndex : props.zIndex) || 2001};
-  position: ${props => (props.fullScreen ? 'fixed' : 'relative')};
-  width: ${props => (props.fullScreen ? '100vw' : '100%')};
-  height: ${props => (props.fullScreen ? '90vh' : '100%')};
+  z-index: ${(props) => (props.isOpened ? props.openedZIndex : props.zIndex) || 2001};
+  position: ${(props) => (props.fullScreen ? 'fixed' : 'relative')};
+  width: ${(props) => (props.fullScreen ? '100vw' : '100%')};
+  height: ${(props) => (props.fullScreen ? '90vh' : '100%')};
   bottom: calc(48px - 100%);
   left: 0;
-  overflow: ${props => (props.fullScreen ? 'visible' : 'hidden')};
+  overflow: ${(props) => (props.fullScreen ? 'visible' : 'hidden')};
   transition: transform 0.4s ease-in-out;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
@@ -178,9 +164,8 @@ const Container = styled.div<ContainerProps & { isOpened?: boolean }>`
   box-shadow: 0 -1px 3px -1px rgba(41, 42, 43, 0.16), 0 0 1px 1px rgba(0, 0, 0, 0.04);
   box-sizing: border-box;
   zoom: 1;
-  ${props =>
-    props.isOpened
-      ? `
+  ${(props) => (props.isOpened
+    ? `
           transform: translateY(calc(48px - 100% + ${BORDER_SIZE}px));
 
           ${Title} {
@@ -197,13 +182,13 @@ const Container = styled.div<ContainerProps & { isOpened?: boolean }>`
             top: ${24 - BORDER_SIZE}px;
           }
         `
-      : `
+    : `
           transform: translateY(${props.fullScreen ? `calc(-10% - ${BORDER_SIZE + 1}px)` : 0});
 
           ${ChevronBox} {
             top: ${12 - BORDER_SIZE}px;
           }
-        `}
+        `)}
 `;
 
 const Header = styled.div`
@@ -222,9 +207,10 @@ const BadgeCounter = styled(Badge)`
 
 const Content = styled.div<{ marginTop?: number; fullScreen?: boolean }>`
   transition: margin 0.4s ease-in-out;
-  margin-top: ${props => props.marginTop || 0}px;
+  margin-top: ${(props) => props.marginTop || 0}px;
   width: 100%;
-  height: calc(${props => (props.fullScreen ? 90 : 100)}% - ${props => props.marginTop || 0}px - ${BORDER_SIZE + 3}px);
+  height: ${(props) => `calc(${props.fullScreen ? 90 : 100}% - ${props.marginTop || 0}px -
+      ${BORDER_SIZE + 3}px)`};
   overflow: auto;
   padding: 0 24px;
 `;
@@ -241,5 +227,5 @@ const BackgroundWindow = styled.div<{ zIndex?: number }>`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
   overflow: visible;
-  z-index: ${props => (props.zIndex ? props.zIndex - 1 : 2000)};
+  z-index: ${(props) => (props.zIndex ? props.zIndex - 1 : 2000)};
 `;

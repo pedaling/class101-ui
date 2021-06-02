@@ -7,7 +7,9 @@ import { Theme } from '../../../core/Theme';
 import ButtonBase, { ButtonCommonProps } from '../ButtonBase';
 import { ButtonIconPosition } from '../ButtonIcon';
 import ButtonSpinner from '../ButtonSpinner';
-import { ButtonColor, IconButtonColorValue, IconButtonSize, IconButtonSizeValue } from '../interface';
+import {
+  ButtonColor, IconButtonColorValue, IconButtonSize, IconButtonSizeValue,
+} from '../interface';
 import { getButtonColors } from '../utils';
 
 const buttonIconSizeByIconButtonSize: { [key in IconButtonSize]: number } = {
@@ -21,7 +23,9 @@ export interface IconButtonProps extends ButtonCommonProps<IconButtonColorValue,
 }
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ color = 'default', fillColor, size = 'sm', theme = Theme.light, icon, disabled, ...restProps }, ref) => {
+  ({
+    color = 'default', fillColor, size = 'sm', theme = Theme.light, icon, disabled, ...restProps
+  }, ref) => {
     let iconColor;
     if (fillColor) {
       iconColor = disabled ? rgba(fillColor, 0.4) : fillColor;
@@ -42,14 +46,14 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         ref={ref}
         {...restProps}
       >
-        {icon &&
-          React.cloneElement(icon as React.ReactElement<IconProps>, {
+        {icon
+          && React.cloneElement(icon as React.ReactElement<IconProps>, {
             fillColor: iconColor,
             size: buttonIconSizeByIconButtonSize[size],
           })}
       </StyledButtonBase>
     );
-  }
+  },
 );
 
 const buttonStyleBySize: { [key in IconButtonSize]: FlattenSimpleInterpolation } = {
@@ -70,24 +74,23 @@ const StyledButtonBase = styled(ButtonBase)<ButtonCommonProps<IconButtonColorVal
   padding: 0;
   border-radius: 3px;
 
-  color: ${props => getButtonColors(props.color, props.theme.mode).textColor};
-  background-color: ${props => getButtonColors(props.color, props.theme.mode).backgroundColor};
+  color: ${(props) => getButtonColors(props.color, props.theme.mode).textColor};
+  background-color: ${(props) => getButtonColors(props.color, props.theme.mode).backgroundColor};
 
-  ${props => buttonStyleBySize[props.size as IconButtonSize]};
+  ${(props) => buttonStyleBySize[props.size as IconButtonSize]};
 
   transition: background-color 0.1s;
   // TODO(chiabi): focus 스타일 추가하기
   &:hover,
   &:active {
-    background-color: ${props =>
-      props.color === ButtonColor.TRANSPARENT
-        ? rgba(getButtonColors(ButtonColor.DEFAULT, props.theme.mode).backgroundColor, 0.2)
-        : darken(0.1, getButtonColors(props.color, props.theme.mode).backgroundColor)};
+    background-color: ${(props) => (props.color === ButtonColor.TRANSPARENT
+    ? rgba(getButtonColors(ButtonColor.DEFAULT, props.theme.mode).backgroundColor, 0.2)
+    : darken(0.1, getButtonColors(props.color, props.theme.mode).backgroundColor))};
     text-decoration-line: none;
   }
 
   &.disabled {
-    color: ${props => getButtonColors(props.color, props.theme.mode).disabledTextColor};
-    background-color: ${props => getButtonColors(props.color, props.theme.mode).disabledBackgroundColor};
+    color: ${(props) => getButtonColors(props.color, props.theme.mode).disabledTextColor};
+    background-color: ${(props) => getButtonColors(props.color, props.theme.mode).disabledBackgroundColor};
   }
 `;

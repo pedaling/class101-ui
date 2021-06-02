@@ -1,7 +1,10 @@
+import Position from 'core/Position';
 import { PopperChildrenProps } from 'react-popper';
 
-import { Position } from '../../core';
+type PopperPlacement = PopperChildrenProps['placement'];
 
-export function adjustPositionWithTooltip(position: Position) {
-  return position.split('-')[0] as PopperChildrenProps['placement'];
+function adjustPositionWithTooltip(position: Position): PopperPlacement {
+  return position.split('-')[0] as PopperPlacement;
 }
+
+export default adjustPositionWithTooltip;

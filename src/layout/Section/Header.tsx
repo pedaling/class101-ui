@@ -1,4 +1,6 @@
-import React, { memo, ReactNode, useCallback, useMemo } from 'react';
+import React, {
+  memo, ReactNode, useCallback, useMemo,
+} from 'react';
 import styled, { css } from 'styled-components';
 
 import { TextButton } from '../../components';
@@ -21,7 +23,9 @@ interface Props {
   onClick?: () => void;
 }
 
-export const Header = memo(({ title, description, typographyProps, to, external, linkText, onClick }: Props) => {
+export const Header = memo(({
+  title, description, typographyProps, to, external, linkText, onClick,
+}: Props) => {
   const hasLinkText = useMemo(() => Boolean(linkText), [linkText]);
 
   const renderTitle = useCallback(() => {
@@ -33,17 +37,15 @@ export const Header = memo(({ title, description, typographyProps, to, external,
     );
   }, [title, typographyProps]);
 
-  const renderLinkHeaderTop = useCallback(() => {
-    return (
-      <>
-        <HeaderTop>
-          {renderTitle()}
-          <LinkButton />
-        </HeaderTop>
-        {description && <Description color={gray600}>{description}</Description>}
-      </>
-    );
-  }, [description, renderTitle]);
+  const renderLinkHeaderTop = useCallback(() => (
+    <>
+      <HeaderTop>
+        {renderTitle()}
+        <LinkButton />
+      </HeaderTop>
+      {description && <Description color={gray600}>{description}</Description>}
+    </>
+  ), [description, renderTitle]);
 
   const renderActionHeader = useCallback(() => {
     if (to) {
@@ -124,15 +126,14 @@ const ActionContainer = styled.div`
 const Container = styled.div<{ hasLinkText?: boolean }>`
   margin-bottom: 16px;
   display: flex;
-  ${props =>
-    props.hasLinkText
-      ? `
+  ${(props) => (props.hasLinkText
+    ? `
         justify-content: space-between;
         align-items: flex-end;
       `
-      : `
+    : `
         flex-direction: column
-  `};
+  `)};
   a {
     ${ActionContainerStyle};
   }

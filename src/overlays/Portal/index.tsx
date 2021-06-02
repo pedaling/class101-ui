@@ -6,7 +6,7 @@ interface Props {
   container?: HTMLElement;
 }
 
-export class Portal extends React.Component<Props> {
+class Portal extends React.Component<Props> {
   private containerEl: HTMLElement;
 
   constructor(props: Props) {
@@ -22,14 +22,17 @@ export class Portal extends React.Component<Props> {
     this.containerEl.className = 'class101-ui-portal';
   }
 
-  public render() {
-    const { children } = this.props;
-    return ReactDom.createPortal(children, this.containerEl);
-  }
-
-  public componentWillUnmount() {
-    if (!this.props.container) {
+  public componentWillUnmount(): void {
+    const { container } = this.props;
+    if (!container) {
       document.body.removeChild(this.containerEl);
     }
   }
+
+  public render(): JSX.Element {
+    const { children } = this.props;
+    return ReactDom.createPortal(children, this.containerEl);
+  }
 }
+
+export default Portal;

@@ -1,7 +1,9 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-import { gray500, gray700, orange600, white } from '../../core/Colors';
+import {
+  gray500, gray700, orange600, white,
+} from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
 
 export interface ProgressStateProps {
@@ -27,8 +29,8 @@ export const ProgressState = ({
   ...restProps
 }: ProgressStateProps) => (
   <Container backgroundColor={backgroundColor} {...restProps}>
-    {items &&
-      items
+    {items
+      && items
         .map((item, index) => (
           <Content
             key={String(index)}
@@ -55,7 +57,7 @@ const Container = styled.div<ProgressStateProps>`
   align-items: center;
   justify-content: space-between;
   border-radius: 16px;
-  background-color: ${props => props.backgroundColor || gray700};
+  background-color: ${(props) => props.backgroundColor || gray700};
   height: 32px;
 `;
 
@@ -69,12 +71,11 @@ const Content = styled.div<ProgressStateProps & { active?: boolean }>`
   flex: 1;
   justify-content: center;
   height: 100%;
-  color: ${props => props.color || gray500};
-  ${props =>
-    props.active &&
-    css<ProgressStateProps>`
-      background-color: ${props => props.activeBackgroundColor || orange600};
-      color: ${props => props.activeColor || white};
+  color: ${(props) => props.color || gray500};
+  ${(props) => props.active
+    && css<ProgressStateProps>`
+      background-color: ${(props) => props.activeBackgroundColor || orange600};
+      color: ${(props) => props.activeColor || white};
       font-weight: bold;
     `};
 `;

@@ -13,7 +13,7 @@ const InnerTags = React.memo<Props>(({ value = [], disabled = false, onRemove })
     (index: number) => () => {
       onRemove(index);
     },
-    [onRemove]
+    [onRemove],
   );
 
   if (value.length > 5000) {

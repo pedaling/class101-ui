@@ -45,20 +45,18 @@ export type HeadlineTypoProps = TypoProps & HeadlinProps;
 
 const customStyle = css<{ textAlign?: string }>`
   margin: 0;
-  ${props => props.textAlign && `text-align: ${props.textAlign}`};
+  ${(props) => props.textAlign && `text-align: ${props.textAlign}`};
 `;
 
 const displayStyle = css<{ display?: string | number }>`
-  ${props =>
-    props.display &&
-    [2, '2'].includes(props.display) &&
-    css`
+  ${(props) => props.display
+    && [2, '2'].includes(props.display)
+    && css`
       ${display2};
     `};
-  ${props =>
-    props.display &&
-    [3, '3'].includes(props.display) &&
-    css`
+  ${(props) => props.display
+    && [3, '3'].includes(props.display)
+    && css`
       ${display3};
     `};
 `;
@@ -110,21 +108,19 @@ const typographyList = {
 };
 
 const TextElement = styled.div<Props>`
-  ${props => typographyList[props.md]}
+  ${(props) => typographyList[props.md]}
   ${displayStyle}
   ${customStyle}
-  ${props =>
-    props.sm &&
-    css`
+  ${(props) => props.sm
+    && css`
       ${media.sm`
         ${typographyList[props.sm]}
         ${displayStyle}
         ${customStyle}
       `}
     `}
-  ${props =>
-    props.lg &&
-    css`
+  ${(props) => props.lg
+    && css`
       ${media.lg`
         ${typographyList[props.lg]}
         ${displayStyle}
@@ -135,7 +131,9 @@ const TextElement = styled.div<Props>`
 
 export class BaseTypography extends PureComponent<Props> {
   public render() {
-    const { lg, sm, md, element = defaultElement[this.props.md] as TypoElement, children, ...restProps } = this.props;
+    const {
+      lg, sm, md, element = defaultElement[this.props.md] as TypoElement, children, ...restProps
+    } = this.props;
     return (
       <TextElement as={element} lg={lg} sm={sm} md={md} {...restProps}>
         {children}

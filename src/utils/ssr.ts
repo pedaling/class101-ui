@@ -1,7 +1,7 @@
-export function isClient() {
+export function isClient(): boolean {
   return typeof window !== 'undefined' && !!window.document;
 }
 
-export function isServer() {
+export function isServer(): boolean {
   return !isClient();
 }

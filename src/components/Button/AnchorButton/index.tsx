@@ -7,7 +7,9 @@ import { Theme } from '../../../core/Theme';
 import AnchorButtonBase, { ButtonCommonProps } from '../AnchorButtonBase';
 import { ButtonIcon, ButtonIconPosition, buttonIconSizeByButtonSize } from '../ButtonIcon';
 import ButtonSpinner from '../ButtonSpinner';
-import { ButtonColor, ButtonSize, ContainButtonColorValue, ContainButtonSizeValue } from '../interface';
+import {
+  ButtonColor, ButtonSize, ContainButtonColorValue, ContainButtonSizeValue,
+} from '../interface';
 import { getButtonColors } from '../utils';
 
 // TODO: ContainButton.ts의 Button과 리팩토링 하기
@@ -25,7 +27,9 @@ export class AnchorButton extends PureComponent<AnchorButtonProps> {
   };
 
   public render() {
-    const { color, size, theme, leftIcon, rightIcon, fill, disabled, children, ...restProps } = this.props;
+    const {
+      color, size, theme, leftIcon, rightIcon, fill, disabled, children, ...restProps
+    } = this.props;
     const icon = leftIcon || rightIcon;
     const iconPosition = rightIcon ? ButtonIconPosition.RIGHT : ButtonIconPosition.LEFT;
     return (
@@ -94,30 +98,30 @@ const buttonStyleBySize: { [key in ButtonSize]: FlattenSimpleInterpolation } = {
 };
 
 const StyledButtonBase = styled(AnchorButtonBase)<StyledContainerProps>`
-  width: ${props => (props.fill === 'true' ? '100%' : 'auto')};
-  display: ${props => (props.fill === 'true' ? 'flex' : 'inline-flex')};
+  width: ${(props) => (props.fill === 'true' ? '100%' : 'auto')};
+  display: ${(props) => (props.fill === 'true' ? 'flex' : 'inline-flex')};
   vertical-align: middle;
   border-radius: 3px;
 
-  color: ${props => getButtonColors(props.color, props.theme.mode).textColor};
-  background-color: ${props => getButtonColors(props.color, props.theme.mode).backgroundColor};
+  color: ${(props) => getButtonColors(props.color, props.theme.mode).textColor};
+  background-color: ${(props) => getButtonColors(props.color, props.theme.mode).backgroundColor};
 
-  ${props => buttonStyleBySize[props.size as ButtonSize]};
+  ${(props) => buttonStyleBySize[props.size as ButtonSize]};
 
   transition: background-color 0.1s;
   text-decoration-line: none;
 
   & > a {
-    color: ${props => getButtonColors(props.color, props.theme.mode).textColor};
+    color: ${(props) => getButtonColors(props.color, props.theme.mode).textColor};
   }
   // TODO(chiabi): focus 스타일 추가하기
   &:hover,
   &:active {
-    background-color: ${props => darken(0.1, getButtonColors(props.color, props.theme.mode).backgroundColor)};
+    background-color: ${(props) => darken(0.1, getButtonColors(props.color, props.theme.mode).backgroundColor)};
   }
 
   &.disabled {
-    color: ${props => getButtonColors(props.color, props.theme.mode).disabledTextColor};
-    background-color: ${props => getButtonColors(props.color, props.theme.mode).disabledBackgroundColor};
+    color: ${(props) => getButtonColors(props.color, props.theme.mode).disabledTextColor};
+    background-color: ${(props) => getButtonColors(props.color, props.theme.mode).disabledBackgroundColor};
   }
 `;

@@ -1,6 +1,8 @@
 import { css, FlattenSimpleInterpolation } from 'styled-components';
 
-import { gray200, gray400, gray50, gray500, gray900 } from '../core/Colors';
+import {
+  gray200, gray400, gray50, gray500, gray900,
+} from '../core/Colors';
 
 export type InputSize = 'sm' | 'md';
 

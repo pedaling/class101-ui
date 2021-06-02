@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { media } from '../../core/BreakPoints';
 import { gray100 } from '../../core/Colors';
 import { IconProps } from '../../Icon';
-import { HTMLDivProps } from '../../interfaces/props';
+import { HTMLElementProps } from '../../interfaces/props';
 import { BadgeProps } from '../Badge';
 import NavigationSection from './NavigationSection';
 
@@ -33,7 +33,7 @@ export interface NavigationSectionItem {
 interface Props {
   pathname?: string;
   className?: string;
-  divAttributes?: HTMLDivProps;
+  divAttributes?: HTMLElementProps;
   'data-element-name'?: string;
   onClickLink?: (url: string) => any;
 }
@@ -46,7 +46,9 @@ const Divider = styled.hr`
 
 export class Navigation extends React.PureComponent<Props> {
   public static Section = NavigationSection;
+
   public static Divider = Divider;
+
   public static defaultProps: Partial<Props> = {
     pathname: '/',
   };
@@ -65,7 +67,7 @@ export class Navigation extends React.PureComponent<Props> {
       <Container {...divAttributes} className={className} data-element-name={dataElementName}>
         {React.Children.map(
           children,
-          child => child && React.cloneElement(child as React.ReactElement<any>, { pathname, onClickLink })
+          (child) => child && React.cloneElement(child as React.ReactElement<any>, { pathname, onClickLink }),
         )}
       </Container>
     );

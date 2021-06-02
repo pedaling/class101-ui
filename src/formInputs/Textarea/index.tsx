@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { gray300, gray900, orange500, redError } from '../../core/Colors';
+import {
+  gray300, gray900, orange500, redError,
+} from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
 import { HTMLTextareaProps } from '../../interfaces/props';
 import { FormInputStyle } from '../common';
@@ -19,7 +21,9 @@ export interface TextareaProps {
 
 export class Textarea extends React.PureComponent<HTMLTextareaProps & TextareaProps> {
   public render() {
-    const { className, style, inputStyle, inline, allowMessage, warnMessage, errorMessage, ...restProps } = this.props;
+    const {
+      className, style, inputStyle, inline, allowMessage, warnMessage, errorMessage, ...restProps
+    } = this.props;
 
     return (
       <Container style={style} inline={inline}>
@@ -62,5 +66,5 @@ const StyledTextarea = styled.textarea`
 `;
 
 const Container = styled.div<TextareaProps>`
-  display: ${props => (props.inline ? 'inline-block' : 'block')};
+  display: ${(props) => (props.inline ? 'inline-block' : 'block')};
 `;

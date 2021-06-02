@@ -13,21 +13,23 @@ interface Props {
   readonly onChangeTime: (date: Date, isSecond: boolean) => void;
 }
 
-export const TimeSelector = React.memo<Props>(props => {
-  const { locale, isRange, secondDate, selectedDate, onChangeTime } = props;
+export const TimeSelector = React.memo<Props>((props) => {
+  const {
+    locale, isRange, secondDate, selectedDate, onChangeTime,
+  } = props;
 
   const handleChangeStartTime = useCallback(
     (date: Date) => {
       onChangeTime(date, false);
     },
-    [onChangeTime]
+    [onChangeTime],
   );
 
   const handleChangeEndTime = useCallback(
     (date: Date) => {
       onChangeTime(date, true);
     },
-    [onChangeTime]
+    [onChangeTime],
   );
 
   if (isRange) {

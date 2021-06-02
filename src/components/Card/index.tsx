@@ -126,8 +126,7 @@ const CoverImageArea = styled.div`
 `;
 
 const RatioCoverImageArea = styled(CoverImageArea)<{ coverImageRatio: CoverRatio }>`
-  ${props => {
-    return css`
+  ${(props) => css`
       position: relative;
       padding-bottom: ${props.coverImageRatio * 100}%;
       img {
@@ -138,8 +137,7 @@ const RatioCoverImageArea = styled(CoverImageArea)<{ coverImageRatio: CoverRatio
         height: 100%;
         object-fit: cover;
       }
-    `;
-  }}
+    `}
 `;
 
 const Body = styled.div``;

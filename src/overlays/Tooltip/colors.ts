@@ -1,4 +1,6 @@
-import { gray100, gray900, orange100, orange600 } from '../../core/Colors';
+import {
+  orange600, gray900, gray100, orange100,
+} from 'core/Colors';
 
 export enum TooltipColor {
   ORANGE,

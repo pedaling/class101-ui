@@ -1,4 +1,4 @@
-import React, { FC, memo, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 import { gray100, gray800 } from '../../core/Colors';
@@ -38,7 +38,7 @@ export interface SkeletonProps {
   count?: number;
 }
 
-export const Skeleton: FC<SkeletonProps> = memo(
+export const Skeleton = React.memo<SkeletonProps>(
   ({
     style,
     className,
@@ -87,7 +87,7 @@ export const Skeleton: FC<SkeletonProps> = memo(
         <Content aria-hidden="true">{children || content}</Content>
       </Container>
     );
-  }
+  },
 );
 
 const fadeOut = keyframes`
@@ -101,9 +101,9 @@ const fadeOut = keyframes`
 
 const Container = styled.span<{ color?: string; rounded?: boolean; circle?: boolean }>`
   background-color: ${ifDarkTheme(gray800, gray100)};
-  ${props => props.color && `background-color: ${props.color}`};
-  ${props => props.rounded && `border-radius: 3px`};
-  ${props => props.circle && `border-radius: 50%`};
+  ${(props) => props.color && `background-color: ${props.color}`};
+  ${(props) => props.rounded && 'border-radius: 3px'};
+  ${(props) => props.circle && 'border-radius: 50%'};
   animation: ${fadeOut} 1s infinite linear alternate;
 `;
 

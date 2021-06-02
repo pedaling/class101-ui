@@ -20,8 +20,11 @@ export class ControlGroup extends PureComponent<ContainerProps> {
     fill: false,
     vertical: false,
   };
+
   public render() {
-    const { fill, children, vertical, ...restProps } = this.props;
+    const {
+      fill, children, vertical, ...restProps
+    } = this.props;
 
     return (
       <Container fill={`${fill}`} vertical={vertical} {...restProps}>
@@ -35,9 +38,8 @@ const Container = styled.div<StyledContainerProps>`
   display: flex;
   align-items: stretch;
 
-  ${props =>
-    props.vertical
-      ? `
+  ${(props) => (props.vertical
+    ? `
           flex-direction: column;
 
           & > * {
@@ -55,7 +57,7 @@ const Container = styled.div<StyledContainerProps>`
             }
           }
         `
-      : `
+    : `
           flex-direction: row;
 
           & > * {
@@ -72,11 +74,10 @@ const Container = styled.div<StyledContainerProps>`
               border-bottom-right-radius: 1px;
             }
           }
-        `}
+        `)}
 
-  ${props =>
-    props.fill === 'true' &&
-    `
+  ${(props) => props.fill === 'true'
+    && `
       & > * {
         flex: 1 1 auto;
       }

@@ -40,7 +40,7 @@ export class NavigationSection extends React.PureComponent<InjectedProps, State>
         if (!item.subItems) {
           return;
         }
-        if (item.subItems.find(subItem => NavigationSection.isActiveLocation(prevProps.pathname, subItem))) {
+        if (item.subItems.find((subItem) => NavigationSection.isActiveLocation(prevProps.pathname, subItem))) {
           openedSectionIndices.push(index);
         }
       });
@@ -143,7 +143,7 @@ export class NavigationSection extends React.PureComponent<InjectedProps, State>
     const isOpened = this.state.openedSectionIndices.indexOf(index) >= 0;
 
     const nextOpenedSectionIndices = isOpened
-      ? openedSectionIndices.filter(i => i !== index)
+      ? openedSectionIndices.filter((i) => i !== index)
       : [...openedSectionIndices, index];
 
     this.setState({
@@ -177,7 +177,7 @@ const SectionTitleContainer = styled.div`
   display: flex;
   padding: 8px;
   align-items: center;
-  cursor: ${props => (props.onClick ? 'pointer' : 'default')};
+  cursor: ${(props) => (props.onClick ? 'pointer' : 'default')};
 `;
 
 const SectionTitle = styled.span`
@@ -212,9 +212,8 @@ const SectionItemStyle = css`
 
 const SectionLink = styled(LinkBlock)<{ active: boolean }>`
   ${SectionItemStyle};
-  ${({ active }) =>
-    active &&
-    css`
+  ${({ active }) => active
+    && css`
       font-weight: bold;
       color: ${gray900};
       background-color: ${gray50};
@@ -246,18 +245,17 @@ const SubItemContainer = styled.ul<{ isOpened: boolean }>`
   transform-origin: top;
   transition: opacity 0.1s ease, transform 0.26s ease;
 
-  ${({ isOpened }) =>
-    isOpened
-      ? `
+  ${({ isOpened }) => (isOpened
+    ? `
     transform: translateY(0);
     opacity: 1;
     height: auto;
   `
-      : `
+    : `
     transform: translateY(-40px);
     opacity: 0;
     height: 0;
-  `}
+  `)}
 `;
 
 const SubItem = styled.li``;

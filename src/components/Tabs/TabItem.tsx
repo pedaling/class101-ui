@@ -34,8 +34,11 @@ export class TabItem extends PureComponent<TabItemProps> {
     type: 'default',
     theme: Theme.light,
   };
+
   public render() {
-    const { active, className, indicatorCount, fluid, theme, type } = this.props;
+    const {
+      active, className, indicatorCount, fluid, theme, type,
+    } = this.props;
 
     return (
       <TabBox
@@ -53,7 +56,9 @@ export class TabItem extends PureComponent<TabItemProps> {
   }
 
   private renderIndicator = () => {
-    const { title, caption, active, theme, type, value, renderIndicator } = this.props;
+    const {
+      title, caption, active, theme, type, value, renderIndicator,
+    } = this.props;
 
     if (renderIndicator) {
       return renderIndicator();
@@ -92,16 +97,15 @@ const TabBox = styled.div<TabBoxProps>`
   align-items: center;
   justify-content: center;
   padding: 14px 0 13px;
-  ${props =>
-    props.fluid
-      ? `
+  ${(props) => (props.fluid
+    ? `
     flex-basis: auto;
     margin-right: 24px;
     `
-      : `
+    : `
     flex-basis: ${100 / (props.indicatorCount || 1)}%;
     margin-right: 0;
-    `};
+    `)};
   cursor: pointer;
   position: relative;
   &:before {
@@ -111,21 +115,20 @@ const TabBox = styled.div<TabBoxProps>`
     content: '';
     width: 100%;
     height: 3px;
-    background-color: ${props => getTabActiveColorByType(props.theme)[props.type]};
+    background-color: ${(props) => getTabActiveColorByType(props.theme)[props.type]};
     opacity: 0;
     transform: translateX(-50%);
   }
-  ${props =>
-    props.active
-      ? css`
+  ${(props) => (props.active
+    ? css`
           color: ${getTabActiveColorByType(props.theme)[props.type]};
           &:before {
             opacity: 1;
           }
         `
-      : `
+    : `
         color: ${gray600}
-    `};
+    `)};
 `;
 
 interface TabIndicatorProps extends TabStyleProps {
@@ -137,19 +140,18 @@ const TabName = styled.div<TabIndicatorProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  ${props =>
-    props.active
-      ? css`
+  ${(props) => (props.active
+    ? css`
           color: ${getTabActiveColorByType(props.theme)[props.type]};
           font-weight: bold;
         `
-      : `
+    : `
         color: ${gray600};
-      `};
+      `)};
 `;
 
 const TabCaption = styled.span<TabIndicatorProps>`
   ${caption1};
   margin-left: 4px;
-  color: ${props => (props.active ? getTabActiveColorByType(props.theme)[props.type] : gray600)};
+  color: ${(props) => (props.active ? getTabActiveColorByType(props.theme)[props.type] : gray600)};
 `;

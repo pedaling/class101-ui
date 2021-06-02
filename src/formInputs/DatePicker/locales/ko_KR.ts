@@ -1,11 +1,10 @@
-import { map } from 'lodash';
 import { DatePickerLocale } from '../interface';
 
 const monthEnd = '월';
 
 const ko: DatePickerLocale = {
   name: 'ko',
-  monthTextArray: map(Array(12), (_, index) => index + 1 + monthEnd),
+  monthTextArray: Array.from({ length: 12 }, (_, i) => `${i + 1}${monthEnd}`),
   weekTextArray: ['일', '월', '화', '수', '목', '금', '토'],
   weekText: '요일',
   timeText: '시간',

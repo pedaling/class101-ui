@@ -54,19 +54,19 @@ const StyledDiv = styled.div<StyleProps>`
   padding-left: 12px;
   box-sizing: border-box;
   ${media.sm<StyleProps>`
-    width: ${props => sizeToPercent(props.sm)}%;
+    width: ${(props) => sizeToPercent(props.sm)}%;
     padding-right: 4px;
     padding-left: 4px;
-    ${props => marginLeftStyle([props.smOffset])}
+    ${(props) => marginLeftStyle([props.smOffset])}
   `}
 
   ${media.md<StyleProps>`
-    width: ${props => sizeToPercent(props.md || props.sm)}%;
-    ${props => marginLeftStyle([props.mdOffset, props.smOffset])};
+    width: ${(props) => sizeToPercent(props.md || props.sm)}%;
+    ${(props) => marginLeftStyle([props.mdOffset, props.smOffset])};
   `}
 
   ${media.lg<StyleProps>`
-    width: ${props => sizeToPercent(props.lg || props.md || props.sm)}%;
-    ${props => marginLeftStyle([props.lgOffset, props.mdOffset, props.smOffset])};
+    width: ${(props) => sizeToPercent(props.lg || props.md || props.sm)}%;
+    ${(props) => marginLeftStyle([props.lgOffset, props.mdOffset, props.smOffset])};
   `};
 `;

@@ -1,84 +1,95 @@
-import { range } from 'lodash';
-import React, { PureComponent } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 
 import { ChevronLeftIcon, ChevronRightIcon } from '../../Icon';
 import { Button, ButtonColor, IconButton } from '../Button';
 
-const DEFAULT_PAGE_COUNT_PER_VIEW = 5;
-export interface PaginationProps {
+export type PaginationProps = {
   totalPageIndex: number;
   currentPageIndex: number;
   pageCountPerView?: number;
   className?: string;
   'data-element-name'?: string;
   onChange?: (pageIndex: number) => void;
-}
+};
 
-export class Pagination extends PureComponent<PaginationProps> {
-  public render() {
-    const { totalPageIndex, currentPageIndex, className, 'data-element-name': dataElementName } = this.props;
-    const handleIncrease = this.handleChange(currentPageIndex + 1);
-    const handleDecrease = this.handleChange(currentPageIndex - 1);
+export const Pagination = React.memo<PaginationProps>(
+  ({
+    totalPageIndex,
+    currentPageIndex,
+    pageCountPerView,
+    onChange,
+    className,
+    'data-element-name': dataElementName,
+  }) => {
+    const getValidatedPageCountPerView = (pageCountPerViewtoCalculate?: number) => {
+      const DEFAULT_PAGE_COUNT_PER_VIEW = 5;
+      if (!pageCountPerViewtoCalculate) {
+        return DEFAULT_PAGE_COUNT_PER_VIEW;
+      }
 
-    const pageCountPerView = this.getValidatedPageCountPerView(this.props.pageCountPerView);
-    const indexListToDisplay = this.getIndexListToDisplay(currentPageIndex, totalPageIndex, pageCountPerView);
+      return pageCountPerViewtoCalculate % 2 === 0 ? pageCountPerViewtoCalculate - 1 : pageCountPerViewtoCalculate;
+    };
+    const range = (start: number, end: number) => Array.from({ length: end - start }, (_, i) => i + start);
+    const getIndexListToDisplay = (
+      currentPageIndextoCalculate: number,
+      totalPageIndextoCalculate: number,
+      pageCountPerViewtoCalculate: number,
+    ) => {
+      const sidePageCountToView = Math.floor(pageCountPerViewtoCalculate / 2);
+
+      if (totalPageIndextoCalculate < pageCountPerViewtoCalculate) {
+        return range(0, totalPageIndextoCalculate + 1);
+      }
+
+      if (currentPageIndextoCalculate <= sidePageCountToView) {
+        return range(0, pageCountPerViewtoCalculate);
+      }
+
+      if (currentPageIndextoCalculate + sidePageCountToView >= totalPageIndextoCalculate) {
+        return range(totalPageIndextoCalculate - pageCountPerViewtoCalculate + 1, totalPageIndextoCalculate + 1);
+      }
+
+      return range(
+        currentPageIndextoCalculate - sidePageCountToView,
+        currentPageIndextoCalculate + sidePageCountToView + 1,
+      );
+    };
+
+    const handleChange = (pageIndex: number) => () => {
+      if (onChange) {
+        onChange(pageIndex);
+      }
+    };
+
+    const handleIncrease = handleChange(currentPageIndex + 1);
+    const handleDecrease = handleChange(currentPageIndex - 1);
+
+    const newPageCountPerView = getValidatedPageCountPerView(pageCountPerView);
+    const indexListToDisplay = getIndexListToDisplay(currentPageIndex, totalPageIndex, newPageCountPerView);
 
     return (
       <PageWrapper className={className} data-element-name={dataElementName}>
-        <PageIconBtn icon={<ChevronLeftIcon />} onClick={handleDecrease} disabled={currentPageIndex <= 0} />
-        {indexListToDisplay.map(index => (
-          <PageBtn
+        <PageIconButton icon={<ChevronLeftIcon />} onClick={handleDecrease} disabled={currentPageIndex <= 0} />
+        {indexListToDisplay.map((index) => (
+          <PageButton
             color={index === currentPageIndex ? ButtonColor.ORANGE : ButtonColor.WHITE}
             size="sm"
-            onClick={this.handleChange(index)}
+            onClick={handleChange(index)}
             key={`pagination-${index}`}
           >
             {index + 1}
-          </PageBtn>
+          </PageButton>
         ))}
-        <PageIconBtn
+        <PageIconButton
           icon={<ChevronRightIcon />}
           onClick={handleIncrease}
           disabled={currentPageIndex >= totalPageIndex}
         />
       </PageWrapper>
     );
-  }
-
-  private getValidatedPageCountPerView = (pageCountPerView: number | undefined) => {
-    if (!pageCountPerView) {
-      return DEFAULT_PAGE_COUNT_PER_VIEW;
-    }
-
-    return pageCountPerView % 2 === 0 ? pageCountPerView - 1 : pageCountPerView;
-  };
-
-  private getIndexListToDisplay = (currentPageIndex: number, totalPageIndex: number, pageCountPerView: number) => {
-    const sidePageCountToView = Math.floor(pageCountPerView / 2);
-
-    if (totalPageIndex < pageCountPerView) {
-      return range(0, totalPageIndex + 1);
-    }
-
-    if (currentPageIndex <= sidePageCountToView) {
-      return range(0, pageCountPerView);
-    }
-
-    if (currentPageIndex + sidePageCountToView >= totalPageIndex) {
-      return range(totalPageIndex - pageCountPerView + 1, totalPageIndex + 1);
-    }
-
-    return range(currentPageIndex - sidePageCountToView, currentPageIndex + sidePageCountToView + 1);
-  };
-
-  private handleChange = (pageIndex: number) => () => {
-    const { onChange } = this.props;
-    if (onChange) {
-      onChange(pageIndex);
-    }
-  };
-}
+  },
+);
 
 const PageWrapper = styled.div``;
 
@@ -86,10 +97,10 @@ const PageBtnCommonStyle = css`
   margin: 5px;
 `;
 
-const PageBtn = styled(Button)`
+const PageButton = styled(Button)`
   ${PageBtnCommonStyle};
 `;
 
-const PageIconBtn = styled(IconButton)`
+const PageIconButton = styled(IconButton)`
   ${PageBtnCommonStyle};
 `;

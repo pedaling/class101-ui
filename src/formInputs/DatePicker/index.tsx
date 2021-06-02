@@ -107,9 +107,9 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
   public componentDidUpdate(prevProps: Readonly<DatePickerProps>) {
     const { value, rangeValue } = this.props;
     if (
-      prevProps.value?.getTime() !== value?.getTime() ||
-      prevProps.rangeValue.start?.getTime() !== rangeValue.start?.getTime() ||
-      prevProps.rangeValue.end?.getTime() !== rangeValue.end?.getTime()
+      prevProps.value?.getTime() !== value?.getTime()
+      || prevProps.rangeValue.start?.getTime() !== rangeValue.start?.getTime()
+      || prevProps.rangeValue.end?.getTime() !== rangeValue.end?.getTime()
     ) {
       this.updateDateStateByPropsChange();
     }
@@ -122,7 +122,9 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
   }
 
   public render() {
-    const { selectedDate, currentMonth, selectorType, modalVisible, secondDate, inputValue } = this.state;
+    const {
+      selectedDate, currentMonth, selectorType, modalVisible, secondDate, inputValue,
+    } = this.state;
     const {
       locale,
       useTime,
@@ -206,9 +208,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     );
   }
 
-  private getDateMonth = (date: Date) => {
-    return new Date(date.getFullYear(), date.getMonth());
-  };
+  private getDateMonth = (date: Date) => new Date(date.getFullYear(), date.getMonth());
 
   private getDateLocaleString = (date: Date | null) => {
     const { useTime } = this.props;
@@ -281,7 +281,9 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
   };
 
   private handleBlurInput = () => {
-    const { useRange, minDate, maxDate, onChange, onChangeRange } = this.props;
+    const {
+      useRange, minDate, maxDate, onChange, onChangeRange,
+    } = this.props;
     const { inputValue } = this.state;
     const dateText = inputValue;
 
@@ -300,7 +302,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
             secondDate: null,
             currentMonth: this.getDateMonth(firstDate),
           },
-          this.calculateInputValue
+          this.calculateInputValue,
         );
       } else if (!Number.isNaN(firstDate.getTime()) && !Number.isNaN(secondDate.getTime())) {
         if (minDate && minDate.getTime() > firstDate.getTime()) {
@@ -319,7 +321,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
             secondDate,
             currentMonth: this.getDateMonth(second),
           },
-          this.calculateInputValue
+          this.calculateInputValue,
         );
       } else {
         this.calculateInputValue();
@@ -329,10 +331,10 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
     const currentDate = new Date(dateText);
 
     if (
-      Number.isNaN(currentDate.getTime()) ||
-      (minDate && minDate.getTime() > currentDate.getTime()) ||
-      (maxDate && maxDate.getTime() < currentDate.getTime()) ||
-      (onChange && onChange(currentDate) === false)
+      Number.isNaN(currentDate.getTime())
+      || (minDate && minDate.getTime() > currentDate.getTime())
+      || (maxDate && maxDate.getTime() < currentDate.getTime())
+      || (onChange && onChange(currentDate) === false)
     ) {
       return this.calculateInputValue();
     }
@@ -342,7 +344,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
         selectedDate: currentDate,
         currentMonth: this.getDateMonth(currentDate),
       },
-      this.calculateInputValue
+      this.calculateInputValue,
     );
     return undefined;
   };
@@ -384,13 +386,15 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
   };
 
   private handleChangeTime = (date: Date, isSecond: boolean) => {
-    const { useRange, onChange, onChangeRange, minDate, maxDate } = this.props;
+    const {
+      useRange, onChange, onChangeRange, minDate, maxDate,
+    } = this.props;
     const { selectedDate, secondDate } = this.state;
     if (!useRange) {
       if (
-        (minDate && minDate.getTime() > date.getTime()) ||
-        (maxDate && maxDate.getTime() < date.getTime()) ||
-        (onChange && onChange(date) === false)
+        (minDate && minDate.getTime() > date.getTime())
+        || (maxDate && maxDate.getTime() < date.getTime())
+        || (onChange && onChange(date) === false)
       ) {
         return;
       }
@@ -398,7 +402,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
         {
           selectedDate: date,
         },
-        this.calculateInputValue
+        this.calculateInputValue,
       );
       return;
     }
@@ -414,7 +418,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
           {
             secondDate: date,
           },
-          this.calculateInputValue
+          this.calculateInputValue,
         );
         return;
       }
@@ -425,7 +429,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
         {
           selectedDate: date,
         },
-        this.calculateInputValue
+        this.calculateInputValue,
       );
       return;
     }
@@ -445,7 +449,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
         selectedDate: start,
         secondDate: end,
       },
-      this.calculateInputValue
+      this.calculateInputValue,
     );
   };
 
@@ -463,7 +467,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
               selectedDate: null,
               secondDate: null,
             },
-            this.calculateInputValue
+            this.calculateInputValue,
           );
         }
         return this.setState(
@@ -471,7 +475,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
             secondDate: date,
             modalVisible: false,
           },
-          this.calculateInputValue
+          this.calculateInputValue,
         );
       }
       return this.setState(
@@ -479,7 +483,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
           selectedDate: date,
           secondDate: null,
         },
-        this.calculateInputValue
+        this.calculateInputValue,
       );
     }
     if (!onChange || onChange(date) !== false) {
@@ -488,7 +492,7 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
           selectedDate: date,
           modalVisible: false,
         },
-        this.calculateInputValue
+        this.calculateInputValue,
       );
     }
     return undefined;
@@ -524,11 +528,11 @@ export class DatePicker extends PureComponent<DatePickerProps, DatePickerState> 
 
 const Container = styled.div<{ inline?: boolean }>`
   position: relative;
-  display: ${props => (props.inline ? 'inline-block' : 'block')};
+  display: ${(props) => (props.inline ? 'inline-block' : 'block')};
 `;
 
 const Picker = styled.div<{ modalVisible: boolean; alwaysShow: boolean }>`
-  position: ${props => (props.alwaysShow ? 'static' : 'absolute')};
+  position: ${(props) => (props.alwaysShow ? 'static' : 'absolute')};
   background: ${white};
   text-align: center;
   transform: none;
@@ -539,7 +543,7 @@ const Picker = styled.div<{ modalVisible: boolean; alwaysShow: boolean }>`
   font-size: 16px;
   left: 0;
   margin-top: 8px;
-  display: ${props => (props.modalVisible ? 'flex' : 'none')};
+  display: ${(props) => (props.modalVisible ? 'flex' : 'none')};
   padding: 12px;
   flex-direction: column;
   z-index: 500;
@@ -565,9 +569,8 @@ const NavText = styled(Button)`
 `;
 
 const PickerInput = styled(Input)<{ adjustInputWidth: boolean }>`
-  ${props =>
-    props.adjustInputWidth &&
-    css`
+  ${(props) => props.adjustInputWidth
+    && css`
       width: ${DatePickerWidth}px;
     `}
 `;

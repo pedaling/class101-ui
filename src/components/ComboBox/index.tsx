@@ -1,4 +1,6 @@
-import { Caption1, Colors, LinkBlock, TextStyles } from 'core';
+import {
+  Caption1, Colors, LinkBlock, TextStyles,
+} from 'core';
 import { elevation4 } from 'core/ElevationStyles';
 import { IconProps } from 'Icon';
 import React, { useCallback, useMemo, useState } from 'react';
@@ -30,7 +32,9 @@ type Props = {
   onClose?: () => void;
 };
 
-export const ComboBox = React.memo<Props>(({ items, position, opened, opener, children, onOpen, onClose }) => {
+export const ComboBox = React.memo<Props>(({
+  items, position, opened, opener, children, onOpen, onClose,
+}) => {
   const [isOpened, setOpened] = useState(false);
 
   const handleClickOpener = useCallback(() => {
@@ -58,26 +62,24 @@ export const ComboBox = React.memo<Props>(({ items, position, opened, opener, ch
     return null;
   }, [children, handleClickOpener, isOpened, opener]);
 
-  const itemList = useMemo(() => {
-    return items.map(item => {
-      const handleItemClick = async () => {
-        if (!item.closeable) {
-          await item?.onClick?.();
-          return;
-        }
-
+  const itemList = useMemo(() => items.map((item) => {
+    const handleItemClick = async () => {
+      if (!item.closeable) {
         await item?.onClick?.();
+        return;
+      }
 
-        if (opener) {
-          setOpened(false);
-        }
+      await item?.onClick?.();
 
-        onClose?.();
-      };
+      if (opener) {
+        setOpened(false);
+      }
 
-      return <ComboBoxItem key={item.label} {...item} onClick={handleItemClick} />;
-    });
-  }, [items, onClose, opener]);
+      onClose?.();
+    };
+
+    return <ComboBoxItem key={item.label} {...item} onClick={handleItemClick} />;
+  }), [items, onClose, opener]);
 
   const visible = opener ? isOpened : opened;
 
@@ -91,13 +93,13 @@ export const ComboBox = React.memo<Props>(({ items, position, opened, opener, ch
   );
 });
 
-export const ComboBoxItem = ({ icon, label, description, to, textColor, onClick }: ComboBoxProps) => {
-  const menuItemProps = useMemo(() => {
-    return {
-      color: textColor,
-      onClick,
-    };
-  }, [onClick, textColor]);
+export const ComboBoxItem = ({
+  icon, label, description, to, textColor, onClick,
+}: ComboBoxProps) => {
+  const menuItemProps = useMemo(() => ({
+    color: textColor,
+    onClick,
+  }), [onClick, textColor]);
 
   const innerElements = (
     <InnerElementWrapper>

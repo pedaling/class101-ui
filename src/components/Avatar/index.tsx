@@ -1,8 +1,14 @@
-import React, { PureComponent } from 'react';
+import { gray100 } from 'core/Colors';
+import Position from 'core/Position';
+import {
+  useState,
+  memo,
+  ReactElement,
+  MouseEventHandler,
+  SyntheticEvent,
+  cloneElement,
+} from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
-
-import { Position } from '../../core';
-import { gray100 } from '../../core/Colors';
 
 export enum AvatarSize {
   SMALL = 'sm',
@@ -11,71 +17,72 @@ export enum AvatarSize {
 }
 
 export type AvatarIconPosition =
-  | typeof Position.TOP_RIGHT
-  | typeof Position.TOP
-  | typeof Position.TOP_LEFT
-  | typeof Position.BOTTOM
-  | typeof Position.BOTTOM_LEFT
-  | typeof Position.BOTTOM_RIGHT
-  | typeof Position.LEFT
-  | typeof Position.RIGHT;
+  | Position.TOP_RIGHT
+  | Position.TOP
+  | Position.TOP_LEFT
+  | Position.BOTTOM
+  | Position.BOTTOM_LEFT
+  | Position.BOTTOM_RIGHT
+  | Position.LEFT
+  | Position.RIGHT;
 
 export interface AvatarProps {
-  size: AvatarSize | number;
-  iconRatio: number;
-  iconPosition: AvatarIconPosition;
+  size?: AvatarSize | number;
+  iconRatio?: number;
+  iconPosition?: AvatarIconPosition;
   src?: string;
   srcSet?: string;
   alt?: string;
   className?: string;
   text?: string;
-  icon?: React.ReactElement<{ size: number }>;
+  icon?: ReactElement<{ size: number }>;
   'data-element-name'?: string;
-  onClick?: React.MouseEventHandler<HTMLSpanElement>;
-  onIconClick?: React.MouseEventHandler<HTMLDivElement>;
-  onError?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
+  onClick?: MouseEventHandler<HTMLSpanElement>;
+  onIconClick?: MouseEventHandler<HTMLDivElement>;
+  onError?: (e: SyntheticEvent<HTMLImageElement, Event>) => void;
 }
 
-interface AvatarState {
-  isError: boolean;
-}
-
-export class Avatar extends PureComponent<AvatarProps, AvatarState> {
-  public static defaultProps: Partial<AvatarProps> = {
-    size: AvatarSize.MEDIUM,
-    iconRatio: 0.55,
-    iconPosition: Position.BOTTOM_RIGHT,
-  };
-
-  public readonly state: AvatarState = {
-    isError: false,
-  };
-
-  public render() {
-    const {
-      size,
-      src,
-      text,
-      className,
-      icon,
-      iconRatio,
-      iconPosition,
-      srcSet,
-      alt,
-      onClick,
-      onIconClick,
-      'data-element-name': dataElementName,
-    } = this.props;
-    const { isError } = this.state;
-
+export const Avatar = memo<AvatarProps>(
+  ({
+    size = AvatarSize.MEDIUM,
+    src,
+    text,
+    className,
+    icon,
+    iconRatio = 0.55,
+    iconPosition = Position.BOTTOM_RIGHT,
+    srcSet,
+    alt,
+    onClick,
+    onIconClick,
+    onError,
+    'data-element-name': dataElementName,
+  }: AvatarProps) => {
+    const [isError, setIsError] = useState(false);
+    const handleImageError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+      setIsError(true);
+      if (onError) {
+        onError(e);
+      }
+    };
     const avatarSize = typeof size === 'number' ? size : avatarSizeBySize[size];
     const iconSize = typeof size === 'number' ? avatarSize * iconRatio : iconSizeBySize[size];
-    const sizedIcon = icon && React.cloneElement(icon, { size: iconSize });
+    const sizedIcon = icon && cloneElement(icon, { size: iconSize });
 
     return (
-      <Container onClick={onClick} size={avatarSize} className={className} data-element-name={dataElementName}>
+      <Container
+        onClick={onClick}
+        size={avatarSize}
+        className={className}
+        data-element-name={dataElementName}
+      >
         {src && !isError ? (
-          <AvatarImage src={src} srcSet={srcSet} alt={alt} onError={this.handleImageError} />
+          <AvatarImage
+            src={src}
+            srcSet={srcSet}
+            alt={alt}
+            onError={handleImageError}
+          />
         ) : (
           text && <TextWrapper>{text.substr(0, 2).toUpperCase()}</TextWrapper>
         )}
@@ -86,20 +93,12 @@ export class Avatar extends PureComponent<AvatarProps, AvatarState> {
         )}
       </Container>
     );
-  }
+  },
+);
 
-  private handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    const { onError } = this.props;
-    this.setState({
-      isError: true,
-    });
-    if (onError) {
-      onError(e);
-    }
-  };
-}
-
-const iconPositionByPosition: { [key in AvatarIconPosition]: FlattenSimpleInterpolation } = {
+const iconPositionByPosition: {
+  [key in AvatarIconPosition]: FlattenSimpleInterpolation;
+} = {
   [Position.BOTTOM]: css`
     bottom: -2px;
     right: 50%;
@@ -153,7 +152,7 @@ const iconSizeBySize: { [key in AvatarSize]: number } = {
 const Container = styled.span<{ size: number }>`
   display: inline-block;
   position: relative;
-  ${props => css`
+  ${(props) => css`
     width: ${props.size}px;
     height: ${props.size}px;
   `};
@@ -176,9 +175,9 @@ const TextWrapper = styled.span`
   text-align: center;
 `;
 
-const IconWrapper = styled.div<{ position: Position }>`
+const IconWrapper = styled.div<{ position: AvatarIconPosition }>`
   display: flex;
   position: absolute;
   z-index: 100;
-  ${props => iconPositionByPosition[props.position]}
+  ${(props) => iconPositionByPosition[props.position]}
 `;

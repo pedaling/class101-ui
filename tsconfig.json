@@ -15,6 +15,7 @@
     "jsx": "react",
     "baseUrl": "src",
     "outDir": "dist",
+    "allowUmdGlobalAccess": true,
     "paths": {
       "interface/*": ["interface/*"]
     }

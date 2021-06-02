@@ -1,13 +1,11 @@
-import * as React from 'react';
-import { useCallback, useEffect } from 'react';
+import { memo, ReactNode, useEffect } from 'react';
 import styled from 'styled-components';
-
+import Portal from 'overlays/Portal';
 import { isClient } from '../../utils';
-import { Portal } from '../Portal';
 
 export interface OverlayProps {
   className?: string;
-  children: React.ReactNode;
+  children: ReactNode;
   opened: boolean;
   /** overlay 존재 여부 */
   dimmer?: boolean;
@@ -19,8 +17,8 @@ export interface OverlayProps {
   zIndex?: number;
 }
 
-export const OverlaidPortal = React.memo<OverlayProps>(props => {
-  const {
+export const OverlaidPortal = memo(
+  ({
     className,
     children,
     dimmer = true,
@@ -29,57 +27,62 @@ export const OverlaidPortal = React.memo<OverlayProps>(props => {
     closeable = true,
     onClose,
     zIndex = 3000,
-  } = props;
-
-  useEffect(() => {
-    if (isClient() && dimmer) {
-      document.body.style.overflow = opened ? 'hidden' : '';
-    }
-    return () => {
+  }: OverlayProps) => {
+    useEffect(() => {
       if (isClient() && dimmer) {
-        document.body.style.overflow = '';
+        document.body.style.overflow = opened ? 'hidden' : '';
       }
-    };
-  }, [opened, dimmer]);
+      return () => {
+        if (isClient() && dimmer) {
+          document.body.style.overflow = '';
+        }
+      };
+    }, [opened, dimmer]);
 
-  if (!isClient()) {
-    return null;
-  }
+    if (!isClient()) {
+      return null;
+    }
 
-  if (!dimmer) {
-    return <Portal container={document.body}>{children}</Portal>;
-  }
+    if (!dimmer) {
+      return <Portal container={document.body}>{children}</Portal>;
+    }
 
-  return (
-    <Portal container={document.body}>
-      <Overlay
-        className={className}
-        zIndex={zIndex}
-        overlayColor={overlayColor}
-        dimmer={dimmer}
-        visible={opened}
-        onClick={closeable ? onClose : undefined}
-      >
-        {children}
-      </Overlay>
-    </Portal>
-  );
-});
+    return (
+      <Portal container={document.body}>
+        <Overlay
+          className={className}
+          zIndex={zIndex}
+          overlayColor={overlayColor}
+          dimmer={dimmer}
+          visible={opened}
+          onClick={closeable ? onClose : undefined}
+        >
+          {children}
+        </Overlay>
+      </Portal>
+    );
+  },
+);
 
-export const Overlay = styled.div<{ zIndex?: number; overlayColor: string; dimmer: boolean; visible: boolean }>`
+export const Overlay = styled.div<{
+  zIndex?: number;
+  overlayColor: string;
+  dimmer: boolean;
+  visible: boolean;
+}>`
   position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: ${props => props.zIndex};
+  z-index: ${(props) => props.zIndex};
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   overflow: hidden;
-  background-color: ${props => (props.dimmer ? props.overlayColor : 'transparent')};
-  opacity: ${props => (props.visible ? '1' : '0')};
-  visibility: ${props => (props.visible ? 'visible' : 'hidden')};
+  background-color: ${(props) => (props.dimmer ? props.overlayColor : 'transparent')};
+  opacity: ${(props) => (props.visible ? '1' : '0')};
+  visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
   overscroll-behavior: contain;
 `;

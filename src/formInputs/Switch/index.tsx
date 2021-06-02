@@ -1,7 +1,9 @@
 import React, { ChangeEvent, ChangeEventHandler, PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 
-import { gray100, gray300, gray500, gray900, orange500, orange700 } from '../../core/Colors';
+import {
+  gray100, gray300, gray500, gray900, orange500, orange700,
+} from '../../core/Colors';
 import { elevation1 } from '../../core/ElevationStyles';
 import { body2 } from '../../core/TextStyles';
 import { Theme, ThemeConfig } from '../../core/Theme';
@@ -65,7 +67,7 @@ export class Switch extends PureComponent<SwitchProps, SwitchState> {
           checked={checked}
           onChange={this.changeChecked}
           disabled={disabled}
-          hidden={true}
+          hidden
           {...inputAttributes}
         />
         <Indicator checked={checked} color={color} hoverColor={hoverColor} disabled={disabled} />
@@ -73,7 +75,7 @@ export class Switch extends PureComponent<SwitchProps, SwitchState> {
     );
   }
 
-  private changeChecked: ChangeEventHandler<HTMLInputElement> = e => {
+  private changeChecked: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { onChange } = this.props;
     if (!onChange || onChange(e) !== false) {
       this.setState({
@@ -84,16 +86,16 @@ export class Switch extends PureComponent<SwitchProps, SwitchState> {
 }
 
 const Container = styled.label<{ inline?: boolean; disabled: boolean }>`
-  display: ${props => (props.inline ? 'inline-flex' : 'flex')};
+  display: ${(props) => (props.inline ? 'inline-flex' : 'flex')};
   align-items: center;
   position: relative;
 `;
 
 const SwitchText = styled.span<{ disabled: boolean; inline?: boolean }>`
   ${body2};
-  color: ${props => (props.disabled ? gray300 : gray900)};
+  color: ${(props) => (props.disabled ? gray300 : gray900)};
   margin-right: 9px;
-  ${props => !props.inline && `flex: 1 1 auto;`}
+  ${(props) => !props.inline && 'flex: 1 1 auto;'}
 `;
 
 const transitionAnimation = '0.15s ease-out 0.08s';
@@ -117,7 +119,7 @@ const Indicator = styled.div<{ checked: boolean; disabled: boolean; color: strin
   position: relative;
   padding: 2px;
   box-sizing: border-box;
-  cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
   border-radius: 23px;
 
   transition: background-color ${transitionAnimation};
@@ -136,26 +138,24 @@ const Indicator = styled.div<{ checked: boolean; disabled: boolean; color: strin
     height: 18px;
   }
 
-  ${props =>
-    props.disabled
-      ? `
+  ${(props) => (props.disabled
+    ? `
         background-color: ${gray100};
       `
-      : `
+    : `
         background-color: ${gray300};
         &:hover {
           background-color: ${gray500};
-          ${props.checked &&
-            `
+          ${props.checked
+            && `
               background-color: ${props.hoverColor}
             `}
         }
     ;
-  `}
+  `)}
 
-  ${props =>
-    props.checked &&
-    `
+  ${(props) => props.checked
+    && `
       background-color: ${props.color};
       &:after {
         transform: translate(14px, 0);
