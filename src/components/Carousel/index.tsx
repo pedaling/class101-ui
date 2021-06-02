@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, {
   useCallback, useEffect, useMemo, useRef,
 } from 'react';
@@ -17,7 +18,6 @@ type SwiperPropsForCaorusel = Partial<
     | 'children'
     | 'slideToClickedSlide'
     | 'speed'
-    | 'getSwiperInstance'
     | 'observer'
     | 'centeredSlides'
     | 'paginationChildren'
@@ -58,7 +58,7 @@ export enum CarouselPaginationTheme {
   Light = 'Light',
 }
 
-export const Carousel = React.memo<CarouselProps>((props) => {
+export const Carousel = React.memo<CarouselProps>((props: CarouselProps) => {
   const {
     className,
     children,
@@ -82,11 +82,7 @@ export const Carousel = React.memo<CarouselProps>((props) => {
     activeIndex,
   } = props;
 
-  const swiperRef = useRef<SwiperInstance>();
-
-  const handleGetSwiperInstance = useCallback((swiper: SwiperInstance) => {
-    swiperRef.current = swiper;
-  }, []);
+  const swiperRef = useRef<SwiperInstance>(null);
 
   const goToSlides = useCallback(
     (index: number) => {
@@ -155,18 +151,8 @@ export const Carousel = React.memo<CarouselProps>((props) => {
           spaceBetween: lgSpaceBetween || typeof lgSlidesPerView !== 'number' || lgSlidesPerView !== 1 ? 24 : 0,
         },
       },
-      getSwiperInstance: handleGetSwiperInstance,
     }),
-    [
-      handleInit,
-      handleTransitionEnd,
-      handleGetSwiperInstance,
-      swiperProps,
-      lgSlidesPerView,
-      smSlidesPerView,
-      lgSpaceBetween,
-      smSpaceBetween,
-    ],
+    [handleInit, handleTransitionEnd, swiperProps, lgSlidesPerView, smSlidesPerView, lgSpaceBetween, smSpaceBetween],
   );
 
   return (
@@ -182,6 +168,7 @@ export const Carousel = React.memo<CarouselProps>((props) => {
       smSlidesSideOffset={smSlidesSideOffset}
       data-element-name={dataElementName}
       onSlideChange={handelChangeSlide}
+      ref={swiperRef}
       {...swiperParams}
     >
       {children}
