@@ -31,6 +31,7 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
+    'max-len': ['error', { code: 120 }],
     'no-shadow': 'off',
     'no-unused-vars': 'off',
     'no-use-before-define': 'off',

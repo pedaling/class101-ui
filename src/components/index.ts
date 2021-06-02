@@ -1,5 +1,7 @@
 import Slide from './Swiper/Slide';
 
+export { Slide };
+export * from './Navigation';
 export * from './Class101UIProvider';
 export * from './Avatar';
 export * from './Badge';
@@ -12,7 +14,6 @@ export * from './Carousel';
 export { default as ViewAllButton } from './Carousel/ViewAllButton';
 export * from './Comment';
 export * from './FilterList';
-export * from './Navigation';
 export * from './Pagination';
 export * from './ProgressBar';
 export * from './ProgressState';
@@ -24,4 +25,3 @@ export * from './Swiper/DefaultNavigation';
 export * from './Tabs';
 export * from './Tag';
 export * from './Reply';
-export { Slide };
