@@ -1,6 +1,11 @@
-import React from "react"
-import { RadioButtonGroup } from '@class101/ui';
+import React from "react";
+import { RadioButtonGroup as RadioButtonGroupUi } from "@class101/ui";
 
-export default () => {
-  return typeof window !== 'undefined' && RadioButtonGroup && <RadioButtonGroup/>
-}
+export const RadioButtonGroup = () =>
+  typeof window !== "undefined" && RadioButtonGroupUi && <RadioButtonGroupUi />;
+
+export const handleAlert = (e) => {
+  if (window) {
+    window.alert(e);
+  }
+};
