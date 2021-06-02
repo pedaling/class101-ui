@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { SwiperSlide } from 'swiper/react';
 
 type SlideProps = {
   className?: string;
+  children?: ReactNode;
 };
 
-const Slide = ({ className }: SlideProps): JSX.Element => <SwiperSlide className={className} />;
+const Slide = ({ className, children }: SlideProps): JSX.Element => (
+  <SwiperSlide className={className}>{children}</SwiperSlide>
+);
 
 Slide.displayName = 'SwiperSlide';
 
