@@ -2,12 +2,8 @@ import { gray900 } from 'core/Colors';
 import { elevation1 } from 'core/ElevationStyles';
 import Position from 'core/Position';
 import { IconProps } from 'Icon/types';
-import {
-  cloneElement,
-  DetailedReactHTMLElement,
-  ReactElement,
-  useEffect,
-  useState,
+import React, {
+  cloneElement, ReactElement, useEffect, useState,
 } from 'react';
 import styled, { css } from 'styled-components';
 import { fadeOutKeyFrames, slideDownKeyFrames, slideUpKeyFrames } from './keyframes';
@@ -27,11 +23,11 @@ export interface ToastProps {
   icon?: ReactElement<IconProps>;
   message: string;
   position?: ToasterPosition;
-  timeout: number;
+  timeout?: number;
   onButtonClicked?: () => void;
   key?: string;
   onClose?: () => void;
-  dismiss: () => void;
+  dismiss?: () => void;
 }
 const UNMOUNT_ANIMATION_SECONDS = 0.2;
 
@@ -56,10 +52,13 @@ export const Toast = ({
   );
 
   useEffect(() => {
-    const dismissTimeOut = window.setTimeout(dismiss, timeout);
-    return () => {
-      window.clearTimeout(dismissTimeOut);
-    };
+    if (dismiss) {
+      const dismissTimeOut = window.setTimeout(dismiss, timeout);
+      return () => {
+        window.clearTimeout(dismissTimeOut);
+      };
+    }
+    return undefined;
   }, [dismiss, timeout]);
 
   useEffect(() => {
@@ -77,19 +76,15 @@ export const Toast = ({
   return (
     <UnmountAnimation unmount={unmount}>
       <Container position={position} {...restProps}>
-        {Boolean(icon) && (
-          <Icon>
-            {cloneElement(icon as DetailedReactHTMLElement<IconProps, HTMLElement>, { size: 18 })}
-          </Icon>
+        {icon && (
+          <Icon>{cloneElement(icon, { size: 18 })}</Icon>
         )}
         <Message>{message}</Message>
-        {Boolean(button) && (
+        {button && (
           <Action onClick={onButtonClicked || dismiss}>
             {typeof button !== 'object'
               ? button
-              : cloneElement(button as DetailedReactHTMLElement<IconProps, HTMLElement>, {
-                size: 18,
-              })}
+              : cloneElement(button, { size: 18 })}
           </Action>
         )}
       </Container>
@@ -121,9 +116,7 @@ const Container = styled.div<Partial<ToastProps>>`
   align-items: center;
   background-color: ${(props) => props.backgroundColor || gray900};
   color: ${(props) => props.color || 'white'};
-  margin-top: ${(props) => (props.position === Position.TOP
-    || props.position === Position.TOP_LEFT
-    || props.position === Position.TOP_RIGHT
+  margin-top: ${(props) => (props.position === Position.TOP || props.position === Position.TOP_LEFT || props.position === Position.TOP_RIGHT
     ? '20px'
     : 0)};
   margin-bottom: ${(props) => (props.position === Position.BOTTOM
@@ -133,9 +126,7 @@ const Container = styled.div<Partial<ToastProps>>`
     : 0)};
   margin-left: ${(props) => (props.position === Position.BOTTOM || props.position === Position.TOP ? 'auto' : '')};
   margin-right: ${(props) => (props.position === Position.BOTTOM || props.position === Position.TOP ? 'auto' : '')};
-  animation: ${(props) => (props.position === Position.TOP
-      || props.position === Position.TOP_LEFT
-      || props.position === Position.TOP_RIGHT
+  animation: ${(props) => (props.position === Position.TOP || props.position === Position.TOP_LEFT || props.position === Position.TOP_RIGHT
     ? slideDownKeyFrames
     : slideUpKeyFrames)}
     0.1s ease-out;

@@ -5,7 +5,7 @@ route: /components/navigation
 ---
 
 import { Playground, Props } from 'docz';
-import { Navigation, Icon } from '@class101/ui';
+import { Navigation, NavigationSection, NavigationDivider, Icon } from '@class101/ui';
 import { PlayGroundContainer, ThemeProvider } from '../docsComponents';
 
 # Navigation
@@ -19,15 +19,15 @@ import { PlayGroundContainer, ThemeProvider } from '../docsComponents';
 <Playground>
   <PlayGroundContainer>
     <Navigation pathname="/components/navigation">
-      <Navigation.Section
+      <NavigationSection
         items={[
           { url: '/', label: '홈', icon: <Icon.Home /> },
           { url: '/inbox', label: '알림', icon: <Icon.Bell /> },
           { url: '/dashboard', label: '대시보드', icon: <Icon.Check /> },
         ]}
       />
-      <Navigation.Divider />
-      <Navigation.Section
+      <NavigationDivider />
+      <NavigationSection
         title="주문 관리"
         action={{
           onClick: () => alert('도움!'),
@@ -55,11 +55,11 @@ import { PlayGroundContainer, ThemeProvider } from '../docsComponents';
 <Playground>
   <PlayGroundContainer>
     <Navigation pathname="/components/navigation">
-      <Navigation.Section
+      <NavigationSection
         items={[{ url: '/components/navigation', external: true, label: '새 창 열기', icon: <Icon.Home /> }]}
       />
-      <Navigation.Divider />
-      <Navigation.Section
+      <NavigationDivider />
+      <NavigationSection
         title="도움말"
         action={{
           onClick: () => alert('도움!'),

@@ -1,3 +1,9 @@
+import { RadioButton } from './RadioButtonGroup/RadioButton';
+import type { RadioButtonProps } from './RadioButtonGroup/RadioButton';
+import { RadioButtonGroup } from './RadioButtonGroup';
+import type { RadioButtonGroupProps } from './RadioButtonGroup';
+
 export * from './ControlGroup';
 export * from './FormGroup';
-export * from './RadioButtonGroup';
+export { RadioButton, RadioButtonGroup };
+export type { RadioButtonProps, RadioButtonGroupProps };

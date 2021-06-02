@@ -1,13 +1,12 @@
+import { Badge } from 'components/Badge';
+import { LinkBlock } from 'core';
+import { gray700, gray50, gray900 } from 'core/Colors';
+import { caption1, body2 } from 'core/TextStyles';
+import { ChevronDownIcon } from 'Icon';
 import pathToRegexp from 'path-to-regexp';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-
-import { NavigationSectionAction, NavigationSectionItem, NavigationSectionSubItem } from '..';
-import { gray50, gray700, gray900 } from '../../../core/Colors';
-import { LinkBlock } from '../../../core/LinkBlock';
-import { body2, caption1 } from '../../../core/TextStyles';
-import { ChevronDownIcon } from '../../../Icon';
-import { Badge } from '../../Badge';
+import { NavigationSectionItem, NavigationSectionAction, NavigationSectionSubItem } from '../Navigation.type';
 
 export interface NavigationSectionProps {
   title?: string;
@@ -17,61 +16,36 @@ export interface NavigationSectionProps {
 
 interface InjectedProps extends NavigationSectionProps {
   pathname: string;
-  onClickLink?: (url: string) => any;
+  onClickLink?: (url: string) => void;
 }
 
-interface State {
-  openedSectionIndices: number[];
-  pathname: string;
-}
-
-export class NavigationSection extends React.PureComponent<InjectedProps, State> {
-  public static isActiveLocation = (pathname: string, item?: { url?: string }) => {
+export const NavigationSection = ({
+  items, title, action, pathname, onClickLink,
+}: InjectedProps):JSX.Element => {
+  const [prevPathName, setPrevPathName] = useState(pathname);
+  const [openedSectionIndices, setOpenedSectionIndices] = useState<number[]>([]);
+  const isActiveLocation = useCallback((item?: { url?: string }) => {
     if (item && item.url) {
       return !!pathToRegexp(item.url).exec(pathname);
     }
     return false;
-  };
+  }, [pathname]);
 
-  public static getDerivedStateFromProps = (prevProps: InjectedProps, prevState: State) => {
-    if (prevProps.pathname !== prevState.pathname) {
-      const { openedSectionIndices } = prevState;
-      prevProps.items.forEach((item, index) => {
+  useEffect(() => {
+    if (prevPathName !== pathname) {
+      setPrevPathName(pathname);
+      items.forEach((item, index) => {
         if (!item.subItems) {
           return;
         }
-        if (item.subItems.find((subItem) => NavigationSection.isActiveLocation(prevProps.pathname, subItem))) {
-          openedSectionIndices.push(index);
+        if (item.subItems.find((subItem) => isActiveLocation(subItem))) {
+          setOpenedSectionIndices([...openedSectionIndices, index]);
         }
       });
-      return { openedSectionIndices, pathname: prevProps.pathname };
     }
+  }, [isActiveLocation, items, openedSectionIndices, pathname, prevPathName]);
 
-    return null;
-  };
-
-  public state: State = {
-    pathname: '',
-    openedSectionIndices: [],
-  };
-
-  public render() {
-    const { items, title, action } = this.props;
-
-    return (
-      <Container>
-        {title ? (
-          <SectionTitleContainer onClick={action && action.onClick}>
-            <SectionTitle>{title}</SectionTitle>
-            {action && React.cloneElement(action.icon, { size: 16 })}
-          </SectionTitleContainer>
-        ) : null}
-        <SectionMenu>{items.map(this.renderSectionItem)}</SectionMenu>
-      </Container>
-    );
-  }
-
-  private renderAddonComponent = (badgeOrComponent: React.ReactNode) => {
+  const renderAddonComponent = (badgeOrComponent: React.ReactNode) => {
     let AddonComponent: React.ReactNode = badgeOrComponent;
 
     if (badgeOrComponent && ['string', 'number'].includes(typeof badgeOrComponent)) {
@@ -81,16 +55,15 @@ export class NavigationSection extends React.PureComponent<InjectedProps, State>
     return AddonComponent;
   };
 
-  private renderSectionItem = (item: NavigationSectionItem, index: number) => {
-    const { pathname } = this.props;
-    const isOpened = this.state.openedSectionIndices.indexOf(index) >= 0;
+  const renderSectionItem = (item: NavigationSectionItem, index: number) => {
+    const isOpened = openedSectionIndices.includes(index);
 
     const Element = (
       <>
         {item.icon}
         <SectionText>{item.label}</SectionText>
         {item.url || item.onClick ? (
-          this.renderAddonComponent(item.badge)
+          renderAddonComponent(item.badge)
         ) : (
           <ChevronContainer isOpened={isOpened}>
             <ChevronDownIcon size={16} />
@@ -105,62 +78,65 @@ export class NavigationSection extends React.PureComponent<InjectedProps, State>
           <SectionLink
             to={item.url}
             external={item.external}
-            onClick={this.handleOnClickLink(item.url)}
-            active={NavigationSection.isActiveLocation(pathname, item)}
+            onClick={handleOnClickLink(item.url)}
+            active={isActiveLocation(item)}
           >
             {Element}
           </SectionLink>
         ) : (
-          <SectionItem onClick={this.handleToggleNavLink(index)}>{Element}</SectionItem>
+          <SectionItem onClick={handleToggleNavLink(index)}>{Element}</SectionItem>
         )}
         {item.subItems && (
-          <SubItemContainer isOpened={isOpened}>{item.subItems.map(this.renderSectionSubItem)}</SubItemContainer>
+          <SubItemContainer isOpened={isOpened}>{item.subItems.map(renderSectionSubItem)}</SubItemContainer>
         )}
       </SectionItemContainer>
     );
   };
 
-  private renderSectionSubItem = (item: NavigationSectionSubItem, index: number) => {
-    const { pathname } = this.props;
+  const renderSectionSubItem = (item: NavigationSectionSubItem, index: number) => (
+    <SubItem key={index}>
+      <SectionLink
+        to={item.url}
+        external={item.external}
+        onClick={handleOnClickLink(item.url)}
+        active={isActiveLocation(item)}
+      >
+        <SectionText>{item.label}</SectionText>
+        {renderAddonComponent(item.badge)}
+      </SectionLink>
+    </SubItem>
+  );
 
-    return (
-      <SubItem key={index}>
-        <SectionLink
-          to={item.url}
-          external={item.external}
-          onClick={this.handleOnClickLink(item.url)}
-          active={NavigationSection.isActiveLocation(pathname, item)}
-        >
-          <SectionText>{item.label}</SectionText>
-          {this.renderAddonComponent(item.badge)}
-        </SectionLink>
-      </SubItem>
-    );
-  };
-
-  private handleToggleNavLink = (index: number) => () => {
-    const { openedSectionIndices } = this.state;
-    const isOpened = this.state.openedSectionIndices.indexOf(index) >= 0;
+  const handleToggleNavLink = (index: number) => () => {
+    const isOpened = openedSectionIndices.includes(index);
 
     const nextOpenedSectionIndices = isOpened
       ? openedSectionIndices.filter((i) => i !== index)
       : [...openedSectionIndices, index];
 
-    this.setState({
-      openedSectionIndices: nextOpenedSectionIndices,
-    });
+    setOpenedSectionIndices(nextOpenedSectionIndices);
   };
 
-  private handleOnClickLink = (url: string) => () => {
-    const { onClickLink } = this.props;
-
+  const handleOnClickLink = (url: string) => () => {
     if (onClickLink) {
       onClickLink(url);
     }
   };
-}
 
-export default (NavigationSection as any) as React.ComponentClass<NavigationSectionProps>;
+  return (
+    <Container>
+      {title ? (
+        <SectionTitleContainer onClick={action && action.onClick}>
+          <SectionTitle>{title}</SectionTitle>
+          {action && React.cloneElement(action.icon, { size: 16 })}
+        </SectionTitleContainer>
+      ) : null}
+      <SectionMenu>{items.map(renderSectionItem)}</SectionMenu>
+    </Container>
+  );
+};
+
+export default NavigationSection;
 
 const Container = styled.div`
   margin-top: 12px;

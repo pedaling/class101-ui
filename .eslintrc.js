@@ -31,10 +31,13 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
+    'max-len': ['error', { code: 120 }],
     'no-shadow': 'off',
     'no-unused-vars': 'off',
+    'no-use-before-define': 'off',
     '@typescript-eslint/no-shadow': ['error'],
     '@typescript-eslint/no-unused-vars': ['error'],
+    '@typescript-eslint/no-use-before-define': ['error', { variables: false }],
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'react/react-in-jsx-scope': 'off',
     'import/extensions': [
@@ -47,7 +50,6 @@ module.exports = {
         tsx: 'never',
       },
     ],
-    'no-use-before-define': ['error', { variables: false }],
     'react/jsx-props-no-spreading': 'off',
     'react/require-default-props': 'off',
   },

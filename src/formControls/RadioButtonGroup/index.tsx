@@ -1,76 +1,70 @@
-import React, { isValidElement, useEffect, useState } from 'react';
+import {
+  Children, cloneElement, useState,
+} from 'react';
 import styled from 'styled-components';
 
 import { RadioButtonContainerProps } from './RadioButton';
 
 export type RadioButtonGroupProps = RadioButtonContainerProps & {
-  children: JSX.Element[];
+  children?: JSX.Element[];
   onChange: (value: string) => void;
   className?: string;
   value?: string;
   stackingDirection: 'horizontal' | 'vertical';
 };
 
-export const RadioButtonGroup = React.memo<RadioButtonGroupProps>(
-  ({
-    children, value, stackingDirection, onChange, ...restProps
-  }) => {
-    const [checkedIndex, setCheckedIndex] = useState(0);
-    useEffect(() => {
-      if (value) {
-        const index = React.Children.toArray(children).findIndex((c) => {
-          if (isValidElement(c)) {
-            return c.props.value === value;
-          }
-          return false;
-        });
-        if (checkedIndex !== index) {
-          setCheckedIndex(index);
-        }
-      }
-      setCheckedIndex(0);
-    }, [checkedIndex, children, value]);
+export const RadioButtonGroup = ({
+  children,
+  value,
+  stackingDirection,
+  onChange,
+  ...restProps
+}: RadioButtonGroupProps): JSX.Element => {
+  const [checkedIndex, setCheckedIndex] = useState(() => {
+    if (value) {
+      const mappedValues = Children.map(children, (c) => c?.props.value) || [];
+      const corresIndex = mappedValues.findIndex((mappedValue) => mappedValue === value);
+      return corresIndex;
+    }
+    return 0;
+  });
 
-    const arrayOfChildren = children.filter((c) => isValidElement(c));
+  const handleClickItem = (index: number) => () => {
+    const child = children?.[index];
+    setCheckedIndex(index);
+    if (onChange) {
+      onChange(child ? child.props.value : '');
+    }
+  };
 
-    const handleClickItem = (index: number) => {
-      const child = arrayOfChildren[index];
-
-      setCheckedIndex(index);
-      if (onChange) {
-        onChange(child ? child.props.value : '');
-      }
+  const renderChild = (child: JSX.Element, index: number) => {
+    const checked = index === checkedIndex;
+    const {
+      textAlign, showDivider, showBorder, color,
+    } = restProps;
+    const injectProps = {
+      textAlign,
+      showDivider,
+      showBorder,
+      color,
     };
 
-    const renderChild = (child: JSX.Element, index: number) => {
-      const checked = index === checkedIndex;
-      const {
-        textAlign, showDivider, showBorder, color,
-      } = restProps;
-      const injectProps = {
-        textAlign,
-        showDivider,
-        showBorder,
-        color,
-      };
-
-      return React.cloneElement(child, {
-        ...child.props,
-        index,
-        checked,
-        stackingDirection,
-        key: index,
-        onClick: handleClickItem,
-        ...injectProps,
-      });
-    };
-    return (
-      <Container stackingDirection={stackingDirection} {...restProps}>
-        {arrayOfChildren.map((child, i) => renderChild(child, i))}
-      </Container>
-    );
-  },
-);
+    return cloneElement(child, {
+      ...child.props,
+      index,
+      checked,
+      stackingDirection,
+      key: index,
+      onClick: handleClickItem(index),
+      ...injectProps,
+    });
+  };
+  return (
+    <Container stackingDirection={stackingDirection} {...restProps}>
+      {children?.map((child, i) => renderChild(child, i))}
+    </Container>
+  );
+};
 
 const Container = styled.div<{ stackingDirection: 'horizontal' | 'vertical' }>`
   display: flex;

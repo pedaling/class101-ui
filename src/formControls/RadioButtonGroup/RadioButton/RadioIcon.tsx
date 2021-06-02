@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { css } from 'styled-components';
 
 import { gray500 } from '../../../core/Colors';
@@ -35,14 +34,15 @@ const RadioIcon = styled.div<RadioIconProps>`
     if (props.size === 'md') {
       return smallStyle;
     }
+    return css``;
   }};
 
   ${(props) => (props.checked
     ? css<RadioIconProps>`
-          border-color: ${(props) => props.color || gray500};
+          border-color: ${props.color || gray500};
           border-width: 6px;
         `
     : '')};
 `;
 
-export default (props: RadioIconProps) => <RadioIcon {...props} />;
+export default RadioIcon;
