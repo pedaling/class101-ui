@@ -1,14 +1,24 @@
-import React, { ReactElement } from 'react';
+import { gray900 } from 'core/Colors';
+import { elevation1 } from 'core/ElevationStyles';
+import Position from 'core/Position';
+import { IconProps } from 'Icon/types';
+import {
+  cloneElement,
+  DetailedReactHTMLElement,
+  ReactElement,
+  useEffect,
+  useState,
+} from 'react';
 import styled, { css } from 'styled-components';
-import { gray900 } from '../../core/Colors';
-import { elevation1 } from '../../core/ElevationStyles';
-import { Position } from '../../core/Position';
-import { IconProps } from '../../Icon';
-import { ToasterPosition } from '../Toaster';
 import { fadeOutKeyFrames, slideDownKeyFrames, slideUpKeyFrames } from './keyframes';
 
-export const DEFAULT_TIMEOUT = 5000;
-export const UNMOUNT_ANIMATION_SECONDS = 0.2;
+export type ToasterPosition =
+  | Position.TOP
+  | Position.TOP_LEFT
+  | Position.TOP_RIGHT
+  | Position.BOTTOM
+  | Position.BOTTOM_LEFT
+  | Position.BOTTOM_RIGHT;
 
 export interface ToastProps {
   backgroundColor?: string;
@@ -17,101 +27,75 @@ export interface ToastProps {
   icon?: ReactElement<IconProps>;
   message: string;
   position?: ToasterPosition;
-  timeout?: number;
+  timeout: number;
   onButtonClicked?: () => void;
   key?: string;
   onClose?: () => void;
-  dismiss?: () => void;
+  dismiss: () => void;
 }
+const UNMOUNT_ANIMATION_SECONDS = 0.2;
 
-interface State {
-  unmount: boolean;
-}
+export const Toast = ({
+  timeout = 5000,
+  dismiss,
+  onClose,
+  button,
+  icon,
+  message,
+  position = Position.TOP,
+  onButtonClicked,
+  ...restProps
+}: ToastProps): JSX.Element => {
+  const [unmount, setUnmount] = useState(false);
 
-export class Toast extends React.Component<ToastProps, State> {
-  public static defaultProps = {
-    position: Position.TOP,
-    timeout: DEFAULT_TIMEOUT,
-  };
+  useEffect(
+    () => () => {
+      onClose?.();
+    },
+    [onClose],
+  );
 
-  public state: State = {
-    unmount: false,
-  };
-  private unmountAnimationTimeout?: number;
+  useEffect(() => {
+    const dismissTimeOut = window.setTimeout(dismiss, timeout);
+    return () => {
+      window.clearTimeout(dismissTimeOut);
+    };
+  }, [dismiss, timeout]);
 
-  public componentDidMount() {
-    const { dismiss, timeout } = this.props;
-
-    if (timeout === undefined) {
-      throw Error('No timeout prop!');
-    }
-
+  useEffect(() => {
     if (timeout > 0) {
-      this.unmountAnimationTimeout = window.setTimeout(() => {
-        this.setState({
-          unmount: true,
-        });
+      const unmountAnimationTimeout = window.setTimeout(() => {
+        setUnmount(true);
       }, timeout - UNMOUNT_ANIMATION_SECONDS * 1000);
-
-      if (dismiss) {
-        window.setTimeout(dismiss, timeout);
-      } else {
-        throw Error('No dismiss prop!');
-      }
+      return () => {
+        window.clearTimeout(unmountAnimationTimeout);
+      };
     }
-  }
+    return undefined;
+  }, [timeout]);
 
-  public componentDidUpdate(prevProps: Readonly<ToastProps>, prevState: Readonly<State>) {
-    if (prevProps.timeout !== this.props.timeout && this.props.timeout !== undefined) {
-      if (this.unmountAnimationTimeout) {
-        clearTimeout(this.unmountAnimationTimeout);
-      }
-      this.unmountAnimationTimeout = window.setTimeout(() => {
-        this.setState({
-          unmount: true,
-        });
-      }, this.props.timeout - UNMOUNT_ANIMATION_SECONDS * 1000);
-
-    }
-  }
-
-  public render() {
-    const { button, dismiss, icon, message, onButtonClicked } = this.props;
-    const { unmount } = this.state;
-
-    return (
-      <UnmountAnimation unmount={unmount}>
-        <Container {...this.props}>
-          {Boolean(icon) && (
-            <Icon>
-              {React.cloneElement(icon as React.DetailedReactHTMLElement<IconProps, HTMLElement>, { size: 18 })}
-            </Icon>
-          )}
-          <Message>{message}</Message>
-          {Boolean(button) && (
-            <Action onClick={onButtonClicked || dismiss}>
-              {typeof button !== 'object'
-                ? button
-                : React.cloneElement(button as React.DetailedReactHTMLElement<IconProps, HTMLElement>, { size: 18 })}
-            </Action>
-          )}
-        </Container>
-      </UnmountAnimation>
-    );
-  }
-
-  public componentWillUnmount() {
-    const { onClose } = this.props;
-
-    if (this.unmountAnimationTimeout) {
-      clearTimeout(this.unmountAnimationTimeout);
-    }
-
-    if (onClose) {
-      onClose();
-    }
-  }
-}
+  return (
+    <UnmountAnimation unmount={unmount}>
+      <Container position={position} {...restProps}>
+        {Boolean(icon) && (
+          <Icon>
+            {cloneElement(icon as DetailedReactHTMLElement<IconProps, HTMLElement>, { size: 18 })}
+          </Icon>
+        )}
+        <Message>{message}</Message>
+        {Boolean(button) && (
+          <Action onClick={onButtonClicked || dismiss}>
+            {typeof button !== 'object'
+              ? button
+              : cloneElement(button as DetailedReactHTMLElement<IconProps, HTMLElement>, {
+                size: 18,
+              })}
+          </Action>
+        )}
+      </Container>
+    </UnmountAnimation>
+  );
+};
 
 const unmountAnimationCss = css`
   animation: ${fadeOutKeyFrames} ${UNMOUNT_ANIMATION_SECONDS}s;
@@ -122,8 +106,8 @@ const unmountedCss = css`
 `;
 
 const UnmountAnimation = styled.div<{ unmount: boolean }>`
-  ${props => props.unmount && unmountAnimationCss}
-  ${props => props.unmount && unmountedCss}
+  ${(props) => props.unmount && unmountAnimationCss}
+  ${(props) => props.unmount && unmountedCss}
 `;
 
 const Container = styled.div<Partial<ToastProps>>`
@@ -135,24 +119,25 @@ const Container = styled.div<Partial<ToastProps>>`
   font-size: 14px;
   display: flex;
   align-items: center;
-  background-color: ${props => props.backgroundColor || gray900};
-  color: ${props => props.color || 'white'};
-  margin-top: ${props =>
-    props.position === Position.TOP || props.position === Position.TOP_LEFT || props.position === Position.TOP_RIGHT
-      ? '20px'
-      : 0};
-  margin-bottom: ${props =>
-    props.position === Position.BOTTOM ||
-    props.position === Position.BOTTOM_LEFT ||
-    props.position === Position.BOTTOM_RIGHT
-      ? '20px'
-      : 0};
-  margin-left: ${props => (props.position === Position.BOTTOM || props.position === Position.TOP ? 'auto' : '')};
-  margin-right: ${props => (props.position === Position.BOTTOM || props.position === Position.TOP ? 'auto' : '')};
-  animation: ${props =>
-      props.position === Position.TOP || props.position === Position.TOP_LEFT || props.position === Position.TOP_RIGHT
-        ? slideDownKeyFrames
-        : slideUpKeyFrames}
+  background-color: ${(props) => props.backgroundColor || gray900};
+  color: ${(props) => props.color || 'white'};
+  margin-top: ${(props) => (props.position === Position.TOP
+    || props.position === Position.TOP_LEFT
+    || props.position === Position.TOP_RIGHT
+    ? '20px'
+    : 0)};
+  margin-bottom: ${(props) => (props.position === Position.BOTTOM
+    || props.position === Position.BOTTOM_LEFT
+    || props.position === Position.BOTTOM_RIGHT
+    ? '20px'
+    : 0)};
+  margin-left: ${(props) => (props.position === Position.BOTTOM || props.position === Position.TOP ? 'auto' : '')};
+  margin-right: ${(props) => (props.position === Position.BOTTOM || props.position === Position.TOP ? 'auto' : '')};
+  animation: ${(props) => (props.position === Position.TOP
+      || props.position === Position.TOP_LEFT
+      || props.position === Position.TOP_RIGHT
+    ? slideDownKeyFrames
+    : slideUpKeyFrames)}
     0.1s ease-out;
   ${elevation1}
 `;

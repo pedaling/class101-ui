@@ -13,7 +13,9 @@ interface Props {
 
 export class Divider extends PureComponent<Props> {
   public render() {
-    const { className, width, color, 'data-element-name': dataElementName } = this.props;
+    const {
+      className, width, color, 'data-element-name': dataElementName,
+    } = this.props;
     return (
       <Container className={className} width={width} data-element-name={dataElementName}>
         <Line color={color} />
@@ -23,12 +25,12 @@ export class Divider extends PureComponent<Props> {
 }
 
 const Container = styled.div<Pick<Props, 'width'>>`
-  ${props => (props.width ? `width: ${typeof props.width === 'number' ? `${props.width}px` : props.width}` : '')};
+  ${(props) => (props.width ? `width: ${typeof props.width === 'number' ? `${props.width}px` : props.width}` : '')};
 `;
 
 const Line = styled.hr<{ color?: string }>`
   margin: 0 !important;
-  box-shadow: inset 0px -1px 0px ${props => props.color || ifDarkTheme(gray800, gray000)};
+  box-shadow: inset 0px -1px 0px ${(props) => props.color || ifDarkTheme(gray800, gray000)};
   border: none;
   height: 1px;
 `;

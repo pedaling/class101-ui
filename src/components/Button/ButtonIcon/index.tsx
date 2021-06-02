@@ -41,9 +41,8 @@ export const ButtonIcon = styled.div<ButtonIconProps>`
   justify-content: center;
   align-items: center;
   font-size: 0;
-  ${props => getButtonIconSize(props.buttonSize)};
-  ${props =>
-    props.position === ButtonIconPosition.RIGHT
-      ? `margin-left: ${iconMarginByButtonSize[props.buttonSize]}px`
-      : `margin-right: ${iconMarginByButtonSize[props.buttonSize]}px`};
+  ${(props) => getButtonIconSize(props.buttonSize)};
+  ${(props) => (props.position === ButtonIconPosition.RIGHT
+    ? `margin-left: ${iconMarginByButtonSize[props.buttonSize]}px`
+    : `margin-right: ${iconMarginByButtonSize[props.buttonSize]}px`)};
 `;

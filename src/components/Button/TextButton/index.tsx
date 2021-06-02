@@ -7,15 +7,19 @@ import { Theme } from '../../../core/Theme';
 import ButtonBase, { ButtonCommonProps } from '../ButtonBase';
 import { ButtonIcon, ButtonIconPosition, buttonIconSizeByButtonSize } from '../ButtonIcon';
 import ButtonSpinner from '../ButtonSpinner';
-import { ButtonSize, TextButtonColorValue, TextButtonSize, TextButtonSizeValue } from '../interface';
+import {
+  ButtonSize, TextButtonColorValue, TextButtonSize, TextButtonSizeValue,
+} from '../interface';
 import { getTextButtonColors } from '../utils';
 
 export type TextButtonProps = ButtonCommonProps<TextButtonColorValue, TextButtonSizeValue>;
 
 export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
   (
-    { color = 'default', size = 'md', theme = Theme.light, leftIcon, rightIcon, disabled, children, ...restProps },
-    ref
+    {
+      color = 'default', size = 'md', theme = Theme.light, leftIcon, rightIcon, disabled, children, ...restProps
+    },
+    ref,
   ) => {
     const icon = leftIcon || rightIcon;
     const iconPosition = rightIcon ? ButtonIconPosition.RIGHT : ButtonIconPosition.LEFT;
@@ -49,7 +53,7 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(
         {children}
       </StyledButtonBase>
     );
-  }
+  },
 );
 
 const buttonStyleBySize: { [key in TextButtonSize]: FlattenSimpleInterpolation } = {
@@ -80,7 +84,7 @@ const buttonStyleBySize: { [key in TextButtonSize]: FlattenSimpleInterpolation }
 };
 
 const buttonHoverStyle = css<TextButtonProps>`
-  color: ${props => darken(0.1, getTextButtonColors(props.color, props.theme.mode).textColor)};
+  color: ${(props) => darken(0.1, getTextButtonColors(props.color, props.theme.mode).textColor)};
   text-decoration-line: underline;
 `;
 
@@ -89,13 +93,13 @@ const StyledButtonBase = styled(ButtonBase)<TextButtonProps>`
   vertical-align: middle;
   background: none;
 
-  color: ${props => getTextButtonColors(props.color, props.theme.mode).textColor};
-  ${props => buttonStyleBySize[props.size as TextButtonSize]};
+  color: ${(props) => getTextButtonColors(props.color, props.theme.mode).textColor};
+  ${(props) => buttonStyleBySize[props.size as TextButtonSize]};
 
   transition: color 0.1s;
 
   & > a {
-    color: ${props => getTextButtonColors(props.color, props.theme.mode).textColor};
+    color: ${(props) => getTextButtonColors(props.color, props.theme.mode).textColor};
   }
   // TODO(chiabi): focus 스타일 추가하기
   &:not(.disabled):hover,
@@ -107,6 +111,6 @@ const StyledButtonBase = styled(ButtonBase)<TextButtonProps>`
   }
 
   &.disabled {
-    color: ${props => getTextButtonColors(props.color, props.theme.mode).disabledTextColor};
+    color: ${(props) => getTextButtonColors(props.color, props.theme.mode).disabledTextColor};
   }
 `;

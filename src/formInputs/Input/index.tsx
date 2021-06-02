@@ -3,7 +3,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { gray900, orange500, redError } from '../../core/Colors';
 import { body2 } from '../../core/TextStyles';
-import { FormInputFillStyle, FormInputStyle, FormInputStyleBySize, InputSize } from '../common';
+import {
+  FormInputFillStyle, FormInputStyle, FormInputStyleBySize, InputSize,
+} from '../common';
 import { InlineError, Intent } from '../InlineError';
 
 type FillAndSize = {
@@ -66,13 +68,13 @@ export const Input = React.memo<InputProps>(
         {warnMessage && <InlineError intent={Intent.WARNING}>{warnMessage}</InlineError>}
       </Container>
     );
-  }
+  },
 );
 
 type StyledInputWrapperProps = InputPropsWithoutFillAndSize & FillAndSize;
 
 const StyledInputWrapper = React.forwardRef<HTMLInputElement, StyledInputWrapperProps>(
-  ({ fill, size, ...restProps }, ref) => <StyledInput ref={ref} inputSize={size} fill={fill} {...restProps} />
+  ({ fill, size, ...restProps }, ref) => <StyledInput ref={ref} inputSize={size} fill={fill} {...restProps} />,
 );
 
 type StyledInputProps = {
@@ -83,8 +85,8 @@ type StyledInputProps = {
 const StyledInput = styled.input<StyledInputProps>`
   ${body2};
   ${FormInputStyle};
-  ${props => FormInputStyleBySize[props.inputSize]};
-  ${props => (props.fill ? FormInputFillStyle : null)};
+  ${(props) => FormInputStyleBySize[props.inputSize]};
+  ${(props) => (props.fill ? FormInputFillStyle : null)};
   color: ${gray900};
   box-sizing: border-box;
   padding: 0 16px;
@@ -99,7 +101,7 @@ const StyledInput = styled.input<StyledInputProps>`
 `;
 
 const Container = styled.div<{ inline?: boolean }>`
-  display: ${props => (props.inline ? 'inline-block' : 'block')};
+  display: ${(props) => (props.inline ? 'inline-block' : 'block')};
 `;
 
 const InlineLabel = styled.label`

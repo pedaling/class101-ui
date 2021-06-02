@@ -31,7 +31,9 @@ export class CommentContent extends PureComponent<Props, State> {
   }
 
   public render() {
-    const { children, maxLine, onClick, hideReadMore, readMoreText, hideText } = this.props;
+    const {
+      children, maxLine, onClick, hideReadMore, readMoreText, hideText,
+    } = this.props;
     const { lineClampable, lineClamped } = this.state;
     return (
       <Container>
@@ -66,7 +68,7 @@ export class CommentContent extends PureComponent<Props, State> {
     return false;
   };
 
-  private handleToggleClampButton: React.MouseEventHandler = event => {
+  private handleToggleClampButton: React.MouseEventHandler = (event) => {
     const { lineClamped } = this.state;
     this.setState({
       lineClamped: !lineClamped,
@@ -88,9 +90,8 @@ const Content = styled.div<{ useLineClamp: boolean; maxLine: number }>`
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  ${props =>
-    props.useLineClamp &&
-    css`
+  ${(props) => props.useLineClamp
+    && css`
       -webkit-line-clamp: ${props.maxLine};
     `}
 `;

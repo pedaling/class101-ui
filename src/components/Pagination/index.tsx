@@ -30,13 +30,11 @@ export const Pagination = React.memo<PaginationProps>(
 
       return pageCountPerViewtoCalculate % 2 === 0 ? pageCountPerViewtoCalculate - 1 : pageCountPerViewtoCalculate;
     };
-    const range = (start: number, end: number) => {
-      return Array.from({ length: end - start }, (_, i) => i + start);
-    };
+    const range = (start: number, end: number) => Array.from({ length: end - start }, (_, i) => i + start);
     const getIndexListToDisplay = (
       currentPageIndextoCalculate: number,
       totalPageIndextoCalculate: number,
-      pageCountPerViewtoCalculate: number
+      pageCountPerViewtoCalculate: number,
     ) => {
       const sidePageCountToView = Math.floor(pageCountPerViewtoCalculate / 2);
 
@@ -54,7 +52,7 @@ export const Pagination = React.memo<PaginationProps>(
 
       return range(
         currentPageIndextoCalculate - sidePageCountToView,
-        currentPageIndextoCalculate + sidePageCountToView + 1
+        currentPageIndextoCalculate + sidePageCountToView + 1,
       );
     };
 
@@ -73,7 +71,7 @@ export const Pagination = React.memo<PaginationProps>(
     return (
       <PageWrapper className={className} data-element-name={dataElementName}>
         <PageIconButton icon={<ChevronLeftIcon />} onClick={handleDecrease} disabled={currentPageIndex <= 0} />
-        {indexListToDisplay.map(index => (
+        {indexListToDisplay.map((index) => (
           <PageButton
             color={index === currentPageIndex ? ButtonColor.ORANGE : ButtonColor.WHITE}
             size="sm"
@@ -90,7 +88,7 @@ export const Pagination = React.memo<PaginationProps>(
         />
       </PageWrapper>
     );
-  }
+  },
 );
 
 const PageWrapper = styled.div``;

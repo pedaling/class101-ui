@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
+import { gray800, white } from 'core/Colors';
+import { ReactNode, CSSProperties, memo } from 'react';
 import styled, { css } from 'styled-components';
 
-import { gray800, white } from '../../core/Colors';
 import { caption1, caption2 } from '../../core/TextStyles';
 
 type Size = 'xs' | 'sm' | 'md';
@@ -11,14 +11,14 @@ export interface BadgeProps {
   backgroundColor?: string;
   pill?: boolean;
   size?: Size | number;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   children?: ReactNode;
   className?: string;
   icon?: ReactNode;
   'data-element-name'?: string;
 }
 
-export const Badge = React.memo<BadgeProps>(
+export const Badge = memo<BadgeProps>(
   ({
     color = white,
     backgroundColor = gray800,
@@ -29,7 +29,7 @@ export const Badge = React.memo<BadgeProps>(
     children,
     style,
     'data-element-name': dataElementName,
-  }) => (
+  }: BadgeProps) => (
     <Container
       className={className}
       color={color}
@@ -44,7 +44,7 @@ export const Badge = React.memo<BadgeProps>(
         {children}
       </TextArea>
     </Container>
-  )
+  ),
 );
 
 const containerMinWidth: { [key in Size]: number } = {
@@ -59,7 +59,10 @@ const containerPaddingSize: { [key in Size]: number } = {
   md: 6,
 };
 
-const containerStyle = (size: BadgeProps['size'] = 'md', pill: BadgeProps['pill'] = false) => {
+const containerStyle = (
+  size: BadgeProps['size'] = 'md',
+  pill: BadgeProps['pill'] = false,
+) => {
   const minWidth = typeof size === 'number' ? size : containerMinWidth[size];
   const padding = typeof size === 'number' ? 0 : containerPaddingSize[size];
   return css`
@@ -71,7 +74,9 @@ const containerStyle = (size: BadgeProps['size'] = 'md', pill: BadgeProps['pill'
   `;
 };
 
-const Container = styled.div<Pick<BadgeProps, 'size' | 'pill' | 'backgroundColor'>>`
+const Container = styled.div<
+  Pick<BadgeProps, 'size' | 'pill' | 'backgroundColor'>
+>`
   ${(props) => containerStyle(props.size, props.pill)};
   background-color: ${(props) => props.backgroundColor};
   flex: none;

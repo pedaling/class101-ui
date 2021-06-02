@@ -1,4 +1,6 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, {
+  FC, useCallback, useEffect, useState,
+} from 'react';
 import styled, { css } from 'styled-components';
 import { gray500, gray800 } from '../../../core/Colors';
 import { body2 } from '../../../core/TextStyles';
@@ -13,8 +15,10 @@ interface Props {
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
-export const ReplyContent: FC<Props> = React.memo(props => {
-  const { children, useLineClamp, maxLine, readMoreText, hideText, hideReadMore, onClick } = props;
+export const ReplyContent: FC<Props> = React.memo((props) => {
+  const {
+    children, useLineClamp, maxLine, readMoreText, hideText, hideReadMore, onClick,
+  } = props;
 
   const [lineClamped, setLineClamped] = useState(true);
   const [lineClampable, setLineClampable] = useState(false);
@@ -41,7 +45,7 @@ export const ReplyContent: FC<Props> = React.memo(props => {
   }, [calculateClamped]);
 
   const handleToggleClampButton = useCallback((event: React.MouseEvent<Element, MouseEvent>) => {
-    setLineClamped(value => !value);
+    setLineClamped((value) => !value);
     event.preventDefault();
     event.stopPropagation();
   }, []);
@@ -65,9 +69,8 @@ const Content = styled.div<{ useLineClamp: boolean; maxLine: number }>`
   overflow: hidden;
   -webkit-box-orient: vertical;
   color: ${gray800};
-  ${props =>
-    props.useLineClamp &&
-    css`
+  ${(props) => props.useLineClamp
+    && css`
       -webkit-line-clamp: ${props.maxLine};
     `}
 `;

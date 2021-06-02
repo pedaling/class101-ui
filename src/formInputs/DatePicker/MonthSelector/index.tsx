@@ -11,12 +11,14 @@ interface Props {
   readonly onChange: (date: Date) => boolean | void;
 }
 
-export const MonthSelector = React.memo<Props>(props => {
-  const { locale, selectedDate, currentYear, onChange, secondDate } = props;
+export const MonthSelector = React.memo<Props>((props) => {
+  const {
+    locale, selectedDate, currentYear, onChange, secondDate,
+  } = props;
 
   const selectedMonth = useMemo(
     () => selectedDate && new Date(selectedDate.getFullYear(), selectedDate.getMonth()).getTime(),
-    [selectedDate]
+    [selectedDate],
   );
   const secondMonth = useMemo(() => secondDate && new Date(secondDate.getFullYear(), secondDate.getMonth()).getTime(), [
     secondDate,

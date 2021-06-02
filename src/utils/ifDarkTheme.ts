@@ -5,10 +5,9 @@ import { ThemeMode } from '../core';
 interface Theme {
   mode: ThemeMode.DARK | ThemeMode.LIGHT;
 }
+type ThemeObject = { theme: Theme };
+type ThemeType = string | FlattenSimpleInterpolation;
 
-export const ifDarkTheme = (
-  darkThemeStyle?: string | FlattenSimpleInterpolation,
-  fallBackStyle: string | FlattenSimpleInterpolation = ''
-) => ({ theme }: { theme: Theme }) => {
-  return theme.mode === ThemeMode.DARK ? darkThemeStyle : fallBackStyle;
-};
+const ifDarkTheme = (darkThemeStyle: ThemeType = '', fallBackStyle: ThemeType = '') => ({ theme }: ThemeObject): ThemeType => (theme.mode === ThemeMode.DARK ? darkThemeStyle : fallBackStyle);
+
+export default ifDarkTheme;

@@ -10,26 +10,26 @@ interface SpinnerProps {
   'data-element-name'?: string;
 }
 
-export const Spinner: FC<SpinnerProps> = React.memo(({ size, backgroundColor, color, ...restProps }) => {
-  return (
-    <Container {...restProps}>
-      <SpinnerContainer>
-        <SpinnerAnimation>
-          <svg height={size} width={size} viewBox="0 0 100 100" strokeWidth={strokeWidth}>
-            <SpinnerTrack color={color} d={SPINNER_TRACK} />
-            <SpinnerHead
-              backgroundColor={backgroundColor}
-              d={SPINNER_TRACK}
-              pathLength={PATH_LENGTH}
-              strokeDasharray={`${PATH_LENGTH} ${PATH_LENGTH}`}
-              strokeDashoffset={strokeOffset}
-            />
-          </svg>
-        </SpinnerAnimation>
-      </SpinnerContainer>
-    </Container>
-  );
-});
+export const Spinner: FC<SpinnerProps> = React.memo(({
+  size, backgroundColor, color, ...restProps
+}) => (
+  <Container {...restProps}>
+    <SpinnerContainer>
+      <SpinnerAnimation>
+        <svg height={size} width={size} viewBox="0 0 100 100" strokeWidth={strokeWidth}>
+          <SpinnerTrack color={color} d={SPINNER_TRACK} />
+          <SpinnerHead
+            backgroundColor={backgroundColor}
+            d={SPINNER_TRACK}
+            pathLength={PATH_LENGTH}
+            strokeDasharray={`${PATH_LENGTH} ${PATH_LENGTH}`}
+            strokeDashoffset={strokeOffset}
+          />
+        </svg>
+      </SpinnerAnimation>
+    </SpinnerContainer>
+  </Container>
+));
 
 Spinner.defaultProps = {
   size: 24,
@@ -47,12 +47,12 @@ const strokeOffset = PATH_LENGTH - PATH_LENGTH * 0.25;
 const SpinnerHead = styled.path<Pick<SpinnerProps, 'backgroundColor'>>`
   transform-origin: center;
   transition: stroke-dashoffset 2s cubic-bezier(0.4, 1, 0.75, 0.9);
-  stroke: ${props => props.backgroundColor};
+  stroke: ${(props) => props.backgroundColor};
   stroke-linecap: round;
 `;
 
 const SpinnerTrack = styled.path`
-  stroke: ${props => props.color};
+  stroke: ${(props) => props.color};
 `;
 
 const SpinnerContainer = styled.div`

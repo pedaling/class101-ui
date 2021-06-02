@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
-import { Button, ButtonColor, ButtonProps, IconButton } from '../../components/Button';
+import {
+  Button, ButtonColor, ButtonProps, IconButton,
+} from '../../components/Button';
 import { media } from '../../core/BreakPoints';
 import { gray600, gray900, white } from '../../core/Colors';
 import { elevation5 } from '../../core/ElevationStyles';
@@ -105,15 +107,14 @@ export class Modal extends PureComponent<ModalProps, State> {
     const { mounted, opened } = this.state;
 
     if (!mounted || isServer()) {
-      return opener || <React.Fragment />;
+      return opener || <></>;
     }
     if (!successAttributes.color) {
       successAttributes.color = ButtonColor.ORANGE;
     }
 
-    const clonedOpener =
-      opener &&
-      React.cloneElement(opener, {
+    const clonedOpener = opener
+      && React.cloneElement(opener, {
         onClick: this.showModal,
       });
     return (
@@ -208,7 +209,7 @@ export class Modal extends PureComponent<ModalProps, State> {
 }
 
 const StyledOverlaidPortal = styled(OverlaidPortal)<{ opened: boolean }>`
-  transition: ${props => !props.opened && `visibility 0s linear 225ms,`} opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: ${(props) => !props.opened && 'visibility 0s linear 225ms,'} opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 `;
 
 const Dialog = styled.div<{ visible: boolean }>`
@@ -250,17 +251,15 @@ const DialogBody = styled.div<{ hideScroll: boolean; removeContentPadding: boole
   overflow-y: auto;
   overflow-x: hidden;
   word-break: break-all;
-  ${props =>
-    props.hideScroll &&
-    `
+  ${(props) => props.hideScroll
+    && `
     &::-webkit-scrollbar {
       display: none;
     }
   `}
 
-  ${props =>
-    props.removeContentPadding &&
-    `
+  ${(props) => props.removeContentPadding
+    && `
     margin-left: -32px;
     margin-right: -32px;
 

@@ -9,7 +9,7 @@ interface Props {
   onChange?: (value: Date) => void;
 }
 
-export const TimeSelectorInput = React.memo<Props>(props => {
+export const TimeSelectorInput = React.memo<Props>((props) => {
   const { value, onChange } = props;
 
   const handleChange = useCallback(
@@ -31,7 +31,7 @@ export const TimeSelectorInput = React.memo<Props>(props => {
       }
       onChange?.(newValue);
     },
-    [onChange, value]
+    [onChange, value],
   );
 
   return (

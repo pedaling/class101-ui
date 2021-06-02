@@ -2,18 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { ChevronLeftIcon, ChevronRightIcon } from '../../../Icon';
 
-export const ArrowNavigation = React.memo(() => {
-  return (
-    <>
-      <Button className="swiper-button-prev">
-        <ChevronLeftIcon fillColor="white" />
-      </Button>
-      <Button className="swiper-button-next">
-        <ChevronRightIcon fillColor="white" />
-      </Button>
-    </>
-  );
-});
+export const ArrowNavigation = React.memo(() => (
+  <>
+    <Button className="swiper-button-prev">
+      <ChevronLeftIcon fillColor="white" />
+    </Button>
+    <Button className="swiper-button-next">
+      <ChevronRightIcon fillColor="white" />
+    </Button>
+  </>
+));
 
 const Button = styled.button`
   &.swiper-button-prev,

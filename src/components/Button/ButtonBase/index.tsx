@@ -62,7 +62,7 @@ const ButtonBase = forwardRef<HTMLButtonElement, Props>(
       className,
       ...restProps
     }: Props,
-    ref
+    ref,
   ) => {
     if (loading) {
       return (
@@ -109,7 +109,7 @@ const ButtonBase = forwardRef<HTMLButtonElement, Props>(
         {innerElements}
       </ButtonContainer>
     );
-  }
+  },
 );
 
 export default ButtonBase;
@@ -143,7 +143,7 @@ const ButtonContainer = styled.button<{ 'icon-position'?: ButtonIconPosition }>`
   ${buttonResetStyle}
   ${buttonCommonStyle};
 
-  flex-direction: ${props => (props['icon-position'] === ButtonIconPosition.RIGHT ? 'row-reverse' : 'row')};
+  flex-direction: ${(props) => (props['icon-position'] === ButtonIconPosition.RIGHT ? 'row-reverse' : 'row')};
 `;
 
 const Text = styled.span`
@@ -175,5 +175,5 @@ const getAnchorButtonStyle = (iconPosition?: ButtonIconPosition) => css`
 `;
 
 const LinkButton = styled(LinkBlock)<{ 'icon-position'?: ButtonIconPosition }>`
-  ${props => getAnchorButtonStyle(props['icon-position'])};
+  ${(props) => getAnchorButtonStyle(props['icon-position'])};
 `;

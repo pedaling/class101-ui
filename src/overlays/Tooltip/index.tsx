@@ -1,30 +1,38 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { elevation2 } from 'core/ElevationStyles';
+import Position from 'core/Position';
+import { body2, caption1 } from 'core/TextStyles';
+import {
+  createElement,
+  CSSProperties,
+  memo,
+  ReactNode,
+  Ref,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { Manager, Popper, Reference } from 'react-popper';
 import styled from 'styled-components';
-
-import { Position } from '../../core';
-import { elevation2 } from '../../core/ElevationStyles';
-import { body2, caption1 } from '../../core/TextStyles';
-import { isClient } from '../../utils';
-import { Portal } from '../Portal';
+import { isClient } from 'utils';
+import Portal from 'overlays/Portal';
 import { tooltipBackgroundColors, TooltipColor, tooltipColors } from './colors';
-import { adjustPositionWithTooltip } from './utils';
+import adjustPositionWithTooltip from './utils';
 
 interface Props {
   position?: Position;
-  content: React.ReactNode;
+  content: ReactNode;
   contentTitle?: string;
   color?: TooltipColor;
   children: string | JSX.Element;
   wrapperTagName?: string;
-  wrapperStyle?: React.CSSProperties;
-  targetStyle?: React.CSSProperties;
+  wrapperStyle?: CSSProperties;
+  targetStyle?: CSSProperties;
   fill?: boolean;
   isOpen?: boolean;
 }
 
-export const Tooltip: React.FC<Props> = React.memo(props => {
-  const {
+export const Tooltip = memo(
+  ({
     position = Position.BOTTOM,
     content,
     contentTitle,
@@ -34,80 +42,91 @@ export const Tooltip: React.FC<Props> = React.memo(props => {
     targetStyle,
     wrapperTagName = 'span',
     fill,
+    isOpen,
     ...restProps
-  } = props;
+  }: Props) => {
+    const [opened, setOpened] = useState(isOpen ?? false);
 
-  const [opened, setOpened] = useState(props.isOpen ?? false);
+    const handleMouseEnter = useCallback(() => {
+      if (!opened) {
+        setOpened(true);
+      }
+    }, [opened, setOpened]);
 
-  const handleMouseEnter = useCallback(() => {
-    if (!opened) {
-      setOpened(true);
+    const handleMouseLeave = useCallback(() => {
+      if (opened) {
+        setOpened(false);
+      }
+    }, [opened, setOpened]);
+
+    useEffect(() => {
+      if (isOpen !== undefined && isOpen !== null) {
+        setOpened(isOpen);
+      }
+    }, [setOpened, isOpen]);
+
+    const renderChild = useCallback(
+      (ref: Ref<HTMLElement>) => {
+        const childProps = {
+          ref,
+          style: { display: fill ? 'flex' : 'inline-flex', ...(wrapperStyle || {}) },
+          onMouseEnter: handleMouseEnter,
+          onMouseLeave: handleMouseLeave,
+          ...restProps,
+        };
+
+        return createElement(wrapperTagName, childProps, children);
+      },
+      [children, wrapperTagName, handleMouseEnter, handleMouseLeave, wrapperStyle, fill, restProps],
+    );
+
+    if (!isClient()) {
+      return <></>;
     }
-  }, [opened, setOpened]);
 
-  const handleMouseLeave = useCallback(() => {
-    if (opened) {
-      setOpened(false);
-    }
-  }, [opened, setOpened]);
-
-  useEffect(() => {
-    if (props.isOpen !== undefined && props.isOpen !== null) {
-      setOpened(props.isOpen);
-    }
-  }, [setOpened, props.isOpen]);
-
-  const renderChild = useCallback(
-    (ref: React.Ref<any>) => {
-      const childProps = {
-        ref,
-        style: { display: fill ? 'flex' : 'inline-flex', ...(wrapperStyle || {}) },
-        onMouseEnter: handleMouseEnter,
-        onMouseLeave: handleMouseLeave,
-        ...restProps,
-      };
-
-      return React.createElement(wrapperTagName, childProps, children);
-    },
-    [children, wrapperTagName, handleMouseEnter, handleMouseLeave, wrapperStyle, fill, restProps]
-  );
-
-  if (!isClient()) {
-    return null;
-  }
-
-  return (
-    <Manager>
-      <Reference>{({ ref }) => renderChild(ref)}</Reference>
-      <Portal container={document.body}>
-        <Popper
-          placement={adjustPositionWithTooltip(position)}
-          modifiers={{
-            preventOverflow: {
-              boundariesElement: 'viewport',
-            },
-          }}
-        >
-          {({ ref, style, placement }) => (
-            <PopoverTarget isVisible={opened} ref={ref} style={{ ...style, ...(targetStyle || {}) }}>
-              <PopoverContent tooltipColor={color} data-placement={placement}>
-                {contentTitle && <PopoverTitle>{contentTitle}</PopoverTitle>}
-                {content}
-              </PopoverContent>
-              <PopperArrow data-placement={placement} tooltipColor={color} />
-            </PopoverTarget>
-          )}
-        </Popper>
-      </Portal>
-    </Manager>
-  );
-});
+    return (
+      <Manager>
+        <Reference>{({ ref }) => renderChild(ref)}</Reference>
+        <Portal container={document.body}>
+          <Popper
+            placement={adjustPositionWithTooltip(position)}
+            modifiers={{
+              preventOverflow: {
+                boundariesElement: 'viewport',
+              },
+            }}
+          >
+            {({ ref, style, placement }) => (
+              <PopoverTarget
+                isVisible={opened}
+                ref={ref}
+                style={{ ...style, ...(targetStyle || {}) }}
+              >
+                <PopoverContent tooltipColor={color} data-placement={placement}>
+                  {contentTitle && <PopoverTitle>{contentTitle}</PopoverTitle>}
+                  {content}
+                </PopoverContent>
+                <PopperArrow data-placement={placement} tooltipColor={color} />
+              </PopoverTarget>
+            )}
+          </Popper>
+        </Portal>
+      </Manager>
+    );
+  },
+);
 
 export { TooltipColor };
 
-const ArrowSVG = (props: { tooltipColor: TooltipColor; className?: string }) => (
+const ArrowSVG = ({
+  tooltipColor,
+  ...props
+}: {
+  tooltipColor: TooltipColor;
+  className?: string;
+}) => (
   <svg viewBox="7 10 10 5" width="16px" {...props}>
-    <path fill={tooltipBackgroundColors[props.tooltipColor]} fillRule="evenodd" d="M17 10l-5 5-5-5z" />
+    <path fill={tooltipBackgroundColors[tooltipColor]} fillRule="evenodd" d="M17 10l-5 5-5-5z" />
   </svg>
 );
 
@@ -143,8 +162,8 @@ const PopoverTitle = styled.h2`
 `;
 
 const PopoverTarget = styled.div<{ isVisible: boolean }>`
-  opacity: ${props => (props.isVisible ? 1 : 0)};
-  visibility: ${props => (props.isVisible ? 'visible' : 'hidden')};
+  opacity: ${(props) => (props.isVisible ? 1 : 0)};
+  visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
   transition: opacity 200ms;
 `;
 
@@ -153,7 +172,7 @@ const PopoverContent = styled.div<{ tooltipColor: TooltipColor }>`
   margin: 8px;
   padding: 12px;
   border-radius: 3px;
-  color: ${props => tooltipColors[props.tooltipColor]};
-  background-color: ${props => tooltipBackgroundColors[props.tooltipColor]};
+  color: ${(props) => tooltipColors[props.tooltipColor]};
+  background-color: ${(props) => tooltipBackgroundColors[props.tooltipColor]};
   ${elevation2};
 `;

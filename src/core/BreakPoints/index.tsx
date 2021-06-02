@@ -1,4 +1,6 @@
-import { css, InterpolationFunction, ThemedStyledProps, Interpolation, CSSObject } from 'styled-components';
+import {
+  css, InterpolationFunction, ThemedStyledProps, Interpolation, CSSObject,
+} from 'styled-components';
 
 export function buildMediaQuery({ minWidth, maxWidth }: { minWidth?: number; maxWidth?: number }, not?: boolean) {
   let query = '';
@@ -29,8 +31,6 @@ export const SIZES = {
   md: {}, // TODO: 태블릿 사이즈가 추가되면 수정합니다.
   lg: { minWidth: 1024 },
 };
-
-type Size = keyof typeof SIZES;
 
 export const media = {
   sm<T extends object>(

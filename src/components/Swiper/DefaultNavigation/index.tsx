@@ -8,14 +8,12 @@ const NAVIGATION_BUTTON_SIZE = 32;
 
 export type NavigationDirection = 'right' | 'left';
 
-export const DefaultNavigation = React.memo(() => {
-  return (
-    <div className="swiper-default-navigation">
-      <Button color={ButtonColor.WHITE} className="swiper-button-prev" icon={<ChevronLeftIcon />} />
-      <Button color={ButtonColor.WHITE} className="swiper-button-next" icon={<ChevronRightIcon />} />
-    </div>
-  );
-});
+export const DefaultNavigation = React.memo(() => (
+  <div className="swiper-default-navigation">
+    <Button color={ButtonColor.WHITE} className="swiper-button-prev" icon={<ChevronLeftIcon />} />
+    <Button color={ButtonColor.WHITE} className="swiper-button-next" icon={<ChevronRightIcon />} />
+  </div>
+));
 
 const Button = styled(IconButton)`
   &.swiper-button-prev,

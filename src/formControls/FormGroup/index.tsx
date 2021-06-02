@@ -16,7 +16,9 @@ export interface FormGroupProps {
 
 export class FormGroup extends PureComponent<FormGroupProps> {
   public render() {
-    const { label, labelColor, htmlLabelFor, inline, children, divAttributes, ...restProps } = this.props;
+    const {
+      label, labelColor, htmlLabelFor, inline, children, divAttributes, ...restProps
+    } = this.props;
 
     return (
       <Container inline={inline} {...divAttributes} {...restProps}>
@@ -32,7 +34,7 @@ export class FormGroup extends PureComponent<FormGroupProps> {
 const Label = styled.label<{ labelColor?: string }>`
   ${body2};
   margin: 0 0 4px;
-  color: ${props => props.labelColor || gray900};
+  color: ${(props) => props.labelColor || gray900};
 `;
 
 const Container = styled.div<{ inline?: boolean }>`
@@ -40,9 +42,8 @@ const Container = styled.div<{ inline?: boolean }>`
   flex-direction: column;
   margin: 0 0 16px;
 
-  ${props =>
-    props.inline &&
-    css`
+  ${(props) => props.inline
+    && css`
       flex-direction: row;
       align-items: center;
 

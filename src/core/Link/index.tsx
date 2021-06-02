@@ -35,7 +35,7 @@ export const Link = React.memo(
     }
 
     return <Anchor ref={ref} href={props.to} {...externalAttributes} {...restProps} />;
-  })
+  }),
 );
 
 const Anchor = styled.a`

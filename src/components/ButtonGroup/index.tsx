@@ -15,13 +15,14 @@ export interface ButtonGroupProps {
 
 export class ButtonGroup extends PureComponent<ButtonGroupProps> {
   public render() {
-    const { children, vertical, fill, theme, 'data-element-name': dataElementName } = this.props;
+    const {
+      children, vertical, fill, theme, 'data-element-name': dataElementName,
+    } = this.props;
     return (
       <ButtonGroupContainer vertical={vertical} fill={fill} theme={theme} data-element-name={dataElementName}>
         {React.Children.map(
           children,
-          child =>
-            child && React.cloneElement(child as React.ReactElement<ButtonProps>, { theme, color: ButtonColor.DEFAULT })
+          (child) => child && React.cloneElement(child as React.ReactElement<ButtonProps>, { theme, color: ButtonColor.DEFAULT }),
         )}
       </ButtonGroupContainer>
     );
@@ -63,6 +64,6 @@ const FillStyle = css`
 
 const ButtonGroupContainer = styled.div<ButtonGroupProps>`
   display: flex;
-  ${props => (props.vertical ? VerticalStyle(props.theme.mode) : HorizontalStyle(props.theme.mode))}
-  ${props => (props.fill ? FillStyle : '')}
+  ${(props) => (props.vertical ? VerticalStyle(props.theme.mode) : HorizontalStyle(props.theme.mode))}
+  ${(props) => (props.fill ? FillStyle : '')}
 `;

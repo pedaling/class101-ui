@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import { gray100 } from 'core/Colors';
+import Position from 'core/Position';
+import {
+  useState,
+  memo,
+  ReactElement,
+  MouseEventHandler,
+  SyntheticEvent,
+  cloneElement,
+} from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
-
-import { Position } from '../../core';
-import { gray100 } from '../../core/Colors';
 
 export enum AvatarSize {
   SMALL = 'sm',
@@ -11,14 +17,14 @@ export enum AvatarSize {
 }
 
 export type AvatarIconPosition =
-  | typeof Position.TOP_RIGHT
-  | typeof Position.TOP
-  | typeof Position.TOP_LEFT
-  | typeof Position.BOTTOM
-  | typeof Position.BOTTOM_LEFT
-  | typeof Position.BOTTOM_RIGHT
-  | typeof Position.LEFT
-  | typeof Position.RIGHT;
+  | Position.TOP_RIGHT
+  | Position.TOP
+  | Position.TOP_LEFT
+  | Position.BOTTOM
+  | Position.BOTTOM_LEFT
+  | Position.BOTTOM_RIGHT
+  | Position.LEFT
+  | Position.RIGHT;
 
 export interface AvatarProps {
   size?: AvatarSize | number;
@@ -29,18 +35,14 @@ export interface AvatarProps {
   alt?: string;
   className?: string;
   text?: string;
-  icon?: React.ReactElement<{ size: number }>;
+  icon?: ReactElement<{ size: number }>;
   'data-element-name'?: string;
-  onClick?: React.MouseEventHandler<HTMLSpanElement>;
-  onIconClick?: React.MouseEventHandler<HTMLDivElement>;
-  onError?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
+  onClick?: MouseEventHandler<HTMLSpanElement>;
+  onIconClick?: MouseEventHandler<HTMLDivElement>;
+  onError?: (e: SyntheticEvent<HTMLImageElement, Event>) => void;
 }
 
-interface AvatarState {
-  isError: boolean;
-}
-
-export const Avatar = React.memo<AvatarProps>(
+export const Avatar = memo<AvatarProps>(
   ({
     size = AvatarSize.MEDIUM,
     src,
@@ -55,9 +57,9 @@ export const Avatar = React.memo<AvatarProps>(
     onIconClick,
     onError,
     'data-element-name': dataElementName,
-  }) => {
+  }: AvatarProps) => {
     const [isError, setIsError] = useState(false);
-    const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const handleImageError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
       setIsError(true);
       if (onError) {
         onError(e);
@@ -65,12 +67,22 @@ export const Avatar = React.memo<AvatarProps>(
     };
     const avatarSize = typeof size === 'number' ? size : avatarSizeBySize[size];
     const iconSize = typeof size === 'number' ? avatarSize * iconRatio : iconSizeBySize[size];
-    const sizedIcon = icon && React.cloneElement(icon, { size: iconSize });
+    const sizedIcon = icon && cloneElement(icon, { size: iconSize });
 
     return (
-      <Container onClick={onClick} size={avatarSize} className={className} data-element-name={dataElementName}>
+      <Container
+        onClick={onClick}
+        size={avatarSize}
+        className={className}
+        data-element-name={dataElementName}
+      >
         {src && !isError ? (
-          <AvatarImage src={src} srcSet={srcSet} alt={alt} onError={handleImageError} />
+          <AvatarImage
+            src={src}
+            srcSet={srcSet}
+            alt={alt}
+            onError={handleImageError}
+          />
         ) : (
           text && <TextWrapper>{text.substr(0, 2).toUpperCase()}</TextWrapper>
         )}
@@ -81,10 +93,12 @@ export const Avatar = React.memo<AvatarProps>(
         )}
       </Container>
     );
-  }
+  },
 );
 
-const iconPositionByPosition: { [key in AvatarIconPosition]: FlattenSimpleInterpolation } = {
+const iconPositionByPosition: {
+  [key in AvatarIconPosition]: FlattenSimpleInterpolation;
+} = {
   [Position.BOTTOM]: css`
     bottom: -2px;
     right: 50%;
@@ -161,7 +175,7 @@ const TextWrapper = styled.span`
   text-align: center;
 `;
 
-const IconWrapper = styled.div<{ position: Position }>`
+const IconWrapper = styled.div<{ position: AvatarIconPosition }>`
   display: flex;
   position: absolute;
   z-index: 100;

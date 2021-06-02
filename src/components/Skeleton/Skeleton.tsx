@@ -87,7 +87,7 @@ export const Skeleton = React.memo<SkeletonProps>(
         <Content aria-hidden="true">{children || content}</Content>
       </Container>
     );
-  }
+  },
 );
 
 const fadeOut = keyframes`
@@ -101,9 +101,9 @@ const fadeOut = keyframes`
 
 const Container = styled.span<{ color?: string; rounded?: boolean; circle?: boolean }>`
   background-color: ${ifDarkTheme(gray800, gray100)};
-  ${props => props.color && `background-color: ${props.color}`};
-  ${props => props.rounded && 'border-radius: 3px'};
-  ${props => props.circle && 'border-radius: 50%'};
+  ${(props) => props.color && `background-color: ${props.color}`};
+  ${(props) => props.rounded && 'border-radius: 3px'};
+  ${(props) => props.circle && 'border-radius: 50%'};
   animation: ${fadeOut} 1s infinite linear alternate;
 `;
 

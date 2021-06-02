@@ -12,11 +12,13 @@ export type RadioButtonGroupProps = RadioButtonContainerProps & {
 };
 
 export const RadioButtonGroup = React.memo<RadioButtonGroupProps>(
-  ({ children, value, stackingDirection, onChange, ...restProps }) => {
+  ({
+    children, value, stackingDirection, onChange, ...restProps
+  }) => {
     const [checkedIndex, setCheckedIndex] = useState(0);
     useEffect(() => {
       if (value) {
-        const index = React.Children.toArray(children).findIndex(c => {
+        const index = React.Children.toArray(children).findIndex((c) => {
           if (isValidElement(c)) {
             return c.props.value === value;
           }
@@ -29,7 +31,7 @@ export const RadioButtonGroup = React.memo<RadioButtonGroupProps>(
       setCheckedIndex(0);
     }, [checkedIndex, children, value]);
 
-    const arrayOfChildren = children.filter(c => isValidElement(c));
+    const arrayOfChildren = children.filter((c) => isValidElement(c));
 
     const handleClickItem = (index: number) => {
       const child = arrayOfChildren[index];
@@ -42,7 +44,9 @@ export const RadioButtonGroup = React.memo<RadioButtonGroupProps>(
 
     const renderChild = (child: JSX.Element, index: number) => {
       const checked = index === checkedIndex;
-      const { textAlign, showDivider, showBorder, color } = restProps;
+      const {
+        textAlign, showDivider, showBorder, color,
+      } = restProps;
       const injectProps = {
         textAlign,
         showDivider,
@@ -65,10 +69,10 @@ export const RadioButtonGroup = React.memo<RadioButtonGroupProps>(
         {arrayOfChildren.map((child, i) => renderChild(child, i))}
       </Container>
     );
-  }
+  },
 );
 
 const Container = styled.div<{ stackingDirection: 'horizontal' | 'vertical' }>`
   display: flex;
-  flex-direction: ${props => (props.stackingDirection === 'horizontal' ? 'row' : 'column')};
+  flex-direction: ${(props) => (props.stackingDirection === 'horizontal' ? 'row' : 'column')};
 `;

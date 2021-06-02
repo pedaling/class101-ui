@@ -23,7 +23,9 @@ export interface ReplyActionProps extends ButtonPropsForReply {
 }
 
 export const ReplyAction: FC<ReplyActionProps> = React.memo(
-  ({ position, text, textColor = gray500, fillColor, icon, children, onClick, hidden, ...restProps }) => {
+  ({
+    position, text, textColor = gray500, fillColor, icon, children, onClick, hidden, ...restProps
+  }) => {
     if (hidden) {
       return <></>;
     }
@@ -38,7 +40,7 @@ export const ReplyAction: FC<ReplyActionProps> = React.memo(
         {children}
       </Container>
     );
-  }
+  },
 );
 
 const Container = styled.div<Pick<ReplyActionProps, 'position' | 'onClick'>>`
@@ -46,7 +48,7 @@ const Container = styled.div<Pick<ReplyActionProps, 'position' | 'onClick'>>`
   align-items: center;
   cursor: pointer;
 
-  ${props => props.onClick && 'cursor: pointer'};
+  ${(props) => props.onClick && 'cursor: pointer'};
   ${({ position }) => {
     if (position === ButtonIconPosition.RIGHT) {
       return 'margin-left: 12px;';

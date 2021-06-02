@@ -44,9 +44,9 @@ const Container = styled.h6<{ intent: Intent }>`
   display: flex;
   align-items: center;
   margin: 2px 0;
-  color: ${props => ColorByIntent[props.intent]};
+  color: ${(props) => ColorByIntent[props.intent]};
   path {
-    fill: ${props => ColorByIntent[props.intent]};
+    fill: ${(props) => ColorByIntent[props.intent]};
   }
 `;
 

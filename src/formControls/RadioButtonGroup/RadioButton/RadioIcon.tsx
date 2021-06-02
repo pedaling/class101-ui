@@ -28,7 +28,7 @@ const RadioIcon = styled.div<RadioIconProps>`
   border-radius: 50%;
   box-sizing: border-box;
 
-  ${props => {
+  ${(props) => {
     if (props.size === 'lg') {
       return largeStyle;
     }
@@ -37,13 +37,12 @@ const RadioIcon = styled.div<RadioIconProps>`
     }
   }};
 
-  ${props =>
-    props.checked
-      ? css<RadioIconProps>`
-          border-color: ${props => props.color || gray500};
+  ${(props) => (props.checked
+    ? css<RadioIconProps>`
+          border-color: ${(props) => props.color || gray500};
           border-width: 6px;
         `
-      : ''};
+    : '')};
 `;
 
 export default (props: RadioIconProps) => <RadioIcon {...props} />;

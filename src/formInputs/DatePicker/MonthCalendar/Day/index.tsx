@@ -1,7 +1,9 @@
 import { darken } from 'polished';
 import React, { useCallback, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { blue500, gray200, gray300, gray900, orange100, orange500, red500, white } from '../../../../core/Colors';
+import {
+  blue500, gray200, gray300, gray900, orange100, orange500, red500, white,
+} from '../../../../core/Colors';
 import { body2 } from '../../../../core/TextStyles';
 
 export type MonthCalendarDayProps = {
@@ -17,8 +19,10 @@ export type MonthCalendarDayProps = {
   onHover?: (date: Date | null) => void;
 };
 
-export const MonthCalendarDay = React.memo<MonthCalendarDayProps>(props => {
-  const { date, useRange, onClick, onHover, ...otherProps } = props;
+export const MonthCalendarDay = React.memo<MonthCalendarDayProps>((props) => {
+  const {
+    date, useRange, onClick, onHover, ...otherProps
+  } = props;
   const dateObject = useMemo(() => new Date(date), [date]);
   const onClickDate = useCallback(() => {
     if (!otherProps.disabled) {
@@ -97,11 +101,11 @@ const dayCss = (props: Omit<MonthCalendarDayProps, 'onClick' | 'onHover' | 'date
 `;
 
 const Day = styled.div<Omit<MonthCalendarDayProps, 'onClick' | 'onHover' | 'date' | 'useRange'>>`
-  ${props => dayCss(props)}
+  ${(props) => dayCss(props)}
 `;
 
 const SelectedDay = styled.p<Omit<MonthCalendarDayProps, 'onClick' | 'onHover' | 'date' | 'useRange'>>`
-  ${props => dayCss(props)}
+  ${(props) => dayCss(props)}
   &:last-of-type::before {
     position: absolute;
     display: block;

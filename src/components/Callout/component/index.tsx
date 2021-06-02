@@ -22,7 +22,9 @@ export class Callout extends PureComponent<Readonly<CalloutProps>> {
   };
 
   public render() {
-    const { title, icon, status, className, children, action, 'data-element-name': dataElementName } = this.props;
+    const {
+      title, icon, status, className, children, action, 'data-element-name': dataElementName,
+    } = this.props;
     return (
       <Container status={status} className={className} data-element-name={dataElementName}>
         <Title>
@@ -48,7 +50,7 @@ const Container = styled.div<{
   align-items: flex-start;
   padding: 16px;
   border-radius: 3px;
-  background-color: ${props => backgroundColorByStatus[props.status]};
+  background-color: ${(props) => backgroundColorByStatus[props.status]};
 `;
 
 const Title = styled.div`

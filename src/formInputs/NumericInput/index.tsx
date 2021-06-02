@@ -30,9 +30,7 @@ export const NumericInput = React.memo<Props>(
       inputRef.current?.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));
     };
 
-    const calculateButtonTop = () => {
-      return label ? 32 : 8;
-    };
+    const calculateButtonTop = () => (label ? 32 : 8);
 
     const handleStepUpClick = () => {
       inputRef.current?.stepUp();
@@ -81,16 +79,16 @@ export const NumericInput = React.memo<Props>(
         />
       </StyledNumericInputContainer>
     );
-  }
+  },
 );
 
 const StyledNumericInputContainer = styled.div<{ inline: boolean }>`
   position: relative;
-  display: ${props => (props.inline ? 'inline-block' : 'block')};
+  display: ${(props) => (props.inline ? 'inline-block' : 'block')};
 `;
 
 const StyledNumericInputInput = styled(Input)<{ align: 'left' | 'center' }>`
-  text-align: ${props => props.align};
+  text-align: ${(props) => props.align};
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -100,7 +98,7 @@ const StyledNumericInputInput = styled(Input)<{ align: 'left' | 'center' }>`
 
 const StyledNumericInputButton = styled(IconButton)<{ top?: number; right?: number; left?: number }>`
   position: absolute;
-  ${props => props.top && `top: ${props.top}px;`}
-  ${props => props.right && `right: ${props.right}px;`}
-  ${props => props.left && `left: ${props.left}px;`}
+  ${(props) => props.top && `top: ${props.top}px;`}
+  ${(props) => props.right && `right: ${props.right}px;`}
+  ${(props) => props.left && `left: ${props.left}px;`}
 `;

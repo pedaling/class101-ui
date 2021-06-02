@@ -46,7 +46,9 @@ const Divider = styled.hr`
 
 export class Navigation extends React.PureComponent<Props> {
   public static Section = NavigationSection;
+
   public static Divider = Divider;
+
   public static defaultProps: Partial<Props> = {
     pathname: '/',
   };
@@ -65,7 +67,7 @@ export class Navigation extends React.PureComponent<Props> {
       <Container {...divAttributes} className={className} data-element-name={dataElementName}>
         {React.Children.map(
           children,
-          child => child && React.cloneElement(child as React.ReactElement<any>, { pathname, onClickLink })
+          (child) => child && React.cloneElement(child as React.ReactElement<any>, { pathname, onClickLink }),
         )}
       </Container>
     );

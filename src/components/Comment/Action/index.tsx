@@ -28,7 +28,9 @@ export class CommentAction extends PureComponent<CommentActionProps> {
   };
 
   public render() {
-    const { position, text, fillColor, children, onClick, hidden, ...restProps } = this.props;
+    const {
+      position, text, fillColor, children, onClick, hidden, ...restProps
+    } = this.props;
 
     if (hidden) {
       return <></>;
@@ -47,9 +49,8 @@ const Container = styled.div<Pick<CommentActionProps, 'position' | 'onClick'>>`
   display: flex;
   align-items: center;
 
-  ${props =>
-    props.onClick &&
-    css`
+  ${(props) => props.onClick
+    && css`
       cursor: pointer;
     `};
   ${({ position }) => {
@@ -74,9 +75,8 @@ const TextWrapper = styled(Body2)`
 const FilledIconButton = styled(IconButton)<{ hasCursor: boolean }>`
   width: auto;
   height: auto;
-  ${props =>
-    !props.hasCursor &&
-    css`
+  ${(props) => !props.hasCursor
+    && css`
       cursor: default !important;
     `};
 `;

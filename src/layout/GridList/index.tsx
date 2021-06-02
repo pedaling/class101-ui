@@ -1,9 +1,9 @@
-import React, { ReactElement } from 'react';
+import { memo, ReactElement } from 'react';
 import styled from 'styled-components';
 
 import { media } from '../../core/BreakPoints';
 import { HTMLDivProps } from '../../interfaces/props';
-import { defaultKeyExtractor, memoComponent } from '../../utils';
+import { defaultKeyExtractor } from '../../utils';
 
 const sizeToPercent = (column?: number) => 100 / (column || 1);
 
@@ -18,7 +18,7 @@ export interface GridProps<T> {
   renderItem: (item: T, index: number) => ReactElement;
 }
 
-export const GridList = memoComponent(
+export const GridList = memo(
   <T extends any>({
     className,
     divAttributes,
@@ -27,19 +27,17 @@ export const GridList = memoComponent(
     lgColumn,
     smColumn,
     renderItem,
-  }: GridProps<T>) => {
-    return (
-      <Container className={className} {...divAttributes}>
-        <GridListUl smColumn={smColumn}>
-          {items.map((item, index) => (
-            <GridListItem key={keyExtractor(item, index)} smColumn={smColumn} lgColumn={lgColumn}>
-              {renderItem(item, index)}
-            </GridListItem>
-          ))}
-        </GridListUl>
-      </Container>
-    );
-  }
+  }: GridProps<T>) => (
+    <Container className={className} {...divAttributes}>
+      <GridListUl smColumn={smColumn}>
+        {items.map((item, index) => (
+          <GridListItem key={keyExtractor(item, index)} smColumn={smColumn} lgColumn={lgColumn}>
+            {renderItem(item, index)}
+          </GridListItem>
+        ))}
+      </GridListUl>
+    </Container>
+  ),
 );
 
 const Container = styled.div`
@@ -63,9 +61,8 @@ const GridListUl = styled.ul<{ smColumn?: Column }>`
     margin-right: -4px;
     margin-left: -4px;
     margin-bottom: -24px;
-    ${props =>
-      props.smColumn === 2 &&
-      `
+    ${(props) => props.smColumn === 2
+      && `
         margin-right: -8px;
         margin-left: -8px;
       `}%;
@@ -79,21 +76,19 @@ const GridListItem = styled.li<{ lgColumn?: Column; smColumn?: Column }>`
   padding-left: 12px;
   margin-bottom: 32px;
   box-sizing: border-box;
-  width: ${props => sizeToPercent(props.smColumn)}%;
+  width: ${(props) => sizeToPercent(props.smColumn)}%;
 
   ${media.sm`
     padding-right: 4px;
     padding-left: 4px;
     margin-bottom: 24px;
-    ${props =>
-      props.smColumn === 2 &&
-      `
+    ${(props) => props.smColumn === 2
+      && `
         padding-right: 8px;
         padding-left: 8px;
       `}%;
-    ${props =>
-      props.smColumn === 1 &&
-      `
+    ${(props) => props.smColumn === 1
+      && `
         .sale-wish-icon {
           > svg {
             width: 32px;
@@ -104,9 +99,8 @@ const GridListItem = styled.li<{ lgColumn?: Column; smColumn?: Column }>`
   `}
 
   ${media.lg`
-    ${props =>
-      props.lgColumn &&
-      `
+    ${(props) => props.lgColumn
+      && `
         width: ${sizeToPercent(props.lgColumn)}%;
       `}
   `}

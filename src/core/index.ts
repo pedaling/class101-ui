@@ -13,7 +13,9 @@ const ElevationStyles = elevationStyles;
 const TextStyles = textStyles;
 const OUITextStyles = ouiTextStyles;
 
-export { BreakPoints, Colors, DarkColors, TextStyles, OUITextStyles, ElevationStyles };
+export {
+  BreakPoints, Colors, DarkColors, TextStyles, OUITextStyles, ElevationStyles,
+};
 
 export * from './GlobalStyle';
 export * from './Theme';

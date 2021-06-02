@@ -56,7 +56,7 @@ export const RadioButton = React.memo<RadioButtonProps>(
         </RadioButtonText>
       </RadioButtonContainer>
     );
-  }
+  },
 );
 
 const optionStyles = ({
@@ -126,7 +126,7 @@ const RadioButtonContainer = styled.div<RadioButtonContainerProps>`
   border-radius: 1px;
   cursor: pointer;
   white-space: nowrap;
-  ${props => optionStyles(props)};
+  ${(props) => optionStyles(props)};
 `;
 
 const RadioButtonText = styled.div<{ checked?: boolean; color?: string }>`
@@ -135,9 +135,8 @@ const RadioButtonText = styled.div<{ checked?: boolean; color?: string }>`
   color: ${gray500};
   white-space: normal;
 
-  ${props =>
-    props.checked &&
-    css`
+  ${(props) => props.checked
+    && css`
       color: ${props.color || gray900};
     `};
 `;

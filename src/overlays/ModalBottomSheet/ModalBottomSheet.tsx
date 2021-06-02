@@ -1,14 +1,16 @@
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 
-import { Button, ButtonColor, ButtonProps, IconButton } from '../../components/Button';
+import fixScrollbar from 'utils/fixScrollbar';
+import {
+  Button, ButtonColor, ButtonProps, IconButton,
+} from '../../components/Button';
 import { media } from '../../core/BreakPoints';
 import { gray600, gray900, white } from '../../core/Colors';
 import { elevation5 } from '../../core/ElevationStyles';
 import { Body2, Headline3 } from '../../core/Typography';
 import { CloseIcon } from '../../Icon';
 import { isClient, isServer } from '../../utils';
-import { fixScrollbar } from '../../utils/fixScrollbar';
 import { OverlaidPortal } from '../OverlaidPortal';
 
 export enum BottomButtonType {
@@ -59,7 +61,10 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
     scrollbarWidth: fixScrollbar(),
   };
 
-  public static getDerivedStateFromProps(nextProps: ModalBottomSheetProps, prevState: State): Partial<State> | null {
+  public static getDerivedStateFromProps(
+    nextProps: ModalBottomSheetProps,
+    prevState: State,
+  ): Partial<State> | null {
     if (nextProps.opened !== undefined && nextProps.opened !== prevState.opened) {
       return {
         opened: nextProps.opened,
@@ -95,78 +100,6 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
         this.enableBodyScroll();
       }
     }
-  }
-
-  public render() {
-    const {
-      zIndex,
-      children,
-      title,
-      subTitle,
-      successText,
-      className,
-      cancelText,
-      hideScroll,
-      closeable,
-      modalStyle,
-      contentStyle,
-      removeContentPadding,
-      opener,
-      successAttributes,
-      cancelAttributes,
-      bottomButtonType = BottomButtonType.Row,
-    } = this.props;
-    const { mounted, opened } = this.state;
-
-    if (!mounted || isServer()) {
-      return opener || <></>;
-    }
-
-    if (!successAttributes.color) {
-      successAttributes.color = ButtonColor.ORANGE;
-    }
-
-    const clonedOpener =
-      opener &&
-      React.cloneElement(opener, {
-        onClick: this.showModal,
-      });
-    return (
-      <>
-        {clonedOpener}
-        <StyledOverlaidPortal zIndex={zIndex} opened={opened} closeable={closeable} onClose={this.handleCloseModal}>
-          <Dialog visible={opened} onClick={this.blockPropagation} style={modalStyle} className={className}>
-            <DialogHead>
-              <DialogTitle>{title}</DialogTitle>
-              {closeable && (
-                <IconButton
-                  icon={<CloseIcon />}
-                  onClick={this.handleCloseModal}
-                  fillColor={gray900}
-                  color="transparent"
-                />
-              )}
-            </DialogHead>
-            {subTitle && <DialogSubTitle>{subTitle}</DialogSubTitle>}
-            <DialogBody style={contentStyle} hideScroll={hideScroll} removeContentPadding={removeContentPadding}>
-              {children}
-            </DialogBody>
-            <DialogFooter bottomButtonType={bottomButtonType}>
-              {cancelText && (
-                <DialogFooterButton onClick={this.handleCancelModal} {...cancelAttributes}>
-                  {cancelText}
-                </DialogFooterButton>
-              )}
-              {successText && (
-                <DialogFooterButton onClick={this.handleSuccessModal} {...successAttributes}>
-                  {successText}
-                </DialogFooterButton>
-              )}
-            </DialogFooter>
-          </Dialog>
-        </StyledOverlaidPortal>
-      </>
-    );
   }
 
   private disableBodyScroll = () => {
@@ -237,10 +170,96 @@ export class ModalBottomSheet extends PureComponent<ModalBottomSheetProps, State
       this.hideModal();
     }
   };
+
+  public render() {
+    const {
+      zIndex,
+      children,
+      title,
+      subTitle,
+      successText,
+      className,
+      cancelText,
+      hideScroll,
+      closeable,
+      modalStyle,
+      contentStyle,
+      removeContentPadding,
+      opener,
+      successAttributes,
+      cancelAttributes,
+      bottomButtonType = BottomButtonType.Row,
+    } = this.props;
+    const { mounted, opened } = this.state;
+
+    if (!mounted || isServer()) {
+      return opener || <></>;
+    }
+
+    if (!successAttributes.color) {
+      successAttributes.color = ButtonColor.ORANGE;
+    }
+
+    const clonedOpener = opener
+      && React.cloneElement(opener, {
+        onClick: this.showModal,
+      });
+    return (
+      <>
+        {clonedOpener}
+        <StyledOverlaidPortal
+          zIndex={zIndex}
+          opened={opened}
+          closeable={closeable}
+          onClose={this.handleCloseModal}
+        >
+          <Dialog
+            visible={opened}
+            onClick={this.blockPropagation}
+            style={modalStyle}
+            className={className}
+          >
+            <DialogHead>
+              <DialogTitle>{title}</DialogTitle>
+              {closeable && (
+                <IconButton
+                  icon={<CloseIcon />}
+                  onClick={this.handleCloseModal}
+                  fillColor={gray900}
+                  color="transparent"
+                />
+              )}
+            </DialogHead>
+            {subTitle && <DialogSubTitle>{subTitle}</DialogSubTitle>}
+            <DialogBody
+              style={contentStyle}
+              hideScroll={hideScroll}
+              removeContentPadding={removeContentPadding}
+            >
+              {children}
+            </DialogBody>
+            <DialogFooter bottomButtonType={bottomButtonType}>
+              {cancelText && (
+                <DialogFooterButton onClick={this.handleCancelModal} {...cancelAttributes}>
+                  {cancelText}
+                </DialogFooterButton>
+              )}
+              {successText && (
+                <DialogFooterButton onClick={this.handleSuccessModal} {...successAttributes}>
+                  {successText}
+                </DialogFooterButton>
+              )}
+            </DialogFooter>
+          </Dialog>
+        </StyledOverlaidPortal>
+      </>
+    );
+  }
 }
 
 const StyledOverlaidPortal = styled(OverlaidPortal)<{ opened: boolean }>`
-  transition: ${props => !props.opened && 'visibility 0s linear 225ms,'} opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: ${(props) => !props.opened && 'visibility 0s linear 225ms,'} opacity 225ms
+    cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   ${media.sm`
     justify-content: flex-end;
   `};
@@ -267,7 +286,7 @@ const Dialog = styled.div<{ visible: boolean }>`
     height: auto;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    ${props => !props.visible && 'transform: translateY(100%);'}
+    ${(props) => !props.visible && 'transform: translateY(100%);'}
     transition: all 225ms ease-out;
   `};
 `;
@@ -296,17 +315,15 @@ const DialogBody = styled.div<{ hideScroll: boolean; removeContentPadding: boole
   overflow-x: hidden;
   overscroll-behavior: contain;
 
-  ${props =>
-    props.hideScroll &&
-    `
+  ${(props) => props.hideScroll
+    && `
     &::-webkit-scrollbar {
       display: none;
     }
   `}
 
-  ${props =>
-    props.removeContentPadding &&
-    css`
+  ${(props) => props.removeContentPadding
+    && css`
       margin-left: -32px;
       margin-right: -32px;
 
@@ -327,7 +344,7 @@ const DialogFooter = styled.div<{ bottomButtonType: BottomButtonType }>`
   display: flex;
   margin: 0 -8px;
 
-  ${props => {
+  ${(props) => {
     switch (props.bottomButtonType) {
       case BottomButtonType.Row:
         return css`
