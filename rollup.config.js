@@ -1,4 +1,3 @@
-import path from 'path';
 import { babel } from '@rollup/plugin-babel';
 import typescript from '@rollup/plugin-typescript';
 import url from '@rollup/plugin-url';
@@ -6,7 +5,6 @@ import commonjs from '@rollup/plugin-commonjs';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import external from 'rollup-plugin-peer-deps-external';
 import visualizer from 'rollup-plugin-visualizer';
-import pkg from './package.json';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 const dependencies = ['classnames', 'react-popper', 'swiper', 'polished', 'path-to-regexp'];
@@ -47,5 +45,5 @@ export default [
     external: dependencies,
     plugins: getPlugins('esm'),
     preserveModules: true,
-  }
+  },
 ];
