@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import { media } from '../../core/BreakPoints';
 import { gray100 } from '../../core/Colors';
 import { HTMLElementProps } from '../../interfaces/props';
-import { NavigationSectionAction, NavigationSectionItem, NavigationSectionSubItem } from './Navigation.type';
-import { NavigationSectionProps, NavigationSection } from './NavigationSection';
 
 interface Props {
   pathname?: string;
@@ -29,7 +27,7 @@ const Navigation = ({
   </Container>
 );
 
-Navigation.Divider = styled.hr`
+const NavigationDivider = styled.hr`
   margin: -8px 0;
   border: 0;
   border-bottom: 1px solid ${gray100};
@@ -37,11 +35,7 @@ Navigation.Divider = styled.hr`
 
 export {
   Navigation,
-  NavigationSection,
-  NavigationSectionProps,
-  NavigationSectionAction,
-  NavigationSectionItem,
-  NavigationSectionSubItem,
+  NavigationDivider,
 };
 
 const Container = styled.nav`

@@ -1,6 +1,16 @@
 import Slide from './Swiper/Slide';
+import type {
+  NavigationSectionAction,
+  NavigationSectionItem,
+  NavigationSectionSubItem,
+} from './Navigation/Navigation.type';
+import { NavigationSection } from './Navigation/NavigationSection';
+import type { NavigationSectionProps } from './Navigation/NavigationSection';
 
-export { Slide };
+export { Slide, NavigationSection };
+export type {
+  NavigationSectionAction, NavigationSectionItem, NavigationSectionSubItem, NavigationSectionProps,
+};
 export * from './Navigation';
 export * from './Class101UIProvider';
 export * from './Avatar';
