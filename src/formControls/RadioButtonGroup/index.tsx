@@ -33,10 +33,8 @@ export const RadioButtonGroup = memo<RadioButtonGroupProps>(
       setCheckedIndex(0);
     }, [checkedIndex, children, value]);
 
-    const arrayOfChildren = children?.filter((c) => isValidElement(c)) || [];
-
     const handleClickItem = (index: number) => {
-      const child = arrayOfChildren[index];
+      const child = children?.[index];
 
       setCheckedIndex(index);
       if (onChange) {
@@ -68,7 +66,7 @@ export const RadioButtonGroup = memo<RadioButtonGroupProps>(
     };
     return (
       <Container stackingDirection={stackingDirection} {...restProps}>
-        {arrayOfChildren.map((child, i) => renderChild(child, i))}
+        {children?.map((child, i) => renderChild(child, i))}
       </Container>
     );
   },
