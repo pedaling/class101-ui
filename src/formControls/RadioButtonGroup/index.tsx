@@ -60,7 +60,7 @@ export const RadioButtonGroup = memo<RadioButtonGroupProps>(
         checked,
         stackingDirection,
         key: index,
-        onClick: handleClickItem,
+        onClick: handleClickItem(index),
         ...injectProps,
       });
     };
