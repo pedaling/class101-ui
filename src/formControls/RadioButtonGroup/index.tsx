@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { RadioButtonContainerProps } from './RadioButton';
 
 export type RadioButtonGroupProps = RadioButtonContainerProps & {
-  children: JSX.Element[];
+  children?: JSX.Element[];
   onChange: (value: string) => void;
   className?: string;
   value?: string;
@@ -33,7 +33,7 @@ export const RadioButtonGroup = memo<RadioButtonGroupProps>(
       setCheckedIndex(0);
     }, [checkedIndex, children, value]);
 
-    const arrayOfChildren = children.filter((c) => isValidElement(c));
+    const arrayOfChildren = children?.filter((c) => isValidElement(c)) || [];
 
     const handleClickItem = (index: number) => {
       const child = arrayOfChildren[index];
