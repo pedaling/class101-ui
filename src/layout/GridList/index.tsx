@@ -1,4 +1,4 @@
-import React, { memo, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 
 import { media } from '../../core/BreakPoints';
@@ -18,16 +18,16 @@ export interface GridProps<T> {
   renderItem: (item: T, index: number) => ReactElement;
 }
 
-export const GridList = memo(
-  <T extends any>({
-    className,
-    divAttributes,
-    items,
-    keyExtractor = defaultKeyExtractor,
-    lgColumn,
-    smColumn,
-    renderItem,
-  }: GridProps<T>) => (
+export function GridList<T>({
+  className,
+  divAttributes,
+  items,
+  keyExtractor = defaultKeyExtractor,
+  lgColumn,
+  smColumn,
+  renderItem,
+}: GridProps<T>): JSX.Element {
+  return (
     <Container className={className} {...divAttributes}>
       <GridListUl smColumn={smColumn}>
         {items.map((item, index) => (
@@ -37,8 +37,8 @@ export const GridList = memo(
         ))}
       </GridListUl>
     </Container>
-  ),
-);
+  );
+}
 
 const Container = styled.div`
   overflow: hidden;
