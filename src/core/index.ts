@@ -1,3 +1,5 @@
+import type { TextStyleProperties } from './TextStyles';
+
 import * as breakPoints from './BreakPoints';
 import * as colors from './Colors';
 import * as darkColors from './DarkColors';
@@ -13,10 +15,14 @@ const ElevationStyles = elevationStyles;
 const TextStyles = textStyles;
 const OUITextStyles = ouiTextStyles;
 
-export { BreakPoints, Colors, DarkColors, TextStyles, OUITextStyles, ElevationStyles };
+export {
+  BreakPoints, Colors, DarkColors, TextStyles, OUITextStyles, ElevationStyles,
+};
 
 export * from './GlobalStyle';
 export * from './Theme';
 export * from './Typography';
 export * from './LinkBlock';
 export { Position };
+
+export type { TextStyleProperties };
