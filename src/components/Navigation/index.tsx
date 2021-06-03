@@ -10,7 +10,7 @@ interface Props {
   className?: string;
   divAttributes?: HTMLElementProps;
   'data-element-name'?: string;
-  children?: JSX.Element;
+  children?: JSX.Element[];
   onClickLink?: (url: string) => void;
 }
 
