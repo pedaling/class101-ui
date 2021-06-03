@@ -56,7 +56,9 @@ const SwiperElement = (props: SwiperElementProps) => {
     >
       {React.Children.map(children, (c) => {
         if (React.isValidElement(c)) {
-          const SlideElement = () => <c.type {...c.props} />;
+          const SlideElement = () => React.cloneElement(c, {
+            ...props,
+          });
           SlideElement.displayName = 'SwiperSlide';
           return <SlideElement />;
         }
@@ -68,4 +70,6 @@ const SwiperElement = (props: SwiperElementProps) => {
   );
 };
 
-export const Swiper = forwardRef<SwiperInstance, SwiperProps>((props, ref) => <SwiperElement {...props} forwarededRef={ref} />);
+export const Swiper = forwardRef<SwiperInstance, SwiperProps>((props, ref) => (
+  <SwiperElement {...props} forwarededRef={ref} />
+));
