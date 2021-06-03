@@ -129,11 +129,9 @@ export const Carousel = React.memo<CarouselProps>((props: CarouselProps) => {
       return;
     }
 
-    if (activeIndex === undefined || activeIndex === swiperRef.current.realIndex) {
-      return;
+    if (activeIndex !== undefined) {
+      goToSlides(activeIndex);
     }
-
-    goToSlides(activeIndex);
   }, [activeIndex, goToSlides]);
 
   const swiperParams = useMemo<Partial<SwiperProps>>(

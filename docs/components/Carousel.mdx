@@ -254,7 +254,7 @@ enum CarouselPaginationTheme {
 
 ## Slides Side Offset
 
-1024이하에서 확인하세요.  
+1024이하에서 확인하세요.
 섹션 콘텐츠를 감싸는 `PlayGroundSectionCarouselContent`에 양옆으로 -24px 음수 마진이 적용되어 있습니다.
 
 <Playground>
@@ -324,7 +324,7 @@ loop 모드
     const [currentIndex, setCurrentIndex] = React.useState(0);
     return (
       <div>
-        <Carousel onChangeSlide={setCurrentIndex} activeIndex={currentIndex} swiperProps={{ loop: true }}>
+        <Carousel activeIndex={currentIndex} swiperProps={{ loop: true }}>
           {[1, 2, 3].map((order) => (
             <Slide key={`ViewAllButton-${order}`}>
               <PlayGroundBanner backgroundColor={Colors[`red${order * 100}`]}>배너{order}</PlayGroundBanner>
