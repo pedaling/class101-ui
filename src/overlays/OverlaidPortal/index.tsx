@@ -1,4 +1,4 @@
-import { memo, ReactNode, useEffect } from 'react';
+import React, { memo, ReactNode, useEffect } from 'react';
 import styled from 'styled-components';
 import Portal from 'overlays/Portal';
 import { isClient } from '../../utils';

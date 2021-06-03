@@ -3,7 +3,7 @@ import { Toast, ToasterPosition, ToastProps } from 'overlays/Toast';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import Portal from 'overlays/Portal';
-import { Component, createRef } from 'react';
+import React, { Component, createRef } from 'react';
 
 export const ToasterDefaultPosition = Position.TOP;
 

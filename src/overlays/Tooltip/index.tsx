@@ -1,7 +1,7 @@
 import { elevation2 } from 'core/ElevationStyles';
 import Position from 'core/Position';
 import { body2, caption1 } from 'core/TextStyles';
-import {
+import React, {
   createElement,
   CSSProperties,
   memo,

@@ -1,6 +1,6 @@
 import { gray100 } from 'core/Colors';
 import Position from 'core/Position';
-import {
+import React, {
   useState,
   memo,
   ReactElement,

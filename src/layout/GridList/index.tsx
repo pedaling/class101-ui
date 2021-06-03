@@ -1,4 +1,4 @@
-import { memo, ReactElement } from 'react';
+import React, { memo, ReactElement } from 'react';
 import styled from 'styled-components';
 
 import { media } from '../../core/BreakPoints';

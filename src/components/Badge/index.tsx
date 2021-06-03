@@ -1,5 +1,5 @@
 import { gray800, white } from 'core/Colors';
-import { ReactNode, CSSProperties, memo } from 'react';
+import React, { ReactNode, CSSProperties, memo } from 'react';
 import styled, { css } from 'styled-components';
 
 import { caption1, caption2 } from '../../core/TextStyles';

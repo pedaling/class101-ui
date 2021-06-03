@@ -1,5 +1,5 @@
 import { blue800 } from 'core/Colors';
-import { memo, ReactNode } from 'react';
+import React, { memo, ReactNode } from 'react';
 import styled from 'styled-components';
 
 type SnackBarProps = {
