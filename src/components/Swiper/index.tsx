@@ -1,4 +1,4 @@
-/* eslint-disable arrow-body-style */
+/* eslint-disable max-len */
 import React, { ForwardedRef, forwardRef } from 'react';
 import SwiperCore, {
   Autoplay, EffectFade, Keyboard, Lazy, Navigation, Pagination, Virtual,
@@ -15,13 +15,12 @@ export type SwiperProps = OriginalSwiper &
     className?: string;
     navigationChildren?: React.ReactNode;
     paginationChildren?: React.ReactNode;
-
   }>;
 type SwiperElementProps = SwiperProps & {
   forwarededRef: ForwardedRef<SwiperInstance>;
-}
+};
 
-const SwiperElement = React.memo<SwiperElementProps>((props: SwiperElementProps) => {
+const SwiperElement = (props: SwiperElementProps) => {
   const {
     children,
     navigation = { prevEl: '.swiper-button-prev', nextEl: '.swiper-button-next' },
@@ -55,13 +54,18 @@ const SwiperElement = React.memo<SwiperElementProps>((props: SwiperElementProps)
       }}
       {...restProps}
     >
-      {children}
+      {React.Children.map(children, (c) => {
+        if (React.isValidElement(c)) {
+          const SlideElement = () => <c.type {...c.props} />;
+          SlideElement.displayName = 'SwiperSlide';
+          return <SlideElement />;
+        }
+        return c;
+      })}
       {navigationChildren}
       {paginationChildren}
     </OriginalSwiper>
   );
-});
+};
 
-export const Swiper = forwardRef<SwiperInstance, SwiperProps>((props, ref) => {
-  return <SwiperElement {...props} forwarededRef={ref} />;
-});
+export const Swiper = forwardRef<SwiperInstance, SwiperProps>((props, ref) => <SwiperElement {...props} forwarededRef={ref} />);
