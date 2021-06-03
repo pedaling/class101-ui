@@ -33,6 +33,18 @@ const SwiperElement = (props: SwiperElementProps) => {
     forwarededRef,
     ...restProps
   } = props;
+
+  const slides = React.Children.map(children, (c) => {
+    if (React.isValidElement(c)) {
+      const SlideElement = () => React.createElement(c.type, {
+        ...c.props,
+      });
+      SlideElement.displayName = 'SwiperSlide';
+      return <SlideElement />;
+    }
+    return c;
+  });
+
   return (
     <OriginalSwiper
       navigation={navigation}
@@ -54,16 +66,7 @@ const SwiperElement = (props: SwiperElementProps) => {
       }}
       {...restProps}
     >
-      {React.Children.map(children, (c) => {
-        if (React.isValidElement(c)) {
-          const SlideElement = () => React.cloneElement(c, {
-            ...props,
-          });
-          SlideElement.displayName = 'SwiperSlide';
-          return <SlideElement />;
-        }
-        return c;
-      })}
+      {slides}
       {navigationChildren}
       {paginationChildren}
     </OriginalSwiper>

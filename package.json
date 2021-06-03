@@ -1,6 +1,6 @@
 {
   "name": "@class101/ui",
-  "version": "9.3.3-rc7",
+  "version": "9.3.3-rc8",
   "description": "A React-based UI Component Library, powered by Class101.",
   "author": "Class101 Co, LTD.",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "prepare": "husky install",
     "test": "cross-env CI=1 react-scripts-ts test --env=jsdom",
     "test:watch": "react-scripts-ts test --env=jsdom",
-    "npm-publish": "yarn prebuild && yarn build && npm publish",
+    "prepublish": "yarn prebuild && yarn build && npm publish",
     "build": "docz build && dist-size ./dist",
     "prebuild": "tsc -p . && rollup -c",
     "analyze": "cross-env RUNNING_ENV=analyze yarn prebuild",
