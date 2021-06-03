@@ -20,7 +20,7 @@ type SwiperElementProps = SwiperProps & {
   forwarededRef: ForwardedRef<SwiperInstance>;
 };
 
-const SwiperElement = React.memo<SwiperElementProps>((props: SwiperElementProps) => {
+const SwiperElement = (props: SwiperElementProps) => {
   const {
     children,
     navigation = { prevEl: '.swiper-button-prev', nextEl: '.swiper-button-next' },
@@ -66,6 +66,6 @@ const SwiperElement = React.memo<SwiperElementProps>((props: SwiperElementProps)
       {paginationChildren}
     </OriginalSwiper>
   );
-});
+};
 
 export const Swiper = forwardRef<SwiperInstance, SwiperProps>((props, ref) => <SwiperElement {...props} forwarededRef={ref} />);
