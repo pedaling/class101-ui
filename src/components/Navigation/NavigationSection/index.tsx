@@ -15,7 +15,7 @@ export interface NavigationSectionProps {
 }
 
 interface InjectedProps extends NavigationSectionProps {
-  pathname: string;
+  pathname?: string;
   onClickLink?: (url: string) => void;
 }
 
@@ -25,7 +25,7 @@ export const NavigationSection = ({
   const [prevPathName, setPrevPathName] = useState(pathname);
   const [openedSectionIndices, setOpenedSectionIndices] = useState<number[]>([]);
   const isActiveLocation = useCallback((item?: { url?: string }) => {
-    if (item && item.url) {
+    if (pathname && item && item.url) {
       return !!pathToRegexp(item.url).exec(pathname);
     }
     return false;
