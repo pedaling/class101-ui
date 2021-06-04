@@ -3,6 +3,7 @@ import React, {
   useCallback, useEffect, useMemo, useRef,
 } from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
+import { Swiper as SwiperClass } from 'swiper';
 import { media, SIZES } from '../../core/BreakPoints';
 import { gray700, white } from '../../core/Colors';
 import { Swiper, SwiperInstance, SwiperProps } from '../Swiper';
@@ -100,35 +101,22 @@ export const Carousel = React.memo<CarouselProps>((props: CarouselProps) => {
     [swiperProps?.loop],
   );
 
-  const handelChangeSlide = useCallback(() => {
-    if (!swiperRef.current) {
-      return;
-    }
-
-    onChangeSlide?.(swiperRef.current.realIndex);
-  }, [onChangeSlide]);
+  const handelChangeSlide = useCallback(
+    (swiper: SwiperClass) => {
+      onChangeSlide?.(swiper.realIndex);
+    },
+    [onChangeSlide],
+  );
 
   const handleTransitionEnd = useCallback(() => {
-    if (!swiperRef.current) {
-      return;
-    }
-
     onTransitionEnd?.();
   }, [onTransitionEnd]);
 
   const handleInit = useCallback(() => {
-    if (!swiperRef.current) {
-      return;
-    }
-
     onInit?.();
   }, [onInit]);
 
   useEffect(() => {
-    if (!swiperRef.current) {
-      return;
-    }
-
     if (activeIndex !== undefined) {
       goToSlides(activeIndex);
     }
@@ -137,10 +125,6 @@ export const Carousel = React.memo<CarouselProps>((props: CarouselProps) => {
   const swiperParams = useMemo<Partial<SwiperProps>>(
     () => ({
       ...swiperProps,
-      on: {
-        init: handleInit,
-        transitionEnd: handleTransitionEnd,
-      },
       slidesPerView: smSlidesPerView,
       spaceBetween: smSpaceBetween || typeof smSlidesPerView !== 'number' || smSlidesPerView !== 1 ? 16 : 0,
       breakpoints: {
@@ -150,7 +134,7 @@ export const Carousel = React.memo<CarouselProps>((props: CarouselProps) => {
         },
       },
     }),
-    [handleInit, handleTransitionEnd, swiperProps, lgSlidesPerView, smSlidesPerView, lgSpaceBetween, smSpaceBetween],
+    [swiperProps, lgSlidesPerView, smSlidesPerView, lgSpaceBetween, smSpaceBetween],
   );
 
   return (
@@ -166,6 +150,8 @@ export const Carousel = React.memo<CarouselProps>((props: CarouselProps) => {
       smSlidesSideOffset={smSlidesSideOffset}
       data-element-name={dataElementName}
       onSlideChange={handelChangeSlide}
+      onInit={handleInit}
+      onTransitionEnd={handleTransitionEnd}
       ref={swiperRef}
       {...swiperParams}
     >
