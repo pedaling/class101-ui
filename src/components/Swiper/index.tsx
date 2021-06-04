@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+import classNames from 'classnames';
 import React, { ForwardedRef, forwardRef } from 'react';
 import SwiperCore, {
   Autoplay, EffectFade, Keyboard, Lazy, Navigation, Pagination, Virtual,
@@ -10,18 +10,19 @@ SwiperCore.use([Autoplay, EffectFade, Keyboard, Lazy, Navigation, Pagination, Vi
 
 export type SwiperInstance = SwiperCore;
 
-export type SwiperProps = OriginalSwiper &
-  React.PropsWithChildren<{
-    className?: string;
-    navigationChildren?: React.ReactNode;
-    paginationChildren?: React.ReactNode;
-  }>;
+export type SwiperProps = OriginalSwiper & {
+  className?: string;
+  navigationChildren?: React.ReactNode;
+  paginationChildren?: React.ReactNode;
+  children: React.ReactNode[] | React.ReactNode;
+};
 type SwiperElementProps = SwiperProps & {
   forwarededRef: ForwardedRef<SwiperInstance>;
 };
 
 const SwiperElement = (props: SwiperElementProps) => {
   const {
+    className,
     children,
     navigation = { prevEl: '.swiper-button-prev', nextEl: '.swiper-button-next' },
     navigationChildren = <DefaultNavigation />,
@@ -47,6 +48,7 @@ const SwiperElement = (props: SwiperElementProps) => {
 
   return (
     <OriginalSwiper
+      className={classNames('swiper-container', className)}
       navigation={navigation}
       pagination={pagination}
       speed={speed}
