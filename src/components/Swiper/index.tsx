@@ -14,7 +14,7 @@ export type SwiperProps = OriginalSwiper & {
   className?: string;
   navigationChildren?: React.ReactNode;
   paginationChildren?: React.ReactNode;
-  children: React.ReactNode[] | React.ReactNode;
+  children?: React.ReactNode[] | React.ReactNode;
 };
 type SwiperElementProps = SwiperProps & {
   forwarededRef: ForwardedRef<SwiperInstance>;
