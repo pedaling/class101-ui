@@ -23,7 +23,7 @@ Swiper를 캡슐화한 컴포넌트 입니다.
   <Carousel swiperProps={{ freeMode: true }}>
     {[1, 2, 3].map((order) => (
       <Slide key={`ViewAllButton-${order}`}>
-        <PlayGroundBanner fill backgroundColor={Colors[`red${order * 100}`]}>
+        <PlayGroundBanner backgroundColor={Colors[`red${order * 100}`]}>
           배너{order}
         </PlayGroundBanner>
       </Slide>

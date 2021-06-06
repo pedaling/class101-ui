@@ -1,4 +1,6 @@
-import { BreakPoints, Colors, Divider, ThemeConfig, ThemeMode, ifDarkTheme } from '@class101/ui';
+import {
+  BreakPoints, Colors, Divider, ThemeConfig, ifDarkTheme,
+} from '@class101/ui';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -17,12 +19,12 @@ export const PlayGroundButtonContainer = styled.div<{ theme: ThemeConfig }>`
   }
 `;
 
-export const PlayGroundBanner = styled.div<{ backgroundColor?: string; fill?: boolean }>`
+export const PlayGroundBanner = styled.div<{ backgroundColor?: string; }>`
   width: 100%;
   height: 208px;
   padding: 20px;
   box-sizing: border-box;
-  background-color: ${props => props.backgroundColor || Colors.gray600};
+  background-color: ${(props) => props.backgroundColor ?? Colors.gray600};
 `;
 
 export const PlayGroundSectionCarouselContent = styled.div`
