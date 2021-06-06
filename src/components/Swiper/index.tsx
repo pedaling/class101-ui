@@ -37,9 +37,7 @@ const SwiperElement = (props: SwiperElementProps) => {
 
   const slides = React.Children.map(children, (c) => {
     if (React.isValidElement(c)) {
-      const SlideElement = () => React.createElement(c.type, {
-        ...c.props,
-      });
+      const SlideElement = () => React.cloneElement(c, c.props);
       SlideElement.displayName = 'SwiperSlide';
       return <SlideElement />;
     }
