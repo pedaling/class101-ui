@@ -1,9 +1,7 @@
-/* eslint-disable max-len */
-import classNames from 'classnames';
 import React, {
   useCallback, useEffect, useMemo, useRef,
 } from 'react';
-import { css, FlattenSimpleInterpolation } from 'styled-components';
+import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 import { Swiper as SwiperClass } from 'swiper';
 import { media, SIZES } from '../../core/BreakPoints';
 import { gray700, white } from '../../core/Colors';
@@ -139,105 +137,107 @@ export const Carousel = React.memo<CarouselProps>((props: CarouselProps) => {
   );
 
   const styleName = css`
-      &.swiper-container {
-        padding-left: ${lgSlidesSideOffset}px;
-        padding-right: ${lgSlidesSideOffset}px;
+    &.swiper-container {
+      padding-left: ${lgSlidesSideOffset}px;
+      padding-right: ${lgSlidesSideOffset}px;
 
-        ${() => smSlidesSideOffset !== undefined
-          && css`
-            ${media.sm`
+      ${() => smSlidesSideOffset !== undefined
+        && css`
+          ${media.sm`
           padding-left: ${smSlidesSideOffset}px;
           padding-right: ${smSlidesSideOffset}px;
           `};
-      `};
+        `};
 
-        ${() => ((navigation && navigationPosition === CarouselNavigationPosition.BottomRightOut)
-          || (navigation
-            && pagination
-            && navigationPosition === CarouselNavigationPosition.TopRightOut)
+      ${() => ((navigation && navigationPosition === CarouselNavigationPosition.BottomRightOut)
+        || (navigation && pagination && navigationPosition === CarouselNavigationPosition.TopRightOut)
     ? 'padding-bottom: 48px;'
     : '')};
 
-        ${() => navigation
-          && navigationPosition === CarouselNavigationPosition.TopRightOut
-          && 'padding-top: 48px; margin-top: -48px;'};
-      }
+      ${() => navigation
+        && navigationPosition === CarouselNavigationPosition.TopRightOut
+        && 'padding-top: 48px; margin-top: -48px;'};
+    }
 
-      .swiper-default-navigation {
-        position: absolute;
-        ${() => (navigationPosition ? navigationPositionStyle[navigationPosition] : '')}
-        left: 50%;
-        z-index: 1;
-        width: ${() => (containerContentMaxWidth ? `calc(100% - ${32 * 2}px)` : '100%')};
-        ${() => containerContentMaxWidth && `max-width: ${containerContentMaxWidth + 32 * 2}px`};
-        ${media.sm`
+    .swiper-default-navigation {
+      position: absolute;
+      ${() => (navigationPosition ? navigationPositionStyle[navigationPosition] : '')}
+      left: 50%;
+      z-index: 1;
+      width: ${() => (containerContentMaxWidth ? `calc(100% - ${32 * 2}px)` : '100%')};
+      ${() => containerContentMaxWidth && `max-width: ${containerContentMaxWidth + 32 * 2}px`};
+      ${media.sm`
       display: none;
     `};
-      }
+    }
 
-      ${() => (!pagination
+    ${() => (!pagination
     ? css`
-              .swiper-pagination {
-                display: none !important;
-              }
-            `
+            .swiper-pagination {
+              display: none !important;
+            }
+          `
     : '')};
 
-      ${() => (!navigation
+    ${() => (!navigation
     ? css`
-              .swiper-default-naviation,
+            .swiper-default-naviation,
+            .swiper-button-next,
+            .swiper-button-prev {
+              display: none !important;
+            }
+          `
+    : '')};
+
+    ${() => (transparentPagination
+    ? css`
+            .swiper-button-next,
+            .swiper-button-prev {
+              opacity: 0 !important;
+              transition: opacity 0.2s !important;
+            }
+            &:hover {
               .swiper-button-next,
               .swiper-button-prev {
-                display: none !important;
+                opacity: 1 !important;
               }
-            `
-    : '')};
-
-      ${() => (transparentPagination
-    ? css`
+            }
+            @media (max-width: 632px) {
               .swiper-button-next,
               .swiper-button-prev {
                 opacity: 0 !important;
-                transition: opacity 0.2s !important;
               }
-              &:hover {
-                .swiper-button-next,
-                .swiper-button-prev {
-                  opacity: 1 !important;
-                }
-              }
-              @media (max-width: 632px) {
-                .swiper-button-next,
-                .swiper-button-prev {
-                  opacity: 0 !important;
-                }
-              }
-            `
+            }
+          `
     : '')}
-      &.swiper-container .swiper-pagination {
-        ${() => navigationPosition && paginationPositionStyle[navigationPosition]};
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .swiper-pagination-bullet {
-        width: 6px;
-        height: 6px;
-        margin: 0 8px;
-        border-radius: 3px;
-        background-color: ${() => (paginationTheme === CarouselPaginationTheme.Light ? white : gray700)};
-        opacity: 0.56;
-      }
-      .swiper-pagination-bullet-active {
-        width: 24px;
-        background-color: ${() => (paginationTheme === CarouselPaginationTheme.Light ? white : gray700)};
-        opacity: 1;
-      }
-    `;
+    &.swiper-container .swiper-pagination {
+      ${() => navigationPosition && paginationPositionStyle[navigationPosition]};
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .swiper-pagination-bullet {
+      width: 6px;
+      height: 6px;
+      margin: 0 8px;
+      border-radius: 3px;
+      background-color: ${() => (paginationTheme === CarouselPaginationTheme.Light ? white : gray700)};
+      opacity: 0.56;
+    }
+    .swiper-pagination-bullet-active {
+      width: 24px;
+      background-color: ${() => (paginationTheme === CarouselPaginationTheme.Light ? white : gray700)};
+      opacity: 1;
+    }
+  `;
+
+  const StyledSwiper = styled(Swiper)`
+    ${styleName}
+  `;
 
   return (
-    <Swiper
-      className={classNames(styleName, className)}
+    <StyledSwiper
+      className={className}
       data-element-name={dataElementName}
       onSlideChange={handelChangeSlide}
       onInit={handleInit}
@@ -246,7 +246,7 @@ export const Carousel = React.memo<CarouselProps>((props: CarouselProps) => {
       {...swiperParams}
     >
       {children}
-    </Swiper>
+    </StyledSwiper>
   );
 });
 
