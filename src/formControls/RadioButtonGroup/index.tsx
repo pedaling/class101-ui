@@ -1,5 +1,5 @@
 import { isEqual, pick } from 'lodash';
-import React, { isValidElement, PureComponent } from 'react';
+import React, { isValidElement, PureComponent, Component } from 'react';
 import styled from 'styled-components';
 
 import { RadioButton, RadioButtonContainerProps, RadioButtonProps } from './RadioButton';
@@ -27,11 +27,13 @@ export class RadioButtonGroup extends PureComponent<RadioButtonGroupProps, State
         }
         return false;
       });
+
       if (state.checkedIndex !== index) {
         return { checkedIndex: index };
       }
     }
-    return { checkedIndex: 0 };
+
+    return null;
   }
 
   public state: State = { checkedIndex: 0 };
@@ -57,6 +59,7 @@ export class RadioButtonGroup extends PureComponent<RadioButtonGroupProps, State
     const child = this.arrayOfChildren[index];
 
     this.setState({ checkedIndex: index });
+
     if (onChange) {
       onChange(child ? child.props.value : '');
     }
