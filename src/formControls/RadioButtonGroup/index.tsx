@@ -1,5 +1,5 @@
 import { isEqual, pick } from 'lodash';
-import React, { isValidElement, PureComponent, Component } from 'react';
+import React, { isValidElement, PureComponent } from 'react';
 import styled from 'styled-components';
 
 import { RadioButton, RadioButtonContainerProps, RadioButtonProps } from './RadioButton';
