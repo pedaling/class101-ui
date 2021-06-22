@@ -32,9 +32,11 @@ type Props = {
   onClose?: () => void;
 };
 
+const Z_INDEX_VALUE = 2000;
+
 export const ComboBox = React.memo<Props>(({
   items, position, opened, opener, children, onOpen, onClose,
-}) => {
+}: Props) => {
   const [isOpened, setOpened] = useState(false);
 
   const handleClickOpener = useCallback(() => {
@@ -85,7 +87,8 @@ export const ComboBox = React.memo<Props>(({
 
   return (
     <Container>
-      {clonedOpener}
+      <Overlay visible={!!visible} onClick={handleClickOpener} />
+      <OpenerContainer opened={!!visible}>{clonedOpener}</OpenerContainer>
       <ActionItemList visible={visible} position={position}>
         {itemList}
       </ActionItemList>
@@ -137,7 +140,7 @@ const ActionItemList = styled.div<{ visible?: boolean; position?: ComboBoxPositi
   background-color: ${Colors.white};
   border-radius: 3px;
   position: absolute;
-  z-index: 2000;
+  z-index: ${Z_INDEX_VALUE};
 
   ${elevation4};
   display: ${({ visible }) => (visible ? 'block' : 'none')};
@@ -192,4 +195,19 @@ const Label = styled.span``;
 const Description = styled(Caption1)`
   color: ${Colors.gray600};
   margin-top: 6px;
+`;
+
+const Overlay = styled.div<{ visible: boolean }>`
+  display: ${({ visible }) => (visible ? 'block' : 'none')};
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: ${Z_INDEX_VALUE};
+`;
+
+const OpenerContainer = styled.div<{ opened: boolean }>`
+  position: relative;
+  ${({ opened }) => opened && `z-index: ${Z_INDEX_VALUE}`}
 `;
